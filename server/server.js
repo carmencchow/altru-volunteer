@@ -1,7 +1,9 @@
 require('dotenv').config()
 const express = require('express');
 const mongoose = require('mongoose');
-const ngoRoutes = require('./routes/ngo'); 
+const ngoRoutes = require('./routes/ngoRoute'); 
+const authRoutes = require('./routes/authRoute'); 
+// const userRoutes = require('./routes/userRoute'); 
 const PORT = process.env.PORT || 5001;
  
 // Express app
@@ -17,6 +19,8 @@ app.use((req, res, next) => {
 
 // Routes
 app.use('/api/ngo', ngoRoutes);
+// app.use('/api/user', userRoutes);
+app.use('/api/auth', authRoutes);
 
 // Connect to db
 mongoose.connect(process.env.MONGO_URI)

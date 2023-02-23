@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const { Schema } = mongoose;
-// var crypto = require('crypto');
+// const { Schema } = mongoose;
+const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
   username: {
@@ -22,6 +22,7 @@ const userSchema = new Schema({
     type: String,
     required: false,
   },
-}, {timestamps: true});
+}, { timestamps: true });
 
-export default mongoose.model('User', userSchema);
+// export default mongoose.model('User', userSchema);
+module.exports = mongoose.model('User', userSchema);

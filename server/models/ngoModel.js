@@ -32,7 +32,7 @@ const ngoSchema = new Schema({
 
 
 // Make the model based on the above schema
-export default mongoose.model('Ngo', ngoSchema);
+module.exports = mongoose.model('Ngo', ngoSchema);
 
 /* EXAMPLE NGO & id:
 
