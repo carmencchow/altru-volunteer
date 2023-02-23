@@ -1,13 +1,26 @@
-import React from 'react'
-import DisplayCards from './Display'
+import React, { useState } from 'react'
 import './Filters.css'
 
 const Filters = () => {
+  
+  const [query, setQuery] = useState('');
+  const [cause, setCause] = useState('');
+  const [region, setRegion] = useState('');
+  const [donate, setDonate] = useState('');
+  const [page, setPage] = useState(1);
+
+  const handleSubmit = () => {
+    console.log('Submit button clicked by user')
+  }
+
   return (
     <main>
       <div className="search">
-        <input type="text" placeholder="Search for an organization"/>
-        <button type="submit">Search</button>
+        <input 
+          type="text" 
+          value={query} 
+          placeholder="Search for an organization"/>
+        <button type="submit" onClick={handleSubmit}>Search</button>
       </div>
 
       <form>
@@ -49,7 +62,6 @@ const Filters = () => {
         </select>
       </form>
        
-      {/* <DisplayCards/> */}
 
     </main>
     );
