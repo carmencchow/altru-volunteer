@@ -5,18 +5,20 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   username: {
     type: String,
-    required: true,
     unique: true,
+    required: [true, "Please enter a valid username"] 
   },
   email: { 
     type: String, 
     unique: true, 
-    lowercase: true 
+    lowercase: true,
+    required: [true, "Please en,ter a valid email address"] 
   },
   password: { 
     type: String, 
     unique: true, 
-    lowercase: true 
+    lowercase: true,
+    required: [true, "Please provide a password"]  
   },
   image: {
     type: String,
