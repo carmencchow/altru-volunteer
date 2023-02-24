@@ -1,42 +1,62 @@
-import React from 'react'
-import styled from 'styled-components'
+import React, { useState } from 'react'
 import { FcGoogle } from 'react-icons/fc'
 import { SiFacebook } from 'react-icons/si'
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
-
-const Main = styled.main`
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-  width: 60%;
-  height: 60vh;
-  display: flex;
-  justify-content: center;
-  margin: 50px auto;
-`;
-
-const Input = styled.input`
-  width: 300px;
-  height: 50px;
-  margin-right: 20px;
-`;
+import './Login.css'
+import axios from 'axios'
 
 const Login = () => {
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState(null);
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(e.target.value, 'form submitted');
+    try {
+      const res = await axios.post('http://localhost:5000/api/auth/login', {
+        username, 
+        password
+      });
+      console.log(res.data);
+    } catch (error) {
+      setError(error);
+      console.log(error); 
+    }
+  }
+
   return (
-    <Main>
-      <div className="login-wrapper">
+    <div className="login-wrapper">
+      <form onSubmit={handleSubmit}>
         <h3 className="login">Sign In to your account / Choose your sign in method</h3>
-        <Input type="text" placeholder="Email"/>
-        <Input type="text" placeholder="Password" />
+        <input 
+          name="username" 
+          type="text" 
+          placeholder="Enter your user name" 
+          value={username} 
+          onChange={(e) => {setUsername(e.target.value)}}
+        />
+        <input 
+          name="password" 
+          type="text" 
+          placeholder="Enter your password" 
+          value={password} onChange={(e) => {setPassword(e.target.value)}}
+        />
         <AiOutlineEye/><AiOutlineEyeInvisible/>
-        <p>Forgot password</p>
-        <button>Sign In</button>
+        <div className="buttons">      <p>Forgot password</p>
+        <button onClick={handleSubmit}>Sign In</button>
         
         <p> OR </p>
         <button><FcGoogle/>Continue with Google</button>
         <button><SiFacebook/>Continue with Facebook</button>
 
-        <p> Dono't have an account? <b>Sign Up</b></p>
-      </div>
-    </Main>
+        <p> Don't have an account? <b>Sign Up</b></p>
+        </div>
+  
+      </form>
+    </div>
+
   )
 }
 
