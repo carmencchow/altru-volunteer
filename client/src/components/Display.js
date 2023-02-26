@@ -1,36 +1,23 @@
 import React from 'react'
-import { useEffect, useState, useSelector } from 'react'
-import Ngo from '../components/Ngo'
+import { useSelector } from 'react-redux'
 import './Display.css'
 
 const Display = () => {
   const ngos = useSelector((state) => state.filterItems.ngos)
-
-
-  // const [ ngos, setNgos ] = useState(null)
-
-  // useEffect(() => {
-  //   const fetchNgos = async () => { 
-  //     const res = await fetch('http://localhost:5000/api/ngo')
-  //     const json = await res.json()
-  //     if(res.ok){
-  //       setNgos(json)
-  //     }
-  //   }
-  //   fetchNgos();
-  // }, [])
-
-  return (
-    <div className="display-ngos">
-      <h3>List of NGOS that match your search:</h3>
-        { ngos && ngos.map((item) => (
-        <div className="row">
-          <Ngo key={item._id} ngo={item}/>   
-        </div>
-      ))}
-    </div>
-    )
+    return (    
+      <div className="ngo-container">
+        {ngos?.map((ngo, idx) => {
+          return (
+            <div key={idx} className="ngo-card">
+              <p className="name">{ngo.name}</p>
+              <p className="category">{ngo.category}</p>
+              <p className="website">{ngo.website}</p>
+            </div> 
+          )
+        })}
+      </div> 
+    );
   }
 
+export default Display;
 
-export default Display

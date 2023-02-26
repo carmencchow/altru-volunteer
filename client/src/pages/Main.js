@@ -19,7 +19,7 @@ const Main = () => {
           <Card/>
           <Card/>
         </div>
-      <Display/>
+      {/* <Display/> */}
       <Footer/>
     </Section>
   )

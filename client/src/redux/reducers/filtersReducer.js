@@ -1,24 +1,33 @@
-import { UPDATE_CATEGORY, SORT_PRICE, SEARCH_PRODUCT } from "../actions/index";
+import { SET_CATEGORY, SET_REGION, SET_DONATION } from "../actions/index";
 
-const filterReducer = (state = {}, action) => 
+const initialState = {
+  region: '',
+  category: '',
+  donation: ''
+};
+
+
+const filterReducer = (state = initialState, action) => 
   {
     switch (action.type) {
-      case SEARCH_PRODUCT:
-        return {
-          products: action.payload,
-        };
-      case UPDATE_CATEGORY:
+      case SET_CATEGORY:
         return {
           ...state,
-          products: action.payload,
+          category: action.payload,
         };
-      case SORT_PRICE:
+      case SET_REGION:
         return {
-          products: action.payload,
+          ...state,
+          region: action.payload,
+        };
+      case SET_DONATION:
+        return {
+          ...state,
+          donation: action.payload,
         };
     default:
       return state;
     }
-  }
+  };
 
 export default filterReducer;
