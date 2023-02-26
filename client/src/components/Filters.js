@@ -1,15 +1,29 @@
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { changeQuery, search, causeFilter, regionFilter, donationTypeFilter } from '../redux/actions'
 import './Filters.css'
+import axios from 'axios';
 
 const Filters = () => {
-  
   const [query, setQuery] = useState('');
-  const [cause, setCause] = useState('');
-  const [region, setRegion] = useState('');
-  const [donate, setDonate] = useState('');
-  const [page, setPage] = useState(1);
+  const [input, setInput] = useState('');
 
-  const handleSubmit = () => {
+  // const [cause, setCause] = useState('');
+  // const [region, setRegion] = useState('');
+  // const [donate, setDonate] = useState('');
+  // const [page, setPage] = useState(1);
+  const dispatch = useDispatch();  
+  const filters = useSelector(state => state.filters);
+  
+  // Handle input change
+  const handleChange = (e) => {
+    setInput(e.target.value);
+  }
+
+  // Handle input submit
+  const handleSubmit = (e) => {
+    dispatch(setQuery(e.target.value))
+    setInput('');
     console.log('Submit button clicked by user')
   }
 
@@ -20,6 +34,7 @@ const Filters = () => {
           type="text" 
           value={query} 
           placeholder="Search for an organization"/>
+          onChange={handleChange} 
         <button type="submit" onClick={handleSubmit}>Search</button>
       </div>
 

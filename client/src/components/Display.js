@@ -1,21 +1,24 @@
 import React from 'react'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useSelector } from 'react'
 import Ngo from '../components/Ngo'
 import './Display.css'
 
 const Display = () => {
-  const [ ngos, setNgos ] = useState(null)
+  const ngos = useSelector((state) => state.filterItems.ngos)
 
-  useEffect(() => {
-    const fetchNgos = async () => { 
-      const res = await fetch('http://localhost:5000/api/ngo')
-      const json = await res.json()
-      if(res.ok){
-        setNgos(json)
-      }
-    }
-    fetchNgos();
-  }, [])
+
+  // const [ ngos, setNgos ] = useState(null)
+
+  // useEffect(() => {
+  //   const fetchNgos = async () => { 
+  //     const res = await fetch('http://localhost:5000/api/ngo')
+  //     const json = await res.json()
+  //     if(res.ok){
+  //       setNgos(json)
+  //     }
+  //   }
+  //   fetchNgos();
+  // }, [])
 
   return (
     <div className="display-ngos">
