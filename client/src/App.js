@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 import Navbar from './components/Navbar';
 import Main from './pages/Main';
@@ -17,9 +17,9 @@ function App() {
           <Route path="/" element={<Home/>}/>
           <Route path="/login" element={<Login/>}/>
           <Route path="/login" element={user ? <Navigate to="/" /> : <Home/>}/>
-          <Route path="/main" element={user ? <Main/> : <Navigate to="/login" />}/>
+          <Route path="/main" element={<Main/>}/>
         </Routes>
-        <ChatWindow/>
+        {/* <ChatWindow/> */}
       </div>
     </BrowserRouter>
   );

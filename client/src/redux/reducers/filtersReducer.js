@@ -1,4 +1,4 @@
-import { SET_CATEGORY, SET_REGION, SET_DONATION } from "../actions/index";
+import { SET_CATEGORY, SET_region, SET_DONATION } from "../actions/index";
 
 const initialState = {
   region: '',
@@ -15,7 +15,7 @@ const filterReducer = (state = initialState, action) =>
           ...state,
           category: action.payload,
         };
-      case SET_REGION:
+      case SET_region:
         return {
           ...state,
           region: action.payload,
