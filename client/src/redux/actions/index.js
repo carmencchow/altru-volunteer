@@ -4,8 +4,10 @@ export const SET_REGION_FILTER = 'SET_REGION_FILTER';
 export const setregionFilter = async (region) => {
   const selectedRegion = region.toLowerCase();
   console.log(selectedRegion)
-  let request = await axios.get(`http://localhost:5000/api/ngo/filter/${selectedRegion}`)
-    .then((response) => {
+  let request = await axios.get(`http://localhost:5000/api/ngos/filter/${region}`)
+
+  // let request = await axios.get(`http://localhost:5000/api/ngo/filter/${selectedRegion}`)
+  .then((response) => {
       console.log(response.data.ngos, response.data.count)
       return response;
     })

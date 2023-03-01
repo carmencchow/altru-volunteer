@@ -4,7 +4,7 @@ import Login from '../pages/Login';
 import  Home from '../pages/Home';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { RxAvatar } from 'react-icons/rx';
- 
+import logo from '../assets/logo.png';
 
 const Nav = styled.nav`
   display: flex;
@@ -29,7 +29,9 @@ const Navbar = ({ user }) => {
   return (
     <Nav>
       <Span className="logo">
-        <Link className="link" to="/main">Logo</Link> 
+        <Link className="link" to="/main">
+          <img src={logo} style={{width: 80, height: 80 }} alt="logo" />Altru
+        </Link> 
       </Span>
 
       {user ? (

@@ -1,11 +1,26 @@
-img {
-  width: 300px;
-  height: 300px;
-  outline: 1px solid blue;
+body{
+  background-color: #fdf9f3;
+  font-family: 'Tilt Warp', cursive;
 }
-.banner{
-  display: flex;
-  justify-content: center;
+.text{
+  font-size: 40px;
+}
+.description{
+  font-size: 26px;
+}
+.container{
+  max-width: 1170px;
+  margin: 0 auto;
+  position: relative;
+  padding: 0 15px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.main-section{
+  padding-top: 70px;
+  padding-bottom: 80px;
+  outline: 1px solid blue;
 }
 .left{
   margin-right: 40px;

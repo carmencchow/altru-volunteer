@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { setregionFilter } from '../redux/actions'
 import Display from '../components/Display'
 import './Filters.css'
+import axios from 'axios';
 
 const Filters = () => {
   const [region, setregion] = useState('');
@@ -18,6 +19,7 @@ const Filters = () => {
     e.preventDefault();
     dispatch(setregionFilter(region));
   }
+
 
   return (
     <div>
@@ -48,6 +50,8 @@ const Filters = () => {
         <button onClick={handleregionSubmit}>Search</button>
       </form>
 
+
+<Display/>
       </div>
     );
   };
