@@ -7,6 +7,21 @@ const getNgos = async (req, res) => {
   res.status(200).json(ngos)
 }
 
+const getNgosByRegion = async (req, res) => {
+  const region = req.params.region.toLowerCase()
+  console.log({region})
+  const ngos = await Ngo.find({ location: region }) 
+  return res.status(200).json(ngos)
+}
+
+const getNgosByCause = async (req, res) => {
+  const cause = req.params.cause.toLowerCase()
+  console.log({cause})
+  const ngos = await Ngo.find({ cause: cause })
+  return res.status(200).json(ngos)
+}
+
+
 // 2. GET a single NGO by grabbing id from the route parameter in main.js and checking use mongoose to check if its id is valid
 const getNgo = async (req, res) => { 
   const { id } = req.params
@@ -23,10 +38,10 @@ const getNgo = async (req, res) => {
 
 // 3. CREATE new NGO by grabbing props from the req.body 
 const createNgo = async (req, res) => {
-  const { id, name, founded, category, website, location, tag, campaign } = req.body 
+  const { id, name, founded, category, website, region, tag, campaign } = req.body 
   // Use Ngo Model to try to create a new ngo document to add to the db
   try { 
-    const ngo = await Ngo.create({ id, name, founded, category, website, location, tag, campaign })
+    const ngo = await Ngo.create({ id, name, founded, category, website, region, tag, campaign })
     res.status(200).json(ngo) // Result will be the new document object returned in JSON
   } catch (err) {
     res.status(400).json({ err: err.message })
@@ -61,4 +76,4 @@ const updateNgo = async (req, res) => {
   res.status(200).json(ngo);
 }
 
-module.exports = { createNgo, getNgos, getNgo, deleteNgo, updateNgo }
+module.exports = { createNgo, getNgosByRegion, getNgosByCause, getNgos, getNgo, deleteNgo, updateNgo }

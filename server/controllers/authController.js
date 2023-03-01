@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const register = async (req, res) => {
   try {
     // Hash the password before saving email and password into the database
-    const hashedPassword = bcrypt.hash(req.body.password);
+    const hashedPassword = bcrypt.hash(req.body.password, 8);
 
     // create a new user instance and collect the data
     const newUser = new User(req.body
@@ -24,6 +24,7 @@ const register = async (req, res) => {
     res.status(200).send({ message: 'New user saved to database' }); 
     // if the new user wasn't added successfully to the database:
   } catch (err) {
+    console.log(err);
     res.status(500).send({ message: 'Error creating user' });
   };
 };
@@ -33,7 +34,12 @@ const login = async (req, res) => {
     const user = await User.findOne({ username: req.body.username });
     if (!user) return res.status(404).send({ message: 'User not found' });
 
-    const isValid = await User
+    // hash the incoming password
+
+    // validate the hashed password
+    const isValid = await
+
+    res.sendStatus(200)
 
   } catch (err) { 
     res.status(500).send(err);

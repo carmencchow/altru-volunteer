@@ -43,7 +43,7 @@ module.exports = mongoose.model('Ngo', ngoSchema);
   "founded": ,
   "category": [" "],
   "website": "",
-  "location": [""],
+  "region": [""],
   "tag": "",
   "campaign": " "
 }
@@ -54,7 +54,7 @@ module.exports = mongoose.model('Ngo', ngoSchema);
   "name": "AWARE Trust Zimbabwe",
   "category": ["animal welfare"],
   "website": "http://www.awaretrust.org/",
-  "location": ["africa", "zimbabwe"],
+  "region": ["africa", "zimbabwe"],
   "tag": "AWARE Trust Zimbabwe is the only veterinary conservation NGO in Zimbabwe run by veterinarians.",
   "founded": 2004
 }

@@ -6,10 +6,15 @@ const authRoutes = require('./routes/authRoute');
 // const userRoutes = require('./routes/userRoute'); 
 const PORT = process.env.PORT || 5001;
  
+
+const cors = require('cors');
+
 // Express app
 const app = express();
 
 // Middleware
+app.use(cors());
+
 app.use(express.json()); //parses incoming JSON requests and puts the parsed data in req.body.
 app.use((req, res, next) => {
   console.log(req.path, req.method)
@@ -18,7 +23,7 @@ app.use((req, res, next) => {
 })
 
 // Routes
-app.use('/api/ngo', ngoRoutes);
+app.use('/api/ngos', ngoRoutes);
 // app.use('/api/user', userRoutes);
 app.use('/api/auth', authRoutes);
 
