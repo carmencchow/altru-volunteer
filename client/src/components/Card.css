@@ -1,5 +1,11 @@
-.card{
+.image{
   width: 300px;
   height: 300px;
   border: 1px solid purple;
+  margin-right: 30px;
+}
+.card{
+  display: flex;
+  padding: 20px 70px;
+  justify-content: center;
 }

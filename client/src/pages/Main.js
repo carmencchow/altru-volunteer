@@ -12,14 +12,11 @@ const Main = () => {
 
   return (
     <Section>
+      <Card/>
       <Filters/>
         <h1>Featured Organizations</h1>
         <div className="featured-cards">
-          <Card/>
-          <Card/>
-          <Card/>
         </div>
-      {/* <Display/> */}
       <Footer/>
     </Section>
   )

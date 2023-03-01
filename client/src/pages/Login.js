@@ -35,13 +35,11 @@ const Login = () => {
             <input 
               name="username" 
               type="text" 
-              placeholder="Enter your user name" 
+              placeholder="Enter your user name or email" 
               value={username} 
-              onChange={(e) => {setUsername(e.target.value)}}
-              
+              onChange={(e) => {setUsername(e.target.value)}}    
             />
-                        <AiOutlineEye/><AiOutlineEyeInvisible/>
-
+          <AiOutlineEye/><AiOutlineEyeInvisible/>
           </div>
 
           <div className="form-password">

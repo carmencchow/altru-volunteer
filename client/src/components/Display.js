@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux'
 import './Display.css'
 
 const Display = () => {
-  // const ngos = useSelector((state) => state)
   const ngos = useSelector((state) => state.filterItems.ngos)
   console.log(ngos)
     return (    

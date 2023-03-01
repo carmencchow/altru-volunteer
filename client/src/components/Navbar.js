@@ -29,7 +29,7 @@ const Navbar = ({ user }) => {
   return (
     <Nav>
       <Span className="logo">
-        <Link className="link" to="/main">
+        <Link className="link" to="/">
           <img src={logo} style={{width: 80, height: 80 }} alt="logo" />Altru
         </Link> 
       </Span>

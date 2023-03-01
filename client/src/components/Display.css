@@ -1,4 +1,4 @@
-.row{
+/* .row{
   display: flex;
   justify-content: space-evenly;
   flex-direction: row;
@@ -9,4 +9,4 @@
 }
 .row:nth-child(odd){
   background-color: lavenderblush;
-}
+} */

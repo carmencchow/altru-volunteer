@@ -1,16 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
-import { Provider } from 'react-redux';
-import reportWebVitals from './reportWebVitals';
-import { createStore, applyMiddleware } from "redux";
 import promise from "redux-promise";
-import rootReducer from './redux/reducers'
-import thunk from "redux-thunk";
+import reducers from './redux/reducers'
+import { createStore, applyMiddleware } from "redux";
+import { Provider } from 'react-redux';
+import App from './App';
 
-const storeWithMiddleware = applyMiddleware(thunk, promise)(createStore);
-const store = storeWithMiddleware(rootReducer, {})
+const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
+const store = createStoreWithMiddleware(reducers)
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -20,5 +18,3 @@ root.render(
     </Provider>
   </React.StrictMode>
 );
-
-reportWebVitals();

@@ -3,11 +3,36 @@ main{
   justify-content: center;
   align-items: center;
 }
-
+.filters{
+  display: flex;
+}
 form {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   margin-left: 20px;
+}
+.row{
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: row;
+  margin: 30px auto;
+}
+.row:nth-child(even){
+
+}
+.row:nth-child(odd){
+  background-color: lavenderblush;
+}
+.display{
+  padding: 30px 70px;
+}
+.heading{
+  display: flex;
+  justify-content: center;
+  justify-content: space-evenly;
+  text-transform: uppercase;;
+  font-size: 30px;
+
 }
