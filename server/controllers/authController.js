@@ -10,15 +10,17 @@ const register = async (req, res) => {
     const hashedPassword = await bcrypt.hash(req.body.password, 8);
 
     // create a new user instance and collect the data
-    // const newUser = new User(req.body) OR
-    const newUser = new User({
-      username: req.body.username,
-      email: req.body.email,
-      password: hashedPassword,
-      image: req.body.image
-    });
+    const newUser = new User(req.body) 
+    
+    // const newUser = new User({
+    //   username: req.body.username,
+    //   email: req.body.email,
+    //   password: hashedPassword,
+    //   image: req.body.image
+    // });
 
-    const existingUser = await User.findOne({ username: newUser.username })
+    const existingUser = await User.findOne({ username: req.body.username.toLowerCase()});
+    // const existingUser = await User.findOne({ username: newUser.username })
     if (existingUser){
       res.status(404).send({ message: 'User name already exists, please enter a different username'});
     } else {    
