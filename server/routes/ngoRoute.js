@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/', getNgos) // localhost:5000/api/ngos
 router.get('/:id', getNgo) // localhost:5000/api/ngos/:id
-router.get('/filter/:region', getNgosByRegion) // localhost:5000/api/ngos/filter/:region
+router.get('/region/:region', getNgosByRegion) // localhost:5000/api/ngos/filter/:region
 router.get('/cause/:cause', getNgosByCause)
 router.post('/', createNgo)
 router.delete('/:id', deleteNgo)

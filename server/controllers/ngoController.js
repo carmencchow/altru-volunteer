@@ -17,7 +17,7 @@ const getNgosByRegion = async (req, res) => {
 const getNgosByCause = async (req, res) => {
   const cause = req.params.cause.toLowerCase()
   console.log({cause})
-  const ngos = await Ngo.find({ cause: cause })
+  const ngos = await Ngo.find({ category: cause })
   return res.status(200).json(ngos)
 }
 
