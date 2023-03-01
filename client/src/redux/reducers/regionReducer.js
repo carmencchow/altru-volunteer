@@ -1,22 +1,18 @@
 import { SET_REGION_FILTER } from '../actions/index';
 
-// const initialState = {
-//   category: '',
-//   ngos: []
-// };
+const initialState = {
+  category: '',
+  ngos: []
+};
 
-const regionReducer = (state = {}, action) => {
+const regionReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_REGION_FILTER:
-      return {
-        ...state,
+      console.log('Fetching by Region:', action.payload)
+    return {
+      ...state,
         ngos: action.payload,
-      };
-    // case SET_NG0S:
-    //   return {
-    //     ...state,
-    //     ngos: action.payload
-    //   };
+    };
 
     default:
       return state;

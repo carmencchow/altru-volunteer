@@ -1,12 +1,13 @@
 import { combineReducers } from 'redux'
 import regionReducer from './regionReducer'
-// import donationReducer from 'redux/reducers/donateReducer'
-// import categoryReducer from 'redux/reducers/categoryReducer'
-import filterReducer from './filtersReducer'
+import causeReducer from './causeReducer'
+// import filterReducer from './filtersReducer'
+// import donationReducer from './donateReducer'
 
 const rootReducer = combineReducers({
   region: regionReducer,
-  filterItems: filterReducer,
+  cause: causeReducer, 
+  // filters: filterReducer,
   // donate: donationReducer,
   // category: categoryReducer
 });

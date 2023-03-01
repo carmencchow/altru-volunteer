@@ -1,28 +1,34 @@
 import React, { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux';
-import { setregionFilter } from '../redux/actions'
+import { useDispatch, useSelector } from 'react-redux';
+import { setRegionFilter, setCauseFilter } from '../redux/actions'
 import { useNavigate } from 'react-router-dom';
 import './Filters.css'
 import axios from 'axios';
 
 const Filters = () => {
-  const [region, setregion] = useState('');
+  const [region, setRegion] = useState('');
   const [cause, setCause] = useState('');
   const [ngos, setNgos] = useState([]);
   const dispatch = useDispatch();  
   const navigate = useNavigate();
 
-  const handleregionChange = (e) => {
-    setregion(e.target.value);
-    console.log('region is:', e.target.value);
+  const handleRegionChange = (e) => {
+    setRegion(e.target.value);
   }
 
-  const handleregionSubmit = (e) => {
+  const handleCauseChange = (e) => {
+    setCause(e.target.value);
+  }
+
+  const handleRegionSubmit = (e) => {
     e.preventDefault();
-    dispatch(setregionFilter(region));
+    dispatch(setRegionFilter(region));
   }
 
-  const handlecauseSubmit = (e) => {}
+  const handleCauseSubmit = (e) => {
+    e.preventDefault();
+    dispatch(setCauseFilter(cause));
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,20 +45,19 @@ const Filters = () => {
 
       <div className="filters">
         <form>
-          <select value={region} onChange={handleregionChange}>  
+          <select value={region} onChange={handleRegionChange}>  
             <option value="">Region</option>
-            <option value="North America">North America</option>
             <option value="South America">South America</option>
             <option value="Asia">Asia</option>
-            <option value="Europe">Europe</option>
             <option value="Middle East">Middle East</option>
             <option value="Africa">Africa</option>
+            <option value="Cameroon">Cameroon</option>
           </select>
-          <button onClick={handleregionSubmit}>Search</button>
+          <button onClick={handleRegionSubmit}>Search</button>
         </form>
 
         <form>
-          <select value={cause}>
+          <select value={cause} onChange={handleCauseChange}>
             <option value="">Cause</option>
             <option value="hunger">Hunger</option>
             <option value="poverty">Poverty</option>
@@ -60,7 +65,7 @@ const Filters = () => {
             <option value="animal welfare">Animal Welfare</option>
             <option value="microfinance">Microfinance</option>
           </select>
-          <button onClick={handlecauseSubmit}>Search</button>
+          <button onClick={handleCauseSubmit}>Search</button>
         </form>
       </div>
 
@@ -80,6 +85,19 @@ const Filters = () => {
             </div> 
             )
           })}
+
+          {/* {region.map((item, id) => {
+            return (
+              <div key={id} className="row">
+                <p className="name">{item.name}</p>
+                <p className="category">{item.category}</p>
+                <p className="website">{item.website}</p>
+                <button onClick={() => navigate('/info')}>Info</button>
+              </div> 
+              )
+            })} */}
+
+
         </div> 
       </div>
     );

@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import './Display.css'
 
 const Display = () => {
-  const ngos = useSelector((state) => state.filterItems.ngos)
+  const ngos = useSelector((state) => state.filter.ngos)
   console.log(ngos)
     return (    
       <div className="ngo-container">

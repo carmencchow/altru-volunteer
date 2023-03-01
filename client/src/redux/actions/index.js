@@ -1,19 +1,17 @@
 import axios from 'axios';
 export const SET_REGION_FILTER = 'SET_REGION_FILTER';
+export const SET_CAUSE_FILTER = 'SET_CAUSE_FILTER';
 
-export const setregionFilter = async (region) => {
+export const setRegionFilter = async (region) => {
   const selectedRegion = region.toLowerCase();
   console.log(selectedRegion)
-  let request = await axios.get(`http://localhost:5000/api/ngos/filter/${region}`)
-
-  // let request = await axios.get(`http://localhost:5000/api/ngo/filter/${selectedRegion}`)
+  let request = await axios.get(`http://localhost:5000/api/ngos/region/${region}`)
   .then((response) => {
-      console.log(response.data.ngos, response.data.count)
-      return response;
-    })
-    .catch((err) => {
-      console.log(err)
-    })
+    return response.data;
+  })
+  .catch((err) => {
+    console.log(err)
+  })
 
   return {
     type: SET_REGION_FILTER,
@@ -21,35 +19,21 @@ export const setregionFilter = async (region) => {
   };
 }
 
-// export const changeQuery = async (query, page) => {
-//   let request = await axios.et(`${ROOT_URL}?page=${page}&query=${query}`)
-//   .then((response) => {
-//     console.log(response.data.products, response.data.count)
-//     return response.data.products; 
-//   })
-//   .catch((error) => {
-//     console.log(error)
-//   })
-  
-//   return {
-//     type: CHANGE_QUERY,
-//     payload: request,
-//   }
-// }
+export const setCauseFilter = async (cause) => {
+  const selectedCause = cause.toLowerCase();
+  console.log(selectedCause)
+  let request = await axios.get(`http://localhost:5000/api/ngos/cause/${cause}`)
+  .then((response) => {
+    return response.data;
+  })
+  .catch((err) => {
+    console.log(err)
+  })
 
-// export const causeFilter = (cause) => {
-//   return {
-//     type: CHANGE_CAUSE,
-//     payload: cause,
-//   }
-// }
+  return {
+    type: SET_CAUSE_FILTER,
+    payload: request,
+  };
+}
 
-
-
-// export const donationTypeFilter = (donationType) => {
-//   return {
-//     type: CHANGE_DONATION,
-//     payload: donationType,
-//   }
-// }
-
+export const setFilters = async (cause, region) => {}
