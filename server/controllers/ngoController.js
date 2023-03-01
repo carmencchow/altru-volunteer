@@ -3,24 +3,30 @@ const mongoose = require('mongoose');
 
 // 1. GET and sort all NGOS alphabetically
 const getNgos = async (req, res) => {
-  const ngos = await Ngo.find({}).sort({ name: 1 }) 
-  res.status(200).json(ngos)
+  const { page = 1, limit = 6} = req.query;
+
+  try {
+    const ngos = await Ngo.find({})
+      .sort({ name: 1 }).limit(limit * 1).skip((page -1) * limit).exec(); 
+
+    const count = await Ngo.countDocuments();
+    res.status(200).json(ngos)
+  } catch (err){
+    console.log(err.message);
+  }
 }
 
 const getNgosByRegion = async (req, res) => {
-  const region = req.params.region.toLowerCase()
-  console.log({region})
+  const region = req.params.region.toLowerCase() // console.log({region})
   const ngos = await Ngo.find({ location: region }) 
   return res.status(200).json(ngos)
 }
 
 const getNgosByCause = async (req, res) => {
-  const cause = req.params.cause.toLowerCase()
-  console.log({cause})
+  const cause = req.params.cause.toLowerCase() // console.log({cause})
   const ngos = await Ngo.find({ category: cause })
   return res.status(200).json(ngos)
 }
-
 
 // 2. GET a single NGO by grabbing id from the route parameter in main.js and checking use mongoose to check if its id is valid
 const getNgo = async (req, res) => { 
@@ -34,7 +40,6 @@ const getNgo = async (req, res) => {
   }
   res.status(200).json(ngo)
 }
-
 
 // 3. CREATE new NGO by grabbing props from the req.body 
 const createNgo = async (req, res) => {
