@@ -2,6 +2,7 @@ const User = require('../models/userModel');
 const bcrypt = require("bcrypt");
 const mongoose = require('mongoose');
 const { response } = require('express');
+const jwt = require('jsonwebtoken');
 
 // Register endpoint
 const register = async (req, res) => {
@@ -33,22 +34,33 @@ const register = async (req, res) => {
   };
 };
 
+// Create JWT token if user has successfully registered
 const login = async (req, res) => {
   try {
     const user = await User.findOne({ username: req.body.username });
     if (!user) return res.status(404).send({ message: 'User not found' });
 
-    // hash the incoming password
+    // validate incoming password
+    const isPasswordValid = await bcrypt.compare(req.body.password, user.password)
+    console.log(req.body.password, user.password);
+        
+      if (!isPasswordValid){
+        res.status(400).send({ message: 'Invalid username or password', err});
+      }
 
-    // validate the hashed password
-    const isValid = await
+      const token = jwt.sign({
+        id: user._id,
+        username: user.username,
+        email: user.email
+      }, JWT_SECRET, { expiresIn: '3h'});
 
-    res.status(200).send({ message: 'User login successful' });
-
-  } catch (err) { 
-    res.status(500).send(err);
-  }
-};
+      res.status(200).send({ message: 'Sending TOKEN', data: token });
+      
+    } catch (err) {
+      console.log(err); 
+      res.status(500).send({ message: 'Login failed', err});
+    }
+  };
 
 const logout = (req, res) => {
   try {
