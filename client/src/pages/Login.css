@@ -5,6 +5,8 @@
   display: flex;
   justify-content: center;
   margin: 50px auto;
+  display: flex;
+  flex-direction: column;
 }
 form{
   display: flex;
@@ -14,4 +16,13 @@ input {
   width: 300px;
   height: 50px;
   margin-right: 20px;
+}
+.form-password, .form-username{
+  padding-bottom: 20px;
+}
+button{
+  margin-right: 20px;
+  padding: 10px;
+  border: 2px;
+  border-radius: 10px;
 }

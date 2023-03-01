@@ -10,7 +10,6 @@ const Login = () => {
   const [password, setPassword] = useState('')
   const [error, setError] = useState(null);
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(e.target.value, 'form submitted');
@@ -28,32 +27,44 @@ const Login = () => {
 
   return (
     <div className="login-wrapper">
-      <form onSubmit={handleSubmit}>
-        <h3 className="login">Sign In to your account / Choose your sign in method</h3>
-        <input 
-          name="username" 
-          type="text" 
-          placeholder="Enter your user name" 
-          value={username} 
-          onChange={(e) => {setUsername(e.target.value)}}
-        />
-        <input 
-          name="password" 
-          type="text" 
-          placeholder="Enter your password" 
-          value={password} onChange={(e) => {setPassword(e.target.value)}}
-        />
-        <AiOutlineEye/><AiOutlineEyeInvisible/>
-        <div className="buttons">      <p>Forgot password</p>
-        <button onClick={handleSubmit}>Sign In</button>
-        
-        <p> OR </p>
-        <button><FcGoogle/>Continue with Google</button>
-        <button><SiFacebook/>Continue with Facebook</button>
+    
+      <form onSubmit={handleSubmit}> 
+        <div className="form-wrapper">
+          <h3 className="login">Sign In to your account / Choose your sign in method</h3>
+          <div className="form-username">
+            <input 
+              name="username" 
+              type="text" 
+              placeholder="Enter your user name" 
+              value={username} 
+              onChange={(e) => {setUsername(e.target.value)}}
+              
+            />
+                        <AiOutlineEye/><AiOutlineEyeInvisible/>
 
-        <p> Don't have an account? <b>Sign Up</b></p>
-        </div>
+          </div>
+
+          <div className="form-password">
+            <input 
+              name="password" 
+              type="text" 
+              placeholder="Enter your password" 
+              value={password} onChange={(e) => {setPassword(e.target.value)}}
+            />
+          </div>
   
+          <div className="buttons">      
+            <p>Forgot password</p>
+            <button onClick={handleSubmit}>Sign In</button>
+          
+            <p> OR </p>
+            <button><FcGoogle/>Continue with Google</button>
+            <button><SiFacebook/>Continue with Facebook</button>
+
+            <p> Don't have an account? <b>Sign Up</b></p>
+          </div>
+        </div>
+
       </form>
     </div>
 
