@@ -1,31 +1,21 @@
 // import { SET_CATEGORY, SET_REGION_FILTER, SET_DONATION } from "../actions/index";
-import { SET_REGION_FILTER } from "../actions/index";
+import { SET_FILTERS } from "../actions/index";
 
 const initialState = {
   region: '',
-  category: '',
-  donation: ''
+  category: ''
 };
 
 
 const filterReducer = (state = initialState, action) => 
   {
     switch (action.type) {
-      // case SET_CATEGORY:
-      //   return {
-      //     ...state,
-      //     category: action.payload,
-      //   };
-      case SET_REGION_FILTER:
+      case SET_FILTERS:
         return {
           ...state,
-          region: action.payload,
+          region: action.payload.region,
+          category: action.payload.category
         };
-      // case SET_DONATION:
-      //   return {
-      //     ...state,
-      //     donation: action.payload,
-      //   };
     default:
       return state;
     }

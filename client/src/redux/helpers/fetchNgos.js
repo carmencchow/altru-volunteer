@@ -1,6 +1,6 @@
 // import axios from 'axios';
 
-// export async function fetchNgos (name, category, founded, region, website) {
+// export async function fetchAllNgos (name, category, founded, region, website) {
 
 //   try {
 //     const params = { 

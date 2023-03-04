@@ -1,39 +1,38 @@
 import axios from 'axios';
-export const SET_REGION_FILTER = 'SET_REGION_FILTER';
-export const SET_CAUSE_FILTER = 'SET_CAUSE_FILTER';
+export const SET_FILTERS = 'SET_FILTERS';
+export const LOGIN_USER_REQUEST = 'USER_LOGIN_REQUEST';
+export const LOGIN_USER_SUCCESS = 'USER_LOGIN_SUCCESS';
+export const LOGOUT_USER = 'USER_LOGOUT';
+export const GET_ERRORS = 'GET_ERRORS';
+export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 
-export const setRegionFilter = async (region) => {
-  const selectedRegion = region.toLowerCase();
-  console.log(selectedRegion)
-  let request = await axios.get(`http://localhost:5000/api/ngos/region/${region}`)
+export const setFilters = async (region, cause) => {
+  // let request = await axios.get(`http://localhost:5000/api/ngos/${region}/${cause}`)
+  // .then((response) => {
+  //   console.log(response.data)
+  //   return response.data;
+  // })
+  // .catch((err) => {
+  //   console.log(err)
+  // })
+
+  return {
+    type: SET_FILTERS,
+    payload: {region, category: cause},
+  };
+}
+
+export const registerUser = async (user) => {
+  let request = await axios.get('http://localhost:5000/api/auth/register', user)
   .then((response) => {
-    return response.data;
+    console.log(response.data);
   })
   .catch((err) => {
     console.log(err)
   })
 
   return {
-    type: SET_REGION_FILTER,
-    payload: request,
+    type: GET_ERRORS,
+    payload: request
   };
-}
-
-export const setCauseFilter = async (cause) => {
-  const selectedCause = cause.toLowerCase();
-  console.log(selectedCause)
-  let request = await axios.get(`http://localhost:5000/api/ngos/cause/${cause}`)
-  .then((response) => {
-    return response.data;
-  })
-  .catch((err) => {
-    console.log(err)
-  })
-
-  return {
-    type: SET_CAUSE_FILTER,
-    payload: request,
-  };
-}
-
-export const setFilters = async (cause, region) => {}
+};

@@ -1,9 +1,14 @@
 import React from 'react'
 import './Home.css'
+import Navbar from '../components/Navbar'
 import child from '../assets/child.jpg';
 
-const Home = () => {
+const Home = ({ user}) => {
+
   return (
+    <div>
+      <Navbar user={user}/> 
+
     <section className="container">
       <div className="main-section">
         <div className="wrapper">
@@ -17,6 +22,7 @@ const Home = () => {
         </div>
       </div>
     </section>
+    </div>
   )
 }
 

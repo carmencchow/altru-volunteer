@@ -16,16 +16,31 @@ const getNgos = async (req, res) => {
   }
 }
 
-const getNgosByRegion = async (req, res) => {
-  const region = req.params.region.toLowerCase() // console.log({region})
-  const ngos = await Ngo.find({ location: region }) 
-  return res.status(200).json(ngos)
-}
+const getFilteredNgos = async (req, res) => { 
+  const cause = req.params.cause.toLowerCase();
+  const region = req.params.region.toLowerCase();
 
-const getNgosByCause = async (req, res) => {
-  const cause = req.params.cause.toLowerCase() // console.log({cause})
-  const ngos = await Ngo.find({ category: cause })
-  return res.status(200).json(ngos)
+  let ngos; 
+  
+  // if user doesn't select both
+  if (cause === 'all' && region === 'all') {
+    ngos = await Ngo.find({})
+  }
+
+  // if user doesn't select cause/category
+  else if (cause === 'all') {
+    ngos = await Ngo.find({ location: region })
+  }
+
+  // if user doesn't select location
+  else if (region === 'all') {
+    ngos = await Ngo.find({ category: cause })
+  }
+
+  else {
+    ngos = await Ngo.find({ location: region, category: cause})
+  }   
+  res.send(ngos);
 }
 
 // 2. GET a single NGO by grabbing id from the route parameter in main.js and checking use mongoose to check if its id is valid
@@ -81,4 +96,4 @@ const updateNgo = async (req, res) => {
   res.status(200).json(ngo);
 }
 
-module.exports = { createNgo, getNgosByRegion, getNgosByCause, getNgos, getNgo, deleteNgo, updateNgo }
+module.exports = { createNgo, getNgos, getNgo, getFilteredNgos, deleteNgo, updateNgo }

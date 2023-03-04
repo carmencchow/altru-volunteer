@@ -6,10 +6,15 @@ const Info = () => {
 
   const handleSave = () => {}
 
+  const handleBack = () => {
+  }
+
   return (
     <div className="details">
       <div className="heading">
         <h3>Organization</h3>
+        <button onClick={handleBack}>Back</button>
+        
         <img src="" alt=""/>  
       </div>
 
