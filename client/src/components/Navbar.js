@@ -23,6 +23,7 @@ const Button = styled.button`
 const Span = styled.span`
   text-decoration: none;
   color: blue;
+  display: flex;
 `
 
 const Navbar = ({ auth, user}) => {
@@ -31,7 +32,8 @@ const Navbar = ({ auth, user}) => {
     <Nav>
       <Span className="logo">
         <Link className="link" to="/">
-          <img src={logo} style={{width: 80, height: 80 }} alt="logo" />Altru
+          <img src={logo} style={{width: 100, height: 100 }} alt="logo" />
+          <p className="logo-text">Altru</p>
         </Link> 
       </Span>
 

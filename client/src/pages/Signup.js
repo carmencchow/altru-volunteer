@@ -38,13 +38,6 @@ const register = async () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    // try {
-    //   await signUp(email, password);
-    //   navigate('/');
-
-    // } catch (err) {
-    //   setError(err.message);
-    // }
   }
 
   return (
@@ -76,7 +69,7 @@ const register = async () => {
           <div className="buttons">      
             <button type="submit" onClick={register}><Link to="/login">Signup</Link></button>
 
-            {user.email}
+            {/* {user.email} */}
           </div>
         </div>
 
