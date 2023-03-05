@@ -6,8 +6,8 @@ const jwt = require('jsonwebtoken');
 const cookie = require('cookie');
 const { countDocuments } = require('../models/userModel');
 
-// 1. REGISTER endpoint
-const register = async (req, res) => {
+// 1. signup endpoint
+const signup = async (req, res) => {
   try {
     // Validate incoming request
     if (!req.body.username || !req.body.password || !req.body.email){
@@ -101,4 +101,4 @@ const logout = ( req, res ) => {
 }
 
 
-module.exports = { register, login, logout };
+module.exports = { signup, login, logout };
