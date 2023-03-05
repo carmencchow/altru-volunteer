@@ -4,8 +4,19 @@ import { BsChatSquareDots } from 'react-icons/bs'
 import { FiSend } from 'react-icons/fi';
 import './ChatWindow.css';
 
-const ChatWindow = () => {
+const ChatWindow = (props) => {
+  let hide = { display: 'none' }
+  let show = { display: 'block' }
+
+  const { messages } = props
+
   const [chat, setChat] = useState('closed');
+  const toggleChat = (e) => {
+    console.log("chat box")
+    setChat(!chat)
+  }
+
+
 
   const handleClick = () => { 
     console.log('chat window clicked')
@@ -16,10 +27,10 @@ const ChatWindow = () => {
   return (
     <div className="container">
       <p>Click to start chatting</p>
-      <BsChatSquareDots className="chat" size={50} onClick={handleClick}/>
+      <BsChatSquareDots className="chat" size={50} onClick={toggleChat}/>
     
         
-      <div className="chatbox">
+      <div className="chatbox" style={ chat ? show : hide }>
         <div className="chatbox-container">
           <h3 className="top">Chat Window</h3>
           <p>how can I help you?</p>

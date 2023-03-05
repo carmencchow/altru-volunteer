@@ -1,6 +1,7 @@
 import React from 'react'
 import './DonationModal.css'
 import { AiFillCloseSquare } from 'react-icons/ai'
+import StripeButton from '../components/StripeButton'
  
 const DonationModal = ({ closeModal }) => {
   return (
@@ -17,6 +18,8 @@ const DonationModal = ({ closeModal }) => {
       <input text='text' placeholder="$ Other amount">
         </input>
 
+        <StripeButton/>
+        <button>Continue</button>
         <button onClick={() => closeModal(false)}>Cancel</button>
       </div>
     </div>
