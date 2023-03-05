@@ -22,8 +22,8 @@ export const setFilters = async (region, cause) => {
   };
 }
 
-export const registerUser = async (user) => {
-  let request = await axios.get('http://localhost:5000/api/auth/register', user)
+export const signupUser = async (user) => {
+  let request = await axios.get('http://localhost:5000/api/auth/signup', user)
   .then((response) => {
     console.log(response.data);
   })

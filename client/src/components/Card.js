@@ -7,31 +7,26 @@ const Card = () => {
       <div className="image">
         <p className="name">Canadian Red Cross</p>
         <p className="region">UNHCR</p>
-        <p className="text">Doctors Without Borders</p>
       </div>
 
       <div className="image">
         <p className="name">Canadian Red Cross</p>
         <p className="region">UNHCR</p>
-        <p className="text">Doctors Without Borders</p>
       </div>
 
       <div className="image">
         <p className="name">Canadian Red Cross</p>
         <p className="region">UNHCR</p>
-        <p className="text">Doctors Without Borders</p>
       </div>
 
       <div className="image">
         <p className="name">Canadian Red Cross</p>
         <p className="region">UNHCR</p>
-        <p className="text">Doctors Without Borders</p>
       </div>
 
       <div className="image">
         <p className="name">Canadian Red Cross</p>
         <p className="region">UNHCR</p>
-        <p className="text">Doctors Without Borders</p>
       </div>
    </div>
 

@@ -3,7 +3,12 @@ import './Home.css'
 import Navbar from '../components/Navbar'
 import child from '../assets/child.jpg';
 
-const Home = ({ user}) => {
+// import { useUserAuth } from '../context/UserAuthContext'
+
+const Home = ({ user }) => {
+
+  // const { user } = useUserAuth();
+  // console.log(user)
 
   return (
     <div>

@@ -5,6 +5,7 @@ import  Home from '../pages/Home';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { RxAvatar } from 'react-icons/rx';
 import logo from '../assets/logo.png';
+import { auth } from '../firebase';
 
 const Nav = styled.nav`
   display: flex;
@@ -24,7 +25,7 @@ const Span = styled.span`
   color: blue;
 `
 
-const Navbar = ({ user }) => {
+const Navbar = ({ auth, user}) => {
   
   return (
     <Nav>
@@ -36,7 +37,7 @@ const Navbar = ({ user }) => {
 
       {user ? (
         <div>
-          {/* <p>Hello {user.name}</p> */}
+          <p>{auth.user.email}</p>
           <Link to="/profile">My Profile</Link>
           <RxAvatar/> 
           <Link to="/profile">Logout</Link>

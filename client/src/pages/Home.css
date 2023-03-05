@@ -1,10 +1,12 @@
 body{
-  background-color: #fdf9f3;
+  background-color: #f9f9f2;
   
   font-family: 'Tilt Warp', cursive;
 }
 .text{
   font-size: 40px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 50%, #fde478 50%);
+  width: 100px;
 }
 .description{
   font-size: 26px;
