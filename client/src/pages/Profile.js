@@ -10,6 +10,11 @@ const Profile = () => {
         <div className="events">Your events</div>
         <div className="events">Your donations</div>
         <div className="events">Your volunteer hours</div>
+
+        <div className="favourites">
+          <h3>Favourited Organizations</h3>
+          
+        </div>
       </div>
     </section>
   )
