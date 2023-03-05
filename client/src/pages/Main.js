@@ -13,6 +13,7 @@ const Section = styled.div``
 const Main = () => {
 
   return (
+    // When user is logged in display a message with user name at the top:
     <Section>
       <Navbar/>
         <Card/>

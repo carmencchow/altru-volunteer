@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setFilters } from '../redux/actions'
+import { setFilters } from '../redux/actions';
 import { useNavigate } from 'react-router-dom';
+import { AiOutlineSearch } from 'react-icons/ai';
+import { BiMap, BiLink } from 'react-icons/bi';
 
 import './Filters.css'
 import axios from 'axios';
 
 const Filters = () => {
+  const [search, setSearch] = useState('');
   const [region, setRegion] = useState('');
   const [cause, setCause] = useState('');
   const [ngos, setNgos] = useState([]);
@@ -63,6 +66,16 @@ const Filters = () => {
       <h1>Find an NGO:</h1>
 
       <div className="filters">
+
+        <div className="searchbar">
+          <div className="input">
+            <div className="input-group">
+            <AiOutlineSearch/>
+            <input type="text" className="searchbar" placeholder="Search Nonprofits" value={search}/>
+            </div>
+          </div>
+        </div>
+
         <form>
           <select value={region} onChange={handleRegionChange}>  
             <option value="">Region</option>
@@ -91,16 +104,24 @@ const Filters = () => {
         <div className="heading">
           <p>Organizations</p>
         </div>
-        <h5>{JSON.stringify(ngoState)}</h5>
+        {/* <h5>{JSON.stringify(ngoState)}</h5> */}
 
         {ngos?.map((ngo, idx) => {
           return (
-            <div key={idx} className="row">
-              <p className="name">{ngo.name}</p>
-              <p className="category">{ngo.category}</p>
-              <p className="website">{ngo.website}</p>
-              <p className="website">{ngo.region}</p>
-              <button onClick={() => navigate('/info')}>Info</button>
+            <div className="display-container">
+              <div key={idx} className="row">
+                <div className="leftside">
+                   <p className="name">{ngo.name}</p>
+                {/* <p className="category">{ngo.category}</p> */}
+                </div>
+                <div className="rightside">
+                  <p className="location"><BiMap/>{ngo.location}</p>
+                  <button className="infoBtn" onClick={() => navigate('/info')}>Info</button>
+                  {/* Navigate to NGO's website */}
+                  
+                  <button className="websiteBtn" onClick={() => navigate('/')}>Website</button>
+                </div>
+              </div> 
             </div> 
             )
           })}

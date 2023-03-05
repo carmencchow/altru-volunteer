@@ -6,36 +6,22 @@ import { Link } from 'react-router-dom';
 import { RxAvatar } from 'react-icons/rx';
 import logo from '../assets/logo.png';
 import { auth } from '../firebase';
-
-const Nav = styled.nav`
-  display: flex;
-  justify-content: space-between;
-  margin: 20px auto;
-  padding: 0px 20px 20px 20px;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
-`
-
-const Button = styled.button`
-  margin-left: 10px;
-  cursor: pointer;
-`
-
-const Span = styled.span`
-  text-decoration: none;
-  color: blue;
-  display: flex;
-`
+import './Navbar.css';
 
 const Navbar = ({ auth, user}) => {
   
   return (
-    <Nav>
-      <Span className="logo">
+    <nav>
+      <div className="logo">
         <Link className="link" to="/">
+          <div className="logo-wrapper">
           <img src={logo} style={{width: 100, height: 100 }} alt="logo" />
           <p className="logo-text">Altru</p>
+          {/* // If user is logged in display this message: */}
+          {/* <p>Hello {auth.user.email}</p> */}
+          </div>
         </Link> 
-      </Span>
+      </div>
 
       {user ? (
         <div>
@@ -45,14 +31,16 @@ const Navbar = ({ auth, user}) => {
           <Link to="/profile">Logout</Link>
         </div>
       ) : (
-        <div>Please login 
-          <Link to="/login">Individual</Link>
-          <Link to="/login">Organization</Link>
+        <div className="nav-login">
+          <p>Please login</p> 
+            <Link className="link" to="/login">Individual</Link>
+          {/* <button><Link className="link" to="/login">Individual</Link></button> */}
+          <button><Link className="link" to="/login">Organization</Link></button>
         </div>
 
       )} 
 
-    </Nav>
+    </nav>
   )
 }
 

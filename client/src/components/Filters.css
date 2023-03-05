@@ -6,6 +6,14 @@ main{
 .filters{
   display: flex;
 }
+.searchbar{
+
+}
+.input-group{
+  font-size: 30px;
+  width: 500px;
+
+}
 form {
   display: flex;
   flex-direction: row;
@@ -17,13 +25,10 @@ form {
   display: flex;
   justify-content: space-evenly;
   flex-direction: row;
-  margin: 30px auto;
-}
-.row:nth-child(even){
-
-}
-.row:nth-child(odd){
-  background-color: lavenderblush;
+  /* border-top: 1px solid rgb(232, 232, 232); */
+  border-top: 1px solid rgb(232, 232, 232);
+  border-radius: 25px;
+  margin-bottom: 40px;
 }
 .display{
   padding: 30px 70px;
@@ -34,5 +39,29 @@ form {
   justify-content: space-evenly;
   text-transform: uppercase;;
   font-size: 30px;
+}
+.name{
+  font-size: 20px;
+}
+.website{
+  font-size: 16px;
+  font-weight: lighter;
+}
 
+.location{}
+
+.info{}
+
+.display-container{
+  margin: 30px 60px;
+}
+.infoBtn, .websiteBtn{
+  width: 100px;
+  height: 40px;
+}
+.leftside{
+
+}
+.rightside{
+  align-items: end;
 }
