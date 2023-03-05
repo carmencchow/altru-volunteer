@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Login from '../pages/Login';
 import  Home from '../pages/Home';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { RxAvatar } from 'react-icons/rx';
 import logo from '../assets/logo.png';
 import { auth } from '../firebase';

@@ -4,7 +4,6 @@ import Navbar from './components/Navbar';
 import Main from './pages/Main';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
-import Donate from './pages/Donate';
 import Info from './pages/Info';
 import Signup from './pages/Signup';
 import Home from './pages/Home';
@@ -27,7 +26,6 @@ function App() {
           <Route path="/signup" element={<Signup/>}/>
           <Route path="/login" element={user ? <Navigate to="/" /> : <Home/>}/>
           <Route path="/profile" element={<Profile/>}/>
-          <Route path="/donate" element={<Donate/>}/>
           <Route path="/info" element={<Info/>}/>
         </Routes>
         {/* </UserAuthContextProvider> */}

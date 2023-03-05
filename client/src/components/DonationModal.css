@@ -1,0 +1,9 @@
+.modal-container{
+  max-width: 500px;
+  max-height: 500px;
+  border: 1px solid purple;
+  border-radius: 20px;
+}
+.modal-background{
+
+}

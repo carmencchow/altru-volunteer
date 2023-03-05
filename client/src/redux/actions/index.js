@@ -4,7 +4,7 @@ export const LOGIN_USER_REQUEST = 'USER_LOGIN_REQUEST';
 export const LOGIN_USER_SUCCESS = 'USER_LOGIN_SUCCESS';
 export const LOGOUT_USER = 'USER_LOGOUT';
 export const GET_ERRORS = 'GET_ERRORS';
-export const SET_CURRENT_USER = 'SET_CURRENT_USER';
+export const SET_CURRENT_USER = 'SET_CURRENT_USER'; 
 
 export const setFilters = async (region, cause) => {
   // let request = await axios.get(`http://localhost:5000/api/ngos/${region}/${cause}`)
