@@ -5,6 +5,7 @@ import chile from '../assets/chile-women.jpg';
 import food from '../assets/fooddistribution.jpg';
 import ocean from '../assets/ocean-cleanup.jpg';
 import vietnam from '../assets/vietnam-children.jpg';
+import { BiMap, BiWorld, BiDonateHeart } from 'react-icons/bi';
 
 
 const Card = () => {
@@ -17,39 +18,31 @@ const Card = () => {
 
   return (
     <div className="card-container">
-      <div className="image">
-        <img className="image" src={afghan} alt=""/>
-        <button className="followBtn" onClick={follow}>Follow</button>
-        <p className="name">Canadian Red Cross</p>
-        <p className="region">UNHCR</p>
-      </div>
 
       <div className="image">
+        <p className="name">Canadian Red Cross</p>
         <img className="image" src={food} alt=""/>
         <button className="followBtn" onClick={follow}>Follow</button>
-        <p className="name">Canadian Red Cross</p>
-        <p className="region">UNHCR</p>
-      </div>
+        <BiWorld/> 
+        <BiDonateHeart/>      
+        </div>
 
       <div className="image">
+        <p className="name">Canadian Red Cross</p>
         <img className="image" src={ocean} alt=""/>
         <button className="followBtn"onClick={follow}>Follow</button>
-        <p className="name">Canadian Red Cross</p>
-        <p className="region">UNHCR</p>
       </div>
 
       <div className="image">
-      <img className="image" src={chile} alt=""/>
+        <p className="name">Canadian Red Cross</p>
+        <img className="image" src={chile} alt=""/>
         <button className="followBtn"onClick={follow}>Follow</button>
-        <p className="name">Canadian Red Cross</p>
-        <p className="region">UNHCR</p>
       </div>
 
       <div className="image">
+        <p className="name">Canadian Red Cross</p>
         <img className="image" src={vietnam} alt=""/>
         <button className="followBtn"onClick={follow}>Follow</button>
-        <p className="name">Canadian Red Cross</p>
-        <p className="region">UNHCR</p>
       </div>
    </div>
 

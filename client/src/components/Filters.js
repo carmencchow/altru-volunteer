@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setFilters } from '../redux/actions';
 import { useNavigate } from 'react-router-dom';
 import { AiOutlineSearch } from 'react-icons/ai';
-import { BiMap, BiLink } from 'react-icons/bi';
+import { BiMap, BiWorld, BiDonateHeart } from 'react-icons/bi';
 
 import './Filters.css'
 import axios from 'axios';
@@ -28,7 +28,7 @@ const Filters = () => {
   // user clicks on search button
   const handleSubmit = (e) => {
     e.preventDefault();
-    // 1. updates redux store with selected regoin and cause
+    // 1. updates redux store with selected region and cause
     dispatch(setFilters(region, cause));
     // 2. call this function
     fetchFilteredNgos()
@@ -49,7 +49,7 @@ const Filters = () => {
     const res = await axios.get(`http://localhost:5000/api/ngos/${location}/${cause}`);
     // 5. update the NGO list in UI
     setNgos(res.data);
-    console.log(res.data);
+    console.log(res.data.location);
   };
 
   // Display list of NGOs when page loads for the first time
@@ -63,8 +63,6 @@ const Filters = () => {
   return (
     <div>
 
-      <h1>Find an NGO:</h1>
-
       <div className="filters">
 
         <div className="searchbar">
@@ -76,50 +74,53 @@ const Filters = () => {
           </div>
         </div>
 
-        <form>
-          <select value={region} onChange={handleRegionChange}>  
-            <option value="">Region</option>
-            <option value="South America">South America</option>
-            <option value="Asia">Asia</option>
-            <option value="Middle East">Middle East</option>
-            <option value="Africa">Africa</option>
-            <option value="Cameroon">Cameroon</option>
-          </select>
-        </form>
+        <div className="menus">
+          <form className="dropdown">
+            <select value={region} onChange={handleRegionChange}>  
+              <option value="">Region</option>
+              <option value="South America">South America</option>
+              <option value="Asia">Asia</option>
+              <option value="Middle East">Middle East</option>
+              <option value="Africa">Africa</option>
+              <option value="Cameroon">Cameroon</option>
+            </select>
+          </form>
 
-        <form>
-          <select value={cause} onChange={handleCauseChange}>
-            <option value="">Cause</option>
-            <option value="hunger">Hunger</option>
-            <option value="poverty">Poverty</option>
-            <option value="education">Education</option>
-            <option value="animal welfare">Animal Welfare</option>
-            <option value="microfinance">Microfinance</option>
-          </select>
+          <form className="dropdown">
+            <select value={cause} onChange={handleCauseChange}>
+              <option value="">Cause</option>
+              <option value="hunger">Hunger</option>
+              <option value="poverty">Poverty</option>
+              <option value="education">Education</option>
+              <option value="animal welfare">Animal Welfare</option>
+              <option value="microfinance">Microfinance</option>
+            </select>
+          </form>
+          </div>
+
           <button onClick={handleSubmit}>Search</button>
-        </form>
-      </div>
+
+        </div>
 
       <div className="display">
         <div className="heading">
           <p>Organizations</p>
         </div>
-        {/* <h5>{JSON.stringify(ngoState)}</h5> */}
 
         {ngos?.map((ngo, idx) => {
           return (
             <div className="display-container">
               <div key={idx} className="row">
-                <div className="leftside">
+                {/* <div className="leftside"> */}
                    <p className="name">{ngo.name}</p>
-                {/* <p className="category">{ngo.category}</p> */}
-                </div>
+                   <p className="location"><BiMap/>{ngo.location[0].toUpperCase()}</p>
+                {/* </div> */}
+
                 <div className="rightside">
-                  <p className="location"><BiMap/>{ngo.location}</p>
-                  <button className="infoBtn" onClick={() => navigate('/info')}>Info</button>
-                  {/* Navigate to NGO's website */}
-                  
-                  <button className="websiteBtn" onClick={() => navigate('/')}>Website</button>
+                  <button className="infoBtn" onClick={() => navigate('/info')}><BiDonateHeart className="icon"/>Donate</button>        
+                  <button className="websiteBtn" onClick={() => {
+                    window.location.replace(`${ngo.website}`)
+                  }}><BiWorld className="icon"/>Website</button>
                 </div>
               </div> 
             </div> 

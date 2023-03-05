@@ -16,10 +16,10 @@ const Main = () => {
     // When user is logged in display a message with user name at the top:
     <Section>
       <Navbar/>
-        <Card/>
         <Filters/>
           <h1>Featured Organizations</h1>
           <div className="featured-cards"></div>
+          <Card/>
         <ChatWindow/>
       <Footer/>
     </Section>

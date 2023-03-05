@@ -26,3 +26,7 @@
 .followBtn:hover{
   
 }
+.card-container{
+  display: flex;
+    margin: 30px 60px;
+}

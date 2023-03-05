@@ -14,6 +14,8 @@ button{
   text-decoration: none;
   color: blue;
   display: flex;
+  line-height: normal;
+  vertical-align: middle;
 }
 .logo-wrapper{
   display: flex;
@@ -25,15 +27,6 @@ button{
 .nav-login{
   justify-content: space-evenly;
 }
-/* button{
-  padding-right: 20px;
-  border-radius: 25px;
-  background-color: purple transparent;
-} */
-/* button:hover{
-  color: white;
-  background-color: purple;
-} */
 .link{
   font-size: 16px;
   text-decoration: none;
@@ -47,4 +40,8 @@ button{
   cursor: pointer;
   width: 200px;
   background-color: purple transparent;
+}
+.menus{
+  display: flex;
+  flex-direction: row;
 }

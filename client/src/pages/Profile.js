@@ -1,12 +1,14 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
+import './Profile.css'
 
 const Profile = () => {
   return (
     <section>
       <Navbar/>
-      <h1>My Profile</h1>
       <div className="user-profile">
+      <h1>My Profile</h1>
+
         <div className="events">Your events</div>
         <div className="events">Your donations</div>
         <div className="events">Your volunteer hours</div>

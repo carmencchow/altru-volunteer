@@ -5,6 +5,7 @@ main{
 }
 .filters{
   display: flex;
+    margin: 30px 60px;
 }
 .searchbar{
 
@@ -12,7 +13,9 @@ main{
 .input-group{
   font-size: 30px;
   width: 500px;
-
+}
+.dropdown{
+  height: 40px;
 }
 form {
   display: flex;
@@ -47,21 +50,23 @@ form {
   font-size: 16px;
   font-weight: lighter;
 }
-
-.location{}
-
-.info{}
-
+.location{
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  padding-left: 20px;
+}
 .display-container{
   margin: 30px 60px;
 }
 .infoBtn, .websiteBtn{
   width: 100px;
   height: 40px;
-}
-.leftside{
-
+  margin-top: 20px;
 }
 .rightside{
-  align-items: end;
+  margin-right: 0;
+  margin-left: auto;
+}
+.icon{
+  font-size: 20px;
+  padding-right: 5px;
 }
