@@ -7,22 +7,60 @@
   margin: 50px auto;
   display: flex;
   flex-direction: column;
+  border-radius: 25px;
+  margin-top: 120px;
+  padding: 50px 50px;
+}
+.form-wrapper{
+  padding: 20px;
+  height: 80%;
+  margin: 30px auto;
 }
 form{
   display: flex;
   flex-direction: column;
 }
 input {
-  width: 300px;
+  /* width: 300px; */
   height: 50px;
   margin-right: 20px;
 }
 .form-password, .form-username{
   padding-bottom: 20px;
+  width: 300px;
 }
-button{
-  margin-right: 20px;
-  padding: 10px;
-  border: 2px;
-  border-radius: 10px;
+.submit{
+  height: 36px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  width: 300px;
+  color: grey;
+  font-size: 16px;
+  border-radius: 0px;
+  border: 1px solid grey;
+}
+.forgot{
+  font-size: 12px;
+  display: flex;
+  justify-content: end;
+  margin-right: 70px;
+  margin-top: 0px;
+}
+.facebook{
+  background-color: #3b579d;
+  color: white;
+  font-size: 16px;
+  width: 300px;
+  border-radius: 0px;
+}
+.google{
+  background-color: black;
+  color: white;
+  font-size: 16px;
+  width: 300px;
+  border-radius: 0px;
+  margin-bottom: 10px;
+}
+.icon{
+  margin-right: 10px;
 }

@@ -27,7 +27,7 @@ const Login = () => {
     <div className="login-wrapper">
       <form onSubmit={handleSubmit}> 
         <div className="form-wrapper">
-          <h3 className="Signup">Sign In to your account / Choose your sign in method</h3>
+          <p className="Signup">Sign in to your account</p>
           <div className="form-username">
             <input 
               name="email"
@@ -48,22 +48,21 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}    
             />
           </div>
-  
-          <div className="buttons">      
-            <p>Forgot password</p>
-            <button type="submit">Sign In</button>
           
-            <p> OR </p>
-            <button><FcGoogle/>Continue with Google</button>
-            <button><SiFacebook/>Continue with Facebook</button>
+          <p className="forgot">Forgot password</p>
+          <button type="submit" className="submit">Sign In</button>
+          <div className="buttons">      
+          
+          <button className="google"><FcGoogle className="icon"/>Continue with Google</button>
+          <button className="facebook"><SiFacebook className="icon"/>Continue with Facebook</button>
 
-            <p> Don't have an account? 
-              <Link to="/signup">
-                <b>Sign Up</b>
-              </Link>
-            </p>
-          </div>
+          <p className="no-account"> Don't have an account? 
+            <Link to="/signup">
+              <p className="register">Sign Up</p>
+            </Link>
+          </p>
         </div>
+      </div>
 
       </form>
     </div>

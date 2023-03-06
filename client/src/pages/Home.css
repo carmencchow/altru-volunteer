@@ -13,7 +13,7 @@ body{
 }
 .container{
   max-width: 1170px;
-  margin: 0 auto;
+  margin: 0 20px;
   position: relative;
   padding: 0 15px;
   -webkit-box-sizing: border-box;
@@ -21,9 +21,7 @@ body{
   box-sizing: border-box;
 }
 .main-section{
-  padding-top: 70px;
   padding-bottom: 80px;
-  outline: 1px solid blue;
 }
 .left{
   margin-right: 40px;

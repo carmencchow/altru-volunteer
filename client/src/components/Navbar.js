@@ -32,10 +32,8 @@ const Navbar = ({ auth, user}) => {
         </div>
       ) : (
         <div className="nav-login">
-          <p>Please login</p> 
-            <Link className="link" to="/login">Individual</Link>
-          {/* <button><Link className="link" to="/login">Individual</Link></button> */}
-          <button><Link className="link" to="/login">Organization</Link></button>
+          <span className="login"><Link className="button-text" to="/login">Log in</Link></span> 
+          <span className="signup"><Link className="button-text" to="/signup">Sign up</Link></span> 
         </div>
 
       )} 

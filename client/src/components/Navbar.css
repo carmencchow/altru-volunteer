@@ -4,7 +4,7 @@ nav{
   margin: 20px auto;
   padding: 0px 20px 20px 20px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
-  height: 50px;
+  height: 60px;
 }
 button{
   margin-left: 10px;
@@ -19,6 +19,7 @@ button{
 }
 .logo-wrapper{
   display: flex;
+  margin-top: -20px;
 }
 .logo-text{
   font-size: 30px;
@@ -26,22 +27,28 @@ button{
 }
 .nav-login{
   justify-content: space-evenly;
-}
-.link{
-  font-size: 16px;
-  text-decoration: none;
-  cursor: pointer;
-  width: 200px;
-  background-color: purple transparent;
-}
-.link:hover{
-  font-size: 16px;
-  text-decoration: none;
-  cursor: pointer;
-  width: 200px;
-  background-color: purple transparent;
+  margin-top: 15px;
 }
 .menus{
   display: flex;
   flex-direction: row;
+}
+.login, .signup{
+  height: 36px;
+  border: 2px solid purple;
+  color: purple;
+  border-radius: 20px;;
+  width: 100px;
+  padding: 5px 10px;
+  margin-right: 10px;
+  cursor: pointer;
+  margin-bottom: -30px;
+}
+.button-text{
+  font-size: 18px;
+  text-decoration: none;
+}
+.login:hover, .signup:hover{
+  background-color: purple transparent;
+  color: white;
 }

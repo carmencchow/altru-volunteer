@@ -6,13 +6,8 @@ import { AiOutlineHeart } from 'react-icons/ai';
 import './Info.css'
 
 const Info = () => {
-  const [openModal, setOpenModal] = useState('false');
+  const [openModal, setOpenModal] = useState(false);
  
-  // const handleModal = () => {
-  //   console.log('Open donation modal')
-  //   setOpenModal(true);
-  // }
-
   const handleBack = () => {}
 
   const addToFavorites = () => {
@@ -37,7 +32,9 @@ const Info = () => {
         <p>Ang Lorem Ipsum ay ginagamit na modelo ng industriya ng pagpriprint at pagtytypeset. Ang Lorem Ipsum ang naging regular na modelo simula pa noong 1500s, noong may isang di kilalang manlilimbag and kumuha ng galley ng type at ginulo an</p>
 
         <button onClick={() => setOpenModal(true)} className="modalButton">Donate</button>
-        <DonationModal open={openModal} onClose={() => setOpenModal(false)}/>
+        <DonationModal 
+            open={openModal} 
+            onClose={() => setOpenModal(false)}/>
       </div>
 
     </div>
