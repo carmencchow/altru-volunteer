@@ -3,8 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setFilters } from '../redux/actions';
 import { useNavigate } from 'react-router-dom';
 import { AiOutlineSearch } from 'react-icons/ai';
-import { BiMap, BiWorld, BiDonateHeart } from 'react-icons/bi';
-
+import { BiMap, BiWorld } from 'react-icons/bi';
+import { VscOrganization } from 'react-icons/vsc';
+import { FaBullhorn } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import './Filters.css'
 import axios from 'axios';
 
@@ -13,6 +15,8 @@ const Filters = () => {
   const [region, setRegion] = useState('');
   const [cause, setCause] = useState('');
   const [ngos, setNgos] = useState([]);
+  const [page, setPage] = useState(1);
+  const [pageCount, setPageCount] = useState(1);
   const dispatch = useDispatch();  
   const navigate = useNavigate();
   const ngoState = useSelector(state => state)
@@ -34,20 +38,39 @@ const Filters = () => {
     fetchFilteredNgos()
   }
 
+  const handlePrevious = () => {
+    console.log('pre page')
+    setPage((p) => {
+      if (p === 1) return p;
+      return p-1;
+    });
+  }
+
+  const handleNext = () => {
+    console.log('Next page')
+    setPage((p) => {
+      if (p === pageCount) return p;
+      return p+1;
+    });
+  }
+
   const fetchAllNgos = async () => {
-    // get NGOs from server
-    const res = await axios.get('http://localhost:5000/api/ngos/');
-    // show them in UI
+    // Get NGOs from server
+    // const res = await axios.get('http://localhost:5000/api/ngos/');
+    const res = await axios.get(`http://localhost:5000/api/ngos?page=${page}`);
+    // Display in UI
     setNgos(res.data);
   };
 
   const fetchFilteredNgos = async () => {
-    // 3. get region and cause values from Redux store
+    // 3. Get region and cause values from Redux store
     const location = ngoState.filters.region
     const cause = ngoState.filters.category
-    // 4. get ngos from server
-    const res = await axios.get(`http://localhost:5000/api/ngos/${location}/${cause}`);
-    // 5. update the NGO list in UI
+    // 4. Get NGOS from server
+    // const res = await axios.get(`http://localhost:5000/api/ngos/$?{location}/${cause}`);
+    const res = await axios.get(`http://localhost:5000/api/ngos/${location}/${cause}?page=${page}`);
+    
+    // 5. Update the NGO list in UI
     setNgos(res.data);
     console.log(res.data.location);
   };
@@ -58,12 +81,20 @@ const Filters = () => {
   }, [],  
   );
 
-
   // Update state with new state below: 
   return (
     <div>
 
-      <div className="filters">
+    <h1 className="h1"><FaBullhorn className="cta"/><Link to="/cards">Featured NGOs: Urgent and Active Campaigns</Link></h1>
+      
+    <div className="filters-headings">
+      <h2>Find a non-profit</h2>
+      <h2>Search by region or cause</h2>
+    </div>
+        
+    <div className="filters">
+
+      <div className="filters-row">
 
         <div className="searchbar">
           <div className="input">
@@ -75,6 +106,7 @@ const Filters = () => {
         </div>
 
         <div className="menus">
+
           <form className="dropdown">
             <select value={region} onChange={handleRegionChange}>  
               <option value="">Region</option>
@@ -96,37 +128,41 @@ const Filters = () => {
               <option value="microfinance">Microfinance</option>
             </select>
           </form>
-          </div>
-
-          <button className="search" onClick={handleSubmit}>Search</button>
-
-          <button className="featured"><h1 className="h1">Featured NGOs</h1></button>
-
-
+      
         </div>
 
-      <div className="display">
-        <div className="heading">
-          <p>Organizations</p>
-        </div>
+        <button className="search" onClick={handleSubmit}>Search</button>
+    
+      </div>
+    </div>
 
-        {ngos?.map((ngo, idx) => {
-          return (
-            <div className="display-container">
-              <div key={idx} className="row">
-                <p className="name">{ngo.name}</p>
-                <p className="location"><BiMap/>{ngo.location[0].toUpperCase()}</p>
+    <div className="pagination">
+      <button className="previous" onClick={handlePrevious}>Previous</button>
+      <button className="next" onClick={handleNext}>Next</button> 
+    </div>
 
-              <div className="rightside">
-                <button className="infoBtn" onClick={() => navigate('/info')}><BiDonateHeart className="icon"/>Donate</button>        
-                <button className="websiteBtn" onClick={() => {
-                  window.open(`${ngo.website}`);
-                }}><BiWorld className="icon"/>Website</button>
-              </div>
-              </div> 
+    <div className="display">
+      <div className="heading">
+        <p>Organizations</p>
+      </div>
+
+      {ngos?.map((ngo, idx) => {
+        return (
+          <div className="display-container">
+            <div key={idx} className="row">
+              <p className="name">{ngo.name}</p>
+              <p className="location"><BiMap/>{ngo.location[0].toUpperCase()}</p>
+
+            <div className="rightside">
+              <button className="infoBtn" onClick={() => navigate('/info')}><VscOrganization className="icon"/>Profile</button>        
+              <button className="websiteBtn" onClick={() => {
+                window.open(`${ngo.website}`);
+              }}><BiWorld className="icon"/>Website</button>
+            </div>
             </div> 
-            )
-          })}
+          </div> 
+          )
+        })}
         </div> 
       </div>
     );

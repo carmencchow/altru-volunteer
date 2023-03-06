@@ -5,7 +5,7 @@ button{
   margin: 30px 60px;
   justify-content: center;
 }
-.signup{
+.following{
   height: 36px;
   border: 2px solid purple;
   color: purple;
@@ -18,5 +18,4 @@ button{
 }
 .heart{
   width: 200px;
-  
 }

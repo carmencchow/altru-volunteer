@@ -7,7 +7,6 @@ import Navbar from '../components/Navbar'
 import ChatWindow from '../components/ChatWindow'
 import './Main.css'
 import Display from '../components/Display'
-import Pagination from '../components/Pagination'
 
 const Section = styled.div``
 
@@ -20,7 +19,6 @@ const Main = () => {
       <Filters/>
       {/* <ChatWindow/> */}
       {/* <Footer/> */}
-      <Pagination/>
     </Section>
   )
 }

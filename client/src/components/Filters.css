@@ -5,7 +5,15 @@ main{
 }
 .filters{
   display: flex;
-  margin: 30px 60px;
+  margin: 30px 60px 0px 60px;
+  padding: 0px 70px;
+}
+.filters-headings, .filters-row{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 80%;
+  padding: 0px 70px;
 }
 .input-group{
   font-size: 30px;
@@ -31,7 +39,7 @@ form {
   margin-bottom: 40px;
 }
 .display{
-  padding: 30px 70px;
+  padding: 0px 70px;
 }
 .heading{
   display: flex;
@@ -39,6 +47,12 @@ form {
   font-size: 30px;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0) 50%, #fde478 0%);
   width: 250px;
+}
+.pagination{
+  display: flex;
+  flex-direction: row;
+  padding-right: 10%;
+  justify-content: end;
 }
 .name{
   font-size: 20px;
@@ -49,7 +63,9 @@ form {
 }
 .location{
   font-family:Verdana, Geneva, Tahoma, sans-serif;
+  font-style: italic;
   padding-left: 20px;
+  margin-top: 20px;
 }
 .display-container{
   margin: 30px 60px;
@@ -68,21 +84,38 @@ form {
   border: 2px solid purple;
 }
 .search{ 
-  height: 36px;
+  height: 30px;
   border: 2px solid purple;
   color: purple;
-  border-radius: 20px;;
+  border-radius: 20px;
   width: 120px;
   padding: 5px 10px;
   margin-right: 10px;
   cursor: pointer;
   font-weight: bolder;
 }
+.searchbar{
+  width: 300px;
+  height: 30px;
+}
 .rightside{
   margin-right: 0;
   margin-left: auto;
+  margin-top: 20px;
+}
+.h1{
+  margin-right: 0;
+  justify-content: end;
+  padding: 0px 70px;
 }
 .icon{
   font-size: 20px;
   padding-right: 5px;
+}
+.cta{
+  padding-right: 10px;
+  font-size: 40px;
+}
+.next, .previous{
+  cursor: pointer;
 }

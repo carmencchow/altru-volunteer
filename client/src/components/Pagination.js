@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
 
 const Pagination = () => {
-  const pages = [];
-  const [currentPage, setcurrentPage] = useState(1);
+  const [page, setPage] = useState(1)
+  const [pageCount, setPageCount] = useState(0)
 
   return (
     <div>Pagination</div>

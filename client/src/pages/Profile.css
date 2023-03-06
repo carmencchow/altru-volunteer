@@ -1,4 +1,19 @@
+.container{
+  padding: 0 70px;
+  display: flex;
+  flex-direction: column;
+}
 .user-profile{
-    display: flex;
-      margin: 30px 60px;
-  }
+  display: flex;
+  /* margin: 30px 60px; */
+  border: 1px solid blue;
+}
+.activity{
+  display: flex;
+  flex-direction: row;
+}
+.favourites{
+  border: 1px solid orange;
+  display: flex;
+  flex-direction: row;
+}

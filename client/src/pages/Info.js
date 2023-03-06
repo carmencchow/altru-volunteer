@@ -34,7 +34,7 @@ const Info = () => {
 
         <div className="info-links">
           <button className="signup" onClick={() => setOpenModal(true)} >Donate</button>
-          <span className="signup"><Link className="button-text" to="/signup">Follow</Link></span> 
+          <span className="following">Follow</span> 
         </div>
 
         
