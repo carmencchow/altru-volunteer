@@ -29,7 +29,7 @@ const Login = () => {
         <div className="form-wrapper">
 
           <div className="form-content">
-          <p className="Signup">Log in to your account</p>
+          <h3 className="Signup">Log in to your account</h3>
           <div className="form-username">
             <input 
               name="email"

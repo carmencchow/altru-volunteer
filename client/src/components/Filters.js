@@ -120,7 +120,7 @@ const Filters = () => {
               <div className="rightside">
                 <button className="infoBtn" onClick={() => navigate('/info')}><BiDonateHeart className="icon"/>Donate</button>        
                 <button className="websiteBtn" onClick={() => {
-                  window.location.replace(`${ngo.website}`)
+                  window.open(`${ngo.website}`);
                 }}><BiWorld className="icon"/>Website</button>
               </div>
               </div> 

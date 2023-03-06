@@ -42,4 +42,5 @@ button{
 .signup:hover{
   background-color: purple transparent;
   color: white;
+  text-decoration: none;
 }

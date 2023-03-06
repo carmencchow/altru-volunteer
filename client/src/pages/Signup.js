@@ -44,7 +44,7 @@ const register = async () => {
     <div className="signup-wrapper">
       <form onSubmit={handleSubmit}> 
         <div className="form-wrapper">
-          <h3>Signup for a new account</h3>
+          <h3>Sign up for a new account</h3>
           <div className="form-email">
             <input 
               name="email" 
@@ -67,7 +67,7 @@ const register = async () => {
           </div>
   
           <div className="buttons">      
-            <button className="signup" type="submit" onClick={register}><Link to="/login">Signup</Link></button>
+            <button className="signup" type="submit" onClick={register}><Link to="/login">Sign up</Link></button>
 
             {/* {user.email} */}
           </div>
