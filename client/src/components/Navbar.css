@@ -27,7 +27,7 @@ button{
 }
 .nav-login{
   justify-content: space-evenly;
-  margin-top: 15px;
+  margin-top: 5px;
 }
 .menus{
   display: flex;
@@ -42,7 +42,7 @@ button{
   padding: 5px 10px;
   margin-right: 10px;
   cursor: pointer;
-  margin-bottom: -30px;
+  /* margin-bottom: -30px; */
 }
 .button-text{
   font-size: 18px;
@@ -51,4 +51,11 @@ button{
 .login:hover, .signup:hover{
   background-color: purple transparent;
   color: white;
+}
+.profile{
+  margin-right: 10px;
+}
+.avatar{
+  font-size: 35px;
+  margin-right: 10px;
 }

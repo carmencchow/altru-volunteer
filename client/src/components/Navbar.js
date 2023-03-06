@@ -32,6 +32,7 @@ const Navbar = ({ auth, user}) => {
         </div>
       ) : (
         <div className="nav-login">
+          <span className="profile">  <RxAvatar className="avatar"/> <Link className="button-text" to="/profile">My Profile</Link></span> 
           <span className="login"><Link className="button-text" to="/login">Log in</Link></span> 
           <span className="signup"><Link className="button-text" to="/signup">Sign up</Link></span> 
         </div>

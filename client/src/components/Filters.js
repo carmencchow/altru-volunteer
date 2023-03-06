@@ -98,7 +98,10 @@ const Filters = () => {
           </form>
           </div>
 
-          <button onClick={handleSubmit}>Search</button>
+          <button className="search" onClick={handleSubmit}>Search</button>
+
+          <button className="featured"><h1 className="h1">Featured NGOs</h1></button>
+
 
         </div>
 
@@ -111,17 +114,15 @@ const Filters = () => {
           return (
             <div className="display-container">
               <div key={idx} className="row">
-                {/* <div className="leftside"> */}
-                   <p className="name">{ngo.name}</p>
-                   <p className="location"><BiMap/>{ngo.location[0].toUpperCase()}</p>
-                {/* </div> */}
+                <p className="name">{ngo.name}</p>
+                <p className="location"><BiMap/>{ngo.location[0].toUpperCase()}</p>
 
-                <div className="rightside">
-                  <button className="infoBtn" onClick={() => navigate('/info')}><BiDonateHeart className="icon"/>Donate</button>        
-                  <button className="websiteBtn" onClick={() => {
-                    window.location.replace(`${ngo.website}`)
-                  }}><BiWorld className="icon"/>Website</button>
-                </div>
+              <div className="rightside">
+                <button className="infoBtn" onClick={() => navigate('/info')}><BiDonateHeart className="icon"/>Donate</button>        
+                <button className="websiteBtn" onClick={() => {
+                  window.location.replace(`${ngo.website}`)
+                }}><BiWorld className="icon"/>Website</button>
+              </div>
               </div> 
             </div> 
             )

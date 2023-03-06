@@ -27,7 +27,7 @@ const Login = () => {
     <div className="login-wrapper">
       <form onSubmit={handleSubmit}> 
         <div className="form-wrapper">
-          <p className="Signup">Sign in to your account</p>
+          <p className="Signup">Log in to your account</p>
           <div className="form-username">
             <input 
               name="email"
@@ -56,16 +56,17 @@ const Login = () => {
           <button className="google"><FcGoogle className="icon"/>Continue with Google</button>
           <button className="facebook"><SiFacebook className="icon"/>Continue with Facebook</button>
 
-          <p className="no-account"> Don't have an account? 
+          <div className="new-account">
+            <p className="no-account"> Don't have an account?</p> 
             <Link to="/signup">
-              <p className="register">Sign Up</p>
+            <p className="register">Sign Up</p>
             </Link>
-          </p>
+          </div>
+  
         </div>
       </div>
-
-      </form>
-    </div>
+    </form>
+  </div>
 
   )
 }

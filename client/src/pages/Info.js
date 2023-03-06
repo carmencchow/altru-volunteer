@@ -14,15 +14,16 @@ const Info = () => {
     console.log("adding org to favorite")
   }
 
-
   return (
-    <div className="details">
+    <div>
       <Navbar/>
-      <div className="heading">
-        <h3>Organization</h3>
-        <AiOutlineHeart onClick={addToFavorites}/>
-        <button onClick={handleBack}>Back</button>
-        <img src="" alt=""/>  
+      <div>
+        <h1>Organization</h1>
+        <div className="">
+          <AiOutlineHeart className="heart" onClick={addToFavorites}/>
+          <button onClick={handleBack}>Back</button>
+          <img src="" alt=""/>  
+        </div>
       </div>
 
       <div className="contact">
@@ -31,10 +32,15 @@ const Info = () => {
         <p>Website</p>
         <p>Ang Lorem Ipsum ay ginagamit na modelo ng industriya ng pagpriprint at pagtytypeset. Ang Lorem Ipsum ang naging regular na modelo simula pa noong 1500s, noong may isang di kilalang manlilimbag and kumuha ng galley ng type at ginulo an</p>
 
-        <button onClick={() => setOpenModal(true)} className="modalButton">Donate</button>
+        <div className="info-links">
+          <button className="signup" onClick={() => setOpenModal(true)} >Donate</button>
+          <span className="signup"><Link className="button-text" to="/signup">Follow</Link></span> 
+        </div>
+
+        
         <DonationModal 
-            open={openModal} 
-            onClose={() => setOpenModal(false)}/>
+          open={openModal} 
+          onClose={() => setOpenModal(false)}/>
       </div>
 
     </div>

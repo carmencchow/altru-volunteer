@@ -2,11 +2,12 @@ import React from 'react'
 import styled from 'styled-components'
 import Footer from '../components/Footer'
 import Filters from '../components/Filters'
-import Card from '../components/Card'
+import Cards from '../components/Cards'
 import Navbar from '../components/Navbar'
 import ChatWindow from '../components/ChatWindow'
 import './Main.css'
 import Display from '../components/Display'
+import Pagination from '../components/Pagination'
 
 const Section = styled.div``
 
@@ -16,12 +17,10 @@ const Main = () => {
     // When user is logged in display a message with user name at the top:
     <Section>
       <Navbar/>
-        <Filters/>
-          <h1>Featured Organizations</h1>
-          <div className="featured-cards"></div>
-          <Card/>
-        <ChatWindow/>
-      <Footer/>
+      <Filters/>
+      {/* <ChatWindow/> */}
+      {/* <Footer/> */}
+      <Pagination/>
     </Section>
   )
 }
