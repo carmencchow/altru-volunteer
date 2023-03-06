@@ -1,9 +1,8 @@
 body {
   margin: 0;
-  /* font-family: 'Tinos', serif; */
-  font-family: 'Domine', serif;
-  /* font-family: 'Tilt Warp', cursive;
-  font-family: 'Tinos', serif; */
+  /* font-family: 'Domine', serif; */
+  font-family: 'Tilt Warp', cursive;
+  /* font-family: 'Tinos', serif;  */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

@@ -26,3 +26,20 @@ button{
   border: 2px;
   border-radius: 10px;
 }
+.signup{
+  height: 36px;
+  border: 2px solid purple;
+  color: purple;
+  border-radius: 20px;;
+  width: 100px;
+  padding: 5px 10px;
+  margin-right: 10px;
+  cursor: pointer;
+  font-family: 'Tilt Warp', cursive;
+  font-size: 18px;
+  text-decoration: none;
+}
+.signup:hover{
+  background-color: purple transparent;
+  color: white;
+}

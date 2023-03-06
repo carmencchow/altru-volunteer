@@ -1,14 +1,13 @@
 .login-wrapper{
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  /* box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px; 
+  border-radius: 25px; */
   width: 60%;
   height: 60vh;
   display: flex;
   justify-content: center;
   margin: 50px auto;
-  display: flex;
   flex-direction: column;
-  border-radius: 25px;
-  margin-top: 120px;
+  margin-top: 100px;
   padding: 50px 50px;
 }
 .form-wrapper{
@@ -16,21 +15,25 @@
   height: 80%;
   margin: 30px auto;
 }
+.form-content{
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
 form{
   display: flex;
   flex-direction: column;
 }
 input {
-  /* width: 300px; */
   height: 50px;
-  margin-right: 20px;
 }
 .form-password, .form-username{
   padding-bottom: 20px;
   width: 300px;
 }
 .submit{
-  height: 36px;
+  height: 40px;
   cursor: pointer;
   margin-bottom: 10px;
   width: 300px;
@@ -41,26 +44,42 @@ input {
 }
 .forgot{
   font-size: 12px;
-  display: flex;
-  justify-content: end;
-  margin-right: 70px;
+  font-weight: lighter;
+  text-align: right;
   margin-top: 0px;
+  margin-right: 0px;
+  color: blue;
 }
-.facebook{
+.facebook-row{
+  display: flex;
   background-color: #3b579d;
   color: white;
   font-size: 16px;
   width: 300px;
   border-radius: 0px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
 }
-.google{
+.google-row{
   background-color: black;
   color: white;
   font-size: 16px;
   width: 300px;
   border-radius: 0px;
   margin-bottom: 10px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
 }
 .icon{
   margin-right: 10px;
+}
+.new-account{
+  display: flex;
+  justify-content: space-between;
+}
+.no-account, .register{
+  font-size: 14px;
 }

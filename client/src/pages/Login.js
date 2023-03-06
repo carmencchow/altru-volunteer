@@ -27,6 +27,8 @@ const Login = () => {
     <div className="login-wrapper">
       <form onSubmit={handleSubmit}> 
         <div className="form-wrapper">
+
+          <div className="form-content">
           <p className="Signup">Log in to your account</p>
           <div className="form-username">
             <input 
@@ -49,12 +51,20 @@ const Login = () => {
             />
           </div>
           
-          <p className="forgot">Forgot password</p>
+          
+          <p className="forgot"><a href="#">Forgot password</a></p>
           <button type="submit" className="submit">Sign In</button>
           <div className="buttons">      
           
-          <button className="google"><FcGoogle className="icon"/>Continue with Google</button>
-          <button className="facebook"><SiFacebook className="icon"/>Continue with Facebook</button>
+          <button className="google-row">
+            <FcGoogle className="icon"/>
+            <p>Continue with Google</p>
+          </button>
+          
+          <button className="facebook-row">
+            <SiFacebook className="icon"/>
+            <p>Continue with Facebook</p>
+          </button>
 
           <div className="new-account">
             <p className="no-account"> Don't have an account?</p> 
@@ -63,7 +73,9 @@ const Login = () => {
             </Link>
           </div>
   
+          </div>
         </div>
+
       </div>
     </form>
   </div>
