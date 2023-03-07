@@ -8,26 +8,26 @@ import { createUserWithEmailAndPassword, onAuthStateChanged } from 'firebase/aut
 import { auth } from '../firebase';
 
 const Signup = () => {
+  const { register } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
-  const [user, setUser] = useState('');
-
-  const { register } = useAuth();
   const navigate = useNavigate();
 
-  // listen for changes to the user authentication state
-  onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser);
-  })
-
-    const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError();
     if(password !== confirmPassword){
-      setError('Passwords do not match');
+      setError("Passwords do not match");
     } else {
-      await register(email, password)
+      await register(email, password).then((res) => {
+        console.log(res)
+        navigate('/main');
+      }).catch((err) => {
+        setError(err.message)
+        console.log(err.message)
+      })
     }
   }
 
@@ -44,7 +44,6 @@ const Signup = () => {
               value={email}   
               onChange={(e) => setEmail(e.target.value)}  
             />
-
           </div>
 
           <div className="form-password">
@@ -61,16 +60,17 @@ const Signup = () => {
             <input 
               name="password" 
               type="password" 
-              placeholder="Confirms your password" 
-              value={password} 
-              onChange={(e) => setPassword(e.target.value)}  
+              placeholder="Confirm your password" 
+              value={confirmPassword} 
+              onChange={(e) => setConfirmPassword(e.target.value)}  
             />
           </div>
+
+          { error && <span><strong>Error:</strong>{error}</span>}
 
           <div className="buttons">      
             <button className="signup" type="submit" onClick={register}><Link to="/login">Sign up</Link></button>
 
-            {/* {user.email} */}
           </div>
         </div>
 

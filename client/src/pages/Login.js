@@ -3,22 +3,27 @@ import { FcGoogle } from 'react-icons/fc'
 import { SiFacebook } from 'react-icons/si'
 import './Login.css'
 import { Link, useNavigate } from 'react-router-dom'
-import { useUserAuth } from '../context/AuthContext'
+import { useAuth } from '../context/AuthContext'
 import firebase from '../firebase';
 
 const Login = () => {
+  const { login } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  // const { login } = useUserAuth();
   const navigate = useNavigate();
-
-  // const { user } = useContext(AuthCon)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
-  };
+    setError()
+    await login(email, password).then((res) => {
+      console.log(res)
+        navigate('/')
+      }).catch((err) => {
+        setError(err.message)
+        console.log(err.message)
+      })
+    }
 
   return (
     <div className="login-wrapper">
@@ -37,7 +42,7 @@ const Login = () => {
             />
           </div>
 
-    {error}
+        {error && <div><strong>Error:</strong>{error}</div>}
 
           <div className="form-password">
             <input 
@@ -48,7 +53,6 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}    
             />
           </div>
-          
           
           <p className="forgot"><Link to={'/forgot'}>Forgot password</Link></p>
           <button type="submit" className="submit">Sign In</button>
