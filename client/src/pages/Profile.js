@@ -12,7 +12,7 @@ const Profile = () => {
 
       {/*------ Section 1: -------*/}
       <div className="user-profile">
-        <h2>My Profile</h2>
+        <p>My Profile</p>
         <div className="my-profile">
           <p className="name"></p>
           <button className="edit"><BsPencil/>Edit Profile</button>
@@ -25,9 +25,9 @@ const Profile = () => {
       </div>
 
       <div className="tracker">
-        <h2>Donation goal:   </h2>
-        <h2>Donations made:   </h2>
-        <h2>Amount remaining to reach goal:   </h2>
+        <p>Goal</p>
+        <p>Made</p>
+        <p>Remaining</p>
       </div>
       
 

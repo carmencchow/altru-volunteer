@@ -1,5 +1,5 @@
 .signup-wrapper{
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  /* box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px; */
   width: 60%;
   height: 60vh;
   display: flex;
@@ -17,7 +17,7 @@ input {
   height: 50px;
   margin-right: 20px;
 }
-.form-password, .form-email{
+.form-password, .form-email, .form-confirm-password{
   padding-bottom: 20px;
 }
 button{

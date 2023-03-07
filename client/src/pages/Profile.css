@@ -8,12 +8,13 @@
   /* margin: 30px 60px; */
   border: 1px solid blue;
 }
-.activity{
-  display: flex;
-  flex-direction: row;
-}
 .favourites{
   border: 1px solid orange;
   display: flex;
   flex-direction: row;
+}
+.tracker, .activity{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }

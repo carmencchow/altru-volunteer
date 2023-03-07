@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { FcGoogle } from 'react-icons/fc'
 import { SiFacebook } from 'react-icons/si'
 import './Login.css'
 import { Link, useNavigate } from 'react-router-dom'
-import { useUserAuth } from '../context/UserAuthContext'
+import { useUserAuth } from '../context/AuthContext'
+import firebase from '../firebase';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -12,15 +13,11 @@ const Login = () => {
   // const { login } = useUserAuth();
   const navigate = useNavigate();
 
+  // const { user } = useContext(AuthCon)
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    // try {
-    //   await login(email, password);
-    //   navigate('/home');
-    // } catch (err) {
-    //   setError(err.message);
-    // }
   };
 
   return (
@@ -33,7 +30,7 @@ const Login = () => {
           <div className="form-username">
             <input 
               name="email"
-              type="text" 
+              type="email" 
               placeholder="Enter your email" 
               value={email}   
               onChange={(e) => setEmail(e.target.value)}    
@@ -41,6 +38,7 @@ const Login = () => {
           </div>
 
     {error}
+
           <div className="form-password">
             <input 
               name="password" 
@@ -52,7 +50,7 @@ const Login = () => {
           </div>
           
           
-          <p className="forgot"><a href="#">Forgot password</a></p>
+          <p className="forgot"><Link to={'/forgot'}>Forgot password</Link></p>
           <button type="submit" className="submit">Sign In</button>
           <div className="buttons">      
           

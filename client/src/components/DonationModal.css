@@ -7,3 +7,12 @@
 .modal-background{
 
 }
+.amount, .currency, .frequency{
+  display: flex;
+  justify-content: space-evenly;
+}
+.close{
+  font-size: 30px;
+  margin-right: 0px;  
+  right: 0px;
+}

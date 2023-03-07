@@ -3,20 +3,18 @@ import { Link, useNavigate } from 'react-router-dom'
 import { FcGoogle } from 'react-icons/fc'
 import { SiFacebook } from 'react-icons/si'
 import './Signup.css'
-import Alert from 'react-bootstrap'
-import { useUserAuth } from '../context/UserAuthContext'
+import { useAuth } from '../context/AuthContext'
 import { createUserWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth'
 import { auth } from '../firebase';
-
-
 
 const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const [user, setUser] = useState('');
 
-  // const { signUp } = useUserAuth();
+  const { register } = useAuth();
   const navigate = useNavigate();
 
   // listen for changes to the user authentication state
@@ -24,20 +22,13 @@ const Signup = () => {
     setUser(currentUser);
   })
 
-  
-const register = async () => {
-  try {
-  // Generate, login and store new user 
-    const user = await createUserWithEmailAndPassword(auth, email, password);
-    console.log(user);
-  } catch (err) { 
-    console.log(err.message);
-  }
-}
-
-  const handleSubmit = async (e) => {
+    const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
+    if(password !== confirmPassword){
+      setError('Passwords do not match');
+    } else {
+      await register(email, password)
+    }
   }
 
   return (
@@ -65,7 +56,17 @@ const register = async () => {
               onChange={(e) => setPassword(e.target.value)}  
             />
           </div>
-  
+
+          <div className="form-confirm-password">
+            <input 
+              name="password" 
+              type="password" 
+              placeholder="Confirms your password" 
+              value={password} 
+              onChange={(e) => setPassword(e.target.value)}  
+            />
+          </div>
+
           <div className="buttons">      
             <button className="signup" type="submit" onClick={register}><Link to="/login">Sign up</Link></button>
 
