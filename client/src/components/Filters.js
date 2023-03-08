@@ -29,7 +29,6 @@ const Filters = () => {
     setCause(e.target.value);
   }
 
-  // user clicks on search button
   const handleSubmit = (e) => {
     e.preventDefault();
     // 1. updates redux store with selected region and cause
@@ -56,8 +55,8 @@ const Filters = () => {
 
   const fetchAllNgos = async () => {
     // Get NGOs from server
-    // const res = await axios.get('http://localhost:5000/api/ngos/');
-    const res = await axios.get(`http://localhost:5000/api/ngos?page=${page}`);
+    const res = await axios.get('http://localhost:5000/api/ngos/');
+    // const res = await axios.get(`http://localhost:5000/api/ngos?page=${page}`);
     // Display in UI
     setNgos(res.data);
   };
@@ -67,8 +66,8 @@ const Filters = () => {
     const location = ngoState.filters.region
     const cause = ngoState.filters.category
     // 4. Get NGOS from server
-    // const res = await axios.get(`http://localhost:5000/api/ngos/$?{location}/${cause}`);
-    const res = await axios.get(`http://localhost:5000/api/ngos/${location}/${cause}?page=${page}`);
+    const res = await axios.get(`http://localhost:5000/api/ngos/${location}/${cause}`);
+    // const res = await axios.get(`http://localhost:5000/api/ngos/${location}/${cause}?page=${page}`);
     
     // 5. Update the NGO list in UI
     setNgos(res.data);
@@ -128,7 +127,6 @@ const Filters = () => {
               <option value="microfinance">Microfinance</option>
             </select>
           </form>
-      
         </div>
 
         <button className="search" onClick={handleSubmit}>Search</button>
@@ -154,7 +152,15 @@ const Filters = () => {
               <p className="location"><BiMap/>{ngo.location[0].toUpperCase()}</p>
 
             <div className="rightside">
-              <button className="infoBtn" onClick={() => navigate('/info')}><VscOrganization className="icon"/>Profile</button>        
+              <button 
+                className="infoBtn" 
+                onClick={() => navigate('/info')}
+                // className="icon"
+                name={ngo.name}
+                website={ngo.website}
+                location={ngo.location}
+              >
+                <VscOrganization/>Profile</button>        
               <button className="websiteBtn" onClick={() => {
                 window.open(`${ngo.website}`);
               }}><BiWorld className="icon"/>Website</button>

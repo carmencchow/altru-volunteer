@@ -3,11 +3,11 @@ import { FcGoogle } from 'react-icons/fc'
 import { SiFacebook } from 'react-icons/si'
 import './Login.css'
 import { Link, useNavigate } from 'react-router-dom'
-import { useAuth } from '../context/AuthContext'
+import { AuthContext } from '../context/AuthContext'
 import firebase from '../firebase';
 
 const Login = () => {
-  const { login } = useAuth();
+  const { login } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -15,10 +15,10 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError()
+    // setError()
     await login(email, password).then((res) => {
       console.log(res)
-        navigate('/')
+        navigate('/main')
       }).catch((err) => {
         setError(err.message)
         console.log(err.message)
@@ -29,7 +29,6 @@ const Login = () => {
     <div className="login-wrapper">
       <form onSubmit={handleSubmit}> 
         <div className="form-wrapper">
-
           <div className="form-content">
           <h3 className="Signup">Log in to your account</h3>
           <div className="form-username">

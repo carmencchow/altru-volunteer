@@ -25,10 +25,6 @@ button{
   font-size: 30px;
   text-decoration: none;
 }
-.nav-login{
-  justify-content: space-evenly;
-  margin-top: 5px;
-}
 .menus{
   display: flex;
   flex-direction: row;
@@ -47,8 +43,11 @@ button{
   font-size: 18px;
   text-decoration: none;
 }
-.login:hover, .signup:hover{
-  background-color: purple transparent;
+.button-text:hover, .signup:hover, .login:hover{
+  color: white;
+}
+span:hover{
+  background-color: purple;
   color: white;
 }
 .profile{
@@ -58,3 +57,22 @@ button{
   font-size: 35px;
   margin-right: 10px;
 }
+.hi{
+  font-size: 34px;
+}
+.user-display{
+  display: flex;
+  flex-direction: row;
+  padding-top: 10px;
+}
+.welcome{
+  padding-right: 20px;
+}
+.nav-login{
+  justify-content: space-evenly;
+  margin-top: 15px;
+}
+/* .login-signup{
+  display: flex;
+  margin-top: 20px;
+} */
