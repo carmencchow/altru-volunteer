@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 const cookie = require('cookie');
 const { countDocuments } = require('../models/userModel');
 
-// 1. signup endpoint
+// 1. REGISTER endpoint
 const signup = async (req, res) => {
   try {
     // Validate incoming request

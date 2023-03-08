@@ -5,7 +5,6 @@ const ngoRoutes = require('./routes/ngoRoute');
 const authRoutes = require('./routes/authRoute'); 
 // const userRoutes = require('./routes/userRoute'); 
 const PORT = process.env.PORT || 5001;
- 
 const cors = require('cors');
 
 // Express app

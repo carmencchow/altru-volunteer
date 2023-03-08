@@ -1,16 +1,32 @@
 const Ngo = require('../models/ngoModel');
 const mongoose = require('mongoose');
 
+// const ITEMS_PER_PAGE = 4;
+
 // 1. GET and sort all NGOS alphabetically
 const getNgos = async (req, res) => {
-  const { page = 1, limit = 6} = req.query;
+  const { page = 1, limit = 5} = req.query;
+
+  // All query params in here
+  const query = {}
 
   try {
     const ngos = await Ngo.find({})
-      .sort({ name: 1 }).limit(limit * 1).skip((page -1) * limit).exec(); 
+      .sort({name: 1}).limit(limit * 1).skip((page -1) * limit).exec(); 
 
-    const count = await Ngo.countDocuments();
+    const count = await Ngo.countDocuments(query);
     res.status(200).json(ngos)
+
+    const pageCount = count / limit;
+
+    return {
+      pagination: {
+        count, 
+        pageCount
+      },
+      items,
+    };
+    
   } catch (err){
     console.log(err.message);
   }
