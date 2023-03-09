@@ -36,6 +36,11 @@ const Filters = () => {
     setCurrentPage(currentPage + 1);
   }
 
+  // Search Filters
+  const handleSearchChange = (e) => {
+    setSearch(e.target.value);
+  }
+
   const handleRegionChange = (e) => {
     setRegion(e.target.value);
   }
@@ -103,19 +108,20 @@ const Filters = () => {
       <div className="filters-row">
 
         <div className="searchbar">
-          <div className="input">
-            <div className="input-group">
-            <AiOutlineSearch/>
-            <input type="text" className="searchbar" placeholder="Search Nonprofits" value={search}/>
-            </div>
-          </div>
+          <AiOutlineSearch/>
+           <input type="text"
+            className="searchbar"
+            placeholder="Search Nonprofits" 
+            value={search}
+            onChange={handleSearchChange}
+          />
         </div>
-
-        <div className="menus">
+       
+      <div className="menus">
 
           <form className="dropdown">
             <select value={region} onChange={handleRegionChange}>  
-              <option value="">--Region--</option>
+              <option value="all">--- Region ---</option>
               <option value="South America">South America</option>
               <option value="Asia">Asia</option>
               <option value="Middle East">Middle East</option>
@@ -125,7 +131,7 @@ const Filters = () => {
 
           <form className="dropdown">
             <select value={cause} onChange={handleCauseChange}>
-              <option value="">--Cause--</option>
+              <option value="all">--- Cause ---</option>
               <option value="animal welfare">Animal Welfare</option>
               <option value="children">Children</option>
               <option value="education">Education</option>
@@ -143,9 +149,9 @@ const Filters = () => {
 
     {/* Pagination */}
     <div className="pagination">
-      <button disabled={currentPage===1} className="previous" onClick={handlePrevious}>Previous</button>
+      <button disabled={currentPage === 1} className="previous" onClick={handlePrevious}>Previous</button>
       <p>{currentPage}/{pageCount}</p>
-      <button disabled={currentPage===pageCount} className="next" onClick={handleNext}>Next</button> 
+      <button disabled={currentPage === pageCount} className="next" onClick={handleNext}>Next</button> 
     </div>
 
     <div className="display">
