@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setFilters } from '../redux/actions';
+import { setFilters, saveNgoDetails } from '../redux/actions';
 import { useNavigate } from 'react-router-dom';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { BiMap, BiWorld } from 'react-icons/bi';
@@ -14,12 +14,27 @@ const Filters = () => {
   const [search, setSearch] = useState('');
   const [region, setRegion] = useState('');
   const [cause, setCause] = useState('');
+  const [name, setName] = useState('');
+  const [website, setWebsite] = useState('');
+  const [tag, setTag] = useState('');
   const [ngos, setNgos] = useState([]);
-  const [page, setPage] = useState(1);
-  const [pageCount, setPageCount] = useState(1);
   const dispatch = useDispatch();  
   const navigate = useNavigate();
   const ngoState = useSelector(state => state)
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageCount, setPageCount] = useState(1);
+
+  // Pagination buttons
+  const handlePrevious = () => {
+    console.log('pre page')
+    setCurrentPage(currentPage - 1);
+  }
+
+  const handleNext = () => {
+    console.log('next page')
+    setCurrentPage(currentPage + 1);
+  }
 
   const handleRegionChange = (e) => {
     setRegion(e.target.value);
@@ -37,26 +52,15 @@ const Filters = () => {
     fetchFilteredNgos()
   }
 
-  const handlePrevious = () => {
-    console.log('pre page')
-    setPage((p) => {
-      if (p === 1) return p;
-      return p-1;
-    });
-  }
-
-  const handleNext = () => {
-    console.log('Next page')
-    setPage((p) => {
-      if (p === pageCount) return p;
-      return p+1;
-    });
+  const handleSaveDetails = () => {
+    dispatch(saveNgoDetails(region, cause, name, website, ));   
+    navigate('/info')
+    console.log('Save NGO details')
   }
 
   const fetchAllNgos = async () => {
     // Get NGOs from server
     const res = await axios.get('http://localhost:5000/api/ngos/');
-    // const res = await axios.get(`http://localhost:5000/api/ngos?page=${page}`);
     // Display in UI
     setNgos(res.data);
   };
@@ -66,13 +70,17 @@ const Filters = () => {
     const location = ngoState.filters.region
     const cause = ngoState.filters.category
     // 4. Get NGOS from server
-    const res = await axios.get(`http://localhost:5000/api/ngos/${location}/${cause}`);
-    // const res = await axios.get(`http://localhost:5000/api/ngos/${location}/${cause}?page=${page}`);
-    
+    const res = await axios.get(`http://localhost:5000/api/ngos/${location}/${cause}`);    
     // 5. Update the NGO list in UI
     setNgos(res.data);
     console.log(res.data.location);
   };
+
+  // Update the page count state whenever the NGO list is updated
+  useEffect(() => { 
+    setPageCount(Math.ceil(ngos.length/5)); // Total number of pages
+  }, [ngos.length],
+  )
 
   // Display list of NGOs when page loads for the first time
   useEffect(() => {
@@ -92,7 +100,6 @@ const Filters = () => {
     </div>
         
     <div className="filters">
-
       <div className="filters-row">
 
         <div className="searchbar">
@@ -134,9 +141,11 @@ const Filters = () => {
       </div>
     </div>
 
+    {/* Pagination */}
     <div className="pagination">
-      <button className="previous" onClick={handlePrevious}>Previous</button>
-      <button className="next" onClick={handleNext}>Next</button> 
+      <button disabled={currentPage===1} className="previous" onClick={handlePrevious}>Previous</button>
+      <p>{currentPage}/{pageCount}</p>
+      <button disabled={currentPage===pageCount} className="next" onClick={handleNext}>Next</button> 
     </div>
 
     <div className="display">
@@ -144,7 +153,7 @@ const Filters = () => {
         <p>Organizations</p>
       </div>
 
-      {ngos?.map((ngo, idx) => {
+      {ngos?.slice((currentPage - 1) * 5, currentPage * 5).map((ngo, idx) => {
         return (
           <div className="display-container">
             <div key={idx} className="row">
@@ -152,15 +161,7 @@ const Filters = () => {
               <p className="location"><BiMap/>{ngo.location[0].toUpperCase()}</p>
 
             <div className="rightside">
-              <button 
-                className="infoBtn" 
-                onClick={() => navigate('/info')}
-                // className="icon"
-                name={ngo.name}
-                website={ngo.website}
-                location={ngo.location}
-              >
-                <VscOrganization/>Profile</button>        
+              <button className="infoBtn" onClick={handleSaveDetails}><VscOrganization/>Profile</button>        
               <button className="websiteBtn" onClick={() => {
                 window.open(`${ngo.website}`);
               }}><BiWorld className="icon"/>Website</button>
