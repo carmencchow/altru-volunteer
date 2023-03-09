@@ -17,13 +17,13 @@ const Filters = () => {
   const [name, setName] = useState('');
   const [website, setWebsite] = useState('');
   const [tag, setTag] = useState('');
-  const [ngos, setNgos] = useState([]);
-  const dispatch = useDispatch();  
-  const navigate = useNavigate();
-  const ngoState = useSelector(state => state)
 
+  const [ngos, setNgos] = useState([]);
+  const ngoState = useSelector(state => state)
   const [currentPage, setCurrentPage] = useState(1);
   const [pageCount, setPageCount] = useState(1);
+  const dispatch = useDispatch();  
+  const navigate = useNavigate();
 
   // Pagination buttons
   const handlePrevious = () => {
@@ -79,7 +79,7 @@ const Filters = () => {
   // Update the page count state whenever the NGO list is updated
   useEffect(() => { 
     setPageCount(Math.ceil(ngos.length/5)); // Total number of pages
-  }, [ngos.length],
+  }, [ngos.length], // Length of NGO list chnages
   )
 
   // Display list of NGOs when page loads for the first time
@@ -115,23 +115,23 @@ const Filters = () => {
 
           <form className="dropdown">
             <select value={region} onChange={handleRegionChange}>  
-              <option value="">Region</option>
+              <option value="">--Region--</option>
               <option value="South America">South America</option>
               <option value="Asia">Asia</option>
               <option value="Middle East">Middle East</option>
               <option value="Africa">Africa</option>
-              <option value="Cameroon">Cameroon</option>
             </select>
           </form>
 
           <form className="dropdown">
             <select value={cause} onChange={handleCauseChange}>
-              <option value="">Cause</option>
-              <option value="hunger">Hunger</option>
-              <option value="poverty">Poverty</option>
-              <option value="education">Education</option>
+              <option value="">--Cause--</option>
               <option value="animal welfare">Animal Welfare</option>
-              <option value="microfinance">Microfinance</option>
+              <option value="children">Children</option>
+              <option value="education">Education</option>
+              <option value="environment">Environment</option>
+              <option value="hunger">Hunger</option>
+              <option value="women">Women</option>
             </select>
           </form>
         </div>
@@ -176,3 +176,11 @@ const Filters = () => {
   };
 
 export default Filters;
+
+
+
+
+
+
+
+
