@@ -1,34 +1,29 @@
 const Ngo = require('../models/ngoModel');
 const mongoose = require('mongoose');
 
-// const ITEMS_PER_PAGE = 4;
-
 // 1. GET and sort all NGOS alphabetically
+// Return first 5 results on page 1: 
+// http://localhost:5000/api/ngos?page=1
 const getNgos = async (req, res) => {
-  const { page = 1, limit = 5} = req.query;
+  // const { page = 1, limit = 5} = req.query;
+
+  // const startIndex = (page - 1 ) * limit // 
+  // const endIndex = page * limit
+  // const resNGOs = ngos.slice(startIndex, endIndex)
+  // res.json(resNGOs)
 
   // All query params in here
   const query = {}
 
   try {
-    const ngos = await Ngo.find({})
-      .sort({name: 1}).limit(limit * 1).skip((page -1) * limit).exec(); 
-
-    const count = await Ngo.countDocuments(query);
-    res.status(200).json(ngos)
-
-    const pageCount = count / limit;
-
-    return {
-      pagination: {
-        count, 
-        pageCount
-      },
-      items,
-    };
-    
-  } catch (err){
+    const ngos = await Ngo.find({}).sort({name: 1})
+//  .limit(limit * 1).skip((page - 1) * limit).exec(); 
+//    const count = await Ngo.countDocuments(query);
+      res.status(200).json(ngos)
+//    const pageCount = count / limit;
+    } catch (err){
     console.log(err.message);
+    res.sendStatus(500);
   }
 }
 
