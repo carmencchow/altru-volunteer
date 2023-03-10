@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const ngoRoutes = require('./routes/ngoRoute'); 
 const authRoutes = require('./routes/authRoute'); 
 const stripeRoutes = require('./routes/stripeRoute'); 
-// const userRoutes = require('./routes/userRoute'); 
+const userRoutes = require('./routes/userRoute'); 
 const PORT = process.env.PORT || 5001;
 const cors = require('cors');
 
@@ -28,7 +28,7 @@ app.use((req, res, next) => {
 
 // Routes
 app.use('/api/ngos', ngoRoutes);
-// app.use('/api/user', userRoutes);
+app.use('/api/user', userRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/payment', stripeRoutes); 
 

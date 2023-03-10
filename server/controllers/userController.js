@@ -28,4 +28,7 @@ const deleteUser = async (req, res) => {
   res.status(200).json(user)
 }
 
-module.exports = { getUser, deleteUser }
+//3. UPDATE/EDIT a user
+const editUser = async (req, res) => {}
+
+module.exports = { getUser, deleteUser, editUser }

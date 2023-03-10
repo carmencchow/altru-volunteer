@@ -7,11 +7,11 @@ const router = express.Router();
 router.get('/user', getUser)
 
 // DELETE User
-router.delete('/', deleteUser)
+router.delete('/delete', deleteUser)
 
 
 // EDIT User
-router.edit('/', editUser)
+router.post('/edit', editUser)
 
 module.exports = router
 
