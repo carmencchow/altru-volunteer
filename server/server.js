@@ -7,6 +7,10 @@ const authRoutes = require('./routes/authRoute');
 const PORT = process.env.PORT || 5001;
 const cors = require('cors');
 
+// Add Stripe key
+const stripe = require('stripe')('pk_test_51L1kSgAoNhpouPlcfYHS4qZk7puLHRnuQFurkS8DelIS2DvAgtPR5nM4DWIdI3rjZCUyhkg9USb34AEQBf2Zz32r00TiqYY6E9')
+const uuid = require("uuid");
+
 // Express app
 const app = express();
 

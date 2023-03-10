@@ -34,29 +34,3 @@ const ngoSchema = new Schema({
 // Make the model based on the above schema
 module.exports = mongoose.model('Ngo', ngoSchema);
 
-/* EXAMPLE NGO & id:
-
-63f51238e6fe9263467a39f2
-
-{
-  "name": " ",
-  "founded": ,
-  "category": [" "],
-  "website": "",
-  "region": [""],
-  "tag": "",
-  "campaign": " "
-}
-*/
-
-/*
-{
-  "name": "AWARE Trust Zimbabwe",
-  "category": ["animal welfare"],
-  "website": "http://www.awaretrust.org/",
-  "region": ["africa", "zimbabwe"],
-  "tag": "AWARE Trust Zimbabwe is the only veterinary conservation NGO in Zimbabwe run by veterinarians.",
-  "founded": 2004
-}
-
-*/
