@@ -2,7 +2,6 @@ const Ngo = require('../models/ngoModel');
 const mongoose = require('mongoose');
 
 const getPayment = async (req, res) => {
-
   const donation = req.body.donation 
   const token = req.body.token 
   console.log(`Donation amount: ${donation}`)
@@ -11,27 +10,27 @@ const getPayment = async (req, res) => {
   return stripe.customers.create({
     email: token.email,
     source: token.id
-  })
-  .then(customer => {
-    // have access to the customer object
+  }).then(customer => {
     stripe.charges.create({
-      customer: customer.id,
-      amount: donation * 100,
+      customer: customer.id, // grab from customer object above
+      amount: donation * 100, //get dollar amount
       currency: 'usd',
-      description: 'donation',
+      description: `${amount} donation`,
       shipping: {
         name: token.card.name,
         address: {
-          city: token.card.address_city
+          address: token.card.address_line1,
+          city: token.card.address_city,
+          zip: token.card.address_zip
         }
       }
     }, {idempotencyKey})
   })
-  .then(res => res.status(200).json(result))
+  .then(result => res.status(200).json(result))
   .catch(err => console.log(err))
 
 }
 
 
 
-module.exports = getPayment 
+module.exports = getPayment
