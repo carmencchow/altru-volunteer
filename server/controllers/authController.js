@@ -117,6 +117,4 @@ const getMe = ( req, res ) => {
   res.json({ message: 'User data display' })
 }
 
-
-
 module.exports = { signup, login, logout, getMe };

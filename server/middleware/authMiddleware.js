@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/userModel');
 
 const protect = async (req, res, next) => { 
-  let token;
+  let token
 
   // Check if JWT in the headers 
   if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) 
@@ -16,16 +16,13 @@ const protect = async (req, res, next) => {
       next()
     } catch (err){
       console.log(err)
-      res.status(404).res.send({ message: 'Not authorized' })      
+      res.status(404).send({ message: 'Not authorized' })      
+    }
+    
+    if (!token){
+      res.status(401).send({ message: 'Not authorized, no token'})
     }
   }
 
-  if (!token){
-    res.status(401).res.send({ message: 'Not authorized, no token'})
-  }
-
-
 module.exports = { protect }
-
-
 // bearer token
