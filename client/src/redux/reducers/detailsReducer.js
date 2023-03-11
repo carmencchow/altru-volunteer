@@ -1,12 +1,5 @@
 import { SAVE_NGO_DETAILS } from '../actions/index';
 
-// const initialState = {
-//   category: '',
-//   region: '',
-//   website: '',
-//   tag: '',
-// };
-
 const detailsReducer = (state = {}, action) => {
   switch (action.type) {
     case SAVE_NGO_DETAILS:
@@ -15,8 +8,10 @@ const detailsReducer = (state = {}, action) => {
       ...state,
       region: action.payload.region,
       category: action.payload.category,
+      tag: action.payload.tag,
+      name: action.payload.name,
       website: action.payload.website,
-      tag: action.payload.tag
+
     };
 
     default:

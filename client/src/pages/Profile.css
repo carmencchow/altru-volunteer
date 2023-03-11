@@ -21,3 +21,9 @@
   padding-right: 10px;
   cursor: pointer;
 }
+.back{
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  margin-right: 30px;
+}

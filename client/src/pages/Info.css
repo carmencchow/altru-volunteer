@@ -5,7 +5,7 @@ button{
   margin: 30px 60px;
   justify-content: center;
 }
-.following, .donate{
+.following, .donate, .volunteer{
   height: 36px;
   border: 2px solid purple;
   color: purple;
@@ -15,6 +15,12 @@ button{
   margin-right: 10px;
   cursor: pointer;
   margin-bottom: -30px;
+}
+.back{
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  margin-right: 30px;
 }
 .heart{
   font-size: 30px;
@@ -34,10 +40,13 @@ button{
 }
 .fave-list{
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   margin-right: 10%;
 }
 span:hover{
   color: purple;
   background: none;
+}
+.favorites-container{
+  border: 1px solid blue;
 }

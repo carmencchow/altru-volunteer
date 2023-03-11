@@ -3,12 +3,12 @@ import { Link, useNavigate } from 'react-router-dom'
 import { FcGoogle } from 'react-icons/fc'
 import { SiFacebook } from 'react-icons/si'
 import './Signup.css'
-import { AuthContext } from '../context/AuthContext'
-import { createUserWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth'
-import { auth } from '../firebase';
+// import { AuthContext } from '../context/AuthContext'
+// import { createUserWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth'
+// import { auth } from '../firebase';
 
 const Signup = () => {
-  const { register } = useContext(AuthContext);
+  // const { register } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -18,20 +18,20 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    if(password !== confirmPassword){
-      setError("Passwords do not match");
-    }
-    if (!email) {
-      setError("Please enter a valid email")
-    } else {
-      await register(email, password).then((res) => {
-        console.log(res)
-        navigate('/main');
-      }).catch((err) => {
-        setError(err.message)
-        console.log(err.message)
-      })
-    }
+    // if(password !== confirmPassword){
+    //   setError("Passwords do not match");
+    // }
+    // if (!email) {
+    //   setError("Please enter a valid email")
+    // } else {
+    //   await register(email, password).then((res) => {
+    //     console.log(res)
+    //     navigate('/main');
+    //   }).catch((err) => {
+    //     setError(err.message)
+    //     console.log(err.message)
+    //   })
+    // }
   }
 
   return (

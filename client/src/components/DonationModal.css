@@ -16,3 +16,26 @@
   margin-right: 0px;  
   right: 0px;
 }
+.stripe{
+  background-color: black;
+}
+/* .input{
+  position: absolute;
+}
+.dollar{
+  position: relative;
+  top: 0;
+  left: 10px;
+} */
+
+.donation-amounts{
+  cursor: pointer;
+}
+.donation-amounts:hover{
+  background-color: purple;
+  color: white;
+}
+.amount{
+  margin-bottom: 10px;
+
+}

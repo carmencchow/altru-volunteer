@@ -52,7 +52,7 @@ form {
   display: flex;
   flex-direction: row;
   padding-right: 10%;
-  justify-content: end;
+  justify-content: flex-end;
 }
 .name{
   font-size: 20px;
@@ -105,7 +105,7 @@ form {
 }
 .h1{
   margin-right: 0;
-  justify-content: end;
+  justify-content: flex-end;
   padding: 0px 70px;
 }
 .icon{
@@ -119,3 +119,10 @@ form {
 .next, .previous{
   cursor: pointer;
 }
+.category{
+  font-style: italic;
+  font-size: 14px;
+  font-weight: lighter;
+}
+
+

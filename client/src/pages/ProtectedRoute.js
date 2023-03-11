@@ -1,14 +1,14 @@
-import React, {useContext} from 'react'
-import { Navigate } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
+// import React, {useContext} from 'react'
+// import { Navigate } from 'react-router-dom';
+// import { AuthContext } from '../context/AuthContext';
 
-const ProtectedRoute = ({ children }) => {
-  //invoke function to get user object
-  const { user } = useContext(AuthContext);
+// const ProtectedRoute = ({ children }) => {
+//   //invoke function to get user object
+//   const { user } = useContext(AuthContext);
   
-  return (
-    user ? children : <Navigate to={'/login'} />
-  ) 
-}
+//   return (
+//     user ? children : <Navigate to={'/login'} />
+//   ) 
+// }
 
-export default ProtectedRoute
+// export default ProtectedRoute

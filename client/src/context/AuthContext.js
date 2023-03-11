@@ -1,78 +1,78 @@
-import { createContext, useState, useEffect } from 'react';
-import { auth } from '../firebase';
-import { 
-  createUserWithEmailAndPassword, 
-  signInWithEmailAndPassword, 
-  signOut, 
-  onAuthStateChanged, 
-  GoogleAuthProvider,
-  signInWithPopup
-} from 'firebase/auth';
+// import { createContext, useState, useEffect } from 'react';
+// import { auth } from '../firebase';
+// import { 
+//   createUserWithEmailAndPassword, 
+//   signInWithEmailAndPassword, 
+//   signOut, 
+//   onAuthStateChanged, 
+//   GoogleAuthProvider,
+//   signInWithPopup
+// } from 'firebase/auth';
 
 
-export const AuthContext = createContext();
+// export const AuthContext = createContext();
 
-export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+// export const AuthProvider = ({ children }) => {
+//   const [user, setUser] = useState(null);
 
-  // Listen for authentication state changes with onAuthStateChanged functon and update user state with the setUser function
-  useEffect(() => {
-    const currentUser = auth.onAuthStateChanged((authUser) => {
-      setUser(authUser)
-    })
-    return currentUser
-  }, [])
+//   // Listen for authentication state changes with onAuthStateChanged functon and update user state with the setUser function
+//   useEffect(() => {
+//     const currentUser = auth.onAuthStateChanged((authUser) => {
+//       setUser(authUser)
+//     })
+//     return currentUser
+//   }, [])
 
-  // Register
-  const register = (email, password) => {
-    return createUserWithEmailAndPassword(auth, email, password);
-  }
+//   // Register
+//   const register = (email, password) => {
+//     return createUserWithEmailAndPassword(auth, email, password);
+//   }
 
-  // Login
-  const login = (email, password) => {
-    return signInWithEmailAndPassword(auth, email, password);
-  }
+//   // Login
+//   const login = (email, password) => {
+//     return signInWithEmailAndPassword(auth, email, password);
+//   }
 
-  // Logout
-  const logout = () => {
-    return signOut(auth);
-  }
+//   // Logout
+//   const logout = () => {
+//     return signOut(auth);
+//   }
 
-  // Google Sign In
-  const googleSignIn = (email, password) => {
-    const googleAuthProvider = new GoogleAuthProvider();
-    return signInWithPopup(auth, googleAuthProvider);
-  }
+//   // Google Sign In
+//   const googleSignIn = (email, password) => {
+//     const googleAuthProvider = new GoogleAuthProvider();
+//     return signInWithPopup(auth, googleAuthProvider);
+//   }
 
-  // Updating Email
-  const updateUserEmail = (user, email) => {
-    // return updateEmail(user, email)
-  }
+//   // Updating Email
+//   const updateUserEmail = (user, email) => {
+//     // return updateEmail(user, email)
+//   }
 
-  // Updating Password
-  const updateUserPassword = (user, password) => {
-    // return updatePassword(user, password)
-  }
+//   // Updating Password
+//   const updateUserPassword = (user, password) => {
+//     // return updatePassword(user, password)
+//   }
 
-  // Forgot Password
-  const forgotPassword = (email) => { 
-    // return sendPasswordResetEmail(auth, email) 
-  } 
+//   // Forgot Password
+//   const forgotPassword = (email) => { 
+//     // return sendPasswordResetEmail(auth, email) 
+//   } 
 
-  // Delete User
-  // const deleteUser = (user) => {
-  //   .then(() => {
-  //     // User deleted
-  // }).catch((err) => {
-  //   console.log(err);
-  // })
+//   // Delete User
+//   // const deleteUser = (user) => {
+//   //   .then(() => {
+//   //     // User deleted
+//   // }).catch((err) => {
+//   //   console.log(err);
+//   // })
 
-  return (
-    <AuthContext.Provider value={{ user, login, logout, updateUserEmail, updateUserPassword, googleSignIn, forgotPassword, register }}>
-      {children}
-    </AuthContext.Provider>  
-  );
+//   return (
+//     <AuthContext.Provider value={{ user, login, logout, updateUserEmail, updateUserPassword, googleSignIn, forgotPassword, register }}>
+//       {children}
+//     </AuthContext.Provider>  
+//   );
   
-}
+// }
  
 

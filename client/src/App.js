@@ -6,7 +6,7 @@ import Info from './pages/Info';
 import Signup from './pages/Signup';
 import Home from './pages/Home';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider } from './context/AuthContext';
+// import { AuthProvider } from './context/AuthContext';
 
 function App() {
   const user = true;
@@ -14,7 +14,7 @@ function App() {
   return (
     <BrowserRouter>
       <div>
-        <AuthProvider>
+        {/* <AuthProvider> */}
           <Routes>
             <Route path="/" element={<Home/>}/>
             <Route path="/main" element={<Main/>}/>
@@ -24,7 +24,7 @@ function App() {
             <Route path="/profile" element={<Profile/>}/>
             <Route path="/info" element={<Info/>}/>
           </Routes>
-        </AuthProvider>
+        {/* </AuthProvider> */}
       </div>
     </BrowserRouter>
   );

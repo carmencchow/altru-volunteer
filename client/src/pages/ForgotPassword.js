@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { useAuth } from '../context/AuthContext'
+// import { useAuth } from '../context/AuthContext'
 
 const ForgotPassword = () => {
-  const { login, forgotPassword } = useAuth();
+  // const { login, forgotPassword } = useAuth();
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState();
@@ -11,13 +11,13 @@ const ForgotPassword = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError();
-    await forgotPassword(email).then((res) => {
-      console.log(res)
-      setSuccess('Check your email for a new password')
-    }).catch((err) => {
-      setError(err.message)
-      console.log(err.message)
-    })
+    // await forgotPassword(email).then((res) => {
+    //   console.log(res)
+    //   setSuccess('Check your email for a new password')
+    // }).catch((err) => {
+    //   setError(err.message)
+    //   console.log(err.message)
+    // })
   }
 
   return (
