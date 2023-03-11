@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 const { response } = require('express');
 const jwt = require('jsonwebtoken');
 const cookie = require('cookie');
-const { countDocuments } = require('../models/userModel');
 
 // 1. REGISTER endpoint
 const signup = async (req, res) => {
@@ -93,27 +92,13 @@ const signup = async (req, res) => {
       expiresIn: '7d',
     })
   }
-        // res.status(200).send({ 
-        //   message: 'Login successful', 
-        //   username, 
-        //   email, 
-        //   token: createToken(newUser._id) 
-        // }); 
-      // }
-    
-      // // Create cookie with token
-      // res.cookie('jwt', token, {
-      //   httpOnly: true,
-      //   secure: true,
-      //   maxAge: 7 * 24 * 60 * 60 * 1000
-      // })
 
-      
-  //   } catch (err) {
-  //     console.log(err); 
-  //     res.status(500).send({ message: 'Login failed', err});
-  //   }
-  // };
+// // Create cookie with token
+    // res.cookie('jwt', token, {
+    //   httpOnly: true,
+    //   secure: true,
+    //   maxAge: 7 * 24 * 60 * 60 * 1000
+    // })
 
 // 3. LOGOUT endpoint
 const logout = ( req, res ) => {
@@ -127,5 +112,11 @@ const logout = ( req, res ) => {
   }
 }
 
+// 4. GETME endpoint
+const getMe = ( req, res ) => { 
+  res.json({ message: 'User data display' })
+}
 
-module.exports = { signup, login, logout };
+
+
+module.exports = { signup, login, logout, getMe };
