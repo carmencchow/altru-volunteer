@@ -93,7 +93,7 @@ const signup = async (req, res) => {
     })
   }
 
-// // Create cookie with token
+// Create cookie with token
     // res.cookie('jwt', token, {
     //   httpOnly: true,
     //   secure: true,
@@ -112,9 +112,15 @@ const logout = ( req, res ) => {
   }
 }
 
-// 4. GETME endpoint
-const getMe = ( req, res ) => { 
-  res.json({ message: 'User data display' })
+// 4. GETME endpoint, access by passing user token in 'auth'
+const getMe = async ( req, res ) => { 
+  const {_id, username, email } = await User.findById(req.user.id);
+  res.status(200).send({ 
+    message: 'User data display',
+    id: _id,
+    username,
+    email
+  })
 }
 
 module.exports = { signup, login, logout, getMe };
