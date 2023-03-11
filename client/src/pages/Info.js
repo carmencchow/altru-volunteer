@@ -20,7 +20,7 @@ const Info = () => {
 
   return (
     <div>
-      {/* <Navbar/> */}
+      <Navbar/>
       <div> 
         <span className="back" onClick={() => navigate(-1)}>Back</span>
         <h1>Organization Profile</h1>

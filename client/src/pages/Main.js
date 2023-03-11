@@ -13,7 +13,7 @@ const Main = () => {
 
   return (
     <Section>
-      {/* <Navbar/> */}
+      <Navbar/>
       <Filters/>
       {/* <ChatWindow/> */}
       {/* <Footer/> */}

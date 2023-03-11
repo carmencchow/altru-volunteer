@@ -24,7 +24,7 @@ const Profile = () => {
   
   return (
     <div>
-      {/* <Navbar/> */}
+      <Navbar/>
         <div className="container">
           <span className="back" onClick={() => navigate(-1)}>Back</span>
             <div className="user-profile">

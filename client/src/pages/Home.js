@@ -12,7 +12,7 @@ const Home = () => {
 
   return (
     <div>
-      {/* <Navbar/>  */}
+      <Navbar/> 
       {/* <Navbar user={user}/>  */}
         <section className="container">
           <div className="main-section">
