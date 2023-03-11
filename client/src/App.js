@@ -1,5 +1,6 @@
 import './App.css';
 import Main from './pages/Main';
+// import Navbar from '../components/Navbar';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Info from './pages/Info';
@@ -14,6 +15,7 @@ function App() {
   return (
     <BrowserRouter>
       <div>
+        {/* <Navbar/> */}
         {/* <AuthProvider> */}
           <Routes>
             <Route path="/" element={<Home/>}/>

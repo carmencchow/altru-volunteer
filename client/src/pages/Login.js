@@ -1,29 +1,30 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import { FcGoogle } from 'react-icons/fc'
 import { SiFacebook } from 'react-icons/si'
 import './Login.css'
 import { Link, useNavigate } from 'react-router-dom'
-// import { AuthContext } from '../context/AuthContext'
-// import firebase from '../firebase';
 
 const Login = () => {
-  // const { login } = useContext(AuthContext);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  })
+
+  const { email, password } = formData
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
+  const handleChange = (e) => {
+    setFormData((prevState) => ({
+      ...prevState, 
+      [e.target.name]: e.target.value,
+    }))
+  }
+
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // setError()
-    // await login(email, password).then((res) => {
-    //   console.log(res)
-    // navigate('/main')
-    // }).catch((err) => {
-    //     setError(err.message)
-    //     console.log(err.message)
-    //   })
-    }
+  }
 
   return (
     <div className="login-wrapper">
@@ -37,7 +38,7 @@ const Login = () => {
               type="email" 
               placeholder="Enter your email" 
               value={email}   
-              onChange={(e) => setEmail(e.target.value)}    
+              onChange={handleChange}  
             />
           </div>
 
@@ -49,7 +50,7 @@ const Login = () => {
               type="password" 
               placeholder="Enter your password" 
               value={password} 
-              onChange={(e) => setPassword(e.target.value)}    
+              onChange={handleChange}    
             />
           </div>
           

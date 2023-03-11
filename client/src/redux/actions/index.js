@@ -24,17 +24,3 @@ export const addToFavorites = (name, website) => {
 }
 
 
-// export const signupUser = async (user) => {
-//   let request = await axios.get('http://localhost:5000/api/auth/signup', user)
-//   .then((response) => {
-//     console.log(response.data);
-//   })
-//   .catch((err) => {
-//     console.log(err)
-//   })
-
-//   return {
-//     type: GET_ERRORS,
-//     payload: request
-//   };
-// };

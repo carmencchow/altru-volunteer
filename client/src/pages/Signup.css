@@ -17,7 +17,7 @@ input {
   height: 50px;
   margin-right: 20px;
 }
-.form-password, .form-email, .form-confirm-password{
+.form-group{
   padding-bottom: 20px;
 }
 button{
