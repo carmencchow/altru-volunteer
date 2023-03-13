@@ -8,15 +8,16 @@ import Signup from './pages/Signup';
 import Home from './pages/Home';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 // import { AuthProvider } from './context/AuthContext';
+import { FiltersProvider } from './contexts/FiltersContext';
+import { NgosProvider } from './contexts/NgosContext';
 
 function App() {
   const user = true;
 
   return (
-    <BrowserRouter>
-      <div>
-        {/* <Navbar/> */}
-        {/* <AuthProvider> */}
+    <NgosProvider> 
+      <BrowserRouter>
+        <div>
           <Routes>
             <Route path="/" element={<Home/>}/>
             <Route path="/main" element={<Main/>}/>
@@ -24,11 +25,11 @@ function App() {
             <Route path="/signup" element={<Signup/>}/>
             <Route path="/login" element={user ? <Navigate to="/" /> : <Home/>}/>
             <Route path="/profile" element={<Profile/>}/>
-            <Route path="/info" element={<Info/>}/>
+            <Route path="/info/:id" element={<Info/>}/>
           </Routes>
-        {/* </AuthProvider> */}
-      </div>
-    </BrowserRouter>
+        </div>
+      </BrowserRouter>
+    </NgosProvider>
   );
 }
 

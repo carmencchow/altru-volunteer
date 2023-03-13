@@ -1,21 +1,19 @@
 // import { configureStore } from "@reduxjs/toolkit";
-// import authReducer from '../features/auth/authSlice'
+
+// import filterReducer from '../redux/reducers/filtersReducer' // ** REDUX 
+// import detailsReducer from './detailsReducer' // ** REDUX 
+// // import authSliceReducer from '../features/auth/authSlice'
+// // import ngoSliceReducer from '../features/ngoSlice' // ** RTK
+// // import filtersSliceReducer from '../features/filtersSlice' // ** RTK
+
 
 // export const store = configureStore({
 //   reducer: {
-//     auth: authReducer,
-//   },
+//     details: detailsReducer,  // ** REDUX 
+//     filters: filterReducer, // ** REDUX 
+//     // // ngo: ngoSliceReducer, // ** RTK
+//     // // auth: authSliceReducer, // ** RTK
+//     // filters: filtersSliceReducer // ** RTK
+//   }
 // })
 
-
-// import { combineReducers } from 'redux'
-// import filterReducer from './filtersReducer'
-// import detailsReducer from './detailsReducer'
-// // import authReducer from '../src/features/auth/authSlice'
-
-// const rootReducer = combineReducers({
-//   filters: filterReducer,
-//   details: detailsReducer
-// });
-
-// export default rootReducer;

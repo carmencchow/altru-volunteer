@@ -1,27 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { setFilters, saveNgoDetails } from '../redux/actions';
-import { useNavigate } from 'react-router-dom';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { saveNgoDetails } from '../redux/actions'; // ** REDUX **
+// import { setFilters } from '../redux/actions'; // ** REDUX **
+// import { ngoSelected } from '../features/ngoSlice' // ** RTK **
+// import { setFilters } from '../features/filtersSlice' // ** RTK **
+
+import { useContext } from 'react'; // ** CONTEXT **
+import { FiltersContext } from '../contexts/FiltersContext'; // ** CONTEXT **
+import { NgosContext } from '../contexts/NgosContext';
+import { useNavigate, Link } from 'react-router-dom';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { BiMap, BiWorld } from 'react-icons/bi';
 import { VscOrganization } from 'react-icons/vsc';
 import { FaBullhorn } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
-import './Filters.css'
 import axios from 'axios';
+import './Filters.css'
 
 const Filters = () => {
-  const [search, setSearch] = useState('');
-  const [region, setRegion] = useState('');
-  const [cause, setCause] = useState('');
+  const { filters, setFilters } = useContext(FiltersContext) 
+  const { ngos, setNgos } = useContext(NgosContext)
+  // const [region, setRegion] = useState('');
+  // const [cause, setCause] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const [ngos, setNgos] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageCount, setPageCount] = useState(1);
-  const ngoState = useSelector(state => state)
-
-  const dispatch = useDispatch();  
   const navigate = useNavigate();
 
   // Pagination buttons
@@ -35,32 +37,26 @@ const Filters = () => {
     setCurrentPage(currentPage + 1);
   }
 
-  // Search Filters
-  const handleSearchChange = (e) => {
-    setSearch(e.target.value);
-  }
-
   const handleRegionChange = (e) => {
-    setRegion(e.target.value);
+    setFilters({ ...filters, region: e.target.value }); 
+    // Only change value of region to the one user selected
   }
 
   const handleCauseChange = (e) => {
-    setCause(e.target.value);
+    setFilters({ ...filters, cause: e.target.value});
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(setFilters(region, cause));
+    // dispatch(setFilters(region, cause));
     fetchFilteredNgos()
-    // setCurrentPage('');
-    // setPageCount('');
   }
 
-  const handleSaveDetails = (region, category, name, website) => {
-    dispatch(saveNgoDetails(region, category, name, website));   
-    setTimeout(() => 
-      navigate('/info'), 2000)
-    console.log('Save NGO details')
+  const handlengoSelected = (id) => {
+    // dispatch(saveNgoDetails(region, category, name, website)); // ** REDUX **
+    // dispatch(ngoSelected(region, category, name, website)); // ** RTK ** 
+    navigate(`/info/${id}`)
+    console.log(id)
   }
 
   const fetchAllNgos = async () => {
@@ -75,8 +71,14 @@ const Filters = () => {
 
   const fetchFilteredNgos = async () => {
     try {
-      const location = ngoState.filters.region
-      const cause = ngoState.filters.category
+      const location = filters.region 
+      const cause = filters.cause 
+
+      // const location = ngoState.filters.region // *** REDUX 
+      // const cause = ngoState.filters.category // *** REDUX 
+      // const location = filteredNGOs.filters.region // *** RTK 
+      // const cause = filteredNGOs.filters.category // *** RTK 
+
       const res = await axios.get(`http://localhost:5000/api/ngos/${location}/${cause}`);    
       setNgos(res.data);
       console.log(res.data.location);
@@ -102,7 +104,7 @@ const Filters = () => {
       <h1 className="h1"><FaBullhorn className="cta"/><Link to="/cards">Featured NGOs: Urgent and Active Campaigns</Link></h1>
         
       <div className="filters-headings">
-        {/* <h2>Find a non-profit</h2> */}
+        <h2>Find a non-profit</h2>
         <h2>Search by region or cause</h2>
       </div>
         
@@ -122,17 +124,17 @@ const Filters = () => {
         <div className="menus">
 
             <form className="dropdown">
-              <select value={region} onChange={handleRegionChange}>  
+              <select value={filters.region} onChange={handleRegionChange}>  
                 <option value="all">--- All Regions ---</option>
-                <option value="South America">South America</option>
+                <option value="Africa">Africa</option>
                 <option value="Asia">Asia</option>
                 <option value="Middle East">Middle East</option>
-                <option value="Africa">Africa</option>
+                <option value="South America">South America</option>                        
               </select>
             </form>
 
             <form className="dropdown">
-              <select value={cause} onChange={handleCauseChange}>
+              <select value={filters.cause} onChange={handleCauseChange}>
                 <option value="all">--- All Causes ---</option>
                 <option value="animal welfare">Animal Welfare</option>
                 <option value="children">Children</option>
@@ -149,7 +151,6 @@ const Filters = () => {
         </div>
       </div>
 
-      {/* Pagination */}
       <div className="pagination">
         <button disabled={currentPage === 1} className="previous" onClick={handlePrevious}>Previous</button>
         <p>{currentPage}/{pageCount}</p>
@@ -170,10 +171,8 @@ const Filters = () => {
                     <p className="location"><BiMap/>{ngo.location[0].toUpperCase()}</p>
                     <p className="category">{ngo.category}</p>
                     <div className="rightside">
-                      <button className="infoBtn" onClick={() => handleSaveDetails(ngo.location[0], ngo.category, ngo.name, ngo.website)}><VscOrganization/>Profile</button>   
-                      {console.log(ngo.location[0], ngo.category, ngo.name, ngo.website)}     
-                      <button className="websiteBtn" onClick={() => { window.open(`${ngo.website}`)}}>
-                        <BiWorld className="icon"/>Website</button>
+                      <button className="infoBtn" onClick={() => handlengoSelected(ngo._id)}><VscOrganization/>Profile</button>   
+                      <button className="websiteBtn" onClick={() => { window.open(`${ngo.website}`)}}><BiWorld className="icon"/>Website</button>
                     </div>          
                   </div> 
                 </div> 

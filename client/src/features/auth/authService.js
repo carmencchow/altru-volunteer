@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Service file: Making HTTP request and sending data in localStorage
 
-const API_URL = 'http://localhost:5000/api/auth/';
+const API_URL = 'http://localhost:5000/api/auth/signup';
 // or in frontend package.json add "proxy": "http://localhost:5000"
 
 // Register new user
@@ -14,8 +14,6 @@ const register = async (userData) => {
   }
   return response.data
 }
-
-
 
 const authService = { 
   register

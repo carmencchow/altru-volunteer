@@ -1,31 +1,46 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import Navbar from '../components/Navbar'
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import DonationModal from '../components/DonationModal'
 import { AiOutlineHeart } from 'react-icons/ai';
 import { useSelector, useDispatch } from 'react-redux';
 import { addToFavorites } from '../redux/actions';
 import './Info.css'
+import axios from 'axios'
 
 const Info = () => {
-  const [openModal, setOpenModal] = useState(false);
-  const ngos = useSelector((state) => state.details);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const { id } = useParams();
+  const [openModal, setOpenModal] = useState(false);
+  const [currentNgo, setCurrentNgo] = useState({
+    _id: '',       
+    name: '',
+    category: [],
+    location: [],
+    website: '',
+    tag: '' 
+  });
 
   const addToFavorites = () => {
     console.log("Adding org to favorite")
-    dispatch(addToFavorites);
   }
+
+  const fetchNgo = async () => {
+    const res = await axios.get(`http://localhost:5000/api/ngos/${id}`)
+    setCurrentNgo(res.data)
+    console.log(res.data)
+  }
+
+  useEffect (() => {
+    fetchNgo();
+  }, [])
 
   return (
     <div>
       <Navbar/>
       <div> 
         <span className="back" onClick={() => navigate(-1)}>Back</span>
-        <h1>Organization Profile</h1>
-        <h1>{ngos.name}</h1>
-        <h1>{ngos.website}</h1>
+        <h1>{currentNgo.name}</h1> 
 
        <div className="fave-list">
     
@@ -40,14 +55,19 @@ const Info = () => {
       </div>
 
       <div className="contact">
-        <p>CAUSE: {ngos.category}</p>
-        <p>{ngos.tag} Ang Lorem Ipsum ay ginagamit na modelo ng industriya ng pagpriprint at pagtytypeset. Ang Lorem Ipsum ang naging regular na modelo simula pa noong 1500s, noong may isang di kilalang manlilimbag and kumuha ng galley ng type at ginulo an</p>
+        <p>CAUSE: {currentNgo.category}</p> 
+        <p>ABOUT US: {currentNgo.tag}</p>
+        <br></br>        
+        <p>{currentNgo.website}</p> 
+        <br></br>
+
 
         <div className="info-links">
           <span className="donate" onClick={() => setOpenModal(true)} >Donate</span>
           <span className="following">Follow</span> 
           <span className="volunteer">Volunteer</span> 
         </div>
+
       </div>
 
     </div>

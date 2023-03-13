@@ -1,21 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import promise from "redux-promise";
-import reducers from './redux/reducers'
-import { createStore, applyMiddleware } from "redux";
-import { Provider } from 'react-redux';
 import App from './App';
-
-const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
-const store = createStoreWithMiddleware(reducers)
+import { AuthContextProvider } from './contexts/AuthContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+root.render(   
   <React.StrictMode>
-    <Provider store={store}> 
+    <AuthContextProvider>
       <App />
-    </Provider>
+    </AuthContextProvider>
   </React.StrictMode>
 );
 

@@ -1,4 +1,3 @@
-// import { SET_CATEGORY, SET_REGION_FILTER, SET_DONATION } from "../actions/index";
 import { SET_FILTERS } from "../actions/index";
 
 const initialState = {

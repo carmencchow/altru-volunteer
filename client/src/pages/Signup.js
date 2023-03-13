@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
-import { FcGoogle } from 'react-icons/fc'
-import { SiFacebook } from 'react-icons/si'
+import { useNavigate } from 'react-router-dom'
 import { register, reset } from '../features/auth/authSlice'
-import './Signup.css'
-import toast, { Toaster } from 'react-hot-toast';
 import Loader from '../components/Loader'
+import toast, { Toaster } from 'react-hot-toast';
+import './Signup.css'
 
 const Signup = () => {
-  const [error, setError] = useState('');
+  // const [error, setError] = useState('');
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -17,7 +15,7 @@ const Signup = () => {
     confirmPassword: ''
   })
 
-  // const { name, email, password, confirmPassword } = formData
+  const { name, email, password, confirmPassword } = formData
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -39,25 +37,25 @@ const Signup = () => {
   // }, [user, isError, isSuccess, message, dispatch, navigate]);
 
   const handleChange = (e) => {
-    // setFormData((prevState) => ({
-    //   ...prevState, 
-    //   [e.target.name]: e.target.value,
-    // }))
+    setFormData((prevState) => ({
+      ...prevState, 
+      [e.target.name]: e.target.value,
+    }))
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
   
-    // if(password !== confirmPassword){
-    //   toast.error('Passwords do not match');
-    // } else {
-    //   const userData = { 
-    //     name,
-    //     email,
-    //     password,
-    //   }
-    //   dispatch(register(userData)); //dispatch register function from authSlice
-    // }
+    if(password !== confirmPassword){
+      toast.error('Passwords do not match');
+    } else {
+      const userData = { 
+        name,
+        email,
+        password,
+      }
+      dispatch(register(userData)); //dispatch register function from authSlice
+    }
   }
 
   // if (isLoading){
@@ -74,7 +72,7 @@ const Signup = () => {
               name="name" 
               type="text" 
               placeholder="Enter your name" 
-              // value={name} 
+              value={name} 
               className="form-control"  
               id="name"
               onChange={handleChange}
@@ -86,7 +84,7 @@ const Signup = () => {
               name="email" 
               type="text" 
               placeholder="Enter your email" 
-              // value={email} 
+s             value={email} 
               className="form-control"  
               id="email"
               onChange={handleChange}
@@ -99,7 +97,7 @@ const Signup = () => {
               type="password" 
               className="form-control"  
               placeholder="Enter your password" 
-              // value={password} 
+              value={password} 
               id="password"
               onChange={handleChange}
             />
@@ -111,13 +109,13 @@ const Signup = () => {
               type="password" 
               className="form-control"  
               placeholder="Confirm your password" 
-              // value={confirmPassword} 
+              value={confirmPassword} 
               id="confirmPassword"
               onChange={handleChange}
             />
           </div>
 
-          { error && <span><strong>Error:</strong>{error}</span>}
+          {/* { error && <span><strong>Error:</strong>{error}</span>} */}
 
           <div className="buttons">      
             <button className="signup" type="submit" onClick={handleSubmit}>Sign Up</button>
