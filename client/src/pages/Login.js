@@ -23,11 +23,12 @@ const Login = () => {
   
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(formData.email, formData.password)
   }
 
   return (
     <div className="login-wrapper">
-      <form onSubmit={handleSubmit}> 
+      <form> 
         <div className="form-wrapper">
           <div className="form-content">
           <h3 className="Signup">Log in to your account</h3>
@@ -38,6 +39,7 @@ const Login = () => {
               placeholder="Enter your email" 
               value={email}   
               onChange={handleChange}  
+              //onChange={(e) => setEmail(e.target.value)}
             />
           </div>
 
@@ -54,7 +56,7 @@ const Login = () => {
           </div>
           
           <p className="forgot"><Link to={'/forgot'}>Forgot password</Link></p>
-          <button type="submit" className="submit">Sign In</button>
+          <button type="submit" className="submit" onClick={handleSubmit}>Sign In</button>
           <div className="buttons">      
           
           <button className="google-row">

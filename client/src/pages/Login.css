@@ -42,6 +42,11 @@ input {
   border-radius: 0px;
   border: 1px solid grey;
 }
+.submit:hover{
+  background-color: darkgrey;
+  color: black;
+  transition: ease-in 2s;
+}
 .forgot{
   font-size: 12px;
   font-weight: lighter;

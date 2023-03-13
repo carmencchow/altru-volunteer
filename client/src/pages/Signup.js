@@ -1,13 +1,8 @@
-import React, { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { register, reset } from '../features/auth/authSlice'
-import Loader from '../components/Loader'
-import toast, { Toaster } from 'react-hot-toast';
 import './Signup.css'
 
 const Signup = () => {
-  // const [error, setError] = useState('');
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -18,23 +13,6 @@ const Signup = () => {
   const { name, email, password, confirmPassword } = formData
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-  // Get from state:
-  // const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth)
-
-  // useEffect(() => {
-  //   if(isError) {
-  //     console.log(message)
-  //     toast.error(message);
-  //   }
-
-  //   // User successfully registered
-  //   if (isSuccess || user){
-  //     navigate('/main')
-  //   }
-  //   dispatch(reset());
-  // }, [user, isError, isSuccess, message, dispatch, navigate]);
 
   const handleChange = (e) => {
     setFormData((prevState) => ({
@@ -47,20 +25,15 @@ const Signup = () => {
     e.preventDefault();
   
     if(password !== confirmPassword){
-      toast.error('Passwords do not match');
+      console.log('Passwords do not match')
     } else {
       const userData = { 
         name,
         email,
         password,
       }
-      dispatch(register(userData)); //dispatch register function from authSlice
     }
   }
-
-  // if (isLoading){
-  //   return <Loader/>
-  // }
 
   return (
     <div className="signup-wrapper">
@@ -114,8 +87,6 @@ s             value={email}
               onChange={handleChange}
             />
           </div>
-
-          {/* { error && <span><strong>Error:</strong>{error}</span>} */}
 
           <div className="buttons">      
             <button className="signup" type="submit" onClick={handleSubmit}>Sign Up</button>
