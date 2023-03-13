@@ -1,22 +1,22 @@
-import { SET_CAUSE_FILTER } from '../actions/index';
+// import { SET_CAUSE_FILTER } from '../actions/index';
 
-const initialState = {
-  category: '',
-  ngos: []
-};
+// const initialState = {
+//   category: '',
+//   ngos: []
+// };
 
-const causeReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case SET_CAUSE_FILTER:
-      console.log('Fetching by Cause:', action.payload)
-    return {
-      ...state,
-        ngos: action.payload,
-    };
+// const causeReducer = (state = initialState, action) => {
+//   switch (action.type) {
+//     case SET_CAUSE_FILTER:
+//       console.log('Fetching by Cause:', action.payload)
+//     return {
+//       ...state,
+//         ngos: action.payload,
+//     };
 
-    default:
-      return state;
-  }
-}
+//     default:
+//       return state;
+//   }
+// }
 
-export default causeReducer;
+// export default causeReducer;
