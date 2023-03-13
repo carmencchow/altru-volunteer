@@ -17,15 +17,15 @@ const getNgos = async (req, res) => {
 
   try {
     const ngos = await Ngo.find({}).sort({name: 1})
-//  .limit(limit * 1).skip((page - 1) * limit).exec(); 
-//    const count = await Ngo.countDocuments(query);
-      res.status(200).json(ngos)
-//    const pageCount = count / limit;
+  // .limit(limit * 1).skip((page - 1) * limit).exec(); 
+  // const count = await Ngo.countDocuments(query);
+    res.status(200).json(ngos)
+  // const pageCount = count / limit;
     } catch (err){
     console.log(err.message);
     res.sendStatus(500);
+    }
   }
-}
 
 const getFilteredNgos = async (req, res) => { 
   const cause = req.params.cause.toLowerCase();
