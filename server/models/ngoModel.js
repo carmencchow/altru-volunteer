@@ -34,3 +34,10 @@ const ngoSchema = new Schema({
 // Make the model based on the above schema
 module.exports = mongoose.model('Ngo', ngoSchema);
 
+// {
+//   "name": " ",
+//   "category": " ",
+//   "website": " ",
+//   "location": " ",
+//   "tag": " "
+// }
