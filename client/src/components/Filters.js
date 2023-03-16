@@ -1,10 +1,4 @@
 import React, { useState, useEffect } from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { saveNgoDetails } from '../redux/actions'; // ** REDUX **
-// import { setFilters } from '../redux/actions'; // ** REDUX **
-// import { ngoSelected } from '../features/ngoSlice' // ** RTK **
-// import { setFilters } from '../features/filtersSlice' // ** RTK **
-
 import { useContext } from 'react'; // ** CONTEXT **
 import { FiltersContext } from '../contexts/FiltersContext'; // ** CONTEXT **
 import { NgosContext } from '../contexts/NgosContext';
@@ -19,8 +13,6 @@ import './Filters.css'
 const Filters = () => {
   const { filters, setFilters } = useContext(FiltersContext) 
   const { ngos, setNgos } = useContext(NgosContext)
-  // const [region, setRegion] = useState('');
-  // const [cause, setCause] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [pageCount, setPageCount] = useState(1);
@@ -53,8 +45,6 @@ const Filters = () => {
   }
 
   const handlengoSelected = (id) => {
-    // dispatch(saveNgoDetails(region, category, name, website)); // ** REDUX **
-    // dispatch(ngoSelected(region, category, name, website)); // ** RTK ** 
     navigate(`/info/${id}`)
     console.log(id)
   }
@@ -73,12 +63,6 @@ const Filters = () => {
     try {
       const location = filters.region 
       const cause = filters.cause 
-
-      // const location = ngoState.filters.region // *** REDUX 
-      // const cause = ngoState.filters.category // *** REDUX 
-      // const location = filteredNGOs.filters.region // *** RTK 
-      // const cause = filteredNGOs.filters.category // *** RTK 
-
       const res = await axios.get(`http://localhost:5000/api/ngos/${location}/${cause}`);    
       setNgos(res.data);
       console.log(res.data.location);
@@ -92,7 +76,6 @@ const Filters = () => {
     setPageCount(Math.ceil(ngos.length/5)); // Total number of pages
     }, [ngos.length]) // Length of NGO list chnages
   
-
   // Display list of NGOs when page loads for the first time
   useEffect(() => {
     fetchAllNgos();
@@ -126,10 +109,10 @@ const Filters = () => {
             <form className="dropdown">
               <select value={filters.region} onChange={handleRegionChange}>  
                 <option value="all">--- All Regions ---</option>
-                <option value="Africa">Africa</option>
-                <option value="Asia">Asia</option>
-                <option value="Middle East">Middle East</option>
-                <option value="South America">South America</option>                        
+                <option value="africa">Africa</option>
+                <option value="asia">Asia</option>
+                <option value="middle east">Middle East</option>
+                <option value="south america">South America</option>                        
               </select>
             </form>
 
@@ -141,7 +124,7 @@ const Filters = () => {
                 <option value="education">Education</option>
                 <option value="environment">Environment</option>
                 <option value="hunger">Hunger</option>
-                <option value="women">Women</option>
+                <option value="womens rights">Women's Rights</option>
               </select>
             </form>
           </div>

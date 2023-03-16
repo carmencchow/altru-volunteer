@@ -3,8 +3,6 @@ import Navbar from '../components/Navbar'
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import DonationModal from '../components/DonationModal'
 import { AiOutlineHeart } from 'react-icons/ai';
-import { useSelector, useDispatch } from 'react-redux';
-import { addToFavorites } from '../redux/actions';
 import './Info.css'
 import axios from 'axios'
 

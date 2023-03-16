@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
+import { useSignup } from '../hooks/useSignup'
 import './Signup.css'
 
 const Signup = () => {
@@ -9,10 +10,11 @@ const Signup = () => {
     password: '',
     confirmPassword: ''
   })
+  const { signup, error, isLoading } = useSignup()
 
   const { name, email, password, confirmPassword } = formData
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData((prevState) => ({
@@ -21,18 +23,21 @@ const Signup = () => {
     }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    if(password !== confirmPassword){
-      console.log('Passwords do not match')
-    } else {
-      const userData = { 
-        name,
-        email,
-        password,
-      }
-    }
+    
+    // if(password !== confirmPassword){
+    //   console.log('Passwords do not match')
+    // } else {
+    //   const userData = { 
+    //     name,
+    //     email,
+    //     password,
+    //   }
+    console.log('Returning', formData.name, formData.email, formData.password)
+    // }
+
+    await signup(email, password)
   }
 
   return (
@@ -89,7 +94,9 @@ s             value={email}
           </div>
 
           <div className="buttons">      
-            <button className="signup" type="submit" onClick={handleSubmit}>Sign Up</button>
+            <button disabled={isLoading} className="signup" type="submit" onClick={handleSubmit}>Sign Up</button>
+
+            { error && <div className="error">{error}</div>}
 
           </div>
         </div>
