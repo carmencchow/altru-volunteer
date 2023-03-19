@@ -57,7 +57,6 @@ const signup = async (req, res) => {
       console.log(req.body.password);
       const hashedPassword = await bcrypt.hash(req.body.password, 8);
     
-
       // Validate incoming request body
       if (!req.body.email || !req.body.password){
         res.status(400).send({ message: 'Email or password missing'});

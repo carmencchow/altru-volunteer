@@ -3,7 +3,7 @@ const User = require('../models/userModel');
 
 const protect = async (req, res, next) => { 
   let token
-  console.log('Hello token')
+  console.log('protection')
 
   // Check if JWT in the headers 
   if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) { 
@@ -13,7 +13,7 @@ const protect = async (req, res, next) => {
       token = req.headers.authorization.split(' ')[1]
       // Verify the token
       const decoded = jwt.verify(token, process.env.JWT_SECRET)
-      // Get user (without password) from the token and assign to req.user for use in any protected route
+      // Get user info (password removed) from the token and assign to req.user for use in any protected route
       req.user = await User.findById(decoded._id).select('-password')
       next()
     } catch (err){

@@ -9,7 +9,6 @@ router.get('/user', getUser)
 // DELETE User
 router.delete('/delete', deleteUser)
 
-
 // EDIT User
 router.post('/edit', editUser)
 

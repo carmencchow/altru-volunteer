@@ -12,8 +12,6 @@ const cors = require('cors');
 const stripe = require('stripe')
 ('sk_test_51L1kSgAoNhpouPlcsLOoeratv5RcCHcEfUfgPew0wwNKZ3R0b1VXLWvvj3AgDxXupbYaDvmQqOdoZPfkVkqWm9yl00loEwN4S4')
 
-const uuid = require("uuid");
-
 // Express app
 const app = express();
 
@@ -35,12 +33,10 @@ app.use('/api/payment', stripeRoutes);
 // Connect to db
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {
-  // Listen for requests
     app.listen(PORT, () => {
       console.log(`connected to db and listening on port', ${PORT}`);
     })
   })
-  // In case the wrong password or URI is entered:
   .catch((err) => {
     console.log(err)
   })
