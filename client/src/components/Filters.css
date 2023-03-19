@@ -3,24 +3,29 @@ main{
   justify-content: center;
   align-items: center;
 }
+.stats{
+  border: 1px solid grey;
+  height: 100px;
+  width: 80%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-left: 80px;
+}
+.donated, .goal, .leftover, .current{
+  /* border: 1px solid grey; */
+  width: 200px;
+  height: 60px;
+  margin-left: 0px;
+}
 .filters{
   display: flex;
-  margin: 30px 60px 0px 60px;
-  padding: 0px 70px;
-}
-.filters-headings, .filters-row{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  width: 80%;
+  margin: 30px 60px 0px 0px;
   padding: 0px 70px;
 }
 .input-group{
   font-size: 30px;
   width: 500px;
-}
-.dropdown{
-  height: 40px;
 }
 form {
   display: flex;
@@ -33,7 +38,6 @@ form {
   display: flex;
   justify-content: space-evenly;
   flex-direction: row;
-  /* border-top: 1px solid rgb(232, 232, 232); */
   border-top: 1px solid rgb(232, 232, 232);
   border-radius: 25px;
   margin-bottom: 40px;
@@ -41,18 +45,13 @@ form {
 .display{
   padding: 0px 70px;
 }
-.heading{
-  display: flex;
-  justify-content: left;
-  font-size: 30px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 50%, #fde478 0%);
-  width: 250px;
-}
 .pagination{
   display: flex;
   flex-direction: row;
   padding-right: 10%;
   justify-content: flex-end;
+  margin-left: 100px;
+  padding-top: 40px;
 }
 .name{
   font-size: 20px;
@@ -84,45 +83,47 @@ form {
   border: 2px solid purple;
 }
 .search{ 
-  height: 30px;
-  border: 2px solid purple;
   color: purple;
   border-radius: 20px;
   width: 120px;
-  padding: 5px 10px;
   margin-right: 10px;
   cursor: pointer;
   font-weight: bolder;
-}
-.searchbar{
-  width: 200px;
-  height: 30px;
+  background-color: none;
 }
 .rightside{
   margin-right: 0;
   margin-left: auto;
   margin-top: 20px;
 }
-.h1{
+h1{
   margin-right: 0;
   justify-content: flex-end;
   padding: 0px 70px;
+}
+.heading{
+  padding-left: 0px;
 }
 .icon{
   font-size: 20px;
   padding-right: 5px;
 }
-.cta{
-  padding-right: 10px;
-  font-size: 40px;
+.searchBtn{
+  height: 40px;
+  margin-left: 20px;
+  padding-top: 40px;
 }
 .next, .previous{
+  height: 40px;
   cursor: pointer;
 }
 .category{
   font-style: italic;
   font-size: 14px;
   font-weight: lighter;
+}
+.choose-amount{
+  width: 100px;
 }
 
 

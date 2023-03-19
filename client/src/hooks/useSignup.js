@@ -12,22 +12,22 @@ export const useSignup = () => {
     setError(null)
 
     // POST request to 'signup' endpoint
-    const res = await axios.get('http://localhost:5000/api/auth/signup', {
+    const response = await axios.get('http://localhost:5000/api/auth/signup', {
       method: 'POST',
       headers: {'Content-type': 'application/json'},
       body: JSON.stringify({ email, password })
     })
-    const response = await res.json()
+    const json = await response.json()
 
     if (!response.ok){
       setIsLoading(false)
-      setError(response.error)
+      setError(json.error)
     }
     if (response.ok){
       // Save user to local storage
-      localStorage.setItem('user', JSON.stringify(response))
+      localStorage.setItem('user', JSON.stringify(json))
       // Update the auth context
-      dispatch({ type: 'LOGIN', payload: response })
+      dispatch({ type: 'LOGIN', payload: json })
 
       setIsLoading(false)
     }

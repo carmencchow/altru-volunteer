@@ -70,10 +70,9 @@ const getNgo = async (req, res) => {
 // 3. CREATE new NGO by grabbing props from the req.body 
 const createNgo = async (req, res) => {
   const { id, name, founded, category, website, region, tag, campaign } = req.body 
-  // Use Ngo Model to try to create a new ngo document to add to the db
   try { 
     const ngo = await Ngo.create({ id, name, founded, category, website, region, tag, campaign })
-    res.status(200).json(ngo) // Result will be the new document object returned in JSON
+    res.status(200).json(ngo) 
   } catch (err) {
     res.status(400).json({ err: err.message })
   }}

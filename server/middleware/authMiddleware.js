@@ -3,9 +3,11 @@ const User = require('../models/userModel');
 
 const protect = async (req, res, next) => { 
   let token
+  console.log('Hello token')
 
   // Check if JWT in the headers 
-  if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) 
+  if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) { 
+
     try {
       // Get just the token from the header
       token = req.headers.authorization.split(' ')[1]
@@ -17,9 +19,10 @@ const protect = async (req, res, next) => {
     } catch (err){
       console.log(err)
       res.status(404).send({ message: 'Not authorized' })      
-    }
-    
-    if (!token){
+    }  
+  }
+
+    else {
       res.status(401).send({ message: 'Not authorized, no token'})
     }
   }

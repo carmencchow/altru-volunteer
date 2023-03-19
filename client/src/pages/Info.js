@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import Navbar from '../components/Navbar'
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import DonationModal from '../components/DonationModal'
-import { AiOutlineHeart } from 'react-icons/ai';
+import { AiOutlineHeart, AiOutlineCalendar } from 'react-icons/ai';
 import './Info.css'
 import axios from 'axios'
 
@@ -18,6 +18,12 @@ const Info = () => {
     website: '',
     tag: '' 
   });
+
+  const openCalendar = () => {
+    navigate(`/info/${id}`)
+    console.log(id)
+  }
+
 
   const addToFavorites = () => {
     console.log("Adding org to favorite")
@@ -59,11 +65,12 @@ const Info = () => {
         <p>{currentNgo.website}</p> 
         <br></br>
 
-
         <div className="info-links">
           <span className="donate" onClick={() => setOpenModal(true)} >Donate</span>
           <span className="following">Follow</span> 
-          <span className="volunteer">Volunteer</span> 
+          <span className="volunteer"><AiOutlineCalendar onClick={openCalendar}></AiOutlineCalendar>Volunteer</span>
+
+          {/* Number of people  */}
         </div>
 
       </div>

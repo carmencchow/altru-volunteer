@@ -10,11 +10,12 @@ const Signup = () => {
     password: '',
     confirmPassword: ''
   })
+
   const { signup, error, isLoading } = useSignup()
 
   const { name, email, password, confirmPassword } = formData
 
-  // const navigate = useNavigate();
+  //const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData((prevState) => ({
@@ -26,6 +27,8 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
+    await signup(email, password) // from useSignup hook
+
     // if(password !== confirmPassword){
     //   console.log('Passwords do not match')
     // } else {
@@ -62,7 +65,7 @@ const Signup = () => {
               name="email" 
               type="text" 
               placeholder="Enter your email" 
-s             value={email} 
+              value={email} 
               className="form-control"  
               id="email"
               onChange={handleChange}

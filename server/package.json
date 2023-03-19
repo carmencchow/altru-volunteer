@@ -11,6 +11,7 @@
   "keywords": [],
   "description": "",
   "dependencies": {
+    "@auth0/auth0-react": "^2.0.1",
     "bcrypt": "^5.1.0",
     "body-parser": "^1.20.1",
     "cookie-parser": "^1.4.6",
@@ -26,6 +27,7 @@
     "redux": "^4.2.1",
     "redux-devtools-extension": "^2.13.9",
     "stripe": "^11.14.0",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.0",
+    "validator": "^13.9.0"
   }
 }

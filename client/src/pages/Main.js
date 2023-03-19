@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Filters from '../components/Filters'
 import Navbar from '../components/Navbar'
 import './Main.css'
-import { FiltersProvider } from '../contexts/FiltersContext'
+import { FiltersProvider } from '../context/FiltersContext'
 
 const Section = styled.div``
 const Main = () => {

@@ -29,7 +29,7 @@ button{
   display: flex;
   flex-direction: row;
 }
-.login, .signup{
+.login, .signup, .logout{
   height: 36px;
   border: 2px solid purple;
   color: purple;
@@ -69,10 +69,7 @@ span:hover{
   padding-right: 20px;
 }
 .nav-login{
-  justify-content: space-evenly;
-  margin-top: 15px;
-}
-/* .login-signup{
   display: flex;
+  justify-content: space-evenly;
   margin-top: 20px;
-} */
+}

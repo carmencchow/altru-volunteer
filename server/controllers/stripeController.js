@@ -1,5 +1,6 @@
 const Ngo = require('../models/ngoModel');
 const mongoose = require('mongoose');
+const stripe = require('stripe')
 
 const getPayment = async (req, res) => {
   const donation = req.body.donation 

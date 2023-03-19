@@ -16,7 +16,7 @@ const signup = async (req, res) => {
     }
 
     // b) Check if user already exists
-    const userExists = await User.findOne({ email});
+    const userExists = await User.findOne({ email });
     if (userExists){
       res.status(400).send({ message: 'Email already exists. Please login instead.'});
     } 
@@ -52,9 +52,12 @@ const signup = async (req, res) => {
   // 2. LOGIN endpoint
   const login = async (req, res) => {
     // Hash the password before saving email and password into the database
-    const hashedPassword = await bcrypt.hash(req.body.password, 8);
-
+    
     try {
+      console.log(req.body.password);
+      const hashedPassword = await bcrypt.hash(req.body.password, 8);
+    
+
       // Validate incoming request body
       if (!req.body.email || !req.body.password){
         res.status(400).send({ message: 'Email or password missing'});
@@ -85,7 +88,6 @@ const signup = async (req, res) => {
     }
   };
 
-
   // Generate JWT token
   const createToken = (_id) => {
     return jwt.sign({ _id }, process.env.JWT_SECRET, { 
@@ -103,7 +105,7 @@ const signup = async (req, res) => {
 // 3. LOGOUT endpoint
 const logout = ( req, res ) => {
   try {
-    // remove JWT
+    // send JWT and then remove 
     res.clearCookie('jwt');
     res.json({ message: 'Logout successful'});  
   } catch (err) {

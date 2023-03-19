@@ -63,9 +63,6 @@ const DonationModal = ({ open, onClose }) => {
               value={amount}
               onChange={handleAmountChange}
             />
-            {/* <p className="dollar">$</p> */}
-      
-
             <div>Amount donating {setMessage}</div>
 
 

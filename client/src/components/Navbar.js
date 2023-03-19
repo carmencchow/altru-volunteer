@@ -32,8 +32,6 @@ const Navbar = () => {
 
         <div className="user-display">
           <div className="welcome"><span className="hi">👋</span> Welcome, ! </div>
-          <Link to="/profile"><RxAvatar className="avatar"/></Link>
-          <Link to="/" onClick={handleLogout}>Logout</Link>
         </div>
       </div>
 
@@ -45,6 +43,7 @@ const Navbar = () => {
         </div>
         <div className="login-signup">
           <span className="login"><Link className="button-text" to="/login">Log in</Link></span> 
+          <span className="logout"><Link to="/" onClick={handleLogout}>Logout</Link></span>
           <span className="signup"><Link className="button-text" to="/signup">Sign up</Link></span> 
         </div>
       </div>
