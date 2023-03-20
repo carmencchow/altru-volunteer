@@ -5,7 +5,8 @@ export const FiltersContext = createContext();
 export const FiltersProvider = ({ children }) => {
   const [filters, setFilters] = useState({
     region: '',
-    cause: ''
+    cause: '',
+    amount: '',
   });
 
   return (

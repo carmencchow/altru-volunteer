@@ -1,6 +1,13 @@
 button{
   cursor: pointer;
 }
+.url{
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+.url:hover{
+  color: blue;
+}
 .heading, .contact, h1{
   margin: 30px 60px;
   justify-content: center;
@@ -21,6 +28,7 @@ button{
   align-items: flex-end;
   justify-content: flex-end;
   margin-right: 30px;
+  cursor: pointer;
 }
 .heart{
   font-size: 30px;

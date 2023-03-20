@@ -1,10 +1,10 @@
 import React, { useState, useContext } from 'react'
-import { Link, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
-import { RxAvatar } from 'react-icons/rx';
-import logo from '../assets/logo.png';
-import Login from '../pages/Login';
-import './Navbar.css';
+import { Link, useNavigate } from 'react-router-dom'
+import { AuthContext } from '../context/AuthContext'
+import { RxAvatar } from 'react-icons/rx'
+import logo from '../assets/logo.png'
+import Login from '../pages/Login'
+import './Navbar.css'
 import axios from 'axios'
 
 const Navbar = () => {

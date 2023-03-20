@@ -6,17 +6,15 @@ import { BsPencil } from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom'
 
 const Profile = () => {
-  const [dropdown, setDropdown] = useState(false);
-  const navigate = useNavigate();
-  const [firstname, setFirstname] = useState('');
-  const [lastname, setLirstname] = useState('');
-  const [email, setEmail] = useState('');
-  const [address, setAddress] = useState('');
-  const [telephone, setTelephone] = useState('');
-
-  const [goalAmount, setGoalAmount] = useState('');
-
-  const [formState, setFormState] = useState();
+  const [dropdown, setDropdown] = useState(false)
+  const [firstname, setFirstname] = useState('')
+  const [lastname, setLirstname] = useState('')
+  const [email, setEmail] = useState('')
+  const [address, setAddress] = useState('')
+  const [telephone, setTelephone] = useState('')
+  const [goalAmount, setGoalAmount] = useState('')
+  const [formState, setFormState] = useState('')
+  const navigate = useNavigate()
   
   const handleEdit = () => {
     console.log('Edit Profile')

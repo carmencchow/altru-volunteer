@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { useContext } from 'react'; // ** CONTEXT **
-import { DonationsContext, DonationsProvider } from '../context/DonationsContext'; // ** CONTEXT
-import { FiltersContext } from '../context/FiltersContext'; // ** CONTEXT **
-import { NgosContext } from '../context/NgosContext';
-import { useNavigate, Link } from 'react-router-dom';
-import { AiOutlineSearch } from 'react-icons/ai';
-import { BiMap, BiWorld } from 'react-icons/bi';
-// import { VscOrganization } from 'react-icons/vsc';
+import React, { useState, useEffect } from 'react'
+import { useContext } from 'react'
+import { DonationsContext, DonationsProvider } from '../context/DonationsContext'
+import { FiltersContext } from '../context/FiltersContext'
+import { NgosContext } from '../context/NgosContext'
+import { useNavigate, Link } from 'react-router-dom'
+import { BiMap, BiWorld } from 'react-icons/bi'
+// import { VscOrganization } from 'react-icons/vsc'
 import StripeCheckout from 'react-stripe-checkout'
-import axios from 'axios';
+import toast, { Toaster } from 'react-hot-toast'
+import axios from 'axios'
 import './Filters.css'
 
 const Filters = () => {
@@ -18,7 +18,7 @@ const Filters = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [pageCount, setPageCount] = useState(1);
-
+  const [amount, setAmount] = useState(null);
   const [goalAmount, setGoalAmount] = useState('');
   const [donatedAmount, setDonatedAmount] = useState('');
   const [leftAmount, setLeftAmount] = useState('');
@@ -56,9 +56,16 @@ const Filters = () => {
     setCurrentPage(currentPage + 1);
   }
 
-  const addAmount = () => {
+  const addAmount = (e) => {
     // Add to currentAmount
-    console.log('amount added')
+    const amount = e.target.value
+    toast.success(`$${amount} added`)
+    console.log(amount, 'added')
+  }
+
+  const handleAmountChange = (e) => {
+    setFilters({ ...filters, amount: e.target.value});
+    console.log(e.target.value)
   }
 
   const handleRegionChange = (e) => {
@@ -112,9 +119,11 @@ const Filters = () => {
     fetchAllNgos();
     }, []);
 
-    return (
+  return (
     <div>
 
+      <Toaster position="top-center" toastOption={{ duration: 3000 }}/>
+      
       <div className="stats">
 
         <div className="goalContainer">
@@ -151,12 +160,12 @@ const Filters = () => {
         <h1 className="heading">Organizations</h1>
 
         <form className="dropdown">
-          <select value={filters.region} onChange={handleRegionChange}>  
+          <select value={filters.amount} onChange={handleAmountChange}>  
           <option value="all"> --- Amount Needed --- </option>
-          <option value="$0">$0.00 - $10.00</option>
-          <option value="$10">$10.00 - $25.00</option>
-          <option value="$25">$25.00 - $50.00</option>
-          <option value="$50">$50.00 - $75.00</option>                        
+          <option value="$10-$25">$10.00 - $25.00</option>
+          <option value="$25-$40">$25.00 - $40.00</option>
+          <option value="$40-$55">$40.00 - $55.00</option>                        
+          <option value="$55-$75">$55.00 - $75.00</option>                        
           </select>
         </form>
     
@@ -204,16 +213,18 @@ const Filters = () => {
                     {/* <p className="category">{ngo.category}</p> */}
                     
                     <div className="rightside">
-                      <button onClick={addAmount} value={addAmount} className="$10">$10</button>
-                      <button onClick={addAmount} className="$10">$25</button>
-                      <button onClick={addAmount} className="$10">$50</button>
+                      <button className="" value="10" onClick={addAmount}>$10</button>
+
+                      <button className="" value="25" onClick={addAmount}>$25</button>
+
+                      <button className="" value="50" onClick={addAmount}>$50</button>
 
                       <input type="text" className="choose-amount" placeholder="Other amount">
                       </input>
 
                       <button className="infoBtn" onClick={() => handleNgoSelected(ngo._id)}>{/* <VscOrganization/> */}
                       Profile</button>   
-                      {/* <button className="websiteBtn" onClick={() => { window.open(`${ngo.website}`)}}><BiWorld className="icon"/>Website</button> */}
+            
                     </div>          
 
                   </div> 
