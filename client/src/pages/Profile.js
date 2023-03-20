@@ -14,6 +14,8 @@ const Profile = () => {
   const [address, setAddress] = useState('');
   const [telephone, setTelephone] = useState('');
 
+  const [goalAmount, setGoalAmount] = useState('');
+
   const [formState, setFormState] = useState();
   
   const handleEdit = () => {
@@ -33,6 +35,8 @@ const Profile = () => {
               <div className="my-profile">
                 <p className="name"></p>
                 <button className="edit" onClick={handleEdit}><BsPencil className="edit"/>Edit Profile</button>
+
+                <input type="text" className="goal-amount" placeholder="$ Donation amount" value={goalAmount}></input>
 
                 <form className="form">
                   <label htmlFor="firstname">First name:</label>

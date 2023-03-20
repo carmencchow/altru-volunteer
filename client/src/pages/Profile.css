@@ -5,12 +5,13 @@
 }
 .user-profile{
   display: flex;
-  /* margin: 30px 60px; */
   border: 1px solid blue;
+  margin-bottom: 20px;
 }
 .favourites{
   display: flex;
-  flex-direction: row;
+  border: 1px solid orchid;
+  margin-bottom: 20px;
 }
 .tracker, .activity{
   display: flex;

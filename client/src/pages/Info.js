@@ -24,9 +24,12 @@ const Info = () => {
     console.log(id)
   }
 
-
-  const addToFavorites = () => {
+  const addToFavorites = async () => {
+    // Button is clicked and ID of the NGO is retrieved
     console.log("Adding org to favorite")
+    const res = await axios.get(`http://localhost:5000/api/ngos/${id}`)
+    // setCurrentNgo(res.data.name)
+    console.log(`Adding '${res.data.name}' to favorites list`)
   }
 
   const fetchNgo = async () => {

@@ -1,9 +1,12 @@
-import React, { useState } from 'react'
-// import { useNavigate } from 'react-router-dom'
+import React, { useState, useContext } from 'react'
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
 import { useSignup } from '../hooks/useSignup'
+
 import './Signup.css'
 
 const Signup = () => {
+  const [user, setUser] = useContext(AuthContext);
   const [formData, setFormData] = useState({
     name: '',
     email: '',

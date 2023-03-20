@@ -1,29 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import { useContext } from 'react'; // ** CONTEXT **
+import { DonationsContext, DonationsProvider } from '../context/DonationsContext'; // ** CONTEXT
 import { FiltersContext } from '../context/FiltersContext'; // ** CONTEXT **
 import { NgosContext } from '../context/NgosContext';
 import { useNavigate, Link } from 'react-router-dom';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { BiMap, BiWorld } from 'react-icons/bi';
-import { VscOrganization } from 'react-icons/vsc';
+// import { VscOrganization } from 'react-icons/vsc';
 import StripeCheckout from 'react-stripe-checkout'
 import axios from 'axios';
 import './Filters.css'
 
 const Filters = () => {
   const { filters, setFilters } = useContext(FiltersContext) 
+  // const { amount, setAmount } = useContext(DonationsContext)
   const { ngos, setNgos } = useContext(NgosContext)
   const [errorMessage, setErrorMessage] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [pageCount, setPageCount] = useState(1);
-  const [amount, setAmount] = useState('');
+
+  const [goalAmount, setGoalAmount] = useState('');
+  const [donatedAmount, setDonatedAmount] = useState('');
+  const [leftAmount, setLeftAmount] = useState('');
+  const [currentAmount, setCurrentAmount] = useState('')
+  
   const navigate = useNavigate();
 
   // Stripe Payment
   const makePayment = token => {
     const body = {
       token, 
-      amount
+      currentAmount
     }
     const headers = {
       "Content-Type": "application/json"
@@ -49,6 +56,11 @@ const Filters = () => {
     setCurrentPage(currentPage + 1);
   }
 
+  const addAmount = () => {
+    // Add to currentAmount
+    console.log('amount added')
+  }
+
   const handleRegionChange = (e) => {
     setFilters({ ...filters, region: e.target.value }); 
     // Only change value of region to the one user selected
@@ -60,7 +72,6 @@ const Filters = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // dispatch(setFilters(region, cause));
     fetchFilteredNgos()
   }
 
@@ -105,10 +116,26 @@ const Filters = () => {
     <div>
 
       <div className="stats">
-        <div className="goal">Your Donations Goal:</div>
-        <div className="donated">Amount Donated:</div>
-        <div className="leftover">Amount Left:</div>
-        <div className="current">Today's Amount: </div>
+
+        <div className="goalContainer">
+          <div className="goal-text">Your Donations Goal:</div>          
+          <div className="donated-amount">$100</div>
+        </div>
+
+        <div className="donatedContainer">
+          <div className="donated-text">Amount Donated:</div>
+          <div className="donated-amount"></div>
+        </div>
+
+        <div className="leftContainer">
+          <div className="left-text">Amount Left:</div>
+          <div className="left-amount"></div>
+        </div>
+
+        <div className="todayContainer">
+          <div className="today-text">Today's Donation:</div>
+          <div className="today-amount"></div>
+        </div>
      
         <StripeCheckout 
           // TEST CC: 4242 4242 4242 4242; 12/34; 123
@@ -116,7 +143,7 @@ const Filters = () => {
           // Token fires a method
           token={makePayment}
           name="Your donation"
-          amount={amount * 100}
+          amount={currentAmount * 100}
         />
       </div>
 
@@ -159,7 +186,7 @@ const Filters = () => {
     
         <div className="pagination">
           <button disabled={currentPage === 1} className="previous" onClick={handlePrevious}>Previous</button>
-          <p>{currentPage}/{pageCount}</p>
+          <p>{currentPage} / {pageCount}</p>
           <button disabled={currentPage === pageCount} className="next" onClick={handleNext}>Next</button> 
         </div>
 
@@ -172,21 +199,23 @@ const Filters = () => {
                 <div className="display-container">
                   <div key={idx} className="row">
                     <p className="name">{ngo.name}</p>
-                    <p className="location"><BiMap/>{ngo.location[0].toUpperCase()}</p>
+                    <p className="location"><BiMap/>{ngo.location[0]}</p>
+                    {/* <p className="location"><BiMap/>{ngo.location[0].toUpperCase()}</p> */}
                     {/* <p className="category">{ngo.category}</p> */}
+                    
                     <div className="rightside">
-
-                      <button className="$10">$10</button>
-                      <button className="$10">$25</button>
-                      <button className="$10">$50</button>
+                      <button onClick={addAmount} value={addAmount} className="$10">$10</button>
+                      <button onClick={addAmount} className="$10">$25</button>
+                      <button onClick={addAmount} className="$10">$50</button>
 
                       <input type="text" className="choose-amount" placeholder="Other amount">
                       </input>
 
-                      <button className="infoBtn" onClick={() => handleNgoSelected(ngo._id)}><VscOrganization/>Profile</button>   
+                      <button className="infoBtn" onClick={() => handleNgoSelected(ngo._id)}>{/* <VscOrganization/> */}
+                      Profile</button>   
                       {/* <button className="websiteBtn" onClick={() => { window.open(`${ngo.website}`)}}><BiWorld className="icon"/>Website</button> */}
-
                     </div>          
+
                   </div> 
                 </div> 
                 )

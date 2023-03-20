@@ -1,38 +1,62 @@
-import React, {useState } from 'react'
-import styled from 'styled-components'
-import Login from '../pages/Login';
+import React, { useState, useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
 import { RxAvatar } from 'react-icons/rx';
 import logo from '../assets/logo.png';
-// import { auth } from '../firebase';
+import Login from '../pages/Login';
 import './Navbar.css';
-// import { AuthContext } from '../context/AuthContext';
+import axios from 'axios'
 
 const Navbar = () => {
-  // const { user } = useContext(AuthContext);
-  // const { logout } = useContext(AuthContext);
   const navigate = useNavigate();
+  // const [user, setUser] = useContext(AuthContext);
 
   const handleLogout = async (e) => {
     e.preventDefault();
-    // auth.signOut();
-    navigate('/')
-    alert('Goodbye {user.email}! You are now logged out.')
     console.log('User signed out');
+    try {
+      const res = await axios.post('http://localhost:5000/api/auth/logout')
+      navigate('/')
+      console.log(res.data)  
+    } catch (err) { 
+      console.log(err, 'Unable to log out')
+    }
+
   }
   return (
     <nav>
       <div className="logo">
         <Link className="link" to="/main">
           <div className="logo-wrapper">
-            <img src={logo} style={{width: 100, height: 100 }} alt="logo" />
+            <img src={logo} style={{ width: 100, height: 100 }} alt="logo" />
             <p className="logo-text">Altru</p>
           </div>
         </Link> 
+        
+      {/* { user ? ( 
+        <div className="user-display">
+          <div className="welcome">
+            <span className="hi">👋</span> 
+            Welcome, {user.username}! 
+          </div>
+        <Link to="/profile"><RxAvatar className="avatar"/></Link>
+        <Link to="/logout" onClick={handleLogout}>Logout</Link>
+      </div>
+
+        ) : (
+
+        <div className="nav-login">
+          <div className="login-signup">
+            <span className="login"><Link className="button-text" to="/login">Log in</Link></span> 
+            <span className="signup"><Link className="button-text" to="/signup">Sign up</Link></span> 
+          </div>
+        </div>
+      )}  */}
 
         <div className="user-display">
           <div className="welcome"><span className="hi">👋</span> Welcome, ! </div>
         </div>
+
       </div>
 
       <div className="nav-login">
@@ -46,6 +70,7 @@ const Navbar = () => {
           <span className="logout"><Link to="/" onClick={handleLogout}>Logout</Link></span>
           <span className="signup"><Link className="button-text" to="/signup">Sign up</Link></span> 
         </div>
+
       </div>
       
     </nav>
@@ -55,25 +80,22 @@ const Navbar = () => {
 export default Navbar;
 
 
-//         {user ? ( 
-//  <div className="user-display">
-//           <div className="welcome"><span className="hi">👋</span> Welcome, {user.email}! </div>
-//           <Link to="/profile"><RxAvatar className="avatar"/></Link>
-//           <Link to="/" onClick={handleLogout}>Logout</Link>
-//         </div>
-//       ) : (
-//         <div className="nav-login">
-//           {/* <div className="profile"><Link className="avatar-text" to="/profile"><RxAvatar className="avatar"/></Link></div> */}
-//           {/* <div className="login-signup"> */}
-//             <span className="login"><Link className="button-text" to="/login">Log in</Link></span> 
-//             <span className="signup"><Link className="button-text" to="/signup">Sign up</Link></span> 
-//           {/* </div> */}
-//         </div>
-//       )} 
+// { user ? ( 
+//   <div className="user-display">
+//     <div className="welcome">
+//       <span className="hi">👋</span> 
+//       Welcome, {user.username}! 
+//     </div>
+//   <Link to="/profile"><RxAvatar className="avatar"/></Link>
+//   <Link to="/logout" onClick={handleLogout}>Logout</Link>
+// </div>
 
-//     {/* </nav>
-//   )
-// }
+//   ) : (
+//   <div className="nav-login">
+//     <div className="login-signup">
+//       <span className="login"><Link className="button-text" to="/login">Log in</Link></span> 
+//       <span className="signup"><Link className="button-text" to="/signup">Sign up</Link></span> 
+//     </div>
+//   </div>
+// )} 
 
-// export default Navbar;
-//  */}

@@ -12,11 +12,18 @@ main{
   align-items: center;
   margin-left: 80px;
 }
-.donated, .goal, .leftover, .current{
-  /* border: 1px solid grey; */
-  width: 200px;
+.donated-amount, .goal-amount, .left-amount, .today-amount{
+  border: 1px solid grey;
+  width: 150px;
   height: 60px;
-  margin-left: 0px;
+  margin-left: 10px;
+}
+#goal-input{
+  width: 150px;
+}
+.goalContainer, .donatedContainer, .leftContainer, .todayContainer{
+  display: flex;
+  flex-direction: column;
 }
 .filters{
   display: flex;

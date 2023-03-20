@@ -1,17 +1,22 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
 import { FcGoogle } from 'react-icons/fc'
 import { SiFacebook } from 'react-icons/si'
-import { useAuth0 } from '@auth0/auth0-react'
-import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import './Login.css'
 
+// TEST USER:
+// "username": "test",
+// "email": "test@gmail.com",
+// "password": "8888",
+
 const Login = () => {
+  // const [user, setUser] = useContext(AuthContext);
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   })
-  // const { loginWithRedirect, isAuthenticated } = useAuth0();  
   const { email, password } = formData
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -26,23 +31,23 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData.email, formData.password)
-
     try {
       const res = await axios.post('http://localhost:5000/api/auth/login', formData, 
       {
-
-      method: 'POST',
-          headers: { 
-            'Content-Type': 'application/json' 
-          },
-        });
-        const data = await res.json();
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json' 
+        },
+      });
+        const data = await res.data;
+        let user = true; 
         console.log(data);
-        return data
+        navigate('/main')
+        return data    
       } catch (err) {
-        console.log(err)
-      };
-    }
+        console.log(err, 'Incorrect password or email')
+    };
+  };
 
   return (
    
@@ -52,6 +57,7 @@ const Login = () => {
           <div className="form-content">
           <h3 className="Signup">Log in to your account</h3>
           <div className="form-username">
+            <p>Email address</p>
             <input 
               name="email"
               type="email" 
@@ -65,6 +71,7 @@ const Login = () => {
         {error && <div><strong>Error:</strong>{error}</div>}
 
           <div className="form-password">
+            <p>Password</p>
             <input 
               name="password" 
               type="password" 
