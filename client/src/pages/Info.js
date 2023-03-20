@@ -3,12 +3,15 @@ import Navbar from '../components/Navbar'
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import DonationModal from '../components/DonationModal'
 import { AiOutlineHeart, AiOutlineCalendar } from 'react-icons/ai';
+import toast, { Toaster } from 'react-hot-toast'
 import './Info.css'
 import axios from 'axios'
 
 const Info = () => {
   const navigate = useNavigate();
   const { id } = useParams();
+  const [isLoading, setIsLoading] = useState(true);
+  const [favorite, setFavorite] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [currentNgo, setCurrentNgo] = useState({
     _id: '',       
@@ -18,18 +21,33 @@ const Info = () => {
     website: '',
     tag: '' 
   });
-
+  // const favorites = [];
+    
   const openCalendar = () => {
     navigate(`/info/${id}`)
     console.log(id)
   }
 
   const addToFavorites = async () => {
-    // Button is clicked and ID of the NGO is retrieved
-    console.log("Adding org to favorite")
-    const res = await axios.get(`http://localhost:5000/api/ngos/${id}`)
-    // setCurrentNgo(res.data.name)
-    console.log(`Adding '${res.data.name}' to favorites list`)
+    try {
+      console.log("Adding org to favorite")
+      const res = await axios.get(`http://localhost:5000/api/ngos/${id}`)
+      console.log(`Adding '${res.data.name}' to favorites list`)
+      setFavorite(res.data.name)
+
+      if (!favorite.includes(res.data.name)){
+        // favorites.push(favorite)
+        toast.success(`${res.data.name} added to favorites`)
+        setFavorite([...favorite, res.data.name])
+        console.log('On favorites list:', favorite)
+      } else {
+        toast.success(`${res.data.name} removed favorites`)
+        console.log(`${res.data.name} is removed from favorites`)  
+        setFavorite([...favorite.filter((ngo) => ngo !==res.data.name)])
+      }
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   const fetchNgo = async () => {
@@ -55,6 +73,9 @@ const Info = () => {
           open={openModal} 
           onClose={() => setOpenModal(false)}/>
 
+          
+          <Toaster position="top-center"
+            />
           <div className="heart"><p className="heart-text">Add to favourites</p><AiOutlineHeart onClick={addToFavorites}/></div>
 
           <div className="favorites-container"></div>

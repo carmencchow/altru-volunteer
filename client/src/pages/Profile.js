@@ -52,6 +52,7 @@ const Profile = () => {
 
             <div className="favourites">
               <h3>Favourited Organizations</h3>
+              <button className="delete">Delete from favorite</button>
             </div>
 
             <Tabs/>
