@@ -95,11 +95,13 @@ const signup = async (req, res) => {
   }
 
 // Create cookie with token
-    // res.cookie('jwt', token, {
-    //   httpOnly: true,
-    //   secure: true,
-    //   maxAge: 7 * 24 * 60 * 60 * 1000
-    // })
+  const createCookie = () => {
+    res.cookie('jwt', token, {
+      httpOnly: true,
+      secure: true,
+      maxAge: 7 * 24 * 60 * 60 * 1000
+    })
+  }
 
 // 3. LOGOUT endpoint
 const logout = ( req, res ) => {
