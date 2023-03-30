@@ -5,6 +5,7 @@ import { FcGoogle } from 'react-icons/fc'
 import { SiFacebook } from 'react-icons/si'
 import axios from 'axios'
 import './Login.css'
+import Navbar from '../components/Navbar'
 
 // TEST USER:
 // "username": "test",
@@ -12,14 +13,13 @@ import './Login.css'
 // "password": "8888",
 
 const Login = () => {
-  // const [user, setUser] = useContext(AuthContext);
+  const { user, setUser, token, setToken } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   })
   const { email, password } = formData
   const [error, setError] = useState('');
-  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData((prevState) => ({
@@ -33,24 +33,26 @@ const Login = () => {
     console.log(formData.email, formData.password)
     try {
       const res = await axios.post('http://localhost:5000/api/auth/login', formData, 
+
       {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json' 
         },
       });
-        const data = await res.data;
-        let user = true; 
+        const data = res.data;
         console.log(data);
-        navigate('/main')
-        return data    
+        setUser({ email: data.email })
+        setToken(data.token);
       } catch (err) {
         console.log(err, 'Incorrect password or email')
     };
   };
 
   return (
-   
+    <>
+      <Link to="/main" className="link">Home</Link>
+
     <div className="login-wrapper">
        <form> 
         <div className="form-wrapper">
@@ -64,7 +66,6 @@ const Login = () => {
               placeholder="Enter your email" 
               value={email}   
               onChange={handleChange}  
-              //onChange={(e) => setEmail(e.target.value)}
             />
           </div>
 
@@ -108,6 +109,8 @@ const Login = () => {
       </div>
     </form>
   </div>
+
+  </>
 
   )
 }

@@ -10,8 +10,9 @@ import './Info.css'
 const Info = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const [favorite, setFavorite] = useState([]);
+  const [favorite, setFavorite] = useState('');
   const [openModal, setOpenModal] = useState(false);
+  const [favorites, setFavorites] = useState([])
   const [currentNgo, setCurrentNgo] = useState({
     _id: '',       
     name: '',
@@ -20,8 +21,7 @@ const Info = () => {
     website: '',
     tag: '' 
   });
-  const favorites = [];
-    
+
   const openCalendar = () => {
     navigate(`/info/${id}`)
     console.log(id)
@@ -31,18 +31,35 @@ const Info = () => {
     try {
       const res = await axios.get(`http://localhost:5000/api/ngos/${id}`)
       console.log(`Adding '${res.data.name}' to favorites list`)
-      if (!favorite.includes(res.data.name)){
-        favorites.push(favorite)
-        setFavorite([...favorite, res.data.name])
+      if (!favorites.includes(res.data.name)){
+        setFavorite(res.data.name)  
+        setFavorites([...favorites, res.data.name])
+        toast.success(`${res.data.name} added to favorites`) 
         console.log('Favorites list:', favorite, favorites)
       } else {
         toast.success(`${res.data.name} removed from favorites`)
-        console.log(`${res.data.name} removed from favorites`)  
-        setFavorite([...favorite.filter((ngo) => ngo !==res.data.name)])
+        setFavorites([...favorites.filter((ngo) => ngo !==res.data.name)])
       }
     } catch (err) {
       console.log(err)
     }
+
+    // try {
+    //   const res = await axios.get(`http://localhost:5000/api/ngos/${id}`)
+    //   console.log(`Adding '${res.data.name}' to favorites list`)
+    //   if (!favorite.includes(res.data.name)){
+    //     favorites.push(favorite)
+    //     setFavorite([...favorite, res.data.name])
+    //     console.log('Favorites list:', favorite, favorites)
+    //   } else {
+    //     toast.success(`${res.data.name} removed from favorites`)
+    //     console.log(`${res.data.name} removed from favorites`)  
+    //     setFavorite([...favorite.filter((ngo) => ngo !==res.data.name)])
+    //   }
+    // } catch (err) {
+    //   console.log(err)
+    // }
+
   }
 
   const addToToday = () => {
@@ -72,6 +89,11 @@ const Info = () => {
           open={openModal} 
           onClose={() => setOpenModal(false)}/>
 
+
+          {/* {favorites && favorites.length > 0 && favorites.map((item) => {
+            return <p key={id}>Item is: {item}</p>
+          })} */}
+
           <Toaster position="top-center" toastOption={{ duration: 3000 }}/>
           <div className="heart"><p className="heart-text">Add to favourites</p><AiOutlineHeart onClick={addToFavorites}/></div>
 
@@ -93,9 +115,7 @@ const Info = () => {
 
           {/* Number of people  */}
         </div>
-
       </div>
-
     </div>
   )
 }

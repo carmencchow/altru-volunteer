@@ -1,6 +1,5 @@
 import React, {useState} from 'react'
 import './DonationModal.css'
-import axios from 'axios';
 import { AiFillCloseSquare } from 'react-icons/ai'
 import StripeCheckout from 'react-stripe-checkout'
  

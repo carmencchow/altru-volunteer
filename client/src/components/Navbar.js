@@ -9,15 +9,17 @@ import axios from 'axios'
 
 const Navbar = () => {
   const navigate = useNavigate();
-  // const [user, setUser] = useContext(AuthContext);
+  const { user, setUser, token, setToken } = useContext(AuthContext);
 
   const handleLogout = async (e) => {
     e.preventDefault();
     console.log('User signed out');
     try {
       const res = await axios.post('http://localhost:5000/api/auth/logout')
-      navigate('/')
-      console.log(res.data)  
+      setUser(null)
+      setToken('')
+
+      // console.log(res.data)  
     } catch (err) { 
       console.log(err, 'Unable to log out')
     }

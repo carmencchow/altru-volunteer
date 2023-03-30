@@ -6,7 +6,6 @@ const mongoose = require('mongoose');
 // http://localhost:5000/api/ngos?page=1
 const getNgos = async (req, res) => {
   // const { page = 1, limit = 5} = req.query;
-
   // const startIndex = (page - 1 ) * limit // 
   // const endIndex = page * limit
   // const resNGOs = ngos.slice(startIndex, endIndex)

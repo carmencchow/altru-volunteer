@@ -9,13 +9,14 @@ import Home from './pages/Home';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { FiltersProvider } from './context/FiltersContext';
 import { NgosProvider } from './context/NgosContext';
+import { AuthContextProvider } from './context/AuthContext';
 
 function App() {
   const user = true;
-
   return (
     <NgosProvider> 
       <BrowserRouter>
+        <AuthContextProvider>
         <div>
           <Routes>
             <Route path="/" element={<Home/>}/>
@@ -27,6 +28,7 @@ function App() {
             <Route path="/info/:id" element={<Info/>}/>
           </Routes>
         </div>
+        </AuthContextProvider>
       </BrowserRouter>
     </NgosProvider>
   );

@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { useContext } from 'react'
-import { DonationsContext, DonationsProvider } from '../context/DonationsContext'
+// import { DonationsContext, DonationsProvider } from '../context/DonationsContext'
+import { AuthContext } from '../context/AuthContext'
 import { FiltersContext } from '../context/FiltersContext'
 import { NgosContext } from '../context/NgosContext'
 import { useNavigate, Link } from 'react-router-dom'
 import { BiMap, BiWorld } from 'react-icons/bi'
 // import { VscOrganization } from 'react-icons/vsc'
+import SetAmount from '../components/SetAmount'
 import StripeCheckout from 'react-stripe-checkout'
 import toast, { Toaster } from 'react-hot-toast'
 import axios from 'axios'
@@ -13,16 +15,17 @@ import './Filters.css'
 
 const Filters = () => {
   const { filters, setFilters } = useContext(FiltersContext) 
-  // const { amount, setAmount } = useContext(DonationsContext)
+  const { token, setToken } = useContext(AuthContext);
+  // const { donation, setDonation } = useContext(DonationsContext)
   const { ngos, setNgos } = useContext(NgosContext)
-  const [errorMessage, setErrorMessage] = useState('');
-  const [currentPage, setCurrentPage] = useState(1);
-  const [pageCount, setPageCount] = useState(1);
-  const [amount, setAmount] = useState(null);
-  const [goalAmount, setGoalAmount] = useState('');
-  const [donatedAmount, setDonatedAmount] = useState('');
-  const [leftAmount, setLeftAmount] = useState('');
-  const [currentAmount, setCurrentAmount] = useState('')
+  const [errorMessage, setErrorMessage] = useState('')
+  const [currentPage, setCurrentPage] = useState(1)
+  const [pageCount, setPageCount] = useState(1)
+  const [amount, setAmount] = useState(0)
+  const [goalAmount, setGoalAmount] = useState(0)
+  const [donatedAmount, setDonatedAmount] = useState(0)
+  const [leftAmount, setLeftAmount] = useState(0)
+  const [currentAmount, setCurrentAmount] = useState(0)
   
   const navigate = useNavigate();
 
@@ -58,9 +61,35 @@ const Filters = () => {
 
   const addAmount = (e) => {
     // Add to currentAmount
-    const amount = e.target.value
+    let amount = e.target.value
+    // reducer? 
+    amount += amount
     toast.success(`$${amount} added`)
     console.log(amount, 'added')
+    setAmount(amount)
+  }
+
+  // Fire function that updates today's donation ... reducer?
+  const todaysAmount = () => {
+    console.log(`You are donating $ {} today`)
+    
+    // setFilters({ ...filters, amount: e.target.value});
+    // console.log(e.target.value)
+
+  }
+
+  const clearAmount = () => {
+    setAmount(0)
+    console.log('Clearing amount')
+  }
+
+  const amountLeft = () => {
+    console.log(`You are $ {} away from meeting your donation goal!`)
+    // goalAmount - amountLeft
+  }
+
+  const amountDonated = () => {
+    console.log(`You have donated $ {}`)
   }
 
   const handleAmountChange = (e) => {
@@ -89,7 +118,7 @@ const Filters = () => {
 
   const fetchAllNgos = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/ngos/')  
+      const res = await axios.get('http://localhost:5000/api/ngos/', { headers: { Authorization: 'Bearer ' + token }})  
       setNgos(res.data);
       console.log(res.data);
     } catch (err) {
@@ -133,27 +162,30 @@ const Filters = () => {
 
         <div className="donatedContainer">
           <div className="donated-text">Amount Donated:</div>
-          <div className="donated-amount"></div>
+          <div className="donated-amount">${}</div>
         </div>
 
         <div className="leftContainer">
           <div className="left-text">Amount Left:</div>
-          <div className="left-amount"></div>
+          <div className="left-amount">${}</div>
         </div>
 
         <div className="todayContainer">
-          <div className="today-text">Today's Donation:</div>
-          <div className="today-amount"></div>
+          <div className="today-text">Today's amount: </div>
+          <div className="today-amount">${amount}</div>
         </div>
      
-        <StripeCheckout 
-          // TEST CC: 4242 4242 4242 4242; 12/34; 123
-          stripeKey="pk_test_51L1kSgAoNhpouPlcfYHS4qZk7puLHRnuQFurkS8DelIS2DvAgtPR5nM4DWIdI3rjZCUyhkg9USb34AEQBf2Zz32r00TiqYY6E9"
-          // Token fires a method
-          token={makePayment}
-          name="Your donation"
-          amount={currentAmount * 100}
-        />
+        <div className="stripeContainer">
+          <div className="stripe-text">Would you like to donate this amount?</div>
+          <StripeCheckout 
+            // TEST CC: 4242 4242 4242 4242; 12/34; 123
+            stripeKey="pk_test_51L1kSgAoNhpouPlcfYHS4qZk7puLHRnuQFurkS8DelIS2DvAgtPR5nM4DWIdI3rjZCUyhkg9USb34AEQBf2Zz32r00TiqYY6E9"
+            // Token fires a method
+            token={makePayment}
+            name="Your donation"
+            amount={currentAmount * 100}
+          />
+        </div>
       </div>
 
       <div className="filters">
@@ -209,9 +241,7 @@ const Filters = () => {
                   <div key={idx} className="row">
                     <p className="name">{ngo.name}</p>
                     <p className="location"><BiMap/>{ngo.location[0]}</p>
-                    {/* <p className="location"><BiMap/>{ngo.location[0].toUpperCase()}</p> */}
-                    {/* <p className="category">{ngo.category}</p> */}
-                    
+            
                     <div className="rightside">
                       <button className="" value="10" onClick={addAmount}>$10</button>
 
@@ -219,8 +249,7 @@ const Filters = () => {
 
                       <button className="" value="50" onClick={addAmount}>$50</button>
 
-                      <input type="text" className="choose-amount" placeholder="Other amount">
-                      </input>
+                      <SetAmount/>
 
                       <button className="infoBtn" onClick={() => handleNgoSelected(ngo._id)}>{/* <VscOrganization/> */}
                       Profile</button>   
