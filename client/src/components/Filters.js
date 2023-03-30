@@ -8,6 +8,7 @@ import { useNavigate, Link } from 'react-router-dom'
 import { BiMap, BiWorld } from 'react-icons/bi'
 // import { VscOrganization } from 'react-icons/vsc'
 import SetAmount from '../components/SetAmount'
+import TodaysAmount from '../components/TodaysAmount'
 import StripeCheckout from 'react-stripe-checkout'
 import toast, { Toaster } from 'react-hot-toast'
 import axios from 'axios'
@@ -21,11 +22,11 @@ const Filters = () => {
   const [errorMessage, setErrorMessage] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
   const [pageCount, setPageCount] = useState(1)
-  const [amount, setAmount] = useState(0)
-  const [goalAmount, setGoalAmount] = useState(0)
-  const [donatedAmount, setDonatedAmount] = useState(0)
-  const [leftAmount, setLeftAmount] = useState(0)
-  const [currentAmount, setCurrentAmount] = useState(0)
+  const [amount, setAmount] = useState('$0')
+  const [goalAmount, setGoalAmount] = useState('$0')
+  const [donatedAmount, setDonatedAmount] = useState('$0')
+  const [leftAmount, setLeftAmount] = useState('$0')
+  const [todaysAmount, setTodaysAmount] = useState('0')
   
   const navigate = useNavigate();
 
@@ -33,7 +34,7 @@ const Filters = () => {
   const makePayment = token => {
     const body = {
       token, 
-      currentAmount
+      todaysAmount
     }
     const headers = {
       "Content-Type": "application/json"
@@ -62,15 +63,15 @@ const Filters = () => {
   const addAmount = (e) => {
     // Add to currentAmount
     let amount = e.target.value
-    // reducer? 
-    amount += amount
+    // // reducer? 
+    // amount += amount
     toast.success(`$${amount} added`)
     console.log(amount, 'added')
-    setAmount(amount)
+    setTodaysAmount(e.target.value)
   }
 
   // Fire function that updates today's donation ... reducer?
-  const todaysAmount = () => {
+  const donation = () => {
     console.log(`You are donating $ {} today`)
     
     // setFilters({ ...filters, amount: e.target.value});
@@ -157,7 +158,7 @@ const Filters = () => {
 
         <div className="goalContainer">
           <div className="goal-text">Your Donations Goal:</div>          
-          <div className="donated-amount">$100</div>
+          <div className="donated-amount">${}</div>
         </div>
 
         <div className="donatedContainer">
@@ -172,7 +173,7 @@ const Filters = () => {
 
         <div className="todayContainer">
           <div className="today-text">Today's amount: </div>
-          <div className="today-amount">${amount}</div>
+          <div className="today-amount">${todaysAmount}</div>
         </div>
      
         <div className="stripeContainer">
@@ -183,7 +184,7 @@ const Filters = () => {
             // Token fires a method
             token={makePayment}
             name="Your donation"
-            amount={currentAmount * 100}
+            amount={todaysAmount * 100}
           />
         </div>
       </div>
@@ -236,30 +237,34 @@ const Filters = () => {
       <div className="display">
         <div className="results-container">
           {ngos?.slice((currentPage - 1) * 5, currentPage * 5).map((ngo, idx) => {
-              return (
-                <div className="display-container">
-                  <div key={idx} className="row">
-                    <p className="name">{ngo.name}</p>
-                    <p className="location"><BiMap/>{ngo.location[0]}</p>
-            
-                    <div className="rightside">
-                      <button className="" value="10" onClick={addAmount}>$10</button>
+            return (
+              <div className="display-container">
+                <div key={idx} className="row">
+                <p className="name">{ngo.name}</p>
+                <p className="location"><BiMap/>{ngo.location[0]}</p>
+        
+                <div className="rightside">
 
-                      <button className="" value="25" onClick={addAmount}>$25</button>
+                  <TodaysAmount/>
 
-                      <button className="" value="50" onClick={addAmount}>$50</button>
+                  {/* <button className="" value="10" onClick={addAmount}>$10</button>
 
-                      <SetAmount/>
+                  <button className="" value="25" onClick={addAmount}>$25</button>
 
-                      <button className="infoBtn" onClick={() => handleNgoSelected(ngo._id)}>{/* <VscOrganization/> */}
-                      Profile</button>   
-            
-                    </div>          
+                  <button className="" value="50" onClick={addAmount}>$50</button>
 
-                  </div> 
+                  <SetAmount/> */}
+
+                  <button className="infoBtn" onClick={() => handleNgoSelected(ngo._id)}>{/* <VscOrganization/> */}
+                  Profile</button>   
+        
+                </div>          
+
                 </div> 
-                )
-              })}
+
+              </div> 
+              )
+            })}
           </div> 
       </div>  
     </div>

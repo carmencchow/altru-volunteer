@@ -12,7 +12,7 @@ const Profile = () => {
   const [email, setEmail] = useState('')
   const [address, setAddress] = useState('')
   const [telephone, setTelephone] = useState('')
-  const [goalAmount, setGoalAmount] = useState('')
+  const [goalAmount, setGoalAmount] = useState('$0')
   const [formState, setFormState] = useState('')
   const navigate = useNavigate()
   
@@ -21,7 +21,16 @@ const Profile = () => {
     navigate('/edit')
     setDropdown(!dropdown)
   }
-  
+
+  const handleGoalAmount = (e) => {
+    console.log('Donation goal: ', e.target.value)
+    setGoalAmount(e.target.value)
+  }
+
+  const saveGoalAmount = (e) => {
+    console.log('Saving amount', e.target.value)
+  }
+
   return (
     <div>
       <Navbar/>
@@ -34,7 +43,17 @@ const Profile = () => {
                 <p className="name"></p>
                 <button className="edit" onClick={handleEdit}><BsPencil className="edit"/>Edit Profile</button>
 
-                <input type="text" className="goal-amount" placeholder="$ Donation amount" value={goalAmount}></input>
+                {/* <h2>Goal Amount is {goalAmount}</h2> */}
+
+                <input 
+                  type="text" 
+                  className="goal-amount" 
+                  placeholder="$Donation amount" 
+                  value={goalAmount}
+                  onChange={handleGoalAmount}>
+                </input>
+
+                <button onClick={saveGoalAmount}>Save</button>
 
                 <form className="form">
                   <label htmlFor="firstname">First name:</label>

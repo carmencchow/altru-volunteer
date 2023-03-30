@@ -9,6 +9,12 @@ const SetAmount = () => {
     setAmount(e.target.value)
   }
 
+  const saveAmount = (e) => {
+    console.log('Saving amount', e.target.value)
+  }
+
+  // Set donation amount with this 
+
   return (
     <div>
       <input 
@@ -19,6 +25,7 @@ const SetAmount = () => {
         onChange={handleAmount}
         >
       </input>
+      <button onClick={saveAmount}>Save</button>
     </div>
   )
 }
