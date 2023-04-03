@@ -180,8 +180,10 @@ const Filters = () => {
         </div>
       </div>
 
+      <h1>Would you like to donate money or time today?</h1>
       <div className="filters">
-        <h1 className="heading">Organizations</h1>
+        {/* <h1>Would you like to donate money or time today?</h1> */}
+        {/* <h1 className="heading">Organizations</h1> */}
 
         <form className="dropdown">
           <select value={filters.amount} onChange={handleAmountChange}>  
@@ -193,13 +195,22 @@ const Filters = () => {
           </select>
         </form>
     
-        <form className="dropdown">
+        {/* <form className="dropdown">
           <select value={filters.region} onChange={handleRegionChange}>  
           <option value="all"> --- All Regions --- </option>
           <option value="africa">Africa</option>
           <option value="asia">Asia</option>
           <option value="middle east">Middle East</option>
           <option value="south america">South America</option>                        
+          </select>
+        </form> */}
+
+        <form className="dropdown">
+          <select value={filters.hours} onChange={handleRegionChange}>  
+          <option value="all"> --- Time --- </option>
+          <option value="day">One Time</option>
+          <option value="weekly">Every Week</option>
+          <option value="monthly">Once a Month</option> 
           </select>
         </form>
 
