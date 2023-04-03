@@ -7,11 +7,6 @@ import axios from 'axios'
 import './Login.css'
 import Navbar from '../components/Navbar'
 
-// TEST USER:
-// "username": "test",
-// "email": "test@gmail.com",
-// "password": "8888",
-
 const Login = () => {
   const { user, setUser, token, setToken } = useContext(AuthContext);
   const [formData, setFormData] = useState({

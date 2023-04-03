@@ -1,22 +1,38 @@
-// import React, { createContext, useState } from 'react'
+import React, { createContext, useState } from 'react'
 
-// const initialState = {
-//   amount: 0,
-// }
+export const DonationsContext = createContext();
 
-// export const DonationsContext = createContext();
+export const DonationsProvider = ({ children }) => {
+  const [goalAmount, setGoalAmount] = useState(0)
+  const [donatedAmounts, setDonatedAmounts] = useState([])
+  const [remainingAmount, setRemainingAmount] = useState(0)
+  const [currentAmount, setCurrentAmount] = useState(0)
+  const [clickedAmount, setClickedAmount] = useState(0)
+  const [totalAmount, setTotalAmount] = useState(0)
+  const [total, setTotal] = useState(0)
 
-// export const DonationsProvider = ({ children }) => {
-//   const [donation, setDonation] = useState(0)
-//   const [goalAmount, setGoalAmount] = useState(0)
-//   const [leftAmount, setLeftAmount] = useState(0)
-//   const [donatedAmount, setDonatedAmount] = useState(0)
-//   const [currentAmount, setCurrentAmount] = useState(0)
+  const getHistory = (id) => {}
 
-//   return (
-//     <DonationsContext.Provider value={{ donation, setDonation }}> 
-//       {children}
-//     </DonationsContext.Provider>
-//   );
-// }
+  return (
+    <DonationsContext.Provider value={{ 
+      goalAmount, 
+      setGoalAmount, 
+      donatedAmounts, 
+      setDonatedAmounts, 
+      remainingAmount, 
+      setRemainingAmount, 
+      currentAmount, 
+      setCurrentAmount,
+      clickedAmount,
+      setClickedAmount,  
+      getHistory,
+      total,
+      setTotal,
+      totalAmount,
+      setTotalAmount 
+    }}> 
+      {children}
+    </DonationsContext.Provider>
+  );
+}
 

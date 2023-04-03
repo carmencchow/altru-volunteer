@@ -1,40 +1,42 @@
-import React, { useState, useEffect } from 'react'
-import { useContext } from 'react'
-// import { DonationsContext, DonationsProvider } from '../context/DonationsContext'
+import React, { useState, useEffect, useContext } from 'react'
 import { AuthContext } from '../context/AuthContext'
+import { DonationsContext } from '../context/DonationsContext'
 import { FiltersContext } from '../context/FiltersContext'
 import { NgosContext } from '../context/NgosContext'
-import { useNavigate, Link } from 'react-router-dom'
-import { BiMap, BiWorld } from 'react-icons/bi'
-// import { VscOrganization } from 'react-icons/vsc'
-import SetAmount from '../components/SetAmount'
-import TodaysAmount from '../components/TodaysAmount'
-import StripeCheckout from 'react-stripe-checkout'
-import toast, { Toaster } from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { Toaster } from 'react-hot-toast'
+import { BiMap } from 'react-icons/bi'
+import StripeCheckout from 'react-stripe-checkout'
+import CurrentAmount from '../components/CurrentAmount'
 import './Filters.css'
 
 const Filters = () => {
   const { filters, setFilters } = useContext(FiltersContext) 
-  const { token, setToken } = useContext(AuthContext);
-  // const { donation, setDonation } = useContext(DonationsContext)
+  // const { goalAmount, totalAmount } = useContext(DonationsContext)
+  const { totalAmount } = useContext(DonationsContext)
+  const [goalAmount, setGoalAmount] = useState(0)
+  const { token } = useContext(AuthContext);
   const { ngos, setNgos } = useContext(NgosContext)
-  const [errorMessage, setErrorMessage] = useState('')
-  const [currentPage, setCurrentPage] = useState(1)
-  const [pageCount, setPageCount] = useState(1)
-  const [amount, setAmount] = useState('$0')
-  const [goalAmount, setGoalAmount] = useState('$0')
-  const [donatedAmount, setDonatedAmount] = useState('$0')
-  const [leftAmount, setLeftAmount] = useState('$0')
-  const [todaysAmount, setTodaysAmount] = useState('0')
-  
+  const [ setErrorMessage ] = useState('')
+  const [ currentPage, setCurrentPage ] = useState(1)
+  const [ pageCount, setPageCount ] = useState(1)
+  const [ currentAmount ] = useState(0)
+  const [input, setInput] = useState('');
   const navigate = useNavigate();
+
+  const handleInputChange = (e) => {
+    console.log('Donation goal: ', e.target.value)
+    setInput(e.target.value)
+  }
+
+  const handleSave = () => {}
 
   // Stripe Payment
   const makePayment = token => {
     const body = {
       token, 
-      todaysAmount
+      currentAmount
     }
     const headers = {
       "Content-Type": "application/json"
@@ -60,42 +62,13 @@ const Filters = () => {
     setCurrentPage(currentPage + 1);
   }
 
-  const addAmount = (e) => {
-    // Add to currentAmount
-    let amount = e.target.value
-    // // reducer? 
-    // amount += amount
-    toast.success(`$${amount} added`)
-    console.log(amount, 'added')
-    setTodaysAmount(e.target.value)
-  }
-
-  // Fire function that updates today's donation ... reducer?
-  const donation = () => {
-    console.log(`You are donating $ {} today`)
-    
-    // setFilters({ ...filters, amount: e.target.value});
-    // console.log(e.target.value)
-
-  }
-
-  const clearAmount = () => {
-    setAmount(0)
-    console.log('Clearing amount')
-  }
-
-  const amountLeft = () => {
-    console.log(`You are $ {} away from meeting your donation goal!`)
-    // goalAmount - amountLeft
-  }
-
-  const amountDonated = () => {
-    console.log(`You have donated $ {}`)
-  }
-
   const handleAmountChange = (e) => {
     setFilters({ ...filters, amount: e.target.value});
     console.log(e.target.value)
+  }
+
+  const handleClearAmount = () => {
+    currentAmount();
   }
 
   const handleRegionChange = (e) => {
@@ -141,7 +114,7 @@ const Filters = () => {
 
   // Update the page count state whenever the NGO list is updated
   useEffect(() => { 
-    setPageCount(Math.ceil(ngos.length/5)); // Total number of pages
+    setPageCount(Math.ceil(ngos.length/4)); // Total number of pages
     }, [ngos.length]) // Length of NGO list chnages
   
   // Display list of NGOs when page loads for the first time
@@ -151,14 +124,23 @@ const Filters = () => {
 
   return (
     <div>
-
       <Toaster position="top-center" toastOption={{ duration: 3000 }}/>
-      
       <div className="stats">
 
         <div className="goalContainer">
-          <div className="goal-text">Your Donations Goal:</div>          
-          <div className="donated-amount">${}</div>
+          <div className="goal-text">
+            Your Donations Goal: 
+          </div>          
+          
+          <input 
+            type="text" 
+            className="goal-amount" 
+            placeholder="Donation amount" 
+            value={input}
+            onChange={handleInputChange}>
+          </input>
+
+          <button onClick={handleSave}>Save</button>
         </div>
 
         <div className="donatedContainer">
@@ -173,9 +155,10 @@ const Filters = () => {
 
         <div className="todayContainer">
           <div className="today-text">Today's amount: </div>
-          <div className="today-amount">${todaysAmount}</div>
+          <div className="today-amount">${totalAmount}</div>
+          <button className="clear-amount" onClick={handleClearAmount}>Reset</button>
         </div>
-     
+    
         <div className="stripeContainer">
           <div className="stripe-text">Would you like to donate this amount?</div>
           <StripeCheckout 
@@ -184,7 +167,7 @@ const Filters = () => {
             // Token fires a method
             token={makePayment}
             name="Your donation"
-            amount={todaysAmount * 100}
+            amount={currentAmount * 100}
           />
         </div>
       </div>
@@ -244,28 +227,15 @@ const Filters = () => {
                 <p className="location"><BiMap/>{ngo.location[0]}</p>
         
                 <div className="rightside">
-
-                  <TodaysAmount/>
-
-                  {/* <button className="" value="10" onClick={addAmount}>$10</button>
-
-                  <button className="" value="25" onClick={addAmount}>$25</button>
-
-                  <button className="" value="50" onClick={addAmount}>$50</button>
-
-                  <SetAmount/> */}
-
-                  <button className="infoBtn" onClick={() => handleNgoSelected(ngo._id)}>{/* <VscOrganization/> */}
+                  <CurrentAmount/>
+                  <button className="infoBtn" onClick={() => handleNgoSelected(ngo._id)}>
                   Profile</button>   
-        
                 </div>          
-
-                </div> 
-
               </div> 
-              )
-            })}
-          </div> 
+            </div> 
+            )
+          })}
+        </div> 
       </div>  
     </div>
     )

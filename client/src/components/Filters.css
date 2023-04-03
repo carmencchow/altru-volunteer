@@ -7,7 +7,6 @@ button:hover{
   outline: 2px solid purple;
 }
 .stats{
-  border: 1px solid grey;
   height: 100px;
   width: 80%;
   display: flex;

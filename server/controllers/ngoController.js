@@ -70,7 +70,7 @@ const getNgo = async (req, res) => {
 const createNgo = async (req, res) => {
   const { id, name, founded, category, website, region, tag, campaign } = req.body 
   try { 
-    const ngo = await Ngo.create({ id, name, founded, category, website, region, tag, campaign })
+    const ngo = await Ngo.create({ id, name, founded, category, website, region, tag, campaign, isFavorite: false })
     res.status(200).json(ngo) 
   } catch (err) {
     res.status(400).json({ err: err.message })

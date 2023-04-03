@@ -12,7 +12,7 @@ const Profile = () => {
   const [email, setEmail] = useState('')
   const [address, setAddress] = useState('')
   const [telephone, setTelephone] = useState('')
-  const [goalAmount, setGoalAmount] = useState('$0')
+  // const [goalAmount, setGoalAmount] = useState(0)
   const [formState, setFormState] = useState('')
   const navigate = useNavigate()
   
@@ -22,14 +22,14 @@ const Profile = () => {
     setDropdown(!dropdown)
   }
 
-  const handleGoalAmount = (e) => {
-    console.log('Donation goal: ', e.target.value)
-    setGoalAmount(e.target.value)
-  }
+  // const handleGoalAmount = (e) => {
+  //   console.log('Donation goal: ', e.target.value)
+  //   setGoalAmount(e.target.value)
+  // }
 
-  const saveGoalAmount = (e) => {
-    console.log('Saving amount', e.target.value)
-  }
+  // const saveGoalAmount = (e) => {
+  //   console.log('Saving amount', goalAmount)
+  // }
 
   return (
     <div>
@@ -38,22 +38,21 @@ const Profile = () => {
           <span className="back" onClick={() => navigate(-1)}>Back</span>
             <div className="user-profile">
               <p>My Profile</p>
+              {/* <h1>Goal is {goalAmount}</h1> */}
 
               <div className="my-profile">
                 <p className="name"></p>
                 <button className="edit" onClick={handleEdit}><BsPencil className="edit"/>Edit Profile</button>
 
-                {/* <h2>Goal Amount is {goalAmount}</h2> */}
-
-                <input 
+                {/* <input 
                   type="text" 
                   className="goal-amount" 
-                  placeholder="$Donation amount" 
+                  placeholder="Donation amount" 
                   value={goalAmount}
                   onChange={handleGoalAmount}>
                 </input>
 
-                <button onClick={saveGoalAmount}>Save</button>
+                <button onClick={saveGoalAmount}>Save</button> */}
 
                 <form className="form">
                   <label htmlFor="firstname">First name:</label>

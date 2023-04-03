@@ -17,16 +17,20 @@ const ngoSchema = new Schema({
     type: String,
     required: true
   },
+  amount: {
+    type: Number,
+  },
   location: {
     type: Array,
     required: true,
   },
+  favorite: {
+    type: Boolean,
+    default: false
+  },
   tag: {
     type: String,
     required: true,
-  },
-  campaign: {
-    type: String,
   }
 }, { timestamps: true });
 
