@@ -4,9 +4,6 @@
   border: 1px solid purple;
   border-radius: 20px;
 }
-.modal-background{
-
-}
 .amount, .currency, .frequency{
   display: flex;
   justify-content: space-evenly;
@@ -19,15 +16,6 @@
 .stripe{
   background-color: black;
 }
-/* .input{
-  position: absolute;
-}
-.dollar{
-  position: relative;
-  top: 0;
-  left: 10px;
-} */
-
 .donation-amounts{
   cursor: pointer;
 }
@@ -37,5 +25,4 @@
 }
 .amount{
   margin-bottom: 10px;
-
 }

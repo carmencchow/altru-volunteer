@@ -21,6 +21,12 @@ const userSchema = new Schema({
     lowercase: true,
     required: [true, "Please provide a password"]  
   },
+  goalAmount: {
+    type: Number,
+  },
+  donations: {
+    type: Number,
+  },
   image: {
     type: String,
     required: false,

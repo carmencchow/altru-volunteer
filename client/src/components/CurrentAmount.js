@@ -3,17 +3,18 @@ import { DonationsContext } from '../context/DonationsContext'
 import toast, { Toaster } from 'react-hot-toast'
 
 const CurrentAmount = () => {
+  // const [total, setTotal] = useState(0)
+  const [amount, setAmount] = useState('$0')
   const [todaysAmount, setTodaysAmount] = useState(0)
   const [otherAmount, setOtherAmount] = useState(0)
-
-
-
   // const { currentAmount, setCurrentAmount, setTotalAmount, totalAmount } = useContext(DonationsContext)
 
   const addAmount = (e) => {
     const clickedAmount = Number(e.target.value);
+    console.log(e.target.value)
     toast.success(`$${clickedAmount} added`)
-    setTodaysAmount(otherAmount + clickedAmount)
+    // setTotal(total + clickedAmount)
+    setTodaysAmount(todaysAmount + clickedAmount)
   }
 
   const handleOtherAmount = (e) => {
@@ -26,12 +27,13 @@ const CurrentAmount = () => {
   }
 
   useEffect(() => {
-    // setTodaysAmount(otherAmount) 
-    setTodaysAmount((prev) => {
-      return prev + todaysAmount 
-    })
+    // setTotalAmount(totalAmount + total) 
+    setTodaysAmount(todaysAmount + amount) 
+    // setTotalAmount((prev) => {
+    //   return prev + total 
+    // })
     // setTotalAmount(totalAmount + total) * alt to lines 19-20 (from Context)
-  }, [todaysAmount])
+  }, [amount])
 
   return (
     <div>
@@ -48,6 +50,7 @@ const CurrentAmount = () => {
           onChange={handleOtherAmount}
           >
         </input>
+
         <button onClick={saveAmount}>Save</button>
       </div>
     </div>

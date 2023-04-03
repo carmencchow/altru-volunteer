@@ -9,28 +9,32 @@ import { Toaster } from 'react-hot-toast'
 import { BiMap } from 'react-icons/bi'
 import StripeCheckout from 'react-stripe-checkout'
 import CurrentAmount from '../components/CurrentAmount'
+import Goal from '../components/Goal'
+import Remaining from '../components/Remaining'
+import Donations from '../components/Donations'
 import './Filters.css'
 
 const Filters = () => {
   const { filters, setFilters } = useContext(FiltersContext) 
   // const { goalAmount, totalAmount } = useContext(DonationsContext)
   const { totalAmount } = useContext(DonationsContext)
-  const [goalAmount, setGoalAmount] = useState(0)
   const { token } = useContext(AuthContext);
   const { ngos, setNgos } = useContext(NgosContext)
   const [ setErrorMessage ] = useState('')
   const [ currentPage, setCurrentPage ] = useState(1)
   const [ pageCount, setPageCount ] = useState(1)
   const [ currentAmount ] = useState(0)
-  const [input, setInput] = useState('');
+  // const [ goal, setGoal] = useState('');
   const navigate = useNavigate();
 
-  const handleInputChange = (e) => {
-    console.log('Donation goal: ', e.target.value)
-    setInput(e.target.value)
-  }
+  // const handleSetGoal = (e) => {
+  //   console.log('Donation goal: ', e.target.value)
+  //   setGoal(e.target.value)
+  // }
 
-  const handleSave = () => {}
+  // const handleSave = () => {
+  //   console.log('set new donation amount')
+  // }
 
   // Stripe Payment
   const makePayment = token => {
@@ -127,7 +131,11 @@ const Filters = () => {
       <Toaster position="top-center" toastOption={{ duration: 3000 }}/>
       <div className="stats">
 
-        <div className="goalContainer">
+        <Goal/>
+        <Remaining/>
+        <Donations/>
+
+        {/* <div className="goalContainer">
           <div className="goal-text">
             Your Donations Goal: 
           </div>          
@@ -136,22 +144,22 @@ const Filters = () => {
             type="text" 
             className="goal-amount" 
             placeholder="Donation amount" 
-            value={input}
-            onChange={handleInputChange}>
+            value={goal}
+            onChange={handleSetGoal}>
           </input>
 
-          <button onClick={handleSave}>Save</button>
-        </div>
+          <button onClick={handleSave}>Save Goal</button>
+        </div> */}
 
-        <div className="donatedContainer">
+        {/* <div className="donatedContainer">
           <div className="donated-text">Amount Donated:</div>
           <div className="donated-amount">${}</div>
-        </div>
+        </div> */}
 
-        <div className="leftContainer">
+        {/* <div className="leftContainer">
           <div className="left-text">Amount Left:</div>
           <div className="left-amount">${}</div>
-        </div>
+        </div> */}
 
         <div className="todayContainer">
           <div className="today-text">Today's amount: </div>
