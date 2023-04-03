@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './Tabs.css'
 import DonationsList from './DonationsList';
+import VolunteerList from './VolunteersList';
 
 const Tabs = () => {
   const [toggleState, setToggleState] = useState(1);
@@ -37,7 +38,9 @@ const Tabs = () => {
         <div><DonationsList/></div>
         </div>
 
-        <div className={toggleState === 3 ? "content active-content" : "content"}>MY VOLUNTEER HOURS</div>
+        <div className={toggleState === 3 ? "content active-content" : "content"}><p>MY VOLUNTEER HOURS</p>
+        <div><VolunteerList/></div>
+        </div>
 
        {/* <div onClick={toggleContent} className={dropContent ? "active content" : "content"}>
           <p>My Events</p>

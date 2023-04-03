@@ -3,12 +3,10 @@ const Schema = mongoose.Schema;
 
 // Define the model
 const ngoSchema = new Schema({
-  // id: { type: Number, required: true },
   name: {
     type: String,
     required: true
   },
-  founded: Number, 
   category: {
     type: Array,
     required: true
@@ -28,10 +26,38 @@ const ngoSchema = new Schema({
     type: Boolean,
     default: false
   },
-  tag: {
-    type: String,
-    required: true,
-  }
+  needVolunteers: {
+    type: Boolean,
+    default: true
+  },
+  needDonations: {
+    type: Boolean,
+    default: true
+  },
+  volunteer: [
+    {
+      time: {
+        type: String,
+        required: true
+      },
+      hours: {
+        type: Number,
+        required: true
+      },
+      activity: {
+        type: String,
+        required: true
+      },
+      date: {
+        type: Date,
+        required: true
+      }, 
+      category: {
+        type: String,
+        required: true
+      }
+    }  
+  ]
 }, { timestamps: true });
 
 
