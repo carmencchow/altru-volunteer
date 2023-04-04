@@ -32,8 +32,8 @@ const ngoSchema = new Schema({
     type: Number,
     required: true,
   },
-  min_hours: {
-    type: Number,
+  commitment: {
+    type: String,
   },
   frequency: {
     type: String,

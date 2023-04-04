@@ -56,7 +56,7 @@ const Navbar = () => {
       )}  */}
 
         <div className="user-display">
-          <div className="welcome"><span className="hi">👋</span> Welcome, ! </div>
+          <div className="welcome"><span className="hi"></span> Welcome, ! </div>
         </div>
 
       </div>

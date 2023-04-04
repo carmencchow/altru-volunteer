@@ -1,9 +1,18 @@
 import React, { useState } from 'react'
 import { GrFormClose } from "react-icons/gr";
-import './Attend.css'
+import axios from 'axios';
+import './VolunteerModal.css'
 
-const Attend = ({ onClose }) => {
+const VolunteerModal = ({ onClose, open, id }) => {
   const [openModal, setOpenModal] = useState(true);
+  const [ngo, setNgo] = useState(null);
+
+  const getNgo = async (id) => {
+    const res = await axios.get(`http://localhost:5000/api/ngo/${id}`);
+    setNgo(res.data);
+  };
+
+  if (!open) return null;
 
   return (
     <div className="modal-background">
@@ -12,7 +21,6 @@ const Attend = ({ onClose }) => {
            <div className="right-side">
             <GrFormClose className="close-btn" onClick={onClose} />
           </div>
- 
           <h1>You are registering for this event: </h1>
         </div> 
         <div>
@@ -21,10 +29,10 @@ const Attend = ({ onClose }) => {
           <p>Description</p>
           <p>Organization</p>
         </div>
-        <button>Save</button>
+        <button>Confirm</button>
       </div>
     </div>
   )
 }
 
-export default Attend
+export default VolunteerModal

@@ -7,15 +7,17 @@ import { NgosContext } from '../context/NgosContext'
 import { useNavigate } from 'react-router-dom'
 import './Volunteer.css'
 import Navbar from '../components/Navbar'
-import Attend from '../components/Attend'
+import { GrFormClose } from "react-icons/gr";
+import VolunteerModal from './VolunteerModal'
 
-const Volunteer = () => {
+const Volunteer = ({ id, onClose, handleFetchData }) => {
   const { filters, setFilters } = useContext(FiltersContext) 
   const { token } = useContext(AuthContext);
   const { ngos, setNgos } = useContext(NgosContext)
   const [ currentPage, setCurrentPage ] = useState(1)
   const [ pageCount, setPageCount ] = useState(1)
-  const [ openModal, setOpenModal ] = useState(false)
+  const [ modal, setModal ] = useState(false)
+
   const navigate = useNavigate();
 
   const donate = () => {
@@ -40,7 +42,6 @@ const Volunteer = () => {
     setFilters({ ...filters, frequency: e.target.value});
   }
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     fetchVolunteerNgos()
@@ -51,19 +52,10 @@ const Volunteer = () => {
     console.log(id)
   }
 
-  const handleAttend = () => {
+  const toggleModal = () => {
     console.log('Sign up for volunteer event')
+    setModal(!modal);
   }
-
-  // const fetchAllNgos = async () => {
-  //   try {
-  //     const res = await axios.get('http://localhost:5000/api/ngos/', { headers: { Authorization: 'Bearer ' + token }})  
-  //     setNgos(res.data);
-  //     console.log(res.data);
-  //   } catch (err) {
-  //     setErrorMessage('Unable to fetch list of NGOs')
-  //   } 
-  // };
 
   const fetchVolunteerNgos = async () => {
     try {
@@ -71,7 +63,7 @@ const Volunteer = () => {
       const category = filters.category 
       const res = await axios.get(`http://localhost:5000/api/ngos/${frequency}/${category}`);  
       setNgos(res.data);
-      console.log(res.data.frequency);
+      console.log(res.data);
     } catch (err) {
       console.log(err);
     }
@@ -80,10 +72,6 @@ const Volunteer = () => {
   useEffect(() => { 
     setPageCount(Math.ceil(ngos.length/4)); 
     }, [ngos.length]) 
-
-  // useEffect(() => {
-  //   fetchAllNgos();
-  //   }, []);
 
   return (
     <div>
@@ -94,7 +82,7 @@ const Volunteer = () => {
         <form className="dropdown">
           <select value={filters.frequency} onChange={handleFrequencyChange}>  
           <option value="all"> --- Frequency --- </option>
-          <option value="upcomin">Upcoming Event</option>
+          <option value="day">One Day Events</option>
           <option value="weekly">Every Week</option>
           <option value="monthly">Once a Month</option> 
           </select>
@@ -120,8 +108,9 @@ const Volunteer = () => {
           <button disabled={currentPage === pageCount} className="next" onClick={handleNext}>Next</button> 
         </div>
 
-        <button onClick={donate}>I am interested in donating</button>
-
+        <div>Don't have time to volunteer?
+          <button onClick={donate}>I am interested in donating</button>
+        </div>
 
       </div>
 
@@ -138,17 +127,38 @@ const Volunteer = () => {
                   <div className="rightside">
                     <p>{ngo.category}</p>
                     <p>Volunteers needed:{ngo.num_volunteers}</p>
-                    <p>Commitment: {ngo.min_hours}</p>
-                    <p>{ngo.event_date} and {ngo.event_time}</p>
-                    <p>{ngo.event_description}</p>                  
+                    <p>Commitment: {ngo.commitment}</p>
                   </div>          
                 </div>    
-                <button onClick={handleAttend}className="attend">Attend</button> 
               
-                <Attend
-                  open={openModal}
-                />     
-              </div> 
+
+        { modal && (      
+            <div className="modal">
+              <div onClick={toggleModal} className="modal-background">
+                <div className="modal-popup">
+                  <div className="modal-popup-heading">
+                    <div className="right-side">
+                      <GrFormClose className="close-btn" onClick={toggleModal} />
+                    </div>
+                    <h1>You are registering for this event: </h1>
+                    <div>
+                      <p>Date</p>
+                      <p>Time</p>
+                      <p>Description</p>
+                      <p>Organization</p>
+                    </div>
+                    <button>Confirm</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )} 
+          
+          <button onClick={toggleModal}
+            className="modal-btn">Become a Volunteer
+          </button> 
+
+          </div> 
             )
           })}
         </div> 
