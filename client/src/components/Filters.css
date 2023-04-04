@@ -62,9 +62,6 @@ form {
   /* margin-left: 50px; */
   padding-top: 40px;
 }
-.name{
-  font-size: 20px;
-}
 .website{
   font-size: 16px;
   font-weight: lighter;
@@ -78,18 +75,18 @@ form {
 .display-container{
   margin: 30px 60px;
 }
-.infoBtn, .websiteBtn{  
+.infoBtn{  
   height: 36px;
-  border: 2px solid purple transparent;
-  color: purple;
-  border-radius: 20px;;
-  width: 120px;
+  color: black;
+  border-radius: 20px;
+  width: 400px;
   padding: 5px 10px;
   margin-right: 10px;
+  font-size: 20px;
   cursor: pointer;
+  font-weight: bolder;
 }
-.infoBtn:hover, .websiteBtn:hover{  
-  border: 2px solid purple;
+.infoBtn:hover{  
 }
 .search{ 
   color: purple;

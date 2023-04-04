@@ -3,38 +3,28 @@ import { AuthContext } from '../context/AuthContext'
 import { DonationsContext } from '../context/DonationsContext'
 import { FiltersContext } from '../context/FiltersContext'
 import { NgosContext } from '../context/NgosContext'
-import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 import { BiMap } from 'react-icons/bi'
-import StripeCheckout from 'react-stripe-checkout'
+// import StripeCheckout from 'react-stripe-checkout'
 import CurrentAmount from '../components/CurrentAmount'
-import Goal from '../components/Goal'
 import Remaining from '../components/Remaining'
 import Donations from '../components/Donations'
+import DonationModal from './DonationModal'
+import Goal from '../components/Goal'
 import './Filters.css'
 
 const Filters = () => {
   const { filters, setFilters } = useContext(FiltersContext) 
-  // const { goalAmount, totalAmount } = useContext(DonationsContext)
-  const { totalAmount } = useContext(DonationsContext)
+  const { goalAmount, totalAmount } = useContext(DonationsContext)
   const { token } = useContext(AuthContext);
   const { ngos, setNgos } = useContext(NgosContext)
   const [ setErrorMessage ] = useState('')
   const [ currentPage, setCurrentPage ] = useState(1)
   const [ pageCount, setPageCount ] = useState(1)
   const [ currentAmount ] = useState(0)
-  // const [ goal, setGoal] = useState('');
   const navigate = useNavigate();
-
-  // const handleSetGoal = (e) => {
-  //   console.log('Donation goal: ', e.target.value)
-  //   setGoal(e.target.value)
-  // }
-
-  // const handleSave = () => {
-  //   console.log('set new donation amount')
-  // }
 
   // Stripe Payment
   const makePayment = token => {
@@ -116,12 +106,10 @@ const Filters = () => {
     }
   };
 
-  // Update the page count state whenever the NGO list is updated
   useEffect(() => { 
-    setPageCount(Math.ceil(ngos.length/4)); // Total number of pages
-    }, [ngos.length]) // Length of NGO list chnages
-  
-  // Display list of NGOs when page loads for the first time
+    setPageCount(Math.ceil(ngos.length/4)); 
+    }, [ngos.length]) 
+
   useEffect(() => {
     fetchAllNgos();
     }, []);
@@ -135,55 +123,27 @@ const Filters = () => {
         <Remaining/>
         <Donations/>
 
-        {/* <div className="goalContainer">
-          <div className="goal-text">
-            Your Donations Goal: 
-          </div>          
-          
-          <input 
-            type="text" 
-            className="goal-amount" 
-            placeholder="Donation amount" 
-            value={goal}
-            onChange={handleSetGoal}>
-          </input>
-
-          <button onClick={handleSave}>Save Goal</button>
-        </div> */}
-
-        {/* <div className="donatedContainer">
-          <div className="donated-text">Amount Donated:</div>
-          <div className="donated-amount">${}</div>
-        </div> */}
-
-        {/* <div className="leftContainer">
-          <div className="left-text">Amount Left:</div>
-          <div className="left-amount">${}</div>
-        </div> */}
-
         <div className="todayContainer">
           <div className="today-text">Today's amount: </div>
           <div className="today-amount">${totalAmount}</div>
           <button className="clear-amount" onClick={handleClearAmount}>Reset</button>
         </div>
+
+        <DonationModal/>
     
-        <div className="stripeContainer">
+        {/* <div className="stripeContainer">
           <div className="stripe-text">Would you like to donate this amount?</div>
-          <StripeCheckout 
-            // TEST CC: 4242 4242 4242 4242; 12/34; 123
+          <StripeCheckout // TEST CC: 4242 4242 4242 4242; 12/34; 123
             stripeKey="pk_test_51L1kSgAoNhpouPlcfYHS4qZk7puLHRnuQFurkS8DelIS2DvAgtPR5nM4DWIdI3rjZCUyhkg9USb34AEQBf2Zz32r00TiqYY6E9"
-            // Token fires a method
             token={makePayment}
             name="Your donation"
             amount={currentAmount * 100}
           />
-        </div>
+        </div> */}
       </div>
 
-      <h1>Would you like to donate money or time today?</h1>
+      <h1>Find Nonprofits to donate to or volunteer events </h1>
       <div className="filters">
-        {/* <h1>Would you like to donate money or time today?</h1> */}
-        {/* <h1 className="heading">Organizations</h1> */}
 
         <form className="dropdown">
           <select value={filters.amount} onChange={handleAmountChange}>  
@@ -195,20 +155,10 @@ const Filters = () => {
           </select>
         </form>
     
-        {/* <form className="dropdown">
-          <select value={filters.region} onChange={handleRegionChange}>  
-          <option value="all"> --- All Regions --- </option>
-          <option value="africa">Africa</option>
-          <option value="asia">Asia</option>
-          <option value="middle east">Middle East</option>
-          <option value="south america">South America</option>                        
-          </select>
-        </form> */}
-
         <form className="dropdown">
           <select value={filters.hours} onChange={handleRegionChange}>  
           <option value="all"> --- Time --- </option>
-          <option value="day">One Time</option>
+          <option value="event">Upcoming Event</option>
           <option value="weekly">Every Week</option>
           <option value="monthly">Once a Month</option> 
           </select>
@@ -217,12 +167,12 @@ const Filters = () => {
         <form className="dropdown">
           <select value={filters.cause} onChange={handleCauseChange}>
           <option value="all"> --- All Causes --- </option>
-          <option value="animal welfare">Animal Welfare</option>
-          <option value="children">Children</option>
-          <option value="education">Education</option>
+          <option value="animals">Animals</option>
+          <option value="children & youth">Children & Youth</option>
+          <option value="education & literacy">Education & Literacy</option>
           <option value="environment">Environment</option>
-          <option value="hunger">Hunger</option>
-          <option value="womens rights">Women's Rights</option>
+          <option value="health & medicine">Health & Medicine</option>
+          <option value="sports & recreation">Sports & Recreation</option>
           </select>
         </form>
         
@@ -242,13 +192,11 @@ const Filters = () => {
             return (
               <div className="display-container">
                 <div key={idx} className="row">
-                <p className="name">{ngo.name}</p>
-                <p className="location"><BiMap/>{ngo.location[0]}</p>
+                <button className="infoBtn" onClick={() => handleNgoSelected(ngo._id)}>
+                  {ngo.name}</button>
         
                 <div className="rightside">
                   <CurrentAmount/>
-                  <button className="infoBtn" onClick={() => handleNgoSelected(ngo._id)}>
-                  Profile</button>   
                 </div>          
               </div> 
             </div> 

@@ -1,0 +1,15 @@
+.other-amount{
+  background-color: #f9f9f2;
+  border: none;
+  color: black;
+  width: 100px;
+}
+input{
+  background-color: #f9f9f2;
+  border: none;
+  color: black;
+  width: 100px;
+}
+textarea:focus, input:focus{
+  outline: none;
+}

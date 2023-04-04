@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { DonationsContext } from '../context/DonationsContext'
 
 const Goal = () => {
   const [ goal, setGoal] = useState('');
+  const { totalAmount, goalAmount } = useContext(DonationsContext)
 
   const handleSetGoal = (e) => {
     console.log('Donation goal: ', e.target.value)
@@ -16,7 +18,7 @@ const Goal = () => {
     <div>
       <div className="goalContainer">
         <div className="goal-text">
-          Your Donations Goal: $100
+          Your Donations Goal: ${goalAmount}
         </div>          
         
         <input 
