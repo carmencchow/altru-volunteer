@@ -101,7 +101,7 @@ const Info = () => {
       </div>
 
       <div className="contact">
-        <p>CAUSE: {currentNgo.category}</p> 
+        <p>category: {currentNgo.category}</p> 
         <p>ABOUT US: {currentNgo.tag}</p>
         <br></br>        
         <div className="url" onClick={() => { window.open(`${currentNgo.website}`)}}>{currentNgo.website}</div>

@@ -24,6 +24,7 @@ const Filters = () => {
   const [ currentPage, setCurrentPage ] = useState(1)
   const [ pageCount, setPageCount ] = useState(1)
   const [ currentAmount ] = useState(0)
+  const [open, setOpen] = useState(true)
   const navigate = useNavigate();
 
   // Stripe Payment
@@ -45,7 +46,10 @@ const Filters = () => {
     .catch(err => console.log(err));
   }
 
-  // Pagination buttons
+  const handleClearAmount = () => {
+    currentAmount('');
+  }
+
   const handlePrevious = () => {
     console.log('pre page')
     setCurrentPage(currentPage - 1);
@@ -57,21 +61,15 @@ const Filters = () => {
   }
 
   const handleAmountChange = (e) => {
-    setFilters({ ...filters, amount: e.target.value});
-    console.log(e.target.value)
+    setFilters({ ...filters, category: e.target.value});
+  }
+  
+  const handleCategoryChange = (e) => {
+    setFilters({ ...filters, category: e.target.value});
   }
 
-  const handleClearAmount = () => {
-    currentAmount();
-  }
-
-  const handleRegionChange = (e) => {
-    setFilters({ ...filters, region: e.target.value }); 
-    // Only change value of region to the one user selected
-  }
-
-  const handleCauseChange = (e) => {
-    setFilters({ ...filters, cause: e.target.value});
+  const handleFrequencyChange = (e) => {
+    setFilters({ ...filters, frequency: e.target.value});
   }
 
   const handleSubmit = async (e) => {
@@ -82,6 +80,11 @@ const Filters = () => {
   const handleNgoSelected = (id) => {
     navigate(`/info/${id}`)
     console.log(id)
+  }
+
+  const handleDonation = () => {
+    console.log('Donating amount')
+    // open modal
   }
 
   const fetchAllNgos = async () => {
@@ -96,11 +99,13 @@ const Filters = () => {
 
   const fetchFilteredNgos = async () => {
     try {
-      const location = filters.region 
-      const cause = filters.cause 
-      const res = await axios.get(`http://localhost:5000/api/ngos/${location}/${cause}`);    
+      const frequency = filters.frequency 
+      // const amount = filters.amount 
+      const category = filters.category 
+      const res = await axios.get(`http://localhost:5000/api/ngos/${frequency}/${category}`);  
+      // const res = await axios.get(`http://localhost:5000/api/ngos/${frequency}/${category}/${amount}`);    
       setNgos(res.data);
-      console.log(res.data.location);
+      console.log(res.data.frequency);
     } catch (err) {
       setErrorMessage('Unable to fetch results');
     }
@@ -127,6 +132,7 @@ const Filters = () => {
           <div className="today-text">Today's amount: </div>
           <div className="today-amount">${totalAmount}</div>
           <button className="clear-amount" onClick={handleClearAmount}>Reset</button>
+          <button className="donate-now" onClick={handleDonation}>Give Now</button>
         </div>
 
         <DonationModal/>
@@ -149,24 +155,25 @@ const Filters = () => {
           <select value={filters.amount} onChange={handleAmountChange}>  
           <option value="all"> --- Amount Needed --- </option>
           <option value="$10-$25">$10.00 - $25.00</option>
-          <option value="$25-$40">$25.00 - $40.00</option>
-          <option value="$40-$55">$40.00 - $55.00</option>                        
-          <option value="$55-$75">$55.00 - $75.00</option>                        
+          <option value="$26-$50">$25.00 - $50.00</option>
+          <option value="$51-$75">$51.00 - $75.00</option>                        
+          <option value="$76-$100">$76.00 - $100.00</option>                        
+          <option value="$101">$100.00+</option>                        
           </select>
         </form>
     
         <form className="dropdown">
-          <select value={filters.hours} onChange={handleRegionChange}>  
-          <option value="all"> --- Time --- </option>
-          <option value="event">Upcoming Event</option>
+          <select value={filters.frequency} onChange={handleFrequencyChange}>  
+          <option value="all"> --- Frequency --- </option>
+          <option value="upcomin">Upcoming Event</option>
           <option value="weekly">Every Week</option>
           <option value="monthly">Once a Month</option> 
           </select>
         </form>
 
         <form className="dropdown">
-          <select value={filters.cause} onChange={handleCauseChange}>
-          <option value="all"> --- All Causes --- </option>
+          <select value={filters.category} onChange={handleCategoryChange}>
+          <option value="all"> --- All categorys --- </option>
           <option value="animals">Animals</option>
           <option value="children & youth">Children & Youth</option>
           <option value="education & literacy">Education & Literacy</option>
@@ -194,6 +201,7 @@ const Filters = () => {
                 <div key={idx} className="row">
                 <button className="infoBtn" onClick={() => handleNgoSelected(ngo._id)}>
                   {ngo.name}</button>
+                  <p>{ngo.category}</p>
         
                 <div className="rightside">
                   <CurrentAmount/>

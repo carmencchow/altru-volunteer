@@ -27,28 +27,28 @@ const getNgos = async (req, res) => {
   }
 
 const getFilteredNgos = async (req, res) => { 
-  const cause = req.params.cause.toLowerCase();
+  const category = req.params.category.toLowerCase();
   const region = req.params.region.toLowerCase();
 
   let ngos; 
   
   // if user doesn't select both
-  if (cause === 'all' && region === 'all') {
+  if (category === 'all' && region === 'all') {
     ngos = await Ngo.find({})
   }
 
-  // if user doesn't select cause/category
-  else if (cause === 'all') {
+  // if user doesn't select category/category
+  else if (category === 'all') {
     ngos = await Ngo.find({ location: region })
   }
 
   // if user doesn't select location
   else if (region === 'all') {
-    ngos = await Ngo.find({ category: cause })
+    ngos = await Ngo.find({ category: category })
   }
 
   else {
-    ngos = await Ngo.find({ location: region, category: cause})
+    ngos = await Ngo.find({ location: region, category: category})
   }   
   res.send(ngos);
 }

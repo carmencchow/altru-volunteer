@@ -1,8 +1,8 @@
-import React, {useState} from 'react'
-import './DonationModal.css'
-import { AiFillCloseSquare } from 'react-icons/ai'
+import React, { useState } from 'react'
+import { GrFormClose } from "react-icons/gr";
 import StripeCheckout from 'react-stripe-checkout'
- 
+import './DonationModal.css'
+
 const DonationModal = ({ open, onClose }) => {
   const [amount, setAmount] = useState('');
   const [dollarAmount, setDollarAmount] = useState('');
@@ -46,7 +46,7 @@ const DonationModal = ({ open, onClose }) => {
         <div onClick={onClose} className="overlay">
           <div onClick={(e) => { e.stopPropagation()}}>
 
-            <AiFillCloseSquare className="close" onClick={onClose}/>
+            <GrFormClose className="close-btn" onClick={onClose} />
             <h1>Donation Card</h1>
            
             <div className="amount">
