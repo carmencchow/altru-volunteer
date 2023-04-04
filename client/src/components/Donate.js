@@ -18,15 +18,31 @@ import './Donate.css'
 const Donate = () => {
   const { filters, setFilters } = useContext(FiltersContext) 
   const { goalAmount, totalAmount } = useContext(DonationsContext)
-  const { token } = useContext(AuthContext);
+  // const { token } = useContext(AuthContext);
   const { ngos, setNgos } = useContext(NgosContext)
-  const [ setErrorMessage ] = useState('')
   const [ currentPage, setCurrentPage ] = useState(1)
   const [ pageCount, setPageCount ] = useState(1)
   const [ currentAmount ] = useState(0)
   const [openModal, setOpenModal] = useState(false);
   const navigate = useNavigate();
 
+  
+  const fetchDonationNgos = async () => {
+    try {
+      // const amount = filters.amount 
+      const category = filters.category 
+      const res = await axios.get(`http://localhost:5000/api/ngos/category/${category}`);  
+      // const res = await axios.get(`http://localhost:5000/api/ngos/${amount}/${category}`);  
+      setNgos(res.data);
+      console.log(res.data);
+    } catch (err) {
+      console.log('Unable to fetch results');
+    }
+  };
+
+  useEffect(() => { 
+    setPageCount(Math.ceil(ngos.length/4)); 
+    }, [ngos.length]) 
 
   const volunteer = () => {
     navigate('/volunteer');
@@ -45,10 +61,6 @@ const Donate = () => {
     console.log('next page')
     setCurrentPage(currentPage + 1);
   }
-
-  const handleAmountChange = (e) => {
-    setFilters({ ...filters, category: e.target.value});
-  }
   
   const handleCategoryChange = (e) => {
     setFilters({ ...filters, category: e.target.value});
@@ -56,7 +68,7 @@ const Donate = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    fetchFilteredNgos()
+    fetchDonationNgos()
   }
 
   const handleNgoSelected = (id) => {
@@ -71,29 +83,13 @@ const Donate = () => {
 
   // const fetchAllNgos = async () => {
   //   try {
-  //     const res = await axios.get('http://localhost:5000/api/ngos/', { headers: { Authorization: 'Bearer ' + token }})  
+  //     const res = await axios.get('http://category', { headers: { Authorization: 'Bearer ' + token }})  
   //     setNgos(res.data);
   //     console.log(res.data);
   //   } catch (err) {
   //     setErrorMessage('Unable to fetch list of NGOs')
   //   } 
   // };
-
-  const fetchFilteredNgos = async () => {
-    try {
-      const amount = filters.amount 
-      const category = filters.category 
-      const res = await axios.get(`http://localhost:5000/api/ngos/${amount}/${category}`);  
-      setNgos(res.data);
-      console.log(res.data.frequency);
-    } catch (err) {
-      setErrorMessage('Unable to fetch results');
-    }
-  };
-
-  useEffect(() => { 
-    setPageCount(Math.ceil(ngos.length/4)); 
-    }, [ngos.length]) 
 
   // useEffect(() => {
   //   fetchAllNgos();
@@ -126,7 +122,7 @@ const Donate = () => {
 
       <div className="filters">
 
-        <form className="dropdown">
+        {/* <form className="dropdown">
           <select value={filters.amount} onChange={handleAmountChange}>  
           <option value="all"> --- Amount Needed --- </option>
           <option value="$10-$25">$10.00 - $25.00</option>
@@ -135,17 +131,17 @@ const Donate = () => {
           <option value="$76-$100">$76.00 - $100.00</option>                        
           <option value="$101">$100.00+</option>                        
           </select>
-        </form>
+        </form> */}
     
         <form className="dropdown">
           <select value={filters.category} onChange={handleCategoryChange}>
-          <option value="all"> --- All categorys --- </option>
+          <option value="all"> --- All categories --- </option>
           <option value="animals">Animals</option>
-          <option value="children & youth">Children & Youth</option>
-          <option value="education & literacy">Education & Literacy</option>
+          <option value="children&youth">Children & Youth</option>
+          <option value="education&literacy">Education & Literacy</option>
           <option value="environment">Environment</option>
-          <option value="health & medicine">Health & Medicine</option>
-          <option value="sports & recreation">Sports & Recreation</option>
+          <option value="health&medicine">Health & Medicine</option>
+          <option value="sports&recreation">Sports & Recreation</option>
           </select>
         </form>
         

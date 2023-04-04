@@ -7,14 +7,15 @@ import { NgosContext } from '../context/NgosContext'
 import { useNavigate } from 'react-router-dom'
 import './Volunteer.css'
 import Navbar from '../components/Navbar'
+import Attend from '../components/Attend'
 
 const Volunteer = () => {
   const { filters, setFilters } = useContext(FiltersContext) 
   const { token } = useContext(AuthContext);
   const { ngos, setNgos } = useContext(NgosContext)
-  const [ setErrorMessage ] = useState('')
   const [ currentPage, setCurrentPage ] = useState(1)
   const [ pageCount, setPageCount ] = useState(1)
+  const [ openModal, setOpenModal ] = useState(false)
   const navigate = useNavigate();
 
   const donate = () => {
@@ -42,12 +43,16 @@ const Volunteer = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    fetchFilteredNgos()
+    fetchVolunteerNgos()
   }
 
   const handleNgoSelected = (id) => {
     navigate(`/info/${id}`)
     console.log(id)
+  }
+
+  const handleAttend = () => {
+    console.log('Sign up for volunteer event')
   }
 
   // const fetchAllNgos = async () => {
@@ -60,16 +65,15 @@ const Volunteer = () => {
   //   } 
   // };
 
-  const fetchFilteredNgos = async () => {
+  const fetchVolunteerNgos = async () => {
     try {
       const frequency = filters.frequency 
-      // const amount = filters.amount 
       const category = filters.category 
       const res = await axios.get(`http://localhost:5000/api/ngos/${frequency}/${category}`);  
       setNgos(res.data);
       console.log(res.data.frequency);
     } catch (err) {
-      setErrorMessage('Unable to fetch results');
+      console.log(err);
     }
   };
 
@@ -127,15 +131,24 @@ const Volunteer = () => {
             return (
               <div className="display-container">
                 <div key={idx} className="row">
-                <button className="infoBtn" onClick={() => handleNgoSelected(ngo._id)}>
+                <button 
+                  className="infoBtn" 
+                  onClick={() => handleNgoSelected(ngo._id)}>
                   {ngo.name}</button>
-                  <p>{ngo.category}</p>
-        
-                <div className="rightside">
-                  
-                </div>          
+                  <div className="rightside">
+                    <p>{ngo.category}</p>
+                    <p>Volunteers needed:{ngo.num_volunteers}</p>
+                    <p>Commitment: {ngo.min_hours}</p>
+                    <p>{ngo.event_date} and {ngo.event_time}</p>
+                    <p>{ngo.event_description}</p>                  
+                  </div>          
+                </div>    
+                <button onClick={handleAttend}className="attend">Attend</button> 
+              
+                <Attend
+                  open={openModal}
+                />     
               </div> 
-            </div> 
             )
           })}
         </div> 
