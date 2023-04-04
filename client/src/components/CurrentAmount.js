@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { DonationsContext } from '../context/DonationsContext'
 import toast, { Toaster } from 'react-hot-toast'
+import './CurrentAmount.css'
 
 const CurrentAmount = () => {
   const [total, setTotal] = useState(0)
@@ -39,7 +40,7 @@ const CurrentAmount = () => {
         
         <input 
           type="text" 
-          className="choose-amount" 
+          className="other-amount" 
           placeholder="Other amount"
           value={total} 
           onChange={handleAmount}

@@ -5,7 +5,6 @@ import { FcGoogle } from 'react-icons/fc'
 import { SiFacebook } from 'react-icons/si'
 import axios from 'axios'
 import './Login.css'
-import Navbar from '../components/Navbar'
 
 const Login = () => {
   const { user, setUser, token, setToken } = useContext(AuthContext);

@@ -1,20 +1,28 @@
 import React from 'react'
-import styled from 'styled-components'
-import Filters from '../components/Filters'
-import Navbar from '../components/Navbar'
+import { useNavigate } from 'react-router-dom'
 import './Main.css'
-import { FiltersProvider } from '../context/FiltersContext'
 
-const Section = styled.div``
 const Main = () => {
+  const navigate = useNavigate();
+
+  const volunteer = () => {
+    navigate('/volunteer');
+  }
+
+  const donate = () => {
+    navigate('/donate');
+  }
 
   return (
-    <Section>
-      <Navbar/>
-      <FiltersProvider>
-        <Filters/>
-      </FiltersProvider>
-    </Section>
+    <div>
+      <h1>Welcome to Altru!</h1> 
+
+      <h2>Find Nonprofits to donate to or volunteer events </h2>
+
+      <button onClick={volunteer}>I am interested in volunteering</button>
+      <button onClick={donate}>I am interested in donating</button>
+  
+    </div>
   )
 }
 

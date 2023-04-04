@@ -14,19 +14,6 @@ button:hover{
   align-items: center;
   margin-left: 80px;
 }
-.donated-amount, .goal-amount, .left-amount, .today-amount{
-  border: 1px solid grey;
-  width: 150px;
-  height: 60px;
-  margin-left: 10px;
-}
-#goal-input{
-  width: 150px;
-}
-.goalContainer, .donatedContainer, .leftContainer, .todayContainer{
-  display: flex;
-  flex-direction: column;
-}
 .filters{
   display: flex;
   margin: 30px 60px 0px 0px;
@@ -57,9 +44,7 @@ form {
 .pagination{
   display: flex;
   flex-direction: row;
-  /* padding-right: 10%; */
   justify-content: flex-end;
-  /* margin-left: 50px; */
   padding-top: 40px;
 }
 .website{
@@ -128,8 +113,6 @@ h1{
   font-size: 14px;
   font-weight: lighter;
 }
-.choose-amount{
-  width: 100px;
-}
+
 
 

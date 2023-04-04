@@ -6,7 +6,7 @@ const ngoSchema = new Schema({
     type: String
   },
   category: {
-    type: String,
+    type: Array,
   }, 
   website: {
     type: String,
@@ -28,7 +28,7 @@ const ngoSchema = new Schema({
     required: true,
     default: true,
   },
-  volunteer_number: {
+  num_volunteers: {
     type: Number,
     required: true,
   },
@@ -39,20 +39,20 @@ const ngoSchema = new Schema({
     type: String,
   },
   event: {
-    upcoming: {
-      type: Boolean,
-    },
-    date: {
-      type: Date,
-    },
-    description: {
-      type: String,
-    },
-    time: {
-      type: String,
-    }
+    type: Boolean,
+    default: false,
+  },
+  event_date: {
+    // type: Date,
+    type: String,
+  },
+  event_time: {
+    type: String, 
+  },
+  event_description: {
+    type: String,
   }
-});
+}, { timestamps: true });
 
 module.exports = mongoose.model('Ngo', ngoSchema);
 

@@ -1,21 +1,21 @@
 import React, { useState, useEffect, useContext } from 'react'
+import axios from 'axios'
 import { AuthContext } from '../context/AuthContext'
 import { DonationsContext } from '../context/DonationsContext'
 import { FiltersContext } from '../context/FiltersContext'
+import { FiltersProvider } from '../context/FiltersContext';
 import { NgosContext } from '../context/NgosContext'
-import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
-import { BiMap } from 'react-icons/bi'
-// import StripeCheckout from 'react-stripe-checkout'
-import CurrentAmount from '../components/CurrentAmount'
-import Remaining from '../components/Remaining'
-import Donations from '../components/Donations'
+import CurrentAmount from './CurrentAmount'
+import Remaining from './Remaining'
+import Donations from './Donations'
 import DonationModal from './DonationModal'
-import Goal from '../components/Goal'
-import './Filters.css'
+import Goal from './Goal'
+import Navbar from '../components/Navbar'
+import './Donate.css'
 
-const Filters = () => {
+const Donate = () => {
   const { filters, setFilters } = useContext(FiltersContext) 
   const { goalAmount, totalAmount } = useContext(DonationsContext)
   const { token } = useContext(AuthContext);
@@ -24,26 +24,12 @@ const Filters = () => {
   const [ currentPage, setCurrentPage ] = useState(1)
   const [ pageCount, setPageCount ] = useState(1)
   const [ currentAmount ] = useState(0)
-  const [open, setOpen] = useState(true)
+  const [openModal, setOpenModal] = useState(false);
   const navigate = useNavigate();
 
-  // Stripe Payment
-  const makePayment = token => {
-    const body = {
-      token, 
-      currentAmount
-    }
-    const headers = {
-      "Content-Type": "application/json"
-    }
-    return fetch('http://localhost:5000/api/payment', {
-      method: "POST",
-      headers,
-      body: JSON.stringify(body)
-    }).then(response => {
-      console.log(response)
-    })
-    .catch(err => console.log(err));
+
+  const volunteer = () => {
+    navigate('/volunteer');
   }
 
   const handleClearAmount = () => {
@@ -68,10 +54,6 @@ const Filters = () => {
     setFilters({ ...filters, category: e.target.value});
   }
 
-  const handleFrequencyChange = (e) => {
-    setFilters({ ...filters, frequency: e.target.value});
-  }
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     fetchFilteredNgos()
@@ -87,23 +69,21 @@ const Filters = () => {
     // open modal
   }
 
-  const fetchAllNgos = async () => {
-    try {
-      const res = await axios.get('http://localhost:5000/api/ngos/', { headers: { Authorization: 'Bearer ' + token }})  
-      setNgos(res.data);
-      console.log(res.data);
-    } catch (err) {
-      setErrorMessage('Unable to fetch list of NGOs')
-    } 
-  };
+  // const fetchAllNgos = async () => {
+  //   try {
+  //     const res = await axios.get('http://localhost:5000/api/ngos/', { headers: { Authorization: 'Bearer ' + token }})  
+  //     setNgos(res.data);
+  //     console.log(res.data);
+  //   } catch (err) {
+  //     setErrorMessage('Unable to fetch list of NGOs')
+  //   } 
+  // };
 
   const fetchFilteredNgos = async () => {
     try {
-      const frequency = filters.frequency 
-      // const amount = filters.amount 
+      const amount = filters.amount 
       const category = filters.category 
-      const res = await axios.get(`http://localhost:5000/api/ngos/${frequency}/${category}`);  
-      // const res = await axios.get(`http://localhost:5000/api/ngos/${frequency}/${category}/${amount}`);    
+      const res = await axios.get(`http://localhost:5000/api/ngos/${amount}/${category}`);  
       setNgos(res.data);
       console.log(res.data.frequency);
     } catch (err) {
@@ -115,12 +95,15 @@ const Filters = () => {
     setPageCount(Math.ceil(ngos.length/4)); 
     }, [ngos.length]) 
 
-  useEffect(() => {
-    fetchAllNgos();
-    }, []);
+  // useEffect(() => {
+  //   fetchAllNgos();
+  //   }, []);
 
   return (
     <div>
+
+      <Navbar/>
+
       <Toaster position="top-center" toastOption={{ duration: 3000 }}/>
       <div className="stats">
 
@@ -135,20 +118,12 @@ const Filters = () => {
           <button className="donate-now" onClick={handleDonation}>Give Now</button>
         </div>
 
-        <DonationModal/>
+        <DonationModal 
+          open={openModal} 
+          onClose={() => setOpenModal(false)}/>
     
-        {/* <div className="stripeContainer">
-          <div className="stripe-text">Would you like to donate this amount?</div>
-          <StripeCheckout // TEST CC: 4242 4242 4242 4242; 12/34; 123
-            stripeKey="pk_test_51L1kSgAoNhpouPlcfYHS4qZk7puLHRnuQFurkS8DelIS2DvAgtPR5nM4DWIdI3rjZCUyhkg9USb34AEQBf2Zz32r00TiqYY6E9"
-            token={makePayment}
-            name="Your donation"
-            amount={currentAmount * 100}
-          />
-        </div> */}
       </div>
 
-      <h1>Find Nonprofits to donate to or volunteer events </h1>
       <div className="filters">
 
         <form className="dropdown">
@@ -162,15 +137,6 @@ const Filters = () => {
           </select>
         </form>
     
-        <form className="dropdown">
-          <select value={filters.frequency} onChange={handleFrequencyChange}>  
-          <option value="all"> --- Frequency --- </option>
-          <option value="upcomin">Upcoming Event</option>
-          <option value="weekly">Every Week</option>
-          <option value="monthly">Once a Month</option> 
-          </select>
-        </form>
-
         <form className="dropdown">
           <select value={filters.category} onChange={handleCategoryChange}>
           <option value="all"> --- All categorys --- </option>
@@ -190,6 +156,9 @@ const Filters = () => {
           <p>{currentPage} / {pageCount}</p>
           <button disabled={currentPage === pageCount} className="next" onClick={handleNext}>Next</button> 
         </div>
+
+        <button onClick={volunteer}>I am interested in volunteering</button>
+
 
       </div>
 
@@ -216,7 +185,7 @@ const Filters = () => {
     )
   }
 
-export default Filters;
+export default Donate;
 
 
 
