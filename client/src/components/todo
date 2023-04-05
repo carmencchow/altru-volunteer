@@ -1,6 +1,7 @@
 On Volunteer page:
-- Registering for event
-- Registering modal 
+- ✅ Registering for event
+- ✅ Registering modal  
+- ✅ Disable button, toggle status
 - decrement number of volunteers by 1
 - See other volunteers
 - Update event on userSchema
@@ -9,13 +10,6 @@ On Volunteer page:
 - Socket.io to chat wit other volunteers
 - Send email confirmation to volutneer
 - Change volunteer button to (attneding) from 'volunteer
-
-
-      {/* Toggle volunteer status */}
-            <button onClick={toggleStatus} className="status">
-              { volunteer ? 'Attending' : 'Volunteer now'}
-            </button> 
-
 
 On Info page:
 - Hook up Stripe for payment
