@@ -45,7 +45,7 @@ const Donate = () => {
     }, [ngos.length]) 
 
   const volunteer = () => {
-    navigate('/volunteer');
+    navigate('/main');
   }
 
   const handleClearAmount = () => {

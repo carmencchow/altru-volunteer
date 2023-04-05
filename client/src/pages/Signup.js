@@ -18,8 +18,6 @@ const Signup = () => {
 
   const { name, email, password, confirmPassword } = formData
 
-  //const navigate = useNavigate();
-
   const handleChange = (e) => {
     setFormData((prevState) => ({
       ...prevState, 

@@ -1,16 +1,15 @@
 import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
-import { AuthContext } from '../context/AuthContext'
 import { FiltersContext } from '../context/FiltersContext'
-import { FiltersProvider } from '../context/FiltersContext';
+import { FiltersProvider } from '../context/FiltersContext'
+import { AuthContext } from '../context/AuthContext'
 import { NgosContext } from '../context/NgosContext'
 import { useNavigate } from 'react-router-dom'
-import './Volunteer.css'
+import { GrFormClose } from "react-icons/gr"
 import Navbar from '../components/Navbar'
-import { GrFormClose } from "react-icons/gr";
-import VolunteerModal from './VolunteerModal'
+import './Volunteer.css'
 
-const Volunteer = ({ id, onClose, handleFetchData }) => {
+const Volunteer = () => {
   const { filters, setFilters } = useContext(FiltersContext) 
   const { token } = useContext(AuthContext);
   const { ngos, setNgos } = useContext(NgosContext)
@@ -49,11 +48,9 @@ const Volunteer = ({ id, onClose, handleFetchData }) => {
 
   const handleNgoSelected = (id) => {
     navigate(`/info/${id}`)
-    console.log(id)
   }
 
   const toggleModal = () => {
-    console.log('Sign up for volunteer event')
     setModal(!modal);
   }
 
@@ -76,8 +73,7 @@ const Volunteer = ({ id, onClose, handleFetchData }) => {
   return (
     <div>
       <Navbar/>
-
-      <div className="filters">
+        <div className="filters">
     
         <form className="dropdown">
           <select value={filters.frequency} onChange={handleFrequencyChange}>  
@@ -124,41 +120,42 @@ const Volunteer = ({ id, onClose, handleFetchData }) => {
                   className="infoBtn" 
                   onClick={() => handleNgoSelected(ngo._id)}>
                   {ngo.name}</button>
-                  <div className="rightside">
-                    <p>{ngo.category}</p>
-                    <p>Volunteers needed:{ngo.num_volunteers}</p>
-                    <p>Commitment: {ngo.commitment}</p>
-                  </div>          
-                </div>    
-              
-
-        { modal && (      
+                <div className="rightside">
+                  <p>{ngo.category}</p>
+                  <p>Volunteers needed: {ngo.num_volunteers}</p>
+                  <p>Commitment: {ngo.commitment}</p>
+                </div>          
+              </div>    
+    
+          {modal && (      
             <div className="modal">
-              <div onClick={toggleModal} className="modal-background">
-                <div className="modal-popup">
-                  <div className="modal-popup-heading">
-                    <div className="right-side">
-                      <GrFormClose className="close-btn" onClick={toggleModal} />
+              <div onClick={toggleModal}  className="modal-background">
+                  <div className="modal-popup">
+                    <div className="modal-popup-heading">
+                      <div className="modal-content">
+                        <div className="right-side">
+                          <GrFormClose className="close-btn" onClick={toggleModal}/>
+                        </div>
+                        <h1>You are registering for this event: </h1>
+                      </div>
+                      <div>
+                        <p>Date</p>
+                        <p>Time</p>
+                        <p>Description</p>
+                        <p>Organization</p>
+                      </div>
+                      <button>Confirm</button>
                     </div>
-                    <h1>You are registering for this event: </h1>
-                    <div>
-                      <p>Date</p>
-                      <p>Time</p>
-                      <p>Description</p>
-                      <p>Organization</p>
-                    </div>
-                    <button>Confirm</button>
                   </div>
                 </div>
               </div>
+            )} 
+            
+            <button onClick={toggleModal}
+              className="modal-btn">Become a Volunteer
+            </button> 
+            
             </div>
-          )} 
-          
-          <button onClick={toggleModal}
-            className="modal-btn">Become a Volunteer
-          </button> 
-
-          </div> 
             )
           })}
         </div> 

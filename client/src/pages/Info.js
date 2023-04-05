@@ -1,19 +1,20 @@
 import React, {useState, useEffect} from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom';
-import DonationModal from '../components/DonationModal'
-import Navbar from '../components/Navbar'
-import { AiOutlineHeart, AiOutlineCalendar } from 'react-icons/ai';
+import { useNavigate, useParams } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast'
+import { GrFormClose } from "react-icons/gr";
+import Profile from '../components/Profile'
+import Navbar from '../components/Navbar'
+import { RxAvatar } from 'react-icons/rx'
 import axios from 'axios'
 import './Info.css'
 
 const Info = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const [favorite, setFavorite] = useState('');
-  const [openModal, setOpenModal] = useState(false);
-  const [favorites, setFavorites] = useState([])
-  const [currentNgo, setCurrentNgo] = useState({
+  const [ favorite, setFavorite ] = useState('');
+  const [ favorites, setFavorites ] = useState([]);
+  const [ amount, setAmount ] = useState(0);
+  const [ currentNgo, setCurrentNgo ] = useState({
     _id: '',       
     name: '',
     category: [],
@@ -22,9 +23,12 @@ const Info = () => {
     tag: '' 
   });
 
-  const openCalendar = () => {
-    navigate(`/info/${id}`)
-    console.log(id)
+  // const toggleDrawer = () => {
+  //   setDrawer(!drawer)
+  // }
+
+  const handleAmount = () => {
+    
   }
 
   const addToFavorites = async () => {
@@ -59,11 +63,6 @@ const Info = () => {
     // } catch (err) {
     //   console.log(err)
     // }
-
-  }
-
-  const addToToday = () => {
-    console.log('Donation added')
   }
 
   const fetchNgo = async () => {
@@ -79,45 +78,51 @@ const Info = () => {
   return (
     <div>
       <Navbar/>
+      <Profile/>
+      {/* <div className="drawer-btn" onClick={toggleDrawer}>
+        <Profile/>Profile      
+        <GrFormClose className="close-button" onClick={toggleDrawer}/>
+      </div> */}
+
       <div> 
         <span className="back" onClick={() => navigate(-1)}>Back</span>
-        <h1>{currentNgo.name}</h1> 
-
-       <div className="fave-list">
-    
-        <DonationModal 
-          open={openModal} 
-          onClose={() => setOpenModal(false)}/>
-
-
-          {/* {favorites && favorites.length > 0 && favorites.map((item) => {
-            return <p key={id}>Item is: {item}</p>
-          })} */}
-
-          <Toaster position="top-center" toastOption={{ duration: 3000 }}/>
-          <div className="heart"><p className="heart-text">Add to favourites</p><AiOutlineHeart onClick={addToFavorites}/></div>
-
-        </div>
+        <h3>{currentNgo.name}</h3> 
+        <Toaster position="top-center" toastOption={{ duration: 3000 }}/>
+      </div>
+        <p>About us: {currentNgo.tag}</p>        
+      <div className="url" onClick={() => { window.open(`${currentNgo.website}`)}}>
+        {currentNgo.website}
+     
+      <div className="info-links">
+        <span className="goal">Follow</span> 
+        <span className="favorite">Set a goal</span> 
       </div>
 
-      <div className="contact">
-        <p>category: {currentNgo.category}</p> 
-        <p>ABOUT US: {currentNgo.tag}</p>
-        <br></br>        
-        <div className="url" onClick={() => { window.open(`${currentNgo.website}`)}}>{currentNgo.website}</div>
-     
-        <br></br>
+      <div className="donation-card">
+        <h3>Make a donation: </h3>
 
-        <div className="info-links">
-          <span className="donate" onClick={() => setOpenModal(true)} >Donate</span>
-          <span className="following">Follow</span> 
-          <span className="volunteer"><AiOutlineCalendar onClick={openCalendar}></AiOutlineCalendar>Volunteer</span>
+        <div className="donation-amount">
+          <p>$20</p>
+          <p>$25</p>
+          <p>$50</p>
+          <p>$70</p>
+          <p>Other</p>
+        <div/>
+      
+        <input 
+          type="text" 
+          className="input"
+          value={amount}
+          onChange={handleAmount}/>                    
+                    
+        <button>Process</button>
+      </div> 
 
-          {/* Number of people  */}
-        </div>
+      </div>
       </div>
     </div>
-  )
-}
+
+    )
+  }
 
 export default Info

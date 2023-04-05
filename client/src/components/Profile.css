@@ -5,12 +5,11 @@
 }
 .user-profile{
   display: flex;
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
   margin-bottom: 20px;
 }
 .favourites{
   display: flex;
-  border: 1px solid orchid;
   margin-bottom: 20px;
 }
 .tracker, .activity{
@@ -27,4 +26,17 @@
   align-items: flex-end;
   justify-content: flex-end;
   margin-right: 30px;
+}
+.profile-drawer{
+  height: 100vh;
+  width: 500px;
+  margin-top: 0px;
+  margin-right: 0px;
+  background-color: whitesmoke;
+  transition: all 0.3s ease-in-out;
+  transform: translate(900px);
+  position: absolute;
+}
+.profile-drawer_open{
+  transform: translate(0);
 }

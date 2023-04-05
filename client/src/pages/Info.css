@@ -12,7 +12,7 @@ button{
   margin: 30px 60px;
   justify-content: center;
 }
-.following, .donate, .volunteer{
+.goal, .donate, .favorite{
   height: 36px;
   border: 2px solid purple;
   color: purple;
@@ -57,4 +57,10 @@ span:hover{
 }
 .favorites-container{
   border: 1px solid blue;
+}
+.donation-card{
+  border: 1px solid orange;
+  width: 500px;
+  height: 400px;
+  margin-left: 40px;
 }

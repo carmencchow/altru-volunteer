@@ -1,18 +1,13 @@
-import './App.css';
-import Main from './pages/Main';
-// import Navbar from '../components/Navbar';
-import Login from './pages/Login';
-import Profile from './pages/Profile';
-import Info from './pages/Info';
-import Signup from './pages/Signup';
-import Home from './pages/Home';
-import Donate from './components/Donate';
-import Volunteer from './components/Volunteer';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { DonationsProvider } from './context/DonationsContext';
+import { AuthContextProvider } from './context/AuthContext';
 import { FiltersProvider } from './context/FiltersContext';
 import { NgosProvider } from './context/NgosContext';
-import { AuthContextProvider } from './context/AuthContext';
+import Volunteer from './components/Volunteer';
+import Signup from './pages/Signup';
+import Login from './pages/Login';
+import Info from './pages/Info';
+import './App.css';
 
 function App() {
   const user = true;
@@ -21,22 +16,18 @@ function App() {
       <BrowserRouter>
         <AuthContextProvider>
           <FiltersProvider>
-        <DonationsProvider>
-        <div>
-          <Routes>
-            <Route path="/" element={<Home/>}/>
-            <Route path="/main" element={<Main/>}/>
-            <Route path="/login" element={<Login/>}/>
-            <Route path="/signup" element={<Signup/>}/>
-            <Route path="/login" element={user ? <Navigate to="/" /> : <Home/>}/>
-            <Route path="/profile" element={<Profile/>}/>
-            <Route path="/donate" element={<Donate/>}/>
-            <Route path="/volunteer" element={<Volunteer/>}/>
-            <Route path="/info/:id" element={<Info/>}/>
-          </Routes>
-        </div>
-        </DonationsProvider>
-        </FiltersProvider>
+            <DonationsProvider>
+              {/* <div> */}
+              <Routes>
+                <Route path="/login" element={<Login/>}/>
+                <Route path="/signup" element={<Signup/>}/>
+                <Route path="/login" element={user ? <Navigate to="/main"/> : <Login/>}/>
+                <Route path="/main" element={<Volunteer/>}/>
+                <Route path="/info/:id" element={<Info/>}/>
+              </Routes>
+              {/* </div> */}
+            </DonationsProvider>
+          </FiltersProvider>
         </AuthContextProvider>
       </BrowserRouter>
     </NgosProvider>

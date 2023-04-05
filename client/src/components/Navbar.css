@@ -2,9 +2,9 @@ nav{
   display: flex;
   justify-content: space-between;
   margin: 20px auto;
-  padding: 0px 20px 20px 20px;
+  padding: 0px 20px 0px 20px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
-  height: 60px;
+  height: 36px;
 }
 button{
   margin-left: 10px;
