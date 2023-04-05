@@ -9,6 +9,10 @@ const userSchema = new Schema({
     unique: true,
     required: [true, "Please enter a valid username"] 
   },
+  initials: {
+    type: String,
+    required: true,
+  },
   email: { 
     type: String, 
     unique: true, 

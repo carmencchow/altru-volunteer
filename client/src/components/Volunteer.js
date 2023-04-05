@@ -25,16 +25,12 @@ const Volunteer = () => {
   const navigate = useNavigate();
 
   const handleRegister = () => {
-    // Thank you for registering
     setConfirm('Thank you. Please check your email for confirmation')
-    // Change 'volunteer' status to 'attending'
     setVolunteer('Attending')
-    // Disable onClick
     setDisabled(true)
     // Decrement volunteer number by 1
     setNumVolunteers(-1)
     // Update backend - user's events
-
     // Update profile
   }
 

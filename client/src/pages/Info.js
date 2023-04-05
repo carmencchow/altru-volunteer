@@ -12,26 +12,26 @@ const Info = () => {
   const [ favorite, setFavorite ] = useState('');
   const [ favorites, setFavorites ] = useState([]);
   const [ amount, setAmount ] = useState(0);
-  const [ currentNgo, setCurrentNgo ] = useState({
-    _id: '',       
-    name: '',
-    category: [],
-    location: [],
-    website: '',
-    tag: '' 
+  const [ ngo, setNgo ] = useState({
+    // _id: '',       
+    // name: '',
+    // category: [],
+    // location: [],
+    // website: '',
+    // tag: '' 
   });
 
-  const addToFavorites = async () => {
+  const handleFollow = async () => {
     try {
       const res = await axios.get(`http://localhost:5000/api/ngos/${id}`)
       console.log(`Adding '${res.data.name}' to favorites list`)
       if (!favorites.includes(res.data.name)){
         setFavorite(res.data.name)  
         setFavorites([...favorites, res.data.name])
-        toast.success(`${res.data.name} added to favorites`) 
+        toast.success(`Following ${res.data.name}`) 
         console.log('Favorites list:', favorite, favorites)
       } else {
-        toast.success(`${res.data.name} removed from favorites`)
+        toast.success(`Unfollowing ${res.data.name}`)
         setFavorites([...favorites.filter((ngo) => ngo !==res.data.name)])
       }
     } catch (err) {
@@ -59,13 +59,13 @@ const Info = () => {
 
   }
 
-  const handleFollow = (e) => {
-    console.log(e.target.value)
+  const handlePayment = () => {
+    console.log('Processing payment')
   }
 
   const fetchNgo = async () => {
     const res = await axios.get(`http://localhost:5000/api/ngos/${id}`)
-    setCurrentNgo(res.data)
+    setNgo(res.data)
     console.log(res.data)
   }
 
@@ -80,39 +80,51 @@ const Info = () => {
 
       <div> 
         <span className="back" onClick={() => navigate(-1)}>Back</span>
-        <h3>{currentNgo.name}<span className="follow" onClick={handleFollow}>Follow</span> 
-        </h3>
+        <span className="follow" onClick={handleFollow}>Follow {ngo.name}</span> 
         <Toaster position="top-center" toastOption={{ duration: 3000 }}/>
       </div>
-        <p>About us: {currentNgo.tag}</p>        
-      {/* <div className="url" onClick={() => { window.open(`${currentNgo.website}`)}}>
-        {currentNgo.website} */}
+        <p> Donate to {ngo.name}</p>        
 
       <div className="donation-card">
-        <h3>Make a donation: </h3>
+        <p>Please select a donation amount: </p>
+        <div className="donation-options">
+          <div className="amount-btn" onClick={selectAmount} value="15">$10</div>
+          <div className="amount-btn" onClick={selectAmount} value="25">$25</div>
+          <div className="amount-btn" onClick={selectAmount} value="50">$30</div>
+        </div>
+        <div className="donation-options">
+          <div className="amount-btn" onClick={selectAmount} value="50">$50</div>
+          <div className="amount-btn" onClick={selectAmount} value="75">$75</div>
+          <div className="amount-btn" onClick={selectAmount} value="75">$100</div>
+        </div>
 
-        <div className="donation-amount">
-          <p onClick={selectAmount} value="15">15</p>
-          <p onClick={selectAmount} value="25">$25</p>
-          <p onClick={selectAmount} value="50">$50</p>
-          <p onClick={selectAmount} value="75">$75</p>
-          <p onClick={selectAmount} value="100">$100</p>
-          <p>Other</p>
-        <div/>
-      
-        <input 
-          type="text" 
-          className="input"
-          value={amount}
-          onChange={selectAmount}
-        />                    
-                    
-        <button>Process</button>
-      </div> 
+        <div className="donation-options">
+          <input 
+            type="text" 
+            className="donation-input"
+            value={amount}
+            placeholder='other amount'
+            onChange={selectAmount}
+          />                              
+        </div> 
+
+        <div className="donor-info">
+          <div className="column">
+            <p>Full name:</p>
+            <p>Street Address:</p>
+            <p>City:</p>
+          </div>
+          <div className="column">
+            <p>Province/State:</p>
+            <p>Postal/ZIP Code:</p>
+            <p>Email address: </p>
+          </div>        
+        </div>
+
+        <div className="process" onClick={handlePayment}>Process</div>      
 
       </div>
-      </div>
- 
+    </div>
     )
   }
 

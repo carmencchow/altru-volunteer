@@ -1,12 +1,6 @@
 button{
   cursor: pointer;
 }
-.url{
-  cursor: pointer;
-}
-.url:hover{
-  color: black;
-}
 .heading, .contact, h1{
   margin: 30px 60px;
   justify-content: center;
@@ -29,22 +23,6 @@ button{
   margin-right: 30px;
   cursor: pointer;
 }
-.heart{
-  font-size: 30px;
-  cursor: pointer;
-}
-.heart-text{
-  font-size: 10px;
-  position: relative;
-  visibility: hidden;
-  left: -20px;
-}
-.heart:hover{
-  color: purple;
-}
-.heart:hover .heart-text{
-  visibility: visible;
-}
 .fave-list{
   display: flex;
   justify-content: flex-end;
@@ -54,12 +32,37 @@ span:hover{
   color: purple;
   background: none;
 }
-.favorites-container{
-  border: 1px solid blue;
-}
 .donation-card{
   border: 1px solid orange;
   width: 500px;
   height: 400px;
   margin-left: 40px;
+}
+.donation-options{
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 30px;
+}
+.donation-input{
+  width: 100px;
+}
+textarea:focus, .donation-input:focus{
+  outline: none;
+}
+/* .form-control:focus {
+  border-color: inherit;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+} */
+.amount-btn{
+  cursor: pointer;
+}
+.column{
+  display: flex;
+  justify-content: space-between;
+}
+.process{
+  cursor: pointer;
+  border: 1px solid palevioletred;
+  width: 70px;
 }
