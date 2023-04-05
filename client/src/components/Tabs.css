@@ -19,7 +19,6 @@
   width: 20%;
   font-size: 20px;
   padding: 20px 30px;
-  /* background-color: #f9f9f2; */
   cursor: pointer;
   box-sizing: content-box;
 }
@@ -49,7 +48,6 @@
   justify-content: space-between;
   background: white;
   border: 1px solid rgb(227, 188, 227);
-  color: blue;
 }
 .tabs-container{
   height: 100vh;
@@ -68,6 +66,13 @@
   flex-direction: row;
   align-items: flex-end;
   justify-content: flex-end;
-  margin-right: 30px;
+  margin-right: 10px;
   cursor: pointer;
+}
+.button-row{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: flex-end;
+  margin-right: 10px;
 }

@@ -4,9 +4,8 @@ const DonationsList = () => {
   return (
     <div className="container">
       <div className="stats">
-        <p>Goal Amount:</p>
-        <p>Amount Donated:</p>
-        <p>${}</p>
+        <p>Goal Amount:$250.00</p>
+        <p>Amount Donated: $35.00</p>
       </div>
       
       <div className="history">

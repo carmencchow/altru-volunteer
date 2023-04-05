@@ -5,11 +5,6 @@
 }
 .user-profile{
   display: flex;
-  /* border: 1px solid blue; */
-  margin-bottom: 20px;
-}
-.favourites{
-  display: flex;
   margin-bottom: 20px;
 }
 .tracker, .activity{

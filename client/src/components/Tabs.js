@@ -21,9 +21,11 @@ const Tabs = () => {
   return (
 
     <div>
-       <button onClick={toggleModal} className="modal-btn">
-        Show Your Stats
-      </button> 
+      <div className="button-row">
+        <button onClick={toggleModal} className="modal-btn">
+          Show Your Stats
+        </button> 
+      </div>
 
    {modal && (  
     <div className="tabs-container">

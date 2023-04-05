@@ -1,0 +1,7 @@
+.follow{
+  display: flex;
+  justify-content: space-between;
+}
+.edit-row{
+  display: flex;
+}

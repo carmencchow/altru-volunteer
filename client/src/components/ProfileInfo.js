@@ -1,21 +1,11 @@
 import React, { useState } from 'react'
-import { GrFormClose } from "react-icons/gr";
 import { BsPencil } from 'react-icons/bs'
-import './Profile.css'
+import './ProfileInfo.css'
 
 const Profile = () => {
   const [ name, setName ] = useState('')
   const [ email, setEmail ] = useState('')
   const [ telephone, setTelephone ] = useState('')
-  const [ goal, setGoal ] = useState(0)
-
-  const handleGoalAmount = (e) => {
-    setGoal(e.target.value)
-  }
-
-  const saveGoalAmount = (e) => {
-    console.log('Saving amount', goal)
-  }
 
   const handleEdit = () => {
     console.log('editing')
@@ -24,24 +14,33 @@ const Profile = () => {
   return (
     
     <div>  
-      <p>Name:</p>
-      <p>Email:</p>
-      <button className="edit" onClick={handleEdit}>
-      <BsPencil className="edit"/>Edit</button>
+      <div className="edit-row">      
+        <p>Name: Carmen Chow</p>
+        <BsPencil className="edit"/>Edit
+      </div>
+
+
+      <p>Email: reach.cchow@gmail.com</p>
+      <button className="edit" onClick={handleEdit}/>
         
-      <input 
-        type="text" 
-        className="goal-amount" 
-        placeholder="Donation amount" 
-        value={goal}
-        onChange={handleGoalAmount}>
-      </input>
+      <div className="following">
+      <h3>Organizations followed:</h3>
+ 
+        <div className="follow">
+          <p>Clean Air Alliance</p>
+          <p>Unfollow</p>
+        </div>
 
-      <button onClick={saveGoalAmount}>Save</button>
+        <div className="follow">
+          <p>Sick Kids Hospital</p>
+          <p>Unfollow</p>
+        </div>
 
-      <div className="favourites">
-        <h3>Favourited Organizations</h3>
-        <button className="delete">Delete from favorite</button>
+        <div className="follow">
+          <p>Toronto Humane Society</p>
+          <p>Unfollow</p>
+        </div>
+
       </div>
     
     </div>

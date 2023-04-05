@@ -21,10 +21,6 @@ const Info = () => {
     tag: '' 
   });
 
-  const handleAmount = () => {
-    
-  }
-
   const addToFavorites = async () => {
     try {
       const res = await axios.get(`http://localhost:5000/api/ngos/${id}`)
@@ -59,6 +55,14 @@ const Info = () => {
     // }
   }
 
+  const selectAmount = () => {
+
+  }
+
+  const handleFollow = (e) => {
+    console.log(e.target.value)
+  }
+
   const fetchNgo = async () => {
     const res = await axios.get(`http://localhost:5000/api/ngos/${id}`)
     setCurrentNgo(res.data)
@@ -76,22 +80,23 @@ const Info = () => {
 
       <div> 
         <span className="back" onClick={() => navigate(-1)}>Back</span>
-        <h3>{currentNgo.name}<span className="goal">Follow</span> 
+        <h3>{currentNgo.name}<span className="follow" onClick={handleFollow}>Follow</span> 
         </h3>
         <Toaster position="top-center" toastOption={{ duration: 3000 }}/>
       </div>
         <p>About us: {currentNgo.tag}</p>        
-      <div className="url" onClick={() => { window.open(`${currentNgo.website}`)}}>
-        {currentNgo.website}
+      {/* <div className="url" onClick={() => { window.open(`${currentNgo.website}`)}}>
+        {currentNgo.website} */}
 
       <div className="donation-card">
         <h3>Make a donation: </h3>
 
         <div className="donation-amount">
-          <p>$20</p>
-          <p>$25</p>
-          <p>$50</p>
-          <p>$70</p>
+          <p onClick={selectAmount} value="15">15</p>
+          <p onClick={selectAmount} value="25">$25</p>
+          <p onClick={selectAmount} value="50">$50</p>
+          <p onClick={selectAmount} value="75">$75</p>
+          <p onClick={selectAmount} value="100">$100</p>
           <p>Other</p>
         <div/>
       
@@ -99,7 +104,7 @@ const Info = () => {
           type="text" 
           className="input"
           value={amount}
-          onChange={handleAmount}
+          onChange={selectAmount}
         />                    
                     
         <button>Process</button>

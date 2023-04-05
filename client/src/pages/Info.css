@@ -2,11 +2,10 @@ button{
   cursor: pointer;
 }
 .url{
-  margin-bottom: 20px;
   cursor: pointer;
 }
 .url:hover{
-  color: blue;
+  color: black;
 }
 .heading, .contact, h1{
   margin: 30px 60px;
