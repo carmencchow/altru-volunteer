@@ -4,11 +4,11 @@ const { protect } = require('../middleware/authMiddleware')
 
 const router = express.Router();
 
-router.post('/signup', signup)  // localhost:5000/api/auth/signup
-router.post('/login', login) // localhost:5000/api/auth/login
-router.post('/logout', logout) // localhost:5000/api/auth/logout
-router.get('/me', protect, getMe) // localhost:5000/api/auth/me
-
+//localhost:5000/api/auth
+router.post('/signup', signup)
+router.post('/login', login) 
+router.post('/logout', logout)
+router.get('/me', protect, getMe)
 
 module.exports = router;
 

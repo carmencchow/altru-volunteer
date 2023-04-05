@@ -29,6 +29,21 @@ const deleteUser = async (req, res) => {
 }
 
 //3. UPDATE/EDIT a user
-const editUser = async (req, res) => {}
+const editUser = async (req, res) => {
+  try {
+    const username = req.body.username;
+    const email = req.body.email;
+    const user = await User.findById({ _id: req.params.id });
+    user.username = username;
+    user.email = email;
+    await user.save();
+    console.log(user._id, user.username, user.email);
+    return res.status(200).send({ message: "Profile updated", user });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({ message: "Error occurred while updating" });
+  }
+};
+
 
 module.exports = { getUser, deleteUser, editUser }

@@ -8,6 +8,10 @@ const Profile = () => {
   const [ telephone, setTelephone ] = useState('')
 
   const handleEdit = () => {
+      
+
+
+
     console.log('editing')
   }
 
@@ -15,13 +19,10 @@ const Profile = () => {
     
     <div>  
       <div className="edit-row">      
-        <p>Name: Carmen Chow</p>
-        <BsPencil className="edit"/>Edit
+        <p>Carmen Chow</p>
+        <p>reach.cchow@gmail.com</p>
+        <BsPencil onClick={handleEdit} className="edit"/>Edit
       </div>
-
-
-      <p>Email: reach.cchow@gmail.com</p>
-      <button className="edit" onClick={handleEdit}/>
         
       <div className="following">
       <h3>Organizations followed:</h3>
@@ -42,7 +43,6 @@ const Profile = () => {
         </div>
 
       </div>
-    
     </div>
   )
 }

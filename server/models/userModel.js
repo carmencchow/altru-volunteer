@@ -11,7 +11,6 @@ const userSchema = new Schema({
   },
   initials: {
     type: String,
-    required: true,
   },
   email: { 
     type: String, 
@@ -31,17 +30,19 @@ const userSchema = new Schema({
   },
   image: {
     type: String,
-    required: false,
   },
   goal_amount: {
     type: Number,
   },
-  donations: {
-    type: Number,
+  following: {
+    type: Array,
   },
-  hours_volunteered: {
-    type: Number,
-  }
+  donations: {
+    type: Array,
+  },
+  attended: {
+    type: Array,
+  },
 }, { timestamps: true });
 
 module.exports = mongoose.model('User', userSchema);

@@ -1,109 +1,111 @@
+// const { response } = require('express');
+const express = require('express');
 const User = require('../models/userModel');
-const bcrypt = require("bcrypt");
-const mongoose = require('mongoose');
-const { response } = require('express');
+const bcrypt = require("bcryptjs");
 const jwt = require('jsonwebtoken');
+const mongoose = require('mongoose');
 const cookie = require('cookie');
 
 // 1. REGISTER endpoint
 const signup = async (req, res) => {
   const { username, email, password } = req.body;
   try {
-    // a) Validate incoming request
-    if (!username || !password || !email){
-      res.status(400).send({ message: 'Please complete all required fields'});
-      return;
+    let user = await User.findOne({
+      email,
+    });
+    if (user) {
+      return res.status(400).json({
+        message: "User already exists",
+      });
     }
+    user = new User({
+      username,
+      email,
+      password,
+      following: [],
+      donations: [],
+      attended: [],
+    });
 
-    // b) Check if user already exists
-    const userExists = await User.findOne({ email });
-    if (userExists){
-      res.status(400).send({ message: 'Email already exists. Please login instead.'});
-    } 
-
-    // c) Hash the password before saving email and password into the database
-    const hashedPassword = await bcrypt.hash(req.body.password, 10);
-
-    // d) Create a new user instance and collect the data
-    const newUser = new User(req.body) 
-  // const newUser = new User({
-      // username: req.body.username,
-      // email: req.body.email,
-      // password: hashedPassword,
-      // image: req.body.image
-    // })
-
-    // e) Save user and return data to user
-    await newUser.save();
-
-    res.status(200).send({ 
-      message: 'New user saved to database', 
-      username, 
-      email, 
-      token: createToken(newUser._id) 
-    }); 
-  
-    } catch (err) {
-      console.log(err);
-      res.status(500).send({ message: 'Invalid user data. User not saved' });
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(password, salt);
+    await user.save();
+    const payload = {
+      user: {
+        id: user.id,
+      },
     };
-  };
 
-  // 2. LOGIN endpoint
-  const login = async (req, res) => {
-    // Hash the password before saving email and password into the database
-    
-    try {
-      console.log(req.body.password);
-      const hashedPassword = await bcrypt.hash(req.body.password, 8);
-    
-      // Validate incoming request body
-      if (!req.body.email || !req.body.password){
-        res.status(400).send({ message: 'Email or password missing'});
-        return;
+    jwt.sign(
+      payload,
+      "randomString",
+      {
+        expiresIn: 10000,
+      },
+      (err, token) => {
+        if (err) throw err;
+        res.status(200).json({
+          token,
+        });
       }
-
-      // Check for user email
-      const user = await User.findOne({ email: req.body.email });
-      if (!user) return res.status(404).send({ message: 'User not found. Please enter the correct email and password' });
-
-      // Validate incoming password against hashed password
-      const isPasswordValid = await bcrypt.compare(req.body.password, hashedPassword)
- 
-      if (!isPasswordValid){
-        res.status(400).send({ message: 'Invalid username or password', err});
-      }
-
-      res.status(200).send({ 
-        message: 'User login successful', 
-        username: req.body.username, 
-        email: req.body.email,
-        token: createToken(user._id) 
-      }); 
-
-    } catch (err) {
-      console.log(err); 
-      res.status(500).send({ message: 'Login failed', err});
-    }
-  };
-
-  // Generate JWT token
-  const createToken = (_id) => {
-    return jwt.sign({ _id }, process.env.JWT_SECRET, { 
-      expiresIn: '7d',
-    })
+    );
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send("Error in saving");
   }
+};
 
-// Create cookie with token
-  const createCookie = () => {
-    res.cookie('jwt', token, {
+// 2. LOGIN endpoint
+const login = async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    let user = await User.findOne({
+      email,
+    });
+    if (!user)
+      return res.status(400).json({
+        message: "User does not exist",
+      });
+
+    // const isMatch = await bcrypt.compare(password, user.password);
+    // if (!isMatch) {
+    //   return res.status(400).json({
+    //     message: "Incorrect email or password",
+    //   });
+    // }
+    const payload = {
+      user: {
+        id: user.id,
+      },
+    };
+
+    const token = jwt.sign(payload, "randomString", { expiresIn: "1h" });
+    res.cookie("token", token, {
       httpOnly: true,
-      secure: true,
-      maxAge: 7 * 24 * 60 * 60 * 1000
-    })
+    });
+    res.status(200).send({ token });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
   }
+};
 
-// 3. LOGOUT endpoint
+// 3. GETME endpoint
+const getMe = async (req, res) => {
+  try {
+    // request.user is getting fetched from middleware after token authentication
+    const user = await User.findById(req.user.id).populate("boards");
+    res.json({
+      username: user.username,
+      boards: user.boards,
+    });
+  } catch (error) {
+    console.log(error);
+    res.send({ message: "Error in fetching user" });
+  }
+};
+
+// 4. LOGOUT endpoint
 const logout = ( req, res ) => {
   try {
     // send JWT and then remove 
@@ -113,17 +115,6 @@ const logout = ( req, res ) => {
     console.log(err);
     res.status(500).json({ message: 'Logout failed', err})
   }
-}
-
-// 4. GETME endpoint, access by passing user token in 'auth'
-const getMe = async ( req, res ) => { 
-  const {_id, username, email } = await User.findById(req.user.id);
-  res.status(200).send({ 
-    message: 'User data display',
-    id: _id,
-    username,
-    email
-  })
 }
 
 module.exports = { signup, login, logout, getMe };
