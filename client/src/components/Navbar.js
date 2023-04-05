@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../context/AuthContext'
-import { RxAvatar } from 'react-icons/rx'
 import logo from '../assets/logo.png'
 import Login from '../pages/Login'
 import './Navbar.css'
@@ -18,8 +17,6 @@ const Navbar = () => {
       const res = await axios.post('http://localhost:5000/api/auth/logout')
       setUser(null)
       setToken('')
-
-      // console.log(res.data)  
     } catch (err) { 
       console.log(err, 'Unable to log out')
     }
@@ -62,11 +59,6 @@ const Navbar = () => {
       </div>
 
       <div className="nav-login">
-        <div className="profile">
-          <Link className="avatar-text" to="/profile">
-          <RxAvatar className="avatar"/>
-          </Link>
-        </div>
         <div className="login-signup">
           <span className="login"><Link className="button-text" to="/login">Log in</Link></span> 
           <span className="logout"><Link to="/" onClick={handleLogout}>Logout</Link></span>

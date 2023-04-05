@@ -1,10 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast'
-import { GrFormClose } from "react-icons/gr";
-import Profile from '../components/Profile'
 import Navbar from '../components/Navbar'
-import { RxAvatar } from 'react-icons/rx'
+import Tabs from '../components/Tabs';
 import axios from 'axios'
 import './Info.css'
 
@@ -22,10 +20,6 @@ const Info = () => {
     website: '',
     tag: '' 
   });
-
-  // const toggleDrawer = () => {
-  //   setDrawer(!drawer)
-  // }
 
   const handleAmount = () => {
     
@@ -78,25 +72,17 @@ const Info = () => {
   return (
     <div>
       <Navbar/>
-      <Profile/>
-      {/* <div className="drawer-btn" onClick={toggleDrawer}>
-        <Profile/>Profile      
-        <GrFormClose className="close-button" onClick={toggleDrawer}/>
-      </div> */}
+      <Tabs/>
 
       <div> 
         <span className="back" onClick={() => navigate(-1)}>Back</span>
-        <h3>{currentNgo.name}</h3> 
+        <h3>{currentNgo.name}<span className="goal">Follow</span> 
+        </h3>
         <Toaster position="top-center" toastOption={{ duration: 3000 }}/>
       </div>
         <p>About us: {currentNgo.tag}</p>        
       <div className="url" onClick={() => { window.open(`${currentNgo.website}`)}}>
         {currentNgo.website}
-     
-      <div className="info-links">
-        <span className="goal">Follow</span> 
-        <span className="favorite">Set a goal</span> 
-      </div>
 
       <div className="donation-card">
         <h3>Make a donation: </h3>
@@ -113,7 +99,8 @@ const Info = () => {
           type="text" 
           className="input"
           value={amount}
-          onChange={handleAmount}/>                    
+          onChange={handleAmount}
+        />                    
                     
         <button>Process</button>
       </div> 

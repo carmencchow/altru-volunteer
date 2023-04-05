@@ -1,58 +1,64 @@
 import React, { useState } from 'react'
 import './Tabs.css'
-import DonationsList from './DonationsList';
-import VolunteerList from './VolunteerList';
+import DonationsInfo from './DonationsInfo'
+import VolunteerInfo from './VolunteerInfo'
+import ProfileInfo from './ProfileInfo'
+import { GrFormClose } from "react-icons/gr"
 
 const Tabs = () => {
   const [toggleState, setToggleState] = useState(1);
-  // const [dropContent, setDropContent] = useState(1);
+  const [modal, setModal] = useState(false);
+
+  const toggleModal = () => {
+    setModal(!modal);
+  }
 
   const toggletabs = (idx) => {
     setToggleState(idx)
     console.log(idx)
   }
-  
-  // const toggleContent = () => {
-  //   setDropContent(!dropContent)
-  // }
 
   return (
+
+    <div>
+       <button onClick={toggleModal} className="modal-btn">
+        Show Your Stats
+      </button> 
+
+   {modal && (  
     <div className="tabs-container">
 
       <div className="heading-tabs">
         <div className={toggleState === 1 ? "tabs active-tabs" : "tabs"} 
-        onClick={() => toggletabs(1)}>Upcoming Events</div>
+        onClick={() => toggletabs(1)}>My Profile</div>
 
         <div className={toggleState === 2 ? "tabs  active-tabs" : "tabs"} 
         onClick={() => toggletabs(2)}>Donations</div>
 
         <div className={toggleState === 3 ? "tabs  active-tabs" : "tabs"} 
-        onClick={() => toggletabs(3)}>Volunteer Hours</div>
+        onClick={() => toggletabs(3)}>Volunteer</div>
       </div>
 
 
       <div className="content-tabs">
-        <div className={toggleState === 1 ? "content active-content" : "content"}>MY EVENTS</div>
-
-        <div className={toggleState === 2 ? "content active-content" : "content"}><p>MY DONATIONS</p>
-        <div><DonationsList/></div>
+        <div className={toggleState === 1 ? "content active-content" : "content"}>
+        <div><ProfileInfo/></div>
+        <GrFormClose className="close-btn" onClick={toggleModal}/>
         </div>
 
-        <div className={toggleState === 3 ? "content active-content" : "content"}><p>MY VOLUNTEER HOURS</p>
-        <div><VolunteerList/></div>
+        <div className={toggleState === 2 ? "content active-content" : "content"}>
+        <div><DonationsInfo/></div>
+        <GrFormClose className="close-btn" onClick={toggleModal}/>
         </div>
 
-       {/* <div onClick={toggleContent} className={dropContent ? "active content" : "content"}>
-          <p>My Events</p>
-        </div> 
-
-        <div onClick={() => toggleContent() ? "content active-content" : "content"}>MY EVENTS</div> 
-
-        <div onClick={toggleContent} className={toggleState === 2 ? "content active content" : "content"}>
-        My Donations</div>*/}
+        <div className={toggleState === 3 ? "content active-content" : "content"}>
+        <div><VolunteerInfo/></div>
+        <GrFormClose className="close-btn" onClick={toggleModal}/>
+        </div>
 
       </div>
-
+    </div>
+      )}
     </div>
   )
 }
