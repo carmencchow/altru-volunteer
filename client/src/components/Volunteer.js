@@ -16,11 +16,23 @@ const Volunteer = () => {
   const [ currentPage, setCurrentPage ] = useState(1)
   const [ pageCount, setPageCount ] = useState(1)
   const [ modal, setModal ] = useState(false)
+  const [ volunteer, setVolunteer ] = useState('Volunteer now')
+  const [ input, setInput ] = useState('')
+  const [ confirm, setConfirm ] = useState('')
+  const [disabled, setDisabled ] = useState(false)
 
   const navigate = useNavigate();
 
-  const donate = () => {
-    navigate('/donate');
+  const handleRegister = () => {
+    // Thank you for registering
+    setConfirm('Thank you. Please check your email for confirmation')
+    // Change 'volunteer' status to 'attending'
+    setVolunteer('Attending')
+    // Disable onClick
+    setDisabled(true)
+        // Update backend
+    // update profile
+    // Decrement volunteer number by 1
   }
 
   const handlePrevious = () => {
@@ -86,7 +98,7 @@ const Volunteer = () => {
 
         <form className="dropdown">
           <select value={filters.category} onChange={handleCategoryChange}>
-          <option value="all"> --- All categorys --- </option>
+          <option value="all"> --- All categories --- </option>
           <option value="animals">Animals</option>
           <option value="children & youth">Children & Youth</option>
           <option value="education & literacy">Education & Literacy</option>
@@ -102,10 +114,6 @@ const Volunteer = () => {
           <button disabled={currentPage === 1} className="previous" onClick={handlePrevious}>Previous</button>
           <p>{currentPage} / {pageCount}</p>
           <button disabled={currentPage === pageCount} className="next" onClick={handleNext}>Next</button> 
-        </div>
-
-        <div>Don't have time to volunteer?
-          <button onClick={donate}>I am interested in donating</button>
         </div>
 
       </div>
@@ -124,14 +132,16 @@ const Volunteer = () => {
                   <p>{ngo.category}</p>
                   <p>Volunteers needed: {ngo.num_volunteers}</p>
                   <p>Commitment: {ngo.commitment}</p>
+                  <p>Date: {ngo.event_date}</p>
+                  <p>Time: {ngo.event_time}</p>
+                  <p>{ngo.event_description} Description</p>
                 </div>          
               </div>    
     
           {modal && (      
             <div className="modal">
-              <div onClick={toggleModal}  className="modal-background">
+              <div className="modal-background">
                   <div className="modal-popup">
-                    <div className="modal-popup-heading">
                       <div className="modal-content">
                         <div className="right-side">
                           <GrFormClose className="close-btn" onClick={toggleModal}/>
@@ -139,22 +149,32 @@ const Volunteer = () => {
                         <h1>You are registering for this event: </h1>
                       </div>
                       <div>
-                        <p>Date</p>
-                        <p>Time</p>
-                        <p>Description</p>
-                        <p>Organization</p>
+                      
+                        <p>Thank you for your interest in volunteering with {ngo.name}</p>
+                        <p>Date: {ngo.event_date}</p>
+                        <p>Time: {ngo.event_time}</p>
+                        <p>{ngo.event_description} Description</p>
+
+                        <p>Please enter your contact info so we can get in touch with you</p>
+
+                        <input type="text" name="name" placeholder="Full name"/>
+                        <input type="text" name="email" placeholder="Email"/>
+
                       </div>
-                      <button>Confirm</button>
+                      <button onClick={handleRegister}>Confirm</button>
+                      <p>{confirm}</p>
                     </div>
-                  </div>
+                   </div>
                 </div>
-              </div>
-            )} 
-            
-            <button onClick={toggleModal}
-              className="modal-btn">Become a Volunteer
+              )} 
+              
+            <button disabled={disabled} onClick={toggleModal}
+              className="modal-btn">{volunteer}
             </button> 
-            
+
+              {/* Toggle volunteer status */}
+
+
             </div>
             )
           })}
