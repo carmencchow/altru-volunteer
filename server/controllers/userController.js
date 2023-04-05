@@ -1,7 +1,7 @@
 const User = require('../models/userModel');
 const mongoose = require('mongoose');
 
-// 1. GET a user
+// 1. GET user by ID
 const getUser = async (req, res) => { 
   const { id } = req.params
   if (!mongoose.Types.ObjectId.isValid(id)){
@@ -14,7 +14,7 @@ const getUser = async (req, res) => {
   res.status(200).json(user)
 }
 
-// 2. DELETE a user
+// 2. DELETE user profile
 const deleteUser = async (req, res) => { 
   const { id } = req.params
   if (!mongoose.Types.ObjectId.isValid(id)){
@@ -25,13 +25,13 @@ const deleteUser = async (req, res) => {
   if (!user){
     return res.status(404).json({ err: "User doesn't exist"})
   }
-  res.status(200).json(user)
+  res.status(200).json({ message: 'User deleted'})
 }
 
-//3. UPDATE/EDIT a user
+//3. UPDATE user profile
 const editUser = async (req, res) => {
   try {
-    const username = req.body.username;
+    const username = req.body.name;
     const email = req.body.email;
     const user = await User.findById({ _id: req.params.id });
     user.username = username;

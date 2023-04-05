@@ -45,7 +45,7 @@ const signup = async (req, res) => {
       (err, token) => {
         if (err) throw err;
         res.status(200).json({
-          token,
+          token, user,
         });
       }
     );

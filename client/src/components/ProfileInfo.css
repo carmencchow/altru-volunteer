@@ -10,6 +10,17 @@
 .edit-row p{
   margin-right: 20px;
 }
-.edit{
+.edit-icon{
+  margin-top: 15px;
+  cursor: pointer;
+}
+.edit-input{
+  width: 200px;
+}
+.email-row{
+  display: flex;
+  flex-direction: row;
+}
+.save-email-btn{
   cursor: pointer;
 }

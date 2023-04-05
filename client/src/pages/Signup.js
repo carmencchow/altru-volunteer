@@ -2,11 +2,10 @@ import React, { useState, useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { useSignup } from '../hooks/useSignup'
-
 import './Signup.css'
 
 const Signup = () => {
-  const [user, setUser] = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -100,14 +99,12 @@ const Signup = () => {
           <div className="buttons">      
             <button disabled={isLoading} className="signup" type="submit" onClick={handleSubmit}>Sign Up</button>
 
-            { error && <div className="error">{error}</div>}
+            {error && <div className="error">{error}</div>}
 
           </div>
         </div>
-
       </form>
     </div>
-
   )
 }
 

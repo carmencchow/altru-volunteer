@@ -10,22 +10,20 @@ import Info from './pages/Info';
 import './App.css';
 
 function App() {
-  const user = true;
+  // const user = true;
   return (
     <NgosProvider> 
       <BrowserRouter>
         <AuthContextProvider>
           <FiltersProvider>
             <DonationsProvider>
-              {/* <div> */}
               <Routes>
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/signup" element={<Signup/>}/>
-                <Route path="/login" element={user ? <Navigate to="/main"/> : <Login/>}/>
+                {/* <Route path="/login" element={user ? <Navigate to="/main"/> : <Login/>}/> */}
                 <Route path="/main" element={<Volunteer/>}/>
                 <Route path="/info/:id" element={<Info/>}/>
               </Routes>
-              {/* </div> */}
             </DonationsProvider>
           </FiltersProvider>
         </AuthContextProvider>

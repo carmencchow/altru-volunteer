@@ -3,9 +3,11 @@ const { getUser, deleteUser, editUser } = require('../controllers/userController
 
 const router = express.Router();
 
-router.get('/user', getUser)
-router.delete('/delete', deleteUser)
-router.post('/edit', editUser)
+
+// localhost:5000/api/user
+router.get('/:id', getUser)
+router.delete('/:id', deleteUser)
+router.put('/:id', editUser)
 
 module.exports = router
 
