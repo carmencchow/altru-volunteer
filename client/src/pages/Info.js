@@ -112,8 +112,7 @@ const Info = () => {
 
       </div>
       </div>
-    </div>
-
+ 
     )
   }
 
