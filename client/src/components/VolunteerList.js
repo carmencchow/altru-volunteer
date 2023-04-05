@@ -6,19 +6,19 @@ const VolunteerList = () => {
   const activity = [
     { 
       id: 1,
-      ngo: 'Ape Action Africa',
+      ngo: 'Meals on Wheels ',
       date: 'August 19, 2022',
-      event: 'Reading workshop'
+      event: 'Hot lunches delivery'
     },
     { 
       id: 2,
-      ngo: 'Animals Asia',
+      ngo: 'Kew Beach Stewards',
       date: 'January 3, 2023',
       event: 'Beach cleanup'
     },
     { 
       id: 3,
-      ngo: 'Dubai Cares',
+      ngo: 'Toronto Humane Society',
       date: 'February 20th, 2023',
       event: '5K fun run'
     },
@@ -31,8 +31,8 @@ const VolunteerList = () => {
           <VolunteerItem 
             id={item.id}
             ngo={item.ngo}
-            hours={item.hours}
             date={item.date}
+            event={item.event}
             />
         ))}
       </ul>

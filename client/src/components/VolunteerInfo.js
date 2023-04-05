@@ -10,7 +10,8 @@ const VolunteerInfo = () => {
       </div>
 
       <div className="next-events">
-        <p>Next event</p>
+        <p>Next event:</p>
+        <p>Girl Guides Bake Sale on August 23rd at 1:30pm</p>
       </div>
     </div>
   )

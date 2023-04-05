@@ -12,23 +12,18 @@ const Info = () => {
   const { id } = useParams();
   const [ favorite, setFavorite ] = useState('');
   const [ favorites, setFavorites ] = useState([]);
-  // const [ amount, setAmount ] = useState(0);
   const [ input, setInput ] = useState(0);
   const [ total, setTotal ] = useState(0)
-  const [ ngo, setNgo ] = useState({
-    // _id: '', name: '', category: [], location: [], website: '', tag: '' 
-  });
+  const [ ngo, setNgo ] = useState({});
 
   const fetchNgo = async () => {
     const res = await axios.get(`http://localhost:5000/api/ngos/${id}`)
     setNgo(res.data)
-    // console.log(res.data)
   }
 
   useEffect (() => {
     fetchNgo();
   }, [])
-
 
   // Stripe Payment
   const addAmount = (e) => {
@@ -137,6 +132,13 @@ const Info = () => {
 
         <div className="donor-info">
           <div className="column">
+            <input 
+              type="text" 
+              className="full-name"
+              value={input}
+              placeholder='Other amount'
+              onChange={handleAmount}
+            />     
             <p>Full name:</p>
             <p>Street Address:</p>
             <p>City:</p>
