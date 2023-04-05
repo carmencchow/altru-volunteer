@@ -8,19 +8,19 @@ const VolunteerList = () => {
       id: 1,
       ngo: 'Ape Action Africa',
       date: 'August 19, 2022',
-      hours: 2
+      event: 'Reading workshop'
     },
     { 
       id: 2,
       ngo: 'Animals Asia',
       date: 'January 3, 2023',
-      hours: 6
+      event: 'Beach cleanup'
     },
     { 
       id: 3,
       ngo: 'Dubai Cares',
       date: 'February 20th, 2023',
-      hours: 5
+      event: '5K fun run'
     },
   ]
 
