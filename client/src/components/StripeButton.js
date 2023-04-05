@@ -44,6 +44,17 @@ const stripeBtn = () => {
       });
   };
   return (
+    // TEST CC: 4242 4242 4242 4242; 12/34; 123
+        // <div className="stripeContainer">
+        //   <p className="stripe-text">
+        //     Would you like to donate this amount?
+        //   </p>
+        //   <StripeCheckout stripeKey= "pk_test_51L1kSgAoNhpouPlcfYHS4qZk7puLHRnuQFurkS8DelIS2DvAgtPR5nM4DWIdI3rjZCUyhkg9USb34AEQBf2Zz32r00TiqYY6E9"
+        //     token={makePayment}
+        //     name="Your donation"
+        //     amount={currentAmount * 100}/>
+        // </div> 
+
     <StripeCheckout
       label="Go Premium" //Component button text
       name="Business LLC" //Modal Header
@@ -56,15 +67,7 @@ const stripeBtn = () => {
       billingAddress={false}
     />
 
-            {/* <div className="stripeContainer">
-          <div className="stripe-text">Would you like to donate this amount?</div>
-          <StripeCheckout // TEST CC: 4242 4242 4242 4242; 12/34; 123
-            stripeKey="pk_test_51L1kSgAoNhpouPlcfYHS4qZk7puLHRnuQFurkS8DelIS2DvAgtPR5nM4DWIdI3rjZCUyhkg9USb34AEQBf2Zz32r00TiqYY6E9"
-            token={makePayment}
-            name="Your donation"
-            amount={currentAmount * 100}
-          />
-        </div> */}
+
   );
 };
 export default stripeBtn;
