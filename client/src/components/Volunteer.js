@@ -16,6 +16,7 @@ const Volunteer = () => {
   const [ currentPage, setCurrentPage ] = useState(1)
   const [ pageCount, setPageCount ] = useState(1)
   const [ modal, setModal ] = useState(false)
+  const [numVolunteers, setNumVolunteers] = useState()
   const [ volunteer, setVolunteer ] = useState('Volunteer now')
   const [ input, setInput ] = useState('')
   const [ confirm, setConfirm ] = useState('')
@@ -30,9 +31,11 @@ const Volunteer = () => {
     setVolunteer('Attending')
     // Disable onClick
     setDisabled(true)
-        // Update backend
-    // update profile
     // Decrement volunteer number by 1
+    setNumVolunteers(-1)
+    // Update backend - user's events
+
+    // Update profile
   }
 
   const handlePrevious = () => {
@@ -112,7 +115,7 @@ const Volunteer = () => {
     
         <div className="pagination">
           <button disabled={currentPage === 1} className="previous" onClick={handlePrevious}>Previous</button>
-          <p>{currentPage} / {pageCount}</p>
+          {/* <p>{currentPage} / {pageCount}</p> */}
           <button disabled={currentPage === pageCount} className="next" onClick={handleNext}>Next</button> 
         </div>
 
@@ -123,19 +126,28 @@ const Volunteer = () => {
           {ngos?.slice((currentPage - 1) * 5, currentPage * 5).map((ngo, idx) => {
             return (
               <div className="display-container">
-                <div key={idx} className="row">
+                <div key={idx}>
                 <button 
                   className="infoBtn" 
                   onClick={() => handleNgoSelected(ngo._id)}>
                   {ngo.name}</button>
-                <div className="rightside">
-                  <p>{ngo.category}</p>
-                  <p>Volunteers needed: {ngo.num_volunteers}</p>
-                  <p>Commitment: {ngo.commitment}</p>
-                  <p>Date: {ngo.event_date}</p>
-                  <p>Time: {ngo.event_time}</p>
-                  <p>{ngo.event_description} Description</p>
-                </div>          
+                <div className="show-details">
+                  <div>
+                    <p>Category: {ngo.category}</p>
+                    <p>Volunteers needed: {ngo.num_volunteers}</p>
+                    <p>Commitment: {ngo.commitment}</p>
+                  </div>
+                  <div>
+                    <p>Date: {ngo.event_date}</p>
+                    <p>Time: {ngo.event_time}</p>
+                    <p>Event: {ngo.event_description}</p>
+                  </div>             
+
+                  <button disabled={disabled} onClick={toggleModal}
+                    className="volunteer-btn">{volunteer}
+                  </button> 
+   
+                </div>               
               </div>    
     
           {modal && (      
@@ -168,13 +180,6 @@ const Volunteer = () => {
                 </div>
               )} 
               
-            <button disabled={disabled} onClick={toggleModal}
-              className="modal-btn">{volunteer}
-            </button> 
-
-              {/* Toggle volunteer status */}
-
-
             </div>
             )
           })}

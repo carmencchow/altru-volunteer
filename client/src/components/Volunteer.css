@@ -30,14 +30,6 @@ form {
   align-items: center;
   margin-left: 20px;
 }
-.row{
-  display: flex;
-  justify-content: space-evenly;
-  flex-direction: row;
-  border-top: 1px solid rgb(232, 232, 232);
-  border-radius: 25px;
-  margin-bottom: 40px;
-}
 .display{
   padding: 0px 70px;
 }
@@ -71,8 +63,6 @@ form {
   cursor: pointer;
   font-weight: bolder;
 }
-.infoBtn:hover{  
-}
 .search{ 
   color: purple;
   border-radius: 20px;
@@ -82,10 +72,10 @@ form {
   font-weight: bolder;
   background-color: none;
 }
-.rightside{
-  margin-right: 0;
-  margin-left: auto;
-  margin-top: 20px;
+.show-details {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 h1{
   margin-right: 0;
@@ -157,4 +147,7 @@ body.active-modal {
   padding: 5px;
   background-color: rgba(0, 0, 0, 0.1);
   border-radius: 50%;
+}
+.volunteer-btn{
+  height: 40px;
 }
