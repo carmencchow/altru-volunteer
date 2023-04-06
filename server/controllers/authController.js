@@ -5,7 +5,6 @@ const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 
-
 // 1. REGISTER endpoint
 const signup = async (req, res) => {
   try {

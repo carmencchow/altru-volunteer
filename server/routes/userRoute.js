@@ -1,9 +1,10 @@
 const express = require('express')
 const { getUser, getUsers, deleteUser, editUser } = require('../controllers/userController')
+const auth = require ('../middleware/auth')
 
 const router = express.Router();
 
-// localhost:5000/api/user
+//localhost:5000/api/user
 router.get('/', getUsers)
 router.get('/:id', getUser)
 router.delete('/:id', deleteUser)

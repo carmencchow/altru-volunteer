@@ -45,7 +45,7 @@ const deleteUser = async (req, res) => {
 //3. UPDATE user profile
 const editUser = async (req, res) => {
   try {
-    const username = req.body.name;
+    const username = req.body.username;
     const email = req.body.email;
     const user = await User.findById({ _id: req.params.id });
     user.username = username;

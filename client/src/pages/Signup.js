@@ -13,9 +13,11 @@ const Signup = () => {
     confirmPassword: ''
   })
 
-  // const { signup, error, isLoading } = useSignup()
+  const { signup, error, isLoading } = useSignup()
 
   const { name, email, password, confirmPassword } = formData
+
+  const handleSignup = () => {}
 
   const handleChange = (e) => {
     setFormData((prevState) => ({
@@ -27,21 +29,22 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // await signup(email, password) // from useSignup hook
+    await signup(email, password) // from useSignup hook
 
-    // if(password !== confirmPassword){
-    //   console.log('Passwords do not match')
-    // } else {
-    //   const userData = { 
-    //     name,
-    //     email,
-    //     password,
-    //   }
+    if(password !== confirmPassword){
+      console.log('Passwords do not match')
+    } else {
+      const userData = { 
+        name,
+        email,
+        password,
+      }
     console.log('Returning', formData.name, formData.email, formData.password)
-    // }
+    }
 
-    // await signup(email, password)
+    await signup(email, password)
   }
+// }
 
   return (
     <div className="signup-wrapper">
@@ -96,13 +99,12 @@ const Signup = () => {
             />
           </div>
 
-          <div className="buttons">      
+          <button onClick={handleSignup}>Sign up</button>
             {/* <button disabled={isLoading} className="signup" type="submit" onClick={handleSubmit}>Sign Up</button>
 
             {error && <div className="error">{error}</div>} */}
 
           </div>
-        </div>
       </form>
     </div>
   )
