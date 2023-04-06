@@ -6,14 +6,10 @@ export const DonationsProvider = ({ children }) => {
   const [goalAmount, setGoalAmount] = useState(900)
   const [donatedAmounts, setDonatedAmounts] = useState([])
   const [remainingAmount, setRemainingAmount] = useState(0)
-  const [currentAmount, setCurrentAmount] = useState(0)
   const [totalAmount, setTotalAmount] = useState(0)
-  const [total, setTotal] = useState(0)
 
   return (
     <DonationsContext.Provider value={{ 
-      total,
-      setTotal,
       goalAmount, 
       setGoalAmount, 
       totalAmount,
@@ -22,8 +18,6 @@ export const DonationsProvider = ({ children }) => {
       setDonatedAmounts, 
       remainingAmount, 
       setRemainingAmount, 
-      currentAmount, 
-      setCurrentAmount, 
     }}> 
       {children}
     </DonationsContext.Provider>

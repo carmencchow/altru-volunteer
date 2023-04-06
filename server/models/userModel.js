@@ -32,15 +32,21 @@ const userSchema = new Schema({
   goal_amount: {
     type: Number,
   },
-  following: {
-    type: Array,
-  },
+  following: [
+    { 
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'ngo',
+    },
+  ],
   donations: {
     type: Array,
   },
-  attended: {
-    type: Array,
-  },
+  attending: [
+    { 
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'event',
+    },
+  ],
 }, { timestamps: true });
 
 module.exports = mongoose.model('User', userSchema);

@@ -36,11 +36,27 @@ const Login = () => {
       });
         const data = res.data;
         console.log(data);
+        localStorage.setItem('token', res.data.token);
         setUser({ email: data.email })
         setToken(data.token);
+        getUser();
       } catch (err) {
         console.log(err, 'Incorrect password or email')
     };
+  };
+
+  const getUser = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      throw new Error("No token found in localStorage");
+    }
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    try {
+      const res = await axios.get("http://localhost:5000/api/auth/me");
+      setUser(res.data);
+    } catch (error) {
+      throw error;
+    }
   };
 
   return (

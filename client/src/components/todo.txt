@@ -22,6 +22,8 @@ activity
 
 # socket.io 
 
+# Fetch user data as soon as user signs in
+
 ### 
 - useContext
 - schema subdocs

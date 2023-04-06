@@ -1,12 +1,18 @@
 require('dotenv').config()
+const http = require("http");
 const express = require('express');
 const mongoose = require('mongoose');
+const bodyParser = require("body-parser");
+const cookieParser = require('cookie-parser');
 const ngoRoutes = require('./routes/ngoRoute'); 
 const authRoutes = require('./routes/authRoute'); 
 const stripeRoutes = require('./routes/stripeRoute'); 
 const userRoutes = require('./routes/userRoute'); 
-const PORT = process.env.PORT || 5001;
 const cors = require('cors');
+const PORT = process.env.PORT || 5001;
+const Ngo = require('./models/ngoModel');
+const Event = require('./models/eventModel');
+const User = require('./models/userModel');
 
 // Add Stripe key
 const stripe = require('stripe')
@@ -14,10 +20,15 @@ const stripe = require('stripe')
 
 // Express app
 const app = express();
+const server = http.createServer(app);
 
 // Middleware
+app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 app.use(express.json()); //parses incoming JSON requests and puts the parsed data in req.body.
 app.use(cors());
+
 app.use((req, res, next) => {
   console.log(req.path, req.method)
   res.header('Access-Control-Allow-Origin', '*');

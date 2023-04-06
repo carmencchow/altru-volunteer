@@ -5,7 +5,7 @@ import { useSignup } from '../hooks/useSignup'
 import './Signup.css'
 
 const Signup = () => {
-  const { user, setUser } = useContext(AuthContext);
+  // const { user, setUser } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -13,7 +13,7 @@ const Signup = () => {
     confirmPassword: ''
   })
 
-  const { signup, error, isLoading } = useSignup()
+  // const { signup, error, isLoading } = useSignup()
 
   const { name, email, password, confirmPassword } = formData
 
@@ -27,7 +27,7 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    await signup(email, password) // from useSignup hook
+    // await signup(email, password) // from useSignup hook
 
     // if(password !== confirmPassword){
     //   console.log('Passwords do not match')
@@ -40,7 +40,7 @@ const Signup = () => {
     console.log('Returning', formData.name, formData.email, formData.password)
     // }
 
-    await signup(email, password)
+    // await signup(email, password)
   }
 
   return (
@@ -97,9 +97,9 @@ const Signup = () => {
           </div>
 
           <div className="buttons">      
-            <button disabled={isLoading} className="signup" type="submit" onClick={handleSubmit}>Sign Up</button>
+            {/* <button disabled={isLoading} className="signup" type="submit" onClick={handleSubmit}>Sign Up</button>
 
-            {error && <div className="error">{error}</div>}
+            {error && <div className="error">{error}</div>} */}
 
           </div>
         </div>

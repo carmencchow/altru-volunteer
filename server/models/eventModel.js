@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const eventSchema = new Schema({
+const eventSchema = new Schema(
+{
   name: {
     type: String,
   },
@@ -17,15 +18,15 @@ const eventSchema = new Schema({
   num_volunteers: {
     type: Number, 
   },
-  ngo: [
+  parentNgo: [
     { 
-      type: mongoose.SchemaType.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: 'ngo',
     },
   ],
   volunteers: [
     {
-      type: mongoose.SchemaType.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: 'user',
     }
   ]

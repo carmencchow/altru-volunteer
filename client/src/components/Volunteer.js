@@ -21,6 +21,27 @@ const Volunteer = () => {
   const [ confirm, setConfirm ] = useState('')
   const [ modal, setModal ] = useState(false)
   const navigate = useNavigate();
+  const [ userInfo, setUserInfo ] = useState("");
+
+
+  const getUser = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      throw new Error("No token found in localStorage");
+    }
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    try {
+      const res = await axios.get("http://localhost:5000/api/auth/me");
+      setUserInfo(res.data);
+    } catch (error) {
+      throw error;
+    }
+  };
+
+
+  useEffect(() => {
+    getUser();
+  }, []);
 
   const handleRegister = () => {
     setConfirm('Thank you. Please check your email for confirmation')
@@ -155,7 +176,7 @@ const Volunteer = () => {
                             </div>
                             
                             <div>
-                              <p>Thank you for your interest in volunteering with {ngo.name}</p>
+                              <p>{userInfo.username}Thank you for your interest in volunteering with {ngo.name}</p>
                               <p>Date: {ngo.event_date}</p>
                               <p>Time: {ngo.event_time}</p>
                               <p>{ngo.event_description} Description</p>

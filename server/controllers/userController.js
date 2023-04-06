@@ -1,7 +1,7 @@
 const User = require('../models/userModel');
 const mongoose = require('mongoose');
 
-// 1. GET user by ID
+// 0. GET user by ID
 const getUser = async (req, res) => { 
   const { id } = req.params
   if (!mongoose.Types.ObjectId.isValid(id)){
@@ -13,6 +13,20 @@ const getUser = async (req, res) => {
   }
   res.status(200).json(user)
 }
+
+// 1. GET all users
+const getUsers = async (req, res) => {
+  try {
+    const users = await User.find({});
+    if (!users) {
+      res.status(401).send("Users not found");
+    }
+    res.status(200).send(users);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Server error");
+  }
+};
 
 // 2. DELETE user profile
 const deleteUser = async (req, res) => { 
@@ -45,5 +59,11 @@ const editUser = async (req, res) => {
   }
 };
 
+// 4. And an event to user
 
-module.exports = { getUser, deleteUser, editUser }
+
+// 5. Add an organization to user
+
+
+
+module.exports = { getUser, getUsers, deleteUser, editUser }
