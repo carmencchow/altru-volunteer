@@ -1,6 +1,3 @@
-/* button:hover{
-  outline: 2px solid purple;
-} */
 .filters{
   display: flex;
   margin: 30px 60px 0px 0px;
@@ -17,12 +14,12 @@ form {
 .display{
   padding: 0px 70px;
 }
-.pagination{
+/* .pagination{
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   padding-top: 40px;
-}
+} */
 .website{
   font-size: 16px;
   font-weight: lighter;
@@ -31,41 +28,44 @@ form {
   margin: 30px 60px;
 }
 .infoBtn{  
-  height: 36px;
-  color: black;
+  color: purple;
   border-radius: 20px;
-  width: 400px;
-  padding: 5px 10px;
   margin-right: 10px;
   font-size: 20px;
   cursor: pointer;
-  font-weight: bolder;
+  text-decoration: underline;
 }
 .show-details {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
-h1{
-  margin-right: 0;
-  justify-content: flex-end;
-  padding: 0px 70px;
+.registering{
+  padding: 0px 60px;
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+.event-details{
+  padding: 0px 60px;
+  margin-bottom: 30px;
+}
+span{
+  margin-left: 30px;
 }
 .searchBtn{
   height: 40px;
   margin-left: 20px;
-  padding-top: 40px;
 }
-.next, .previous{
+/* .next, .previous{
   height: 40px;
   cursor: pointer;
-}
+} */
 body.active-modal {
   overflow-y: hidden;
 }
 .modal-background {
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.3);
   position: fixed;
   height: 100%;
   top: 0;
@@ -74,7 +74,7 @@ body.active-modal {
   bottom: 0;
 }
 .modal-popup {
-  height: 750px;
+  height: 500px;
   width: 700px;
   position: absolute;
   background-color: #f4f5f7;
@@ -83,17 +83,56 @@ body.active-modal {
   transform: translate(-50%, -50%);
 }
 .modal-content {
-  width: 90%;
-  margin: 20px auto;
+  width: 100%;
+}
+.modal-text{
+  display: flex;
+  justify-content: center;
+  margin: 30px auto;
+}
+.right-side {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: end;
 }
 .close-btn {
   cursor: pointer;
   font-size: 25px;
-  margin: 10px;
+  margin-right: 20px;
+  margin-top: 20px;
   padding: 5px;
   background-color: rgba(0, 0, 0, 0.1);
   border-radius: 50%;
 }
 .volunteer-btn{
   height: 40px;
+}
+.confirm{
+  background-color: rgb(122, 122, 244);
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;  
+  height: 40px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+.confirm:hover{
+  background-color: rgb(96, 96, 245);
+}
+.contact-info{
+  display: flex;
+  width: 500px;
+  justify-content: center;
+}
+input.name, input.email{
+  width: 200px;
+  margin-top: 5px;
+}
+.row{
+  display: flex;
+  flex-direction: row;
 }

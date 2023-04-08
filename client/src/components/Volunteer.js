@@ -127,24 +127,23 @@ const Volunteer = () => {
           </button>
         </div>
 
-          <div className="pagination">
+          {/* <div className="pagination">
             <button disabled={currentPage === 1} className="previous" onClick={handlePrevious}>Previous</button>
-            {/* <p>{currentPage} / {pageCount}</p> */}
+            <p>{currentPage} / {pageCount}</p>
             <button disabled={currentPage === pageCount} className="next" onClick={handleNext}>Next</button> 
-          </div>
+          </div> */}
       
-
         <div className="display">
           <div className="results-container">
             {ngos?.slice((currentPage - 1) * 5, currentPage * 5).map((ngo, idx) => {
               return (
                 <div className="display-container">
                   <div key={idx}>
-                    <button 
+                    <div 
                       className="infoBtn" 
                       onClick={() => handleNgoSelected(ngo._id)}>
                       {ngo.name}
-                    </button>
+                    </div>
                   <div className="show-details">
                     <div>
                       <p>Category: {ngo.category}</p>
@@ -167,38 +166,45 @@ const Volunteer = () => {
                 {modal && (      
                   <div className="modal">
                     <div className="modal-background">
-                        <div className="modal-popup">
-                            <div className="modal-content">
-                              <div className="right-side">
-                                <GrFormClose className="close-btn" onClick={toggleModal}/>
-                              </div>
-                              <h1>You are registering for this event: </h1>
-                            </div>
+                      <div className="modal-popup">
+                        <div className="modal-content">
+                        <div className="right-side">
+                         <GrFormClose className="close-btn" onClick={toggleModal}/>
+                        </div>
+                          <p className="registering">You are registering for this event: </p>
+
+                          <div className="event-details">
+                            <p className="text">Event: <span>{ngo.event_description}</span></p>
+                            <p className="text">Date: <span>{ngo.event_date}</span></p>
+                            <p className="text">Time: <span>{ngo.event_time}</span></p>
                             
-                            <div>
-                              <p>{userInfo.username}Thank you for your interest in volunteering with {ngo.name}</p>
-                              <p>Date: {ngo.event_date}</p>
-                              <p>Time: {ngo.event_time}</p>
-                              <p>{ngo.event_description} Description</p>
-                              <p>Please enter your contact info so we can get in touch with you</p>
-                              <input type="text" name="name" placeholder="Full name"/>
-                              <input type="text" name="email" placeholder="Email"/>
+                            <p>Please enter your contact info so we can get in touch with you</p>
+
+                          <div className="row">
+                            <div className="contact-info">
+                              <input className="name" type="text" name="name" placeholder="Full name"/>
+                              <input className="email" type="text" name="email" placeholder="Email"/>
                             </div>
 
-                            <button onClick={handleRegister}>Confirm</button>
+                            <button className="confirm" onClick={handleRegister}>Confirm</button>
+                          </div>
+  
+
                             <p>{confirm}</p>
-                          
+  
                           </div>
                         </div>
                       </div>
-                    )} 
+                    </div>
                   </div>
-                  )
-                })}
-              </div> 
-            </div>  
-          </div>
-          )
+                  )} 
+                </div>
+                )
+              })}
+            </div> 
+          </div>  
+        </div>
+        )
         }
 
 export default Volunteer;
