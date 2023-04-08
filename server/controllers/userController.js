@@ -29,7 +29,7 @@ const getUsers = async (req, res) => {
 };
 
 // 2. DELETE user profile
-const deleteUser = async (req, res) => { 
+const deleteProfile = async (req, res) => { 
   const { id } = req.params
   if (!mongoose.Types.ObjectId.isValid(id)){
     return res.status(404).json({ err: 'No such user with this id' })
@@ -43,7 +43,7 @@ const deleteUser = async (req, res) => {
 }
 
 //3. UPDATE user profile
-const editUser = async (req, res) => {
+const editProfile = async (req, res) => {
   try {
     const username = req.body.username;
     const email = req.body.email;
@@ -66,4 +66,4 @@ const editUser = async (req, res) => {
 
 
 
-module.exports = { getUser, getUsers, deleteUser, editUser }
+module.exports = { getUser, getUsers, deleteProfile, editProfile }

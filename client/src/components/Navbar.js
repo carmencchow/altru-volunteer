@@ -27,7 +27,7 @@ const Navbar = () => {
       <div className="logo">
         <Link className="link" to="/main">
           <div className="logo-wrapper">
-            <img src={logo} style={{ width: 80, height: 80 }} alt="logo" />
+            <img src={logo} style={{ width: 70, height: 70 }} alt="logo" />
             <p className="logo-text">Altru</p>
           </div>
         </Link> 

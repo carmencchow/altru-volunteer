@@ -4,7 +4,7 @@ nav{
   margin: 20px auto;
   padding: 0px 20px 0px 20px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
-  height: 36px;
+  height: 45px;
 }
 button{
   margin-left: 10px;
@@ -22,7 +22,7 @@ button{
   margin-top: -20px;
 }
 .logo-text{
-  font-size: 30px;
+  font-size: 20px;
   text-decoration: none;
 }
 .menus{
@@ -30,25 +30,18 @@ button{
   flex-direction: row;
 }
 .login, .signup, .logout{
-  height: 36px;
   border: 2px solid purple;
-  color: purple;
-  border-radius: 20px;;
+  color: darkcyan;
+  border-radius: 20px;
   width: 100px;
   padding: 5px 10px;
   margin-right: 10px;
   cursor: pointer;
+  font-size: 16px;
 }
 .button-text{
-  font-size: 18px;
+  font-size: 16px;
   text-decoration: none;
-}
-.button-text:hover, .signup:hover, .login:hover{
-  color: white;
-}
-span:hover{
-  background-color: purple;
-  color: white;
 }
 .profile{
   margin-right: 10px;
@@ -57,19 +50,17 @@ span:hover{
   font-size: 35px;
   margin-right: 10px;
 }
-.hi{
-  font-size: 34px;
-}
 .user-display{
   display: flex;
   flex-direction: row;
-  padding-top: 10px;
+  font-size: 16px;
+  margin-left: 10px;
 }
 .welcome{
-  padding-right: 20px;
+  padding-right: 40px;
+  font-size: 16px;
 }
 .nav-login{
   display: flex;
   justify-content: space-evenly;
-  margin-top: 20px;
 }

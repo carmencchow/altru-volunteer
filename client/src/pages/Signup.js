@@ -2,10 +2,11 @@ import React, { useState, useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { useSignup } from '../hooks/useSignup'
+
 import './Signup.css'
 
 const Signup = () => {
-  // const { user, setUser } = useContext(AuthContext);
+  const [user, setUser] = useContext(AuthContext);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -16,8 +17,6 @@ const Signup = () => {
   const { signup, error, isLoading } = useSignup()
 
   const { name, email, password, confirmPassword } = formData
-
-  const handleSignup = () => {}
 
   const handleChange = (e) => {
     setFormData((prevState) => ({
@@ -31,20 +30,19 @@ const Signup = () => {
     
     await signup(email, password) // from useSignup hook
 
-    if(password !== confirmPassword){
-      console.log('Passwords do not match')
-    } else {
-      const userData = { 
-        name,
-        email,
-        password,
-      }
+    // if(password !== confirmPassword){
+    //   console.log('Passwords do not match')
+    // } else {
+    //   const userData = { 
+    //     name,
+    //     email,
+    //     password,
+    //   }
     console.log('Returning', formData.name, formData.email, formData.password)
-    }
+    // }
 
     await signup(email, password)
   }
-// }
 
   return (
     <div className="signup-wrapper">
@@ -99,14 +97,17 @@ const Signup = () => {
             />
           </div>
 
-          <button onClick={handleSignup}>Sign up</button>
-            {/* <button disabled={isLoading} className="signup" type="submit" onClick={handleSubmit}>Sign Up</button>
+          <div className="buttons">      
+            <button disabled={isLoading} className="signup" type="submit" onClick={handleSubmit}>Sign Up</button>
 
-            {error && <div className="error">{error}</div>} */}
+            { error && <div className="error">{error}</div>}
 
           </div>
+        </div>
+
       </form>
     </div>
+
   )
 }
 

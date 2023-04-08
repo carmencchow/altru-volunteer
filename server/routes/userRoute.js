@@ -1,14 +1,14 @@
 const express = require('express')
-const { getUser, getUsers, deleteUser, editUser } = require('../controllers/userController')
+const { getUser, getUsers, deleteProfile, editProfile } = require('../controllers/userController')
 const auth = require ('../middleware/auth')
 
 const router = express.Router();
 
 //localhost:5000/api/user
-router.get('/', getUsers)
-router.get('/:id', getUser)
-router.delete('/:id', deleteUser)
-router.put('/:id', editUser)
+router.get('/', auth, getUsers)
+router.get('/:id', auth, getUser)
+router.delete('/:id', auth, deleteProfile)
+router.put('/:id', auth, editProfile)
 
 module.exports = router
 

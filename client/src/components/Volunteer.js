@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState,useEffect, useContext } from 'react'
 import axios from 'axios'
 import { FiltersContext } from '../context/FiltersContext'
 import { FiltersProvider } from '../context/FiltersContext'
@@ -23,7 +23,6 @@ const Volunteer = () => {
   const navigate = useNavigate();
   const [ userInfo, setUserInfo ] = useState("");
 
-
   const getUser = async () => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -38,7 +37,6 @@ const Volunteer = () => {
     }
   };
 
-
   useEffect(() => {
     getUser();
   }, []);
@@ -48,7 +46,6 @@ const Volunteer = () => {
     setVolunteer('Attending')
     setDisabled(true)
     // Decrement volunteer number by 1
-    setNumVolunteers(-1)
     // Update backend - user's events
     // Update profile
   }
@@ -125,14 +122,17 @@ const Volunteer = () => {
             </select>
           </form>
           
-          <button className="searchBtn" onClick={handleSubmit}>Search</button>
-      
+          <button className="searchBtn" onClick={handleSubmit}>
+            Search
+          </button>
+        </div>
+
           <div className="pagination">
             <button disabled={currentPage === 1} className="previous" onClick={handlePrevious}>Previous</button>
             {/* <p>{currentPage} / {pageCount}</p> */}
             <button disabled={currentPage === pageCount} className="next" onClick={handleNext}>Next</button> 
           </div>
-        </div>
+      
 
         <div className="display">
           <div className="results-container">

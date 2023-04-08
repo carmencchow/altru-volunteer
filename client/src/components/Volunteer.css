@@ -1,27 +1,11 @@
-main{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-button:hover{
+/* button:hover{
   outline: 2px solid purple;
-}
-.stats{
-  height: 100px;
-  width: 80%;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  margin-left: 80px;
-}
+} */
 .filters{
   display: flex;
   margin: 30px 60px 0px 0px;
   padding: 0px 70px;
-}
-.input-group{
-  font-size: 30px;
-  width: 500px;
+  justify-content: center;
 }
 form {
   display: flex;
@@ -43,12 +27,6 @@ form {
   font-size: 16px;
   font-weight: lighter;
 }
-.location{
-  font-family:Verdana, Geneva, Tahoma, sans-serif;
-  font-style: italic;
-  padding-left: 20px;
-  margin-top: 20px;
-}
 .display-container{
   margin: 30px 60px;
 }
@@ -63,15 +41,6 @@ form {
   cursor: pointer;
   font-weight: bolder;
 }
-.search{ 
-  color: purple;
-  border-radius: 20px;
-  width: 120px;
-  margin-right: 10px;
-  cursor: pointer;
-  font-weight: bolder;
-  background-color: none;
-}
 .show-details {
   display: flex;
   flex-direction: row;
@@ -82,13 +51,6 @@ h1{
   justify-content: flex-end;
   padding: 0px 70px;
 }
-.heading{
-  padding-left: 0px;
-}
-.icon{
-  font-size: 20px;
-  padding-right: 5px;
-}
 .searchBtn{
   height: 40px;
   margin-left: 20px;
@@ -97,11 +59,6 @@ h1{
 .next, .previous{
   height: 40px;
   cursor: pointer;
-}
-.category{
-  font-style: italic;
-  font-size: 14px;
-  font-weight: lighter;
 }
 body.active-modal {
   overflow-y: hidden;
@@ -124,17 +81,6 @@ body.active-modal {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-}
-.modal-popup-heading {
-  display: flex;
-  justify-content: space-between;
-  height: 70px;
-}
-.modal-right{
-  display: flex;
-}
-.modal-popup-heading p {
-  margin-left: 25px;
 }
 .modal-content {
   width: 90%;
