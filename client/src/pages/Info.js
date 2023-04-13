@@ -1,11 +1,10 @@
 import React, {useState, useEffect} from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios'
+import StripeCheckout from "react-stripe-checkout";
 import toast, { Toaster } from 'react-hot-toast'
 import Navbar from '../components/Navbar'
-import Tabs from '../components/Tabs';
-import axios from 'axios'
 import './Info.css'
-import StripeCheckout from "react-stripe-checkout";
 
 const Info = () => {
   const navigate = useNavigate();
@@ -104,15 +103,16 @@ const Info = () => {
 
   return (
     <div>
-      <Navbar/><Tabs/>
+      <Navbar/>
       <div> 
         <span className="back" onClick={() => navigate(-1)}>Back</span>
         <span className="follow" onClick={handleFollow}>Follow {ngo.name}</span> 
         <Toaster position="top-center" toastOption={{ duration: 3000 }}/>
       </div>
-        <p>Donate to {ngo.name}</p>        
+        <p className="donate-text">Donate to {ngo.name}</p>        
 
       <div className="donation-card">
+        <div className="header"></div>
         <p>Please select a donation amount: </p>
         <div className="donation-options">
           <button className="amount-btn" onClick={handleClick} value="10">$10</button>
@@ -125,7 +125,7 @@ const Info = () => {
           <button className="amount-btn" onClick={handleClick} value="100">$100</button>
         </div>
 
-        <div className="other-amount">
+        <div className="other-amount"><p className="dollar-sign">$</p>
           <input 
             type="text" 
             className="donation-input"

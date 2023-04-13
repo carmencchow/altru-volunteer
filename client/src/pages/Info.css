@@ -1,21 +1,6 @@
 button{
   cursor: pointer;
 }
-.heading, .contact, h1{
-  margin: 30px 60px;
-  justify-content: center;
-}
-.goal, .donate, .favorite{
-  height: 36px;
-  border: 2px solid purple;
-  color: purple;
-  border-radius: 20px;;
-  width: 100px;
-  padding: 5px 10px;
-  margin-right: 10px;
-  cursor: pointer;
-  margin-bottom: -30px;
-}
 .back{
   display: flex;
   align-items: flex-end;
@@ -23,19 +8,10 @@ button{
   margin-right: 30px;
   cursor: pointer;
 }
-.fave-list{
-  display: flex;
-  justify-content: flex-end;
-  margin-right: 10%;
-}
-span:hover{
-  color: purple;
-  background: none;
-}
 .donation-card{
-  border: 1px solid orange;
+  background-color:#e8fbff;
   width: 500px;
-  height: 400px;
+  height: 600px;
   margin-left: 40px;
 }
 .donation-options{

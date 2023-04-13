@@ -16,6 +16,7 @@ nav{
 }
 .logo{
   margin-top: 10px;
+  cursor: pointer;
 }
 .logout-btn{
   color: white;
@@ -27,4 +28,7 @@ nav{
 .logout-btn:hover{
  color:aqua; 
  cursor: pointer;
+}
+.profile-btn{
+  cursor: pointer;
 }

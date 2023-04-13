@@ -15,14 +15,13 @@ const DonationsInfo = () => {
   }
 
   return (
-    // map through donations
     <div className="container">
       <div className="stats">
         <p>Goal Amount: {goal}</p>
         <p>Amount Donated: $64.00</p>
 
         <div className="other-amount">
-          <input 
+          $<input 
             type="text" 
             className="donation-input"
             value={input}

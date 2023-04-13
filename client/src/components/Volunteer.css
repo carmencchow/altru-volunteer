@@ -82,21 +82,25 @@ form.dropdown p{
   letter-spacing: 0.5px;
   cursor: pointer;
 }
+.volunteer-btn{
+  height: 40px;
+  border: 1px solid purple;
+  color: purple;
+  background-color: white;
+  font-family: 'Montserrat', sans-serif;
+  border-radius: 1px;
+  padding: 10px;
+  width: 87px;
+}
+.volunteer-btn:hover{
+  border: 2px solid purple;
+}
 .show-details {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   font-size: 70px;
   color: black;
-}
-.registering{
-  padding: 0px 60px;
-  font-size: 20px;
-  margin-bottom: 30px;
-}
-.event-details{
-  padding: 0px 60px;
-  margin-bottom: 30px;
 }
 span{
   margin-left: 30px;
@@ -124,84 +128,98 @@ body.active-modal {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  display: flex;
-  flex-direction: column; 
 }
 .modal-content {
-  height: 90vh;
+  height: 100vh;
   max-height: 400px;
-  width: 95vw;
+  width: 105vw;
   max-width: 900px;
+  display: flex;
+  flex-direction: row;
 }
 .left-side{
   width: 40%;
 }
-.background{
-  height: 400px;
-  
-}
-.modal-text{
-  display: flex;
-  justify-content: center;
-  margin: 30px auto;
+.modal-image{
+  width: 100%;
+  height: 90vh;
+  max-height: 400px;
+  /* object-fit: cover; */
 }
 .right-side {
-  display: flex;
-  flex-direction: row;
+  background-color:rgb(96, 96, 245);
+  color: white;
   width: 60%;
-  justify-content: flex-end;
+}
+.close-btn-row{
+  display: flex;
+  justify-content: end;
+  align-items: end;
 }
 .close-btn {
+  width: 20px;
   cursor: pointer;
-  font-size: 25px;
+  font-size: 20px;
   margin-right: 20px;
   margin-top: 20px;
   padding: 5px;
   background-color: rgba(0, 0, 0, 0.1);
   border-radius: 50%;
 }
-.volunteer-btn{
-  height: 40px;
-  border: 1px solid purple;
-  color: purple;
-  background-color: white;
-  font-family: 'Montserrat', sans-serif;
-  border-radius: 1px;
-  padding: 10px;
-  width: 87px;
-}
-.volunteer-btn:hover{
-  border: 2px solid purple;
-}
-.confirm{
-  background-color: rgb(122, 122, 244);
-  color: white;
-  cursor: pointer;
-  border-radius: 5px;
+.right-side-content{
+  /* border: 1px solid white; */
+  margin-top: 0px;
+  margin-left: 7%;
+  max-height: 350px;
+  width: 90vw;
+  max-width: 500px;
   display: flex;
-  flex-direction: row;
-  justify-content: flex-end;  
-  height: 40px;
-  margin-top: 10px;
-  margin-bottom: 30px;
-}
-.confirm:hover{
-  background-color: rgb(96, 96, 245);
-}
-.contact-info{
-  display: flex;
-  width: 500px;
+  flex-direction: column;
   justify-content: center;
 }
-input.name, input.email{
-  width: 200px;
-  margin-top: 5px;
-  border-radius: none;
+.registering{
+  font-size: 18px;
+  color: white;
+  margin-top: 0px;
+}
+.event-details{
+  padding: 0px 60px;
+  margin-bottom: 30px;
 }
 .row{
   display: flex;
   flex-direction: row;
 }
+.contact-info{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 480px;
+  justify-content: center;
+  margin-top: 10px;
+}
+input.name, input.email{
+  width: 200px;
+  height: 30px;
+  margin-top: 5px;
+  border-radius: none;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  margin-left: 5px;
+}
+.confirm{
+  color:#19add6;
+  font-size: 12px;
+  height: 30px;
+  display: flex;
+  justify-content: end;
+  margin-right: 7%;
+}
+.confirm:hover{
+  cursor: pointer;
+  font-weight: bolder;
+}
 p{
-  font-size: 16px;
+  font-size: 14px;
+  padding: 0px;
+  margin-bottom: 5px;
 }

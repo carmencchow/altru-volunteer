@@ -72,7 +72,6 @@ const Volunteer = () => {
   const handleLocationChange = (e) => {
     setFilters({ ...filters, location: e.target.value});
   }
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -172,8 +171,8 @@ const Volunteer = () => {
                     <button disabled={disabled} onClick={toggleModal}
                       className="volunteer-btn">{volunteer}
                     </button> 
+
                   </div>      
-                  <span className="line"></span>         
                 </div>    
     
                 {modal && (      
@@ -182,36 +181,34 @@ const Volunteer = () => {
                       <div className="modal-popup">
                         <div className="modal-content">
                           <div className="left-side">
-                            <div className="background" style={{ backgroundImage: `url(${image})`}}>
-                            </div>
+                            <img className="modal-image" src={image} alt="volunteers"/> 
                           </div>
+
                           <div className="right-side">
-                            <GrFormClose className="close-btn" onClick={toggleModal}/>
-                            <p className="registering">You are registering for this event: </p>
-                          <div className="event-details">
-                            <p className="text">Event: <span>{ngo.event_description}</span></p>
-                            <p className="text">Date: <span>{ngo.event_date}</span></p>
-                            <p className="text">Time: <span>{ngo.event_time}</span></p>
-                            
-                            <p>Please enter your contact info so we can get in touch with you</p>
-
-                          <div className="row">
-                            <div className="contact-info">
-                              <input className="name" type="text" name="name" placeholder="Full name"/>
-                              <input className="email" type="text" name="email" placeholder="Email"/>
+                            <div className="close-btn-row"><GrFormClose className="close-btn" onClick={toggleModal}/>
                             </div>
 
-                            <button className="confirm" onClick={handleRegister}>Confirm</button>
-                          </div>
+                            <div className="right-side-content">
+                              <p className="registering">You are registering for this event: </p>
+                              <p className="text">Event: <span>{ngo.event_description}</span></p>
+                              <p className="text">Date: <span>{ngo.event_date}</span></p>
+                              <p className="text">Time: <span>{ngo.event_time}</span></p>  
+                              <p>Please enter your contact info so we can get in touch with you</p>
 
-                          <p>{confirm}</p>
-                          </div>
+                              <div className="contact-info">
+                                <input className="name" type="text" name="name" placeholder="Full name"/>
+                                <input className="email" type="text" name="email" placeholder="Email"/>
+                              </div>
 
+                              <div className="confirm" onClick={handleRegister}>Confirm</div>
+                              <p>{confirm}</p>
+
+                            </div>
                           </div>
                         </div>
                       </div>
+                      </div>
                     </div>
-                  </div>
                   )} 
                 </div>
                 )

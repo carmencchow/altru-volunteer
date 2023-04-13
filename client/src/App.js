@@ -5,6 +5,7 @@ import { UserProvider } from './context/UserContext';
 import { FiltersProvider } from './context/FiltersContext';
 import { NgosProvider } from './context/NgosContext';
 import Volunteer from './components/Volunteer';
+import Profile from './pages/Profile';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Home from './pages/Home';
@@ -26,6 +27,7 @@ function App() {
                 {/* <Route path="/login" element={user ? <Navigate to="/main"/> : <Login/>}/> */}
                 <Route path="/volunteer" element={<Volunteer/>}/>
                 <Route path="/info/:id" element={<Info/>}/>
+                <Route path="/profile" element={<Profile/>}/>
               </Routes>
             </DonationsProvider>
           </FiltersProvider>
