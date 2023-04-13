@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../context/AuthContext'
 import logo from '../assets/altru2.png'
 import background from '../assets/volunteer1.jpg'
@@ -7,12 +7,14 @@ import './Home.css'
 
 const Home = () => {
 
-  const handleLogin = () => {
+  const navigate = useNavigate();
 
+  const handleLogin = () => {
+    navigate('/login')
   }
   
   const handleSignup = () => {
-
+    navigate('/signup')
   }
 
   return (

@@ -28,13 +28,8 @@ const Navbar = () => {
   return (
     <nav>
       <div className="logo">
-        <Link className="link" to="/main">
-          <div className="logo-wrapper">
-            <img src={logo} style={{ width: 70, height: 70 }} alt="logo" />
-            <p className="logo-text">Altru</p>
-          </div>
-        </Link> 
-        
+        <p className="logo-text">Altru</p>
+        <span className="logout"><Link to="/" onClick={handleLogout}>Logout</Link></span>
       { user ? ( 
         <div className="user-display">
           {/* <div className="welcome">Welcome {user.email}!</div>
@@ -44,10 +39,10 @@ const Navbar = () => {
         ) : (
 
         <div className="nav-login">
-          <div className="login-signup">
+          {/* <div className="login-signup">
             <span className="login"><Link className="button-text" to="/login">Log in</Link></span> 
             <span className="signup"><Link className="button-text" to="/signup">Sign up</Link></span> 
-          </div>
+          </div> */}
         </div>
       )} 
       </div>

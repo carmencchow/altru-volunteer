@@ -2,74 +2,65 @@ body{
   margin: 0;
   padding: 0;
   box-sizing: border-box; 
-}
-.background{
-  height: 100vh;
-  /* background-position: center; */
-  background-repeat: no-repeat;
-  background-size: cover;
-  opacity: 0.9;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box; 
-}
-.banner{
-  height: 200px;
-  width: 100%;
-  background-color: rgb(76, 76, 245);
-}
-/* .welcome-text{
-  color: #19add6;
-  font-size: 60px;
-  font-family: 'League Gothic', sans-serif;
-  background-color: #322ca9;
+} 
+.login-card{
+  align-items: center;
+  display: flex;
+  flex-direction: column;
   width: 700px;
-  padding: 30px;
-  text-align: center;
-  margin: 0 auto; */
-/* } */
-.signup-text{
-  text-align: center;
-  
+  margin-top: 0px;
 }
-.login-inputs{
+.container{
+  height: 80vh;
+  width: 70%;
   display: flex;
   flex-direction: row;
+  align-items: center;
+  margin: 0 auto;
+  justify-content: center;
+}
+.form-container{
+  border: 2px solid #19add6;
+  height: 70vh;
+  width: 80%;
+  margin: 0 auto;
   justify-content: center;
 }
 input{
-  border-radius: 30px;
   border: 2px solid #19add6;
-  width: 200px;
-  padding-left: 30px;
+  margin-bottom: 20px;
+  width: 350px;
 }
 .login-submit{
   height: 40px;
   cursor: pointer;
-  width: 100px;
-  color: grey;
+  width: 355px;
+  color: white;
   font-size: 16px;
-  border-radius: 30px;
   border: 2px solid #19add6;
+  border-radius: 0px;
+  margin-right: 4px;
+  background-color: #19add6;
 }
 .submit:hover{
   background-color: darkgrey;
   color: black;
   transition: ease-in 2s;
 }
-.forgot{
-  font-size: 12px;
-  font-weight: lighter;
-  text-align: right;
-  margin-top: 0px;
-  margin-right: 0px;
-  color: blue;
-}
-.logo-wrapper{
+.new-account{
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
+  margin-top: 15px;
 }
-.no-account, .register{
+.no-account{
   font-size: 14px;
+  margin-left: 0px;
+} 
+.register{
+  font-size: 12px;
+  margin-left: 120px;
+}
+.register:hover{
+  color: #19add6;
+  cursor: pointer;
 }

@@ -1,14 +1,12 @@
 import React, { useState, useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { AuthContext } from '../context/AuthContext'
-// import { FcGoogle } from 'react-icons/fc'
-// import { SiFacebook } from 'react-icons/si'
 import logo from '../assets/altru2.png'
-import background from '../assets/volunteer1.jpg'
 import './Login.css'
 
 const Login = () => {
+  const navigate = useNavigate();
   const { user, setUser, token, setToken } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     email: '',
@@ -24,6 +22,10 @@ const Login = () => {
     }))
   }
   
+  const handleSignup = () => {
+    navigate('/signup')
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData.email, formData.password)
@@ -47,53 +49,43 @@ const Login = () => {
   };
 
   return (
-    <div className="background" style={{ backgroundImage: `url(${background})`}}>
-      <div className="banner">
-        <div className="logo-wrapper">
-          <img src={logo} style={{ width: 200, height: 100 }} alt="logo" />
-            <Link className="signup-btn" to="/signup">
-            <p className="register">Sign Up</p>
-            </Link>
+  
+    <div className="container">
+      <div className="login-card">
+        <img src={logo} style={{ width: 200, height: 100 }} alt="logo" />
+
+        <div className="email-input">
+          <p>Email address</p>
+            <input 
+              name="email"
+              type="email" 
+              placeholder="Enter your email" 
+              value={email}   
+              onChange={handleChange}  
+            />
         </div>
-          <h3 className="signup-text">Log in to your account</h3>
-            
-          <div className="login-inputs">
-            <div className="email-input">
-              {/* <p>Email address</p> */}
-                <input 
-                  name="email"
-                  type="email" 
-                  placeholder="Enter your email" 
-                  value={email}   
-                  onChange={handleChange}  
-                />
-            </div>
-      
-            {error && <div><strong>Error:</strong>{error}</div>}
-
-            <div className="password-input">
-              {/* <p>Password</p> */}
-                <input 
-                  name="password" 
-                  type="password" 
-                  placeholder="Enter your password" 
-                  value={password} 
-                  onChange={handleChange}    
-                />
-            </div>
-
-            <button type="submit" className="login-submit" onClick={handleSubmit}>Sign In</button>
-          </div>
-                          
-          {/* <div className="new-account">
-            <p className="no-account"> Don't have an account?</p> 
-            <Link to="/signup">
-            <p className="register">Sign Up</p>
-            </Link>
-          </div> */}
     
+        {/* {error && <div><strong>Error:</strong>{error}</div>} */}
+
+        <div className="password-input">
+          <p>Password</p>
+            <input 
+              name="password" 
+              type="password" 
+              placeholder="Enter your password" 
+              value={password} 
+              onChange={handleChange}    
+            />
+        </div>
+
+        <button type="submit" className="login-submit" onClick={handleSubmit}>Log in</button>
+                      
+        <div className="new-account">
+          <div className="no-account"> Don't have an account?</div> 
+          <div className="register" onClick={handleSignup}>Sign Up</div>
         </div>
       </div>
+    </div>
     )
   }
 

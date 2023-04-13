@@ -60,33 +60,8 @@ body{
 .login-btn:hover, .signup-btn:hover{
   cursor: pointer;
 }
-.login-submit{
-  height: 40px;
-  cursor: pointer;
-  width: 100px;
-  color: grey;
-  font-size: 16px;
-  border-radius: 30px;
-  border: 2px solid #19add6;
-}
-.submit:hover{
-  background-color: darkgrey;
-  color: black;
-  transition: ease-in 2s;
-}
-/* .forgot{
-  font-size: 12px;
-  font-weight: lighter;
-  text-align: right;
-  margin-top: 0px;
-  margin-right: 0px;
-  color: blue;
-} */
 .logo-wrapper{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
-/* .no-account, .register{
-  font-size: 14px;
-} */

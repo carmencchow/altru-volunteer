@@ -5,10 +5,8 @@ nav{
   padding: 0px 20px 0px 20px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
   height: 45px;
-  background-color: black;
-  /* background-color: #e8f0ed; */
+  background-color: rgb(76, 76, 245);
   color: white;
-  /* color: #357a65; */
 }
 button{
   margin-left: 10px;
@@ -16,9 +14,8 @@ button{
 }
 .logo{
   text-decoration: none;
-  /* color: blue; */
   color: white;
-    display: flex;
+  display: flex;
   line-height: normal;
   vertical-align: middle;
 }
@@ -43,7 +40,6 @@ button{
   font-size: 16px;
 }
 .button-text{
-  /* border: 1px solid white; */
   border-radius: 20px;
   width: 100px;
   padding: 5px 10px;
