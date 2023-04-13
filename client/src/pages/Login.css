@@ -3,6 +3,10 @@ body{
   padding: 0;
   box-sizing: border-box; 
 } 
+.login-logo{
+  margin-top: 20px;
+  margin-left: 20px;
+}
 .login-card{
   align-items: center;
   display: flex;
@@ -10,7 +14,7 @@ body{
   width: 700px;
   margin-top: 0px;
 }
-.container{
+.login-wrapper{
   height: 80vh;
   width: 70%;
   display: flex;
@@ -18,6 +22,12 @@ body{
   align-items: center;
   margin: 0 auto;
   justify-content: center;
+}
+h2{
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  margin-left: 0px;
 }
 .form-container{
   border: 2px solid #19add6;
@@ -30,6 +40,7 @@ input{
   border: 2px solid #19add6;
   margin-bottom: 20px;
   width: 350px;
+  height: 50px;
 }
 .login-submit{
   height: 40px;
@@ -42,10 +53,11 @@ input{
   margin-right: 4px;
   background-color: #19add6;
 }
-.submit:hover{
-  background-color: darkgrey;
-  color: black;
-  transition: ease-in 2s;
+.login-submit:hover{
+  border: none;
+  background-color: #322ca9;
+  color: white;
+  transition: ease-in 0.5s;
 }
 .new-account{
   display: flex;
@@ -62,5 +74,6 @@ input{
 }
 .register:hover{
   color: #19add6;
+  font-weight: bolder;
   cursor: pointer;
 }

@@ -49,43 +49,45 @@ const Login = () => {
   };
 
   return (
-  
-    <div className="container">
-      <div className="login-card">
-        <img src={logo} style={{ width: 200, height: 100 }} alt="logo" />
+    <>
+      <img className="login-logo" src={logo} style={{ width: 130, height: 40 }} alt="logo" />
 
-        <div className="email-input">
-          <p>Email address</p>
-            <input 
-              name="email"
-              type="email" 
-              placeholder="Enter your email" 
-              value={email}   
-              onChange={handleChange}  
-            />
-        </div>
-    
+      <div className="login-wrapper">      
+        <div className="login-card">
+          <h2>Login</h2>
+          <div className="email-input">
+            <p>Email address</p>
+              <input 
+                name="email"
+                type="email" 
+                placeholder="Enter your email" 
+                value={email}   
+                onChange={handleChange}  
+              />
+          </div>
+      
         {/* {error && <div><strong>Error:</strong>{error}</div>} */}
 
-        <div className="password-input">
-          <p>Password</p>
-            <input 
-              name="password" 
-              type="password" 
-              placeholder="Enter your password" 
-              value={password} 
-              onChange={handleChange}    
-            />
-        </div>
+          <div className="password-input">
+            <p>Password</p>
+              <input 
+                name="password" 
+                type="password" 
+                placeholder="Enter your password" 
+                value={password} 
+                onChange={handleChange}    
+              />
+          </div>
 
-        <button type="submit" className="login-submit" onClick={handleSubmit}>Log in</button>
-                      
-        <div className="new-account">
-          <div className="no-account"> Don't have an account?</div> 
-          <div className="register" onClick={handleSignup}>Sign Up</div>
+          <button type="submit" className="login-submit" onClick={handleSubmit}>Log in</button>
+                        
+          <div className="new-account">
+            <div className="no-account"> Don't have an account?</div> 
+            <div className="register" onClick={handleSignup}>Sign Up</div>
+          </div>
         </div>
       </div>
-    </div>
+    </>
     )
   }
 
