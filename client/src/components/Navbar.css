@@ -5,6 +5,10 @@ nav{
   padding: 0px 20px 0px 20px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
   height: 45px;
+  background-color: black;
+  /* background-color: #e8f0ed; */
+  color: white;
+  /* color: #357a65; */
 }
 button{
   margin-left: 10px;
@@ -12,8 +16,9 @@ button{
 }
 .logo{
   text-decoration: none;
-  color: blue;
-  display: flex;
+  /* color: blue; */
+  color: white;
+    display: flex;
   line-height: normal;
   vertical-align: middle;
 }
@@ -30,8 +35,6 @@ button{
   flex-direction: row;
 }
 .login, .signup, .logout{
-  border: 2px solid purple;
-  color: darkcyan;
   border-radius: 20px;
   width: 100px;
   padding: 5px 10px;
@@ -40,7 +43,17 @@ button{
   font-size: 16px;
 }
 .button-text{
-  font-size: 16px;
+  /* border: 1px solid white; */
+  border-radius: 20px;
+  width: 100px;
+  padding: 5px 10px;
+  font-size: 20px;
+  text-decoration: none;
+  color: white;
+  font-weight: bolder;
+}
+.button-text:hover{
+  font-size: 20px;
   text-decoration: none;
 }
 .profile{

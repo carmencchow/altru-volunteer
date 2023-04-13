@@ -13,7 +13,7 @@ const Volunteer = () => {
   const { filters, setFilters } = useContext(FiltersContext) 
   const { ngos, setNgos } = useContext(NgosContext)
   const { token } = useContext(AuthContext);
-  const [ volunteer, setVolunteer ] = useState('Volunteer now')
+  const [ volunteer, setVolunteer ] = useState('Sign up')
   const [ numVolunteers, setNumVolunteers ] = useState()
   const [ currentPage, setCurrentPage ] = useState(1)
   const [ disabled, setDisabled ] = useState(false)
@@ -68,6 +68,11 @@ const Volunteer = () => {
     setFilters({ ...filters, frequency: e.target.value});
   }
 
+  // const handleLocationChange = (e) => {
+  //   setFilters({ ...filters, location: e.target.value});
+  // }
+  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     fetchVolunteerNgos()
@@ -103,16 +108,24 @@ const Volunteer = () => {
         <div className="filters">
           <form className="dropdown">
             <select value={filters.frequency} onChange={handleFrequencyChange}>  
-            <option value="all"> --- Frequency --- </option>
+            <option value="all"> Commitment: </option>
             <option value="day">One Day Events</option>
             <option value="weekly">Every Week</option>
             <option value="monthly">Once a Month</option> 
             </select>
           </form>
 
+          {/* <form className="dropdown">
+            <select value={filters.virtual} onChange={handleLocationChange}>  
+              <option value="all"> --- In-Person or Remote --- </option>
+              <option value="in-person">In-Person</option>
+              <option value="remote">Remote</option>
+            </select>
+          </form> */}
+
           <form className="dropdown">
             <select value={filters.category} onChange={handleCategoryChange}>
-            <option value="all"> --- All categories --- </option>
+            <option value="all"> Causes: </option>
             <option value="animals">Animals</option>
             <option value="children & youth">Children & Youth</option>
             <option value="education & literacy">Education & Literacy</option>
@@ -146,21 +159,20 @@ const Volunteer = () => {
                     </div>
                   <div className="show-details">
                     <div>
-                      <p>Category: {ngo.category}</p>
-                      <p>Volunteers needed: {ngo.num_volunteers}</p>
-                      <p>Commitment: {ngo.commitment}</p>
+                      { ngo.num_volunteer ? <p>Volunteers needed: {ngo.num_volunteers}</p> : null}
+                      { ngo.commitment ? <p>Commitment: {ngo.commitment}</p> : null}
                     </div>
                     <div>
-                      <p>Date: {ngo.event_date}</p>
-                      <p>Time: {ngo.event_time}</p>
-                      <p>Event: {ngo.event_description}</p>
+                      { ngo.event_date ? <p>Date: {ngo.event_date}</p> : null} 
+                      { ngo.event_time ? <p>Time: {ngo.event_time}</p> : null}
+                      { ngo.event_description ? <p>Event: {ngo.event_description}</p> : null}
                     </div>             
 
                     <button disabled={disabled} onClick={toggleModal}
                       className="volunteer-btn">{volunteer}
                     </button> 
-   
-                  </div>               
+                  </div>      
+                  <span className="line"></span>         
                 </div>    
     
                 {modal && (      

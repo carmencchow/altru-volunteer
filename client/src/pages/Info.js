@@ -16,9 +16,15 @@ const Info = () => {
   const [ total, setTotal ] = useState(0)
   const [ ngo, setNgo ] = useState({});
 
+  const [inputValue, setInputValue] = useState("");
+
   const fetchNgo = async () => {
     const res = await axios.get(`http://localhost:5000/api/ngos/${id}`)
     setNgo(res.data)
+  }
+
+  const handleClick = (event) => {
+    setInputValue(event.target.value);
   }
 
   useEffect (() => {
@@ -28,8 +34,8 @@ const Info = () => {
   // Stripe Payment
   const addAmount = (e) => {
     const clickedAmount = Number(e.target.value);
-    toast.success(`$${clickedAmount} added`)
-    setTotal(clickedAmount)
+    // toast.success(`$${clickedAmount} added`)
+    setTotal(e.target.value)
     console.log(e.target.value, total) // undefined, NaN
   }
 
@@ -109,21 +115,21 @@ const Info = () => {
       <div className="donation-card">
         <p>Please select a donation amount: </p>
         <div className="donation-options">
-          <div className="amount-btn" onClick={addAmount} value="10">$10</div>
-          <div className="amount-btn" onClick={addAmount} value="25">$25</div>
-          <div className="amount-btn" onClick={addAmount} value="30">$30</div>
+          <button className="amount-btn" onClick={handleClick} value="10">$10</button>
+          <button className="amount-btn" onClick={handleClick} value="25">$25</button>
+          <button className="amount-btn" onClick={handleClick} value="30">$30</button>
         </div>
         <div className="donation-options">
-          <div className="amount-btn" onClick={addAmount} value="50">$50</div>
-          <div className="amount-btn" onClick={addAmount} value="75">$75</div>
-          <div className="amount-btn" onClick={addAmount} value="100">$100</div>
+          <button className="amount-btn" onClick={handleClick} value="50">$50</button>
+          <button className="amount-btn" onClick={handleClick} value="75">$75</button>
+          <button className="amount-btn" onClick={handleClick} value="100">$100</button>
         </div>
 
         <div className="other-amount">
           <input 
             type="text" 
             className="donation-input"
-            value={input}
+            value={inputValue}
             placeholder='Other amount'
             onChange={handleAmount}
           />                              

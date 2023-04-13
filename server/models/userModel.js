@@ -32,21 +32,27 @@ const userSchema = new Schema({
   goal_amount: {
     type: Number,
   },
-  following: [
-    { 
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'ngo',
-    },
-  ],
+  // following: [
+  //   { 
+  //     type: mongoose.Schema.Types.ObjectId,
+  //     ref: 'ngo',
+  //   },
+  // ],
+  following: {
+    type: Array,
+  },
   donations: {
     type: Array,
   },
-  attending: [
-    { 
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'event',
-    },
-  ],
+  attending: {
+    type: Array,
+  },
+  // attending: [
+  //   { 
+  //     type: mongoose.Schema.Types.ObjectId,
+  //     ref: 'event',
+  //   },
+  // ],
 }, { timestamps: true });
 
 module.exports = mongoose.model('User', userSchema);

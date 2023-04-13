@@ -17,6 +17,9 @@ const Navbar = () => {
       const res = await axios.post('http://localhost:5000/api/auth/logout')
       setUser(null)
       setToken('')
+      await localStorage.clear();
+      navigate('/login');
+      
     } catch (err) { 
       console.log(err, 'Unable to log out')
     }
@@ -34,8 +37,8 @@ const Navbar = () => {
         
       { user ? ( 
         <div className="user-display">
-          <div className="welcome">Welcome {user.email}!</div>
-          <Link to="/logout" onClick={handleLogout}>Logout</Link>
+          {/* <div className="welcome">Welcome {user.email}!</div>
+          <Link to="/logout" onClick={handleLogout}>Logout</Link> */}
       </div>
 
         ) : (

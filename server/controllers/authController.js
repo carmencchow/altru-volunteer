@@ -116,16 +116,12 @@ const logout = ( req, res ) => {
 
 // 4. getUserData endpoint, access by passing user token in 'auth'
 const getUserData = async ( req, res ) => { 
-  const {_id, username, email, donations, following, attended } = await User.findById(req.user.id);
-  res.status(200).send({ 
-    message: 'Displaying user data',
-    id: _id,
-    username,
-    email,
-    donations,
-    following,
-    attended
-  })
+  try {
+    const user = await User.findById(req.user.id);
+    res.status(200).json({ message: 'User info:', user: user })
+  } catch (err) {
+    console.log(err); 
+  }
 }
 
 module.exports = { signup, login, logout, getUserData };
