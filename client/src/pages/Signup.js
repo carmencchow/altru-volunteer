@@ -18,6 +18,10 @@ const Signup = () => {
 
   // const { signup, error, isLoading } = useSignup()
 
+  const handleHome = () => {
+    navigate('/')
+  }
+
   const { name, email, password, confirm } = formData
 
   const handleChange = (e) => {
@@ -48,7 +52,7 @@ const Signup = () => {
 
   return (
     <>
-      <img className="login-logo" src={logo} style={{ width: 130, height: 40 }} alt="logo" />
+      <img onClick={handleHome} className="signup-logo" src={logo} style={{ width: 130, height: 40 }} alt="logo" />
 
       <div className="signup-wrapper">
         <div className="signup-card">

@@ -12,16 +12,18 @@ body{
   padding: 0;
   box-sizing: border-box; 
 }
+.home-logo{
+  margin-top: 10px;
+  margin-left: 10px;
+}
 .buttons{
   display: flex;
   flex-direction: row;
   justify-content: end;
-  margin-top: 20px;
-  margin-bottom: 20px;
   margin-right: 20px;
 }
 .banner{
-  height: 200px;
+  height: 70px;
   width: 100%;
   background-color: rgb(76, 76, 245);
 }
@@ -31,7 +33,6 @@ body{
   width: 700px;
   height: 170px;
   padding: 10px;
-  text-align: center;
   margin: 0 auto;
 }
 .welcome-text{
@@ -59,6 +60,9 @@ body{
 }
 .login-btn:hover, .signup-btn:hover{
   cursor: pointer;
+  background-color: #19add6;
+  color:#322ca9; 
+  transition: ease-in 0.5s;
 }
 .logo-wrapper{
   display: flex;

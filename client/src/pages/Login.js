@@ -26,6 +26,10 @@ const Login = () => {
     navigate('/signup')
   }
 
+  const handleHome = () => {
+    navigate('/')
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData.email, formData.password)
@@ -50,7 +54,7 @@ const Login = () => {
 
   return (
     <>
-      <img className="login-logo" src={logo} style={{ width: 130, height: 40 }} alt="logo" />
+      <img onClick={handleHome} className="login-logo" src={logo} style={{ width: 130, height: 40 }} alt="logo" />
 
       <div className="login-wrapper">      
         <div className="login-card">

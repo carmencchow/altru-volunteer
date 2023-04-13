@@ -6,7 +6,6 @@ import background from '../assets/volunteer1.jpg'
 import './Home.css'
 
 const Home = () => {
-
   const navigate = useNavigate();
 
   const handleLogin = () => {
@@ -21,7 +20,7 @@ const Home = () => {
     <div className="background" style={{ backgroundImage: `url(${background})`}}>
       <div className="banner">
         <div className="logo-wrapper">
-          <img src={logo} style={{ width: 200, height: 100 }} alt="logo" />
+          <img className="home-logo" src={logo} style={{ width: 120, height: 36 }} alt="logo" />
             <div className="buttons">
               <div className="login-btn" onClick={handleLogin}>Login</div>
               <div className="signup-btn" onClick={handleSignup}>Signup</div>

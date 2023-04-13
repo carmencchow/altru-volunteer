@@ -4,6 +4,29 @@
   padding: 0px 70px;
   justify-content: center;
 }
+.pagination{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding-top: 40px;
+  margin-right: 60px;
+}
+.next, .previous{
+  height: 40px;
+  cursor: pointer;
+  color: #19add6;
+  border: 2px solid #19add6;
+  width: 100px;
+  margin-right: 7px;
+  font-family: 'Montserrat', sans-serif;
+}
+.next:hover, .previous:hover{
+  background-color: #19add6;
+  color: white;
+}
+.arrow:hover{
+  color: white;
+}
 form {
   display: flex;
   flex-direction: row;
@@ -12,41 +35,59 @@ form {
   margin-left: 20px;
   border-radius: 0px;
 }
-
-.line{
-  width: 1000px;
-  height: 1px;
-  color: green;
+.dropdown, option{
+  height: 40px;
+  border-radius: 0px;
+  font-family: 'Montserrat', sans-serif;
+}
+select, option{
+  height: 40px;
+}
+.dropdown{
+  flex-direction: column;
+}
+form.dropdown p{
+  font-size: 14px;
+  font-style: italic;
+  margin-bottom: 5px;
+  margin-left: 0;
+}
+.searchBtn{
+  height: 40px;
+  background-color: whitesmoke;
+  font-family: 'Montserrat', sans-serif;
+  border-radius: 1px;
+  padding: 10px;
+  width: 100px;
+  margin-left: 20px;
+  margin-top: 7px;
+  color: white;
+  background-color: #716bc4;
+  font-family: 'Montserrat', sans-serif;
+}
+.searchBtn:hover{
+  background-color: #a8a4db;
 }
 .display{
   padding: 0px 70px;
 }
-/* .pagination{
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  padding-top: 40px;
-} */
-.website{
-  font-size: 16px;
-  font-weight: lighter;
-}
 .display-container{
   margin: 30px 60px;
 }
-.infoBtn{  
-  color: purple;
-  border-radius: 20px;
+.ngo-name{  
+  color:  #322ca9;
+  font-family: 'League Gothic', sans-serif;
   margin-right: 10px;
-  font-size: 20px;
+  font-size: 36px;
+  letter-spacing: 0.5px;
   cursor: pointer;
-  text-decoration: underline;
 }
 .show-details {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  font-size: 20px;
+  font-size: 70px;
+  color: black;
 }
 .registering{
   padding: 0px 60px;
@@ -60,34 +101,6 @@ form {
 span{
   margin-left: 30px;
 }
-.dropdown, select, option{
-  height: 40px;
-  border-radius: 0px;
-  font-family: 'Montserrat', sans-serif;
-}
-.searchBtn{
-  height: 40px;
-  /* border: 1px solid black; */
-  background-color: whitesmoke;
-  font-family: 'Montserrat', sans-serif;
-  border-radius: 1px;
-  padding: 10px;
-  width: 100px;
-  margin-left: 20px;
-  color: white;
-  background-color: #716bc4;
-  font-family: 'Montserrat', sans-serif;
- 
-}
-.searchBtn:hover{
-  background-color: #a8a4db;
-  color: black;
-
-}
-/* .next, .previous{
-  height: 40px;
-  cursor: pointer;
-} */
 body.active-modal {
   overflow-y: hidden;
 }
@@ -102,16 +115,30 @@ body.active-modal {
   bottom: 0;
 }
 .modal-popup {
-  height: 500px;
-  width: 700px;
+  height: 90vh;
+  max-height: 400px;
+  width: 95vw;
+  max-width: 900px;
   position: absolute;
   background-color: #f4f5f7;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column; 
 }
 .modal-content {
-  width: 100%;
+  height: 90vh;
+  max-height: 400px;
+  width: 95vw;
+  max-width: 900px;
+}
+.left-side{
+  width: 40%;
+}
+.background{
+  height: 400px;
+  
 }
 .modal-text{
   display: flex;
@@ -121,7 +148,7 @@ body.active-modal {
 .right-side {
   display: flex;
   flex-direction: row;
-  width: 100%;
+  width: 60%;
   justify-content: flex-end;
 }
 .close-btn {
@@ -135,12 +162,16 @@ body.active-modal {
 }
 .volunteer-btn{
   height: 40px;
-  border: 1px solid black;
-  background-color: whitesmoke;
+  border: 1px solid purple;
+  color: purple;
+  background-color: white;
   font-family: 'Montserrat', sans-serif;
   border-radius: 1px;
   padding: 10px;
-  width: 100px;
+  width: 87px;
+}
+.volunteer-btn:hover{
+  border: 2px solid purple;
 }
 .confirm{
   background-color: rgb(122, 122, 244);
@@ -165,10 +196,12 @@ body.active-modal {
 input.name, input.email{
   width: 200px;
   margin-top: 5px;
-  border: 1px solid green;
   border-radius: none;
 }
 .row{
   display: flex;
   flex-direction: row;
+}
+p{
+  font-size: 16px;
 }

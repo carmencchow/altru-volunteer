@@ -3,6 +3,11 @@ body{
   padding: 0;
   box-sizing: border-box; 
 } 
+.signup-logo{
+  margin-top: 20px;
+  margin-left: 20px;
+  cursor: pointer;
+}
 .signup-card{
   align-items: center;
   display: flex;
@@ -42,4 +47,7 @@ input{
   background-color: #322ca9;
   color: white;
   transition: ease-in 0.5s;
+}
+::placeholder{
+  margin-left: 10px;
 }

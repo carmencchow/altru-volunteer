@@ -1,12 +1,13 @@
 import React, { useState,useEffect, useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { FiltersContext } from '../context/FiltersContext'
-import { FiltersProvider } from '../context/FiltersContext'
 import { AuthContext } from '../context/AuthContext'
 import { NgosContext } from '../context/NgosContext'
-import { useNavigate } from 'react-router-dom'
-import { GrFormClose } from "react-icons/gr"
+import { GrFormClose } from 'react-icons/gr'
+import { FcNext, FcPrevious } from 'react-icons/fc'
 import Navbar from '../components/Navbar'
+import image from '../assets/volunteer.jpg'
 import './Volunteer.css'
 
 const Volunteer = () => {
@@ -144,9 +145,8 @@ const Volunteer = () => {
         </div>
 
           <div className="pagination">
-            <button disabled={currentPage === 1} className="previous" onClick={handlePrevious}>Previous</button>
-            <p>{currentPage} / {pageCount}</p>
-            <button disabled={currentPage === pageCount} className="next" onClick={handleNext}>Next</button> 
+            <button disabled={currentPage === 1} className="previous" onClick={handlePrevious}><FcPrevious className="arrow"/>Previous</button>
+            <button disabled={currentPage === pageCount} className="next" onClick={handleNext}>Next<FcNext className="arrow"/></button> 
           </div>
       
         <div className="display">
@@ -156,7 +156,7 @@ const Volunteer = () => {
                 <div className="display-container">
                   <div key={idx}>
                     <div 
-                      className="infoBtn" 
+                      className="ngo-name" 
                       onClick={() => handleNgoSelected(ngo._id)}>
                       {ngo.name}
                     </div>
@@ -164,8 +164,6 @@ const Volunteer = () => {
                     <div>
                       { ngo.num_volunteer ? <p>Volunteers needed: {ngo.num_volunteers}</p> : null}
                       { ngo.commitment ? <p>Commitment: {ngo.commitment}</p> : null}
-                    </div>
-                    <div>
                       { ngo.event_date ? <p>Date: {ngo.event_date}</p> : null} 
                       { ngo.event_time ? <p>Time: {ngo.event_time}</p> : null}
                       { ngo.event_description ? <p>Event: {ngo.event_description}</p> : null}
@@ -183,11 +181,13 @@ const Volunteer = () => {
                     <div className="modal-background">
                       <div className="modal-popup">
                         <div className="modal-content">
-                        <div className="right-side">
-                         <GrFormClose className="close-btn" onClick={toggleModal}/>
-                        </div>
-                          <p className="registering">You are registering for this event: </p>
-
+                          <div className="left-side">
+                            <div className="background" style={{ backgroundImage: `url(${image})`}}>
+                            </div>
+                          </div>
+                          <div className="right-side">
+                            <GrFormClose className="close-btn" onClick={toggleModal}/>
+                            <p className="registering">You are registering for this event: </p>
                           <div className="event-details">
                             <p className="text">Event: <span>{ngo.event_description}</span></p>
                             <p className="text">Date: <span>{ngo.event_date}</span></p>
@@ -203,10 +203,10 @@ const Volunteer = () => {
 
                             <button className="confirm" onClick={handleRegister}>Confirm</button>
                           </div>
-  
 
-                            <p>{confirm}</p>
-  
+                          <p>{confirm}</p>
+                          </div>
+
                           </div>
                         </div>
                       </div>
@@ -220,7 +220,7 @@ const Volunteer = () => {
           </div>  
         </div>
         )
-        }
+      }
 
 export default Volunteer;
 
