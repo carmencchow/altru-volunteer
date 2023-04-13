@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { AuthContext } from '../context/AuthContext'
-import logo from '../assets/altru2.png'
+import logo from '../assets/altru.png'
 import './Login.css'
 
 const Login = () => {

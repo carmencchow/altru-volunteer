@@ -2,8 +2,7 @@ import React, { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../context/AuthContext'
 import axios from 'axios'
-import logo from '../assets/logo.png'
-import Login from '../pages/Login'
+import logo from '../assets/altru.png'
 import './Navbar.css'
 
 const Navbar = () => {
@@ -27,33 +26,10 @@ const Navbar = () => {
   }
   return (
     <nav>
-      <div className="logo">
-        <p className="logo-text">Altru</p>
-        <span className="logout"><Link to="/" onClick={handleLogout}>Logout</Link></span>
-      { user ? ( 
-        <div className="user-display">
-          {/* <div className="welcome">Welcome {user.email}!</div>
-          <Link to="/logout" onClick={handleLogout}>Logout</Link> */}
-      </div>
-
-        ) : (
-
-        <div className="nav-login">
-          {/* <div className="login-signup">
-            <span className="login"><Link className="button-text" to="/login">Log in</Link></span> 
-            <span className="signup"><Link className="button-text" to="/signup">Sign up</Link></span> 
-          </div> */}
-        </div>
-      )} 
-      </div>
-
-      <div className="nav-login">
-        <div className="login-signup">
-          <span className="login"><Link className="button-text" to="/login">Log in</Link></span> 
-          <span className="logout"><Link to="/" onClick={handleLogout}>Logout</Link></span>
-          <span className="signup"><Link className="button-text" to="/signup">Sign up</Link></span> 
-        </div>
-
+      <div className="navbar">
+        <img className="logo" src={logo} style={{ width: 120, height: 40 }} alt="logo" />
+      
+        <div className="logout-btn" onClick={handleLogout}>Logout</div>
       </div>
       
     </nav>
@@ -63,22 +39,5 @@ const Navbar = () => {
 export default Navbar;
 
 
-// { user ? ( 
-//   <div className="user-display">
-//     <div className="welcome">
-//       <span className="hi">👋</span> 
-//       Welcome, {user.username}! 
-//     </div>
-//   <Link to="/profile"><RxAvatar className="avatar"/></Link>
-//   <Link to="/logout" onClick={handleLogout}>Logout</Link>
-// </div>
 
-//   ) : (
-//   <div className="nav-login">
-//     <div className="login-signup">
-//       <span className="login"><Link className="button-text" to="/login">Log in</Link></span> 
-//       <span className="signup"><Link className="button-text" to="/signup">Sign up</Link></span> 
-//     </div>
-//   </div>
-// )} 
 

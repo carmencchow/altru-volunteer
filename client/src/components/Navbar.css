@@ -1,75 +1,30 @@
 nav{
   display: flex;
   justify-content: space-between;
-  margin: 20px auto;
+  margin: 0px auto;
   padding: 0px 20px 0px 20px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
-  height: 45px;
+  height: 60px;
   background-color: rgb(76, 76, 245);
   color: white;
 }
-button{
-  margin-left: 10px;
-  cursor: pointer;
+.navbar{
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
 }
 .logo{
-  text-decoration: none;
+  margin-top: 10px;
+}
+.logout-btn{
   color: white;
-  display: flex;
-  line-height: normal;
-  vertical-align: middle;
-}
-.logo-wrapper{
-  display: flex;
-  margin-top: -20px;
-}
-.logo-text{
-  font-size: 20px;
-  text-decoration: none;
-}
-.menus{
-  display: flex;
-  flex-direction: row;
-}
-.login, .signup, .logout{
-  border-radius: 20px;
-  width: 100px;
-  padding: 5px 10px;
-  margin-right: 10px;
-  cursor: pointer;
-  font-size: 16px;
-}
-.button-text{
-  border-radius: 20px;
-  width: 100px;
-  padding: 5px 10px;
-  font-size: 20px;
-  text-decoration: none;
-  color: white;
-  font-weight: bolder;
-}
-.button-text:hover{
-  font-size: 20px;
-  text-decoration: none;
-}
-.profile{
+  font-family: 'League Gothic', sans-serif;
+  font-size: 28px;
+  padding: 8px;
   margin-right: 10px;
 }
-.avatar{
-  font-size: 35px;
-  margin-right: 10px;
-}
-.user-display{
-  display: flex;
-  flex-direction: row;
-  font-size: 16px;
-  margin-left: 10px;
-}
-.welcome{
-  padding-right: 40px;
-  font-size: 16px;
-}
-.nav-login{
-  display: flex;
-  justify-content: space-evenly;
+.logout-btn:hover{
+ color:aqua; 
+ cursor: pointer;
 }

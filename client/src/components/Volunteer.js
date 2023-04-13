@@ -68,9 +68,9 @@ const Volunteer = () => {
     setFilters({ ...filters, frequency: e.target.value});
   }
 
-  // const handleLocationChange = (e) => {
-  //   setFilters({ ...filters, location: e.target.value});
-  // }
+  const handleLocationChange = (e) => {
+    setFilters({ ...filters, location: e.target.value});
+  }
   
 
   const handleSubmit = async (e) => {
@@ -107,25 +107,28 @@ const Volunteer = () => {
       <Navbar/>
         <div className="filters">
           <form className="dropdown">
+            <p>Commitment</p>
             <select value={filters.frequency} onChange={handleFrequencyChange}>  
-            <option value="all"> Commitment: </option>
+            <option value="all"> Anytime </option>
             <option value="day">One Day Events</option>
             <option value="weekly">Every Week</option>
             <option value="monthly">Once a Month</option> 
             </select>
           </form>
 
-          {/* <form className="dropdown">
+          <form className="dropdown">
+            <p>Location</p>
             <select value={filters.virtual} onChange={handleLocationChange}>  
-              <option value="all"> --- In-Person or Remote --- </option>
+              <option value="all"> Both </option>
               <option value="in-person">In-Person</option>
               <option value="remote">Remote</option>
             </select>
-          </form> */}
+          </form>
 
           <form className="dropdown">
+            <p>Cause</p>
             <select value={filters.category} onChange={handleCategoryChange}>
-            <option value="all"> Causes: </option>
+            <option value="all"> All </option>
             <option value="animals">Animals</option>
             <option value="children & youth">Children & Youth</option>
             <option value="education & literacy">Education & Literacy</option>
@@ -140,11 +143,11 @@ const Volunteer = () => {
           </button>
         </div>
 
-          {/* <div className="pagination">
+          <div className="pagination">
             <button disabled={currentPage === 1} className="previous" onClick={handlePrevious}>Previous</button>
             <p>{currentPage} / {pageCount}</p>
             <button disabled={currentPage === pageCount} className="next" onClick={handleNext}>Next</button> 
-          </div> */}
+          </div>
       
         <div className="display">
           <div className="results-container">

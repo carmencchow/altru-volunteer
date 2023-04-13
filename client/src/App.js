@@ -12,7 +12,6 @@ import Info from './pages/Info';
 import './App.css';
 
 function App() {
-  // const user = true;
   return (
     <NgosProvider> 
       <BrowserRouter>
