@@ -1,18 +1,13 @@
 import React, { useState } from 'react'
-import { GrFormClose } from "react-icons/gr"
 import DonationsInfo from '../components/DonationsInfo'
 import VolunteerInfo from '../components/VolunteerInfo'
 import ProfileInfo from '../components/ProfileInfo'
 import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
 import './Profile.css'
 
 const Profile = () => {
   const [toggleState, setToggleState] = useState(1);
-  const [modal, setModal] = useState(false);
-
-  const toggleModal = () => {
-    setModal(!modal);
-  }
 
   const toggletabs = (idx) => {
     setToggleState(idx)
@@ -52,6 +47,7 @@ const Profile = () => {
         </div>
       </div>
     </div>
+    <Footer/>
   </>
   )
 }

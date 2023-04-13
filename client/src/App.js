@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { DonationsProvider } from './context/DonationsContext';
 import { AuthContextProvider } from './context/AuthContext';
-import { UserProvider } from './context/UserContext';
 import { FiltersProvider } from './context/FiltersContext';
 import { NgosProvider } from './context/NgosContext';
 import Volunteer from './components/Volunteer';
@@ -16,7 +15,6 @@ function App() {
   return (
     <NgosProvider> 
       <BrowserRouter>
-      {/* <UserProvider> */}
         <AuthContextProvider>
           <FiltersProvider>
             <DonationsProvider>
@@ -24,7 +22,6 @@ function App() {
                 <Route path="/" element={<Home/>}/>
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/signup" element={<Signup/>}/>
-                {/* <Route path="/login" element={user ? <Navigate to="/main"/> : <Login/>}/> */}
                 <Route path="/volunteer" element={<Volunteer/>}/>
                 <Route path="/info/:id" element={<Info/>}/>
                 <Route path="/profile" element={<Profile/>}/>
@@ -32,7 +29,6 @@ function App() {
             </DonationsProvider>
           </FiltersProvider>
         </AuthContextProvider>
-        {/* </UserProvider> */}
       </BrowserRouter>
     </NgosProvider>
   );

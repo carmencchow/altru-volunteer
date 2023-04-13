@@ -1,17 +1,9 @@
 import React from 'react'
-import styled from 'styled-components'
-
-const Box = styled.div`
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-`;
+import './Footer.css'
 
 const Footer = () => {
   return (
-    <Box>
-      <p className="copyright">Thank you for donating! Copyright Altru @ 2023</p>
-    </Box>
+    <p className="copyright">Made by Carmen Chow Copyright Altru @ 2023</p>
   )
 }
 

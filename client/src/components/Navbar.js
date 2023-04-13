@@ -38,8 +38,11 @@ const Navbar = () => {
       <div className="navbar">
         <img className="logo" onClick={navMain} src={logo} style={{ width: 120, height: 40 }} alt="logo" />
       
-        <div className="profile-btn" onClick={navProfile}><CgProfile/></div>
-        <div className="logout-btn" onClick={handleLogout}>Logout</div>
+        <div className="navbar-right">
+        {/* <div className="profile-btn" onClick={navProfile}><CgProfile/></div> */}
+          <div className="profile-btn" onClick={navProfile}>Profile</div>
+          <div className="logout-btn" onClick={handleLogout}>Logout</div>
+        </div>
       </div>
       
     </nav>

@@ -18,14 +18,18 @@ nav{
   margin-top: 10px;
   cursor: pointer;
 }
-.logout-btn{
+.navbar-right{
+  display: flex;
+  justify-content: end;
+}
+.logout-btn, .profile-btn{
   color: white;
   font-family: 'League Gothic', sans-serif;
   font-size: 28px;
   padding: 8px;
   margin-right: 10px;
 }
-.logout-btn:hover{
+.logout-btn:hover, .profile-btn:hover{
  color:aqua; 
  cursor: pointer;
 }

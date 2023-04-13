@@ -7,6 +7,7 @@ import { NgosContext } from '../context/NgosContext'
 import { GrFormClose } from 'react-icons/gr'
 import { FcNext, FcPrevious } from 'react-icons/fc'
 import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
 import image from '../assets/volunteer.jpg'
 import './Volunteer.css'
 
@@ -215,6 +216,7 @@ const Volunteer = () => {
               })}
             </div> 
           </div>  
+          <Footer/>
         </div>
         )
       }
