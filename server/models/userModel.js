@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const bcrypt = require('bcrypt')
-const validator = require('validator')
 
 const userSchema = new Schema({
   username: {
@@ -11,7 +9,6 @@ const userSchema = new Schema({
   },
   initials: {
     type: String,
-    required: true,
   },
   email: { 
     type: String, 
@@ -31,17 +28,31 @@ const userSchema = new Schema({
   },
   image: {
     type: String,
-    required: false,
   },
   goal_amount: {
     type: Number,
   },
-  donations: {
-    type: Number,
+  // following: [
+  //   { 
+  //     type: mongoose.Schema.Types.ObjectId,
+  //     ref: 'ngo',
+  //   },
+  // ],
+  following: {
+    type: Array,
   },
-  hours_volunteered: {
-    type: Number,
-  }
+  donations: {
+    type: Array,
+  },
+  attending: {
+    type: Array,
+  },
+  // attending: [
+  //   { 
+  //     type: mongoose.Schema.Types.ObjectId,
+  //     ref: 'event',
+  //   },
+  // ],
 }, { timestamps: true });
 
 module.exports = mongoose.model('User', userSchema);

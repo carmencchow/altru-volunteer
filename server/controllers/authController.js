@@ -1,107 +1,106 @@
+const express = require('express');
 const User = require('../models/userModel');
-const bcrypt = require("bcrypt");
-const mongoose = require('mongoose');
-const { response } = require('express');
+const bcrypt = require("bcryptjs");
 const jwt = require('jsonwebtoken');
-const cookie = require('cookie');
+const mongoose = require('mongoose');
+const cookieParser = require('cookie-parser');
 
 // 1. REGISTER endpoint
 const signup = async (req, res) => {
-  const { username, email, password } = req.body;
   try {
-    // a) Validate incoming request
-    if (!username || !password || !email){
-      res.status(400).send({ message: 'Please complete all required fields'});
-      return;
+    const { username, email, password } = req.body;
+    if (!(username && email && password)){
+      res.status(400).send('Fill in all required fields')
+    }
+    const user = await User.findOne({
+      email,
+    });
+    if (user) {
+      return res.status(400).send("User already exists");
     }
 
-    // b) Check if user already exists
-    const userExists = await User.findOne({ email });
-    if (userExists){
-      res.status(400).send({ message: 'Email already exists. Please login instead.'});
-    } 
-
-    // c) Hash the password before saving email and password into the database
-    const hashedPassword = await bcrypt.hash(req.body.password, 10);
-
-    // d) Create a new user instance and collect the data
-    const newUser = new User(req.body) 
-  // const newUser = new User({
-      // username: req.body.username,
-      // email: req.body.email,
-      // password: hashedPassword,
-      // image: req.body.image
-    // })
-
-    // e) Save user and return data to user
-    await newUser.save();
-
-    res.status(200).send({ 
-      message: 'New user saved to database', 
-      username, 
-      email, 
-      token: createToken(newUser._id) 
-    }); 
-  
-    } catch (err) {
-      console.log(err);
-      res.status(500).send({ message: 'Invalid user data. User not saved' });
-    };
-  };
-
-  // 2. LOGIN endpoint
-  const login = async (req, res) => {
-    // Hash the password before saving email and password into the database
+    // const salt = await bcrypt.genSalt(10);
+    // user.password = await bcrypt.hash(password, salt);
     
-    try {
-      console.log(req.body.password);
-      const hashedPassword = await bcrypt.hash(req.body.password, 8);
-    
-      // Validate incoming request body
-      if (!req.body.email || !req.body.password){
-        res.status(400).send({ message: 'Email or password missing'});
-        return;
-      }
+    user = await User.create({
+      username,
+      email,
+      password,
+      // password: salt,
+      following: [],
+      donations: [],
+      attended: [],
+    });
+        await user.save();
 
-      // Check for user email
-      const user = await User.findOne({ email: req.body.email });
-      if (!user) return res.status(404).send({ message: 'User not found. Please enter the correct email and password' });
+    // Generate and send token to user
+    const token = jwt.sign(
+      { id: user._id, email },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "2h",
+      },
+    );
+    user.token = token;
+    // user.password = undefined; // password will not be sent to the frontend
+    res.status(201).json(user, token)
 
-      // Validate incoming password against hashed password
-      const isPasswordValid = await bcrypt.compare(req.body.password, hashedPassword)
- 
-      if (!isPasswordValid){
-        res.status(400).send({ message: 'Invalid username or password', err});
-      }
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send("Error in saving");
+  }
+};
 
-      res.status(200).send({ 
-        message: 'User login successful', 
-        username: req.body.username, 
-        email: req.body.email,
-        token: createToken(user._id) 
-      }); 
+// 2. LOGIN endpoint
+const login = async (req, res) => {
+  try {
+    const { email, password } = req.body
+    if (!(email && password)) {
+      res.status(400).send('Email and password are required')
+    }
+    let user = await User.findOne({
+      email,
+    });
+    if (!user)
+      return res.status(400).json({
+        message: "User does not exist",
+      });
 
-    } catch (err) {
-      console.log(err); 
-      res.status(500).send({ message: 'Login failed', err});
+    // const isValid = await bcrypt.compare(password, user.password);
+    // if (!isValid) {
+    //   return res.status(400).json({
+    //     message: "Incorrect email or password",
+    //   });
+    // }
+
+    const token = jwt.sign({ 
+        id: user._id, 
+        email
+      },
+        process.env.JWT_SECRET,
+      { 
+        expiresIn: "2h" 
+      });
+      user.token = token
+      // user.password = undefined
+    // }
+
+    // Store token in cookie and send to client
+        const options = {
+          expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
+          httpOnly: true
+        }
+
+      res.status(200).cookie("token", token, options).json({    
+        success: true,
+        token,
+        user
+      })
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: "Server error" });
     }
   };
-
-  // Generate JWT token
-  const createToken = (_id) => {
-    return jwt.sign({ _id }, process.env.JWT_SECRET, { 
-      expiresIn: '7d',
-    })
-  }
-
-// Create cookie with token
-  const createCookie = () => {
-    res.cookie('jwt', token, {
-      httpOnly: true,
-      secure: true,
-      maxAge: 7 * 24 * 60 * 60 * 1000
-    })
-  }
 
 // 3. LOGOUT endpoint
 const logout = ( req, res ) => {
@@ -115,15 +114,14 @@ const logout = ( req, res ) => {
   }
 }
 
-// 4. GETME endpoint, access by passing user token in 'auth'
-const getMe = async ( req, res ) => { 
-  const {_id, username, email } = await User.findById(req.user.id);
-  res.status(200).send({ 
-    message: 'User data display',
-    id: _id,
-    username,
-    email
-  })
+// 4. getUserData endpoint, access by passing user token in 'auth'
+const getUserData = async ( req, res ) => { 
+  try {
+    const user = await User.findById(req.user.id);
+    res.status(200).json({ message: 'User info:', user: user })
+  } catch (err) {
+    console.log(err); 
+  }
 }
 
-module.exports = { signup, login, logout, getMe };
+module.exports = { signup, login, logout, getUserData };

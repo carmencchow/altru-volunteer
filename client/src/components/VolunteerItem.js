@@ -1,5 +1,4 @@
 import React from 'react'
-import './VolunteerItem.css'
 
 const VolunteerItem = (props) => {
   return (
@@ -7,7 +6,7 @@ const VolunteerItem = (props) => {
       <div className="volunteer-item">
         <p>{props.ngo}</p>
         <p>{props.date}</p>
-        <p>{props.hours}</p>
+        <p>{props.event}</p>
       </div>      
     </div>
   )

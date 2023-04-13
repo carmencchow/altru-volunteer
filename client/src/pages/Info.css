@@ -63,10 +63,17 @@ textarea:focus, .donation-input:focus{
 }
 .process{
   cursor: pointer;
-  /* border: 1px solid palevioletred; */
   width: 70px;
 }
 .payment{
   display: flex;
   flex-direction: row;
+}
+.other-amount{
+  display: flex;
+  flex-direction: row;
+}
+.save-btn{
+  cursor: pointer;
+  border: 1px solid orange;
 }

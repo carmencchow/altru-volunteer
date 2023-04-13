@@ -1,10 +1,10 @@
-import React, { useState, useContext } from 'react'
+import React, { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../context/AuthContext'
+import axios from 'axios'
 import logo from '../assets/logo.png'
 import Login from '../pages/Login'
 import './Navbar.css'
-import axios from 'axios'
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -17,6 +17,9 @@ const Navbar = () => {
       const res = await axios.post('http://localhost:5000/api/auth/logout')
       setUser(null)
       setToken('')
+      await localStorage.clear();
+      navigate('/login');
+      
     } catch (err) { 
       console.log(err, 'Unable to log out')
     }
@@ -27,19 +30,15 @@ const Navbar = () => {
       <div className="logo">
         <Link className="link" to="/main">
           <div className="logo-wrapper">
-            <img src={logo} style={{ width: 100, height: 100 }} alt="logo" />
+            <img src={logo} style={{ width: 70, height: 70 }} alt="logo" />
             <p className="logo-text">Altru</p>
           </div>
         </Link> 
         
-      {/* { user ? ( 
+      { user ? ( 
         <div className="user-display">
-          <div className="welcome">
-            <span className="hi">👋</span> 
-            Welcome, {user.username}! 
-          </div>
-        <Link to="/profile"><RxAvatar className="avatar"/></Link>
-        <Link to="/logout" onClick={handleLogout}>Logout</Link>
+          {/* <div className="welcome">Welcome {user.email}!</div>
+          <Link to="/logout" onClick={handleLogout}>Logout</Link> */}
       </div>
 
         ) : (
@@ -50,12 +49,7 @@ const Navbar = () => {
             <span className="signup"><Link className="button-text" to="/signup">Sign up</Link></span> 
           </div>
         </div>
-      )}  */}
-
-        <div className="user-display">
-          <div className="welcome"><span className="hi"></span> Welcome, ! </div>
-        </div>
-
+      )} 
       </div>
 
       <div className="nav-login">

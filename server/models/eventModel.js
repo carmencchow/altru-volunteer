@@ -1,27 +1,35 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const eventSchema = new Schema({
+const eventSchema = new Schema(
+{
   name: {
     type: String,
-    unique: true,
-    required: [true, "Please enter a valid username"] 
   },
   location: { 
     type: String, 
-    unique: true, 
-    lowercase: true,
-    required: [true, "Please enter a valid email address"] 
-  },
-  logo: {
-    type: String,
-    required: false,
   },
   date: {
-    type: Date,
-    required: false,
-  }
-  
+    type: String,
+  },
+  time: {
+    type: String,
+  },
+  num_volunteers: {
+    type: Number, 
+  },
+  parentNgo: [
+    { 
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'ngo',
+    },
+  ],
+  volunteers: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'user',
+    }
+  ]
 }, { timestamps: true });
 
 module.exports = mongoose.model('Event', eventSchema);

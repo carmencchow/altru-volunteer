@@ -13,9 +13,9 @@ form{
   flex-direction: column;
 }
 input {
-  width: 300px;
+  margin-left: 5px;
+  /* width: 290px; */
   height: 50px;
-  margin-right: 20px;
 }
 .form-group{
   padding-bottom: 20px;
@@ -28,8 +28,6 @@ button{
 }
 .signup{
   height: 36px;
-  border: 2px solid purple;
-  color: purple;
   border-radius: 20px;;
   width: 100px;
   padding: 5px 10px;

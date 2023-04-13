@@ -1,30 +1,80 @@
 import React, { useState } from 'react'
+import { useParams } from 'react-router-dom'
+import axios from 'axios'
 import { BsPencil } from 'react-icons/bs'
 import './ProfileInfo.css'
 
 const Profile = () => {
-  const [ name, setName ] = useState('')
+  const { id } = useParams(); 
   const [ email, setEmail ] = useState('')
-  const [ telephone, setTelephone ] = useState('')
+  const [ openInput, setOpenInput ] = useState(false)
+  const [ user, setUser ] = useState({})
 
-  const handleEdit = () => {
-    console.log('editing')
+  const getUser = async () => {
+    const res = await axios.get(`http://localhost:5000/api/auth/users/${id}`)
+    setUser(res.data)
+  }
+
+  const toggleInput = () => {
+    setOpenInput(!openInput)
+  }  
+  
+  const handleEdit = (e) => {
+    setEmail(e.target.value)
+  }
+
+  const handleSave = async (id, e) => {
+    console.log(`New email ${email}`)
+  
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        throw new Error("No token found in localStorage");
+      }
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+      const res = await axios.put(
+        `http://localhost:5000/api/auth/user/${id}`,
+  
+        { 
+          email: `${email}`
+        },
+  
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const data = res.data;
+      console.log(data);
+      getUser();
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return (
     
     <div>  
       <div className="edit-row">      
-        <p>Name: Carmen Chow</p>
-        <BsPencil className="edit"/>Edit
+        <p>Carmen Chow {user.username}</p>
+        <p>reach.cchow@gmail.com {user.email}</p>
+        <BsPencil onClick={toggleInput} className="edit-icon"/>
+      </div>
+        
+      <div className="email-row">
+        <input type="text" 
+          className="edit-input"
+          placeholder="New email" 
+          value={email}
+          onChange={handleEdit}
+        />
+        <div className="save-email-btn" onClick={handleSave}>Save</div> 
       </div>
 
-
-      <p>Email: reach.cchow@gmail.com</p>
-      <button className="edit" onClick={handleEdit}/>
-        
       <div className="following">
-      <h3>Organizations followed:</h3>
+        <h3>Organizations followed:</h3>
  
         <div className="follow">
           <p>Clean Air Alliance</p>
@@ -42,27 +92,9 @@ const Profile = () => {
         </div>
 
       </div>
-    
     </div>
   )
 }
 
 export default Profile
 
-
-/* CRUD
-* Profile information
-- Edit profile: contact and image
-
-* Donation information
-- Edit savings goal
-- History of donations made
-
-* Volunteer information
-- Update favorites list
-- History of volunteer activities
-
-EXTRA
-- Schema: 
-- see other users
-*/

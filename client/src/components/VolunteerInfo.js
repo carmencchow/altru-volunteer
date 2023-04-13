@@ -1,19 +1,17 @@
 import React from 'react'
+import VolunteerList from './VolunteerList'
 import './VolunteerInfo.css'
 
 const VolunteerInfo = () => {
   return (
     <div className="container">
       <div className="history">
-        <p>Volunteer Events: 1</p>
-        <p>Volunteer Events: 2</p>
-        <p>Volunteer Events: 3</p>
-        <p>Volunteer Events: 4</p>
-        <p>Volunteer Events: 5</p>
+        <VolunteerList/>
       </div>
 
       <div className="next-events">
-        <p>Next event</p>
+        <p>Next event:</p>
+        <p>Girl Guides Bake Sale on August 23rd at 1:30pm</p>
       </div>
     </div>
   )

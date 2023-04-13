@@ -17,7 +17,6 @@ const ngoSchema = new Schema({
   },  
   donations: {
     type: Boolean,
-    required: true,
     default: true,
   }, 
   amount_needed: {
@@ -25,12 +24,10 @@ const ngoSchema = new Schema({
   },
   volunteers: {
     type: Boolean,
-    required: true,
     default: true,
   },
   num_volunteers: {
     type: Number,
-    required: true,
   },
   commitment: {
     type: String,

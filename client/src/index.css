@@ -1,13 +1,7 @@
-body {
+body, html {
   margin: 0;
-  /* font-family: 'Domine', serif; */
-  font-family: 'Tilt Warp', cursive;
-  /* font-family: 'Tinos', serif;  */
+  font-family: 'Montserrat', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}

@@ -12,33 +12,47 @@ const Info = () => {
   const { id } = useParams();
   const [ favorite, setFavorite ] = useState('');
   const [ favorites, setFavorites ] = useState([]);
-  const [ amount, setAmount ] = useState(0);
-  const [ donation, setDonation ] = useState(0)
-  const [ ngo, setNgo ] = useState({
-    // _id: '', name: '', category: [], location: [], website: '', tag: '' 
-  });
+  const [ input, setInput ] = useState(0);
+  const [ total, setTotal ] = useState(0)
+  const [ ngo, setNgo ] = useState({});
+
+  const [inputValue, setInputValue] = useState("");
 
   const fetchNgo = async () => {
     const res = await axios.get(`http://localhost:5000/api/ngos/${id}`)
     setNgo(res.data)
-    console.log(res.data)
+  }
+
+  const handleClick = (event) => {
+    setInputValue(event.target.value);
   }
 
   useEffect (() => {
     fetchNgo();
   }, [])
 
-
   // Stripe Payment
-  const selectAmount = (e) => {
-    setAmount(e.target.value)
-    console.log(amount, e.target.value);
+  const addAmount = (e) => {
+    const clickedAmount = Number(e.target.value);
+    // toast.success(`$${clickedAmount} added`)
+    setTotal(e.target.value)
+    console.log(e.target.value, total) // undefined, NaN
+  }
+
+  const handleAmount = (e) => {
+    setInput(e.target.value)
+  }
+
+  // Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(number));
+  const saveAmount = (e) => {
+    const donation = input.toFixed(2)
+    console.log(donation)
   }
 
   const handlePayment = token => {
     const body = {
       token, 
-      donation
+      total
     }
     const headers = {
       "Content-Type": "application/json"
@@ -88,10 +102,9 @@ const Info = () => {
     // }
   }
 
-
   return (
     <div>
-      <Navbar/> <Tabs/>
+      <Navbar/><Tabs/>
       <div> 
         <span className="back" onClick={() => navigate(-1)}>Back</span>
         <span className="follow" onClick={handleFollow}>Follow {ngo.name}</span> 
@@ -102,28 +115,36 @@ const Info = () => {
       <div className="donation-card">
         <p>Please select a donation amount: </p>
         <div className="donation-options">
-          <div className="amount-btn" onClick={selectAmount} value="10">$10</div>
-          <div className="amount-btn" onClick={selectAmount} value="25">$25</div>
-          <div className="amount-btn" onClick={selectAmount} value="30">$30</div>
+          <button className="amount-btn" onClick={handleClick} value="10">$10</button>
+          <button className="amount-btn" onClick={handleClick} value="25">$25</button>
+          <button className="amount-btn" onClick={handleClick} value="30">$30</button>
         </div>
         <div className="donation-options">
-          <div className="amount-btn" onClick={selectAmount} value="50">$50</div>
-          <div className="amount-btn" onClick={selectAmount} value="75">$75</div>
-          <div className="amount-btn" onClick={selectAmount} value="100">$100</div>
+          <button className="amount-btn" onClick={handleClick} value="50">$50</button>
+          <button className="amount-btn" onClick={handleClick} value="75">$75</button>
+          <button className="amount-btn" onClick={handleClick} value="100">$100</button>
         </div>
 
-        <div className="donation-options">
+        <div className="other-amount">
           <input 
             type="text" 
             className="donation-input"
-            value={amount}
-            placeholder='other amount'
-            onChange={selectAmount}
+            value={inputValue}
+            placeholder='Other amount'
+            onChange={handleAmount}
           />                              
-        </div> 
+          <div className="save-btn" onClick={saveAmount}>Save</div>
+        </div>
 
         <div className="donor-info">
           <div className="column">
+            <input 
+              type="text" 
+              className="full-name"
+              value={input}
+              placeholder='Other amount'
+              onChange={handleAmount}
+            />     
             <p>Full name:</p>
             <p>Street Address:</p>
             <p>City:</p>
@@ -143,7 +164,7 @@ const Info = () => {
             <StripeCheckout stripeKey= "pk_test_51L1kSgAoNhpouPlcfYHS4qZk7puLHRnuQFurkS8DelIS2DvAgtPR5nM4DWIdI3rjZCUyhkg9USb34AEQBf2Zz32r00TiqYY6E9"
               token={handlePayment}
               name="Your donation"
-              amount={donation * 100}/> 
+              amount={total * 100}/> 
           </div> 
         </div> 
       </div>

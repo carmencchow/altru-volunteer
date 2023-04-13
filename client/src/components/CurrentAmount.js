@@ -5,7 +5,7 @@ import './CurrentAmount.css'
 
 const CurrentAmount = () => {
   const [total, setTotal] = useState(0)
-  const [amount, setAmount] = useState('$0')
+  const [amount, setAmount] = useState(0)
   const { currentAmount, setCurrentAmount, setTotalAmount, totalAmount } = useContext(DonationsContext)
 
   const addAmount = (e) => {
