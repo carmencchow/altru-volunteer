@@ -20,7 +20,7 @@ body{
 .buttons{
   display: flex;
   flex-direction: row;
-  justify-content: end;
+  justify-content: flex-end;
   margin-right: 20px;
 }
 .banner{

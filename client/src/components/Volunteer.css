@@ -155,8 +155,8 @@ body.active-modal {
 }
 .close-btn-row{
   display: flex;
-  justify-content: end;
-  align-items: end;
+  justify-content: flex-end;
+  align-items: flex-end;
 }
 .close-btn {
   width: 20px;
@@ -212,7 +212,7 @@ input.name, input.email{
   font-size: 12px;
   height: 30px;
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   margin-right: 7%;
 }
 .confirm:hover{

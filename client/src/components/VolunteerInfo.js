@@ -1,17 +1,22 @@
-import React from 'react'
-import VolunteerList from './VolunteerList'
+import React, { useContext } from 'react'
+import { AuthContext } from '../context/AuthContext'
+// import VolunteerList from './VolunteerList'
 import './VolunteerInfo.css'
 
 const VolunteerInfo = () => {
+  const { user } = useContext(AuthContext)
+
+
   return (
     <div className="container">
       <div className="history">
-        <VolunteerList/>
-      </div>
-
+        <h2>Events attended:</h2>
+        <p>{user.attending}</p>
+      
       <div className="next-events">
-        <p>Next event:</p>
-        <p>Girl Guides Bake Sale on August 23rd at 1:30pm</p>
+        <h2>Upcoming events</h2>
+        <p></p>
+      </div>
       </div>
     </div>
   )

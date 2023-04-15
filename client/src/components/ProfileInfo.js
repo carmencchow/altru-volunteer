@@ -1,25 +1,21 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { AuthContext } from '../context/AuthContext'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { BsPencil } from 'react-icons/bs'
 import './ProfileInfo.css'
 
 const Profile = () => {
+  const { user } = useContext(AuthContext)
   const { id } = useParams(); 
   const [ email, setEmail ] = useState('')
   const [ openInput, setOpenInput ] = useState(false)
-  const [ user, setUser ] = useState({})
-
-  const getUser = async () => {
-    const res = await axios.get(`http://localhost:5000/api/auth/users/${id}`)
-    setUser(res.data)
-  }
 
   const toggleInput = () => {
     setOpenInput(!openInput)
   }  
   
-  const handleEdit = (e) => {
+  const handleUpdate = (e) => {
     setEmail(e.target.value)
   }
 
@@ -48,7 +44,6 @@ const Profile = () => {
       );
       const data = res.data;
       console.log(data);
-      getUser();
     } catch (err) {
       console.log(err);
     }
@@ -61,14 +56,13 @@ const Profile = () => {
       <div className="edit-row">    
         <div className="user-profile">  
           <p className="contact">Contact Details:</p>
-          <p>Carmen Chow {user.username}</p>
-          <p>reach.cchow@gmail.com {user.email}</p>
+          <p>Name: {user.username}</p>
+          <p>Email: {user.email}</p>
 
-          <p className="address">Address:</p>
-          <p>766 Jarvis St, Unit B49</p>
-          <p>Toronto, ON M2H 8C9</p>
           {/* <BsPencil onClick={toggleInput} className="edit-icon"/> */}
         </div>
+
+        <button onClick={handleUpdate} className="edit-btn">Update</button>
 
         <div className="user-image">
           <div className="avatar"></div>

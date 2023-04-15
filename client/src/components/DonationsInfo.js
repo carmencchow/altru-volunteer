@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, {useState, useContext} from 'react'
+import {AuthContext} from '../context/AuthContext'
 import DonationsList from './DonationsList'
 
 const DonationsInfo = () => {
-  const [ input, setInput ] = useState(0)
-  const [ goal, setGoal ] = useState(0)
+  const {user} = useContext(AuthContext)
+  const [input, setInput] = useState(0)
+  const [goal, setGoal] = useState(0)
 
   const handleGoal = (e) => {
     setInput(e.target.value)
@@ -17,7 +19,7 @@ const DonationsInfo = () => {
   return (
     <div className="container">
       <div className="stats">
-        <h3>Goal Amount: {goal}</h3>
+        <h3>Goal Amount: ${goal}</h3>
         <h3>Amount Donated: $64.00</h3>
 
         <div className="other-amount">
@@ -35,7 +37,7 @@ const DonationsInfo = () => {
       
       <div className="history">
         <h3>Donations made:</h3>
-        <DonationsList/>
+        <p>{user.donations}</p>
       </div>
     </div>
   )

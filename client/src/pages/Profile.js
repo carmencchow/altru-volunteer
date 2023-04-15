@@ -1,29 +1,27 @@
 import React, { useState, useContext } from 'react'
+import { AuthContext } from '../context/AuthContext'
 import DonationsInfo from '../components/DonationsInfo'
 import VolunteerInfo from '../components/VolunteerInfo'
 import ProfileInfo from '../components/ProfileInfo'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
-import { AuthContext } from '../context/AuthContext'
 import './Profile.css'
 
 const Profile = () => {
-  const [toggleState, setToggleState] = useState(1);
   const { user } = useContext(AuthContext)
+  const [toggleState, setToggleState] = useState(1);
 
   const toggletabs = (idx) => {
     setToggleState(idx)
   }
 
-  // if (!user) return null;
+  if (!user) return null;
 
   return (
     <>
     <Navbar/>
       <div className="profile-container">
         <div className="tabs-container">
-          {/* <h1>{user.username}</h1> */}
-          <h1>{JSON.stringify(user)}</h1>
         <div className="heading-tabs">
           <div className={toggleState === 1 ? "tabs active-tabs" : "tabs"} 
           onClick={() => toggletabs(1)}>My Profile</div>
@@ -51,7 +49,7 @@ const Profile = () => {
         </div>
       </div>
     </div>
-    <Footer/>
+    {/* <Footer/> */}
   </>
   )
 }

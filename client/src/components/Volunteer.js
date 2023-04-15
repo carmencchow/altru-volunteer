@@ -2,7 +2,6 @@ import React, { useState,useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { FiltersContext } from '../context/FiltersContext'
-import { AuthContext } from '../context/AuthContext'
 import { NgosContext } from '../context/NgosContext'
 import { GrFormClose } from 'react-icons/gr'
 import { FcNext, FcPrevious } from 'react-icons/fc'
@@ -14,36 +13,16 @@ import './Volunteer.css'
 const Volunteer = () => {
   const { filters, setFilters } = useContext(FiltersContext) 
   const { ngos, setNgos } = useContext(NgosContext)
-  const { token } = useContext(AuthContext);
   const [ volunteer, setVolunteer ] = useState('Sign up')
   const [ currentPage, setCurrentPage ] = useState(1)
   const [ disabled, setDisabled ] = useState(false)
   const [ pageCount, setPageCount ] = useState(1)
-  const [ userInfo, setUserInfo ] = useState('')
   const [ confirm, setConfirm ] = useState('')
   const [ modal, setModal ] = useState(false)
+  const [ eventId, setEventId ] = useState(null);
   const navigate = useNavigate();
 
-  const getUser = async () => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      throw new Error("No token found in localStorage");
-    }
-    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    try {
-      const res = await axios.get("http://localhost:5000/api/auth/me");
-      setUserInfo(res.data);
-      console.log(res.data);
-    } catch (error) {
-      throw error;
-    }
-  };
-
-  useEffect(() => {
-    getUser();
-  }, []);
-
-  const handleRegister = () => {
+  const handleRegister = (id) => {
     setConfirm('Thank you. Please check your email for confirmation')
     setVolunteer('Attending')
     setDisabled(true)
@@ -106,7 +85,6 @@ const Volunteer = () => {
   return (
     <div>
       <Navbar/>
-      <div>Welcome back {userInfo.username}!</div>
         <div className="filters">
           <form className="dropdown">
             <p>Commitment</p>
@@ -170,13 +148,20 @@ const Volunteer = () => {
                       { ngo.event_description ? <p>Event: {ngo.event_description}</p> : null}
                     </div>             
 
-                    <button disabled={disabled} onClick={toggleModal}
+                    <button 
+                      disabled={disabled} 
+                      onClick={() => {
+                        console.log('Ngo:', ngo._id, ngo.name)
+                        setEventId(ngo._id);
+                        toggleModal()
+                      }}
                       className="volunteer-btn">{volunteer}
                     </button> 
 
                   </div>      
                 </div>    
     
+
                 {modal && (      
                   <div className="modal">
                     <div className="modal-background">
@@ -191,7 +176,7 @@ const Volunteer = () => {
                             </div>
 
                             <div className="right-side-content">
-                              <p className="registering">You are registering for this event: </p>
+                              <p className="registering">You are registering {ngo.name}for this event: </p>
                               <p className="text">Event: <span>{ngo.event_description}</span></p>
                               <p className="text">Date: <span>{ngo.event_date}</span></p>
                               <p className="text">Time: <span>{ngo.event_time}</span></p>  

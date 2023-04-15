@@ -83,22 +83,6 @@ const Info = () => {
     } catch (err) {
       console.log(err)
     }
-
-    // try {
-    //   const res = await axios.get(`http://localhost:5000/api/ngos/${id}`)
-    //   console.log(`Adding '${res.data.name}' to favorites list`)
-    //   if (!favorite.includes(res.data.name)){
-    //     favorites.push(favorite)
-    //     setFavorite([...favorite, res.data.name])
-    //     console.log('Favorites list:', favorite, favorites)
-    //   } else {
-    //     toast.success(`${res.data.name} removed from favorites`)
-    //     console.log(`${res.data.name} removed from favorites`)  
-    //     setFavorite([...favorite.filter((ngo) => ngo !==res.data.name)])
-    //   }
-    // } catch (err) {
-    //   console.log(err)
-    // }
   }
 
   return (
