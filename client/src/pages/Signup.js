@@ -4,6 +4,7 @@ import axios from 'axios'
 import { AuthContext } from '../context/AuthContext';
 import logo from '../assets/altru.png'
 import { useSignup } from '../hooks/useSignup'
+import Footer from '../components/Footer'
 import './Signup.css'
 
 const Signup = () => {
@@ -102,6 +103,7 @@ const Signup = () => {
 
           </div>
         </div>
+        <Footer/>
       </>
     )
   }

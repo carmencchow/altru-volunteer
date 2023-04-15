@@ -109,11 +109,11 @@ const Info = () => {
         <span className="follow" onClick={handleFollow}>Follow {ngo.name}</span> 
         <Toaster position="top-center" toastOption={{ duration: 3000 }}/>
       </div>
-        <p className="donate-text">Donate to {ngo.name}</p>        
 
       <div className="donation-card">
-        <div className="header"></div>
-        <p>Please select a donation amount: </p>
+        <h3 className="header">Don't have time to volunteer?</h3> 
+        <h3 className="ngo-donation">You can donate to {ngo.name} instead</h3> 
+        <p>Your donation amount: </p>
         <div className="donation-options">
           <button className="amount-btn" onClick={handleClick} value="10">$10</button>
           <button className="amount-btn" onClick={handleClick} value="25">$25</button>

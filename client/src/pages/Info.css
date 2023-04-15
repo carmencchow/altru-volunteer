@@ -9,10 +9,12 @@ button{
   cursor: pointer;
 }
 .donation-card{
-  background-color:#e8fbff;
   width: 500px;
   height: 600px;
   margin-left: 40px;
+  border: 1px solid grey;
+  border-radius: 20px;
+  padding: 10px;
 }
 .donation-options{
   display: flex;
@@ -25,13 +27,26 @@ button{
 textarea:focus, .donation-input:focus{
   outline: none;
 }
-/* .form-control:focus {
-  border-color: inherit;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-} */
+.ngo-donate{
+  color: #19add6;
+  font-weight: bolder;
+  display: flex;
+  flex-direction: row;
+}
 .amount-btn{
   cursor: pointer;
+  border: none;
+  padding: 10px;
+  background-color: white;
+  color: purple;
+  font-size: 20px;
+  border: 2px solid #716bc4;
+  width: 160px;
+  height: 60px;
+}
+.amount-btn:hover{
+  background-color: #716bc4;
+  color: white;
 }
 .column{
   display: flex;
@@ -51,5 +66,12 @@ textarea:focus, .donation-input:focus{
 }
 .save-btn{
   cursor: pointer;
-  border: 1px solid orange;
+}
+.donation-card{
+  margin: 0 auto;
+  height: 100vh;
+  max-height: 500px;
+  width: 105vw;
+  max-width: 700px;
+ 
 }

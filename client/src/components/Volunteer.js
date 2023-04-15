@@ -16,14 +16,13 @@ const Volunteer = () => {
   const { ngos, setNgos } = useContext(NgosContext)
   const { token } = useContext(AuthContext);
   const [ volunteer, setVolunteer ] = useState('Sign up')
-  const [ numVolunteers, setNumVolunteers ] = useState()
   const [ currentPage, setCurrentPage ] = useState(1)
   const [ disabled, setDisabled ] = useState(false)
   const [ pageCount, setPageCount ] = useState(1)
+  const [ userInfo, setUserInfo ] = useState('')
   const [ confirm, setConfirm ] = useState('')
   const [ modal, setModal ] = useState(false)
   const navigate = useNavigate();
-  const [ userInfo, setUserInfo ] = useState("");
 
   const getUser = async () => {
     const token = localStorage.getItem("token");
@@ -34,6 +33,7 @@ const Volunteer = () => {
     try {
       const res = await axios.get("http://localhost:5000/api/auth/me");
       setUserInfo(res.data);
+      console.log(res.data);
     } catch (error) {
       throw error;
     }
@@ -106,6 +106,7 @@ const Volunteer = () => {
   return (
     <div>
       <Navbar/>
+      <div>Welcome back {userInfo.username}!</div>
         <div className="filters">
           <form className="dropdown">
             <p>Commitment</p>

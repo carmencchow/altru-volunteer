@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { AuthContext } from '../context/AuthContext'
 import logo from '../assets/altru.png'
+import Footer from '../components/Footer'
 import './Login.css'
 
 const Login = () => {
@@ -22,12 +23,12 @@ const Login = () => {
     }))
   }
   
-  const handleSignup = () => {
-    navigate('/signup')
-  }
-
   const handleHome = () => {
     navigate('/')
+  }
+
+  const handleSignup = () => {
+    navigate('/signup')
   }
 
   const handleSubmit = async (e) => {
@@ -45,7 +46,7 @@ const Login = () => {
         const data = res.data;
         console.log(data);
         localStorage.setItem('token', res.data.token);
-        setUser({ email: data.email })
+        setUser(data.user)
         setToken(data.token);
       } catch (err) {
         console.log(err, 'Incorrect password or email')
@@ -91,6 +92,7 @@ const Login = () => {
           </div>
         </div>
       </div>
+      <Footer/>
     </>
     )
   }

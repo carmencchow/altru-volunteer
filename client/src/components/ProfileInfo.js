@@ -57,40 +57,55 @@ const Profile = () => {
   return (
     
     <div>  
-      <div className="edit-row">      
-        <p>Carmen Chow {user.username}</p>
-        <p>reach.cchow@gmail.com {user.email}</p>
-        <BsPencil onClick={toggleInput} className="edit-icon"/>
+      <h3>My Profile</h3>
+      <div className="edit-row">    
+        <div className="user-profile">  
+          <p className="contact">Contact Details:</p>
+          <p>Carmen Chow {user.username}</p>
+          <p>reach.cchow@gmail.com {user.email}</p>
+
+          <p className="address">Address:</p>
+          <p>766 Jarvis St, Unit B49</p>
+          <p>Toronto, ON M2H 8C9</p>
+          {/* <BsPencil onClick={toggleInput} className="edit-icon"/> */}
+        </div>
+
+        <div className="user-image">
+          <div className="avatar"></div>
+          <p>Update profile photo</p>
+        </div>
       </div>
-        
+
       <div className="email-row">
-        <input type="text" 
+        {/* <input type="text" 
           className="edit-input"
           placeholder="New email" 
           value={email}
           onChange={handleEdit}
-        />
+        /> */}
         <div className="save-email-btn" onClick={handleSave}>Save</div> 
       </div>
 
       <div className="following">
         <h3>Organizations followed:</h3>
  
-        <div className="follow">
-          <p>Clean Air Alliance</p>
-          <p>Unfollow</p>
-        </div>
+        <div className="organizations">
+          <div className="follow">
+            <p>Clean Air Alliance</p>
+            <p className="unfollow">Unfollow</p>
+          </div>
 
-        <div className="follow">
-          <p>Sick Kids Hospital</p>
-          <p>Unfollow</p>
-        </div>
+          <div className="follow">
+            <p>Sick Kids Hospital</p>
+            <p className="unfollow">Unfollow</p>
+          </div>
 
-        <div className="follow">
-          <p>Toronto Humane Society</p>
-          <p>Unfollow</p>
-        </div>
+          <div className="follow">
+            <p>Toronto Humane Society</p>
+            <p className="unfollow">Unfollow</p>
+          </div>
 
+          </div>
       </div>
     </div>
   )

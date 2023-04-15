@@ -1,5 +1,11 @@
 .copyright{
-  padding-top: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   text-align: center;
   font-size: 12px;
+  position: absolute;
+  height: 30px;
+  bottom: 0;
+  width: 100%;
 }

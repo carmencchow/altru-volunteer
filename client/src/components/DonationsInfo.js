@@ -17,8 +17,8 @@ const DonationsInfo = () => {
   return (
     <div className="container">
       <div className="stats">
-        <p>Goal Amount: {goal}</p>
-        <p>Amount Donated: $64.00</p>
+        <h3>Goal Amount: {goal}</h3>
+        <h3>Amount Donated: $64.00</h3>
 
         <div className="other-amount">
           $<input 
@@ -34,11 +34,8 @@ const DonationsInfo = () => {
       </div>
       
       <div className="history">
+        <h3>Donations made:</h3>
         <DonationsList/>
-        {/* <p>Donations 1</p>
-        <p>Donations 2</p>
-        <p>Donations 3</p>
-        <p>Donations 4</p> */}
       </div>
     </div>
   )

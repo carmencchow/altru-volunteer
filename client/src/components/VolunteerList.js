@@ -1,5 +1,6 @@
 import React from 'react'
 import VolunteerItem from './VolunteerItem'
+import './VolunteerList.css'
 
 const VolunteerList = () => {
 

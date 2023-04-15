@@ -1,25 +1,29 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import DonationsInfo from '../components/DonationsInfo'
 import VolunteerInfo from '../components/VolunteerInfo'
 import ProfileInfo from '../components/ProfileInfo'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import { AuthContext } from '../context/AuthContext'
 import './Profile.css'
 
 const Profile = () => {
   const [toggleState, setToggleState] = useState(1);
+  const { user } = useContext(AuthContext)
 
   const toggletabs = (idx) => {
     setToggleState(idx)
-    console.log(idx)
   }
+
+  // if (!user) return null;
 
   return (
     <>
     <Navbar/>
       <div className="profile-container">
         <div className="tabs-container">
-
+          {/* <h1>{user.username}</h1> */}
+          <h1>{JSON.stringify(user)}</h1>
         <div className="heading-tabs">
           <div className={toggleState === 1 ? "tabs active-tabs" : "tabs"} 
           onClick={() => toggletabs(1)}>My Profile</div>
