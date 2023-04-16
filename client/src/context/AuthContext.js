@@ -1,6 +1,5 @@
-import { createContext, useState, useEffect} from 'react'
+import React, { createContext, useState, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
 export const AuthContext = createContext()
 
 export const AuthContextProvider = ({ children }) => { 
@@ -13,13 +12,14 @@ export const AuthContextProvider = ({ children }) => {
       navigate('/')
     } else {
       navigate('/volunteer')
-      // getUser()
     }
-
   }, [user])
 
   return (
-    <AuthContext.Provider value={{ user, setUser, token, setToken }}>
+    <AuthContext.Provider value={{ 
+      user, setUser, 
+      token, setToken 
+    }}>
       { children }
     </AuthContext.Provider>
   )

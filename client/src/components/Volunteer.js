@@ -2,11 +2,13 @@ import React, { useState,useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { FiltersContext } from '../context/FiltersContext'
+import { AuthContext } from '../context/AuthContext'
 import { NgosContext } from '../context/NgosContext'
 import { GrFormClose } from 'react-icons/gr'
 import { FcNext, FcPrevious } from 'react-icons/fc'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import Button from '../components/Button'
 import image from '../assets/volunteer.jpg'
 import './Volunteer.css'
 
@@ -18,14 +20,15 @@ const Volunteer = () => {
   const [ disabled, setDisabled ] = useState(false)
   const [ pageCount, setPageCount ] = useState(1)
   const [ confirm, setConfirm ] = useState('')
-  const [ modal, setModal ] = useState(false)
-  const [ eventId, setEventId ] = useState(null);
+  const [ openModal, setOpenModal ] = useState(false)
+  const [ ngoModal, setNgoModal ] = useState(null)
   const navigate = useNavigate();
 
-  const handleRegister = (id) => {
+  const handleRegister = () => {
     setConfirm('Thank you. Please check your email for confirmation')
     setVolunteer('Attending')
     setDisabled(true)
+    
     // Decrement volunteer number by 1
     // Update backend - user's events
     // Update profile
@@ -55,18 +58,19 @@ const Volunteer = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    fetchVolunteerNgos()
+    fetchNgos()
   }
 
   const handleNgoSelected = (id) => {
     navigate(`/info/${id}`)
   }
 
-  const toggleModal = () => {
-    setModal(!modal);
+  const toggleModal = (ngo) => {
+    setNgoModal(ngo);
+    setOpenModal(!openModal);
   }
 
-  const fetchVolunteerNgos = async () => {
+  const fetchNgos = async () => {
     try {
       const frequency = filters.frequency 
       const category = filters.category 
@@ -148,64 +152,65 @@ const Volunteer = () => {
                       { ngo.event_description ? <p>Event: {ngo.event_description}</p> : null}
                     </div>             
 
-                    <button 
-                      disabled={disabled} 
-                      onClick={() => {
-                        console.log('Ngo:', ngo._id, ngo.name)
-                        setEventId(ngo._id);
-                        toggleModal()
-                      }}
+                    <button disabled={disabled} 
+                      onClick={() => {toggleModal(ngo)}}
                       className="volunteer-btn">{volunteer}
                     </button> 
 
+                    {/* <Button
+                      ngo={ngo}
+                      toggleModal={toggleModal}
+                      disabled={disabled}
+                      volunteer={volunteer}
+                    /> */}
+
                   </div>      
-                </div>    
-    
+                </div>     
+              </div>
+              )
+            })}
+          </div> 
+        </div>  
 
-                {modal && (      
-                  <div className="modal">
-                    <div className="modal-background">
-                      <div className="modal-popup">
-                        <div className="modal-content">
-                          <div className="left-side">
-                            <img className="modal-image" src={image} alt="volunteers"/> 
-                          </div>
+        {openModal && (      
+          <div className="modal">
+            <div className="modal-background">
+              <div className="modal-popup">
+                <div className="modal-content">
+                  <div className="left-side">
+                    <img className="modal-image" src={image} alt="volunteers"/> 
+                  </div>
 
-                          <div className="right-side">
-                            <div className="close-btn-row"><GrFormClose className="close-btn" onClick={toggleModal}/>
-                            </div>
-
-                            <div className="right-side-content">
-                              <p className="registering">You are registering {ngo.name}for this event: </p>
-                              <p className="text">Event: <span>{ngo.event_description}</span></p>
-                              <p className="text">Date: <span>{ngo.event_date}</span></p>
-                              <p className="text">Time: <span>{ngo.event_time}</span></p>  
-                              <p>Please enter your contact info so we can get in touch with you</p>
-
-                              <div className="contact-info">
-                                <input className="name" type="text" name="name" placeholder="Full name"/>
-                                <input className="email" type="text" name="email" placeholder="Email"/>
-                              </div>
-
-                              <div className="confirm" onClick={handleRegister}>Confirm</div>
-                              <p>{confirm}</p>
-
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      </div>
+                  <div className="right-side">
+                    <div className="close-btn-row"><GrFormClose className="close-btn" onClick={toggleModal}/>
                     </div>
-                  )} 
+                    <div className="right-side-content">
+                      <p className="registering">You are registering for this event: {ngoModal.event} </p>
+                      <p className="text">Organization: {ngoModal.name}  <span>{ngoModal.event_description}</span></p>
+                      <p className="text">Date: <span>{ngoModal.event_date}</span></p>
+                      <p className="text">Time: <span>{ngoModal.event_time}</span></p>  
+                      <p>Please enter your contact info so we can get in touch with you</p>
+
+                      <div className="contact-info">
+                        <input className="name" type="text" name="name" placeholder="Full name"/>
+                        <input className="email" type="text" name="email" placeholder="Email"/>
+                      </div>
+
+                      <div className="confirm" onClick={handleRegister()}>Confirm</div>
+                      <p>{confirm}</p>
+
+                    </div>
+                  </div>
                 </div>
-                )
-              })}
-            </div> 
-          </div>  
-          <Footer/>
-        </div>
-        )
-      }
+              </div>
+            </div>
+          </div>
+        )} 
+
+        {/* <Footer/> */}
+      </div>
+    )
+  }
 
 export default Volunteer;
 

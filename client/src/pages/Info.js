@@ -1,6 +1,7 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios'
+import { NgosContext } from '../context/NgosContext';
 import StripeCheckout from "react-stripe-checkout";
 import toast, { Toaster } from 'react-hot-toast'
 import Navbar from '../components/Navbar'
@@ -8,6 +9,7 @@ import './Info.css'
 
 const Info = () => {
   const navigate = useNavigate();
+  // const { fetchNgo } = useContext(NgosContext);
   const { id } = useParams();
   const [ favorite, setFavorite ] = useState('');
   const [ favorites, setFavorites ] = useState([]);
