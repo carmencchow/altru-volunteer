@@ -16,16 +16,23 @@ const Info = () => {
   const [ input, setInput ] = useState(0);
   const [ total, setTotal ] = useState(0)
   const [ ngo, setNgo ] = useState({});
-
-  const [inputValue, setInputValue] = useState("");
+  const [ button, setButton ] = useState(false)
+  const [ buttonColor, setButtonColor ] = useState('')
+  const [ buttonText, setButtonText ] = useState('')
+  const [ buttonBorder, setButtonBorder ] = useState('')
+  const [inputValue, setInputValue] = useState('');
 
   const fetchNgo = async () => {
     const res = await axios.get(`http://localhost:5000/api/ngos/${id}`)
     setNgo(res.data)
   }
 
-  const handleClick = (event) => {
-    setInputValue(event.target.value);
+  const handleClick = (e) => {
+    setInputValue(e.target.value);
+    setButtonColor('purple');
+    setButtonText('white')
+    setButtonBorder('purple');
+    console.log('amount chose', e.target.value)
   }
 
   useEffect (() => {
@@ -46,6 +53,7 @@ const Info = () => {
 
   // Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(number));
   const saveAmount = (e) => {
+    console.log('Saving amount', e.target.value)
     const donation = input.toFixed(2)
     console.log(donation)
   }
@@ -99,19 +107,48 @@ const Info = () => {
       <div className="donation-card">
         <h3 className="header">Don't have time to volunteer?</h3> 
         <h3 className="ngo-donation">You can donate to {ngo.name} instead</h3> 
-        <p>Your donation amount: </p>
+        <p>Select an amount to donate: </p>
         <div className="donation-options">
-          <button className="amount-btn" onClick={handleClick} value="10">$10</button>
-          <button className="amount-btn" onClick={handleClick} value="25">$25</button>
-          <button className="amount-btn" onClick={handleClick} value="30">$30</button>
+          <button 
+            className="amount-btn" 
+            style={{ backgroundColor: buttonColor, color: buttonText, border: buttonBorder }} 
+            onClick={handleClick} 
+            value="10">$10
+          </button>
+          <button 
+            className="amount-btn" 
+            style={{ backgroundColor: buttonColor, color: buttonText, border: buttonBorder }} 
+            onClick={handleClick} 
+            value="25">$25
+          </button>
+          <button 
+            className="amount-btn" 
+            style={{ backgroundColor: buttonColor, color: buttonText, border: buttonBorder }}
+            onClick={handleClick} 
+            value="50">$50
+          </button>
         </div>
         <div className="donation-options">
-          <button className="amount-btn" onClick={handleClick} value="50">$50</button>
-          <button className="amount-btn" onClick={handleClick} value="75">$75</button>
-          <button className="amount-btn" onClick={handleClick} value="100">$100</button>
+          <button 
+            className="amount-btn" 
+            style={{ backgroundColor: buttonColor, color: buttonText, border: buttonBorder }}
+            onClick={handleClick} 
+            value="75">$75
+          </button>
+          <button 
+            className="amount-btn" 
+            style={{ backgroundColor: buttonColor, color: buttonText, border: buttonBorder }}
+            onClick={handleClick} 
+            value="100">$100
+          </button>
+          <button 
+            className="amount-btn" 
+            onClick={handleAmount} 
+            value="">$Other Amount
+          </button>
         </div>
 
-        <div className="other-amount"><p className="dollar-sign">$</p>
+        {/* <div className="other-amount"><p className="dollar-sign">$</p>
           <input 
             type="text" 
             className="donation-input"
@@ -119,18 +156,17 @@ const Info = () => {
             placeholder='Other amount'
             onChange={handleAmount}
           />                              
-          <div className="save-btn" onClick={saveAmount}>Save</div>
-        </div>
+        </div> */}
 
         <div className="donor-info">
           <div className="column">
-            <input 
+            {/* <input 
               type="text" 
               className="full-name"
               value={input}
               placeholder='Other amount'
               onChange={handleAmount}
-            />     
+            />      */}
             <p>Full name:</p>
             <p>Street Address:</p>
             <p>City:</p>

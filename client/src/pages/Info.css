@@ -44,10 +44,11 @@ textarea:focus, .donation-input:focus{
   width: 160px;
   height: 60px;
 }
+/* 
 .amount-btn:hover{
   background-color: #716bc4;
   color: white;
-}
+} */
 .column{
   display: flex;
   justify-content: space-between;

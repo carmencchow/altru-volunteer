@@ -1,4 +1,4 @@
-import React, { useState,useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { FiltersContext } from '../context/FiltersContext'
@@ -7,16 +7,15 @@ import { NgosContext } from '../context/NgosContext'
 import { GrFormClose } from 'react-icons/gr'
 import { FcNext, FcPrevious } from 'react-icons/fc'
 import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
-import Button from '../components/Button'
 import image from '../assets/volunteer.jpg'
 import './Volunteer.css'
 
 const Volunteer = () => {
+  const { user, setUser, token, setToken } = useContext(AuthContext);
   const { filters, setFilters } = useContext(FiltersContext) 
   const { ngos, setNgos } = useContext(NgosContext)
-  const [ volunteer, setVolunteer ] = useState('Sign up')
   const [ currentPage, setCurrentPage ] = useState(1)
+  const [ volunteer, setVolunteer ] = useState('Sign up')
   const [ disabled, setDisabled ] = useState(false)
   const [ pageCount, setPageCount ] = useState(1)
   const [ confirm, setConfirm ] = useState('')
@@ -66,7 +65,7 @@ const Volunteer = () => {
   }
 
   const toggleModal = (ngo) => {
-    setNgoModal(ngo);
+    console.log('toggling modal now')
     setOpenModal(!openModal);
   }
 
@@ -153,7 +152,9 @@ const Volunteer = () => {
                     </div>             
 
                     <button disabled={disabled} 
-                      onClick={() => {toggleModal(ngo)}}
+                      onClick={() => {
+                        console.log(ngo.name, ngo._id)
+                        toggleModal(ngo)}}
                       className="volunteer-btn">{volunteer}
                     </button> 
 
@@ -185,11 +186,13 @@ const Volunteer = () => {
                     <div className="close-btn-row"><GrFormClose className="close-btn" onClick={toggleModal}/>
                     </div>
                     <div className="right-side-content">
-                      <p className="registering">You are registering for this event: {ngoModal.event} </p>
-                      <p className="text">Organization: {ngoModal.name}  <span>{ngoModal.event_description}</span></p>
+                      {/*<p className="registering">You are registering for this event: 
+                      {ngoModal.event_description} 
+                      </p>
+                       <p className="text">Organization: {ngoModal.name} </p>
                       <p className="text">Date: <span>{ngoModal.event_date}</span></p>
                       <p className="text">Time: <span>{ngoModal.event_time}</span></p>  
-                      <p>Please enter your contact info so we can get in touch with you</p>
+                      <p>Please enter your contact info so we can get in touch with you</p> */}
 
                       <div className="contact-info">
                         <input className="name" type="text" name="name" placeholder="Full name"/>
