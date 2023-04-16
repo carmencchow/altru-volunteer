@@ -1,0 +1,19 @@
+.donation-options{
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 30px;
+  padding-top: 20px;
+}
+.amount-btn{
+  cursor: pointer;
+  border: none;
+  padding: 10px;
+  margin-left: 10px;
+  background-color: white;
+  color: purple;
+  font-size: 20px;
+  border: 1px solid #716bc4;
+  border-radius: 5px;
+  width: 100px;
+  height: 60px;
+}

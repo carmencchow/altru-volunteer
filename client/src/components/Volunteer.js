@@ -66,7 +66,9 @@ const Volunteer = () => {
 
   const toggleModal = (ngo) => {
     console.log('toggling modal now')
+    setNgoModal(ngo)
     setOpenModal(!openModal);
+    // setOpenModal(true);
   }
 
   const fetchNgos = async () => {
@@ -83,7 +85,7 @@ const Volunteer = () => {
 
   useEffect(() => { 
     setPageCount(Math.ceil(ngos.length/4)); 
-    }, [ngos.length]) 
+  }, [ngos.length]) 
 
   return (
     <div>
@@ -183,23 +185,23 @@ const Volunteer = () => {
                   </div>
 
                   <div className="right-side">
-                    <div className="close-btn-row"><GrFormClose className="close-btn" onClick={toggleModal}/>
+                    <div className="close-btn-row"><GrFormClose className="close-btn" onClick = {() => setNgoModal(!openModal)}/>
                     </div>
                     <div className="right-side-content">
-                      {/*<p className="registering">You are registering for this event: 
+                      <p className="registering">You are registering for this event: 
                       {ngoModal.event_description} 
                       </p>
                        <p className="text">Organization: {ngoModal.name} </p>
                       <p className="text">Date: <span>{ngoModal.event_date}</span></p>
                       <p className="text">Time: <span>{ngoModal.event_time}</span></p>  
-                      <p>Please enter your contact info so we can get in touch with you</p> */}
+                      <p>Please enter your contact info so we can get in touch with you</p>
 
                       <div className="contact-info">
                         <input className="name" type="text" name="name" placeholder="Full name"/>
                         <input className="email" type="text" name="email" placeholder="Email"/>
                       </div>
 
-                      <div className="confirm" onClick={handleRegister()}>Confirm</div>
+                      <div className="confirm" onClick={handleRegister}>Confirm</div>
                       <p>{confirm}</p>
 
                     </div>

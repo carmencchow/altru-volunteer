@@ -5,6 +5,7 @@ import { NgosContext } from '../context/NgosContext';
 import StripeCheckout from "react-stripe-checkout";
 import toast, { Toaster } from 'react-hot-toast'
 import Navbar from '../components/Navbar'
+import AmountBtn from '../components/AmountBtn'
 import './Info.css'
 
 const Info = () => {
@@ -16,10 +17,7 @@ const Info = () => {
   const [ input, setInput ] = useState(0);
   const [ total, setTotal ] = useState(0)
   const [ ngo, setNgo ] = useState({});
-  const [ button, setButton ] = useState(false)
-  const [ buttonColor, setButtonColor ] = useState('')
-  const [ buttonText, setButtonText ] = useState('')
-  const [ buttonBorder, setButtonBorder ] = useState('')
+  const [ select, setSelect ] = useState('0');
   const [inputValue, setInputValue] = useState('');
 
   const fetchNgo = async () => {
@@ -27,13 +25,12 @@ const Info = () => {
     setNgo(res.data)
   }
 
-  const handleClick = (e) => {
-    setInputValue(e.target.value);
-    setButtonColor('purple');
-    setButtonText('white')
-    setButtonBorder('purple');
-    console.log('amount chose', e.target.value)
-  }
+    const amounts = ['$10', '$25', '$50', '$75', '$100', 'Other']
+
+  // const handleClick = (e) => {
+  //   setInputValue(e.target.value);
+  //   console.log('amount chose', e.target.value)
+  // }
 
   useEffect (() => {
     fetchNgo();
@@ -108,65 +105,42 @@ const Info = () => {
         <h3 className="header">Don't have time to volunteer?</h3> 
         <h3 className="ngo-donation">You can donate to {ngo.name} instead</h3> 
         <p>Select an amount to donate: </p>
+        {/* <div className="donation-options"> */}
+          
         <div className="donation-options">
-          <button 
-            className="amount-btn" 
-            style={{ backgroundColor: buttonColor, color: buttonText, border: buttonBorder }} 
-            onClick={handleClick} 
-            value="10">$10
-          </button>
-          <button 
-            className="amount-btn" 
-            style={{ backgroundColor: buttonColor, color: buttonText, border: buttonBorder }} 
-            onClick={handleClick} 
-            value="25">$25
-          </button>
-          <button 
-            className="amount-btn" 
-            style={{ backgroundColor: buttonColor, color: buttonText, border: buttonBorder }}
-            onClick={handleClick} 
-            value="50">$50
-          </button>
+          {amounts.map((amount) => {
+
+            return(
+              <AmountBtn 
+                // className="amount-btn" 
+                // onClick={handleClick} 
+                amount={amount}
+                select={select}
+                setSelect={setSelect}
+              />
+            )
+          })}
         </div>
-        <div className="donation-options">
-          <button 
-            className="amount-btn" 
-            style={{ backgroundColor: buttonColor, color: buttonText, border: buttonBorder }}
-            onClick={handleClick} 
-            value="75">$75
-          </button>
-          <button 
-            className="amount-btn" 
-            style={{ backgroundColor: buttonColor, color: buttonText, border: buttonBorder }}
-            onClick={handleClick} 
-            value="100">$100
-          </button>
-          <button 
-            className="amount-btn" 
+          
+          {/* <AmountBtn
+            clickedBtn={clickedBtn}
+            id={id}
+          /> */}
+        {/* </div> */}
+       
+          {/* {clickedBtn && 
+            <AmountBtn backgroundColor="blue"/>} */}
+
+          {/* <button 
+            className="other-btn" 
             onClick={handleAmount} 
             value="">$Other Amount
-          </button>
-        </div>
+          </button> */}
 
-        {/* <div className="other-amount"><p className="dollar-sign">$</p>
-          <input 
-            type="text" 
-            className="donation-input"
-            value={inputValue}
-            placeholder='Other amount'
-            onChange={handleAmount}
-          />                              
-        </div> */}
+        </div> 
 
         <div className="donor-info">
           <div className="column">
-            {/* <input 
-              type="text" 
-              className="full-name"
-              value={input}
-              placeholder='Other amount'
-              onChange={handleAmount}
-            />      */}
             <p>Full name:</p>
             <p>Street Address:</p>
             <p>City:</p>
@@ -189,7 +163,6 @@ const Info = () => {
               amount={total * 100}/> 
           </div> 
         </div> 
-      </div>
     )
   }
 
