@@ -68,7 +68,6 @@ const Volunteer = () => {
     console.log('toggling modal now')
     setNgoModal(ngo)
     setOpenModal(!openModal);
-    // setOpenModal(true);
   }
 
   const fetchNgos = async () => {
@@ -160,13 +159,6 @@ const Volunteer = () => {
                       className="volunteer-btn">{volunteer}
                     </button> 
 
-                    {/* <Button
-                      ngo={ngo}
-                      toggleModal={toggleModal}
-                      disabled={disabled}
-                      volunteer={volunteer}
-                    /> */}
-
                   </div>      
                 </div>     
               </div>
@@ -185,7 +177,8 @@ const Volunteer = () => {
                   </div>
 
                   <div className="right-side">
-                    <div className="close-btn-row"><GrFormClose className="close-btn" onClick = {() => setNgoModal(!openModal)}/>
+                    <div className="close-btn-row"><GrFormClose className="close-btn" onClick={toggleModal}/>
+                    {/* <div className="close-btn-row"><GrFormClose className="close-btn" onClick = {() => setNgoModal(!openModal)}/> */}
                     </div>
                     <div className="right-side-content">
                       <p className="registering">You are registering for this event: 

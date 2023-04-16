@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useContext} from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios'
-import { NgosContext } from '../context/NgosContext';
+import {NgosContext} from '../context/NgosContext';
 import StripeCheckout from "react-stripe-checkout";
 import toast, { Toaster } from 'react-hot-toast'
 import Navbar from '../components/Navbar'
@@ -11,20 +11,19 @@ import './Info.css'
 const Info = () => {
   const navigate = useNavigate();
   // const { fetchNgo } = useContext(NgosContext);
-  const { id } = useParams();
-  const [ favorite, setFavorite ] = useState('');
-  const [ favorites, setFavorites ] = useState([]);
-  const [ input, setInput ] = useState(0);
-  const [ total, setTotal ] = useState(0)
-  const [ ngo, setNgo ] = useState({});
-  const [ select, setSelect ] = useState('0');
+  const {id } = useParams();
+  const [favorite, setFavorite] = useState('');
+  const [favorites, setFavorites] = useState([]);
+  const [input, setInput] = useState(0);
+  const [total, setTotal] = useState(0)
+  const [ngo, setNgo] = useState({});
+  const [clickedBtn, setClickedBtn] = useState('0');
   const [inputValue, setInputValue] = useState('');
 
   const fetchNgo = async () => {
     const res = await axios.get(`http://localhost:5000/api/ngos/${id}`)
     setNgo(res.data)
   }
-
     const amounts = ['$10', '$25', '$50', '$75', '$100', 'Other']
 
   // const handleClick = (e) => {
@@ -105,64 +104,44 @@ const Info = () => {
         <h3 className="header">Don't have time to volunteer?</h3> 
         <h3 className="ngo-donation">You can donate to {ngo.name} instead</h3> 
         <p>Select an amount to donate: </p>
-        {/* <div className="donation-options"> */}
           
         <div className="donation-options">
           {amounts.map((amount) => {
-
             return(
               <AmountBtn 
-                // className="amount-btn" 
-                // onClick={handleClick} 
                 amount={amount}
-                select={select}
-                setSelect={setSelect}
+                clickedBtn={clickedBtn}
+                setClickedBtn={setClickedBtn}
               />
             )
           })}
         </div>
-          
-          {/* <AmountBtn
-            clickedBtn={clickedBtn}
-            id={id}
-          /> */}
-        {/* </div> */}
-       
-          {/* {clickedBtn && 
-            <AmountBtn backgroundColor="blue"/>} */}
+      </div> 
 
-          {/* <button 
-            className="other-btn" 
-            onClick={handleAmount} 
-            value="">$Other Amount
-          </button> */}
-
-        </div> 
-
-        <div className="donor-info">
-          <div className="column">
-            <p>Full name:</p>
-            <p>Street Address:</p>
-            <p>City:</p>
-          </div>
-          <div className="column">
-            <p>Province/State:</p>
-            <p>Postal/ZIP Code:</p>
-            <p>Email address: </p>
-          </div>        
+      <div className="donor-info">
+        <div className="column">
+          <p>Full name:</p>
+          <p>Street Address:</p>
+          <p>City:</p>
         </div>
+        <div className="column">
+          <p>Province/State:</p>
+          <p>Postal/ZIP Code:</p>
+          <p>Email address: </p>
+        </div>        
+      </div>
 
-        <div className="process">
-          {/* <div className="payment" onClick={handlePayment}>
-            Process
-          </div>  */}
-          {/* TEST CC: 4242 4242 4242 4242; 12/34; 123 */}
-            <StripeCheckout stripeKey= "pk_test_51L1kSgAoNhpouPlcfYHS4qZk7puLHRnuQFurkS8DelIS2DvAgtPR5nM4DWIdI3rjZCUyhkg9USb34AEQBf2Zz32r00TiqYY6E9"
-              token={handlePayment}
-              name="Your donation"
-              amount={total * 100}/> 
-          </div> 
+      <div className="process">
+        {/* <div className="payment" onClick={handlePayment}>
+          Process
+        </div>  */}
+        {/* TEST CC: 4242 4242 4242 4242; 12/34; 123 */}
+        <StripeCheckout stripeKey= "pk_test_51L1kSgAoNhpouPlcfYHS4qZk7puLHRnuQFurkS8DelIS2DvAgtPR5nM4DWIdI3rjZCUyhkg9USb34AEQBf2Zz32r00TiqYY6E9"
+          token={handlePayment}
+          name="Your donation"
+          amount={total * 100}/> 
         </div> 
+      </div> 
     )
   }
 
