@@ -11,11 +11,12 @@ import './Info.css'
 
 const Info = () => {
   const navigate = useNavigate();
-  const { userId } = useContext(AuthContext);
+  const { userId, getUser } = useContext(AuthContext);
   const {id} = useParams();
   const [ngo, setNgo] = useState({});
   const [total, setTotal] = useState(0)
   const [clickedBtn, setClickedBtn] = useState('0');
+  const [ disabled, setDisabled ] = useState(false)
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [address, setAddress] = useState('');
@@ -75,6 +76,7 @@ const Info = () => {
       );
       const data = res.data;
       console.log(data)
+      // getUser();
       } catch (e) {
         console.log(e);
       }
@@ -107,20 +109,41 @@ const Info = () => {
   }
 
   // Add NGO to follow
-  const handleFollow = async (req, res) => {
+  const handleFollow = async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/ngos/${id}`)
-    } catch (err) {
-      console.log(err)
+      const token = localStorage.getItem("token");
+      if (!token) {
+        throw new Error("No token found in localStorage");
+      }
+      const res = await axios.post(
+        // console.log(ngo.name)
+        `http://localhost:5000/api/user/${userId}/following/ngo`,        
+        { 
+          follow: `${ngo.name}`
+        },
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
+        }
+      );
+      const data = res.data;
+      console.log(data)
+      // getUser();
+      } catch (e) {
+        console.log(e);
+      }
     }
-  }
+
 
   return (
     <div>
       <Navbar/>
       <div> 
         <span className="back" onClick={() => navigate(-1)}>Back</span>
-        <span className="follow" onClick={handleFollow}>Follow {ngo.name}</span> 
+        <button className="follow" onClick={handleFollow}>Follow {ngo.name}</button> 
         <Toaster position="top-center" toastOption={{ duration: 3000 }}/>
         <span className="header1">Don't have time to volunteer with {ngo.name}?</span> <br></br>
         <span className="header2">Would you like to make a donation instead?</span>

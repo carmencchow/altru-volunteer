@@ -62,8 +62,6 @@ const Profile = () => {
           <p className="contact">Contact Details:</p>
           <p>Name: {user.username}</p>
           <p>Email: {user.email}</p>
-
-          {/* <BsPencil onClick={toggleInput} className="edit-icon"/> */}
         </div>
 
         <button onClick={handleUpdate} className="edit-btn">Update</button>
@@ -88,20 +86,11 @@ const Profile = () => {
         <h3>Organizations followed:</h3>
  
         <div className="organizations">
-          <div className="follow">
-            <p>Clean Air Alliance</p>
-            <p className="unfollow">Unfollow</p>
-          </div>
-
-          <div className="follow">
-            <p>Sick Kids Hospital</p>
-            <p className="unfollow">Unfollow</p>
-          </div>
-
-          <div className="follow">
-            <p>Toronto Humane Society</p>
-            <p className="unfollow">Unfollow</p>
-          </div>
+          {Object.keys(user.following).map(follow => (
+            <div follow={follow}>
+              {user.following[follow]}
+            </div>
+          ))}
 
           </div>
       </div>

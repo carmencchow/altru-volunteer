@@ -1,37 +1,53 @@
 import React, {useState, useContext} from 'react'
 import {AuthContext} from '../context/AuthContext'
 import DonationsList from './DonationsList'
+import './DonationsInfo.css'
 
 const DonationsInfo = () => {
-  const {user} = useContext(AuthContext)
-  const [input, setInput] = useState(0)
-  const [goal, setGoal] = useState(0)
+  const {user, getUser } = useContext(AuthContext)
+  const [input, setInput] = useState('$0')
+  const [goalAmount, setGoalAmount] = useState('$0')
+  const [openInput, setOpenInput] = useState(false)
+  const [totalAmount, setTotalAmount] = useState('$0')
+
+  const handleTotalAmount = () => {
+  
+  }
 
   const handleGoal = (e) => {
     setInput(e.target.value)
   }
   
+  const handleOpenInput = () => {
+    console.log('open input')
+    setOpenInput(!openInput)
+  }
+
   const saveGoal = () => {
-    setGoal(input)
+    setGoalAmount(input)
     setInput('')
   }
 
   return (
     <div className="container">
       <div className="stats">
-        <h3>Goal Amount: ${goal}</h3>
-        <h3>Amount Donated: </h3>
-
-        <div className="other-amount">
+      <div className="other-amount">
+        <h3>Set Goal Amount: </h3>
           $<input 
             type="text" 
             className="donation-input"
             value={input}
-            placeholder='Other amount'
+            placeholder='50.00'
             onChange={handleGoal}
           />                              
           <div className="save-btn" onClick={saveGoal}>Save</div>
         </div>
+        
+        
+        <h3>Goal Amount: {goalAmount}</h3>
+        <button onClick={handleOpenInput}>Edit Amount</button>
+        <h3>Total Amount Donated: {totalAmount}</h3>
+        <h3>Amount needed to reach donation goal: </h3>
 
       </div>
       

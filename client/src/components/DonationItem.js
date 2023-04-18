@@ -1,15 +1,15 @@
-import React from 'react'
-import './DonationItem.css'
+// import React from 'react'
+// import './DonationItem.css'
 
-const DonationItem = (props) => {
-  return (
-    <div>
-      <div className="donation-item">
-        <p>{props.ngo}</p>
-        <p>${props.amount} USD</p>
-      </div>      
-    </div>
-  )
-}
+// const DonationItem = (props) => {
+//   return (
+//     <div>
+//       <div className="donation-item">
+//         <p>{props.ngo}</p>
+//         <p>${props.amount} USD</p>
+//       </div>      
+//     </div>
+//   )
+// }
 
-export default DonationItem
+// export default DonationItem
