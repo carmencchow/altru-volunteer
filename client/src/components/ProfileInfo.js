@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../context/AuthContext'
 import { NgosContext } from '../context/NgosContext'
 import { useParams } from 'react-router-dom'
@@ -7,6 +8,7 @@ import { BsPencil } from 'react-icons/bs'
 import './ProfileInfo.css'
 
 const ProfileInfo = () => {
+  const navigate = useNavigate();
   const { user, userId } = useContext(AuthContext)
   const { ngoId } = useContext(NgosContext)
   const { id } = useParams(); 
@@ -18,7 +20,7 @@ const ProfileInfo = () => {
   }  
   
   const handleEdit = (e) => {
-    setEmail(e.target.value)
+    navigate('/edit')
   }
 
   const handleUpdate = (e) => {
@@ -52,9 +54,6 @@ const ProfileInfo = () => {
         console.log(e);
       }
   }
-
-
-      
 
   const handleSave = async (userId, e) => {
     console.log(`New email ${email}`)
@@ -97,22 +96,12 @@ const ProfileInfo = () => {
           <p>Email: {user.email}</p>
         </div>
 
-        <button onClick={handleUpdate} className="edit-btn">Update</button>
+        <button onClick={handleEdit} className="edit-btn">Edit Profile</button>
 
         <div className="user-image">
           <div className="avatar"></div>
           <p>Update profile photo</p>
         </div>
-      </div>
-
-      <div className="email-row">
-        <input type="text" 
-          className="edit-input"
-          placeholder="New email" 
-          value={email}
-          onChange={handleEdit}
-        />
-        <div className="save-email-btn" onClick={handleSave}>Save</div> 
       </div>
 
       <div className="following">

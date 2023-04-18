@@ -68,7 +68,6 @@ textarea:focus, .donation-input:focus{
 }
 .form-control{
   flex: 0 1 auto;
-
   display: block;
   width: 80%;
   height: calc(1.5em + 0.75rem + 2px);

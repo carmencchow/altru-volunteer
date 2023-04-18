@@ -22,7 +22,8 @@
   border-top-right-radius: 15px;
   border-top-left-radius: 15px;
   border-bottom: none;
-  border: 1px solid rgb(227, 188, 227);
+  border: 1px solid rgb(122, 184, 242);
+  /* border: 1px solid rgb(227, 188, 227); */
   width: 33%;
   font-size: 20px;
   padding: 20px 30px;
@@ -36,8 +37,10 @@
   border-top-right-radius: 45px;
   border-top-left-radius: 45px;
   border-bottom: none;
-  border: 1px solid purple;
-  border: 1px solid #a8a4db;
+  /* border: 1px solid purple;
+  border: 1px solid #a8a4db; */
+  border: 1px solid rgb(122, 184, 242);
+
   border-bottom: 1px solid transparent;
   width: 33%;
 }
