@@ -15,30 +15,34 @@ const Profile = () => {
     setOpenInput(!openInput)
   }  
   
+  const handleEdit = (e) => {
+    setEmail(e.target.value)
+  }
+
   const handleUpdate = (e) => {
     setEmail(e.target.value)
   }
 
   const handleSave = async (id, e) => {
     console.log(`New email ${email}`)
+    console.log('editing email', email)
   
     try {
       const token = localStorage.getItem("token");
       if (!token) {
         throw new Error("No token found in localStorage");
       }
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       const res = await axios.put(
         `http://localhost:5000/api/auth/user/${id}`,
   
         { 
           email: `${email}`
         },
-  
         {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`,
           },
         }
       );
@@ -71,12 +75,12 @@ const Profile = () => {
       </div>
 
       <div className="email-row">
-        {/* <input type="text" 
+        <input type="text" 
           className="edit-input"
           placeholder="New email" 
           value={email}
           onChange={handleEdit}
-        /> */}
+        />
         <div className="save-email-btn" onClick={handleSave}>Save</div> 
       </div>
 

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { AuthContext } from '../context/AuthContext'
@@ -8,13 +8,12 @@ import './Login.css'
 
 const Login = () => {
   const navigate = useNavigate();
-  const { user, setUser, token, setToken } = useContext(AuthContext);
+  const { user, userId, setUserId, setUser, token, setToken } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   })
   const { email, password } = formData
-  const [error, setError] = useState('');
 
   const handleChange = (e) => {
     setFormData((prevState) => ({
@@ -44,14 +43,25 @@ const Login = () => {
       }
       );
         const data = res.data;
-        console.log(data);
         localStorage.setItem('token', res.data.token);
+        // Set the state of the user
         setUser(data.user)
+        setUserId(data.user._id)
+        console.log('User and userId is:', data, data.user._id);
         setToken(data.token);
+        localStorage.setItem('user', data.user)
       } catch (err) {
         console.log(err, 'Incorrect password or email')
     };
   };
+
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem('data.user');
+    if (loggedInUser) {
+      const foundUser = JSON.parse(loggedInUser);
+      setUser(foundUser);
+    }
+  }, []);
 
   return (
     <>

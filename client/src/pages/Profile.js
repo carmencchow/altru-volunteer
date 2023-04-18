@@ -5,6 +5,7 @@ import VolunteerInfo from '../components/VolunteerInfo'
 import ProfileInfo from '../components/ProfileInfo'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import TestComponent from '../components/TestComponent'
 import './Profile.css'
 
 const Profile = () => {
@@ -20,6 +21,8 @@ const Profile = () => {
   return (
     <>
     <Navbar/>
+    <TestComponent/>
+    
       <div className="profile-container">
         <div className="tabs-container">
         <div className="heading-tabs">

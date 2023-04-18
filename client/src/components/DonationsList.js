@@ -7,19 +7,16 @@ const DonationsList = () => {
   return (
     <div>
       <h2>Donations Made</h2>
-              {/* <ul className="donations-list"> */}
-        {/* {donations.map((donation) => (
+        {/* <ul className="donations-list"> 
+        {donations.map((donation) => (
           <DonationItem 
           id={donation.id}
           ngo={donation.ngo}
           amount={donation.donated}
           date={donation.date}
-          /> */}
-        {/* ))} */}
- s     {/* </ul> */}
-
-      {/* // Calculate total */}
-
+          /> 
+        ))}
+      </ul>  */}
     </div>
   )
 }

@@ -20,7 +20,7 @@ const DonationsInfo = () => {
     <div className="container">
       <div className="stats">
         <h3>Goal Amount: ${goal}</h3>
-        <h3>Amount Donated: $64.00</h3>
+        <h3>Amount Donated: </h3>
 
         <div className="other-amount">
           $<input 
@@ -38,7 +38,7 @@ const DonationsInfo = () => {
       <div className="history">
         <h3>Donations made:</h3>
         <p>{user.donations}</p>
-      </div>
+       </div>
     </div>
   )
 }

@@ -62,8 +62,23 @@ const editProfile = async (req, res) => {
 // 4. And an event to user
 
 
+// 5. Add a donation to user
+const addDonation = async (req, res) => {
+  try{
+    const newDonation = req.body.donation;
+    const user = await User.findOne({ _id: req.params.id });
+    user.donations.push(newDonation)
+    await user.save();
+    console.log('Donation added: ', user.donations)
+    return res.status(200).send({ results: user, message: user.donations });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).send({ message: err.message });
+  }
+};
+
 // 5. Add an organization to user
 
 
 
-module.exports = { getUser, getUsers, deleteProfile, editProfile }
+module.exports = { getUser, getUsers, deleteProfile, editProfile, addDonation }

@@ -32,12 +32,6 @@ const userSchema = new Schema({
   goal_amount: {
     type: Number,
   },
-  // following: [
-  //   { 
-  //     type: mongoose.Schema.Types.ObjectId,
-  //     ref: 'ngo',
-  //   },
-  // ],
   following: {
     type: Array,
   },
@@ -47,6 +41,9 @@ const userSchema = new Schema({
   attending: {
     type: Array,
   },
+  isAttending: {
+    type: Boolean
+  }
   // attending: [
   //   { 
   //     type: mongoose.Schema.Types.ObjectId,

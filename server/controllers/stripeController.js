@@ -2,13 +2,14 @@ const Ngo = require('../models/ngoModel');
 const mongoose = require('mongoose');
 const stripe = require('stripe')
 
-const getPayment = async (req, res) => {
+const getPayment = (req, res) => {
   const donation = req.body.donation 
   const token = req.body.token 
   console.log(`Donation amount: ${donation}`)
   const idempotencyKey = uuid() // To prevent user from being charged twice
 
   return stripe.customers.create({
+    // return stripe.customers.create({
     email: token.email,
     source: token.id
   }).then(customer => {
@@ -27,11 +28,9 @@ const getPayment = async (req, res) => {
       }
     }, {idempotencyKey})
   })
-  .then(result => res.status(200).json(result))
+  .then(
+    result => res.status(200).json(result))
   .catch(err => console.log(err))
-
 }
-
-
 
 module.exports = getPayment
