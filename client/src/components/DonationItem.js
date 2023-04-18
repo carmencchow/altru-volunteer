@@ -6,7 +6,6 @@ const DonationItem = (props) => {
     <div>
       <div className="donation-item">
         <p>{props.ngo}</p>
-        <p>{props.date}</p>
         <p>${props.amount} USD</p>
       </div>      
     </div>

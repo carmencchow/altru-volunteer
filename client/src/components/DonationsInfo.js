@@ -37,8 +37,14 @@ const DonationsInfo = () => {
       
       <div className="history">
         <h3>Donations made:</h3>
-        <p>{user.donations}</p>
-       </div>
+        <p>
+          {Object.keys(user.donations).map(donation => (
+            <div donation={donation}>
+              {user.donations[donation]}
+            </div>
+          ))}
+        </p>
+      </div>
     </div>
   )
 }
