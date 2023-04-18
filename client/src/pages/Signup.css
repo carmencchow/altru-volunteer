@@ -24,6 +24,13 @@ body{
   margin: 0 auto;
   justify-content: center;
 }
+.name-inputs{
+  border: 2px solid #19add6;
+  width: 350px;
+  height: 50px;
+  margin-top: 0px;
+  margin-bottom: 0px; 
+}
 input{
   border: 2px solid #19add6;
   width: 350px;

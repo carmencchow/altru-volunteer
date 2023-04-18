@@ -1,4 +1,5 @@
 const User = require('../models/userModel');
+// const Donation = require('../models/donationsModel');
 const mongoose = require('mongoose');
 
 // 0. GET user by ID
@@ -60,6 +61,20 @@ const editProfile = async (req, res) => {
 };
 
 // 4. And an event to user
+const addEvent = async (req, res) => {
+  try{
+    const newEvent = req.body.event
+    console.log('trying to add this: ', newEvent)
+    const user = await User.findOne({ _id: req.params.id });
+    user.attending.push(newEvent)
+    await user.save();
+    console.log('Event added: ', user.attending)
+    return res.status(200).send({ results: user, message: user.attending });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).send({ message: err.message });
+  }
+};
 
 
 // 5. Add a donation to user
@@ -78,7 +93,36 @@ const addDonation = async (req, res) => {
 };
 
 // 5. Add an organization to user
+const follow = async (req, res) => {
+  try{
+    const newFollow = req.body.follow;
+    const user = await User.findOne({ _id: req.params.id });
+    user.following.push(newFollow)
+    await user.save();
+    console.log('Followed Orgs: ', user.following)
+    return res.status(200).send({ results: user, message: user.following });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).send({ message: err.message });
+  }
+};
+
+// 6. Unfollow/Delete an organization 
+const unfollow = async (req, res) => {
+  try{
+    const remove = req.body.remove;
+    const user = await User.findOne({ _id: req.params.id }).findOneAndDelete({donations: remove}) 
+   
+    // const user = await User.findOneAndDelete({donations: remove}) 
+    user.following.push(newFollow)
+    return res.status(200).send({ results: user, message: user.following });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).send({ message: err.message });
+  }
+};
 
 
 
-module.exports = { getUser, getUsers, deleteProfile, editProfile, addDonation }
+
+module.exports = { getUser, getUsers, addEvent, follow, unfollow, deleteProfile, editProfile, addDonation }

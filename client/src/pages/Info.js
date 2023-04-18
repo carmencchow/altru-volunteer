@@ -117,7 +117,7 @@ const Info = () => {
       }
       const res = await axios.post(
         // console.log(ngo.name)
-        `http://localhost:5000/api/user/${userId}/following/ngo`,        
+        `http://localhost:5000/api/user/${userId}/follow/ngo`,        
         { 
           follow: `${ngo.name}`
         },

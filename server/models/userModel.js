@@ -22,10 +22,6 @@ const userSchema = new Schema({
     lowercase: true,
     required: [true, "Please provide a password"]  
   },
-  phone: {
-    unique: true,
-    type: Number,
-  },
   image: {
     type: String,
   },
@@ -38,6 +34,12 @@ const userSchema = new Schema({
   donations: {
     type: Array,
   },
+  // donations: [
+  //   {
+  //     type: mongoose.Schema.Types.ObjectId,
+  //     ref: "donations",
+  //   },
+  // ],
   attending: {
     type: Array,
   },

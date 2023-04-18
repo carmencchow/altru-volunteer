@@ -8,6 +8,7 @@ import './Login.css'
 
 const Login = () => {
   const navigate = useNavigate();
+  const [error, setError] = useState('')
   const { user, userId, setUserId, setUser, token, setToken } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     email: '',
@@ -52,6 +53,7 @@ const Login = () => {
         localStorage.setItem('user', data.user)
       } catch (err) {
         console.log(err, 'Incorrect password or email')
+        setError('Incorred email or password. Please try again.');
     };
   };
 
@@ -93,7 +95,7 @@ const Login = () => {
                 onChange={handleChange}    
               />
           </div>
-
+          <p className="error">{error}</p>
           <button type="submit" className="login-submit" onClick={handleSubmit}>Log in</button>
                         
           <div className="new-account">

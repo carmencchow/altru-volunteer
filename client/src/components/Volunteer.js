@@ -12,7 +12,7 @@ import image from '../assets/volunteer.jpg'
 import './Volunteer.css'
 
 const Volunteer = () => {
-  const { user, setUser, token, setToken } = useContext(AuthContext);
+  const { user, userId, setUser, token, setToken } = useContext(AuthContext);
   const { filters, setFilters } = useContext(FiltersContext) 
   const { ngos, setNgos } = useContext(NgosContext)
   const [ currentPage, setCurrentPage ] = useState(1)
@@ -24,10 +24,38 @@ const Volunteer = () => {
   const [ ngoModal, setNgoModal ] = useState(null)
   const navigate = useNavigate();
 
-  const handleRegister = (ngo) => {
+  const handleRegister = async (ngoModal) => {
     setConfirm('Thank you. Please check your email for confirmation')
-    setClickedBtn(!clickedBtn) 
+    // setClickedBtn(!clickedBtn) 
     setDisabled(true)
+
+    // const addEvent = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) {
+          throw new Error("No token found in localStorage");
+        }
+        const res = await axios.post(
+          `http://localhost:5000/api/user/${userId}/add-event`,        
+          { 
+            // event: `${ngo}` 
+            event: `${ngoModal.event_description}` 
+          },
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${token}`
+            },
+          }
+        );
+        const data = res.data;
+        console.log('New Event added: ', data.event_description);
+        // getUser();
+        } catch (e) {
+          console.log(e);
+        }
+      // }
   }
   
   const toggleModal = (ngo) => {

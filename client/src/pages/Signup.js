@@ -11,7 +11,8 @@ const Signup = () => {
   const navigate = useNavigate();
   const { user, setUser } = useContext(AuthContext);
   const [formData, setFormData] = useState({
-    name: '',
+    firstname: '',
+    lastname: '',
     email: '',
     password: '',
     confirmPassword: ''
@@ -23,7 +24,7 @@ const Signup = () => {
     navigate('/')
   }
 
-  const { name, email, password, confirm } = formData
+  const { firstname, lastname, email, password, confirm } = formData
 
   const handleChange = (e) => {
     setFormData((prevState) => ({
@@ -45,7 +46,7 @@ const Signup = () => {
     //     email,
     //     password,
     //   }
-    console.log('Returning', formData.name, formData.email, formData.password)
+    console.log('Returning', formData.firstname, formData.lastname, formData.email, formData.password)
     // }
 
     // await signup(email, password)
@@ -59,21 +60,33 @@ const Signup = () => {
         <div className="signup-card">
           <h2>Sign up</h2>
 
-          <div className="name-input">
-            <input 
-              name="name" 
-              type="text" 
-              placeholder="Enter your name" 
-              value={name} 
-              onChange={handleChange}
-            />
+          <div className="name-row">
+            <div className="firstname-input">
+              <input 
+                name="firstname" 
+                type="text" 
+                placeholder="  Enter your first name" 
+                value={firstname} 
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="lastname-input">
+              <input 
+                name="lastname" 
+                type="text" 
+                placeholder="  Enter your last name" 
+                value={lastname} 
+                onChange={handleChange}
+              />
+            </div>
           </div>
 
           <div className="email-input">
             <input 
               name="email" 
               type="email" 
-              placeholder="Enter your email" 
+              placeholder="  Enter your email" 
               value={email} 
               onChange={handleChange}
             />
@@ -83,7 +96,7 @@ const Signup = () => {
             <input 
               name="password" 
               type="password" 
-              placeholder="Enter your password" 
+              placeholder="  Enter your password" 
               value={password} 
               onChange={handleChange}
             />
@@ -93,7 +106,7 @@ const Signup = () => {
             <input 
               name="confirm" 
               type="password" 
-              placeholder="Confirm your password" 
+              placeholder="  Confirm your password" 
               value={confirm} 
               onChange={handleChange}
             />

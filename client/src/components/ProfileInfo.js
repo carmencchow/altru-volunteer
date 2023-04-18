@@ -1,12 +1,14 @@
 import React, { useState, useContext } from 'react'
 import { AuthContext } from '../context/AuthContext'
+import { NgosContext } from '../context/NgosContext'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { BsPencil } from 'react-icons/bs'
 import './ProfileInfo.css'
 
-const Profile = () => {
-  const { user } = useContext(AuthContext)
+const ProfileInfo = () => {
+  const { user, userId } = useContext(AuthContext)
+  const { ngoId } = useContext(NgosContext)
   const { id } = useParams(); 
   const [ email, setEmail ] = useState('')
   const [ openInput, setOpenInput ] = useState(false)
@@ -23,7 +25,38 @@ const Profile = () => {
     setEmail(e.target.value)
   }
 
-  const handleSave = async (id, e) => {
+  // Unfollow NGO
+  const handleUnfollow = async (ngoId) => {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        throw new Error("No token found in localStorage");
+      }
+      const res = await axios.delete(
+        `http://localhost:5000/api/user/${userId}/follow/ngo`,        
+        { 
+          follow: `${ngoId}`
+        },
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
+        }
+      );
+      const data = res.data;
+      console.log(data)
+      // getUser();
+      } catch (e) {
+        console.log(e);
+      }
+  }
+
+
+      
+
+  const handleSave = async (userId, e) => {
     console.log(`New email ${email}`)
     console.log('editing email', email)
   
@@ -33,7 +66,7 @@ const Profile = () => {
         throw new Error("No token found in localStorage");
       }
       const res = await axios.put(
-        `http://localhost:5000/api/auth/user/${id}`,
+        `http://localhost:5000/api/auth/user/${userId}`,
   
         { 
           email: `${email}`
@@ -89,14 +122,16 @@ const Profile = () => {
           {Object.keys(user.following).map(follow => (
             <div follow={follow}>
               {user.following[follow]}
+              <button onClick={handleUnfollow}>Unfollow</button>
             </div>
           ))}
+         
+        </div>
 
-          </div>
       </div>
     </div>
   )
 }
 
-export default Profile
+export default ProfileInfo
 
