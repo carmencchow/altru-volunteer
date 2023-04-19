@@ -1,0 +1,10 @@
+.save-btn{
+  border: 1px solid grey
+}
+.donated-amounts{
+  display: flex;
+  align-items: right;
+}
+p {
+  margin-right: 20px;
+}

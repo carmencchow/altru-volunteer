@@ -1,11 +1,24 @@
 import React, { createContext, useState, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 export const AuthContext = createContext()
 
 export const AuthContextProvider = ({ children }) => { 
   const [user, setUser] = useState(null);
+  const [userId, setUserId] = useState('');
   const [token, setToken] = useState('');
   const navigate = useNavigate(); 
+
+  const getUser = async () => {
+    try {
+      console.log('calling getUser function')
+      const res = await axios.get(`http://localhost:5000/api/user/${userId}`);
+      const data = res.data;
+      setUser(data.user);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   useEffect(() => {
     if (user === null){
@@ -18,7 +31,9 @@ export const AuthContextProvider = ({ children }) => {
   return (
     <AuthContext.Provider value={{ 
       user, setUser, 
-      token, setToken 
+      userId, setUserId,
+      token, setToken, 
+      getUser
     }}>
       { children }
     </AuthContext.Provider>

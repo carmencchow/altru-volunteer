@@ -5,15 +5,12 @@
 .user-profile{
   display: flex;
   flex-direction: column;
-  border: 1px solid orangered;
 }
 .edit-row{
   display: flex;
-  justify-content: space-between;
   flex-direction: row;
-  width: 80%;
 }
-.contact, .address{
+.contact{
   font-weight: bold;
 }
 .user-image{
@@ -25,24 +22,6 @@
   width: 100px;
   height: 100px;
 }
-.edit-row p{
-  margin-right: 20px;
-}
-.edit-icon{
-  margin-top: 15px;
-  cursor: pointer;
-}
-.edit-input{
-  width: 200px;
-}
-.email-row{
-  display: flex;
-  flex-direction: row;
-}
-.save-email-btn{
-  cursor: pointer;
-  border: 1px solid lightsalmon;
-}
 .organizations{
   border: 2px solid lightblue;
 }
@@ -51,4 +30,7 @@
 }
 .unfollow:hover{
   color: purple;
+}
+.edit-btn{
+  height: 30px;
 }

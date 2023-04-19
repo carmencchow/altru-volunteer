@@ -5,16 +5,16 @@ const AmountBtn = ({ amount, clickedBtn, setClickedBtn }) => {
 
   const handleClick = () => {
     setClickedBtn(amount);
+    console.log('clicked amount is', amount)
   }
 
   return (
-    <button className="amount-btn" 
-      style={
-        clickedBtn === amount ?
-        { backgroundColor: 'purple', color: 'white', border: 'purple' } : undefined
-      } 
+    <button 
+      className="amount-btn" 
+      style={clickedBtn === amount ? { backgroundColor: 'purple', color: 'white', border: 'purple' } 
+        : undefined} 
       onClick={handleClick} 
-      value={`${amount}`}>{amount}
+      value={`${amount}`}>${amount}
     </button>
   )
 }

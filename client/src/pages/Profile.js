@@ -4,11 +4,11 @@ import DonationsInfo from '../components/DonationsInfo'
 import VolunteerInfo from '../components/VolunteerInfo'
 import ProfileInfo from '../components/ProfileInfo'
 import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
+import TestComponent from '../components/TestComponent'
 import './Profile.css'
 
 const Profile = () => {
-  const { user } = useContext(AuthContext)
+  const { user, getUser } = useContext(AuthContext)
   const [toggleState, setToggleState] = useState(1);
 
   const toggletabs = (idx) => {
@@ -20,6 +20,8 @@ const Profile = () => {
   return (
     <>
     <Navbar/>
+    <TestComponent/>
+    
       <div className="profile-container">
         <div className="tabs-container">
         <div className="heading-tabs">
@@ -27,7 +29,7 @@ const Profile = () => {
           onClick={() => toggletabs(1)}>My Profile</div>
 
           <div className={toggleState === 2 ? "tabs  active-tabs" : "tabs"} 
-          onClick={() => toggletabs(2)}>Donations</div>
+          onClick={() => toggletabs(2)}> Donations</div>
 
           <div className={toggleState === 3 ? "tabs  active-tabs" : "tabs"} 
           onClick={() => toggletabs(3)}>Volunteer</div>

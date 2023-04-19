@@ -2,51 +2,68 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
+  firstname: {
+    type: String,
+    required: true, 
+  },
+  lastname: {
+    type: String,
+    required: true,  
+  },
   username: {
     type: String,
     unique: true,
-    required: [true, "Please enter a valid username"] 
-  },
-  initials: {
-    type: String,
+    required: true, 
   },
   email: { 
     type: String, 
     unique: true, 
     lowercase: true,
-    required: [true, "Please enter a valid email address"] 
+    required: true, 
   },
   password: { 
     type: String, 
     unique: true, 
     lowercase: true,
-    required: [true, "Please provide a password"]  
+    required: true, 
   },
-  phone: {
-    unique: true,
+  address: {
+    type: String,
+  },
+  state: {
+    type: String,
+  },
+  city: {
+    type: String,
+  },
+  zipcode: {
     type: Number,
   },
   image: {
     type: String,
   },
-  goal_amount: {
+  goalAmount: {
     type: Number,
   },
-  // following: [
-  //   { 
-  //     type: mongoose.Schema.Types.ObjectId,
-  //     ref: 'ngo',
-  //   },
-  // ],
   following: {
     type: Array,
   },
   donations: {
     type: Array,
   },
+
+  // donations: [
+  //   {
+  //     type: mongoose.Schema.Types.ObjectId,
+  //     ref: "donations",
+  //   },
+  // ],
   attending: {
     type: Array,
   },
+  isAttending: {
+    type: Boolean
+  }
   // attending: [
   //   { 
   //     type: mongoose.Schema.Types.ObjectId,

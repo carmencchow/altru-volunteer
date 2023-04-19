@@ -6,16 +6,17 @@ import { AuthContext } from '../context/AuthContext'
 import { NgosContext } from '../context/NgosContext'
 import { GrFormClose } from 'react-icons/gr'
 import { FcNext, FcPrevious } from 'react-icons/fc'
+import VolunteerBtn from '../components/VolunteerBtn'
 import Navbar from '../components/Navbar'
 import image from '../assets/volunteer.jpg'
 import './Volunteer.css'
 
 const Volunteer = () => {
-  const { user, setUser, token, setToken } = useContext(AuthContext);
+  const { user, userId, setUser, token, setToken } = useContext(AuthContext);
   const { filters, setFilters } = useContext(FiltersContext) 
   const { ngos, setNgos } = useContext(NgosContext)
   const [ currentPage, setCurrentPage ] = useState(1)
-  const [ volunteer, setVolunteer ] = useState('Sign up')
+  const [ clickedBtn, setClickedBtn] = useState(false)
   const [ disabled, setDisabled ] = useState(false)
   const [ pageCount, setPageCount ] = useState(1)
   const [ confirm, setConfirm ] = useState('')
@@ -23,14 +24,45 @@ const Volunteer = () => {
   const [ ngoModal, setNgoModal ] = useState(null)
   const navigate = useNavigate();
 
-  const handleRegister = () => {
+  const handleRegister = async (ngoModal) => {
     setConfirm('Thank you. Please check your email for confirmation')
-    setVolunteer('Attending')
+    // setClickedBtn(!clickedBtn) 
     setDisabled(true)
-    
-    // Decrement volunteer number by 1
-    // Update backend - user's events
-    // Update profile
+
+    // const addEvent = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) {
+          throw new Error("No token found in localStorage");
+        }
+        const res = await axios.post(
+          `http://localhost:5000/api/user/${userId}/add-event`,        
+          { 
+            // event: `${ngo}` 
+            event: `${ngoModal.event_description}` 
+          },
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${token}`
+            },
+          }
+        );
+        const data = res.data;
+        console.log('New Event added: ', data.event_description);
+        // getUser();
+        } catch (e) {
+          console.log(e);
+        }
+      // }
+  }
+  
+  const toggleModal = (ngo) => {
+    console.log('toggling modal now')
+    setNgoModal(ngo)
+    setClickedBtn(true)
+    setOpenModal(!openModal);
   }
 
   const handlePrevious = () => {
@@ -61,15 +93,9 @@ const Volunteer = () => {
   }
 
   const handleNgoSelected = (id) => {
+    console.log(`Going to ${id}`)
     navigate(`/info/${id}`)
   }
-
-  const toggleModal = (ngo) => {
-    console.log('toggling modal now')
-    setNgoModal(ngo)
-    setOpenModal(!openModal);
-  }
-
   const fetchNgos = async () => {
     try {
       const frequency = filters.frequency 
@@ -152,12 +178,21 @@ const Volunteer = () => {
                       { ngo.event_description ? <p>Event: {ngo.event_description}</p> : null}
                     </div>             
 
-                    <button disabled={disabled} 
+                    {/* <button disabled={disabled} 
                       onClick={() => {
                         console.log(ngo.name, ngo._id)
                         toggleModal(ngo)}}
-                      className="volunteer-btn">{volunteer}
-                    </button> 
+                      className="volunteer-btn">{clickedBtn ? 'Attending' : 'Sign up'}
+                    </button>  */}
+
+                    <VolunteerBtn
+                      ngoId={ngo._id}
+                      disabled={disabled}
+                      clickedBtn={clickedBtn}
+                      setClickedBtn={setClickedBtn}
+                      toggleModal={toggleModal}
+                      ngo={ngo}
+                    />
 
                   </div>      
                 </div>     
@@ -182,6 +217,8 @@ const Volunteer = () => {
                     </div>
                     <div className="right-side-content">
                       <p className="registering">You are registering for this event: 
+                      <br></br>
+                      <br></br>
                       {ngoModal.event_description} 
                       </p>
                        <p className="text">Organization: {ngoModal.name} </p>
