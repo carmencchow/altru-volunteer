@@ -1,3 +1,7 @@
 .save-btn{
   border: 1px solid grey
 }
+.donated-amounts{
+  display: flex;
+  align-items: right;
+}

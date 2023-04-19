@@ -4,7 +4,7 @@ import { AuthContext } from '../context/AuthContext'
 import './EditGoal.css';
 
 const EditGoal = ({ openInput, closeInput }) => {
-  const [input, setInput] = useState('$0');
+  const [input, setInput] = useState(0);
   const { userId, getUser } = useContext(AuthContext);
 
   const handleInput = (e) => {
@@ -40,7 +40,7 @@ const EditGoal = ({ openInput, closeInput }) => {
 
   return (
     <div className="row">
-      <div className="edit-input">
+      <div className="edit-input">$
         <input
           type="text"
           className="edit"

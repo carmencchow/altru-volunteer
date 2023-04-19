@@ -6,7 +6,7 @@ import './DonationsInfo.css'
 const DonationsInfo = () => {
   const {user} = useContext(AuthContext)
   const [openInput, setOpenInput] = useState(false)
-  const [total, setTotal] = useState('$0')
+  const [total, setTotal] = useState(0)
 
   // Calculate amount left to reach goal
   
@@ -14,7 +14,7 @@ const DonationsInfo = () => {
     <div className="container">
       <div className="stats">
         <div className="row">
-          <h3>Goal Amount: {user.goalAmount}</h3>
+          <h3>Goal Amount: ${user.goalAmount}</h3>
 
            <div className="input-field">
             <EditGoal
@@ -32,15 +32,15 @@ const DonationsInfo = () => {
               <div></div>
             )}
           </div>
-        <h3>Amount needed to reach donation goal: </h3>
+
       </div>
       
-      <div className="history">
+      <div className="donation-history">
         <h3>Donation history: </h3>
-        <p>
+        <p className="donated amounts">
           {Object.keys(user.donations).map(donation => (
-            <div donation={donation}>
-              {user.donations[donation]}
+            <div donation={donation}>$
+               {user.donations[donation]}.00
             </div>
           ))}
         </p>
@@ -49,6 +49,9 @@ const DonationsInfo = () => {
           <p>${user.donations.reduce((a,b) => a + b, 0)}</p>
         </h4>
         
+        <h4>Amount needed to reach donation goal: 
+          <p>${user.goalAmount - user.donations.reduce((a,b) => a + b, 0)}</p>
+        </h4>
 
       </div>
       </div>
