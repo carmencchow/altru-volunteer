@@ -31,7 +31,8 @@ const signup = async (req, res) => {
       // password: salt,
       following: [],
       donations: [],
-      attending: []
+      attending: [],
+      ngos: [],
     });
         await user.save();
 

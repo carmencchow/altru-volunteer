@@ -51,6 +51,9 @@ const userSchema = new Schema({
   donations: {
     type: Array,
   },
+  ngos: {
+    type: Array,
+  },
 
   // donations: [
   //   {

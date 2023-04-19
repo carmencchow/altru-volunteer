@@ -54,9 +54,7 @@ const Info = () => {
     setProvince(e.target.value)
   }
 
-  const handleConfirmation = async () => {
-    // const amount = clickedBtn.replace(/\$/g,'');
-    // const newAmount = amount.replace(/\'/g,'');
+  const handlePayment = async () => {
     try {
       const token = localStorage.getItem("token");
       if (!token) {
@@ -65,8 +63,8 @@ const Info = () => {
       const res = await axios.post(
         `http://localhost:5000/api/user/${userId}/donation`,        
         { 
-          donation: `${clickedBtn}` 
-          // donation: newAmount 
+          donation: `${clickedBtn}` ,
+          ngo: ngo.name
         },
         {
           method: "POST",
@@ -90,8 +88,8 @@ const Info = () => {
     fetchNgo();
   }, [])
 
-  const handlePayment = token => {
-    handleConfirmation();
+  const handleStripe = token => {
+    handlePayment();
     console.log('Payment')
     const body = {
       token, 
@@ -200,7 +198,7 @@ const Info = () => {
         {/* TEST CC: 4242 4242 4242 4242; 12/34; 123 */}
         <StripeCheckout stripeKey= "pk_test_51L1kSgAoNhpouPlcggVUZyCuhwjZKomWM4sK8IrNj9OI3OumyeYeNkOrSPTrshrj8vbjJdA82r7FBgKueeUOzNbk00vJ7IMMjT"
           image={logo} 
-          token={handlePayment}
+          token={handleStripe}
           name="Donating"
           amount={total * 100}/> 
       </div> 

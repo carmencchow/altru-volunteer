@@ -37,14 +37,20 @@ const DonationsInfo = () => {
       
       <div className="donation-history">
         <h3>Donation history: </h3>
-        <p className="donated amounts">
-          {Object.keys(user.donations).map(donation => (
-            <div donation={donation}>
-               $ {user.donations[donation]}
-               <br></br>
-            </div>
-          ))}
-        </p>
+
+        <div className="donated-amounts">
+          <div>
+            {Object.keys(user.donations).map(donation => (
+              <div className="donation">${user.donations[donation]} --  </div>
+            ))}
+          </div>
+          <div>
+            {Object.keys(user.ngos).map(ngo => (
+              <div> {user.ngos[ngo]}</div>
+            ))}
+          </div>
+        </div>
+
 
         <h4>Total Amount Donated: 
             <p>${user.donations.map(Number).reduce((a,b) =>  a + b, 0)}</p>

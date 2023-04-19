@@ -80,11 +80,13 @@ const addEvent = async (req, res) => {
 const addDonation = async (req, res) => {
   try{
     const newDonation = req.body.donation;
+    const newNgo = req.body.ngo;
     const user = await User.findOne({ _id: req.params.id });
     user.donations.push(newDonation)
+    user.ngos.push(newNgo)
     await user.save();
-    console.log('Donation added: ', user.donations)
-    return res.status(200).send({ results: user, message: user.donations });
+    console.log('Donation added: ', user.donations, user.ngos)
+    return res.status(200).send({ results: user });
   } catch (err) {
     console.log(err);
     return res.status(500).send({ message: err.message });
