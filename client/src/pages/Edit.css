@@ -1,6 +1,6 @@
 .tabs, .active-tabs{
-  border-top-right-radius: 15px;
-  border-top-left-radius: 15px;
+  /* border-top-right-radius: 15px;
+  border-top-left-radius: 15px; */
   border-bottom: none;
   border: 1px solid rgb(227, 188, 227);
   width: 33%;
@@ -13,22 +13,27 @@
   background: white;
   color: black;
   font-size: 20px;
-  border-top-right-radius: 45px;
-  border-top-left-radius: 45px;
+  /* border-top-right-radius: 45px;
+  border-top-left-radius: 45px; */
   border-bottom: none;
-  border: 1px solid purple;
-  border: 1px solid #a8a4db;
+  /* border: 1px solid purple;
+  border: 1px solid #a8a4db; */
   border-bottom: 1px solid transparent;
   width: 33%;
 }
+.row{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 input{
-
+  margin-left: 20px;
 }
 .form-control{
   /* flex: 0 1 auto; */
   display: block;
-  width: 100%;
-  /* height: calc(1.5em + 0.75rem + 2px); */
+  width: 90vw;
+  max-width: 300px;
   padding: 0.375rem 0.75rem;
   font-size: 1rem;
   font-weight: 400;
@@ -37,5 +42,8 @@ input{
   background-color: #fff;
   border: 1px solid #ced4da;
   border-radius: 0.25rem;
+}
+.update-btn{
+  cursor: pointer;
 }
 

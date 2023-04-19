@@ -1,16 +1,13 @@
 import React, { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../context/AuthContext'
-import { NgosContext } from '../context/NgosContext'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
-import { BsPencil } from 'react-icons/bs'
 import './ProfileInfo.css'
 
 const ProfileInfo = () => {
   const navigate = useNavigate();
-  const { user, userId } = useContext(AuthContext)
-  const { ngoId } = useContext(NgosContext)
+  const { user, getUser, userId } = useContext(AuthContext)
   const { id } = useParams(); 
   const [ email, setEmail ] = useState('')
   const [ openInput, setOpenInput ] = useState(false)
@@ -49,7 +46,7 @@ const ProfileInfo = () => {
       );
       const data = res.data;
       console.log(data)
-      // getUser();
+      getUser();
       } catch (e) {
         console.log(e);
       }

@@ -46,13 +46,13 @@ const deleteProfile = async (req, res) => {
 //3. UPDATE user profile
 const editProfile = async (req, res) => {
   try {
-    const username = req.body.username;
-    const email = req.body.email;
+    const { username, firstname, lastname } = req.body
     const user = await User.findById({ _id: req.params.id });
+    user.firstname = firstname;
+    user.lastname = lastname;
     user.username = username;
-    user.email = email;
     await user.save();
-    console.log(user._id, user.username, user.email);
+    console.log(user._id, user.username, user.firstname, user.lastname);
     return res.status(200).send({ message: "Profile updated", user });
   } catch (err) {
     console.log(err);
@@ -76,7 +76,6 @@ const addEvent = async (req, res) => {
   }
 };
 
-
 // 5. Add a donation to user
 const addDonation = async (req, res) => {
   try{
@@ -92,7 +91,7 @@ const addDonation = async (req, res) => {
   }
 };
 
-// 5. Add an organization to user
+// 6. Add an organization to user
 const follow = async (req, res) => {
   try{
     const newFollow = req.body.follow;
@@ -107,7 +106,7 @@ const follow = async (req, res) => {
   }
 };
 
-// 6. Unfollow/Delete an organization 
+// 7. Unfollow/Delete an organization 
 const unfollow = async (req, res) => {
   try{
     const remove = req.body.remove;
@@ -122,7 +121,20 @@ const unfollow = async (req, res) => {
   }
 };
 
+// 8. Set goal amount
+const editGoal = async (req, res) => {
+  try {
+    const goalAmount = req.body.goalAmount
+    const user = await User.findById({ _id: req.params.id });
+    user.goalAmount = goalAmount;
+    await user.save();
+    return res.status(200).send({ message: "Goal amount updated", goalAmount });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({ message: "Error occurred while updating" });
+  }
+};
 
 
 
-module.exports = { getUser, getUsers, addEvent, follow, unfollow, deleteProfile, editProfile, addDonation }
+module.exports = { getUser, getUsers, addEvent, follow, unfollow, deleteProfile, editProfile, editGoal, addDonation }

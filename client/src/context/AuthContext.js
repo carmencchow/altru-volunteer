@@ -9,10 +9,12 @@ export const AuthContextProvider = ({ children }) => {
   const [token, setToken] = useState('');
   const navigate = useNavigate(); 
 
-  const getUser = async (userId) => {
+  const getUser = async () => {
     try {
+      console.log('calling getUser function')
       const res = await axios.get(`http://localhost:5000/api/user/${userId}`);
-      setUser(res.data);
+      const data = res.data;
+      setUser(data.user);
     } catch (e) {
       console.log(e);
     }

@@ -29,7 +29,7 @@ function App() {
                 <Route path="/profile" element={<Profile/>}/>
                 <Route path="/edit" element={<Edit/>}/>
               </Routes>
-              <Footer/>
+              {/* <Footer/> */}
             </DonationsProvider>
           </FiltersProvider>
         </AuthContextProvider>
