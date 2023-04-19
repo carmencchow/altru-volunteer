@@ -5,7 +5,10 @@
 .user-profile{
   display: flex;
   flex-direction: column;
-  border: 1px solid orangered;
+}
+.edit-row{
+  display: flex;
+  flex-direction: row;
 }
 .contact{
   font-weight: bold;
@@ -19,9 +22,6 @@
   width: 100px;
   height: 100px;
 }
-.edit-row p{
-  margin-right: 20px;
-}
 .organizations{
   border: 2px solid lightblue;
 }
@@ -30,4 +30,7 @@
 }
 .unfollow:hover{
   color: purple;
+}
+.edit-btn{
+  height: 30px;
 }

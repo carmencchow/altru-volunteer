@@ -55,7 +55,8 @@ const Info = () => {
   }
 
   const handleConfirmation = async () => {
-    console.log('Thank you for donating!', )
+    // const amount = clickedBtn.replace(/\$/g,'');
+    // const newAmount = amount.replace(/\'/g,'');
     try {
       const token = localStorage.getItem("token");
       if (!token) {
@@ -65,6 +66,7 @@ const Info = () => {
         `http://localhost:5000/api/user/${userId}/donation`,        
         { 
           donation: `${clickedBtn}` 
+          // donation: newAmount 
         },
         {
           method: "POST",
@@ -82,7 +84,7 @@ const Info = () => {
       }
     }
 
-  const amounts = ['$10', '$25', '$50', '$75', '$100', 'Other']
+  const amounts = [10, 25, 50, 75, 100]
 
   useEffect (() => {
     fetchNgo();

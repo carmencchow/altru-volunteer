@@ -8,7 +8,7 @@ import './ProfileInfo.css'
 const ProfileInfo = () => {
   const navigate = useNavigate();
   const { user, getUser, userId } = useContext(AuthContext)
-  const { id } = useParams(); 
+  // const { id } = useParams(); 
   const [ email, setEmail ] = useState('')
   const [ openInput, setOpenInput ] = useState(false)
 
@@ -85,20 +85,23 @@ const ProfileInfo = () => {
   return (
     
     <div>  
-      <h3>My Profile</h3>
+      <h3>User Profile</h3>
       <div className="edit-row">    
         <div className="user-profile">  
-          <p className="contact">Contact Details:</p>
-          <p>Name: {user.username}</p>
-          <p>Email: {user.email}</p>
-        </div>
+          <p className="contact"></p>
+          <p>{user.username}</p>
+          <p>{user.email}</p>
+          <p>Member since {user.createdAt}</p>
+          <button onClick={handleEdit} 
+          className="edit-btn">Edit Profile</button>
 
-        <button onClick={handleEdit} className="edit-btn">Edit Profile</button>
+        </div>
 
         <div className="user-image">
           <div className="avatar"></div>
           <p>Update profile photo</p>
         </div>
+        
       </div>
 
       <div className="following">

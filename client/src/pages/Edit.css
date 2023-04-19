@@ -46,4 +46,10 @@ input{
 .update-btn{
   cursor: pointer;
 }
+.delete-btn{
+  height: 30px;
+  margin-right: 20px;
+  flex-direction: row;
+  justify-content: flex-end;
 
+}

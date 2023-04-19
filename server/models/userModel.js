@@ -43,7 +43,7 @@ const userSchema = new Schema({
     type: String,
   },
   goalAmount: {
-    type: String,
+    type: Number,
   },
   following: {
     type: Array,

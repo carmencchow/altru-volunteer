@@ -8,8 +8,8 @@ const cookieParser = require('cookie-parser');
 // 1. REGISTER endpoint
 const signup = async (req, res) => {
   try {
-    const { username, email, password } = req.body;
-    if (!(username && email && password)){
+    const { username, email, password, firstname, lastname } = req.body;
+    if (!(username && email && password && firstname && lastname)){
       res.status(400).send('Fill in all required fields')
     }
     const user = await User.findOne({
@@ -23,13 +23,15 @@ const signup = async (req, res) => {
     // user.password = await bcrypt.hash(password, salt);
     
     user = await User.create({
+      firstname,
+      lastname,
       username,
       email,
       password,
       // password: salt,
       following: [],
       donations: [],
-      attended: [],
+      attending: []
     });
         await user.save();
 

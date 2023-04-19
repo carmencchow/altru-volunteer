@@ -8,7 +8,10 @@ const EditGoal = ({ openInput, closeInput }) => {
   const { userId, getUser } = useContext(AuthContext);
 
   const handleInput = (e) => {
-    setInput(e.target.value);
+    const fixed = parseFloat(e.target.value).toFixed(2).toString()
+    if (fixed.length < parseFloat(e.target.value).toString().length)
+    e.target.value = fixed
+    setInput(e.target.value)
   };
 
   const handleSave = async () => {
@@ -40,10 +43,11 @@ const EditGoal = ({ openInput, closeInput }) => {
 
   return (
     <div className="row">
-      <div className="edit-input">$
+      <div className="edit">$
         <input
-          type="text"
-          className="edit"
+          type="number"
+          className="edit-input"
+          min="10"
           value={input}
           placeholder="Enter goal amount"
           onChange={handleInput}
