@@ -11,16 +11,10 @@ const Edit = () => {
   const { user, userId, getUser } = useContext(AuthContext)
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
-  const [username, setUsername] = useState('');
   const [toggleState, setToggleState] = useState(1);
 
   const toggletabs = (idx) => {
     setToggleState(idx)
-  }
-
-
-  const handleUsername = (e) => {
-    setUsername(e.target.value)
   }
 
   const handleFirstname = (e) => {
@@ -33,7 +27,7 @@ const Edit = () => {
 
   const handleUpdate = async () => {
     try {
-      console.log("Saving changes", username, firstname, lastname);
+      console.log("Saving changes", firstname, lastname);
 
       const token = localStorage.getItem("token");
       if (!token) {
@@ -42,7 +36,6 @@ const Edit = () => {
       const res = await axios.put(
         `http://localhost:5000/api/user/${userId}`,
 
-        { username: `${username}` },
         { firstname: `${firstname}` },
         { lastname: `${lastname}` },
         {
@@ -99,27 +92,22 @@ const Edit = () => {
               <div className="row">
                 <input type="text" 
                   className="form-control"
-                  placeholder={user.firstname} 
+                  placeholder='' 
                   value={firstname}
                   onChange={handleFirstname}
                 />
 
                 <input type="lastname" 
                   className="form-control"
-                  placeholder={user.lastname} 
+                  placeholder='' 
                   value={lastname}
                   onChange={handleLastname}
                 />
               </div>
 
-              <div className="row">
-                <p>Name: </p>
-              </div>
-
               <button className="update-btn" onClick={handleUpdate}>Save Changes</button>
 
               <div><button className="delete-btn" onClick={handleDelete}>Delete Account</button></div>
-
 
           </div> 
         </div>
