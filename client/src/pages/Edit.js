@@ -55,6 +55,10 @@ const Edit = () => {
     }
   }
 
+  const profile = () => {
+    navigate('/profile')
+  }
+
   const handleDelete = async () => {
     console.log('Deleting your account')
     await axios.delete(`http://localhost:5000/api/user/${userId}`)
@@ -71,7 +75,9 @@ const Edit = () => {
       <div className="profile-container">
         <div className="tabs-container">
           <div className="heading-tabs">
-            <div className="tabs active-tabs">My Profile</div>
+            <div className="tabs active-tabs">
+              <div onClick={profile}>My Profile</div>
+              </div>
           </div>
 
             <div className="content-tabs">
@@ -84,21 +90,21 @@ const Edit = () => {
                 <p>Last name:</p>
               </div>
 
-              {/* <div className="row">
+              <div className="row">
                 <input type="text" 
                   className="form-control"
-                  placeholder={user.firstname} 
+                  placeholder='' 
                   value={firstname}
                   onChange={handleFirstname}
                 />
 
                 <input type="lastname" 
                   className="form-control"
-                  placeholder={user.lastname} 
+                  placeholder=''
                   value={lastname}
                   onChange={handleLastname}
                 />
-              </div> */}
+              </div>
 
               <div className="row">
                 <p>Name: </p>
