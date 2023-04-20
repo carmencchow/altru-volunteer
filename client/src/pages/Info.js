@@ -1,11 +1,11 @@
 import React, {useState, useEffect, useContext} from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios'
-import { AuthContext } from '../context/AuthContext';
 import StripeCheckout from "react-stripe-checkout";
 import toast, { Toaster } from 'react-hot-toast'
-import Navbar from '../components/Navbar'
+import { AuthContext } from '../context/AuthContext';
 import AmountBtn from '../components/AmountBtn'
+import Navbar from '../components/Navbar'
 import logo from '../assets/altru.png'
 import './Info.css'
 
@@ -14,6 +14,7 @@ const Info = () => {
   const { userId, getUser } = useContext(AuthContext);
   const {id} = useParams();
   const [ngo, setNgo] = useState({});
+  const [ngoId, setNgoId] = useState('');
   const [total, setTotal] = useState(0)
   const [clickedBtn, setClickedBtn] = useState('0');
   const [ disabled, setDisabled ] = useState(false)
@@ -28,6 +29,8 @@ const Info = () => {
   const fetchNgo = async () => {
     const res = await axios.get(`http://localhost:5000/api/ngos/${id}`)
     setNgo(res.data)
+    setNgoId(res.data._id)
+    console.log(res.data._id)
   }
     
   const handleNameInput = (e) => {
@@ -110,13 +113,14 @@ const Info = () => {
 
   // Add NGO to follow
   const handleFollow = async () => {
+    setDisabled(true)
+
     try {
       const token = localStorage.getItem("token");
       if (!token) {
         throw new Error("No token found in localStorage");
       }
       const res = await axios.post(
-        // console.log(ngo.name)
         `http://localhost:5000/api/user/${userId}/follow/ngo`,        
         { 
           follow: `${ngo.name}`
@@ -129,6 +133,7 @@ const Info = () => {
           },
         }
       );
+
       const data = res.data;
       console.log(data)
       // getUser();
@@ -143,7 +148,7 @@ const Info = () => {
       <Navbar/>
       <div> 
         <span className="back" onClick={() => navigate(-1)}>Back</span>
-        <button className="follow" onClick={handleFollow}>Follow {ngo.name}</button> 
+        <button className="follow" onClick={handleFollow} disabled={disabled}>Follow {ngo.name}</button> 
         <Toaster position="top-center" toastOption={{ duration: 3000 }}/>
         <span className="header1">Don't have time to volunteer with {ngo.name}?</span> <br></br>
         <span className="header2">Would you like to make a donation instead?</span>

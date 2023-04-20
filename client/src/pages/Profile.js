@@ -8,7 +8,7 @@ import TestComponent from '../components/TestComponent'
 import './Profile.css'
 
 const Profile = () => {
-  const { user, getUser } = useContext(AuthContext)
+  const { user } = useContext(AuthContext)
   const [toggleState, setToggleState] = useState(1);
 
   const toggletabs = (idx) => {
@@ -20,8 +20,6 @@ const Profile = () => {
   return (
     <>
     <Navbar/>
-    <TestComponent/>
-    
       <div className="profile-container">
         <div className="tabs-container">
         <div className="heading-tabs">
@@ -51,7 +49,6 @@ const Profile = () => {
         </div>
       </div>
     </div>
-    {/* <Footer/> */}
   </>
   )
 }

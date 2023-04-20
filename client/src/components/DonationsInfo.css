@@ -8,3 +8,18 @@
 p {
   margin-right: 20px;
 }
+.headings{
+  display: flex;
+  flex-direction: row;
+}
+.orgs{
+  margin-left: 40px;
+}
+.headings p{
+  text-decoration: underline;
+  padding-bottom: 5px;
+  padding-top: 20px;
+}
+.donation-history p{
+  text-decoration: underline;
+}

@@ -8,8 +8,8 @@ const cookieParser = require('cookie-parser');
 // 1. REGISTER endpoint
 const signup = async (req, res) => {
   try {
-    const { username, email, password, firstname, lastname } = req.body;
-    if (!(username && email && password && firstname && lastname)){
+    const { email, password, firstname, lastname } = req.body;
+    if (!(email && password && firstname && lastname)){
       res.status(400).send('Fill in all required fields')
     }
     const user = await User.findOne({
@@ -25,7 +25,6 @@ const signup = async (req, res) => {
     user = await User.create({
       firstname,
       lastname,
-      username,
       email,
       password,
       // password: salt,
@@ -34,7 +33,7 @@ const signup = async (req, res) => {
       attending: [],
       ngos: [],
     });
-        await user.save();
+      await user.save();
 
     // Generate and send token to user
     const token = jwt.sign(

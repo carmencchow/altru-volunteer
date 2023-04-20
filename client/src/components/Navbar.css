@@ -22,10 +22,16 @@ nav{
   display: flex;
   justify-content: end;
 }
-.logout-btn, .profile-btn{
+.logout-btn{
   color: white;
   font-family: 'League Gothic', sans-serif;
   font-size: 28px;
+  padding: 8px;
+  margin-right: 10px;
+}
+.profile-btn{
+  color:aqua;  
+  font-size: 20px;
   padding: 8px;
   margin-right: 10px;
 }

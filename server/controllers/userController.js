@@ -42,17 +42,17 @@ const deleteProfile = async (req, res) => {
   }
   res.status(200).json({ message: 'User deleted'})
 }
-
 //3. UPDATE user profile
 const editProfile = async (req, res) => {
+  console.log(req.body.user, req.body.firstname, req.body.lastname)
+
   try {
-    const { username, firstname, lastname } = req.body
+
+    const { firstname, lastname } = req.body
     const user = await User.findById({ _id: req.params.id });
     user.firstname = firstname;
     user.lastname = lastname;
-    user.username = username;
     await user.save();
-    console.log(user._id, user.username, user.firstname, user.lastname);
     return res.status(200).send({ message: "Profile updated", user });
   } catch (err) {
     console.log(err);
@@ -98,13 +98,21 @@ const follow = async (req, res) => {
   try{
     const newFollow = req.body.follow;
     const user = await User.findOne({ _id: req.params.id });
+    // const ngoExists = await User.findOne({ following: { $all: [newFollow] }});
+    // const ngoExists = await User.findOne({ following: { "$in": [newFollow] }});
+    // const ngoExists = await User.find({ following: { "$in": newFollow }});
+    // const ngoExists = await User.findOne({ following: newFollow });
+    // const ngoExists = await user.follwoing.findOne(newFollow);
+    // if (ngoExists){
+    //   return res.status(400).send('Already following')
+    // }
     user.following.push(newFollow)
     await user.save();
     console.log('Followed Orgs: ', user.following)
     return res.status(200).send({ results: user, message: user.following });
   } catch (err) {
     console.log(err);
-    return res.status(500).send({ message: err.message });
+    return res.status(500).send({ message: 'Already following' });
   }
 };
 

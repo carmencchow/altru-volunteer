@@ -7,9 +7,6 @@ const DonationsInfo = () => {
   const {user} = useContext(AuthContext)
   const [openInput, setOpenInput] = useState(false)
 
-
-
-  
   return (
     <div className="container">
       <div className="stats">
@@ -38,13 +35,18 @@ const DonationsInfo = () => {
       <div className="donation-history">
         <h3>Donation history: </h3>
 
+        <div className="headings">
+          <p>Amount</p>
+          <p>Organization</p>
+        </div>
+
         <div className="donated-amounts">
-          <div>
+          <div className="amounts">
             {Object.keys(user.donations).map(donation => (
-              <div className="donation">${user.donations[donation]} --  </div>
+              <div className="donation">${user.donations[donation]}</div>
             ))}
           </div>
-          <div>
+          <div className="orgs">
             {Object.keys(user.ngos).map(ngo => (
               <div> {user.ngos[ngo]}</div>
             ))}
@@ -52,13 +54,15 @@ const DonationsInfo = () => {
         </div>
 
 
-        <h4>Total Amount Donated: 
-            <p>${user.donations.map(Number).reduce((a,b) =>  a + b, 0)}</p>
-         </h4>
+        <p>Total Amount Donated:</p> 
+            <div>${user.donations.map(Number).reduce((a,b) =>  a + b, 0)}</div>
+         
         
-        <h4>Amount needed to reach donation goal: 
-          <p>${user.goalAmount - user.donations.map(Number).reduce((a,b) => a + b, 0)}</p>
-        </h4>
+        <p>Amount needed to reach donation goal: </p>
+          <div>${user.goalAmount - user.donations.map(Number).reduce((a,b) => a + b, 0)}</div>
+   
+
+        {user.donations.map(Number).reduce((a,b) =>  a + b, 0) > user.goalAmount} ? (<div>You've reached your goal!</div>) : null 
 
       </div>
       </div>

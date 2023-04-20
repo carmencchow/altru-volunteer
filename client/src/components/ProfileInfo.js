@@ -1,31 +1,19 @@
-import React, { useState, useContext } from 'react'
+import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../context/AuthContext'
-import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import './ProfileInfo.css'
 
 const ProfileInfo = () => {
   const navigate = useNavigate();
-  const { user, getUser, userId } = useContext(AuthContext)
-  // const { id } = useParams(); 
-  const [ email, setEmail ] = useState('')
-  const [ openInput, setOpenInput ] = useState(false)
-
-  const toggleInput = () => {
-    setOpenInput(!openInput)
-  }  
+  const { user, getUser, userId, ngoId } = useContext(AuthContext)
   
   const handleEdit = (e) => {
     navigate('/edit')
   }
 
-  const handleUpdate = (e) => {
-    setEmail(e.target.value)
-  }
-
   // Unfollow NGO
-  const handleUnfollow = async (ngoId) => {
+  const handleUnfollow = async () => {
     try {
       const token = localStorage.getItem("token");
       if (!token) {
@@ -52,35 +40,6 @@ const ProfileInfo = () => {
       }
   }
 
-  const handleSave = async (userId, e) => {
-    console.log(`New email ${email}`)
-    console.log('editing email', email)
-  
-    try {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        throw new Error("No token found in localStorage");
-      }
-      const res = await axios.put(
-        `http://localhost:5000/api/auth/user/${userId}`,
-  
-        { 
-          email: `${email}`
-        },
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`,
-          },
-        }
-      );
-      const data = res.data;
-      console.log(data);
-    } catch (err) {
-      console.log(err);
-    }
-  }
 
   return (
     
@@ -89,7 +48,7 @@ const ProfileInfo = () => {
       <div className="edit-row">    
         <div className="user-profile">  
           <p className="contact"></p>
-          <p>{user.username}</p>
+          <p>{user.firstname}{user.lastname}</p>
           <p>{user.email}</p>
           <p>Member since {user.createdAt}</p>
           <button onClick={handleEdit} 
@@ -106,17 +65,16 @@ const ProfileInfo = () => {
 
       <div className="following">
         <h3>Organizations followed:</h3>
+        </div>
  
         <div className="organizations">
           {Object.keys(user.following).map(follow => (
-            <div follow={follow}>
+            <div>
               {user.following[follow]}
-              <button onClick={handleUnfollow}>Unfollow</button>
-            </div>
-          ))}
-         
-        </div>
-
+              <button className="unfollow-btn" onClick={handleUnfollow}>Unfollow</button>
+              </div>
+            ))}
+        
       </div>
     </div>
   )

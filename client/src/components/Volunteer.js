@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { FiltersContext } from '../context/FiltersContext'
-import { AuthContext } from '../context/AuthContext'
 import { NgosContext } from '../context/NgosContext'
 import { GrFormClose } from 'react-icons/gr'
 import { FcNext, FcPrevious } from 'react-icons/fc'
@@ -12,66 +11,44 @@ import image from '../assets/volunteer.jpg'
 import './Volunteer.css'
 
 const Volunteer = () => {
-  const { user, userId, setUser, token, setToken } = useContext(AuthContext);
+  const { ngoId } = useContext(NgosContext)
   const { filters, setFilters } = useContext(FiltersContext) 
   const { ngos, setNgos } = useContext(NgosContext)
   const [ currentPage, setCurrentPage ] = useState(1)
-  const [ clickedBtn, setClickedBtn] = useState(false)
   const [ disabled, setDisabled ] = useState(false)
   const [ pageCount, setPageCount ] = useState(1)
   const [ confirm, setConfirm ] = useState('')
+  // const [ clickedBtn, setClickedBtn ] = useState('Signup')
+  // const [ clickedBtn, setClickedBtn ] = useState('')
+
+  const [ openButton, setOpenButton ] = useState(false)
+  const [ buttonText, setButtonText ] = useState('Signup') 
+
   const [ openModal, setOpenModal ] = useState(false)
   const [ ngoModal, setNgoModal ] = useState(null)
   const navigate = useNavigate();
 
-  const handleRegister = async (ngoModal) => {
-    setConfirm('Thank you. Please check your email for confirmation')
-    // setClickedBtn(!clickedBtn) 
-    setDisabled(true)
+  // const handleRegister = () => {
+  //   setConfirm('Thank you. Please check your email for confirmation')
+  //   setClickedBtn('Attending')
+  //   setDisabled(true)
+  // }
 
-    // const addEvent = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        if (!token) {
-          throw new Error("No token found in localStorage");
-        }
-        const res = await axios.post(
-          `http://localhost:5000/api/user/${userId}/add-event`,        
-          { 
-            // event: `${ngo}` 
-            event: `${ngoModal.event_description}` 
-          },
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "Authorization": `Bearer ${token}`
-            },
-          }
-        );
-        const data = res.data;
-        console.log('New Event added: ', data.event_description);
-        // getUser();
-        } catch (e) {
-          console.log(e);
-        }
-      // }
+  const toggleButton = (ngo) => {
+    setOpenButton(ngo)
+    setButtonText('Attending')
   }
   
   const toggleModal = (ngo) => {
-    console.log('toggling modal now')
     setNgoModal(ngo)
-    setClickedBtn(true)
     setOpenModal(!openModal);
   }
 
   const handlePrevious = () => {
-    console.log('pre page')
     setCurrentPage(currentPage - 1);
   }
 
   const handleNext = () => {
-    console.log('next page')
     setCurrentPage(currentPage + 1);
   }
 
@@ -93,7 +70,6 @@ const Volunteer = () => {
   }
 
   const handleNgoSelected = (id) => {
-    console.log(`Going to ${id}`)
     navigate(`/info/${id}`)
   }
   const fetchNgos = async () => {
@@ -102,7 +78,6 @@ const Volunteer = () => {
       const category = filters.category 
       const res = await axios.get(`http://localhost:5000/api/ngos/${frequency}/${category}`);  
       setNgos(res.data);
-      console.log(res.data);
     } catch (err) {
       console.log(err);
     }
@@ -178,21 +153,29 @@ const Volunteer = () => {
                       { ngo.event_description ? <p>Event: {ngo.event_description}</p> : null}
                     </div>             
 
+                    <button disabled={disabled} 
+                      onClick={() => {
+                        setOpenButton(ngo)
+                        toggleModal(ngo)}}                        
+                      className="volunteer-btn">{buttonText}
+                    </button> 
+
                     {/* <button disabled={disabled} 
                       onClick={() => {
-                        console.log(ngo.name, ngo._id)
-                        toggleModal(ngo)}}
-                      className="volunteer-btn">{clickedBtn ? 'Attending' : 'Sign up'}
+                        setClickedBtn(ngoId)
+                        toggleModal(ngo)}}                        
+                      className="volunteer-btn">{clickedBtn}
                     </button>  */}
 
-                    <VolunteerBtn
-                      ngoId={ngo._id}
+                    {/* <VolunteerBtn
+                      // ngoId={ngo._id}
+                      ngo={ngo}
                       disabled={disabled}
                       clickedBtn={clickedBtn}
                       setClickedBtn={setClickedBtn}
                       toggleModal={toggleModal}
-                      ngo={ngo}
-                    />
+                      // onClick={() => handleNgoSelected(ngo._id)}>
+                    /> */}
 
                   </div>      
                 </div>     
@@ -231,7 +214,11 @@ const Volunteer = () => {
                         <input className="email" type="text" name="email" placeholder="Email"/>
                       </div>
 
-                      <div className="confirm" onClick={handleRegister}>Confirm</div>
+                      <div className="confirm" 
+                        onClick={toggleButton}>
+                        {/* onClick={() => handleRegister(ngoId)}> */}
+                        {/* onClick={handleRegister}> */}
+                        Confirm</div>
                       <p>{confirm}</p>
 
                     </div>
@@ -241,8 +228,6 @@ const Volunteer = () => {
             </div>
           </div>
         )} 
-
-        {/* <Footer/> */}
       </div>
     )
   }

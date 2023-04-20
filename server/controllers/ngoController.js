@@ -27,15 +27,15 @@ const getNgos = async (req, res) => {
     }
   }
 
-const getDonationNgos = async (req, res) => { 
-  try {
-    const category = req.params.category.toLowerCase();
-  // const region = req.params.region.toLowerCase();
-    let ngos = await Ngo.find({ category: category })
-    res.status(200).json(ngos);
-  } catch (err){
-    console.log(err);
-  }
+// const getDonationNgos = async (req, res) => { 
+//   try {
+//     const category = req.params.category.toLowerCase();
+//   // const region = req.params.region.toLowerCase();
+//     let ngos = await Ngo.find({ category: category })
+//     res.status(200).json(ngos);
+//   } catch (err){
+//     console.log(err);
+//   }
   // // if user doesn't select both
   // if (category === 'all' && region === 'all') {
   //   ngos = await Ngo.find({})
@@ -54,9 +54,9 @@ const getDonationNgos = async (req, res) => {
   // else {
   //   ngos = await Ngo.find({ location: region, category: category})
   // }   
-}
+// }
 
-const getVolunteerNgos = async (req, res) => {
+const getFilteredNgos = async (req, res) => {
   try {
     const category = req.params.category.toLowerCase();
     const frequency = req.params.frequency.toLowerCase();
@@ -119,4 +119,4 @@ const updateNgo = async (req, res) => {
   res.status(200).json(ngo);
 }
 
-module.exports = { createNgo, getNgos, getNgo, getDonationNgos, getVolunteerNgos, deleteNgo, updateNgo }
+module.exports = { createNgo, getNgos, getNgo, getFilteredNgos, deleteNgo, updateNgo }

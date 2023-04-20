@@ -10,11 +10,6 @@ const userSchema = new Schema({
     type: String,
     required: true,  
   },
-  username: {
-    type: String,
-    unique: true,
-    required: true, 
-  },
   email: { 
     type: String, 
     unique: true, 
@@ -46,33 +41,20 @@ const userSchema = new Schema({
     type: Number,
   },
   following: {
-    type: Array,
+    type: [String],
   },
   donations: {
-    type: Array,
+    type: [String],
   },
   ngos: {
-    type: Array,
-  },
-
-  // donations: [
-  //   {
-  //     type: mongoose.Schema.Types.ObjectId,
-  //     ref: "donations",
-  //   },
-  // ],
+    type: [String],
+ },
   attending: {
     type: Array,
   },
   isAttending: {
     type: Boolean
   }
-  // attending: [
-  //   { 
-  //     type: mongoose.Schema.Types.ObjectId,
-  //     ref: 'event',
-  //   },
-  // ],
 }, { timestamps: true });
 
 module.exports = mongoose.model('User', userSchema);

@@ -2,14 +2,16 @@ import React, { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import { AuthContext } from '../context/AuthContext';
-import logo from '../assets/altru.png'
 import { useSignup } from '../hooks/useSignup'
+import logo from '../assets/altru.png'
 import Footer from '../components/Footer'
 import './Signup.css'
 
 const Signup = () => {
   const navigate = useNavigate();
-  const { user, setUser } = useContext(AuthContext);
+  const [error, setError] = useState('Passwords do not match');
+  const { user, userId, setUserId, setUser, token, setToken } = useContext(AuthContext);
+
   const [formData, setFormData] = useState({
     firstname: '',
     lastname: '',
@@ -18,14 +20,8 @@ const Signup = () => {
     confirmPassword: ''
   })
 
-  // const { signup, error, isLoading } = useSignup()
-
-  const handleHome = () => {
-    navigate('/')
-  }
-
   const { firstname, lastname, email, password, confirm } = formData
-
+  
   const handleChange = (e) => {
     setFormData((prevState) => ({
       ...prevState, 
@@ -34,23 +30,45 @@ const Signup = () => {
   }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    try {
+      e.preventDefault();
+      console.log('Sending user data:', formData)
     
-    // await signup(email, password) // from useSignup hook
-
-    // if(password !== confirmPassword){
-    //   console.log('Passwords do not match')
-    // } else {
-    //   const userData = { 
-    //     name,
-    //     email,
-    //     password,
-    //   }
-    console.log('Returning', formData.firstname, formData.lastname, formData.email, formData.password)
-    // }
-
-    // await signup(email, password)
+      if(password === confirm){
+        const res = await axios.post('http://localhost:5000/api/auth/signup', formData, 
+        {
+          method: 'POST',
+          headers: { 
+            'Content-Type': 'application/json' 
+          },
+        });
+        const data = res.data;
+        localStorage.setItem('token', res.data.token);
+        setUser(data.user)
+        setUserId(data.user._id)
+        setToken(data.token);
+        localStorage.setItem('user', data.user)
+      } else {
+        console.log('Passwords don not match')
+        setError('Incorrect email or password. Please try again.');
+      };  
+      } catch (err) {
+        console.log(err, 'Incorrect password or email')
+        setError('Incorrect email or password. Please try again.');
+      };
+    };
+ 
+  const handleHome = () => {
+    navigate('/')
   }
+
+  const handleLogin = () => {
+    navigate('/login')
+  }
+
+
+  // const { signup, error, isLoading } = useSignup()
+  // await signup(email, password)
 
   return (
     <>
@@ -114,9 +132,14 @@ const Signup = () => {
 
           <button className="signup-submit" type="submit" onClick={handleSubmit}>Sign Up</button>
 
+          <div className="account">
+            <div className="my-account"> Already have an account?</div> 
+            <div className="login" onClick={handleLogin}>Login</div>
+          </div>
+
+
           </div>
         </div>
-        <Footer/>
       </>
     )
   }

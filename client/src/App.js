@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { DonationsProvider } from './context/DonationsContext';
 import { AuthContextProvider } from './context/AuthContext';
 import { FiltersProvider } from './context/FiltersContext';
 import { NgosProvider } from './context/NgosContext';
@@ -19,19 +18,17 @@ function App() {
       <BrowserRouter>
         <AuthContextProvider>
           <FiltersProvider>
-            <DonationsProvider>
-              <Routes>
-                <Route path="/" element={<Home/>}/>
-                <Route path="/login" element={<Login/>}/>
-                <Route path="/signup" element={<Signup/>}/>
-                <Route path="/volunteer" element={<Volunteer/>}/>
-                <Route path="/info/:id" element={<Info/>}/>
-                <Route path="/profile" element={<Profile/>}/>
-                <Route path="/edit" element={<Edit/>}/>
-              </Routes>
-              {/* <Footer/> */}
-            </DonationsProvider>
-          </FiltersProvider>
+            <Routes>
+              <Route path="/" element={<Home/>}/>
+              <Route path="/login" element={<Login/>}/>
+              <Route path="/signup" element={<Signup/>}/>
+              <Route path="/volunteer" element={<Volunteer/>}/>
+              <Route path="/info/:id" element={<Info/>}/>
+              <Route path="/profile" element={<Profile/>}/>
+              <Route path="/edit" element={<Edit/>}/>
+            </Routes>
+            <Footer/>
+        </FiltersProvider>
         </AuthContextProvider>
       </BrowserRouter>
     </NgosProvider>

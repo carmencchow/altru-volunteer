@@ -22,9 +22,6 @@
   width: 100px;
   height: 100px;
 }
-.organizations{
-  border: 2px solid lightblue;
-}
 .unfollow{
   cursor: pointer;
 }
@@ -33,4 +30,16 @@
 }
 .edit-btn{
   height: 30px;
+}
+.following{
+  margin-top: 30px;
+}
+.organizations{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 10px;
+}
+.button{
+
 }

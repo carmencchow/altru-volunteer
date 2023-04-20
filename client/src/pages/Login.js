@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { AuthContext } from '../context/AuthContext'
@@ -24,31 +24,21 @@ const Login = () => {
     }))
   }
   
-  const handleHome = () => {
-    navigate('/')
-  }
-
-  const handleSignup = () => {
-    navigate('/signup')
-  }
-
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log(formData.email, formData.password)
     try {
+      e.preventDefault();
+      console.log(formData)
       const res = await axios.post('http://localhost:5000/api/auth/login', formData, 
       {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json' 
         },
-      }
-      );
+      });
         const data = res.data;
         localStorage.setItem('token', res.data.token);
         setUser(data.user)
         setUserId(data.user._id)
-        console.log('User and userId is:', data, data.user._id);
         setToken(data.token);
         localStorage.setItem('user', data.user)
       } catch (err) {
@@ -57,13 +47,13 @@ const Login = () => {
     };
   };
 
-  useEffect(() => {
-    const loggedInUser = localStorage.getItem('data.user');
-    if (loggedInUser) {
-      const foundUser = JSON.parse(loggedInUser);
-      setUser(foundUser);
-    }
-  }, []);
+  const handleHome = () => {
+    navigate('/')
+  }
+
+  const handleSignup = () => {
+    navigate('/signup')
+  }
 
   return (
     <>
@@ -82,9 +72,6 @@ const Login = () => {
                 onChange={handleChange}  
               />
           </div>
-      
-        {/* {error && <div><strong>Error:</strong>{error}</div>} */}
-
           <div className="password-input">
             <p>Password</p>
               <input 
@@ -104,7 +91,6 @@ const Login = () => {
           </div>
         </div>
       </div>
-      {/* <Footer/> */}
     </>
     )
   }

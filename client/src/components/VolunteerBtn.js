@@ -1,17 +1,18 @@
 import React from 'react'
 
-const VolunteerBtn = ({ ngo, disabled, setClickedBtn, clickedBtn, toggleModal }) => {
+const VolunteerBtn = ({ ngo, clickedBtn, setClickedBtn, toggleModal, disabled }) => {
 
   return (
-    <div>
-      <button disabled={disabled} onClick={() => {
-        console.log(ngo.name, ngo._id)
-        setClickedBtn(ngo._id)
-        toggleModal(ngo)
-      }}
-        className="volunteer-btn">
-      {clickedBtn ? 'Attending' : 'Sign up'}</button> 
-    </div>
+    <button 
+      className="volunteer-btn"
+      disabled={disabled} 
+      onClick={() => {
+      // console.log(ngo.name, ngo._id)
+      setClickedBtn(ngo)
+      toggleModal(ngo)
+    }}>
+      {/* {clickedBtn ? 'Attending' : 'Sign up'} */}
+    </button> 
   )
 }
 
