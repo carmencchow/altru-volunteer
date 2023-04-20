@@ -145,6 +145,4 @@ const editGoal = async (req, res) => {
   }
 };
 
-
-
 module.exports = { getUser, getUsers, addEvent, follow, unfollow, deleteProfile, editProfile, editGoal, addDonation }

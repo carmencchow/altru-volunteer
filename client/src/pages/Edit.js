@@ -55,10 +55,14 @@ const Edit = () => {
     }
   }
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     console.log('Deleting your account')
-  }
-
+    await axios.delete(`http://localhost:5000/api/user/${userId}`)
+      .then((res) => {
+      console.log(`Account deleted`, res.data);
+      navigate('/');
+    });
+  };
   
 
   return (
@@ -102,7 +106,8 @@ const Edit = () => {
 
               <button className="update-btn" onClick={handleUpdate}>Save Changes</button>
 
-          
+              <div><button className="delete-btn" onClick={handleDelete}>Delete Account</button></div>
+
 
           </div> 
         </div>
