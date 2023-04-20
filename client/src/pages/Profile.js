@@ -20,7 +20,6 @@ const Profile = () => {
   return (
     <>
     <Navbar/>
-    <TestComponent/>
     
       <div className="profile-container">
         <div className="tabs-container">

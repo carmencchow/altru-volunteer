@@ -89,9 +89,9 @@ const ProfileInfo = () => {
       <div className="edit-row">    
         <div className="user-profile">  
           <p className="contact"></p>
-          <p>{user.username}</p>
-          <p>{user.email}</p>
-          <p>Member since {user.createdAt}</p>
+          <p>User: {user.firstname} {user.lastname}</p>
+          <p>Email: {user.email}</p>
+          <p>Member since: {user.createdAt}</p>
           <button onClick={handleEdit} 
           className="edit-btn">Edit Profile</button>
 
