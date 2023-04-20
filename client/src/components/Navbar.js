@@ -37,7 +37,7 @@ const Navbar = () => {
     <nav>
       <div className="navbar">
         <img className="logo" onClick={navMain} src={logo} style={{ width: 120, height: 40 }} alt="logo" />
-        <h1>Hi, {user.username}!</h1>
+        <h1>Hi, {user.firstname}!</h1>
         <div className="navbar-right">
           <div className="profile-btn" onClick={navProfile}>Profile</div>
           <div className="logout-btn" onClick={handleLogout}>Logout</div>
