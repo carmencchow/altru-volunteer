@@ -7,9 +7,6 @@ const DonationsInfo = () => {
   const {user} = useContext(AuthContext)
   const [openInput, setOpenInput] = useState(false)
 
-
-
-  
   return (
     <div className="container">
       <div className="stats">

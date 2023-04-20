@@ -3,53 +3,101 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import { AuthContext } from '../context/AuthContext';
 import logo from '../assets/altru.png'
-import { useSignup } from '../hooks/useSignup'
-import Footer from '../components/Footer'
 import './Signup.css'
 
 const Signup = () => {
   const navigate = useNavigate();
-  const { user, setUser } = useContext(AuthContext);
-  const [formData, setFormData] = useState({
-    firstname: '',
-    lastname: '',
-    email: '',
-    password: '',
-    confirmPassword: ''
-  })
+  const [error, setError] = useState('Passwords do not match');
+  const { user, userId, setUserId, setUser, token, setToken } = useContext(AuthContext);
 
-  // const { signup, error, isLoading } = useSignup()
+  // const [formData, setFormData] = useState({
+  //   firstname: '',
+  //   lastname: '',
+  //   email: '',
+  //   password: '',
+  //   confirmPassword: ''
+  // })
 
+  const [firstname, setFirstname] = useState('')
+  const [lastname, setLastname] = useState('')
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirm, setConfirm] = useState('');
+
+  // const { firstname, lastname, email, password, confirm } = formData
+  
+  // const handleChange = (e) => {
+  //   setFormData((prevState) => ({
+  //     ...prevState, 
+  //     [e.target.name]: e.target.value,
+  //   }))
+  // }
+
+  const handleFirstname = (e) => {
+    setFirstname(e.target.value)
+  }
+
+  const handleLastname = (e) => {
+    setLastname(e.target.value)
+  }
+
+  const handleEmail = (e) => {
+    setEmail(e.target.value)
+  }
+
+  const handlePassword = (e) => {
+    setPassword(e.target.value)
+  }
+
+  const handleConfirm = (e) => {
+    setConfirm(e.target.value)
+  }
+
+
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      // console.log('Sending user data:', formData)
+      const formData = {
+        email: email,
+        password: password,
+        firstname: firstname,
+        lastname: lastname,
+      }
+      console.log('Sending user data', formData)
+    
+      if(password === confirm){
+        // const res = await axios.post('http://localhost:5000/api/auth/signup', formData, 
+        const res = await axios.post('http://localhost:5000/api/auth/signup', formData, 
+      
+        {
+          method: 'POST',
+          headers: { 
+            'Content-Type': 'application/json' 
+          },
+        });
+          const data = res.data;
+          localStorage.setItem('token', res.data.token);
+          setUser(data.user)
+          setUserId(data.user._id)
+          setToken(data.token);
+          localStorage.setItem('user', data.user)
+      } else {
+        console.log('Passwords do not match')
+        setError('Incorrect email or password. Please try again.');
+      };  
+    } catch (err) {
+      console.log(err, 'Incorrect password or email')
+      setError('Signup failed, incorrect email or password. Please try again.');
+    };
+  };
+ 
   const handleHome = () => {
     navigate('/')
   }
 
-  const { firstname, lastname, email, password, confirm } = formData
-
-  const handleChange = (e) => {
-    setFormData((prevState) => ({
-      ...prevState, 
-      [e.target.name]: e.target.value,
-    }))
-  }
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    
-    // await signup(email, password) // from useSignup hook
-
-    // if(password !== confirmPassword){
-    //   console.log('Passwords do not match')
-    // } else {
-    //   const userData = { 
-    //     name,
-    //     email,
-    //     password,
-    //   }
-    console.log('Returning', formData.firstname, formData.lastname, formData.email, formData.password)
-    // }
-
-    // await signup(email, password)
+  const handleLogin = () => {
+    navigate('/login')
   }
 
   return (
@@ -67,7 +115,8 @@ const Signup = () => {
                 type="text" 
                 placeholder="  Enter your first name" 
                 value={firstname} 
-                onChange={handleChange}
+                // onChange={handleChange}
+                onChange={handleFirstname}
               />
             </div>
 
@@ -77,7 +126,8 @@ const Signup = () => {
                 type="text" 
                 placeholder="  Enter your last name" 
                 value={lastname} 
-                onChange={handleChange}
+                onChange={handleLastname}
+                // onChange={handleChange}
               />
             </div>
           </div>
@@ -88,7 +138,8 @@ const Signup = () => {
               type="email" 
               placeholder="  Enter your email" 
               value={email} 
-              onChange={handleChange}
+              onChange={handleEmail}
+              // onChange={handleChange}
             />
           </div>
 
@@ -98,7 +149,8 @@ const Signup = () => {
               type="password" 
               placeholder="  Enter your password" 
               value={password} 
-              onChange={handleChange}
+              onChange={handlePassword}
+              // onChange={handleChange}
             />
           </div>
 
@@ -108,15 +160,20 @@ const Signup = () => {
               type="password" 
               placeholder="  Confirm your password" 
               value={confirm} 
-              onChange={handleChange}
+              onChange={handleConfirm}
+              // onChange={handleChange}
             />
           </div>
 
           <button className="signup-submit" type="submit" onClick={handleSubmit}>Sign Up</button>
 
+          <div className="account">
+            <div className="my-account"> Already have an account?</div> 
+            <div className="login" onClick={handleLogin}>Login</div>
+          </div>
+
           </div>
         </div>
-        <Footer/>
       </>
     )
   }

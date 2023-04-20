@@ -58,3 +58,21 @@ input{
 ::placeholder{
   margin-left: 10px;
 }
+.account{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+.my-account{
+  font-size: 14px;
+  margin-left: 0px;
+} 
+.login{
+  font-size: 12px;
+  margin-left: 120px;
+}
+.login:hover{
+  color: #19add6;
+  font-weight: bolder;
+  cursor: pointer;
+}
