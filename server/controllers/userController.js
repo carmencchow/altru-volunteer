@@ -78,29 +78,41 @@ const addEvent = async (req, res) => {
 const addDonation = async (req, res) => {
   try{
     const newDonation = req.body.donation;
+    const newNgo = req.body.ngo;
     const user = await User.findOne({ _id: req.params.id });
     user.donations.push(newDonation)
+    user.ngos.push(newNgo)
     await user.save();
-    console.log('Donation added: ', user.donations)
-    return res.status(200).send({ results: user, message: user.donations });
+    console.log('Donation added: ', user.donations, user.ngos)
+    return res.status(200).send({ results: user });
   } catch (err) {
     console.log(err);
     return res.status(500).send({ message: err.message });
   }
 };
 
+
+
 // 6. Add an organization to user
 const follow = async (req, res) => {
   try{
     const newFollow = req.body.follow;
     const user = await User.findOne({ _id: req.params.id });
+    // const ngoExists = await User.findOne({ following: { $all: [newFollow] }});
+    // const ngoExists = await User.findOne({ following: { "$in": [newFollow] }});
+    // const ngoExists = await User.find({ following: { "$in": newFollow }});
+    // const ngoExists = await User.findOne({ following: newFollow });
+    // const ngoExists = await user.follwoing.findOne(newFollow);
+    // if (ngoExists){
+    //   return res.status(400).send('Already following')
+    // }
     user.following.push(newFollow)
     await user.save();
     console.log('Followed Orgs: ', user.following)
     return res.status(200).send({ results: user, message: user.following });
   } catch (err) {
     console.log(err);
-    return res.status(500).send({ message: err.message });
+    return res.status(500).send({ message: 'Already following' });
   }
 };
 

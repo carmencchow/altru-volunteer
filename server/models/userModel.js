@@ -41,30 +41,20 @@ const userSchema = new Schema({
     type: Number,
   },
   following: {
-    type: Array,
+    type: [String],
   },
   donations: {
-    type: Array,
+    type: [String],
   },
-
-  // donations: [
-  //   {
-  //     type: mongoose.Schema.Types.ObjectId,
-  //     ref: "donations",
-  //   },
-  // ],
+  ngos: {
+    type: [String],
+ },
   attending: {
     type: Array,
   },
   isAttending: {
     type: Boolean
   }
-  // attending: [
-  //   { 
-  //     type: mongoose.Schema.Types.ObjectId,
-  //     ref: 'event',
-  //   },
-  // ],
 }, { timestamps: true });
 
 module.exports = mongoose.model('User', userSchema);
