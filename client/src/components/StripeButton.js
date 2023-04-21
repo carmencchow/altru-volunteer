@@ -27,9 +27,6 @@ const stripeBtn = () => {
       });
   };
   return (
-    // TEST CC: 4242 4242 4242 4242; 
-    // 12/23 (any future date)
-    // 567 (any 3 digits)
     <StripeCheckout/>
   );
 };

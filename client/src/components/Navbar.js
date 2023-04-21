@@ -2,7 +2,6 @@ import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../context/AuthContext'
 import axios from 'axios'
-import { CgProfile } from 'react-icons/cg'
 import logo from '../assets/altru.png'
 import './Navbar.css'
 
@@ -31,8 +30,8 @@ const Navbar = () => {
     } catch (err) { 
       console.log(err, 'Unable to log out')
     }
-
   }
+
   return (
     <nav>
       <div className="navbar">

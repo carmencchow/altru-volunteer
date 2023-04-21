@@ -17,8 +17,6 @@ const Volunteer = () => {
   const { filters, setFilters } = useContext(FiltersContext) 
   const { ngos, setNgos } = useContext(NgosContext)
   const [ currentPage, setCurrentPage ] = useState(1)
-  // const [ clickedBtn, setClickedBtn] = useState('')
-  // const [ disabled, setDisabled ] = useState(false)
   const [ pageCount, setPageCount ] = useState(1)
   const [ confirm, setConfirm ] = useState('')
   const [ openModal, setOpenModal ] = useState(false)
@@ -27,45 +25,39 @@ const Volunteer = () => {
 
   const handleRegister = async (ngoModal) => {
     setConfirm('Thank you. Please check your email for confirmation')
-    // setClickedBtn(!clickedBtn) 
-    // setClickedBtn(ngoModal._id)
     console.log(ngoModal);
-    // setDisabled(true)
 
-    // const addEvent = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        if (!token) {
-          throw new Error("No token found in localStorage");
-        }
-        const res = await axios.post(
-          `http://localhost:5000/api/user/${userId}/add-event`,        
-          { 
-            // event: `${ngo}` 
-            event: `${ngoModal.name}` 
-          },
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "Authorization": `Bearer ${token}`
-            },
-          }
-        );
-        const data = res.data;
-        console.log(user);
-        console.log('New Event added: ', data);
-        await getUser(userId, setUser);
-        console.log(user)
-        } catch (e) {
-          console.log(e);
-        }
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        throw new Error("No token found in localStorage");
       }
+      const res = await axios.post(
+        `http://localhost:5000/api/user/${userId}/add-event`,        
+        { 
+          event: `${ngoModal.name}` 
+        },
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
+        }
+      );
+      const data = res.data;
+      console.log(user);
+      console.log('New Event added: ', data);
+      await getUser(userId, setUser);
+      console.log(user)
+      } catch (e) {
+        console.log(e);
+      }
+    }
   
   const toggleModal = (ngo) => {
     console.log('toggling modal now')
     setNgoModal(ngo)
-    // setClickedBtn(ngo._id)
     setOpenModal(!openModal);
   }
 
@@ -182,17 +174,10 @@ const Volunteer = () => {
                       { ngo.event_description ? <p>Event: {ngo.event_description}</p> : null}
                     </div>             
 
-                    {/* <button disabled={disabled} 
-                      onClick={() => {
-                        console.log(ngo.name, ngo._id)
-                        toggleModal(ngo)}}
-                      className="volunteer-btn">{clickedBtn ? 'Attending' : 'Sign up'}
-                    </button>  */}
-
                     <VolunteerBtn
                       ngoId={ngo._id}
-                      disabled={user.attending.find(el => el===ngo.name)}
-                      clickedBtn={user.attending.find(el => el===ngo.name)}
+                      disabled={user.attending.find(event => event===ngo.name)}
+                      clickedBtn={user.attending.find(event => event===ngo.name)}
                       toggleModal={toggleModal}
                       ngo={ngo}
                     />
@@ -245,8 +230,6 @@ const Volunteer = () => {
             </div>
           </div>
         )} 
-
-        {/* <Footer/> */}
       </div>
     )
   }

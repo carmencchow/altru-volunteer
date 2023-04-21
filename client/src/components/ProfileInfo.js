@@ -9,20 +9,10 @@ import './ProfileInfo.css'
 const ProfileInfo = () => {
   const navigate = useNavigate();
   const { user, setUser, userId } = useContext(AuthContext)
-  // const { id } = useParams(); 
   const [ email, setEmail ] = useState('')
-  const [ openInput, setOpenInput ] = useState(false)
 
-  const toggleInput = () => {
-    setOpenInput(!openInput)
-  }  
-  
   const handleEdit = (e) => {
     navigate('/edit')
-  }
-
-  const handleUpdate = (e) => {
-    setEmail(e.target.value)
   }
 
   // Unfollow NGO
@@ -52,36 +42,6 @@ const ProfileInfo = () => {
       } catch (e) {
         console.log(e);
       }
-  }
-
-  const handleSave = async (userId, e) => {
-    console.log(`New email ${email}`)
-    console.log('editing email', email)
-  
-    try {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        throw new Error("No token found in localStorage");
-      }
-      const res = await axios.put(
-        `http://localhost:5000/api/auth/user/${userId}`,
-  
-        { 
-          email: `${email}`
-        },
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`,
-          },
-        }
-      );
-      const data = res.data;
-      console.log(data);
-    } catch (err) {
-      console.log(err);
-    }
   }
 
   return (

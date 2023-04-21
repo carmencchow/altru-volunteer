@@ -9,7 +9,6 @@ const VolunteerInfo = () => {
     <div className="container">
       <div className="next-events">
         <h2>Upcoming events</h2>
-        {/* <p>{user.attending}</p> */}
         {user.attending.map((item) => {
           return (
             <div className="row">

@@ -65,7 +65,6 @@ const Info = () => {
         `http://localhost:5000/api/user/${userId}/donation`,        
         { 
           donation: `${clickedBtn}` 
-          // donation: newAmount 
         },
         {
           method: "POST",
@@ -117,7 +116,6 @@ const Info = () => {
         throw new Error("No token found in localStorage");
       }
       const res = await axios.post(
-        // console.log(ngo.name)
         `http://localhost:5000/api/user/${userId}/follow/ngo`,        
         { 
           follow: `${ngo.name}`
@@ -196,7 +194,6 @@ const Info = () => {
       </div>
 
       <div className="process">
-        {/* TEST CC: 4242 4242 4242 4242; 12/34; 123 */}
         <StripeCheckout stripeKey= "pk_test_51L1kSgAoNhpouPlcggVUZyCuhwjZKomWM4sK8IrNj9OI3OumyeYeNkOrSPTrshrj8vbjJdA82r7FBgKueeUOzNbk00vJ7IMMjT"
           image={logo} 
           token={handlePayment}

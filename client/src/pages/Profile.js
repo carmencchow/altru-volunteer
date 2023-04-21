@@ -1,11 +1,9 @@
 import React, { useState, useContext } from 'react'
 import { AuthContext } from '../context/AuthContext'
-import {getUser} from '../utils/getUser'
 import DonationsInfo from '../components/DonationsInfo'
 import VolunteerInfo from '../components/VolunteerInfo'
 import ProfileInfo from '../components/ProfileInfo'
 import Navbar from '../components/Navbar'
-import TestComponent from '../components/TestComponent'
 import './Profile.css'
 
 const Profile = () => {
@@ -21,7 +19,6 @@ const Profile = () => {
   return (
     <>
     <Navbar/>
-    
       <div className="profile-container">
         <div className="tabs-container">
         <div className="heading-tabs">
@@ -51,7 +48,6 @@ const Profile = () => {
         </div>
       </div>
     </div>
-    {/* <Footer/> */}
   </>
   )
 }

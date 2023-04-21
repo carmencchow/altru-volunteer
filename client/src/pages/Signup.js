@@ -57,7 +57,6 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      // console.log('Sending user data:', formData)
       const formData = {
         email: email,
         password: password,

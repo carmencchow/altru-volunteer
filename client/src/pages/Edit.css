@@ -1,6 +1,4 @@
 .tabs, .active-tabs{
-  /* border-top-right-radius: 15px;
-  border-top-left-radius: 15px; */
   border-bottom: none;
   border: 1px solid rgb(227, 188, 227);
   width: 33%;
@@ -13,8 +11,6 @@
   background: white;
   color: black;
   font-size: 20px;
-  /* border-top-right-radius: 45px;
-  border-top-left-radius: 45px; */
   border-bottom: none;
   /* border: 1px solid purple;
   border: 1px solid #a8a4db; */
