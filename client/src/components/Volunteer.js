@@ -62,12 +62,10 @@ const Volunteer = () => {
   }
 
   const handlePrevious = () => {
-    console.log('pre page')
     setCurrentPage(currentPage - 1);
   }
 
   const handleNext = () => {
-    console.log('next page')
     setCurrentPage(currentPage + 1);
   }
 
