@@ -13,7 +13,7 @@ router.put('/:id/amount', editGoal)
 router.post('/:id/donation', addDonation)
 router.post('/:id/add-event', addEvent)
 router.post('/:id/follow/ngo', follow)
-router.delete('/:id/follow/ngo', unfollow)
+router.post('/:id/unfollow/ngo', unfollow)
 
 module.exports = router
 

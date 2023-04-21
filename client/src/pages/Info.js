@@ -2,6 +2,7 @@ import React, {useState, useEffect, useContext} from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios'
 import { AuthContext } from '../context/AuthContext';
+import { getUser} from '../utils/getUser'
 import StripeCheckout from "react-stripe-checkout";
 import toast, { Toaster } from 'react-hot-toast'
 import Navbar from '../components/Navbar'
@@ -11,7 +12,7 @@ import './Info.css'
 
 const Info = () => {
   const navigate = useNavigate();
-  const { userId, getUser } = useContext(AuthContext);
+  const { userId, setUser } = useContext(AuthContext);
   const {id} = useParams();
   const [ngo, setNgo] = useState({});
   const [total, setTotal] = useState(0)
@@ -55,8 +56,6 @@ const Info = () => {
   }
 
   const handleConfirmation = async () => {
-    // const amount = clickedBtn.replace(/\$/g,'');
-    // const newAmount = amount.replace(/\'/g,'');
     try {
       const token = localStorage.getItem("token");
       if (!token) {
@@ -78,7 +77,7 @@ const Info = () => {
       );
       const data = res.data;
       console.log(data)
-      // getUser();
+      await getUser(userId, setUser);
       } catch (e) {
         console.log(e);
       }
@@ -133,7 +132,7 @@ const Info = () => {
       );
       const data = res.data;
       console.log(data)
-      // getUser();
+      await getUser(userId, setUser);
       } catch (e) {
         console.log(e);
       }

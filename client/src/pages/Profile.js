@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { AuthContext } from '../context/AuthContext'
+import {getUser} from '../utils/getUser'
 import DonationsInfo from '../components/DonationsInfo'
 import VolunteerInfo from '../components/VolunteerInfo'
 import ProfileInfo from '../components/ProfileInfo'
@@ -8,7 +9,7 @@ import TestComponent from '../components/TestComponent'
 import './Profile.css'
 
 const Profile = () => {
-  const { user, getUser } = useContext(AuthContext)
+  const { user, setUser } = useContext(AuthContext)
   const [toggleState, setToggleState] = useState(1);
 
   const toggletabs = (idx) => {

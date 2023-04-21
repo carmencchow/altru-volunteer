@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../context/AuthContext'
+import {getUser} from '../utils/getUser'
 import axios from 'axios'
 import Navbar from '../components/Navbar'
 import './Profile.css'
@@ -8,7 +9,7 @@ import './Edit.css'
 
 const Edit = () => {
   const navigate = useNavigate();
-  const { user, userId, getUser } = useContext(AuthContext)
+  const { user, userId, setUser } = useContext(AuthContext)
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
   const [toggleState, setToggleState] = useState(1);
@@ -36,8 +37,10 @@ const Edit = () => {
       const res = await axios.put(
         `http://localhost:5000/api/user/${userId}`,
 
-        { firstname: `${firstname}` },
-        { lastname: `${lastname}` },
+        { 
+          firstname: `${firstname}`,
+          lastname: `${lastname}` 
+        },
         {
           method: "PUT",
           headers: {
@@ -48,7 +51,7 @@ const Edit = () => {
       );
       const data = res.data;
       console.log(data);
-      getUser();
+      await getUser(userId, setUser);
       navigate('/profile')
     } catch (err) {
       console.log(err);

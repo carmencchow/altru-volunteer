@@ -47,6 +47,7 @@ const deleteProfile = async (req, res) => {
 const editProfile = async (req, res) => {
   try {
     const { firstname, lastname } = req.body
+    console.log(firstname, lastname)
     const user = await User.findById({ _id: req.params.id });
     user.firstname = firstname;
     user.lastname = lastname;
@@ -98,14 +99,10 @@ const follow = async (req, res) => {
   try{
     const newFollow = req.body.follow;
     const user = await User.findOne({ _id: req.params.id });
-    // const ngoExists = await User.findOne({ following: { $all: [newFollow] }});
-    // const ngoExists = await User.findOne({ following: { "$in": [newFollow] }});
-    // const ngoExists = await User.find({ following: { "$in": newFollow }});
-    // const ngoExists = await User.findOne({ following: newFollow });
-    // const ngoExists = await user.follwoing.findOne(newFollow);
-    // if (ngoExists){
-    //   return res.status(400).send('Already following')
-    // }
+    const ngoExists = user.following.find(el => el === newFollow)
+    if (ngoExists){
+      return res.status(400).send('Already following')
+    }
     user.following.push(newFollow)
     await user.save();
     console.log('Followed Orgs: ', user.following)
@@ -120,11 +117,14 @@ const follow = async (req, res) => {
 const unfollow = async (req, res) => {
   try{
     const remove = req.body.remove;
-    const user = await User.findOne({ _id: req.params.id }).findOneAndDelete({donations: remove}) 
-   
-    // const user = await User.findOneAndDelete({donations: remove}) 
-    user.following.push(newFollow)
-    return res.status(200).send({ results: user, message: user.following });
+    const user = await User.findOne({ _id: req.params.id })
+    let following = [...user.following];
+    console.log(following, user)
+    let updatedFollowing = following.filter(el => el !== remove);
+    console.log(updatedFollowing, remove)
+    user.following = updatedFollowing;
+    await user.save();
+    return res.status(200).send({ message: user });
   } catch (err) {
     console.log(err);
     return res.status(500).send({ message: err.message });

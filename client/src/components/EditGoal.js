@@ -1,11 +1,12 @@
 import React, { useContext, useState } from "react";
 import axios from 'axios'
 import { AuthContext } from '../context/AuthContext'
+import {getUser} from '../utils/getUser'
 import './EditGoal.css';
 
 const EditGoal = ({ openInput, closeInput }) => {
   const [input, setInput] = useState(0);
-  const { userId, getUser } = useContext(AuthContext);
+  const { userId, setUser} = useContext(AuthContext);
 
   const handleInput = (e) => {
     const fixed = parseFloat(e.target.value).toFixed(2).toString()
@@ -32,7 +33,7 @@ const EditGoal = ({ openInput, closeInput }) => {
       const data = res.data;
       console.log(data);
       setInput('')
-      getUser();
+      await getUser(userId, setUser);
       closeInput();
     } catch (err) {
       console.log(err);

@@ -6,6 +6,7 @@ import { AuthContext } from '../context/AuthContext'
 import { NgosContext } from '../context/NgosContext'
 import { GrFormClose } from 'react-icons/gr'
 import { FcNext, FcPrevious } from 'react-icons/fc'
+import { getUser} from '../utils/getUser'
 import VolunteerBtn from '../components/VolunteerBtn'
 import Navbar from '../components/Navbar'
 import image from '../assets/volunteer.jpg'
@@ -16,8 +17,8 @@ const Volunteer = () => {
   const { filters, setFilters } = useContext(FiltersContext) 
   const { ngos, setNgos } = useContext(NgosContext)
   const [ currentPage, setCurrentPage ] = useState(1)
-  const [ clickedBtn, setClickedBtn] = useState(false)
-  const [ disabled, setDisabled ] = useState(false)
+  // const [ clickedBtn, setClickedBtn] = useState('')
+  // const [ disabled, setDisabled ] = useState(false)
   const [ pageCount, setPageCount ] = useState(1)
   const [ confirm, setConfirm ] = useState('')
   const [ openModal, setOpenModal ] = useState(false)
@@ -27,7 +28,9 @@ const Volunteer = () => {
   const handleRegister = async (ngoModal) => {
     setConfirm('Thank you. Please check your email for confirmation')
     // setClickedBtn(!clickedBtn) 
-    setDisabled(true)
+    // setClickedBtn(ngoModal._id)
+    console.log(ngoModal);
+    // setDisabled(true)
 
     // const addEvent = async () => {
       try {
@@ -39,7 +42,7 @@ const Volunteer = () => {
           `http://localhost:5000/api/user/${userId}/add-event`,        
           { 
             // event: `${ngo}` 
-            event: `${ngoModal.event_description}` 
+            event: `${ngoModal.name}` 
           },
           {
             method: "POST",
@@ -50,18 +53,19 @@ const Volunteer = () => {
           }
         );
         const data = res.data;
-        console.log('New Event added: ', data.event_description);
-        // getUser();
+        console.log(user);
+        console.log('New Event added: ', data);
+        await getUser(userId, setUser);
+        console.log(user)
         } catch (e) {
           console.log(e);
         }
-      // }
-  }
+      }
   
   const toggleModal = (ngo) => {
     console.log('toggling modal now')
     setNgoModal(ngo)
-    setClickedBtn(true)
+    // setClickedBtn(ngo._id)
     setOpenModal(!openModal);
   }
 
@@ -187,9 +191,8 @@ const Volunteer = () => {
 
                     <VolunteerBtn
                       ngoId={ngo._id}
-                      disabled={disabled}
-                      clickedBtn={clickedBtn}
-                      setClickedBtn={setClickedBtn}
+                      disabled={user.attending.find(el => el===ngo.name)}
+                      clickedBtn={user.attending.find(el => el===ngo.name)}
                       toggleModal={toggleModal}
                       ngo={ngo}
                     />
@@ -231,7 +234,8 @@ const Volunteer = () => {
                         <input className="email" type="text" name="email" placeholder="Email"/>
                       </div>
 
-                      <div className="confirm" onClick={handleRegister}>Confirm</div>
+                      <div className="confirm" onClick=
+                      {() => handleRegister(ngoModal)}>Confirm</div>
                       <p>{confirm}</p>
 
                     </div>

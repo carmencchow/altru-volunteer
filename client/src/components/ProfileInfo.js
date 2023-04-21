@@ -1,13 +1,14 @@
 import React, { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../context/AuthContext'
+import {getUser} from '../utils/getUser'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import './ProfileInfo.css'
 
 const ProfileInfo = () => {
   const navigate = useNavigate();
-  const { user, getUser, userId } = useContext(AuthContext)
+  const { user, setUser, userId } = useContext(AuthContext)
   // const { id } = useParams(); 
   const [ email, setEmail ] = useState('')
   const [ openInput, setOpenInput ] = useState(false)
@@ -25,19 +26,20 @@ const ProfileInfo = () => {
   }
 
   // Unfollow NGO
-  const handleUnfollow = async (ngoId) => {
+  const handleUnfollow = async (follow) => {
     try {
+      console.log(follow)
       const token = localStorage.getItem("token");
       if (!token) {
         throw new Error("No token found in localStorage");
       }
-      const res = await axios.delete(
-        `http://localhost:5000/api/user/${userId}/follow/ngo`,        
+      const res = await axios.post(
+        `http://localhost:5000/api/user/${userId}/unfollow/ngo`,        
         { 
-          follow: `${ngoId}`
+          remove: `${follow}`
         },
         {
-          method: "DELETE",
+          method: "POST",
           headers: {
             "Content-Type": "application/json",
             "Authorization": `Bearer ${token}`
@@ -46,7 +48,7 @@ const ProfileInfo = () => {
       );
       const data = res.data;
       console.log(data)
-      getUser();
+      await getUser(userId, setUser);
       } catch (e) {
         console.log(e);
       }
@@ -94,7 +96,6 @@ const ProfileInfo = () => {
           <p>Member since: {user.createdAt}</p>
           <button onClick={handleEdit} 
           className="edit-btn">Edit Profile</button>
-
         </div>
 
         <div className="user-image">
@@ -108,10 +109,11 @@ const ProfileInfo = () => {
         <h3>Organizations followed:</h3>
  
         <div className="organizations">
-          {Object.keys(user.following).map(follow => (
-            <div follow={follow}>
-              {user.following[follow]}
-              <button onClick={handleUnfollow}>Unfollow</button>
+          {(user.following).map(follow => (
+            <div>
+              {follow}
+              <button onClick={
+                async () => await handleUnfollow(follow)}>Unfollow</button>
             </div>
           ))}
          
