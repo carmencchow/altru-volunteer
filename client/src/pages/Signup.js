@@ -10,28 +10,11 @@ const Signup = () => {
   const [error, setError] = useState('Passwords do not match');
   const { user, userId, setUserId, setUser, token, setToken } = useContext(AuthContext);
 
-  // const [formData, setFormData] = useState({
-  //   firstname: '',
-  //   lastname: '',
-  //   email: '',
-  //   password: '',
-  //   confirmPassword: ''
-  // })
-
   const [firstname, setFirstname] = useState('')
   const [lastname, setLastname] = useState('')
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
-
-  // const { firstname, lastname, email, password, confirm } = formData
-  
-  // const handleChange = (e) => {
-  //   setFormData((prevState) => ({
-  //     ...prevState, 
-  //     [e.target.name]: e.target.value,
-  //   }))
-  // }
 
   const handleFirstname = (e) => {
     setFirstname(e.target.value)
@@ -66,7 +49,6 @@ const Signup = () => {
       console.log('Sending user data', formData)
     
       if(password === confirm){
-        // const res = await axios.post('http://localhost:5000/api/auth/signup', formData, 
         const res = await axios.post('http://localhost:5000/api/auth/signup', formData, 
       
         {
@@ -114,7 +96,6 @@ const Signup = () => {
                 type="text" 
                 placeholder="  Enter your first name" 
                 value={firstname} 
-                // onChange={handleChange}
                 onChange={handleFirstname}
               />
             </div>
@@ -126,7 +107,6 @@ const Signup = () => {
                 placeholder="  Enter your last name" 
                 value={lastname} 
                 onChange={handleLastname}
-                // onChange={handleChange}
               />
             </div>
           </div>
@@ -138,7 +118,6 @@ const Signup = () => {
               placeholder="  Enter your email" 
               value={email} 
               onChange={handleEmail}
-              // onChange={handleChange}
             />
           </div>
 
@@ -149,7 +128,6 @@ const Signup = () => {
               placeholder="  Enter your password" 
               value={password} 
               onChange={handlePassword}
-              // onChange={handleChange}
             />
           </div>
 
@@ -160,14 +138,13 @@ const Signup = () => {
               placeholder="  Confirm your password" 
               value={confirm} 
               onChange={handleConfirm}
-              // onChange={handleChange}
             />
           </div>
 
           <button className="signup-submit" type="submit" onClick={handleSubmit}>Sign Up</button>
 
           <div className="account">
-            <div className="my-account"> Already have an account?</div> 
+            <div className="my-account">Already have an account?</div> 
             <div className="login" onClick={handleLogin}>Login</div>
           </div>
 
