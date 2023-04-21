@@ -83,8 +83,6 @@ const login = async (req, res) => {
         expiresIn: "2h" 
       });
       user.token = token
-      // user.password = undefined
-    // }
 
     // Store token in cookie and send to client
         const options = {
