@@ -5,7 +5,7 @@ const AmountBtn = ({ amount, clickedBtn, setClickedBtn }) => {
 
   const handleClick = () => {
     setClickedBtn(amount);
-    console.log('clicked amount is', amount)
+    console.log('Clicking $', amount)
   }
 
   return (

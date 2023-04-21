@@ -9,6 +9,7 @@
 .edit-row{
   display: flex;
   flex-direction: row;
+  margin-top: 0px;
 }
 .contact{
   font-weight: bold;
@@ -22,15 +23,13 @@
   width: 100px;
   height: 100px;
 }
-.organizations{
-  border: 2px solid lightblue;
-}
 .unfollow{
   cursor: pointer;
+  width: 100px;
 }
 .unfollow:hover{
   color: purple;
 }
 .edit-btn{
-  height: 30px;
+  width: 100px;
 }

@@ -23,23 +23,3 @@ const auth = async (req, res, next) => {
 };
 
 module.exports = auth 
-
-
-// const auth = async (req, res, next) => {
-//   // Grab token from cookie
-//   console.log(req.cookies)
-//   const {token} = req.cookies
-//   if (!token){
-//     res.status(403).send('Please login first')
-//   }
-//   try {
-//     const decode = jwt.verify(token, process.env.JWT_SECRET)
-//     console.log(decode)
-//     req.user = decode
-//     console.log(req.user)
-//   } catch (error) {
-//     console.log(error)
-//     res.status(401).send('Invalid token')
-//   }
-//   return next()
-// }

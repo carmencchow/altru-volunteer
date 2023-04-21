@@ -51,9 +51,6 @@ const userSchema = new Schema({
  },
   attending: {
     type: Array,
-  },
-  isAttending: {
-    type: Boolean
   }
 }, { timestamps: true });
 

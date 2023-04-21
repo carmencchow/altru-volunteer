@@ -36,7 +36,6 @@ const Signup = () => {
     setConfirm(e.target.value)
   }
 
-
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
@@ -58,9 +57,9 @@ const Signup = () => {
           },
         });
           const data = res.data;
-          localStorage.setItem('token', res.data.token);
+          console.log(data)
+          localStorage.setItem('token', data.token);
           setUser(data.user)
-          setUserId(data.user._id)
           setToken(data.token);
           localStorage.setItem('user', data.user)
       } else {

@@ -40,7 +40,6 @@ const ngoSchema = new Schema({
     default: false,
   },
   event_date: {
-    // type: Date,
     type: String,
   },
   event_time: {

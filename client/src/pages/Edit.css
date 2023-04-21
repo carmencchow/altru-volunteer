@@ -1,6 +1,5 @@
 .tabs, .active-tabs{
   border-bottom: none;
-  border: 1px solid rgb(227, 188, 227);
   width: 33%;
   font-size: 20px;
   padding: 20px 30px;
@@ -8,13 +7,14 @@
   box-sizing: content-box;
 }
 .active-tabs{
-  background: white;
-  color: black;
+  background-color: rgb(153, 153, 243);
+  border-top-right-radius: 50px;
+  border-top-left-radius: 50px;
+  border-bottom: 5px solid blue;
+  color: white;
+  font-weight: bold;
   font-size: 20px;
   border-bottom: none;
-  /* border: 1px solid purple;
-  border: 1px solid #a8a4db; */
-  border-bottom: 1px solid transparent;
   width: 33%;
 }
 .row{
@@ -26,7 +26,6 @@ input{
   margin-left: 20px;
 }
 .form-control{
-  /* flex: 0 1 auto; */
   display: block;
   width: 90vw;
   max-width: 300px;

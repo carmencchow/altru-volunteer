@@ -1,5 +1,13 @@
-.save-btn{
-  border: 1px solid grey
+.save-goal-btn, .close-goal-btn {
+  border: 1px solid grey;
+  height: 26px;
+  border-radius: 3px;
+}
+.save-goal-btn{
+  margin-left: 5px;
+}
+.close-goal-btn{
+  margin-left: 10px;
 }
 .donated-amounts{
   display: flex;
@@ -7,4 +15,18 @@
 }
 p {
   margin-right: 20px;
+}
+.goal-input{
+  height: 20px;
+  width: 150px;
+}
+.edit{
+  display: flex;
+  flex-direction: row;
+}
+.amount{
+  margin-right: 5px;
+}
+.ngo{
+  font-style: italic;
 }

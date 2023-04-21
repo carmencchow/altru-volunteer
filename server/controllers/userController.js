@@ -1,6 +1,7 @@
 const User = require('../models/userModel');
 const mongoose = require('mongoose');
 
+// GET user by Id
 const getUser = async (req, res) => { 
   const { id } = req.params
   if (!mongoose.Types.ObjectId.isValid(id)){
@@ -13,6 +14,7 @@ const getUser = async (req, res) => {
   res.status(200).json(user)
 }
 
+// GET all users
 const getUsers = async (req, res) => {
   try {
     const users = await User.find({});
@@ -26,6 +28,7 @@ const getUsers = async (req, res) => {
   }
 };
 
+// DELETE user
 const deleteProfile = async (req, res) => { 
   const { id } = req.params
   if (!mongoose.Types.ObjectId.isValid(id)){
@@ -38,25 +41,27 @@ const deleteProfile = async (req, res) => {
   res.status(200).json({ message: 'User deleted'})
 }
 
+// UPDATE user
 const editProfile = async (req, res) => {
   try {
     const { firstname, lastname } = req.body
-    console.log(firstname, lastname)
+    console.log(firstname, lastname, req.params)
     const user = await User.findById({ _id: req.params.id });
     user.firstname = firstname;
     user.lastname = lastname;
     await user.save();
     return res.status(200).send({ message: "Profile updated", user });
+  
   } catch (err) {
     console.log(err);
     res.status(500).send({ message: "Error occurred while updating" });
   }
 };
 
+// ADD event
 const addEvent = async (req, res) => {
   try{
     const newEvent = req.body.event
-    console.log('trying to add this: ', newEvent)
     const user = await User.findOne({ _id: req.params.id });
     user.attending.push(newEvent)
     await user.save();
@@ -68,6 +73,7 @@ const addEvent = async (req, res) => {
   }
 };
 
+// ADD donation
 const addDonation = async (req, res) => {
   try{
     const newDonation = req.body.donation;
@@ -84,11 +90,12 @@ const addDonation = async (req, res) => {
   }
 };
 
+// ADD NGO
 const follow = async (req, res) => {
   try{
     const newFollow = req.body.follow;
     const user = await User.findOne({ _id: req.params.id });
-    const ngoExists = user.following.find(el => el === newFollow)
+    const ngoExists = user.following.find(ngo => ngo === newFollow)
     if (ngoExists){
       return res.status(400).send('Already following')
     }
@@ -102,6 +109,7 @@ const follow = async (req, res) => {
   }
 };
 
+// DELETE NGO
 const unfollow = async (req, res) => {
   try{
     const remove = req.body.remove;
@@ -119,6 +127,7 @@ const unfollow = async (req, res) => {
   }
 };
 
+// EDIT goal
 const editGoal = async (req, res) => {
   try {
     const goalAmount = req.body.goalAmount
@@ -131,6 +140,5 @@ const editGoal = async (req, res) => {
     res.status(500).send({ message: "Error occurred while updating" });
   }
 };
-
 
 module.exports = { getUser, getUsers, addEvent, follow, unfollow, deleteProfile, editProfile, editGoal, addDonation }

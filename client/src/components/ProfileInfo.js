@@ -1,15 +1,13 @@
-import React, { useState, useContext } from 'react'
+import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../context/AuthContext'
 import {getUser} from '../utils/getUser'
-import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import './ProfileInfo.css'
 
 const ProfileInfo = () => {
   const navigate = useNavigate();
-  const { user, setUser, userId } = useContext(AuthContext)
-  const [ email, setEmail ] = useState('')
+  const { user, setUser } = useContext(AuthContext)
 
   const handleEdit = (e) => {
     navigate('/edit')
@@ -24,7 +22,7 @@ const ProfileInfo = () => {
         throw new Error("No token found in localStorage");
       }
       const res = await axios.post(
-        `http://localhost:5000/api/user/${userId}/unfollow/ngo`,        
+        `http://localhost:5000/api/user/${user._id}/unfollow/ngo`,        
         { 
           remove: `${follow}`
         },
@@ -38,16 +36,16 @@ const ProfileInfo = () => {
       );
       const data = res.data;
       console.log(data)
-      await getUser(userId, setUser);
+      await getUser(user._id, setUser);
       } catch (e) {
         console.log(e);
       }
-  }
+    }
 
   return (
     
     <div>  
-      <h3>User Profile</h3>
+      <h2>Personal Info</h2>
       <div className="edit-row">    
         <div className="user-profile">  
           <p className="contact"></p>
@@ -56,13 +54,7 @@ const ProfileInfo = () => {
           <p>Member since: {user.createdAt}</p>
           <button onClick={handleEdit} 
           className="edit-btn">Edit Profile</button>
-        </div>
-
-        <div className="user-image">
-          <div className="avatar"></div>
-          <p>Update profile photo</p>
-        </div>
-        
+        </div>        
       </div>
 
       <div className="following">
@@ -78,7 +70,6 @@ const ProfileInfo = () => {
           ))}
          
         </div>
-
       </div>
     </div>
   )

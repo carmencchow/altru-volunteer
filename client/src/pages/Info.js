@@ -12,12 +12,11 @@ import './Info.css'
 
 const Info = () => {
   const navigate = useNavigate();
-  const { userId, setUser } = useContext(AuthContext);
+  const { setUser, user } = useContext(AuthContext);
   const {id} = useParams();
   const [ngo, setNgo] = useState({});
   const [total, setTotal] = useState(0)
   const [clickedBtn, setClickedBtn] = useState('0');
-  const [ disabled, setDisabled ] = useState(false)
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [address, setAddress] = useState('');
@@ -62,7 +61,7 @@ const Info = () => {
         throw new Error("No token found in localStorage");
       }
       const res = await axios.post(
-        `http://localhost:5000/api/user/${userId}/donation`,        
+        `http://localhost:5000/api/user/${user._id}/donation`,        
         { 
           donation: `${clickedBtn}` 
         },
@@ -75,8 +74,8 @@ const Info = () => {
         }
       );
       const data = res.data;
-      console.log(data)
-      await getUser(userId, setUser);
+      console.log('DonationsArr:', data.results.donations)
+      await getUser(user._id, setUser);
       } catch (e) {
         console.log(e);
       }
@@ -90,7 +89,7 @@ const Info = () => {
 
   const handlePayment = token => {
     handleConfirmation();
-    console.log('Payment')
+    console.log('Payment received')
     const body = {
       token, 
       total
@@ -103,7 +102,7 @@ const Info = () => {
       headers,
       body: JSON.stringify(body)
     }).then(response => {
-      console.log(response)
+      // console.log(response)
     })
     .catch(err => console.log(err));
   }
@@ -116,7 +115,7 @@ const Info = () => {
         throw new Error("No token found in localStorage");
       }
       const res = await axios.post(
-        `http://localhost:5000/api/user/${userId}/follow/ngo`,        
+        `http://localhost:5000/api/user/${user._id}/follow/ngo`,        
         { 
           follow: `${ngo.name}`
         },
@@ -130,7 +129,7 @@ const Info = () => {
       );
       const data = res.data;
       console.log(data)
-      await getUser(userId, setUser);
+      await getUser(user._id, setUser);
       } catch (e) {
         console.log(e);
       }
@@ -158,6 +157,7 @@ const Info = () => {
           {amounts.map((amount) => {
             return(
               <AmountBtn 
+                key={amount}
                 amount={amount}
                 clickedBtn={clickedBtn}
                 setClickedBtn={setClickedBtn}

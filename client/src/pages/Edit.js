@@ -9,7 +9,7 @@ import './Edit.css'
 
 const Edit = () => {
   const navigate = useNavigate();
-  const { user, userId, setUser } = useContext(AuthContext)
+  const { user, setUser } = useContext(AuthContext)
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
   const [toggleState, setToggleState] = useState(1);
@@ -34,8 +34,9 @@ const Edit = () => {
       if (!token) {
         throw new Error("No token found in localStorage");
       }
+
       const res = await axios.put(
-        `http://localhost:5000/api/user/${userId}`,
+        `http://localhost:5000/api/user/${user._id}`,
 
         { 
           firstname: `${firstname}`,
@@ -51,7 +52,7 @@ const Edit = () => {
       );
       const data = res.data;
       console.log(data);
-      await getUser(userId, setUser);
+      await getUser(user._id, setUser);
       navigate('/profile')
     } catch (err) {
       console.log(err);
@@ -64,7 +65,7 @@ const Edit = () => {
 
   const handleDelete = async () => {
     console.log('Deleting your account')
-    await axios.delete(`http://localhost:5000/api/user/${userId}`)
+    await axios.delete(`http://localhost:5000/api/user/${user._id}`)
       .then((res) => {
       console.log(`Account deleted`, res.data);
       navigate('/');
@@ -112,9 +113,9 @@ const Edit = () => {
 
               <div><button className="delete-btn" onClick={handleDelete}>Delete Account</button></div>
 
-          </div> 
+            </div> 
+          </div>
         </div>
-      </div>
       </div>
     </div>
   </>

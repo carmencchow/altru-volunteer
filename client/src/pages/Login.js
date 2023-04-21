@@ -8,7 +8,7 @@ import './Login.css'
 const Login = () => {
   const navigate = useNavigate();
   const [error, setError] = useState('')
-  const { user, userId, setUserId, setUser, token, setToken } = useContext(AuthContext);
+  const { user, setUserId, setUser, token, setToken } = useContext(AuthContext);
 
   const [formData, setFormData] = useState({
     email: '',
@@ -34,7 +34,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData.email, formData.password)
+    console.log(formData.email)
     try {
       const res = await axios.post('http://localhost:5000/api/auth/login', formData, 
       {
@@ -47,9 +47,9 @@ const Login = () => {
         const data = res.data;
         localStorage.setItem('token', res.data.token);
         setUser(data.user)
-        setUserId(data.user._id)
-        console.log('User and userId is:', data, data.user._id);
         setToken(data.token);
+        // setUserId(data.user._id)
+        console.log(data.user.firstname, data.user.lastname, data.user._id);
         localStorage.setItem('user', data.user)
       } catch (err) {
         console.log(err, 'Incorrect password or email')
@@ -57,13 +57,13 @@ const Login = () => {
     };
   };
 
-  useEffect(() => {
-    const loggedInUser = localStorage.getItem('data.user');
-    if (loggedInUser) {
-      const foundUser = JSON.parse(loggedInUser);
-      setUser(foundUser);
-    }
-  }, []);
+  // useEffect(() => {
+  //   const loggedInUser = localStorage.getItem('data.user');
+  //   if (loggedInUser) {
+  //     const foundUser = JSON.parse(loggedInUser);
+  //     setUser(foundUser);
+  //   }
+  // }, []);
 
   return (
     <>

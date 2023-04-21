@@ -9,11 +9,13 @@ const DonationsInfo = () => {
 
   return (
     <div className="container">
-      <div className="stats">
-        <div className="row">
-        <h3>Goal Amount: ${user.goalAmount}</h3>
+      <div className="stats">      
+      <div className="donation-history">
+        <h2>Donation history </h2>
+      
+        <h4>Goal Amount: ${user.goalAmount}</h4>
         
-           <div className="input-field">
+           <div className="goal-input">
             <EditGoal
               openInput={openInput}
               closeInput={() => {setOpenInput(false)}}
@@ -29,21 +31,22 @@ const DonationsInfo = () => {
               <div></div>
             )}
           </div>
+          </div>
 
-      </div>
-      
-      <div className="donation-history">
-        <h3>Donation history: </h3>
-        <p className="donated amounts">
-          {Object.keys(user.donations).map(donation => (
-            <div donation={donation}>
-               $ {user.donations[donation]}
-               <br></br>
-            </div>
-          ))}
+        <p className="donated-amounts">
+          <div className="amount">
+            {(user.donations).map(donation => (
+              <div>${donation}  to</div>
+            ))}
+          </div>
+          <div className="ngo">
+            {(user.ngos).map(ngo => (
+              <div>{ngo}</div>
+            ))}
+          </div>
         </p>
 
-        <h4>Total Amount Donated: 
+        <h4>Total amount donated: 
             <p>${user.donations.map(Number).reduce((a,b) =>  a + b, 0)}</p>
          </h4>
         
@@ -53,7 +56,6 @@ const DonationsInfo = () => {
 
       </div>
       </div>
-    </div>
   )
 }
 

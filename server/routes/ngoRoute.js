@@ -11,7 +11,7 @@ router.post('/', createNgo)
 router.delete('/:id', deleteNgo)
 router.put('/:id', updateNgo)
 
-// router.get('/', auth, getNgos) 
+// router.get('/', getNgos) 
 // router.get('/:id', auth, getNgo) 
 // router.get('/:frequency/:category', auth, getFiltered) 
 // router.post('/', auth, createNgo)

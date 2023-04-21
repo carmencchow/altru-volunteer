@@ -1,11 +1,11 @@
 import React from 'react'
 
-const VolunteerBtn = ({ ngo, disabled, clickedBtn, toggleModal }) => {
-
+const VolunteerBtn = ({ ngo, disabled, clickedBtn, toggleModal }) => 
+{
   return (
     <div>
       <button disabled={disabled} onClick={() => {
-        console.log(ngo.name, ngo._id)
+        console.log('Button clicked:', ngo.name, ngo._id)
         toggleModal(ngo)
       }}
         className="volunteer-btn">

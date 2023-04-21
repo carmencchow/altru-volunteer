@@ -2,11 +2,10 @@ import React, { useContext, useState } from "react";
 import axios from 'axios'
 import { AuthContext } from '../context/AuthContext'
 import {getUser} from '../utils/getUser'
-import './EditGoal.css';
 
 const EditGoal = ({ openInput, closeInput }) => {
   const [input, setInput] = useState(0);
-  const { userId, setUser} = useContext(AuthContext);
+  const { setUser, user} = useContext(AuthContext);
 
   const handleInput = (e) => {
     const fixed = parseFloat(e.target.value).toFixed(2).toString()
@@ -19,7 +18,7 @@ const EditGoal = ({ openInput, closeInput }) => {
     try {
       console.log("New goal amount is", input);
       const res = await axios.put(
-        `http://localhost:5000/api/user/${userId}/amount`,
+        `http://localhost:5000/api/user/${user._id}/amount`,
         { 
           goalAmount: `${input}` 
         },
@@ -33,7 +32,7 @@ const EditGoal = ({ openInput, closeInput }) => {
       const data = res.data;
       console.log(data);
       setInput('')
-      await getUser(userId, setUser);
+      await getUser(user._id, setUser);
       closeInput();
     } catch (err) {
       console.log(err);
@@ -47,15 +46,15 @@ const EditGoal = ({ openInput, closeInput }) => {
       <div className="edit">$
         <input
           type="number"
-          className="edit-input"
+          className="goal-input"
           min="10"
           value={input}
           placeholder="Enter goal amount"
           onChange={handleInput}
           closeInput={closeInput}
         />
-        <button className="close-btn" onClick={closeInput}>X</button>
-        <button className="save-btn" onClick={handleSave}>Save</button> 
+        <button className="close-goal-btn" onClick={closeInput}>X</button>
+        <button className="save-goal-btn" onClick={handleSave}>Save</button> 
       </div>
     </div>
   );

@@ -12,17 +12,17 @@ const signup = async (req, res) => {
     if (!(email && password && firstname && lastname)){
       res.status(400).send('Fill in all required fields')
     }
-    const user = await User.findOne({
+    const existingUser = await User.findOne({
       email,
     });
-    if (user) {
+    if (existingUser) {
       return res.status(400).send("User already exists");
     }
 
     // const salt = await bcrypt.genSalt(10);
     // user.password = await bcrypt.hash(password, salt);
     
-    user = await User.create({
+    const user = await User.create({
       firstname,
       lastname,
       email,
@@ -32,19 +32,20 @@ const signup = async (req, res) => {
       donations: [],
       attending: []
     });
-        await user.save();
+      await user.save();
 
     // Generate and send token to user
     const token = jwt.sign(
       { id: user._id, email },
       process.env.JWT_SECRET,
       {
-        expiresIn: "2h",
+        expiresIn: "3d",
       },
     );
-    user.token = token;
+    // user.token = token;
     // user.password = undefined; // password will not be sent to the frontend
-    res.status(201).json(user, token)
+    // console.log(user);
+    res.status(201).json({user, token})
 
   } catch (error) {
     console.log(error.message);
@@ -80,7 +81,7 @@ const login = async (req, res) => {
       },
         process.env.JWT_SECRET,
       { 
-        expiresIn: "2h" 
+        expiresIn: "3d" 
       });
       user.token = token
 

@@ -1,8 +1,21 @@
 button{
   cursor: pointer;
 }
+.header1, .header2{
+  margin-bottom: 10px;
+}
 .follow{
   cursor: pointer;
+  margin-left: 30px;
+  margin-bottom: 20px;
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid lightblue;
+  background-color: lightblue;
+}
+.follow:hover{
+  color: white;
+  background-color: rgb(100, 100, 246);
 }
 .confirmation{
   font-size: 20px;
@@ -12,10 +25,16 @@ button{
 }
 .back{
   display: flex;
+  font-size: 14px;
+  font-style: italic;
+  padding-top: 20px;
   align-items: flex-end;
   justify-content: flex-end;
   margin-right: 30px;
   cursor: pointer;
+}
+.back:hover{
+  color: blue;
 }
 .donation-card{
   width: 500px;
