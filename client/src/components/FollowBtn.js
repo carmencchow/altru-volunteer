@@ -33,6 +33,9 @@ const FollowBtn = ({ ngo }) => {
       const data = res.data;
       console.log(data)
       await getUser(user._id, setUser);
+
+
+      // How to only display NGOS that aren't followed yet?
       } catch (e) {
         console.log(e);
       }
@@ -40,8 +43,9 @@ const FollowBtn = ({ ngo }) => {
 
   return (
     <div>
-      <button disabled={disabled} className="follow" onClick={handleFollow}> 
-        {clicked ? 'Following' : `Follow ${ngo.name}`}</button>
+      <button disabled={disabled} className="follow" onClick={handleFollow}>{clicked ? 'Following...' : `Follow ${ngo.name}`}</button>
+
+      {/* <button disabled={disabled} className="follow" onClick={handleFollow} style={{ display: clicked ? 'none' : `block`}}>Follow {ngo.name}</button> */}
     </div>
   )
 }

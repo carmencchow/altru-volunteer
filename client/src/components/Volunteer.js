@@ -1,12 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
-import { FiltersContext } from '../context/FiltersContext'
 import { AuthContext } from '../context/AuthContext'
 import { NgosContext } from '../context/NgosContext'
 import { FcNext, FcPrevious } from 'react-icons/fc'
-import { getUser} from '../utils/getUser'
 import VolunteerBtn from '../components/VolunteerBtn'
+import FollowBtn from '../components/FollowBtn';
 import Filters from '../components/Filters'
 import Navbar from '../components/Navbar'
 import Modal from '../components/Modal'
@@ -20,12 +18,15 @@ const Volunteer = () => {
   const [ confirm, setConfirm ] = useState('')
   const [ openModal, setOpenModal ] = useState(false)
   const [ ngoModal, setNgoModal ] = useState(null)
+  const [clickedBtn, setClickedBtn] = useState(false)
   const navigate = useNavigate();
+
   
   const toggleModal = (ngo) => {
     console.log('Card opened:', ngo.name, ngo._id)
     setNgoModal(ngo)
     setOpenModal(!openModal);
+    setClickedBtn(!clickedBtn)
   }
 
   const handlePrevious = () => {
@@ -76,6 +77,7 @@ const Volunteer = () => {
                       { ngo.event_date ? <p>Date: {ngo.event_date}</p> : null} 
                       { ngo.event_time ? <p>Time: {ngo.event_time}</p> : null}
                       { ngo.event_description ? <p>Event: {ngo.event_description}</p> : null}
+                      <FollowBtn ngo={ngo}/>
                     </div>             
 
                     <VolunteerBtn
@@ -89,7 +91,7 @@ const Volunteer = () => {
                     />
                   </div>      
                 </div>     
-              </div>
+                </div>
               )
             })}
           </div> 

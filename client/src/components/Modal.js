@@ -65,8 +65,9 @@ const Modal = ({ confirm, setConfirm, openModal, setNgoModal, setOpenModal, ngoM
                 </div>
 
                 <div className="right-side-content">
-                  <p className="registering">You are registering for this event: {ngoModal.event_description}</p>
-                  <p className="text">Organization: {ngoModal.name} </p>
+                  <p className="registering">You are registering for this event: </p>
+                  <p className="event-name">{ngoModal.event_description}</p>
+                    <p className="event-org"> {ngoModal.name} </p>
                   <p className="text">Date: <span>{ngoModal.event_date}</span></p>
                   <p className="text">Time: <span>{ngoModal.event_time}</span></p>  
                   <p>Please enter your contact info so we can get in touch with you</p>
