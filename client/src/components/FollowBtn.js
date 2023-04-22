@@ -4,11 +4,11 @@ import { AuthContext } from '../context/AuthContext';
 import { getUser} from '../utils/getUser'
 
 const FollowBtn = ({ ngo }) => {
-  const [clicked, setClicked] = useState(false)
+  const [clicked, setClicked] = useState()
   const { user, setUser } = useContext(AuthContext);
 
   const handleFollow = async () => {
-    setClicked(true)
+    setClicked(!clicked)
 
     try {
       const token = localStorage.getItem("token");
@@ -37,13 +37,9 @@ const FollowBtn = ({ ngo }) => {
     }
 
   return (
-// Change this to <button className="follow" style={{ display: clicked ? 'none' : 'block' }}
-
     <div>
-      {/* <button className="follow"  */}
-      <button className="follow" style={{ display: clicked ? 'none' : 'block' }}
-        onClick={handleFollow}>Follow {ngo.name}
-      </button>
+      <button className="follow" onClick={handleFollow}> 
+        {clicked ? 'Following' : `Follow ${ngo.name}`}</button>
     </div>
   )
 }
