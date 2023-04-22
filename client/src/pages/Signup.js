@@ -45,8 +45,7 @@ const Signup = () => {
         firstname: firstname,
         lastname: lastname,
       }
-      console.log('Sending user data', formData)
-    
+
       if(password === confirm){
         const res = await axios.post('http://localhost:5000/api/auth/signup', formData, 
       
@@ -57,7 +56,7 @@ const Signup = () => {
           },
         });
           const data = res.data;
-          console.log(data)
+          console.log('New user:', data.token, data.user)
           localStorage.setItem('token', data.token);
           setUser(data.user)
           setToken(data.token);
@@ -72,7 +71,7 @@ const Signup = () => {
     };
   };
  
-  const handleHome = () => {
+  const homepage = () => {
     navigate('/')
   }
 
@@ -82,7 +81,7 @@ const Signup = () => {
 
   return (
     <>
-      <img onClick={handleHome} className="signup-logo" src={logo} style={{ width: 130, height: 40 }} alt="logo" />
+      <img onClick={homepage} className="signup-logo" src={logo} style={{ width: 130, height: 40 }} alt="logo" />
 
       <div className="signup-wrapper">
         <div className="signup-card">
