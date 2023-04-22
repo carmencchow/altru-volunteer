@@ -17,6 +17,9 @@ button{
   color: white;
   background-color: rgb(100, 100, 246);
 }
+.follow .hide{
+  display: none;
+}
 .confirmation{
   font-size: 20px;
   color: purple;
