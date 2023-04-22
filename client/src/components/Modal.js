@@ -16,6 +16,8 @@ const Modal = ({ confirm, setConfirm, openModal, setNgoModal, setOpenModal, ngoM
 
   const handleRegister = async (ngoModal) => {
   setConfirm('Thank you. Please check your email for confirmation')
+  
+  console.log(ngoModal.name, ngoModal.event_description)
 
     try {
       const token = localStorage.getItem("token");
@@ -26,7 +28,9 @@ const Modal = ({ confirm, setConfirm, openModal, setNgoModal, setOpenModal, ngoM
       const res = await axios.post(
         `http://localhost:5000/api/user/${user._id}/add-event`,        
         { 
-          event: `${ngoModal.name}` 
+          event: `${ngoModal.event_description}`, 
+          name: `${ngoModal.name}`,
+          date: `${ngoModal.event_description}}`
         },
         {
           method: "POST",
@@ -36,15 +40,14 @@ const Modal = ({ confirm, setConfirm, openModal, setNgoModal, setOpenModal, ngoM
           },
         }
       );
-      setConfirm('');
-      const data = res.data;
-      console.log(user);
-      console.log('New Event added: ', data);
-      await getUser(user._id, setUser);
-      } catch (e) {
-        console.log(e);
-      }
+    setConfirm('');
+    const data = res.data;
+    console.log('New Event added: ', data.results.attending);
+    await getUser(user._id, setUser);
+    } catch (e) {
+    console.log(e);
     }
+  }
 
   return (
     <div>

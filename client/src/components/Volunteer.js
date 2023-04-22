@@ -57,7 +57,7 @@ const Volunteer = () => {
     }
   
   const toggleModal = (ngo) => {
-    console.log('toggling modal now')
+    console.log('Card opened:', ngo.name, ngo._id)
     setNgoModal(ngo)
     setOpenModal(!openModal);
   }
@@ -82,12 +82,15 @@ const Volunteer = () => {
   return (
     <div>
       <Navbar/>
+        <h2>Start searching for an organization</h2>
         <Filters/>
 
+        {ngos && (        
           <div className="pagination">
             <button disabled={currentPage === 1} className="previous" onClick={handlePrevious}><FcPrevious className="arrow"/>Previous</button>
             <button disabled={currentPage === pageCount} className="next" onClick={handleNext}>Next<FcNext className="arrow"/></button> 
           </div>
+        )}
       
         <div className="display">
           <div className="results-container">
@@ -130,7 +133,7 @@ const Volunteer = () => {
           <Modal
             {...{openModal, setOpenModal, ngoModal, setNgoModal, confirm, setConfirm}}
             />
-        )} 
+          )} 
       </div>
     )
   }

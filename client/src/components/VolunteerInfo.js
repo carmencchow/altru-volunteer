@@ -12,6 +12,15 @@ const VolunteerInfo = () => {
         {(user.attending).map(attend => (
           <div>{attend}</div>
         ))}
+
+        {(user.host).map(ngo => (
+          <div>{ngo}</div>
+        ))}
+
+        {(user.calendar).map(day => (
+          <div>{day}</div>
+        ))}
+
       </div>
     </div>
   )

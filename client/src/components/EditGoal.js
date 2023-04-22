@@ -53,7 +53,6 @@ const EditGoal = ({ openInput, closeInput }) => {
           onChange={handleInput}
           closeInput={closeInput}
         />
-        <button className="close-goal-btn" onClick={closeInput}>X</button>
         <button className="save-goal-btn" onClick={handleSave}>Save</button> 
       </div>
     </div>

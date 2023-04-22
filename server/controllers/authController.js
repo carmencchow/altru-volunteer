@@ -21,6 +21,7 @@ const signup = async (req, res) => {
 
     // const salt = await bcrypt.genSalt(10);
     // user.password = await bcrypt.hash(password, salt);
+    // console.log('Salt is:', user.password);
     
     const user = await User.create({
       firstname,
@@ -30,14 +31,19 @@ const signup = async (req, res) => {
       // password: salt,
       following: [],
       donations: [],
-      attending: []
+      attending: [],
+      calendar: [],
+      host: [],
     });
       await user.save();
 
     // Generate and send token to user
     const token = jwt.sign(
-      { id: user._id, email },
-      process.env.JWT_SECRET,
+      { 
+        id: user._id, 
+        email 
+      },
+        process.env.JWT_SECRET,
       {
         expiresIn: "3d",
       },
@@ -83,7 +89,7 @@ const login = async (req, res) => {
       { 
         expiresIn: "3d" 
       });
-      user.token = token
+      // user.token = token
 
     // Store token in cookie and send to client
         const options = {
@@ -105,7 +111,6 @@ const login = async (req, res) => {
 // 3. LOGOUT endpoint
 const logout = ( req, res ) => {
   try {
-    // send JWT and then remove 
     res.clearCookie('jwt');
     res.json({ message: 'Logout successful'});  
   } catch (err) {

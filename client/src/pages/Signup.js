@@ -61,9 +61,11 @@ const Signup = () => {
           setUser(data.user)
           setToken(data.token);
           localStorage.setItem('user', data.user)
+          navigate('/login')
       } else {
         console.log('Passwords do not match')
         setError('Incorrect email or password. Please try again.');
+        navigate('/signup')
       };  
     } catch (err) {
       console.log(err, 'Incorrect password or email')

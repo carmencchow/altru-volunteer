@@ -36,7 +36,7 @@ const DonationsInfo = () => {
         <p className="donated-amounts">
           <div className="amount">
             {(user.donations).map(donation => (
-              <div>${donation}  to</div>
+              <div>${donation} to</div>
             ))}
           </div>
           <div className="ngo">

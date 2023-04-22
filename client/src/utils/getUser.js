@@ -1,7 +1,6 @@
 import axios from 'axios'
 
 const getUser = async (userId, setUser) => {
-
   try {
     const res = await axios.get(`http://localhost:5000/api/user/${userId}`);
     const data = res.data;
@@ -10,5 +9,16 @@ const getUser = async (userId, setUser) => {
     console.log(e);
   }
 };
+
+// useEffect(() => {
+//   if (user === null){
+//     navigate('/')
+//   } else {
+//     navigate('/volunteer')
+//   }
+// }, [user])
+
+
+
 
 export { getUser };

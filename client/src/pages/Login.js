@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { AuthContext } from '../context/AuthContext'
@@ -8,7 +8,7 @@ import './Login.css'
 const Login = () => {
   const navigate = useNavigate();
   const [error, setError] = useState('')
-  const { user, setUserId, setUser, token, setToken } = useContext(AuthContext);
+  const { setUser, token, setToken } = useContext(AuthContext);
 
   const [formData, setFormData] = useState({
     email: '',
@@ -24,7 +24,7 @@ const Login = () => {
     }))
   }
   
-  const handleHome = () => {
+  const home = () => {
     navigate('/')
   }
 
@@ -48,26 +48,19 @@ const Login = () => {
         localStorage.setItem('token', res.data.token);
         setUser(data.user)
         setToken(data.token);
-        // setUserId(data.user._id)
         console.log(data.user.firstname, data.user.lastname, data.user._id);
         localStorage.setItem('user', data.user)
+        navigate('/volunteer')
       } catch (err) {
         console.log(err, 'Incorrect password or email')
         setError('Incorrect email or password. Please try again.');
+        navigate('/login')
     };
   };
 
-  // useEffect(() => {
-  //   const loggedInUser = localStorage.getItem('data.user');
-  //   if (loggedInUser) {
-  //     const foundUser = JSON.parse(loggedInUser);
-  //     setUser(foundUser);
-  //   }
-  // }, []);
-
   return (
     <>
-      <img onClick={handleHome} className="login-logo" src={logo} style={{ width: 130, height: 40 }} alt="logo" />
+      <img onClick={home} className="login-logo" src={logo} style={{ width: 130, height: 40 }} alt="logo" />
 
       <div className="login-wrapper">      
         <div className="login-card">
@@ -83,8 +76,6 @@ const Login = () => {
               />
           </div>
       
-        {/* {error && <div><strong>Error:</strong>{error}</div>} */}
-
           <div className="password-input">
             <p>Password</p>
               <input 

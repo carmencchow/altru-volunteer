@@ -28,7 +28,7 @@ const Edit = () => {
 
   const handleUpdate = async () => {
     try {
-      console.log("Saving changes", firstname, lastname);
+      // console.log("Saving changes", firstname, lastname);
 
       const token = localStorage.getItem("token");
       if (!token) {
@@ -51,9 +51,9 @@ const Edit = () => {
         }
       );
       const data = res.data;
-      console.log(data);
+      console.log('Profile updated:', user.firstname, user.lastname, user.email);
       await getUser(user._id, setUser);
-      navigate('/profile')
+      // navigate('/profile')
     } catch (err) {
       console.log(err);
     }

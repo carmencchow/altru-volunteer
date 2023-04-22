@@ -58,21 +58,6 @@ const editProfile = async (req, res) => {
   }
 };
 
-// ADD event
-const addEvent = async (req, res) => {
-  try{
-    const newEvent = req.body.event
-    const user = await User.findOne({ _id: req.params.id });
-    user.attending.push(newEvent)
-    await user.save();
-    console.log('Event added: ', user.attending)
-    return res.status(200).send({ results: user, message: user.attending });
-  } catch (err) {
-    console.log(err);
-    return res.status(500).send({ message: err.message });
-  }
-};
-
 // ADD donation
 const addDonation = async (req, res) => {
   try{
@@ -86,6 +71,29 @@ const addDonation = async (req, res) => {
     return res.status(200).send({ results: user });
   } catch (err) {
     console.log(err);
+    return res.status(500).send({ message: err.message });
+  }
+};
+
+// ADD event
+const addEvent = async (req, res) => {
+  try{
+    const newEvent = req.body.event
+    const ngoName = req.body.name
+    const eventDate = req.body.date
+    const user = await User.findOne({ _id: req.params.id });
+    const eventExists = user.attending.find(ngo => ngo === newEvent)
+    if (eventExists) {
+      return res.status(400).send('Already signed up');
+    }
+    user.attending.push(newEvent)
+    user.host.push(ngoName)
+    user.calendar.push(date)
+    await user.save();
+    console.log('Event added: ', user.attending, user.host)
+    return res.status(200).send({ results: user, message: user.attending });
+  } catch (err) {
+    console.log('Already attending this event');
     return res.status(500).send({ message: err.message });
   }
 };
