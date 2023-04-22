@@ -37,7 +37,6 @@ const Volunteer = () => {
         `http://localhost:5000/api/user/${user._id}/add-event`,        
         { 
           event: `${ngoModal.event_description}` 
-          // event: `${ngoModal.name}` 
         },
         {
           method: "POST",
@@ -97,7 +96,7 @@ const Volunteer = () => {
             {ngos?.slice((currentPage - 1) * 5, currentPage * 5).map((ngo, idx) => {
               return (
                 <div className="display-container">
-                  <div key={idx}>
+                  <div key={ngo}>
                     <div 
                       className="ngo-name" 
                       onClick={() => handleNgoSelected(ngo._id)}>

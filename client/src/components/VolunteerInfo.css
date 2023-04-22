@@ -2,3 +2,19 @@
   display: flex;
   justify-content: space-between;
 }
+.event-heading{
+  display: flex;
+  justify-content: space-between;
+  text-decoration: underline;
+}
+.next-event{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.next-event:nth-child(odd){
+  background-color: rgb(245, 247, 248); 
+}
+.next-event:nth-child(even){
+  background-color: beige;
+}

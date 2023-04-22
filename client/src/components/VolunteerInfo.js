@@ -7,20 +7,32 @@ const VolunteerInfo = () => {
 
   return (
     <div className="container">
-      <div className="next-events">
+    
         <h2>Events</h2>
-        {(user.attending).map(attend => (
-          <div>{attend}</div>
-        ))}
+        <p className="event-heading">
+          <p>Name</p>
+          <p>Organization</p>
+          <p>Date</p>
+        </p>
 
-        {(user.host).map(ngo => (
-          <div>{ngo}</div>
-        ))}
+        <div className="next-event">
+          <p className="name">
+            {(user.attending).map(attend => (
+              <div key={attend}>{attend}</div>
+            ))}
+          </p>
 
-        {(user.calendar).map(day => (
-          <div>{day}</div>
-        ))}
+          <p className="org">
+            {(user.host).map(ngo => (
+              <div key={ngo}>{ngo}</div>
+            ))}
+          </p>
 
+          <p className="date">
+            {(user.calendar).map(day => (
+              <div key={day}>{day}</div>
+            ))}
+          </p>
       </div>
     </div>
   )

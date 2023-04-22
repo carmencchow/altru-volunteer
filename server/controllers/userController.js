@@ -88,7 +88,7 @@ const addEvent = async (req, res) => {
     }
     user.attending.push(newEvent)
     user.host.push(ngoName)
-    user.calendar.push(date)
+    user.calendar.push(eventDate)
     await user.save();
     console.log('Event added: ', user.attending, user.host)
     return res.status(200).send({ results: user, message: user.attending });

@@ -14,10 +14,10 @@ const Modal = ({ confirm, setConfirm, openModal, setNgoModal, setOpenModal, ngoM
     setOpenModal(!openModal);
   }
 
-  const handleRegister = async (ngoModal) => {
+  const handleRegister = async () => {
   setConfirm('Thank you. Please check your email for confirmation')
   
-  console.log(ngoModal.name, ngoModal.event_description)
+  console.log('Event details', ngoModal.name, ngoModal.event_description)
 
     try {
       const token = localStorage.getItem("token");
@@ -30,7 +30,7 @@ const Modal = ({ confirm, setConfirm, openModal, setNgoModal, setOpenModal, ngoM
         { 
           event: `${ngoModal.event_description}`, 
           name: `${ngoModal.name}`,
-          date: `${ngoModal.event_description}}`
+          date: `${ngoModal.event_date}`
         },
         {
           method: "POST",
