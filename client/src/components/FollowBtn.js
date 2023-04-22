@@ -5,10 +5,12 @@ import { getUser} from '../utils/getUser'
 
 const FollowBtn = ({ ngo }) => {
   const [clicked, setClicked] = useState()
+  const [disabled, setDisabled] = useState(false)
   const { user, setUser } = useContext(AuthContext);
 
   const handleFollow = async () => {
     setClicked(!clicked)
+    setDisabled(true)
 
     try {
       const token = localStorage.getItem("token");
@@ -38,7 +40,7 @@ const FollowBtn = ({ ngo }) => {
 
   return (
     <div>
-      <button className="follow" onClick={handleFollow}> 
+      <button disabled={disabled} className="follow" onClick={handleFollow}> 
         {clicked ? 'Following' : `Follow ${ngo.name}`}</button>
     </div>
   )
