@@ -102,8 +102,10 @@ const addEvent = async (req, res) => {
 const follow = async (req, res) => {
   try{
     const newFollow = req.body.follow;
+    console.log('New:', newFollow)
     const user = await User.findOne({ _id: req.params.id });
     const ngoExists = user.following.find(ngo => ngo === newFollow)
+    console.log('Exist:', ngoExists)
     if (ngoExists){
       return res.status(400).send('Already following')
     }

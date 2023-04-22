@@ -16,23 +16,25 @@ const VolunteerInfo = () => {
         </p>
 
         <div className="next-event">
-          <p className="name">
-            {(user.attending).map(attend => (
-              <div key={attend}>{attend}</div>
-            ))}
-          </p>
+          <div className="list">
+            <p className="name">
+              {(user.attending).map(attend => (
+                <div key={attend}>{attend}</div>
+              ))}
+            </p>
 
-          <p className="org">
-            {(user.host).map(ngo => (
-              <div key={ngo}>{ngo}</div>
-            ))}
-          </p>
+            <p className="org">
+              {(user.host).map(ngo => (
+                <div key={ngo}>{ngo}</div>
+              ))}
+            </p>
 
-          <p className="date">
-            {(user.calendar).map(day => (
-              <div key={day}>{day}</div>
-            ))}
-          </p>
+            <p className="date">
+              {(user.calendar).map(day => (
+                <div key={day}>{day}</div>
+              ))}
+            </p>
+          </div>
       </div>
     </div>
   )

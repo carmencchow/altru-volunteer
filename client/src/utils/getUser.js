@@ -10,15 +10,4 @@ const getUser = async (userId, setUser) => {
   }
 };
 
-// useEffect(() => {
-//   if (user === null){
-//     navigate('/')
-//   } else {
-//     navigate('/volunteer')
-//   }
-// }, [user])
-
-
-
-
 export { getUser };
