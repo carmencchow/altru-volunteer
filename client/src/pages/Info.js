@@ -63,7 +63,8 @@ const Info = () => {
       const res = await axios.post(
         `http://localhost:5000/api/user/${user._id}/donation`,        
         { 
-          donation: `${clickedBtn}` 
+          donation: `${clickedBtn}`, 
+          name: `${ngo.name}`
         },
         {
           method: "POST",
@@ -74,7 +75,7 @@ const Info = () => {
         }
       );
       const data = res.data;
-      console.log('DonationsArr:', data.results.donations)
+      console.log('Donation:', data.results.donations)
       await getUser(user._id, setUser);
       } catch (e) {
         console.log(e);

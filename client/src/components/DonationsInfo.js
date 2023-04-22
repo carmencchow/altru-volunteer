@@ -33,10 +33,15 @@ const DonationsInfo = () => {
           </div>
           </div>
 
+        <p className="heading">
+          <p>Amount</p>
+          <p>Organization</p>
+        </p>
+
         <p className="donated-amounts">
           <div className="amount">
             {(user.donations).map(donation => (
-              <div>${donation} to</div>
+              <div>${donation} </div>
             ))}
           </div>
           <div className="ngo">
