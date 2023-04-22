@@ -7,7 +7,7 @@ import Navbar from '../components/Navbar'
 import './Profile.css'
 
 const Profile = () => {
-  const { user, setUser } = useContext(AuthContext)
+  const { user } = useContext(AuthContext)
   const [toggleState, setToggleState] = useState(1);
 
   const toggletabs = (idx) => {
