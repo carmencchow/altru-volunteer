@@ -7,13 +7,12 @@ import StripeCheckout from "react-stripe-checkout";
 import toast, { Toaster } from 'react-hot-toast'
 import Navbar from '../components/Navbar'
 import AmountBtn from '../components/AmountBtn'
-import FollowBtn from '../components/FollowBtn';
 import logo from '../assets/altru.png'
 import './Info.css'
 
 const Info = () => {
   const navigate = useNavigate();
-  const { user, setUser } = useContext(AuthContext);
+  const { userId, setUser } = useContext(AuthContext);
   const {id} = useParams();
   const [ngo, setNgo] = useState({});
   const [total, setTotal] = useState(0)
@@ -62,7 +61,7 @@ const Info = () => {
         throw new Error("No token found in localStorage");
       }
       const res = await axios.post(
-        `http://localhost:5000/api/user/${user._id}/donation`,        
+        `http://localhost:5000/api/user/${userId}/donation`,        
         { 
           donation: `${clickedBtn}` 
         },
@@ -76,7 +75,7 @@ const Info = () => {
       );
       const data = res.data;
       console.log('DonationsArr:', data.results.donations)
-      await getUser(user._id, setUser);
+      await getUser(userId, setUser);
       } catch (e) {
         console.log(e);
       }
@@ -108,14 +107,41 @@ const Info = () => {
     .catch(err => console.log(err));
   }
 
+  // Add NGO to follow
+  const handleFollow = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        throw new Error("No token found in localStorage");
+      }
+      const res = await axios.post(
+        `http://localhost:5000/api/user/${userId}/follow/ngo`,        
+        { 
+          follow: `${ngo.name}`
+        },
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
+        }
+      );
+      const data = res.data;
+      console.log(data)
+      await getUser(userId, setUser);
+      } catch (e) {
+        console.log(e);
+      }
+    }
+
 
   return (
     <div>
       <Navbar/>
       <div> 
         <span className="back" onClick={() => navigate(-1)}>Back</span>
-        <FollowBtn ngo={ngo}/>
-
+        <button className="follow" onClick={handleFollow}>Follow {ngo.name}</button> 
         <Toaster position="top-center" toastOption={{ duration: 3000 }}/>
         <span className="header1">Don't have time to volunteer with {ngo.name}?</span> <br></br>
         <span className="header2">Would you like to make a donation instead?</span>

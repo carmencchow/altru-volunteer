@@ -54,7 +54,7 @@ const Login = () => {
       } catch (err) {
         console.log(err, 'Incorrect password or email')
         setError('Incorrect email or password. Please try again.');
-        navigate('/login')
+        navigate('/login');
     };
   };
 
@@ -76,6 +76,8 @@ const Login = () => {
               />
           </div>
       
+        {/* {error && <div><strong>Error:</strong>{error}</div>} */}
+
           <div className="password-input">
             <p>Password</p>
               <input 
