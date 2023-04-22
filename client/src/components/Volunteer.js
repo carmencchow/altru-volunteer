@@ -4,19 +4,16 @@ import axios from 'axios'
 import { FiltersContext } from '../context/FiltersContext'
 import { AuthContext } from '../context/AuthContext'
 import { NgosContext } from '../context/NgosContext'
-import { GrFormClose } from 'react-icons/gr'
 import { FcNext, FcPrevious } from 'react-icons/fc'
 import { getUser} from '../utils/getUser'
 import VolunteerBtn from '../components/VolunteerBtn'
 import Filters from '../components/Filters'
 import Navbar from '../components/Navbar'
 import Modal from '../components/Modal'
-import image from '../assets/volunteer.jpg'
 import './Volunteer.css'
 
 const Volunteer = () => {
   const { user, setUser } = useContext(AuthContext);
-  const { filters, setFilters } = useContext(FiltersContext) 
   const { ngos, setNgos } = useContext(NgosContext)
   const [ currentPage, setCurrentPage ] = useState(1)
   const [ pageCount, setPageCount ] = useState(1)
@@ -24,36 +21,6 @@ const Volunteer = () => {
   const [ openModal, setOpenModal ] = useState(false)
   const [ ngoModal, setNgoModal ] = useState(null)
   const navigate = useNavigate();
-
-  const handleRegister = async (ngoModal) => {
-    setConfirm('Thank you. Please check your email for confirmation')
-
-    try {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        throw new Error("No token found in localStorage");
-      }
-      const res = await axios.post(
-        `http://localhost:5000/api/user/${user._id}/add-event`,        
-        { 
-          event: `${ngoModal.event_description}` 
-        },
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
-          },
-        }
-      );
-      const data = res.data;
-      console.log(user);
-      console.log('New Event added: ', data);
-      await getUser(user._id, setUser);
-      } catch (e) {
-        console.log(e);
-      }
-    }
   
   const toggleModal = (ngo) => {
     console.log('Card opened:', ngo.name, ngo._id)
