@@ -212,7 +212,7 @@ p{
   content: '< ';
 }
 
-/* Media Queries */
+/* ------- Media Queries ------*/
 
 @media only screen and (max-width: 599px) {
   h3{
@@ -269,7 +269,13 @@ p{
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-    margin-right: 10%;
+    margin-right: 12%;
+  }
+  .display-container{
+    margin: 2%;
+  }
+  .ngo-name{
+    font-size: 26px;
   }
 }
 

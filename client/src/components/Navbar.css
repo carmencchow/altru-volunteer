@@ -36,6 +36,23 @@ nav{
 
 /* Media Queries */
 
+@media only screen and (min-width: 320px) {
+  .logout-btn, .profile-btn{
+    font-size: 22px;
+  }
+}
+
+@media only screen and (max-width: 599px) {
+  .logout-btn, .profile-btn{
+    font-size: 28px;
+  }
+}
+@media only screen and (min-width: 599px) {
+  .logout-btn, .profile-btn{
+    font-size: 30px;
+  }
+}
+
 @media only screen and (min-width: 992px) {
   .logout-btn, .profile-btn{
     font-size: 32px;
@@ -44,6 +61,6 @@ nav{
 
 @media only screen and (min-width: 1200px) {
   .logout-btn, .profile-btn{
-    font-size: 38px;
+    font-size: 36px;
   }
 }
