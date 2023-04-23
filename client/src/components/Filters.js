@@ -61,7 +61,7 @@ const Filters = () => {
       
       </div>
 
-      <div className="button-row">
+      <div className="search-row">
         <button className="searchBtn" onClick={handleSubmit}>
           Search</button>
       </div>

@@ -48,14 +48,7 @@ form.dropdown p{
 
 /* Media Queries */
 
-/* @media only screen and (max-width: 320px) { */
 @media only screen and (max-width: 599px) {
-  h3{
-    display: flex;
-    margin-left: 20px;
-    width: 100%;
-    font-size: 12px;
-  }
   .filters{
     display: flex;
     flex-direction: column;
@@ -83,7 +76,7 @@ form.dropdown p{
     width: 60px;
     border: none;
   }
-  .button-row{
+  .search-row{
     display: flex;  
     flex-direction: row-reverse;
     margin-right: 13%;
@@ -91,12 +84,6 @@ form.dropdown p{
 }
 
 @media only screen and (min-width: 599px) {
-  h3{
-    display: flex;
-    margin-left: 40px;
-    width: 100%;
-    font-size: 20px;
-  }
   .filters{
     display: flex;
     flex-direction: row;
@@ -123,7 +110,7 @@ form.dropdown p{
     width: 70px;
     border: none;
   }
-  .button-row{
+  .search-row{
     display: flex;  
     flex-direction: row-reverse;
     margin-right: 7%;
@@ -141,7 +128,7 @@ form.dropdown p{
   select{
     font-size: 20px;
   }
-  .button-row{
+  .search-row{
     display: flex;  
     flex-direction: row-reverse;
     margin-right: 8%;
