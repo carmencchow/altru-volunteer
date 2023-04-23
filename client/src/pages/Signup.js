@@ -20,6 +20,7 @@ const Signup = () => {
   const { email, password, firstname, lastname, confirm } = formData
 
   const handleChange = (e) => {
+    console.log(e.target.value)
     setFormData((prevState) => ({
       ...prevState, 
       [e.target.name]: e.target.value,

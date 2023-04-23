@@ -9,7 +9,6 @@ const Login = () => {
   const navigate = useNavigate();
   const [error, setError] = useState('')
   const { setUser, token, setToken } = useContext(AuthContext);
-
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -18,6 +17,7 @@ const Login = () => {
   const { email, password } = formData
 
   const handleChange = (e) => {
+    console.log(e.target.value)
     setFormData((prevState) => ({
       ...prevState, 
       [e.target.name]: e.target.value,
@@ -33,9 +33,9 @@ const Login = () => {
   }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log(formData.email)
     try {
+      e.preventDefault();
+      console.log(formData)
       const res = await axios.post('http://localhost:5000/api/auth/login', formData, 
       {
         method: 'POST',
@@ -63,24 +63,23 @@ const Login = () => {
       <img onClick={home} className="login-logo" src={logo} style={{ width: 130, height: 40 }} alt="logo" />
 
       <div className="login-wrapper">      
-        
         <div className="login-card">
           <h2>Login</h2>
-          <div className="">
+          <div className="email-input">
             <input 
-              name="email-input"
+              name="email"
               type="email" 
-              placeholder="Enter your email" 
+              placeholder="  Enter your email" 
               value={email}   
               onChange={handleChange}  
             />
           </div>
 
-          <div className="">
+          <div className="password-input">
             <input 
-              name="password-input" 
+              name="password" 
               type="password" 
-              placeholder="Enter your password" 
+              placeholder="  Enter your password" 
               value={password} 
               onChange={handleChange}    
             />
