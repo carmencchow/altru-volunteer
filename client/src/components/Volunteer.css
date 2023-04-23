@@ -205,6 +205,14 @@ p{
   display: flex;
   flex-direction: row
 }
+.next:before{
+  content: ' >';
+}
+.previous:before{
+  content: '< ';
+}
+
+/* Media Queries */
 
 @media only screen and (max-width: 599px) {
   h3{
@@ -241,14 +249,50 @@ p{
   .left-side{
     width: 100%;
   }
+  .next, .previous{
+    height: 20px;
+    cursor: pointer;
+    color: #19add6;
+    border: 2px solid #19add6;
+    width: 30px;
+    font-size: 12px;
+    margin-right: 7px;
+    font-family: 'Montserrat', sans-serif;
+  }
+  .previous:before{
+    content: '<<'
+  }
+  .next:before{
+    content: '>>'
+  }
+  .pagination{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-right: 10%;
+  }
 }
 
-/* @media only screen and (max-width: 599px) {} */
+@media only screen and (min-width: 599px) {
+  .previous:before{
+    content: '< Previous';
+  }
+  .next:before{
+    content: 'Next >'
+  }
+  .previous, .next{
+    width: 70px;
+    height: 26px;
+    font-size: 10px;
+  }
+  .pagination{
+    margin-right: 5%;
+  }
+}
 
-@media only screen and (min-width: 600px) {}
+@media only screen and (min-width: 768px) {
+  .pagination{
+    margin-right: 8%;
+  }
+}
 
-@media only screen and (min-width: 768px) {}
-
-@media only screen and (min-width: 992px) {}
-
-@media only screen and (min-width: 1200px) {}

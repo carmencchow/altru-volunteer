@@ -53,8 +53,14 @@ const Volunteer = () => {
 
         {ngos && (        
           <div className="pagination">
-            <button disabled={currentPage === 1} className="previous" onClick={handlePrevious}><FcPrevious className="arrow"/>Previous</button>
-            <button disabled={currentPage === pageCount} className="next" onClick={handleNext}>Next<FcNext className="arrow"/></button> 
+            <button disabled={currentPage === 1} className="previous" onClick={handlePrevious}>
+              {/* <FcPrevious className="arrow"/> */}
+              {/* Previous */}
+            </button>
+            <button disabled={currentPage === pageCount} className="next" onClick={handleNext}>
+              {/* Next */}
+              {/* <FcNext className="arrow"/> */}
+            </button> 
           </div>
         )}
       
