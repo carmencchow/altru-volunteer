@@ -89,6 +89,8 @@ input{
   justify-content: left;
 }
 
+/* Media Queries */
+
 @media only screen and (max-width: 600px) {
   input{
     width: 200px;

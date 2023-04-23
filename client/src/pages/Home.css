@@ -71,22 +71,131 @@ body{
   justify-content: space-between;
 }
 
-@media (max-width: 930px){
+/* Media Queries */
 
+@media only screen and (max-width: 320px) {
+  .home-text{
+    height: 110px;
+    margin-top: 5px;
+    width: 100%;
+  }
+  .welcome-text{
+    font-size: 20px;
+    text-align: center;
+    margin-top: 0px;
+  }
+  .sub-text{
+    font-size: 10px;
+    text-align: center;
+    font-style: normal;
+    margin-top: 0px;
+  }
+}
+
+@media only screen and (max-width: 460px) {
+  .home-text{
+    height: 60px;
+    margin-top: 5px;
+    width: 95%;
+  }
+  .welcome-text{
+    font-size: 22px;
+    text-align: center;
+    margin-top: 0px;
+  }
+  .sub-text{
+    font-size: 14px;
+    text-align: center;
+    font-style: normal;
+    margin-top: 0px;
+  }
+}
+
+@media only screen and (min-width: 461px) {
+  .home-text{
+    height: 100px;
+    margin-top: 5px;
+    width: 80vw;
+  }
+  .welcome-text{
+    font-size: 28px;
+    text-align: center;
+    margin-top: 10px;
+  }
+  .sub-text{
+    font-size: 20px;
+    text-align: center;
+    font-style: normal;
+    margin-top: 0px;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .home-text{
+    height: 100px;
+    margin-top: 5px;
+  }
+  .welcome-text{
+    font-size: 34px;
+    text-align: center;
+  }
+  .sub-text{
+    font-size: 24px;
+    text-align: center;
+    font-style: normal;
+    margin-top: 0px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .home-text{
+    height: 120px;
+    margin-top: 5px;
+  }
   .welcome-text{
     font-size: 40px;
+    text-align: center;
   }
   .sub-text{
-
-  }
-}
-
-@media (max-width: 500px){
-
-  .welcome-text{
     font-size: 30px;
-  }
-  .sub-text{
-    font-size: 18px;
+    text-align: center;
+    font-style: normal;
+    margin-top: 0px;
   }
 }
+
+@media only screen and (min-width: 992px) {
+  .home-text{
+    height: 120px;
+    margin-top: 5px;
+  }
+  .welcome-text{
+    font-size: 40px;
+    text-align: center;
+  }
+  .sub-text{
+    font-size: 30px;
+    text-align: center;
+    font-style: normal;
+    margin-top: 0px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .home-text{
+    height: 135px;
+    margin-top: 5px;
+  }
+  .welcome-text{
+    font-size: 56px;
+    text-align: center;
+    margin-top: 0px;
+  }
+  .sub-text{
+    font-size: 40px;
+    text-align: center;
+    font-style: normal;
+    margin-top: 0px;
+  }
+}
+
