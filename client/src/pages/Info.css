@@ -4,6 +4,14 @@ button{
 .header1, .header2{
   margin-bottom: 10px;
 }
+.follow{
+  cursor: pointer;
+  margin-left: 30px;
+  margin-bottom: 20px;
+  padding: 10px;
+  border-radius: 20px;
+  border: 2px solid lightblue;
+}
 .confirmation{
   font-size: 20px;
   color: purple;

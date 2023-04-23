@@ -43,7 +43,7 @@ const Login = () => {
           'Content-Type': 'application/json' 
         },
       }
-      );
+    );
         const data = res.data;
         localStorage.setItem('token', res.data.token);
         setUser(data.user)
@@ -63,34 +63,38 @@ const Login = () => {
       <img onClick={home} className="login-logo" src={logo} style={{ width: 130, height: 40 }} alt="logo" />
 
       <div className="login-wrapper">      
+        
         <div className="login-card">
           <h2>Login</h2>
-          <div className="email-input">
+          <div className="">
             <p>Email address</p>
               <input 
-                name="email"
+                name="email-input"
                 type="email" 
                 placeholder="Enter your email" 
                 value={email}   
                 onChange={handleChange}  
               />
           </div>
-      
-        {/* {error && <div><strong>Error:</strong>{error}</div>} */}
 
           <div className="password-input">
             <p>Password</p>
               <input 
-                name="password" 
+                name="password-input" 
                 type="password" 
                 placeholder="Enter your password" 
                 value={password} 
                 onChange={handleChange}    
               />
           </div>
+          
           <p className="error">{error}</p>
-          <button type="submit" className="login-submit" onClick={handleSubmit}>Log in</button>
-                        
+
+
+          <div className="login-div">
+            <button type="submit" className="login-submit" onClick={handleSubmit}>Log in</button>
+          </div>
+
           <div className="new-account">
             <div className="no-account"> Don't have an account?</div> 
             <div className="register" onClick={handleSignup}>Sign Up</div>

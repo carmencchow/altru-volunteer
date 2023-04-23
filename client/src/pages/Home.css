@@ -31,7 +31,7 @@ body{
 .home-text{
   font-family: 'League Gothic', sans-serif;
   background-color: #322ca9;
-  width: 700px;
+  width: 70%;
   height: 170px;
   padding: 10px;
   margin: 0 auto;
@@ -69,4 +69,24 @@ body{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+@media (max-width: 930px){
+
+  .welcome-text{
+    font-size: 40px;
+  }
+  .sub-text{
+
+  }
+}
+
+@media (max-width: 500px){
+
+  .welcome-text{
+    font-size: 30px;
+  }
+  .sub-text{
+    font-size: 18px;
+  }
 }

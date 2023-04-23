@@ -4,7 +4,6 @@ import { AuthContext } from '../context/AuthContext'
 import { NgosContext } from '../context/NgosContext'
 import { FcNext, FcPrevious } from 'react-icons/fc'
 import VolunteerBtn from '../components/VolunteerBtn'
-import FollowBtn from '../components/FollowBtn';
 import Filters from '../components/Filters'
 import Navbar from '../components/Navbar'
 import Modal from '../components/Modal'
@@ -49,7 +48,7 @@ const Volunteer = () => {
   return (
     <div>
       <Navbar/>
-        <h2>Start searching for an organization</h2>
+        <h3>Find volunteer opportunities:</h3>
         <Filters/>
 
         {ngos && (        
@@ -77,7 +76,6 @@ const Volunteer = () => {
                       { ngo.event_date ? <p>Date: {ngo.event_date}</p> : null} 
                       { ngo.event_time ? <p>Time: {ngo.event_time}</p> : null}
                       { ngo.event_description ? <p>Event: {ngo.event_description}</p> : null}
-                      <FollowBtn ngo={ngo}/>
                     </div>             
 
                     <VolunteerBtn

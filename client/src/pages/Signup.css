@@ -76,3 +76,20 @@ input{
   font-weight: bolder;
   cursor: pointer;
 }
+
+@media (max-width: 530px){
+
+  input{
+    width: 200px;
+  }
+
+  .signup-submit{
+    width: 200px;
+  }
+  .account{
+    flex-direction: column;
+    font-size: 10px;
+  }
+
+
+}

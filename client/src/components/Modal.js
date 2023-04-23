@@ -15,7 +15,7 @@ const Modal = ({ confirm, setConfirm, openModal, setNgoModal, setOpenModal, ngoM
   }
 
   const handleRegister = async () => {
-  setConfirm('Thank you. Please check your email for confirmation')
+  setConfirm('Thank you. We look forward to meeting you at our event!')
   
   console.log('Event details', ngoModal.name, ngoModal.event_description)
 
@@ -70,7 +70,7 @@ const Modal = ({ confirm, setConfirm, openModal, setNgoModal, setOpenModal, ngoM
                     <p className="event-org"> {ngoModal.name} </p>
                   <p className="text">Date: <span>{ngoModal.event_date}</span></p>
                   <p className="text">Time: <span>{ngoModal.event_time}</span></p>  
-                  <p>Please enter your contact info so we can get in touch with you</p>
+                  <p className="contact">Please enter your contact info below</p>
 
                   <div className="contact-info">
                     <input className="name" type="text" name="name" placeholder="Full name"/>

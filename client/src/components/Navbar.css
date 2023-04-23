@@ -1,5 +1,7 @@
 nav{
   display: flex;
+  flex-wrap: wrap;
+  width: 100%;
   justify-content: space-between;
   margin: 0px auto;
   padding: 0px 20px 0px 20px;
@@ -36,3 +38,4 @@ nav{
 .profile-btn{
   cursor: pointer;
 }
+

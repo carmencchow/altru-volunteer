@@ -63,7 +63,6 @@ const addDonation = async (req, res) => {
   try{
     const newDonation = req.body.donation;
     const newNgo = req.body.name;
-    // const { email, name, address, province, city, postal } = req.body 
     const user = await User.findOne({ _id: req.params.id });
     user.donations.push(newDonation)
     user.ngos.push(newNgo)

@@ -4,14 +4,11 @@ import { AuthContext } from '../context/AuthContext';
 import { getUser} from '../utils/getUser'
 
 const FollowBtn = ({ ngo }) => {
-  const [clicked, setClicked] = useState()
   const [disabled, setDisabled] = useState(false)
-  const { user, setUser } = useContext(AuthContext);
+  const { user, setUser } = useContext
+  (AuthContext);
 
   const handleFollow = async () => {
-    setClicked(!clicked)
-    setDisabled(true)
-
     try {
       const token = localStorage.getItem("token");
       if (!token) {
@@ -32,10 +29,8 @@ const FollowBtn = ({ ngo }) => {
       );
       const data = res.data;
       console.log(data)
+      setDisabled('Following...')
       await getUser(user._id, setUser);
-
-
-      // How to only display NGOS that aren't followed yet?
       } catch (e) {
         console.log(e);
       }
@@ -43,9 +38,13 @@ const FollowBtn = ({ ngo }) => {
 
   return (
     <div>
-      <button disabled={disabled} className="follow" onClick={handleFollow}>{clicked ? 'Following...' : `Follow ${ngo.name}`}</button>
-
-      {/* <button disabled={disabled} className="follow" onClick={handleFollow} style={{ display: clicked ? 'none' : `block`}}>Follow {ngo.name}</button> */}
+      <button 
+        disabled={disabled} 
+        className="follow" 
+        onClick={handleFollow}>
+        {(user.following).filter(follow => follow !==ngo.name) ? 
+          `Following` : `Follow ${ngo.name}`}
+      </button>
     </div>
   )
 }

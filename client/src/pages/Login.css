@@ -41,7 +41,7 @@ h2{
   margin: 0 auto;
   justify-content: center;
 }
-input{
+.login-input, .email-input{
   border: 2px solid #19add6;
   margin-bottom: 20px;
   width: 350px;
@@ -50,13 +50,13 @@ input{
 .login-submit{
   height: 40px;
   cursor: pointer;
-  width: 355px;
+  width: 350px;
   color: white;
   font-size: 16px;
   border: 2px solid #19add6;
   border-radius: 0px;
-  margin-right: 4px;
   background-color: #19add6;
+  justify-content: center;
 }
 .login-submit:hover{
   border: none;

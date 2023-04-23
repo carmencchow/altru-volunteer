@@ -5,7 +5,8 @@ const mongoose = require('mongoose');
 const getNgos = async (req, res) => {
   const query = {}
   try {
-    const ngos = await Ngo.find({}).sort({name: 1})
+    const ngos = await Ngo.find({})
+    // const ngos = await Ngo.find({}).sort({name: 1})
     res.status(200).json(ngos)
     } catch (err){
     console.log(err.message);

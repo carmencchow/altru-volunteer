@@ -47,6 +47,9 @@ const ngoSchema = new Schema({
   },
   event_description: {
     type: String,
+  },
+  image:{
+    type: String,
   }
 }, { timestamps: true });
 

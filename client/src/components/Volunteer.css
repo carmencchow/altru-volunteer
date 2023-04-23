@@ -11,6 +11,17 @@
   padding-top: 40px;
   margin-right: 60px;
 }
+h3{
+  margin: 30px 100px;
+}
+.next::before{
+  content: 'Next >';
+} 
+.next::before{
+  content: '< Previous';
+} 
+
+
 .next, .previous{
   height: 40px;
   cursor: pointer;
@@ -39,6 +50,9 @@ form {
   height: 40px;
   border-radius: 0px;
   font-family: 'Montserrat', sans-serif;
+}
+.contact{
+  padding-top: 20px;
 }
 select, option{
   height: 40px;
@@ -247,4 +261,71 @@ p{
 .button-row{
   display: flex;
   flex-direction: row
+}
+
+
+
+@media (max-width: 599px){
+  .filters{
+    display: flex;
+    flex-direction: column;
+  }
+  input{
+    width: 200px;
+  }
+  .searchBtn{
+    height: 20px;
+    background-color: whitesmoke;
+    border-radius: 1px;
+    padding: 10px;
+    width: 80px;
+    font-size: 12px;
+    margin-left: 20px;
+    margin-top: 15px;
+    color: white;
+    background-color: #716bc4;
+    border: 1px solid #716bc4;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .dropdown, option{
+    width: 100px;
+  }
+  h3{
+    font-size: 16px;
+  }
+  .next::before{
+    content: '>>';
+  }
+  .next::before{
+    content: 'Next >';
+  }
+  .previous{
+    height: 40px;
+    cursor: pointer;
+    color: #19add6;
+    border: 2px solid #19add6;
+    width: 70px;
+    margin-right: 7px;
+    font-family: 'Montserrat', sans-serif;
+  }
+}
+
+
+
+
+@media (min-width: 600px) { 
+  
+}
+
+@media (min-width: 900px) { 
+
+}
+
+@media (min-width: 1200px) {  
+
+}
+
+@media (min-width: 1800px) { 
+
 }

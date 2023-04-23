@@ -8,7 +8,7 @@ import toast, { Toaster } from 'react-hot-toast'
 import Navbar from '../components/Navbar'
 import AmountBtn from '../components/AmountBtn'
 import Form from '../components/Form'
-// import FollowBtn from '../components/FollowBtn';
+import FollowBtn from '../components/FollowBtn';
 import logo from '../assets/altru.png'
 import './Info.css'
 
@@ -82,7 +82,7 @@ const Info = () => {
       <Navbar/>
       <div> 
         <span className="back" onClick={() => navigate(-1)}>Back</span>
-        {/* <FollowBtn ngo={ngo}/> */}
+        <FollowBtn ngo={ngo}/>
         <Toaster position="top-center" toastOption={{ duration: 3000 }}/>
         <span className="header1">Don't have time to volunteer with {ngo.name}?</span>
         <span className="header2">Would you like to make a donation instead?</span>  
