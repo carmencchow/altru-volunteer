@@ -1,6 +1,7 @@
 import React, {useContext} from 'react'
 import { FiltersContext } from '../context/FiltersContext'
 import { NgosContext } from '../context/NgosContext'
+import './Filters.css'
 import axios from 'axios'
 
 const Filters = () => {
@@ -36,7 +37,7 @@ const Filters = () => {
     <div>
       <div className="filters">
         <form className="dropdown">
-          <p>Commitment</p>
+          <p className="commitment">Commitment</p>
           <select value={filters.frequency} onChange={handleFrequencyChange}>  
           <option value="all"> Anytime </option>
           <option value="day">One Day Events</option>
@@ -46,7 +47,7 @@ const Filters = () => {
         </form>
 
         <form className="dropdown">
-          <p>Cause</p>
+          <p className="cause">Cause</p>
           <select value={filters.category} onChange={handleCategoryChange}>
           <option value="all"> All </option>
           <option value="animals">Animals</option>
@@ -57,11 +58,14 @@ const Filters = () => {
           <option value="sports & recreation">Sports & Recreation</option>
           </select>
         </form>
-        
-        <button className="searchBtn" onClick={handleSubmit}>
-          Search
-        </button>
+      
       </div>
+
+      <div className="button-row">
+        <button className="searchBtn" onClick={handleSubmit}>
+          Search</button>
+      </div>
+
     </div>
   )
 }
