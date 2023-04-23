@@ -41,11 +41,13 @@ h2{
   margin: 0 auto;
   justify-content: center;
 }
-.login-input, .email-input{
+input{
   border: 2px solid #19add6;
   margin-bottom: 20px;
   width: 350px;
   height: 50px;
+  margin-top: 0px;
+  margin-bottom: 20px; 
 }
 .login-submit{
   height: 40px;
@@ -74,11 +76,50 @@ h2{
   margin-left: 0px;
 } 
 .register{
-  font-size: 12px;
+  font-size: 14px;
   margin-left: 120px;
 }
 .register:hover{
-  color: #19add6;
-  font-weight: bolder;
+  color: blue;
   cursor: pointer;
 }
+.text{
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+}
+
+@media only screen and (max-width: 600px) {
+  input{
+    width: 200px;
+  }
+  .login-submit{
+    width: 208px;
+  }
+  .no-account{
+    display: none;
+  }
+  .register{
+    font-size: 12px;
+    align-items: right;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  input{
+    width: 400px;
+  }
+  .login-submit{
+    width: 408px;
+  }
+  .no-account{
+    font-size: 16px;
+  }
+  .register{
+    font-size: 16px;
+    align-items: right;
+  }
+
+}
+
+

@@ -67,29 +67,26 @@ const Login = () => {
         <div className="login-card">
           <h2>Login</h2>
           <div className="">
-            <p>Email address</p>
-              <input 
-                name="email-input"
-                type="email" 
-                placeholder="Enter your email" 
-                value={email}   
-                onChange={handleChange}  
-              />
+            <input 
+              name="email-input"
+              type="email" 
+              placeholder="Enter your email" 
+              value={email}   
+              onChange={handleChange}  
+            />
           </div>
 
-          <div className="password-input">
-            <p>Password</p>
-              <input 
-                name="password-input" 
-                type="password" 
-                placeholder="Enter your password" 
-                value={password} 
-                onChange={handleChange}    
-              />
+          <div className="">
+            <input 
+              name="password-input" 
+              type="password" 
+              placeholder="Enter your password" 
+              value={password} 
+              onChange={handleChange}    
+            />
           </div>
           
           <p className="error">{error}</p>
-
 
           <div className="login-div">
             <button type="submit" className="login-submit" onClick={handleSubmit}>Log in</button>
