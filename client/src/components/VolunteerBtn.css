@@ -1,0 +1,50 @@
+.volunteer{
+  margin-top: 0px;
+}
+.volunteer-btn{
+  height: 40px;
+  border: 1px solid purple;
+  color: purple;
+  background-color: white;
+  font-family: 'Montserrat', sans-serif;
+  border-radius: 1px;
+  width: 80px;
+  margin-bottom: 20px;
+}
+.volunteer-btn:hover{
+  border: 2px solid purple;
+}
+
+/* ------- Media Queries ---------- */
+
+@media only screen and (max-width: 320px) {
+  .volunteer-btn{
+    height: 20px;
+    width: 60px;
+    font-size: 14px;
+  }
+  .volunteer{
+    display: row;
+  }
+}
+
+@media only screen and (max-width: 599px) {
+  .volunteer-btn{
+    height: 20px;
+    width: 70px;
+    font-size: 10px;
+    margin-right: 40%;
+  }
+  .show-details{
+    margin-bottom: 20px;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .volunteer-btn{
+    height: 26px;
+    width: 70px;
+    font-size: 12px;
+    margin-right: 40%;
+  }
+}

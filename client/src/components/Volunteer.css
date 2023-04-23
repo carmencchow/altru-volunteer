@@ -41,25 +41,15 @@ h3{
   letter-spacing: 0.5px;
   cursor: pointer;
 }
-.volunteer-btn{
-  height: 40px;
-  border: 1px solid purple;
-  color: purple;
-  background-color: white;
-  font-family: 'Montserrat', sans-serif;
-  border-radius: 1px;
-  padding: 10px;
-  width: 87px;
-}
-.volunteer-btn:hover{
-  border: 2px solid purple;
-}
 .show-details {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   font-size: 70px;
   color: black;
+}
+.show-details p{
+  margin-top: 2px;
 }
 span{
   margin-left: 30px;
@@ -214,11 +204,38 @@ p{
 
 /* ------- Media Queries ------*/
 
+@media only screen and (max-width: 320px) {
+  h3{
+    font-size: 10px;
+  }
+  .display{
+    margin-top: 5%;
+    width: 100vw;
+    margin-left: -10%;
+  }
+  .results-container{
+    width: 100vw;
+    margin-left: 0%;
+  }
+  .show-details p{
+    font-size: 10px;
+  }
+  .ngo-name{
+    font-size: 14px;
+  }
+  .volunteer-btn{
+    width: 60px;
+  }
+}
+
 @media only screen and (max-width: 599px) {
   h3{
     display: flex;
     margin-left: 40px;
     width: 100%;
+    font-size: 14px;
+  }
+  .show-details p{
     font-size: 14px;
   }
   .modal-popup {

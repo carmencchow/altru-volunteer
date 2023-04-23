@@ -1,9 +1,10 @@
 import React from 'react'
+import './VolunteerBtn.css'
 
 const VolunteerBtn = ({ ngo, disabled, clickedBtn, toggleModal }) => 
 {
   return (
-    <div>
+    <div className="volunteer">
       <button disabled={disabled} onClick={() => {
         console.log('Button clicked:', ngo.name, ngo._id)
         toggleModal(ngo)

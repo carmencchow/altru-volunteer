@@ -54,12 +54,8 @@ const Volunteer = () => {
         {ngos && (        
           <div className="pagination">
             <button disabled={currentPage === 1} className="previous" onClick={handlePrevious}>
-              {/* <FcPrevious className="arrow"/> */}
-              {/* Previous */}
             </button>
             <button disabled={currentPage === pageCount} className="next" onClick={handleNext}>
-              {/* Next */}
-              {/* <FcNext className="arrow"/> */}
             </button> 
           </div>
         )}
@@ -84,6 +80,8 @@ const Volunteer = () => {
                       { ngo.event_description ? <p>Event: {ngo.event_description}</p> : null}
                     </div>             
 
+                    </div>      
+
                     <VolunteerBtn
                       ngoId={ngo._id}
                       disabled={user.attending.find(ngo => ngo===ngo.name)}
@@ -95,7 +93,7 @@ const Volunteer = () => {
                     />
                   </div>      
                 </div>     
-                </div>
+                // </div>
               )
             })}
           </div> 
