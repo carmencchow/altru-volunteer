@@ -2,18 +2,14 @@ nav{
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  justify-content: space-between;
-  margin: 0px auto;
-  padding: 0px 20px 0px 20px;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+  padding: 0px 0px 0px 20px; 
   height: 60px;
   background-color: rgb(76, 76, 245);
   color: white;
 }
 .navbar{
   display: flex;
-  width: 100%;
-  flex-direction: row;
+  width: 95%;
   justify-content: space-between;
 }
 .logo{
@@ -29,7 +25,6 @@ nav{
   font-family: 'League Gothic', sans-serif;
   font-size: 28px;
   padding: 8px;
-  margin-right: 10px;
 }
 .logout-btn:hover, .profile-btn:hover{
  color:aqua; 
@@ -39,3 +34,16 @@ nav{
   cursor: pointer;
 }
 
+/* Media Queries */
+
+@media only screen and (min-width: 992px) {
+  .logout-btn, .profile-btn{
+    font-size: 32px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .logout-btn, .profile-btn{
+    font-size: 38px;
+  }
+}
