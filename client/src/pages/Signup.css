@@ -72,9 +72,8 @@ body{
   margin-left: 120px;
 }
 .login:hover{
-  color: #19add6;
+  color: blue;
   font-weight: bolder;
-  cursor: pointer;
 }
 
 
@@ -96,17 +95,12 @@ body{
   input{
     width: 400px;
   }
-  .login-submit{
+  .signup-submit{
     width: 408px;
   }
-  .no-account{
+  .my-account, .login{
     font-size: 16px;
   }
-  .register{
-    font-size: 16px;
-    align-items: right;
-  }
-
 }
 
 
