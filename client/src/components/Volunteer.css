@@ -91,9 +91,9 @@ span{
 }
 
 @media only screen and (max-width: 599px) {
-  h3{
+  .find{
     display: flex;
-    margin-left: 40px;
+    margin-left: 10%;
     width: 100%;
     font-size: 14px;
   }
@@ -173,6 +173,13 @@ span{
   .pagination{
     margin-right: 5%;
   }
+  .find{
+    display: flex;
+    margin-left: 10%;
+    width: 100%;
+    font-size: 14px;
+  }
+
 }
 
 @media only screen and (min-width: 768px) {

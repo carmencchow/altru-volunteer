@@ -46,7 +46,7 @@ const Volunteer = () => {
   return (
     <div>
       <Navbar/>
-        <h3>Find volunteer opportunities:</h3>
+        <h3 className="find">Find volunteer opportunities:</h3>
         <Filters/>
 
         {ngos && (        
