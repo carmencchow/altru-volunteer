@@ -78,12 +78,10 @@ const Volunteer = () => {
                       { ngo.event_description ? <p>Event: {ngo.event_description}</p> : null}
                     </div>             
                   </div>      
-
+ 
                   <VolunteerBtn
-                    ngo={ngo}
-                    disabled={user.attending.find(item => item===ngo.name)}
-                    setClickedBtn={(user.attending).find(item => item===ngo.name)}
-                    toggleModal={toggleModal}
+                    attending={user.attending.find(item => item===ngo.event_description)} 
+                    toggleModal={() => toggleModal(ngo)}
                   />
                   
                   </div>      
