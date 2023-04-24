@@ -89,8 +89,8 @@ const Edit = () => {
               <h3>User Info</h3>
 
               <div className="row">
-                <p>First name:</p>
-                <p>Last name:</p>
+                <p className="first">First name:</p>
+                <p className="last">Last name:</p>
               </div>
 
               <div className="row">
@@ -109,9 +109,12 @@ const Edit = () => {
                 />
               </div>
 
-              <button className="update-btn" onClick={handleUpdate}>Save Changes</button>
-
-              <div><button className="delete-btn" onClick={handleDelete}>Delete Account</button></div>
+              <div className="save-delete-row">
+                <button className="save-btn" onClick={handleUpdate}>Save Changes</button>
+              </div>
+              <div className="save-delete-row">
+                <button className="delete-btn" onClick={handleDelete}>Delete Account</button>
+              </div>
 
             </div> 
           </div>

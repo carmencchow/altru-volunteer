@@ -101,15 +101,15 @@ textarea:focus, .donation-input:focus{
 
 @media only screen and (max-width: 320px) {
   .donation-card{
-    max-width: 400px;
-    
+    border: none;
   }
-  .donation-options{
-  }
-
   .header1, .header2{
     font-size: 12px;
     margin-bottom: 10px;
+  }
+  .span{
+    width: 90px;
+    height: 30px;
   }
 
 }

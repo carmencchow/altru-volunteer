@@ -5,31 +5,40 @@
 .user-profile{
   display: flex;
   flex-direction: column;
-}
-.edit-row{
-  display: flex;
-  flex-direction: row;
   margin-top: 0px;
+}
+.user-profile p{
+  margin-top: 0px;
+}
+.follow-heading{
+  margin-left: 0px;
+  margin-top: 30px;
+}
+.follow-list{
+  font-size: 14px;
 }
 .contact{
   font-weight: bold;
 }
+.user-profile p{
+  font-size: 14px;
+}
 .user-image{
   margin-left: 200px;
 }
-.avatar{
-  border-radius: 50%;
-  border: 1px solid blue;
-  width: 100px;
-  height: 100px;
-}
-.unfollow{
+.unfollow-btn{
+  margin-left: 0px;
+  border: none;
+  color: blue;
+  font-size: 12px;
   cursor: pointer;
-  width: 100px;
-}
-.unfollow:hover{
-  color: purple;
 }
 .edit-btn{
   width: 100px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+.edit-btn:hover{
+  color: white;
+  background-color: blueviolet;
 }

@@ -46,25 +46,22 @@ const ProfileInfo = () => {
     
     <div>  
       <h2>Personal Info</h2>
-      <div className="edit-row">    
         <div className="user-profile">  
-          <p className="contact"></p>
           <p>User: {user.firstname} {user.lastname}</p>
           <p>Email: {user.email}</p>
           <p>Member since: {user.createdAt}</p>
           <button onClick={handleEdit} 
           className="edit-btn">Edit Profile</button>
         </div>        
-      </div>
 
       <div className="following">
-        <h3>Organizations followed:</h3>
+        <h2 className="follow-heading">Organizations followed:</h2>
  
         <div className="organizations">
           {(user.following).map(follow => (
-            <div>
+            <div className="follow-list">
               {follow}
-              <button onClick={
+              <button className="unfollow-btn" onClick={
                 async () => await handleUnfollow(follow)}>Unfollow</button>
             </div>
           ))}

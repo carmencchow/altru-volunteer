@@ -69,7 +69,7 @@ const Info = () => {
       headers,
       body: JSON.stringify(body)
     }).then(response => {
-    })
+  })
     .catch(err => console.log(err));
   }
 

@@ -3,7 +3,6 @@ import './Form.css'
 
 const Form = () => {
   const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
   const [address, setAddress] = useState('');
   const [province, setProvince] = useState('');
   const [city, setCity] = useState('');
@@ -23,10 +22,6 @@ const Form = () => {
 
   const handlePostalInput = (e) => {
     setPostal(e.target.value)
-  }
-
-  const handleEmailInput = (e) => {
-    setEmail(e.target.value)
   }
 
   const handleProvinceInput = (e) => {
@@ -55,9 +50,6 @@ const Form = () => {
         <p>ZIP Code:</p>
         <input type="text" className="form-control" value={postal}
         onChange={handlePostalInput}/>
-        <p>Email: </p>
-        <input type="text" className="form-control" value={email}
-        onChange={handleEmailInput}/>
       </div>        
     </div>
   )

@@ -17,10 +17,23 @@
   border-bottom: none;
   width: 33%;
 }
+.last{
+  margin-left: 150px;
+}
 .row{
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+}
+.save-delete-row{
+  display: flex;
+  flex-direction: row-reverse;
+}
+.save-btn, .delete-btn{
+  width: 100px;
+  height: 20px;
+  font-size: 12px;
+  margin-top: 10px;
+  justify-content: flex-end;
 }
 
 .form-control{
@@ -36,13 +49,11 @@
   border: 1px solid #ced4da;
   border-radius: 0.25rem;
 }
-.update-btn{
+.delete-btn, .update-btn{
   cursor: pointer;
 }
-.delete-btn{
-  height: 30px;
-  margin-right: 20px;
-  flex-direction: row;
-  justify-content: flex-end;
-
+.delete-btn:hover, .update-btn:hover{
+  color: white;
+  background-color: blueviolet;
+  cursor: pointer;
 }
