@@ -154,7 +154,7 @@ span{
     margin: 2%;
   }
   .ngo-name{
-    font-size: 26px;
+    font-size: 22px;
   }
 }
 
@@ -179,6 +179,9 @@ span{
     width: 100%;
     font-size: 14px;
   }
+  .ngo-name{
+    font-size: 22px;
+  }
 
 }
 
@@ -186,5 +189,9 @@ span{
   .pagination{
     margin-right: 8%;
   }
+  .ngo-name{
+    font-size: 26px;
+  }
+
 }
 
