@@ -78,6 +78,27 @@ body{
 
 /* Media Queries */
 
+@media only screen and (max-width: 320px) {
+  .firstname, .lastname, .email, .password, .confirm{
+    width: 300px;
+    height: 20px;
+    margin-top: 0px;
+    margin-bottom: 0px; 
+  }
+  .signup-submit{
+    height: 40px;
+    cursor: pointer;
+    width: 355px;
+    color: white;
+    font-size: 16px;
+    border: 2px solid #19add6;
+    border-radius: 0px;
+    margin-right: 4px;
+    background-color: #19add6;
+  }
+
+}
+
 @media only screen and (max-width: 600px) {
   .signup-submit{
     width: 208px;

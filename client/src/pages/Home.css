@@ -75,7 +75,7 @@ body{
 
 @media only screen and (max-width: 320px) {
   .home-text{
-    height: 110px;
+    height: 90px;
     margin-top: 5px;
     width: 100%;
   }
@@ -89,6 +89,10 @@ body{
     text-align: center;
     font-style: normal;
     margin-top: 0px;
+  }
+  .login-btn, .signup-btn{
+    font-size: 14px;
+    border: none;
   }
 }
 

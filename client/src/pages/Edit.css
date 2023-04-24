@@ -4,7 +4,7 @@
   font-size: 20px;
   padding: 20px 30px;
   cursor: pointer;
-  box-sizing: content-box;
+  /* box-sizing: content-box; */
 }
 .active-tabs{
   background-color: rgb(153, 153, 243);
@@ -59,3 +59,31 @@
   border-radius: 3px;
   cursor: pointer;
 }
+
+/* Media Queries */
+
+@media only screen and (max-width: 320px) {
+  .active-tabs{
+    font-size: 14px;
+    color: blue;
+    text-decoration: underlined;
+    border-bottom: 1px solid blue;
+    background-color: white;
+    width: 25%;
+  }
+  .tabs{
+    font-size: 14px;
+    color: black;
+    width: 25%;
+  }
+}
+
+@media only screen and (max-width: 599px) {}
+
+@media only screen and (min-width: 600px) {}
+
+@media only screen and (min-width: 768px) {}
+
+@media only screen and (min-width: 992px) {}
+
+@media only screen and (min-width: 1200px) {}

@@ -46,16 +46,16 @@ const ProfileInfo = () => {
     
     <div>  
       <h2>Personal Info</h2>
-        <div className="user-profile">  
+        <div className="user-profile"> 
           <p>User: {user.firstname} {user.lastname}</p>
           <p>Email: {user.email}</p>
-          <p>Member since: {user.createdAt}</p>
+          <p>Member since: {String(user.createdAt).slice(0, 10)}</p>
           <button onClick={handleEdit} 
           className="edit-btn">Edit Profile</button>
         </div>        
 
       <div className="following">
-        <h2 className="follow-heading">Organizations followed:</h2>
+        <h3 className="follow-heading">Following</h3>
  
         <div className="organizations">
           {(user.following).map(follow => (

@@ -25,7 +25,7 @@ const DonationsInfo = () => {
               <div className="edit-amount" onClick={() => {
                 setOpenInput(true);
               }}>
-                <button className="edit">Edit goal amount</button>
+                <button className="edit">Edit</button>
               </div>
             ) : (
               <div></div>
@@ -52,11 +52,11 @@ const DonationsInfo = () => {
         </p>
 
         <h4>Total amount donated: 
-            <p>${user.donations.map(Number).reduce((a,b) =>  a + b, 0)}</p>
+            <p className="amount-donated">${user.donations.map(Number).reduce((a,b) =>  a + b, 0)}</p>
          </h4>
         
         <h4>Amount needed to reach donation goal: 
-          <p>${user.goalAmount - user.donations.map(Number).reduce((a,b) => a + b, 0)}</p>
+          <p className="amount-needed">${user.goalAmount - user.donations.map(Number).reduce((a,b) => a + b, 0)}</p>
         </h4>
 
       </div>

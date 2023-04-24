@@ -27,13 +27,37 @@ p {
   height: 20px;
   width: 150px;
 }
+.amount-donated, .amount-needed{
+  font-size: 14px;
+  font-weight: normal;
+}
 .edit{
   display: flex;
   flex-direction: row;
 }
-/* .amount{
-  margin-right: 5px;
-} */
+.edit:hover{
+  color: white;
+  background-color: blueviolet;
+  border: 2px solid blueviolet;
+  border-radius: 2px;
+}
+
 .ngo{
   margin-left: 0px;
+}
+
+
+/* Media Queries */
+
+@media only screen and (max-width: 320px) {
+ 
+  h2, h4, .amount-donated, .amount-needed{
+    font-size: 10px;
+  }
+  .edit{
+    width: 40px;
+    font-size: 10px;
+    justify-content: center;
+  }
+
 }

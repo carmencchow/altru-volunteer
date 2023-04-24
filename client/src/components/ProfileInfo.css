@@ -13,6 +13,7 @@
 .follow-heading{
   margin-left: 0px;
   margin-top: 30px;
+  margin-bottom: 5px;
 }
 .follow-list{
   font-size: 14px;
@@ -41,4 +42,34 @@
 .edit-btn:hover{
   color: white;
   background-color: blueviolet;
+  border: 2px solid blueviolet;
+  border-radius: 2px;
+}
+
+/* Media Queries */
+
+@media only screen and (max-width: 320px) {
+ 
+  .user-profile p{
+    margin-top: 0px;
+    font-size: 10px;
+  }
+  .follow-list, .unfollow-btn{
+    font-size: 10px;
+  }
+  .edit-btn{
+    width: 80px;
+    font-size: 10px;
+  }
+  .follow-heading{
+    margin-left: 0px;
+    margin-top: 50px;
+    margin-bottom: 5px;
+  }
+}
+
+@media only screen and (max-width: 599px) {
+  .follow-heading{
+    display:flex;
+  }
 }
