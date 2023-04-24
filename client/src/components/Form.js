@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import './Form.css'
 
 const Form = () => {
   const [name, setName] = useState('');
@@ -46,15 +47,15 @@ const Form = () => {
         <p>City:</p>
         <input type="text" className="form-control" value={city}
         onChange={handleCityInput}/>
-        <p>Province/State:</p>
+        <p>State:</p>
         <input type="text" className="form-control" value={province}
         onChange={handleProvinceInput}/>
       </div>
       <div className="column">
-        <p>Postal/ZIP Code:</p>
+        <p>ZIP Code:</p>
         <input type="text" className="form-control" value={postal}
         onChange={handlePostalInput}/>
-        <p>Email address: </p>
+        <p>Email: </p>
         <input type="text" className="form-control" value={email}
         onChange={handleEmailInput}/>
       </div>        

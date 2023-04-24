@@ -1,4 +1,4 @@
-pbody{
+body{
   margin: 0;
   padding: 0;
   box-sizing: border-box; 
@@ -90,6 +90,22 @@ input{
 }
 
 /* Media Queries */
+
+@media only screen and (max-width: 320px) {
+  input{
+    width: 160px;
+  }
+  .login-submit{
+    width: 160px;
+  }
+  .no-account{
+    display: none;
+  }
+  .register{
+    font-size: 12px;
+    align-items: right;
+  }
+}
 
 @media only screen and (max-width: 600px) {
   input{

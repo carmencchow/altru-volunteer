@@ -1,9 +1,10 @@
-import React, {useState, useContext} from 'react'
+import React, {useContext} from 'react'
 import axios from 'axios'
 import { AuthContext } from '../context/AuthContext'
 import image from '../assets/volunteer.jpg'
 import { getUser} from '../utils/getUser'
 import { GrFormClose } from 'react-icons/gr'
+import './Modal.css'
 
 const Modal = ({ confirm, setConfirm, openModal, setNgoModal, setOpenModal, ngoModal}) => {
   const { user, setUser } = useContext(AuthContext);  
@@ -50,44 +51,31 @@ const Modal = ({ confirm, setConfirm, openModal, setNgoModal, setOpenModal, ngoM
   }
 
   return (
-    <div>
-      <div className="modal">
-        <div className="modal-background">
-          <div className="modal-popup">
-            <div className="modal-content">
-              <div className="left-side">
-                <img className="modal-image" src={image} alt="volunteers"/> 
-              </div>
-
-              <div className="right-side">
-                <div className="close-btn-row"><GrFormClose className="close-btn" onClick={toggleModal}/>
-                {/* <div className="close-btn-row"><GrFormClose className="close-btn" onClick = {() => setNgoModal(!openModal)}/> */}
-                </div>
-
-                <div className="right-side-content">
-                  <p className="registering">You are registering for this event: </p>
-                  <p className="event-name">{ngoModal.event_description}</p>
-                    <p className="event-org"> {ngoModal.name} </p>
-                  <p className="text">Date: <span>{ngoModal.event_date}</span></p>
-                  <p className="text">Time: <span>{ngoModal.event_time}</span></p>  
-                  <p className="contact">Please enter your contact info below</p>
-
-                  <div className="contact-info">
-                    <input className="name" type="text" name="name" placeholder="Full name"/>
-                    <input className="email" type="text" name="email" placeholder="Email"/>
-                  </div>
-
-                  <div className="confirm" onClick={() => handleRegister(ngoModal)}>Confirm</div>
-                  <p>{confirm}</p>
-                </div>
-              </div>
-
-            </div>
-          </div>
+    <div className="modal-background">
+      <div className="modal-popup">
+        <div className="close-btn-row"><GrFormClose className="close-btn" onClick={toggleModal}/>
         </div>
+
+        <div className="modal-content"> 
+          <p className="registering">You are registering for this event: </p>
+          <p className="event-name">{ngoModal.event_description}</p>
+          <p className="event-org">{ngoModal.name}</p>
+          <p className="text">Date: <span>{ngoModal.event_date}</span></p>
+          <p className="text">Time: <span>{ngoModal.event_time}</span></p>  
+          <p className="contact">Please enter your contact info below</p>
+        </div>
+
+        <div className="contact-info">
+          <input className="name" type="text" name="name" placeholder="Full name"/>
+          <input className="email" type="text" name="email" placeholder="Email"/>
+        </div>
+
+        <div className="confirm-btn" onClick={() => handleRegister(ngoModal)}>Confirm</div>
+        <p>{confirm}</p>
+        </div>
+
       </div>
-    </div>
-  )
-}
+    )
+  }
 
 export default Modal

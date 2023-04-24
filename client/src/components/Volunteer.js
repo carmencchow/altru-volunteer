@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../context/AuthContext'
 import { NgosContext } from '../context/NgosContext'
-import { FcNext, FcPrevious } from 'react-icons/fc'
 import VolunteerBtn from '../components/VolunteerBtn'
 import Filters from '../components/Filters'
 import Navbar from '../components/Navbar'
@@ -17,14 +16,13 @@ const Volunteer = () => {
   const [ confirm, setConfirm ] = useState('')
   const [ openModal, setOpenModal ] = useState(false)
   const [ ngoModal, setNgoModal ] = useState(null)
-  const [clickedBtn, setClickedBtn] = useState(false)
+  const [ clickedBtn, setClickedBtn ] = useState(false)
   const navigate = useNavigate();
 
-  
   const toggleModal = (ngo) => {
     console.log('Card opened:', ngo.name, ngo._id)
     setNgoModal(ngo)
-    setOpenModal(!openModal);
+    setOpenModal(!openModal)
     setClickedBtn(!clickedBtn)
   }
 
@@ -79,21 +77,17 @@ const Volunteer = () => {
                       { ngo.event_time ? <p>Time: {ngo.event_time}</p> : null}
                       { ngo.event_description ? <p>Event: {ngo.event_description}</p> : null}
                     </div>             
+                  </div>      
 
-                    </div>      
-
-                    <VolunteerBtn
-                      ngoId={ngo._id}
-                      disabled={user.attending.find(ngo => ngo===ngo.name)}
-                      clickedBtn={user.attending.find(ngo => ngo===ngo.name)}
-                      // disabled={user.attending.find(ngo => ngo===ngo.event_description)}
-                      // clickedBtn={user.attending.find(ngo => ngo===ngo.event_description)}
-                      toggleModal={toggleModal}
-                      ngo={ngo}
-                    />
+                  <VolunteerBtn
+                    ngo={ngo}
+                    disabled={user.attending.find(item => item===ngo.name)}
+                    setClickedBtn={(user.attending).find(item => item===ngo.name)}
+                    toggleModal={toggleModal}
+                  />
+                  
                   </div>      
                 </div>     
-                // </div>
               )
             })}
           </div> 
