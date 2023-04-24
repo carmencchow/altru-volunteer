@@ -12,6 +12,7 @@ const Edit = () => {
   const { user, setUser } = useContext(AuthContext)
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
+  const [email, setEmail] = useState('');
   const [toggleState, setToggleState] = useState(1);
 
   const toggletabs = (idx) => {
@@ -26,10 +27,12 @@ const Edit = () => {
     setLastname(e.target.value)
   }
 
+  const handleEmail = (e) => {
+    setEmail(e.target.value)
+  }
+
   const handleUpdate = async () => {
     try {
-      // console.log("Saving changes", firstname, lastname);
-
       const token = localStorage.getItem("token");
       if (!token) {
         throw new Error("No token found in localStorage");
@@ -40,7 +43,8 @@ const Edit = () => {
 
         { 
           firstname: `${firstname}`,
-          lastname: `${lastname}` 
+          lastname: `${lastname}`,
+          email: `${email}`, 
         },
         {
           method: "PUT",
@@ -53,7 +57,7 @@ const Edit = () => {
       const data = res.data;
       console.log('Profile updated:', user.firstname, user.lastname, user.email);
       await getUser(user._id, setUser);
-      // navigate('/profile')
+      navigate('/profile')
     } catch (err) {
       console.log(err);
     }
@@ -91,6 +95,7 @@ const Edit = () => {
               <div className="row">
                 <p className="first">First name:</p>
                 <p className="last">Last name:</p>
+                <p className="last">Email:</p>
               </div>
 
               <div className="row">
@@ -107,6 +112,13 @@ const Edit = () => {
                   value={lastname}
                   onChange={handleLastname}
                 />
+
+                <input type="email" 
+                  className="form-control"
+                  placeholder='' 
+                  value={email}
+                  onChange={handleEmail}
+                />    
               </div>
 
               <div className="save-delete-row">

@@ -49,11 +49,13 @@
   border: 1px solid #ced4da;
   border-radius: 0.25rem;
 }
-.delete-btn, .update-btn{
+.delete-btn, .save-btn{
   cursor: pointer;
 }
-.delete-btn:hover, .update-btn:hover{
+.delete-btn:hover, .save-btn:hover{
   color: white;
-  background-color: blueviolet;
+  background-color: #9999f3;
+  border: 2px solid #9999f3;
+  border-radius: 3px;
   cursor: pointer;
 }

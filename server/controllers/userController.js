@@ -44,11 +44,12 @@ const deleteProfile = async (req, res) => {
 // UPDATE user
 const editProfile = async (req, res) => {
   try {
-    const { firstname, lastname } = req.body
+    const { firstname, lastname, email } = req.body
     console.log(firstname, lastname, req.params)
     const user = await User.findById({ _id: req.params.id });
     user.firstname = firstname;
     user.lastname = lastname;
+    user.email = email;
     await user.save();
     return res.status(200).send({ message: "Profile updated", user });
   
