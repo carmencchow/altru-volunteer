@@ -83,7 +83,7 @@ const Volunteer = () => {
                     attending={user.attending.find(item => item===ngo.event_description)} 
                     toggleModal={() => toggleModal(ngo)}
                   />
-                  
+                
                   </div>      
                 </div>     
               )

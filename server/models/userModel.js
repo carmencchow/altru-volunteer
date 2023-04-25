@@ -55,10 +55,17 @@ const userSchema = new Schema({
  calendar: {
   type: [String],
 },
-
+// attending: [
+//   {
+//     type: mongoose.Schema.Types.ObjectId,
+//     ref: "ngo",
+//   },
+// ],
   attending: {
     type: Array,
   }
+
+
 }, { timestamps: true });
 
 module.exports = mongoose.model('User', userSchema);

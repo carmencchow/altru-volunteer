@@ -22,13 +22,6 @@ const ngoSchema = new Schema({
   amount_needed: {
     type: Number,
   },
-  volunteers: {
-    type: Boolean,
-    default: true,
-  },
-  num_volunteers: {
-    type: Number,
-  },
   commitment: {
     type: String,
   },
@@ -46,9 +39,6 @@ const ngoSchema = new Schema({
     type: String, 
   },
   event_description: {
-    type: String,
-  },
-  image:{
     type: String,
   }
 }, { timestamps: true });

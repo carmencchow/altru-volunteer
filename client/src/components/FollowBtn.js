@@ -38,12 +38,8 @@ const FollowBtn = ({ ngo }) => {
 
   return (
     <div>
-      <button 
-        disabled={disabled} 
-        className="follow" 
-        onClick={handleFollow}>
-        {(user.following).filter(follow => follow !==ngo.name) ? 
-          `Following` : `Follow ${ngo.name}`}
+      <button disabled={disabled} className="follow" onClick={handleFollow}>
+        {(user.following).find(item => item===ngo.name) ? `Following` : `Follow ${ngo.name}`}
       </button>
     </div>
   )
