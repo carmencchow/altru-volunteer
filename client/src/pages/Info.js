@@ -84,8 +84,10 @@ const Info = () => {
         <span className="back" onClick={() => navigate(-1)}>Back</span>
         <FollowBtn ngo={ngo}/>
         <Toaster position="top-center" toastOption={{ duration: 3000 }}/>
-        <span className="header1">Don't have time to volunteer
-        with {ngo.name}?  Consider donating instead.</span>  
+        <div className="header-text">
+          <span className="header1">Don't have time to volunteer
+          with {ngo.name}?  Consider donating instead.</span>  
+        </div>
       </div>
 
       <div className="donation-card">

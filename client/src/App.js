@@ -14,8 +14,8 @@ import './App.css';
 
 function App() {
   return (
-    <NgosProvider> 
-      <BrowserRouter>
+    <BrowserRouter>
+      <NgosProvider> 
         <AuthContextProvider>
           <FiltersProvider>
             <Routes>
@@ -30,8 +30,8 @@ function App() {
             {/* <Footer/> */}
           </FiltersProvider>
         </AuthContextProvider>
-      </BrowserRouter>
-    </NgosProvider>
+      </NgosProvider>
+    </BrowserRouter>
   );
 }
 

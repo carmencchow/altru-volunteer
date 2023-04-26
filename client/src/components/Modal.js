@@ -45,6 +45,7 @@ const Modal = ({ confirm, setConfirm, openModal, setNgoModal, setOpenModal, ngoM
     const data = res.data;
     console.log('New Event added: ', data.results.attending);
     await getUser(user._id, setUser);
+    setOpenModal(false);
     } catch (e) {
     console.log(e);
     }

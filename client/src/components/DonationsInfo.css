@@ -37,8 +37,6 @@ p {
 }
 .edit:hover{
   color: white;
-  background-color: blueviolet;
-  border: 2px solid blueviolet;
   border-radius: 2px;
 }
 

@@ -1,8 +1,12 @@
 button{
   cursor: pointer;
 }
-.header1, .header2{
+.header1{
   margin-bottom: 10px;
+  margin-left: 10px;
+}
+.header-text{
+  border: 1px solid orangered;
 }
 .follow{
   cursor: pointer;
@@ -10,7 +14,7 @@ button{
   margin-bottom: 20px;
   padding: 10px;
   border-radius: 20px;
-  border: 2px solid lightblue;
+  border: 2px solid rgb(131, 216, 244);
 }
 .confirmation{
   font-size: 20px;

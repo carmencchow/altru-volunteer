@@ -22,21 +22,6 @@ const userSchema = new Schema({
     lowercase: true,
     required: true, 
   },
-  address: {
-    type: String,
-  },
-  state: {
-    type: String,
-  },
-  city: {
-    type: String,
-  },
-  zipcode: {
-    type: Number,
-  },
-  image: {
-    type: String,
-  },
   goalAmount: {
     type: Number,
   },

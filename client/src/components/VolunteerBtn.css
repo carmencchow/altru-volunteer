@@ -14,6 +14,12 @@
 .volunteer-btn:hover{
   border: 2px solid purple;
 }
+.volunteer-btn:disabled{
+  border: 1px solid purple;
+  color: white;
+  background-color: rgb(209, 205, 205);
+  border: none;
+}
 
 /* ------- Media Queries ---------- */
 

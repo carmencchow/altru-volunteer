@@ -6,17 +6,14 @@ const eventSchema = new Schema(
   name: {
     type: String,
   },
-  location: { 
-    type: String, 
-  },
   date: {
     type: String,
   },
   time: {
     type: String,
   },
-  num_volunteers: {
-    type: Number, 
+  description: {
+    type: String,
   },
   parentNgo: [
     { 

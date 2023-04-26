@@ -8,20 +8,10 @@ const ngoSchema = new Schema({
   category: {
     type: Array,
   }, 
-  website: {
-    type: String,
-  },
   favorite: {
     type: Boolean,
     default: false
   },  
-  donations: {
-    type: Boolean,
-    default: true,
-  }, 
-  amount_needed: {
-    type: Number,
-  },
   commitment: {
     type: String,
   },

@@ -6,6 +6,7 @@ const Form = () => {
   const [address, setAddress] = useState('');
   const [province, setProvince] = useState('');
   const [city, setCity] = useState('');
+  const [country, setCountry] = useState('');
   const [postal, setPostal] = useState('');
 
   const handleNameInput = (e) => {
@@ -27,32 +28,40 @@ const Form = () => {
   const handleProvinceInput = (e) => {
     setProvince(e.target.value)
   }
+
+  const handleCountry = (e) => {
+    setCountry(e.target.value)
+  }
+
   return (
 
     <div className="donor-info">
       <h3>Donor Information</h3>
-      <div className="column">
-        <p>Name:</p>
-        <input type="text" className="form-control" value={name} onChange={handleNameInput}/>
-        <p>Address:</p>
-        <input type="text" className="form-control" value={address}
-        onChange={handleAddressInput}/>
-      </div>
-      <div className="column">
-        <p>City:</p>
-        <input type="text" className="form-control" value={city}
-        onChange={handleCityInput}/>
-        <p>State:</p>
-        <input type="text" className="form-control" value={province}
-        onChange={handleProvinceInput}/>
-      </div>
-      <div className="column">
-        <p>ZIP Code:</p>
-        <input type="text" className="form-control" value={postal}
-        onChange={handlePostalInput}/>
+        <div className="column">
+          <p>Name:</p>
+          <input type="text" className="form-control" value={name} onChange={handleNameInput}/>
+          <p>Address:</p>
+          <input type="text" className="form-control" value={address}
+          onChange={handleAddressInput}/>
+        </div>
+        <div className="column">
+          <p>City:</p>
+          <input type="text" className="form-control" value={city}
+          onChange={handleCityInput}/>
+          <p>State:</p>
+          <input type="text" className="form-control" value={province}
+          onChange={handleProvinceInput}/>
+        </div>
+        <div className="column">
+          <p>ZIP Code:</p>
+          <input type="text" className="form-control" value={postal}
+          onChange={handlePostalInput}/>
+          <p>Country:</p>
+          <input type="text" className="form-control" value={country}
+          onChange={handleCountry}/>
+        </div>        
       </div>        
-    </div>
-  )
-}
+    )
+  }
 
 export default Form
