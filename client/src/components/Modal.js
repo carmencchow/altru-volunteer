@@ -54,29 +54,32 @@ const Modal = ({ confirm, setConfirm, openModal, setNgoModal, setOpenModal, ngoM
   return (
     <div className="modal-background">
       <div className="modal-popup">
+      <div className="modal-content"> 
+          <div className="modal-innercontent">
         <div className="close-btn-row"><GrFormClose className="close-btn" onClick={toggleModal}/>
         </div>
-
-        <div className="modal-content"> 
-          <p className="registering">You are registering for this event: </p>
           <p className="event-name">{ngoModal.event_description}</p>
           <p className="event-org">{ngoModal.name}</p>
           <p className="text">Date: <span>{ngoModal.event_date}</span></p>
           <p className="text">Time: <span>{ngoModal.event_time}</span></p>  
           <p className="contact">Please enter your contact info below</p>
-        </div>
-
+      
         <div className="contact-info">
-          <input className="name" type="text" name="name" placeholder="Full name"/>
-          <input className="email" type="text" name="email" placeholder="Email"/>
+          <div className="modal-inputs">
+          <input className="modal-input" type="text" name="name" placeholder="  Name"/>
+          <input className="modal-input" type="text" name="email" placeholder="  Email"/>
+        </div></div>
+
+        <div className="button-container">
+          <div className="confirm-btn" onClick={() => handleRegister(ngoModal)}><p>Confirm</p></div>
+          <p>{confirm}</p>
+          </div>
         </div>
 
-        <div className="confirm-btn" onClick={() => handleRegister(ngoModal)}>Confirm</div>
-        <p>{confirm}</p>
         </div>
-
       </div>
-    )
-  }
+    </div>
+  )
+}
 
 export default Modal

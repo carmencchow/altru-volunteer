@@ -9,21 +9,24 @@
   bottom: 0;
 }
 .modal-popup {
-  border: 3px solid palevioletred;
+    border: 5px solid yellow;
   height: 90vh;
   max-height: 500px;
   width: 95vw;
-  max-width: 900px;
+  max-width: 500px;
   position: absolute;
   left: 50%;
   top: 50%;
   color: black;
   transform: translate(-50%, -50%);
-  background-color: white;
+  background-color: #8fe6e0;
+  font-family: 'Domine', serif;
 }
 .modal-content{
-  margin: 5%;
-  border: 1px solid orangered;
+  margin: 4%;
+}
+.modal-innercontent{
+  padding: 0% 4% 2% 4%;
 }
 .close-btn-row{
   display: flex;
@@ -34,102 +37,78 @@
   width: 20px;
   cursor: pointer;
   font-size: 20px;
-  margin-right: 20px;
-  margin-top: 20px;
   padding: 5px;
   background-color: rgba(0, 0, 0, 0.1);
   border-radius: 50%;
 }
-.registering{
-  font-size: 20px;
-  color: black;
-  margin-top: 0px;
-  font-family: 'Montserrat', sans-serif;
-}
 .contact-info{
+  margin: 0 auto;
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
-  width: 480px;
   justify-content: center;
-  margin-top: 10px;
 }
-input.name, input.email{
-  width: 200px;
+.modal-inputs{
+  margin: 0 auto;
+  padding-top: 10px;
+}
+.modal-input{
+  justify-content: center;
+  width: 160px;
   height: 30px;
-  margin-top: 5px;
+  margin-bottom: 3px;
   border-radius: none;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  margin-left: 5px;
+}
+.button-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 .confirm-btn{
-  color:#19add6;
-  font-size: 12px;
+  color: white;
+  margin-top: 10px;
+  background-color: #19add6;
+  font-size: 14px;
   height: 30px;
+  width: 75%;
   display: flex;
-  justify-content: flex-end;
-  margin-right: 7%;
-  border: none;
+  justify-content: center;
 }
 .confirm-btn:hover{
   cursor: pointer;
   font-weight: bolder;
 }
+.confirm-btn p{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-left: 12px;
+}
 p{
-  font-size: 12px;
+  font-size: 14px;
   padding: 0px;
-  margin-bottom: 5px;
+  margin-top: 5px;
 }
 .event-name{
-  font-size: 20px;
+  font-size: 30px;
   font-weight: bolder;
 }
 .event-org{
   color: black;
   font-weight: normal;
-  font-size: 16px;
-}
-/* 
-@media only screen and (min-width: 320px) {
-  .registering{
-    font-size: 10px;
-  }
-  .modal-popup{
-    width: 100vw;
-  }
-  .event-name{
-    font-size: 12px;
-    font-weight: normal;
-  }
-  .contact{
-    font-weight: normal;
-    font-size: 12px;
-    margin-top: 0px;
-  }
-  .text{
-    margin-top: 0px;
-  }
-  input.name, input.email{
-    width: 30%;
-  }
-  .contact-info {
-    justify-content: left;
-    flex-direction: column;
-  }
-  .confirm-btn{
-    padding-right: 10%;
-  }
+  font-size: 20px;
 }
 
+/* Media Queries */
+
 @media only screen and (min-width: 320px) {
-  .registering{
-    font-size: 10px;
-  }
-  .modal-popup{
-    width: 100vw;
+  .modal-popup {
+    height: 50%;
+    width: 68%;
+    position: absolute;
   }
   .event-name{
-    font-size: 12px;
+    font-size: 24px;
     font-weight: normal;
   }
   .contact{
@@ -149,11 +128,29 @@ p{
   }
   .confirm-btn{
     padding-right: 10%;
+  }
+  .event-org{
+    color: black;
+    font-weight: normal;
+    font-size: 16px;
   }
 }
 
 @media only screen and (max-width: 600px) {
-
+  .modal-popup {
+    height: 58%;
+    width: 68%;
+    position: absolute;
+  }
+  .event-name{
+    font-size: 24px;
+    font-weight: bolder;
+  }
+  .event-org{
+    color: black;
+    font-weight: normal;
+    font-size: 14px;
+  }
 }
 
 @media (min-width: 600px) {
@@ -172,62 +169,14 @@ p{
     width: 70%;
     position: absolute;
   }
-} 
-
-@media only screen and (min-width: 768px) {
-  .registering{
-    font-size: 14px;
-  }
   .event-name{
-    font-size: 16px;
-    font-weight: normal;
-  }
-  .contact{
-    font-weight: normal;
-    font-size: 12px;
-    margin-top: 0px;
-  }
-  .text{
-    margin-top: 0px;
-    font-size: 14px;
-  }
-  input.name, input.email{
-    width: 30%;
-  }
-  .contact-info {
-    justify-content: left;
-    flex-direction: row;
-  }
-  .confirm{
-    margin-right: 20%;
-  }
-}
-
-@media only screen and (min-width: 900px) {
-  .contact-info {
-    justify-content: left;
-    flex-direction: row;
-  }
-  .registering{
-    font-size: 16px;
-  }
-  .event-name{
-    font-size: 20px;
-    font-weight: normal;
+    font-size: 26px;
+    font-weight: bolder;
   }
   .event-org{
-    font-size: 18px;
-  }
-  .contact{
+    color: black;
     font-weight: normal;
-    font-size: 14px;
-    margin-top: 0px;
+    font-size: 16px;
   }
-  .text{
-    margin-top: 0px;
-    font-size: 18px;
-  }
-  input.name, input.email{
-    width: 35%;
-  }
-} */
+} 
+
