@@ -27,12 +27,14 @@ const Modal = ({ confirm, setConfirm, openModal, setNgoModal, setOpenModal, ngoM
         throw new Error("No token found in localStorage");
       }
       const res = await axios.post(
-        `http://localhost:5000/api/user/${user._id}/add-event`,        
+        `http://localhost:5000/api/user/${user._id}/add-event`,     
+        // `http://localhost:5000/api/card/?listId=${listId}`,
+     
+        
+
         { 
-          // event: `${ngoModal.event_description}`, 
-          // name: `${ngoModal.name}`,
-          // date: `${ngoModal.event_date}`
           id: `${ngoModal._id}`
+          // title: `${input}` 
         },
         {
           method: "POST",

@@ -1,5 +1,5 @@
 const express = require('express')
-const { createNgo, createEvent, getNgos, getNgo, getFiltered, deleteNgo, updateNgo } = require('../controllers/ngoController')
+const { createNgo, getNgos, getNgo, getFiltered, deleteNgo, updateNgo } = require('../controllers/ngoController')
 const auth = require('../middleware/auth')
 const router = express.Router();
 
@@ -8,7 +8,6 @@ router.get('/', getNgos)
 router.get('/:id', getNgo) 
 router.get('/:frequency/:category', getFiltered) 
 router.post('/', createNgo)
-router.post('/event', createEvent)
 router.delete('/:id', deleteNgo)
 router.put('/:id', updateNgo)
 

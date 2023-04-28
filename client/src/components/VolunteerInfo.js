@@ -9,12 +9,11 @@ const VolunteerInfo = () => {
     <div className="container">
       <h2>Events</h2>
       <p className="event-heading">
-        <p>Name</p>
+        <p>Namead</p>
         <p>Organization</p>
         <p>Date</p>
       </p>
-
-{/* // Make  a new request Refetch data another network call */}
+zz
       <div className="next-event">
         <div className="list">
           <p className="name">

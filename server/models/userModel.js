@@ -54,9 +54,6 @@ const userSchema = new Schema(
       ref: "event",
     },
   ],
-    // attending: {
-    //   type: Array,
-    // }
   }, { timestamps: true }
 );
 

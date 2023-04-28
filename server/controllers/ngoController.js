@@ -47,20 +47,6 @@ const createNgo = async (req, res) => {
     res.status(400).json({ err: err.message })
   }}
 
-
-const createEvent = async (req, res) => {
-  const { name, date, time, description, ngoId } = req.body
-  try { 
-    const event = await Event.create({ name, date, time, description, parentNgo: ngoId })
-    const parent = await Ngo.findById(ngoId)
-    parent.event.push(event._id)
-    await parent.save(); 
-    res.status(200).json(event) 
-  } catch (err) {
-    res.status(400).json({ err: err.message })
-  }}
-
-
 const deleteNgo = async (req, res) => {
   const { id } = req.params
   if (!mongoose.Types.ObjectId.isValid(id)){
@@ -85,4 +71,4 @@ const updateNgo = async (req, res) => {
   res.status(200).json(ngo);
 }
 
-module.exports = { createNgo, createEvent, getNgos, getNgo, getFiltered, deleteNgo, updateNgo }
+module.exports = { createNgo, getNgos, getNgo, getFiltered, deleteNgo, updateNgo }

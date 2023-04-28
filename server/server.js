@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const cookieParser = require('cookie-parser');
 const ngoRoutes = require('./routes/ngoRoute'); 
 const authRoutes = require('./routes/authRoute'); 
+const eventRoutes = require('./routes/eventRoute'); 
 const stripeRoutes = require('./routes/stripeRoute'); 
 const userRoutes = require('./routes/userRoute'); 
 const cors = require('cors');
@@ -39,6 +40,7 @@ app.use((req, res, next) => {
 app.use('/api/ngos', ngoRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/event', eventRoutes);
 app.use('/api/payment', stripeRoutes); 
 
 // Connect to db
