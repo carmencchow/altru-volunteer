@@ -79,19 +79,22 @@ const addDonation = async (req, res) => {
 // ADD event
 const addEvent = async (req, res) => {
   try{
-    const newEvent = req.body.event
-    const ngoName = req.body.name
-    const eventDate = req.body.date
+    const ngoId = req.body.id
+    // const newEvent = req.body.event
+    // const ngoName = req.body.name
+    // const eventDate = req.body.date
     const user = await User.findOne({ _id: req.params.id });
-    const eventExists = user.attending.find(ngo => ngo === newEvent)
+    const eventExists = user.attending.find(ngo => ngo===ngoId)
     if (eventExists) {
       return res.status(400).send('Already signed up');
     }
-    user.attending.push(newEvent)
-    user.host.push(ngoName)
-    user.calendar.push(eventDate)
+    user.attending.push(ngoId)
+    // user.attending.push(newEvent)
+    // user.host.push(ngoName)
+    // user.calendar.push(eventDate)
     await user.save();
     console.log('Event added: ', user.attending, user.host)
+    const findEvent = await User.find
     return res.status(200).send({ results: user, message: user.attending });
   } catch (err) {
     console.log('Already attending this event');

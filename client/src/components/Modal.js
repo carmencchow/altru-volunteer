@@ -29,9 +29,10 @@ const Modal = ({ confirm, setConfirm, openModal, setNgoModal, setOpenModal, ngoM
       const res = await axios.post(
         `http://localhost:5000/api/user/${user._id}/add-event`,        
         { 
-          event: `${ngoModal.event_description}`, 
-          name: `${ngoModal.name}`,
-          date: `${ngoModal.event_date}`
+          // event: `${ngoModal.event_description}`, 
+          // name: `${ngoModal.name}`,
+          // date: `${ngoModal.event_date}`
+          id: `${ngoModal._id}`
         },
         {
           method: "POST",

@@ -2,6 +2,13 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const ngoSchema = new Schema({
+  event: [
+    { 
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'event',
+    },
+  ],
+
   name: {
     type: String
   },
@@ -18,19 +25,19 @@ const ngoSchema = new Schema({
   frequency: {
     type: String,
   },
-  event: {
-    type: Boolean,
-    default: false,
-  },
-  event_date: {
-    type: String,
-  },
-  event_time: {
-    type: String, 
-  },
-  event_description: {
-    type: String,
-  }
+  // event: {
+  //   type: Boolean,
+  //   default: false,
+  // },
+  // event_date: {
+  //   type: String,
+  // },
+  // event_time: {
+  //   type: String, 
+  // },
+  // event_description: {
+  //   type: String,
+  // }
 }, { timestamps: true });
 
 module.exports = mongoose.model('Ngo', ngoSchema);

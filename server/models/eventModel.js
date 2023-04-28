@@ -15,12 +15,11 @@ const eventSchema = new Schema(
   description: {
     type: String,
   },
-  parentNgo: [
+  parentNgo: 
     { 
       type: mongoose.Schema.Types.ObjectId,
       ref: 'ngo',
     },
-  ],
   volunteers: [
     {
       type: mongoose.Schema.Types.ObjectId,
