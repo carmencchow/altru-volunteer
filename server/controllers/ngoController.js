@@ -6,8 +6,8 @@ const mongoose = require('mongoose');
 const getNgos = async (req, res) => {
   const query = {}
   try {
-    const ngos = await Ngo.find({})
-    // const ngos = await Ngo.find({}).sort({name: 1})
+    // const ngos = await Ngo.find({})
+    const ngos = await Ngo.find({}).sort({name: 1})
     res.status(200).json(ngos)
     } catch (err){
     console.log(err.message);
@@ -39,9 +39,9 @@ const getNgo = async (req, res) => {
 }
 
 const createNgo = async (req, res) => {
-  const { id, name, category } = req.body 
+  const { name, category, favorite, commitment, frequency, event } = req.body 
   try { 
-    const ngo = await Ngo.create({ id, name, category, isFavorite: false })
+    const ngo = await Ngo.create({  name, category, favorite, commitment, frequency, event })
     res.status(200).json(ngo) 
   } catch (err) {
     res.status(400).json({ err: err.message })

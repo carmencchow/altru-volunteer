@@ -3,10 +3,12 @@ const Ngo = require('../models/ngoModel');
 const Event = require('../models/eventModel');
 const mongoose = require('mongoose');
 
+// For admin to CREATE event
 const createEvent = async (req, res) => {
   const { name, date, time, description, ngoId } = req.body
+
   try { 
-    const event = await Event.create({ name, date, time, description, parentNgo: ngoId })
+    const event = await Event.create({ name, date, time, description, parent: ngoId })
     const parent = await Ngo.findById(ngoId)
     parent.event.push(event._id)
     await parent.save(); 

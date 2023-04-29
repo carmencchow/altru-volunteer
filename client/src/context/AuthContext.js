@@ -7,13 +7,15 @@ export const AuthContextProvider = ({ children }) => {
   const [token, setToken] = useState('');
   const navigate = useNavigate(); 
 
-  // useEffect(() => {
-  //   if (user === null){
-  //     navigate('/')
-  //   } else {
-  //     navigate('/volunteer')
-  //   }
-  // }, [user])
+  useEffect(() => {
+    const currentUser = JSON.parse(localStorage.getItem('user'));
+
+    if (currentUser === null){
+      navigate('/')
+    } else {
+      setUser(currentUser)
+    }
+  }, [])
 
   return (
     <AuthContext.Provider value={{ 

@@ -7,7 +7,7 @@ const getUser = async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(id)){
     return res.status(404).json({ err: 'No such user with this id' })
   }
-  const user = await User.findById(id)
+  const user = await User.findById(id).populate('attending');
   if (!user){
     return res.status(404).json({ err: "User doesn't exist"})
   }
@@ -76,27 +76,22 @@ const addDonation = async (req, res) => {
   }
 };
 
-// ADD event
+// JOINING event (ngoId)
 const addEvent = async (req, res) => {
   try{
     const ngoId = req.body.id
-    // const newEvent = req.body.event
-    // const ngoName = req.body.name
-    // const eventDate = req.body.date
-    const user = await User.findOne({ _id: req.params.id });
-    const eventExists = user.attending.find(ngo => ngo===ngoId)
-    if (eventExists) {
-      return res.status(400).send('Already signed up');
-    }
-    user.attending.push(ngoId)
-    // user.attending.push(newEvent)
-    // user.host.push(ngoName)
-    // user.calendar.push(eventDate)
-    await user.save();
-    console.log('Event added: ', user.attending, user.host)
-    const findEvent = await User.find
-    return res.status(200).send({ results: user, message: user.attending });
-  } catch (err) {
+    // const ngoName = req.body.title
+    // const user = await User.findOne({ _id: req.params.id });
+    // const nameExists = user.attending.find(ngo => ngo===ngoId) // NGO id
+    // console.log('existing event:', nameExists)
+    // if (!nameExists) {
+    // user.attending.push(ngoId)
+    // // user.attending.push(ngoId, ngoName)
+    // await user.save();
+    // console.log(user.attending)
+    const user = await User.findByIdAndUpdate(req.params.id, {$addToSet: {attending: ngoId}})
+    return res.status(200).send({ results: user, message: user.attending })
+    } catch (err) {
     console.log('Already attending this event');
     return res.status(500).send({ message: err.message });
   }

@@ -3,6 +3,12 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema(
   {
+    attending: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Ngo",
+      },
+    ],
     firstname: {
       type: String,
       required: true, 
@@ -48,12 +54,6 @@ const userSchema = new Schema(
   calendar: {
     type: [String],
   },
-  attending: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "event",
-    },
-  ],
   }, { timestamps: true }
 );
 

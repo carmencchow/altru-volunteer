@@ -39,7 +39,7 @@ const FollowBtn = ({ ngo }) => {
   return (
     <div>
       <button disabled={disabled} className="follow" onClick={handleFollow}>
-        {(user.following).find(item => item===ngo.name) ? `Following` : `Follow ${ngo.name}`}
+        {(user?.following)?.find(item => item===ngo.name) ? `Following` : `Follow ${ngo.name}`}
       </button>
     </div>
   )

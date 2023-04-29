@@ -79,11 +79,17 @@ const Volunteer = () => {
                     </div>             
                   </div>      
  
+                  {/* <VolunteerBtn
+                    attending={user.attending.find(item => item===ngoModal._id)} 
+                    toggleModal={() => toggleModal(ngo)}
+                  />
+                 */}
+                
                   <VolunteerBtn
                     attending={user.attending.find(item => item===ngo.event_description)} 
                     toggleModal={() => toggleModal(ngo)}
                   />
-                
+
                   </div>      
                 </div>     
               )

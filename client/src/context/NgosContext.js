@@ -6,8 +6,8 @@ export const NgosContext = createContext()
 export const NgosProvider = ({ children }) => {
   const [ngos, setNgos] = useState([])
   const [ngo, setNgo] = useState({})
+  const [ngoModal, setNgoModal] = useState({})
   const [ngoId, setNgoId] = useState('')
-
 
   const fetchNgo = async () => {  
     try{
@@ -18,9 +18,21 @@ export const NgosProvider = ({ children }) => {
     }
   }
   
+  const fetchNgoModal = async () => {  
+    try{
+      const res = await axios.get(`http://localhost:5000/api/ngos/${ngoModal._id}`)
+      setNgoModal(res.data)
+      console.log('ngoModal results:', res.data)
+    } catch(e){
+      console.log(e);
+    }
+  }
+
+
   return (
     <NgosContext.Provider value={{  
       fetchNgo,
+      fetchNgoModal,
       ngo, setNgo,
       ngos, setNgos,
       ngoId, setNgoId,
