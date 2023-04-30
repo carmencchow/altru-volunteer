@@ -1,90 +1,99 @@
-nav{
+nav {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  padding: 0px 0px 0px 20px; 
+  padding: 0px 0px 0px 20px;
   height: 60px;
   background-color: rgb(76, 76, 245);
   color: white;
 }
-.navbar{
+.navbar {
   display: flex;
   width: 95%;
   justify-content: space-between;
 }
-.logo{
+.logo {
   margin-top: 14px;
   cursor: pointer;
   height: 30px;
   width: 90px;
 }
-.navbar-right{
+.navbar-right {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
-.logout-btn, .profile-btn{
+.logout-btn,
+.profile-btn {
   color: white;
-  font-family: 'League Gothic', sans-serif;
+  font-family: "League Gothic", sans-serif;
   font-size: 26px;
   padding: 8px;
 }
-.logout-btn:hover, .profile-btn:hover{
- color:aqua; 
- cursor: pointer;
+.logout-btn:hover,
+.profile-btn:hover {
+  color: aqua;
+  cursor: pointer;
 }
-.profile-btn{
+.profile-btn {
   cursor: pointer;
 }
 
 /* Media Queries */
 
 @media only screen and (max-width: 599px) {
-  .logout-btn, .profile-btn{
+  .logout-btn,
+  .profile-btn {
     font-size: 20px;
     margin-top: 8px;
   }
-  .logo{
+  .logo {
     height: 20px;
     width: 60px;
     margin-top: 20px;
   }
 }
 @media only screen and (min-width: 599px) {
-  .logout-btn, .profile-btn{
+  .logout-btn,
+  .profile-btn {
     font-size: 22px;
     margin-top: 8px;
   }
 }
 
 @media only screen and (min-width: 992px) {
-  .logout-btn, .profile-btn{
+  .logout-btn,
+  .profile-btn {
     font-size: 22px;
     margin-top: 8px;
   }
 }
 
 @media only screen and (min-width: 992px) {
-  .logout-btn, .profile-btn{
+  .logout-btn,
+  .profile-btn {
     font-size: 22px;
     margin-top: 8px;
   }
 }
 
 @media only screen and (min-width: 992px) {
-  .logout-btn, .profile-btn{
+  .logout-btn,
+  .profile-btn {
     font-size: 22px;
     margin-top: 8px;
   }
 }
 
 @media only screen and (min-width: 992px) {
-  .logout-btn, .profile-btn{
+  .logout-btn,
+  .profile-btn {
     font-size: 24px;
   }
 }
 
 @media only screen and (min-width: 1200px) {
-  .logout-btn, .profile-btn{
+  .logout-btn,
+  .profile-btn {
     font-size: 24px;
   }
 }
