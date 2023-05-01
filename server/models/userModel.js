@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema(
@@ -11,23 +11,23 @@ const userSchema = new Schema(
     ],
     firstname: {
       type: String,
-      required: true, 
+      required: true,
     },
     lastname: {
       type: String,
-      required: true,  
+      required: true,
     },
-    email: { 
-      type: String, 
-      unique: true, 
+    email: {
+      type: String,
+      unique: true,
       lowercase: true,
-      required: true, 
+      required: true,
     },
-    password: { 
-      type: String, 
-      unique: true, 
+    password: {
+      type: String,
+      unique: true,
       lowercase: true,
-      required: true, 
+      required: true,
     },
     goalAmount: {
       type: Number,
@@ -38,23 +38,17 @@ const userSchema = new Schema(
     donations: {
       type: [String],
     },
-    // donations: [
-    //   {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: "donation",
-    //   },
-    // ],
-
     host: {
       type: [String],
     },
     ngos: {
       type: [String],
+    },
+    calendar: {
+      type: [String],
+    },
   },
-  calendar: {
-    type: [String],
-  },
-  }, { timestamps: true }
+  { timestamps: true }
 );
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model("User", userSchema);

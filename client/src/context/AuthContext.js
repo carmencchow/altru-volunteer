@@ -8,6 +8,7 @@ export const AuthContextProvider = ({ children }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    // const currentUser = JSON.stringify(localStorage.getItem("user"));
     const currentUser = JSON.parse(localStorage.getItem("user"));
 
     if (currentUser === null) {
@@ -16,6 +17,13 @@ export const AuthContextProvider = ({ children }) => {
       setUser(currentUser);
     }
   }, []);
+
+  //   if (user === null) {
+  //     navigate("/");
+  //   } else {
+  //     setUser(user);
+  //   }
+  // }, []);
 
   return (
     <AuthContext.Provider

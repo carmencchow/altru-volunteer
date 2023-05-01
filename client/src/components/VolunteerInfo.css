@@ -1,4 +1,4 @@
-.volunteer-item{
+.volunteer-item {
   display: flex;
   justify-content: space-between;
 }
@@ -8,39 +8,37 @@
   justify-content: space-between;
   text-decoration: underline;
 }
-.event-heading p{
+.event-heading p {
   font-size: 14px;
 }
-.next-event{
-  display: flex;
+.events {
   flex-direction: row;
   justify-content: space-between;
   font-size: 14px;
-
 }
-.list{
-
-  display: flex;
-  flex-direction: row;
+.list {
   padding-bottom: 10px;
-
+  margin: 5px;
+  display: flex;
+  justify-content: space-between;
 }
-.name, .org, .date{
+.name,
+.org,
+.date {
   font-size: 14px;
 }
 
 /* Media Queries */
 
 @media only screen and (max-width: 320px) {
- 
-  .event-heading p{
+  .event-heading p {
     font-size: 10px;
   }
-  p{
+  p {
     padding-right: 20px;
   }
 
-  .next-event{
+  .next-event {
     display: flex;
     flex-direction: column;
   }

@@ -9,22 +9,21 @@ const VolunteerInfo = () => {
     <div className="container">
       <h2>Events</h2>
       <p className="event-heading">
-        <p>Name</p>
-        <p>Organization</p>
+        <p>Name & Organization</p>
         <p>Date</p>
       </p>
 
-      <div className="next-event">
-        <div className="list">
-          <p className="name">
-            {user.attending.map((attend) => (
-              <div key={attend._id}>
-                <p className="name">{attend.name}</p>
-                <p className="date">{attend.date}</p>
-              </div>
-            ))}
-          </p>
-        </div>
+      <div className="events">
+        {user.attending.map((attend) => (
+          <div className="list" key={attend._id}>
+            <div className="date">
+              {attend.event_description} at {attend.name}
+            </div>
+            <div className="date">
+              {attend.event_date}, {attend.event_time}
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

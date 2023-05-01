@@ -19,10 +19,6 @@ const signup = async (req, res) => {
       return res.status(400).send("User already exists");
     }
 
-    // const salt = await bcrypt.genSalt(10);
-    // user.password = await bcrypt.hash(password, salt);
-    // console.log('Salt is:', user.password);
-
     const user = await User.create({
       firstname,
       lastname,
@@ -35,6 +31,11 @@ const signup = async (req, res) => {
       calendar: [],
       host: [],
     });
+
+    // const salt = await bcrypt.genSalt(10);
+    // user.password = await bcrypt.hash(password, salt);
+    // console.log("Salt is:", user.password);
+
     await user.save();
 
     // Generate and send token to user
@@ -48,9 +49,6 @@ const signup = async (req, res) => {
         expiresIn: "3d",
       }
     );
-    // user.token = token;
-    // user.password = undefined; // password will not be sent to the frontend
-    // console.log(user);
     res.status(201).json({ user, token });
   } catch (error) {
     console.log(error.message);
@@ -88,9 +86,6 @@ const login = async (req, res) => {
         expiresIn: "3d",
       }
     );
-    // user.token = token
-
-    // Store token in cookie and send to client
     const options = {
       expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
       httpOnly: true,
