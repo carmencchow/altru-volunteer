@@ -28,6 +28,8 @@ const Modal = ({
     }
   };
 
+  // const changeButtonText = attending;
+
   const toggleModal = (ngoModal) => {
     console.log("Card opened:", ngoModal.name, ngoModal._id);
     setNgoModal(ngoModal);
@@ -64,8 +66,8 @@ const Modal = ({
         ngoModal._id,
         ngoModal.name
       );
-      await getUser(user._id, setUser);
       await fetchNgo(ngoModal._id);
+      await getUser(user._id, setUser);
       setOpenModal(false);
     } catch (e) {
       console.log(e);

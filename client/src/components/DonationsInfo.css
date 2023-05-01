@@ -12,7 +12,12 @@
 }
 .heading {
   display: flex;
+  margin-top: 40px;
   text-decoration: underline;
+}
+.heading p {
+  margin-top: 0px;
+  padding-top: 0px;
 }
 .donated-amounts {
   display: flex;

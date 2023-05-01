@@ -16,14 +16,12 @@ const Volunteer = () => {
   const [confirm, setConfirm] = useState("");
   const [openModal, setOpenModal] = useState(false);
   const [ngoModal, setNgoModal] = useState(null);
-  const [clickedBtn, setClickedBtn] = useState(false);
   const navigate = useNavigate();
 
   const toggleModal = (ngo) => {
     console.log("Card opened:", ngo.name, ngo._id);
     setNgoModal(ngo);
     setOpenModal(!openModal);
-    setClickedBtn(!clickedBtn);
   };
 
   const handlePrevious = () => {
@@ -94,20 +92,16 @@ const Volunteer = () => {
                       </div>
                     </div>
 
-                    {/* <VolunteerBtn
-                      attending={user.attending.find(
-                        (item) => item === ngoModal._id
-                      )}
-                      toggleModal={() => toggleModal(ngo)}
-                    />
-                     */}
-
                     <VolunteerBtn
                       attending={user.attending.find(
                         (item) => item === ngo._id
                       )}
                       toggleModal={() => toggleModal(ngo)}
                     />
+
+                    {/* <button disabled={disabled} className="follow" onClick={handleFollow}>
+                      {(user?.following)?.find(item => item===ngo.name) ? `Following` : `Follow ${ngo.name}`}
+                    </button> */}
                   </div>
                 </div>
               );

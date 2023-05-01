@@ -7,12 +7,16 @@ const VolunteerBtn = ({ attending, toggleModal }) => {
       <button
         disabled={attending}
         onClick={() => {
-          console.log("button clicked");
+          console.log("button clicked", attending);
           toggleModal();
         }}
         className="volunteer-btn"
       >
-        {attending ? "Attending" : "Sign up"}
+        {!attending ? "Sign up" : "Attending"}
+
+        {/* <button disabled={disabled} className="follow" onClick={handleFollow}>
+        {(user?.following)?.find(item => item===ngo.name) ? `Following` : `Follow ${ngo.name}`}
+      </button> */}
       </button>
     </div>
   );

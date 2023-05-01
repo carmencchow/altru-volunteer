@@ -64,7 +64,7 @@ const editProfile = async (req, res) => {
 const addDonation = async (req, res) => {
   try {
     const ngo = req.body.name;
-    // const ngoId = req.body.id;
+    const ngoId = req.body.id;
     const donation = req.body.donation;
     const user = await User.findById(req.params.id);
     user.donations.push(donation);
