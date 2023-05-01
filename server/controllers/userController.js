@@ -59,18 +59,33 @@ const editProfile = async (req, res) => {
 };
 
 // ADD donation
+// const addDonation = async (req, res) => {
+//   try {
+//     const newDonation = req.body.donation;
+//     const newNgo = req.body.name;
+//     const user = await User.findOne({ _id: req.params.id });
+//     user.donations.push(newDonation);
+//     user.ngos.push(newNgo);
+//     await user.save();
+//     console.log("Donation added: ", user.donations, user.ngos);
+//     return res.status(200).send({ results: user });
+//   } catch (err) {
+//     console.log(err);
+//     return res.status(500).send({ message: err.message });
+//   }
+// };
+
 const addDonation = async (req, res) => {
   try {
     const newDonation = req.body.donation;
-    const newNgo = req.body.name;
-    const user = await User.findOne({ _id: req.params.id });
-    user.donations.push(newDonation);
-    user.ngos.push(newNgo);
-    await user.save();
-    console.log("Donation added: ", user.donations, user.ngos);
-    return res.status(200).send({ results: user });
+    // const newNgo = req.body.name;
+    const ngoId = req.body.id;
+    const user = await User.findByIdAndUpdate(req.params.id, {
+      $addToSet: { donations: newDonation },
+    });
+    return res.status(200).send({ results: donations });
   } catch (err) {
-    console.log(err);
+    console.log("Can't add donation");
     return res.status(500).send({ message: err.message });
   }
 };

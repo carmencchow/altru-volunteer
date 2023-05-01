@@ -1,61 +1,58 @@
-.save-goal-btn, .close-goal-btn {
+.save-goal-btn,
+.close-goal-btn {
   border: 1px solid grey;
   height: 26px;
   border-radius: 3px;
 }
-.save-goal-btn{
+.save-goal-btn {
   margin-left: 5px;
 }
-.close-goal-btn{
+.close-goal-btn {
   margin-left: 10px;
 }
-.heading{
+.heading {
   display: flex;
   text-decoration: underline;
 }
-.donated-amounts{
+.donated-amounts {
   display: flex;
   margin-top: 0px;
 }
-.ngo{
+.ngo {
   padding-left: 40px;
 }
 p {
   margin-right: 20px;
 }
-.goal-input{
+.goal-input {
   height: 20px;
   width: 150px;
 }
-.amount-donated, .amount-needed{
+.amount-donated,
+.amount-needed {
   font-size: 14px;
   font-weight: normal;
 }
-.edit{
+.edit {
   display: flex;
   flex-direction: row;
 }
-.edit:hover{
-  color: white;
-  border-radius: 2px;
-}
-
-.ngo{
+.ngo {
   margin-left: 0px;
 }
-
 
 /* Media Queries */
 
 @media only screen and (max-width: 320px) {
- 
-  h2, h4, .amount-donated, .amount-needed{
+  h2,
+  h4,
+  .amount-donated,
+  .amount-needed {
     font-size: 10px;
   }
-  .edit{
+  .edit {
     width: 40px;
     font-size: 10px;
     justify-content: center;
   }
-
 }
