@@ -50,8 +50,6 @@ const Info = () => {
         }
       );
       const data = res.data;
-      console.log("Data", data);
-      console.log("DonationArr:", data.results);
       await getUser(user._id, setUser);
     } catch (e) {
       console.log(e);
