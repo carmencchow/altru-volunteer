@@ -37,11 +37,10 @@ const Navbar = () => {
       <div className="navbar">
         <img className="logo" onClick={navMain} src={logo} alt="logo" />
         <div className="navbar-right">
-          <div className="profile-btn" onClick={navProfile}>{user.firstname}</div>
+          <div className="profile-btn" onClick={navProfile}>{user?.firstname}</div>
           <div className="logout-btn" onClick={handleLogout}>Logout</div>
         </div>
       </div>
-      
     </nav>
   )
 }

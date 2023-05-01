@@ -1,4 +1,7 @@
-.volunteer-item{
+.events-container {
+  width: 60vw;
+}
+.volunteer-item {
   display: flex;
   justify-content: space-between;
 }
@@ -8,40 +11,79 @@
   justify-content: space-between;
   text-decoration: underline;
 }
-.event-heading p{
+.event-heading p {
   font-size: 14px;
 }
-.next-event{
-  display: flex;
-  flex-direction: row;
+.events {
   justify-content: space-between;
   font-size: 14px;
-
 }
-.list{
-
-  display: flex;
-  flex-direction: row;
-  padding-bottom: 10px;
-
+.list {
+  margin: 5px;
+  width: 100%;
+  margin-bottom: 26px;
 }
-.name, .org, .date{
+.place {
+  font-size: 16px;
+  font-weight: bold;
+}
+.name,
+.org,
+.date {
   font-size: 14px;
 }
 
 /* Media Queries */
 
 @media only screen and (max-width: 320px) {
- 
-  .event-heading p{
+  .event-heading p {
     font-size: 10px;
   }
-  p{
+  p {
     padding-right: 20px;
   }
-
-  .next-event{
+  .events-container {
+    width: 50vw;
+  }
+  .list {
+    padding-bottom: 10px;
+    margin: 5px;
     display: flex;
     flex-direction: column;
+  }
+  .date {
+    font-size: 12px;
+  }
+  .event-heading {
+    display: none;
+  }
+  .place {
+    font-size: 12px;
+    font-weight: bold;
+  }
+}
+
+@media only screen and (max-width: 599px) {
+  .list {
+    padding-bottom: 10px;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+  }
+  .date {
+    font-size: 12px;
+  }
+  .event-heading {
+    display: none;
+  }
+  .place {
+    font-size: 14px;
+    font-weight: bold;
+  }
+}
+
+@media only screen and (min-width: 599px) {
+  .events-container {
+    width: 90vw;
   }
 }

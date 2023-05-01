@@ -14,7 +14,7 @@ import "./Info.css";
 
 const Info = () => {
   const navigate = useNavigate();
-  const { userId, setUser } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
   const { id } = useParams();
   const [ngo, setNgo] = useState({});
   const [total, setTotal] = useState(0);
@@ -34,9 +34,12 @@ const Info = () => {
         throw new Error("No token found in localStorage");
       }
       const res = await axios.post(
-        `http://localhost:5000/api/user/${userId}/donation`,
+        `http://localhost:5000/api/user/${user._id}/donation`,
+
         {
+          id: `${ngo._id}`,
           donation: `${clickedBtn}`,
+          name: `${ngo.name}`,
         },
         {
           method: "POST",
@@ -47,8 +50,7 @@ const Info = () => {
         }
       );
       const data = res.data;
-      console.log("DonationsArr:", data.results.donations);
-      await getUser(userId, setUser);
+      await getUser(user._id, setUser);
     } catch (e) {
       console.log(e);
     }
@@ -114,7 +116,7 @@ const Info = () => {
 
         <div className="process">
           <StripeCheckout
-            stripeKey="pk_test_51L1kSgAoNhpouPlcjJkJ9Fh5Bi2bSrccKhv0rQuL5zbG70ttMTqiaTfCj46FpF9t2PHXECrUBD26IZIfWAJYcrzs00UCsQLPDr"
+            stripeKey="pk_test_51L1kSgAoNhpouPlcyKF54cnZLtny8hT1C19isE9Iidc2UXxsYWtoyPckQFUxl8w3y1nDdid1AWGNeuLnDWuq56ue00ThTC2pQe"
             image={logo}
             token={handlePayment}
             name="Donating"

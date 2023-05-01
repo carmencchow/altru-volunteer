@@ -1,42 +1,27 @@
-import React, { useContext } from 'react'
-import { AuthContext } from '../context/AuthContext'
-import './VolunteerInfo.css'
+import React, { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
+import "./VolunteerInfo.css";
 
 const VolunteerInfo = () => {
-  const {user} = useContext(AuthContext)
+  const { user } = useContext(AuthContext);
 
   return (
-    <div className="container">
+    <div className="events-container">
       <h2>Events</h2>
-      <p className="event-heading">
-        <p>Name</p>
-        <p>Organization</p>
-        <p>Date</p>
-      </p>
-
-      <div className="next-event">
-        <div className="list">
-          <p className="name">
-            {(user.attending).map(attend => (
-              <div key={attend}>{attend}</div>
-            ))}
-          </p>
-
-          <p className="org">
-            {(user.host).map(ngo => (
-              <div key={ngo}>{ngo}</div>
-            ))}
-          </p>
-
-          <p className="date">
-            {(user.calendar).map(day => (
-              <div key={day}>{day}</div>
-            ))}
-          </p>
-        </div>
+      <div className="events">
+        {user.attending.map((attend) => (
+          <div className="list" key={attend._id}>
+            <div className="place">
+              {attend.event_description} at {attend.name}
+            </div>
+            <div className="date">
+              {attend.event_date} from {attend.event_time}
+            </div>
+          </div>
+        ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default VolunteerInfo
+export default VolunteerInfo;

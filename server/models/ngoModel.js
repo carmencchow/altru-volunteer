@@ -1,37 +1,38 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const ngoSchema = new Schema({
   name: {
-    type: String
+    type: String,
   },
   category: {
     type: Array,
-  }, 
+  },
   favorite: {
     type: Boolean,
-    default: false
-  },  
+    default: false,
+  },
   commitment: {
     type: String,
   },
   frequency: {
     type: String,
   },
-  event: {
-    type: Boolean,
-    default: false,
-  },
   event_date: {
     type: String,
   },
   event_time: {
-    type: String, 
+    type: String,
   },
   event_description: {
     type: String,
-  }
-}, { timestamps: true });
+  },
+  amount: {
+    type: String,
+  },
+  org: {
+    type: String,
+  },
+});
 
-module.exports = mongoose.model('Ngo', ngoSchema);
-
+module.exports = mongoose.model("Ngo", ngoSchema);

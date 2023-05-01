@@ -1,8 +1,17 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const eventSchema = new Schema(
-{
+const eventSchema = new Schema({
+  ngo: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Ngo",
+  },
+  user: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
   name: {
     type: String,
   },
@@ -15,18 +24,6 @@ const eventSchema = new Schema(
   description: {
     type: String,
   },
-  parentNgo: [
-    { 
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'ngo',
-    },
-  ],
-  volunteers: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'user',
-    }
-  ]
-}, { timestamps: true });
+});
 
-module.exports = mongoose.model('Event', eventSchema);
+module.exports = mongoose.model("Event", eventSchema);

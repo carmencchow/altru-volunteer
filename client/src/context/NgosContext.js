@@ -1,26 +1,41 @@
 import React, { createContext, useState } from 'react'
+import axios from 'axios'
 
 export const NgosContext = createContext()
 
 export const NgosProvider = ({ children }) => {
   const [ngos, setNgos] = useState([])
   const [ngo, setNgo] = useState({})
+  const [ngoModal, setNgoModal] = useState({})
   const [ngoId, setNgoId] = useState('')
-  // const [ ngoModal, setNgoModal ] = useState(null)
-  // const [ openModal, setOpenModal ] = useState(false)
 
-  // const toggleModal = (ngo) => {
-  //   console.log('Card opened:', ngo.name, ngo._id)
-  //   setNgoModal(ngo)
-  //   setOpenModal(!openModal);
-  // }
+  const fetchNgo = async () => {  
+    try{
+      const res = await axios.get(`http://localhost:5000/api/ngos/${ngo._id}`)
+      setNgo(res.data)
+    } catch(e){
+      console.log(e);
+    }
+  }
+  
+  const fetchNgoModal = async () => {  
+    try{
+      const res = await axios.get(`http://localhost:5000/api/ngos/${ngoModal._id}`)
+      setNgoModal(res.data)
+      console.log('ngoModal results:', res.data)
+    } catch(e){
+      console.log(e);
+    }
+  }
+
 
   return (
     <NgosContext.Provider value={{  
+      fetchNgo,
+      fetchNgoModal,
       ngo, setNgo,
       ngos, setNgos,
       ngoId, setNgoId,
-      // toggleModal, 
     }}>
       {children}
     </NgosContext.Provider>

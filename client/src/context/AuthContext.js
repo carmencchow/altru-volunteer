@@ -1,26 +1,40 @@
-import React, { createContext, useState, useEffect} from 'react'
-import { useNavigate } from 'react-router-dom'
-export const AuthContext = createContext()
+import React, { createContext, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+export const AuthContext = createContext();
 
-export const AuthContextProvider = ({ children }) => { 
+export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [token, setToken] = useState('');
-  const navigate = useNavigate(); 
+  const [token, setToken] = useState("");
+  const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   if (user === null){
-  //     navigate('/')
+  useEffect(() => {
+    const currentUser = JSON.stringify(localStorage.getItem("user"));
+    // const currentUser = JSON.parse(localStorage.getItem("user"));
+
+    if (currentUser === null) {
+      navigate("/");
+    } else {
+      setUser(currentUser);
+    }
+  }, []);
+
+  //   if (user === null) {
+  //     navigate("/");
   //   } else {
-  //     navigate('/volunteer')
+  //     setUser(user);
   //   }
-  // }, [user])
+  // }, []);
 
   return (
-    <AuthContext.Provider value={{ 
-      user, setUser, 
-      token, setToken, 
-    }}>
-      { children }
+    <AuthContext.Provider
+      value={{
+        user,
+        setUser,
+        token,
+        setToken,
+      }}
+    >
+      {children}
     </AuthContext.Provider>
-  )
-}
+  );
+};

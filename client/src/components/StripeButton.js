@@ -2,8 +2,7 @@ import React from "react";
 import StripeCheckout from "react-stripe-checkout";
 import axios from "axios";
 const stripeBtn = () => {
-  const publishableKey =
-    "pk_test_51L1kSgAoNhpouPlcjJkJ9Fh5Bi2bSrccKhv0rQuL5zbG70ttMTqiaTfCj46FpF9t2PHXECrUBD26IZIfWAJYcrzs00UCsQLPDr";
+  const publishableKey = process.env.REACT_APP_STRIPE_KEY;
 
   // Send card info to Stripe and returns a token object
   const onToken = (token) => {
