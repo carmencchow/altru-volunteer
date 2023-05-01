@@ -1,8 +1,8 @@
-const jwt = require('jsonwebtoken');
-const User = require('../models/userModel');
+const jwt = require("jsonwebtoken");
+const User = require("../models/userModel");
 
 const auth = async (req, res, next) => {
-  const authHeader = req.header.authHeader;
+  const authHeader = req.header("Authorization");
   if (!authHeader) {
     console.log("Missing Authorization Header");
     return res.status(401).json({ message: "Auth Error" });
@@ -13,7 +13,7 @@ const auth = async (req, res, next) => {
     return res.status(401).json({ message: "Auth Error" });
   }
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET)
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.user = decoded.user;
     next();
   } catch (error) {
@@ -22,4 +22,4 @@ const auth = async (req, res, next) => {
   }
 };
 
-module.exports = auth 
+module.exports = auth;

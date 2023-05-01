@@ -35,9 +35,13 @@ const userSchema = new Schema(
     following: {
       type: [String],
     },
-    donations: {
-      type: [String],
-    },
+    donations: [
+      {
+        // type: [String],
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Ngo",
+      },
+    ],
   },
   { timestamps: true }
 );

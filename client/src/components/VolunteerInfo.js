@@ -4,7 +4,7 @@ import "./VolunteerInfo.css";
 
 const VolunteerInfo = () => {
   const { user } = useContext(AuthContext);
-  console.log(user);
+
   return (
     <div className="events-container">
       <h2>Events</h2>
