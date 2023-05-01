@@ -15,7 +15,6 @@ const Modal = ({
   ngoModal,
 }) => {
   const { user, setUser } = useContext(AuthContext);
-  // const { fetchNgoModal } = useContext(NgosContext);
   const [ngo, setNgo] = useState("");
 
   const fetchNgo = async () => {
@@ -29,12 +28,6 @@ const Modal = ({
       console.log(e);
     }
   };
-
-  // const toggleModal = (ngo) => {
-  //   console.log('Card opened:', ngo.name, ngo._id)
-  //   setNgoModal(ngo)
-  //   setOpenModal(!openModal);
-  // }
 
   const toggleModal = (ngoModal) => {
     console.log("Card opened:", ngoModal.name, ngoModal._id);

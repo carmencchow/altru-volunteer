@@ -79,9 +79,13 @@ const addDonation = async (req, res) => {
 const addEvent = async (req, res) => {
   try {
     const ngoId = req.body.id;
-    const user = await User.findByIdAndUpdate(req.params.id, {
-      $addToSet: { attending: ngoId },
-    });
+    const user = await User.findByIdAndUpdate(req.params.id);
+    const ngoExists = user.attending.filter((item) => item === ngoId);
+    if (!ngoExists) {
+      const user = await User.findByIdAndUpdate(req.params.id, {
+        $addToSet: { attending: ngoId },
+      });
+    }
     return res.status(200).send({ results: user, message: user.attending });
   } catch (err) {
     console.log("Already attending this event");
