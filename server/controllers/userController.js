@@ -58,35 +58,17 @@ const editProfile = async (req, res) => {
   }
 };
 
-// ADD donation
-// const addDonation = async (req, res) => {
-//   try {
-//     const newDonation = req.body.donation;
-//     const newNgo = req.body.name;
-//     const user = await User.findOne({ _id: req.params.id });
-//     user.donations.push(newDonation);
-//     user.ngos.push(newNgo);
-//     await user.save();
-//     console.log("Donation added: ", user.donations, user.ngos);
-//     return res.status(200).send({ results: user });
-//   } catch (err) {
-//     console.log(err);
-//     return res.status(500).send({ message: err.message });
-//   }
-// };
-
+// ADDING a DONATION (ngoId)
 const addDonation = async (req, res) => {
   try {
-    const newDonation = req.body.donation;
-    // const newNgo = req.body.name;
     const ngoId = req.body.id;
     const user = await User.findByIdAndUpdate(req.params.id, {
-      $addToSet: { donations: newDonation },
+      $addToSet: { donations: ngoId },
     });
-    return res.status(200).send({ results: donations });
+    console.log("Donor is:", user.firstname);
+    res.status(200).send({ results: user, message: user.attending });
   } catch (err) {
-    console.log("Can't add donation");
-    return res.status(500).send({ message: err.message });
+    console.log(err);
   }
 };
 
@@ -97,15 +79,16 @@ const addEvent = async (req, res) => {
     const user = await User.findOne({ _id: req.params.id });
     console.log("User is:", user.firstname);
     const isAttending = user.attending.find((item) => item === ngoId);
-    if (!isAttending) {
-      const user = await User.findByIdAndUpdate(req.params.id, {
+    if (isAttending) {
+      return res.status(500).send({ message: "Already attending this event" });
+    } else {
+      await User.findByIdAndUpdate(req.params.id, {
         $addToSet: { attending: ngoId },
       });
+      res.status(200).send({ results: user, message: user.attending });
     }
-    return res.status(200).send({ results: user, message: user.attending });
   } catch (err) {
-    console.log("Already attending this event");
-    return res.status(500).send({ message: err.message });
+    console.log(err);
   }
 };
 
