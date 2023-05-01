@@ -14,7 +14,7 @@ import "./Info.css";
 
 const Info = () => {
   const navigate = useNavigate();
-  const { userId, setUser } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
   const { id } = useParams();
   const [ngo, setNgo] = useState({});
   const [total, setTotal] = useState(0);
@@ -34,7 +34,7 @@ const Info = () => {
         throw new Error("No token found in localStorage");
       }
       const res = await axios.post(
-        `http://localhost:5000/api/user/${userId}/donation`,
+        `http://localhost:5000/api/user/${user._id}/donation`,
 
         {
           donation: `${clickedBtn}`,
@@ -49,7 +49,7 @@ const Info = () => {
       );
       const data = res.data;
       console.log("DonationsArr:", data.results.donations);
-      await getUser(userId, setUser);
+      await getUser(user._id, setUser);
     } catch (e) {
       console.log(e);
     }

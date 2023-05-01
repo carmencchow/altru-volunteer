@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
-// import { NgosContext } from '../context/NgosContext'
 import { getUser } from "../utils/getUser";
 import { GrFormClose } from "react-icons/gr";
 import "./Modal.css";
@@ -60,7 +59,7 @@ const Modal = ({
       setConfirm("");
       const data = res.data;
       console.log(
-        "New Event added: ",
+        "Current events: ",
         data.results.attending,
         ngoModal._id,
         ngoModal.name
