@@ -1,3 +1,6 @@
+.events-container {
+  width: 60vw;
+}
 .volunteer-item {
   display: flex;
   justify-content: space-between;
@@ -12,15 +15,17 @@
   font-size: 14px;
 }
 .events {
-  flex-direction: row;
   justify-content: space-between;
   font-size: 14px;
 }
 .list {
-  padding-bottom: 10px;
   margin: 5px;
-  display: flex;
-  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 26px;
+}
+.place {
+  font-size: 16px;
+  font-weight: bold;
 }
 .name,
 .org,
@@ -37,9 +42,48 @@
   p {
     padding-right: 20px;
   }
-
-  .next-event {
+  .events-container {
+    width: 50vw;
+  }
+  .list {
+    padding-bottom: 10px;
+    margin: 5px;
     display: flex;
     flex-direction: column;
+  }
+  .date {
+    font-size: 12px;
+  }
+  .event-heading {
+    display: none;
+  }
+  .place {
+    font-size: 12px;
+    font-weight: bold;
+  }
+}
+
+@media only screen and (max-width: 599px) {
+  .list {
+    padding-bottom: 10px;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+  }
+  .date {
+    font-size: 12px;
+  }
+  .event-heading {
+    display: none;
+  }
+  .place {
+    font-size: 14px;
+    font-weight: bold;
+  }
+}
+
+@media only screen and (min-width: 599px) {
+  .events-container {
+    width: 90vw;
   }
 }

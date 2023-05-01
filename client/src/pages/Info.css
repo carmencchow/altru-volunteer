@@ -1,11 +1,11 @@
-button{
+button {
   cursor: pointer;
 }
-.header1{
+.header1 {
   margin-bottom: 10px;
   margin-left: 10px;
 }
-.follow{
+.follow {
   cursor: pointer;
   margin-left: 30px;
   margin-bottom: 20px;
@@ -13,13 +13,13 @@ button{
   border-radius: 20px;
   border: 2px solid rgb(131, 216, 244);
 }
-.confirmation{
+.confirmation {
   font-size: 20px;
   color: purple;
   font-weight: bolder;
   text-align: center;
 }
-.back{
+.back {
   display: flex;
   font-size: 14px;
   font-style: italic;
@@ -29,10 +29,10 @@ button{
   margin-right: 30px;
   cursor: pointer;
 }
-.back:hover{
+.back:hover {
   color: blue;
 }
-.donation-card{
+.donation-card {
   width: 500px;
   height: 600px;
   margin-left: 40px;
@@ -41,48 +41,47 @@ button{
   padding: 10px;
   margin-top: 10px;
 }
-.donation-input{
+.donation-input {
   width: 100px;
 }
-textarea:focus, .donation-input:focus{
+textarea:focus,
+.donation-input:focus {
   outline: none;
 }
-.ngo-donate{
+.ngo-donate {
   color: #19add6;
   font-weight: bolder;
   display: flex;
   flex-direction: row;
 }
-.column{
+.column {
   display: flex;
   justify-content: space-between;
 }
-.process{
+.process {
   cursor: pointer;
   width: 70px;
 }
-.payment{
+.payment {
   display: flex;
   flex-direction: row;
 }
-.other-amount{
+.other-amount {
   display: flex;
   flex-direction: row;
 }
-.save-btn{
+.save-btn {
   cursor: pointer;
 }
 
 /* form */
-.donation-card{
-  /* flex: 0 1 auto; */
+.donation-card {
   margin: 0 auto;
   height: 100vh;
-  /* max-height: 500px; */
   width: 105vw;
   max-width: 700px;
 }
-.form-control{
+.form-control {
   flex: 0 1 auto;
   display: block;
   width: 80%;
@@ -97,30 +96,50 @@ textarea:focus, .donation-input:focus{
   border-radius: 0.25rem;
 }
 
-
 /* Media Queries */
 
 @media only screen and (max-width: 320px) {
-  .donation-card{
+  .donation-card {
     border: none;
   }
-  .header1, .header2{
+  .header1,
+  .header2 {
     font-size: 12px;
     margin-bottom: 10px;
   }
-  .span{
+  .span {
     width: 90px;
     height: 30px;
   }
-
+  .donation-card {
+    width: 300px;
+    height: 400px;
+    border: 1px solid grey;
+    border-radius: 20px;
+    padding: 10px;
+    margin-top: 10px;
+  }
 }
 
-@media only screen and (max-width: 599px) {}
+@media only screen and (max-width: 599px) {
+  .donation-card {
+    width: 400px;
+    height: 400px;
+    border: 1px solid grey;
+    border-radius: 20px;
+    padding: 10px;
+    margin-top: 10px;
+  }
+}
 
-@media only screen and (min-width: 600px) {}
+@media only screen and (min-width: 600px) {
+}
 
-@media only screen and (min-width: 768px) {}
+@media only screen and (min-width: 768px) {
+}
 
-@media only screen and (min-width: 992px) {}
+@media only screen and (min-width: 992px) {
+}
 
-@media only screen and (min-width: 1200px) {}
+@media only screen and (min-width: 1200px) {
+}

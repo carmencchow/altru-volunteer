@@ -28,8 +28,6 @@ const signup = async (req, res) => {
       following: [],
       donations: [],
       attending: [],
-      calendar: [],
-      host: [],
     });
 
     // const salt = await bcrypt.genSalt(10);

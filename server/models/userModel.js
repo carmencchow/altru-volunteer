@@ -38,15 +38,6 @@ const userSchema = new Schema(
     donations: {
       type: [String],
     },
-    host: {
-      type: [String],
-    },
-    ngos: {
-      type: [String],
-    },
-    calendar: {
-      type: [String],
-    },
   },
   { timestamps: true }
 );
