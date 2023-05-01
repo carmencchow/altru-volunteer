@@ -9,6 +9,12 @@ const userSchema = new Schema(
         ref: "Ngo",
       },
     ],
+    donations: {
+      type: [String],
+    },
+    ngos: {
+      type: [String],
+    },
     firstname: {
       type: String,
       required: true,
@@ -35,15 +41,6 @@ const userSchema = new Schema(
     following: {
       type: [String],
     },
-    donations: {
-      type: [String],
-    },
-    // donations: [
-    //   {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: "Ngo",
-    //   },
-    // ],
   },
   { timestamps: true }
 );

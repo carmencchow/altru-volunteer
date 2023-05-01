@@ -2,10 +2,6 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const ngoSchema = new Schema({
-  // event: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: 'Event',
-  // },
   name: {
     type: String,
   },
@@ -29,6 +25,12 @@ const ngoSchema = new Schema({
     type: String,
   },
   event_description: {
+    type: String,
+  },
+  amount: {
+    type: String,
+  },
+  org: {
     type: String,
   },
 });

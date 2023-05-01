@@ -7,7 +7,9 @@ const getUser = async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ err: "No such user with this id" });
   }
-  const user = await User.findById(id).populate("attending");
+  const user = await User.findById(id)
+    .populate("attending")
+    .populate("donations");
   if (!user) {
     return res.status(404).json({ err: "User doesn't exist" });
   }
@@ -58,41 +60,37 @@ const editProfile = async (req, res) => {
   }
 };
 
-// ADDING a DONATION (ngoId)
+// ADD donation
 const addDonation = async (req, res) => {
   try {
-    const ngoId = req.body.id;
-    const user = await User.findByIdAndUpdate(req.params.id, {
-      $addToSet: { donations: ngoId },
-    });
-    console.log("Donor is:", user.firstname);
-    res.status(200).send({ results: user, message: user.attending });
+    const ngo = req.body.name;
+    // const ngoId = req.body.id;
+    const donation = req.body.donation;
+    const user = await User.findById(req.params.id);
+    user.donations.push(donation);
+    user.ngos.push(ngo);
+    await user.save();
+    res.status(200).send({ results: user.donations });
   } catch (err) {
     console.log(err);
   }
 };
 
-// JOINING event (ngoId)
+// JOIN event
 const addEvent = async (req, res) => {
   try {
     const ngoId = req.body.id;
-    const user = await User.findOne({ _id: req.params.id });
-    console.log("User is:", user.firstname);
-    const isAttending = user.attending.find((item) => item === ngoId);
-    if (isAttending) {
-      return res.status(500).send({ message: "Already attending this event" });
-    } else {
-      await User.findByIdAndUpdate(req.params.id, {
-        $addToSet: { attending: ngoId },
-      });
-      res.status(200).send({ results: user, message: user.attending });
-    }
+    const user = await User.findByIdAndUpdate(req.params.id, {
+      $addToSet: { attending: ngoId },
+    });
+    await user.save();
+    res.status(200).send({ results: user, message: user.attending });
   } catch (err) {
-    console.log(err);
+    console.log("Already registered");
   }
 };
 
-// ADD NGO
+// FOLLOW NGO
 const follow = async (req, res) => {
   try {
     const newFollow = req.body.follow;
@@ -113,7 +111,7 @@ const follow = async (req, res) => {
   }
 };
 
-// DELETE NGO
+// UNFOLLOW NGO
 const unfollow = async (req, res) => {
   try {
     const remove = req.body.remove;

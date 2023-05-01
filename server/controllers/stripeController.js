@@ -1,4 +1,4 @@
-// const Ngo = require("../models/ngoModel");
+const Ngo = require("../models/ngoModel");
 const mongoose = require("mongoose");
 const stripe = require("stripe");
 

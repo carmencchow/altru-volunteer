@@ -37,7 +37,9 @@ const Info = () => {
         `http://localhost:5000/api/user/${user._id}/donation`,
 
         {
+          id: `${ngo._id}`,
           donation: `${clickedBtn}`,
+          name: `${ngo.name}`,
         },
         {
           method: "POST",
@@ -48,7 +50,8 @@ const Info = () => {
         }
       );
       const data = res.data;
-      console.log("DonationsArr:", data.results.donations);
+      console.log("Data", data);
+      console.log("DonationArr:", data.results);
       await getUser(user._id, setUser);
     } catch (e) {
       console.log(e);

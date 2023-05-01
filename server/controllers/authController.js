@@ -61,7 +61,9 @@ const login = async (req, res) => {
     if (!(email && password)) {
       res.status(400).send("Email and password are required");
     }
-    let user = await User.findOne({ email }).populate("attending");
+    let user = await User.findOne({ email })
+      .populate("attending")
+      .populate("donations");
     if (!user)
       return res.status(400).json({
         message: "User does not exist",
