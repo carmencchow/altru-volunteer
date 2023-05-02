@@ -6,8 +6,8 @@ import { GrFormClose } from "react-icons/gr";
 import "./Modal.css";
 
 const Modal = ({
-  confirm,
-  setConfirm,
+  confirmMessage,
+  setConfirmMessage,
   openModal,
   setNgoModal,
   setOpenModal,
@@ -35,7 +35,9 @@ const Modal = ({
   };
 
   const handleRegister = async () => {
-    setConfirm("Thank you. We look forward to meeting you at our event!");
+    setConfirmMessage(
+      "Thank you. We look forward to meeting you at our event!"
+    );
     try {
       const token = localStorage.getItem("token");
 
@@ -56,7 +58,7 @@ const Modal = ({
           },
         }
       );
-      setConfirm("");
+      setConfirmMessage("");
       const data = res.data;
       console.log(
         "Current events: ",
@@ -80,6 +82,10 @@ const Modal = ({
             <div className="close-btn-row">
               <GrFormClose className="close-btn" onClick={toggleModal} />
             </div>
+            <h4 className="message">
+              Thank you for your interest in volunteering for this event! Here
+              are the event details:
+            </h4>
             <p className="event-name">{ngoModal.event_description}</p>
             <p className="event-org">{ngoModal.name}</p>
             <p className="text">
@@ -88,7 +94,10 @@ const Modal = ({
             <p className="text">
               Time: <span>{ngoModal.event_time}</span>
             </p>
-            <p className="contact">Please enter your contact info below</p>
+            <h5 className="contact">
+              Please enter your contact info below and we will get in touch
+              shortly
+            </h5>
 
             <div className="contact-info">
               <div className="modal-inputs">
@@ -108,13 +117,8 @@ const Modal = ({
             </div>
 
             <div className="button-container">
-              <div
-                className="confirm-btn"
-                onClick={() => handleRegister(ngoModal)}
-              >
-                <p>Confirm</p>
-              </div>
-              <p>{confirm}</p>
+              <button onClick={() => handleRegister(ngoModal)}>Confirm</button>
+              <p className="confirm-msg">{confirmMessage}</p>
             </div>
           </div>
         </div>

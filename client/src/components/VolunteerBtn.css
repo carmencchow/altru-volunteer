@@ -1,6 +1,25 @@
 .volunteer {
   margin-top: 0px;
 }
+
+.volunteer-btn {
+  height: 40px;
+  background-color: whitesmoke;
+  font-family: "Montserrat", sans-serif;
+  border-radius: 1px;
+  width: 80px;
+  margin-top: 7px;
+  color: white;
+  background-color: rgb(76, 76, 245);
+  border: 1px solid rgb(76, 76, 245);
+  font-family: "Montserrat", sans-serif;
+}
+.volunteer-btn:hover {
+  background-color: blue;
+  border: 1px solid blue;
+}
+
+/* 
 .volunteer-btn {
   height: 40px;
   border: 1px solid purple;
@@ -15,8 +34,10 @@
   /* border: 2px solid purple;
   background-color: rgb(90, 28, 90);
   color: white;
-  transition: ease-in 0.1s; */
-}
+  transition: ease-in 0.1s; 
+} 
+*/
+
 .volunteer-btn:disabled {
   border: 1px solid purple;
   color: white;

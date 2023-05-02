@@ -11,9 +11,10 @@ import "./Volunteer.css";
 const Volunteer = () => {
   const { user, setUser } = useContext(AuthContext);
   const { ngos, setNgos } = useContext(NgosContext);
+  const [disabled, setDisabled] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageCount, setPageCount] = useState(1);
-  const [confirm, setConfirm] = useState("");
+  const [confirmMessage, setConfirmMessage] = useState("");
   const [openModal, setOpenModal] = useState(false);
   const [ngoModal, setNgoModal] = useState(null);
   const navigate = useNavigate();
@@ -103,7 +104,9 @@ const Volunteer = () => {
 
                     {ngo.event === true && (
                       <VolunteerBtn
-                        // attending={user?.attending.find(
+                        className="volunteer-btn"
+                        disabled={disabled}
+                        // attending={user.attending.find(
                         //   (item) => item === ngo._id
                         // )}
                         toggleModal={() => toggleModal(ngo)}
@@ -127,8 +130,9 @@ const Volunteer = () => {
             setOpenModal,
             ngoModal,
             setNgoModal,
-            confirm,
-            setConfirm,
+            confirmMessage,
+            disabled,
+            setConfirmMessage,
           }}
         />
       )}

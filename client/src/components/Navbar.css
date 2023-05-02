@@ -22,20 +22,25 @@ nav {
   display: flex;
   justify-content: flex-end;
 }
-.logout-btn,
-.profile-btn {
+.logout-btn {
   color: white;
   font-family: "League Gothic", sans-serif;
   font-size: 26px;
   padding: 8px;
 }
-.logout-btn:hover,
-.profile-btn:hover {
+.profile-btn {
+  color: aqua;
+  font-family: "League Gothic", sans-serif;
+  font-size: 26px;
+  padding: 8px;
+  cursor: pointer;
+}
+.logout-btn:hover {
   color: aqua;
   cursor: pointer;
 }
-.profile-btn {
-  cursor: pointer;
+.profile-btn:hover {
+  color: white;
 }
 
 /* Media Queries */

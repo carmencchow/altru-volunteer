@@ -56,23 +56,25 @@ const ProfileInfo = () => {
         </button>
       </div>
 
-      <div className="following">
-        <h3 className="follow-heading">Following</h3>
+      {user.following && (
+        <div className="following">
+          <h3 className="follow-heading">Following</h3>
 
-        <div className="organizations">
-          {user.following.map((follow) => (
-            <div className="follow-list">
-              {follow}
-              <button
-                className="unfollow-btn"
-                onClick={async () => await handleUnfollow(follow)}
-              >
-                Unfollow
-              </button>
-            </div>
-          ))}
+          <div className="organizations">
+            {user.following.map((follow) => (
+              <div className="follow-list">
+                {follow}
+                <button
+                  className="unfollow-btn"
+                  onClick={async () => await handleUnfollow(follow)}
+                >
+                  Unfollow
+                </button>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

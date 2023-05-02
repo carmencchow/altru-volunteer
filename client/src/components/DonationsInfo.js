@@ -38,39 +38,43 @@ const DonationsInfo = () => {
           </div>
         </div>
 
-        <p className="heading">
-          <p>Amount</p>
-          <p>Organization</p>
-        </p>
+        {user.goalAmount && (
+          <div className="donation-container">
+            <p className="heading">
+              <p>Amount</p>
+              <p>Organization</p>
+            </p>
 
-        <p className="donated-amounts">
-          <div className="amount">
-            {user.donations.map((donation) => (
-              <div>${donation} </div>
-            ))}
+            <p className="donated-amounts">
+              <div className="amount">
+                {user.donations.map((donation) => (
+                  <div>${donation} </div>
+                ))}
+              </div>
+              <div className="ngo">
+                {user.ngos.map((ngo) => (
+                  <div>{ngo}</div>
+                ))}
+              </div>
+            </p>
+
+            <h4>
+              Total amount donated:
+              <p className="amount-donated">
+                ${user.donations.map(Number).reduce((a, b) => a + b, 0)}
+              </p>
+            </h4>
+
+            <h4>
+              Amount needed to reach donation goal:
+              <p className="amount-needed">
+                $
+                {user.goalAmount -
+                  user.donations.map(Number).reduce((a, b) => a + b, 0)}
+              </p>
+            </h4>
           </div>
-          <div className="ngo">
-            {user.ngos.map((ngo) => (
-              <div>{ngo}</div>
-            ))}
-          </div>
-        </p>
-
-        <h4>
-          Total amount donated:
-          <p className="amount-donated">
-            ${user.donations.map(Number).reduce((a, b) => a + b, 0)}
-          </p>
-        </h4>
-
-        <h4>
-          Amount needed to reach donation goal:
-          <p className="amount-needed">
-            $
-            {user.goalAmount -
-              user.donations.map(Number).reduce((a, b) => a + b, 0)}
-          </p>
-        </h4>
+        )}
       </div>
     </div>
   );
