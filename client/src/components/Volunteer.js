@@ -86,7 +86,7 @@ const Volunteer = () => {
 
                         <p>{ngo.help ? <p>Duties: {ngo.help}</p> : null}</p>
                         <p>
-                          {ngo.num_volunteer ? (
+                          {ngo.num_volunteers ? (
                             <p>Volunteers needed: {ngo.num_volunteers}</p>
                           ) : null}
                         </p>
