@@ -78,26 +78,37 @@ const Volunteer = () => {
                     </div>
                     <div className="show-details">
                       <div>
-                        {ngo.num_volunteer ? (
-                          <p>Volunteers needed: {ngo.num_volunteers}</p>
-                        ) : null}
-                        {ngo.commitment ? (
-                          <p>Commitment: {ngo.commitment}</p>
+                        {ngo.event_description ? (
+                          <p className="event">{ngo.event_description}</p>
                         ) : null}
                         {ngo.event_date ? <p>Date: {ngo.event_date}</p> : null}
                         {ngo.event_time ? <p>Time: {ngo.event_time}</p> : null}
-                        {ngo.event_description ? (
-                          <p>Event: {ngo.event_description}</p>
+
+                        <p>{ngo.help ? <p>Duties: {ngo.help}</p> : null}</p>
+                        <p>
+                          {ngo.num_volunteer ? (
+                            <p>Volunteers needed: {ngo.num_volunteers}</p>
+                          ) : null}
+                        </p>
+                        {ngo.commitment ? (
+                          <p>
+                            Commitment: {ngo.commitment}
+                            {ngo.frequency}
+                          </p>
                         ) : null}
+
+                        <p>Tel: {ngo.telephone}</p>
                       </div>
                     </div>
 
-                    <VolunteerBtn
-                      attending={user.attending.find(
-                        (item) => item === ngo._id
-                      )}
-                      toggleModal={() => toggleModal(ngo)}
-                    />
+                    {ngo.event === true && (
+                      <VolunteerBtn
+                        // attending={user?.attending.find(
+                        //   (item) => item === ngo._id
+                        // )}
+                        toggleModal={() => toggleModal(ngo)}
+                      />
+                    )}
 
                     {/* <button disabled={disabled} className="follow" onClick={handleFollow}>
                       {(user?.following)?.find(item => item===ngo.name) ? `Following` : `Follow ${ngo.name}`}

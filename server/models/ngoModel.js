@@ -5,6 +5,9 @@ const ngoSchema = new Schema({
   name: {
     type: String,
   },
+  telephone: {
+    type: String,
+  },
   category: {
     type: Array,
   },
@@ -17,6 +20,9 @@ const ngoSchema = new Schema({
   },
   frequency: {
     type: String,
+  },
+  event: {
+    type: Boolean,
   },
   event_date: {
     type: String,
