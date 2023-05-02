@@ -1,7 +1,5 @@
-.filters{
+.filters {
   display: flex;
-  /* margin: 30px 60px 0px 0px; */
-  /* padding: 0px 70px; */
   justify-content: center;
 }
 form {
@@ -12,36 +10,38 @@ form {
   margin-left: 20px;
   border-radius: 0px;
 }
-.dropdown, option{
+.dropdown,
+option {
   height: 40px;
   border-radius: 0px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
-select, option{
+select,
+option {
   height: 40px;
 }
-.dropdown{
+.dropdown {
   flex-direction: column;
 }
-form.dropdown p{
+form.dropdown p {
   font-size: 14px;
   font-style: italic;
   margin-bottom: 5px;
   margin-left: 0;
 }
-.searchBtn{
+.searchBtn {
   height: 40px;
   background-color: whitesmoke;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   border-radius: 1px;
   width: 80px;
   margin-top: 7px;
   color: white;
   background-color: rgb(76, 76, 245);
   border: 1px solid rgb(76, 76, 245);
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
-.searchBtn:hover{
+.searchBtn:hover {
   background-color: #a8a4db;
   border: 1px solid #a8a4db;
 }
@@ -49,87 +49,88 @@ form.dropdown p{
 /* Media Queries */
 
 @media only screen and (max-width: 599px) {
-  .filters{
+  .filters {
     display: flex;
     flex-direction: column;
     margin: 10px auto;
   }
-  select{
+  select {
     width: 70vw;
     margin-top: 10px;
     height: 40px;
   }
-  .cause{
+  .any {
+    font-size: 20px;
+  }
+  .cause {
     margin-top: 60px;
   }
-  .cause, .commitment{
-   display: none;
-  }    
-  form.dropdown p{
+  form.dropdown p {
     font-style: normal;
     font-size: 14px;
   }
-  .searchBtn{
+  .searchBtn {
     height: 20px;
     font-size: 10px;
     color: white;
     width: 60px;
     border: none;
   }
-  .search-row{
-    display: flex;  
+  .search-row {
+    display: flex;
     flex-direction: row-reverse;
     margin-right: 13%;
   }
 }
 
 @media only screen and (min-width: 599px) {
-  .filters{
+  .filters {
     display: flex;
     flex-direction: row;
     margin: 10px auto;
   }
-  select{
+  select {
     width: 40vw;
     margin-top: 10px;
   }
-  .cause{
+  .cause {
     margin-top: 60px;
   }
-  .cause, .commitment{
-   display: none;
-  }    
-  form.dropdown p{
+  .cause,
+  .commitment {
+    display: none;
+  }
+  form.dropdown p {
     font-style: normal;
     font-size: 14px;
   }
-  .searchBtn{
+  .searchBtn {
     height: 30px;
     font-size: 12px;
     color: white;
     width: 70px;
     border: none;
   }
-  .search-row{
-    display: flex;  
+  .search-row {
+    display: flex;
     flex-direction: row-reverse;
     margin-right: 7%;
   }
 }
 
 @media only screen and (min-width: 768px) {
-  .searchBtn{
+  .searchBtn {
     height: 40px;
     font-size: 14px;
     color: white;
     width: 80px;
     border: none;
   }
-  select{
+  select {
     font-size: 20px;
   }
-  .search-row{
-    display: flex;  
+  .search-row {
+    display: flex;
     flex-direction: row-reverse;
     margin-right: 8%;
   }

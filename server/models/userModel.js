@@ -40,6 +40,10 @@ const userSchema = new Schema({
   goalAmount: {
     type: Number,
   },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 module.exports = mongoose.model("User", userSchema);

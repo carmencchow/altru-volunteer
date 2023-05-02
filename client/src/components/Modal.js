@@ -28,8 +28,6 @@ const Modal = ({
     }
   };
 
-  // const changeButtonText = attending;
-
   const toggleModal = (ngoModal) => {
     console.log("Card opened:", ngoModal.name, ngoModal._id);
     setNgoModal(ngoModal);
