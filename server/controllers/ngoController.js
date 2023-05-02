@@ -19,15 +19,17 @@ const getFiltered = async (req, res) => {
     const category = req.params.category.toLowerCase();
     const frequency = req.params.frequency.toLowerCase();
 
-    if (frequency === "all") {
-      let ngos = await Ngo.find({ category: category });
-      console.log("Returning one category");
-      return res.status(200).json(ngos);
-    }
     if (frequency === "all" && category === "all") {
       let ngos = await Ngo.find({});
-      console.log("Returning all ngos");
-      return res.status(200).json(ngos);
+      res.status(200).json(ngos);
+    }
+    if (frequency === "all") {
+      let ngos = await Ngo.find({ category: category });
+      res.status(200).json(ngos);
+    }
+    if (category === "all") {
+      let ngos = await Ngo.find({ frequency: frequency });
+      res.status(200).json(ngos);
     } else {
       let ngos = await Ngo.find({ category: category, frequency: frequency });
       return res.status(200).json(ngos);
