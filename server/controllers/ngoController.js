@@ -32,7 +32,7 @@ const getFiltered = async (req, res) => {
       res.status(200).json(ngos);
     } else {
       let ngos = await Ngo.find({ category: category, frequency: frequency });
-      return res.status(200).json(ngos);
+      res.status(200).json(ngos);
     }
   } catch (err) {
     console.log(err);

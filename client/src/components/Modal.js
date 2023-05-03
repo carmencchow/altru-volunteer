@@ -15,6 +15,7 @@ const Modal = ({
 }) => {
   const { user, setUser } = useContext(AuthContext);
   const [ngo, setNgo] = useState("");
+  const [disabled, setDisabled] = useState(false);
 
   const fetchNgo = async () => {
     try {
@@ -31,6 +32,7 @@ const Modal = ({
     console.log("Card opened:", ngoModal.name, ngoModal._id);
     setNgoModal(ngoModal);
     setOpenModal(!openModal);
+    setDisabled(!disabled);
   };
 
   const handleRegister = async () => {
@@ -67,7 +69,6 @@ const Modal = ({
       );
       await fetchNgo(ngoModal._id);
       await getUser(user._id, setUser);
-      // await fetchNgo(ngo._id);
       setOpenModal(false);
     } catch (e) {
       console.log(e);

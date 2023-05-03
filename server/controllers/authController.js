@@ -61,12 +61,12 @@ const login = async (req, res) => {
     if (!(email && password)) {
       res.status(400).send("Email and password are required");
     }
-    let user = await User.findOne({ email })
+    let user = await User.findOne({ email, password })
       .populate("attending")
       .populate("donations");
     if (!user)
       return res.status(400).json({
-        message: "User does not exist",
+        message: "User does not exist. Email or password incorrect",
       });
 
     // const isValid = await bcrypt.compare(password, user.password);

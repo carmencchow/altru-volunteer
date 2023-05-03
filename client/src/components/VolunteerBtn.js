@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 import "./VolunteerBtn.css";
 
-const VolunteerBtn = ({ attending, toggleModal }) => {
+const VolunteerBtn = ({ getUser, attending, toggleModal }) => {
   return (
     <div className="volunteer">
       <button
@@ -12,7 +13,7 @@ const VolunteerBtn = ({ attending, toggleModal }) => {
         }}
         className="volunteer-btn"
       >
-        {!attending ? "Sign up" : "Attending"}
+        {attending ? "Attending" : "Sign up"}
       </button>
     </div>
   );

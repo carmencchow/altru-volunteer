@@ -11,7 +11,6 @@ import "./Volunteer.css";
 const Volunteer = () => {
   const { user, setUser } = useContext(AuthContext);
   const { ngos, setNgos } = useContext(NgosContext);
-  const [disabled, setDisabled] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageCount, setPageCount] = useState(1);
   const [confirmMessage, setConfirmMessage] = useState("");
@@ -106,7 +105,7 @@ const Volunteer = () => {
                       <VolunteerBtn
                         className="volunteer-btn"
                         attending={user.attending.find(
-                          (item) => item === ngoModal._id
+                          (ngo) => ngo === ngo._id
                         )}
                         toggleModal={() => toggleModal(ngo)}
                       />
@@ -126,7 +125,6 @@ const Volunteer = () => {
             ngoModal,
             setNgoModal,
             confirmMessage,
-            disabled,
             setConfirmMessage,
           }}
         />
