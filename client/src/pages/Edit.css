@@ -1,12 +1,12 @@
-.tabs, .active-tabs{
+.tabs,
+.active-tabs {
   border-bottom: none;
   width: 33%;
   font-size: 20px;
   padding: 20px 30px;
   cursor: pointer;
-  /* box-sizing: content-box; */
 }
-.active-tabs{
+.active-tabs {
   background-color: rgb(153, 153, 243);
   border-top-right-radius: 50px;
   border-top-left-radius: 50px;
@@ -17,18 +17,19 @@
   border-bottom: none;
   width: 33%;
 }
-.last{
+.last {
   margin-left: 150px;
 }
-.row{
+.row {
   display: flex;
   flex-direction: row;
 }
-.save-delete-row{
+.save-delete-row {
   display: flex;
   flex-direction: row-reverse;
 }
-.save-btn, .delete-btn{
+.save-btn,
+.delete-btn {
   width: 100px;
   height: 20px;
   font-size: 12px;
@@ -36,7 +37,7 @@
   justify-content: flex-end;
 }
 
-.form-control{
+.form-control {
   display: block;
   width: 90vw;
   max-width: 300px;
@@ -49,10 +50,12 @@
   border: 1px solid #ced4da;
   border-radius: 0.25rem;
 }
-.delete-btn, .save-btn{
+.delete-btn,
+.save-btn {
   cursor: pointer;
 }
-.delete-btn:hover, .save-btn:hover{
+.delete-btn:hover,
+.save-btn:hover {
   color: white;
   background-color: #9999f3;
   border: 2px solid #9999f3;
@@ -63,27 +66,28 @@
 /* Media Queries */
 
 @media only screen and (max-width: 320px) {
-  .active-tabs{
+  .active-tabs {
     font-size: 14px;
-    color: blue;
-    text-decoration: underlined;
-    border-bottom: 1px solid blue;
-    background-color: white;
+    background-color: none;
     width: 25%;
   }
-  .tabs{
+  .tabs {
     font-size: 14px;
-    color: black;
     width: 25%;
+  }
+  h2 {
+    font-size: 16px;
+    color: blue;
   }
 }
 
-@media only screen and (max-width: 599px) {}
-
-@media only screen and (min-width: 600px) {}
-
-@media only screen and (min-width: 768px) {}
-
-@media only screen and (min-width: 992px) {}
-
-@media only screen and (min-width: 1200px) {}
+@media only screen and (max-width: 599px) {
+  .tabs,
+  .active-tabs {
+    font-size: 14px;
+  }
+  h2 {
+    font-size: 16px;
+    color: blue;
+  }
+}

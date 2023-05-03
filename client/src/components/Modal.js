@@ -22,7 +22,6 @@ const Modal = ({
         `http://localhost:5000/api/ngos/${ngoModal._id}`
       );
       setNgo(res.data);
-      console.log("Ngo results:", res.data);
     } catch (e) {
       console.log(e);
     }
@@ -61,13 +60,14 @@ const Modal = ({
       setConfirmMessage("");
       const data = res.data;
       console.log(
-        "Current events: ",
+        "Event added to user: ",
         data.results.attending,
         ngoModal._id,
         ngoModal.name
       );
       await fetchNgo(ngoModal._id);
       await getUser(user._id, setUser);
+      // await fetchNgo(ngo._id);
       setOpenModal(false);
     } catch (e) {
       console.log(e);

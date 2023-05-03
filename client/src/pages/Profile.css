@@ -1,9 +1,9 @@
-.profile-container{
+.profile-container {
   display: flex;
   justify-content: space-between;
   margin: 0px auto;
 }
-.tabs-container{
+.tabs-container {
   display: flex;
   flex-direction: column;
   max-width: 900px;
@@ -13,12 +13,13 @@
   margin: 0 auto;
   padding-top: 20px;
 }
-.heading-tabs{
+.heading-tabs {
   display: flex;
   flex-direction: row;
   text-align: center;
 }
-.tabs, .active-tabs{
+.tabs,
+.active-tabs {
   border-bottom: none;
   width: 33%;
   font-size: 20px;
@@ -26,20 +27,20 @@
   cursor: pointer;
   box-sizing: content-box;
 }
-.active-tabs{
+.active-tabs {
   color: white;
   font-size: 20px;
   border-bottom: 5px solid blue;
   width: 33%;
 }
-.content{
+.content {
   max-width: 700px;
   display: flex;
   flex-direction: row;
   background: white;
   display: none;
 }
-.active-content{
+.active-content {
   display: block;
   display: flex;
   flex-direction: row;
@@ -50,32 +51,25 @@
   width: 90vw;
 }
 
-
 /* Media Queries */
 
 @media only screen and (max-width: 320px) {
- 
-  .tabs-container{
-   max-width: 300px;
-   width: 100vw; 
-  } 
-  .heading-tabs{
+  .tabs-container {
+    max-width: 300px;
+    width: 100vw;
+  }
+  .heading-tabs {
     max-width: 280px;
     display: flex;
     flex-direction: row;
     text-align: center;
   }
-  h2{
+  h2 {
     font-size: 14px;
   }
+  .tabs,
+  .active-tabs {
+    font-size: 14px;
+    background-color: none;
+  }
 }
-
-@media only screen and (max-width: 599px) {}
-
-@media only screen and (min-width: 600px) {}
-
-@media only screen and (min-width: 768px) {}
-
-@media only screen and (min-width: 992px) {}
-
-@media only screen and (min-width: 1200px) {}

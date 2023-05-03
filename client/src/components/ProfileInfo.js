@@ -57,6 +57,7 @@ const ProfileInfo = () => {
       </div>
 
       {user.following && (
+        // {!user.following.length === 0 && (
         <div className="following">
           <h3 className="follow-heading">Following</h3>
 

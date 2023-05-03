@@ -12,7 +12,7 @@ const VolunteerInfo = () => {
         {user.attending.map((attend) => (
           <div className="list" key={attend._id}>
             <div className="place">
-              {attend.event_description} at {attend.name}
+              {attend.event_description} with {attend.name}
             </div>
             <div className="date">
               {attend.event_date} from {attend.event_time}

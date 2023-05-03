@@ -105,17 +105,12 @@ const Volunteer = () => {
                     {ngo.event === true && (
                       <VolunteerBtn
                         className="volunteer-btn"
-                        disabled={disabled}
-                        // attending={user.attending.find(
-                        //   (item) => item === ngo._id
-                        // )}
+                        attending={user.attending.find(
+                          (item) => item === ngoModal._id
+                        )}
                         toggleModal={() => toggleModal(ngo)}
                       />
                     )}
-
-                    {/* <button disabled={disabled} className="follow" onClick={handleFollow}>
-                      {(user?.following)?.find(item => item===ngo.name) ? `Following` : `Follow ${ngo.name}`}
-                    </button> */}
                   </div>
                 </div>
               );
