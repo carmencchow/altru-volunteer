@@ -12,28 +12,28 @@ const signup = async (req, res) => {
     if (!(email && password && firstname && lastname)) {
       res.status(400).send("Fill in all required fields");
     }
-    const existingUser = await User.findOne({
+    const isUser = await User.findOne({
       email,
     });
-    if (existingUser) {
+    if (isUser) {
       return res.status(400).send("User already exists");
     }
+
+    // const salt = await bcrypt.genSalt(10);
+    // const newPassword = await bcrypt.hash(password, salt);
 
     const user = await User.create({
       firstname,
       lastname,
       email,
       password,
-      // password: salt,
+      // password: newPassword,
       following: [],
       donations: [],
       attending: [],
     });
 
-    // const salt = await bcrypt.genSalt(10);
-    // user.password = await bcrypt.hash(password, salt);
     // console.log("Salt is:", user.password);
-
     await user.save();
 
     // Generate and send token to user
@@ -58,44 +58,26 @@ const signup = async (req, res) => {
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
+    // const salt = await bcrypt.genSalt(10);
+    // const newPassword = await bcrypt.hash(password, salt);
+    // console.log(email, password, newPassword);
     if (!(email && password)) {
       res.status(400).send("Email and password are required");
     }
     let user = await User.findOne({ email, password })
       .populate("attending")
       .populate("donations");
+    console.log(user.password);
+    // const isValid = await bcrypt.compare(password, user.password);
+    // console.log(isValid);
+    // if (!isValid) {
+    //   res.status(400).json({ msg: "Invalid password" });
+    //   return;
+    // }
     if (!user)
       return res.status(400).json({
         message: "User does not exist. Email or password incorrect",
       });
-
-    // const isValid = await bcrypt.compare(password, user.password);
-    // if (!isValid) {
-    //   return res.status(400).json({
-    //     message: "Incorrect email or password",
-    //   });
-    // }
-
-    const token = jwt.sign(
-      {
-        id: user._id,
-        email,
-      },
-      process.env.JWT_SECRET,
-      {
-        expiresIn: "3d",
-      }
-    );
-    const options = {
-      expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
-      httpOnly: true,
-    };
-
-    res.status(200).cookie("token", token, options).json({
-      success: true,
-      token,
-      user,
-    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server error" });

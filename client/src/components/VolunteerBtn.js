@@ -1,21 +1,19 @@
-import React, { useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
+import React from "react";
 import "./VolunteerBtn.css";
 
-const VolunteerBtn = ({ getUser, attending, toggleModal }) => {
+const VolunteerBtn = ({ attending, toggleModal }) => {
+  console.log(attending);
   return (
-    <div className="volunteer">
-      <button
-        disabled={attending}
-        onClick={() => {
-          console.log("button clicked", attending);
-          toggleModal();
-        }}
-        className="volunteer-btn"
-      >
-        {attending ? "Attending" : "Sign up"}
-      </button>
-    </div>
+    <button
+      className="volunteer-btn"
+      disabled={attending}
+      onClick={() => {
+        console.log("button clicked", attending);
+        toggleModal();
+      }}
+    >
+      {attending ? "Attending" : "Sign up"}
+    </button>
   );
 };
 

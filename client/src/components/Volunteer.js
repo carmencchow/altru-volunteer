@@ -104,9 +104,14 @@ const Volunteer = () => {
                     {ngo.event === true && (
                       <VolunteerBtn
                         className="volunteer-btn"
-                        attending={user.attending.find(
-                          (ngo) => ngo === ngo._id
-                        )}
+                        attending={
+                          user.attending.find((item) => {
+                            // console.log("ngo._id:", item, ngo._id);
+                            return item._id === ngo._id;
+                          })
+                            ? true
+                            : false
+                        }
                         toggleModal={() => toggleModal(ngo)}
                       />
                     )}
