@@ -32,9 +32,10 @@ const Login = () => {
   };
 
   const handleSubmit = async (e) => {
+    console.log("Submitting");
     try {
       e.preventDefault();
-      console.log(formData);
+      console.log("Form data:", formData);
       const res = await axios.post(
         "http://localhost:5000/api/auth/login",
         formData,
@@ -45,16 +46,18 @@ const Login = () => {
           },
         }
       );
+      console.log("Result:", res);
       const data = res.data;
       localStorage.setItem("token", res.data.token);
       setUser(data.user);
       setToken(data.token);
       console.log(data.user.firstname, data.user.lastname, data.user._id);
-      localStorage.setItem("user", JSON.stringify(data.user));
+      localStorage.setItem("user", data.user);
+      // localStorage.setItem("user", JSON.stringify(data.user));
       navigate("/volunteer");
     } catch (err) {
       console.log(err, "Incorrect password or email");
-      setError("Incorrect email or password. Please try again.");
+      setError("Incorrect email or password. Please try again!");
       navigate("/login");
     }
   };

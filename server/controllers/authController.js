@@ -58,26 +58,20 @@ const signup = async (req, res) => {
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    // const salt = await bcrypt.genSalt(10);
-    // const newPassword = await bcrypt.hash(password, salt);
-    // console.log(email, password, newPassword);
+    console.log(email, password);
+
     if (!(email && password)) {
       res.status(400).send("Email and password are required");
     }
     let user = await User.findOne({ email, password })
       .populate("attending")
       .populate("donations");
-    console.log(user.password);
-    // const isValid = await bcrypt.compare(password, user.password);
-    // console.log(isValid);
-    // if (!isValid) {
-    //   res.status(400).json({ msg: "Invalid password" });
-    //   return;
-    // }
-    if (!user)
-      return res.status(400).json({
-        message: "User does not exist. Email or password incorrect",
-      });
+    console.log("Logging in user:", user.password);
+    res.status(200).json({ message: "signed in", user });
+    // if (!user)
+    // res.status(400).json({
+    //   message: "User does not exist. Email or password incorrect",
+    // });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server error" });
