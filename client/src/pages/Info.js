@@ -22,7 +22,9 @@ const Info = () => {
   const amounts = [10, 25, 50, 75, 100];
 
   const fetchNgo = async () => {
-    const res = await axios.get(`http://localhost:5000/api/ngos/${id}`);
+    const res = await axios.get(
+      `https://altru-volunteer-be.onrender.com/api/ngos/${id}`
+    );
     setNgo(res.data);
   };
 
@@ -33,7 +35,7 @@ const Info = () => {
         throw new Error("No token found in localStorage");
       }
       const res = await axios.post(
-        `http://localhost:5000/api/user/${user._id}/donation`,
+        `https://altru-volunteer-be.onrender.com/api/user/${user._id}/donation`,
 
         {
           id: `${ngo._id}`,
@@ -65,7 +67,7 @@ const Info = () => {
     const headers = {
       "Content-Type": "application/json",
     };
-    return fetch("http://localhost:5000/api/payment", {
+    return fetch("https://altru-volunteer-be.onrender.com/api/payment", {
       method: "POST",
       headers,
       body: JSON.stringify(body),

@@ -21,7 +21,9 @@ const Navbar = () => {
     e.preventDefault();
     console.log("User signed out");
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/logout");
+      const res = await axios.post(
+        "https://altru-volunteer-be.onrender.com/api/auth/logout"
+      );
       setUser(null);
       setToken("");
       await localStorage.clear();

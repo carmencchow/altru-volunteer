@@ -31,7 +31,7 @@ const Signup = () => {
       e.preventDefault();
       if (password === confirm) {
         const res = await axios.post(
-          "http://localhost:5000/api/auth/signup",
+          "https://altru-volunteer-be.onrender.com/api/auth/signup",
           formData,
 
           {

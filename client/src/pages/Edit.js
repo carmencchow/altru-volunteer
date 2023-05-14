@@ -39,7 +39,7 @@ const Edit = () => {
       }
 
       const res = await axios.put(
-        `http://localhost:5000/api/user/${user._id}`,
+        `https://altru-volunteer-be.onrender.com/api/user/${user._id}`,
         {
           firstname: `${firstname}`,
           lastname: `${lastname}`,
@@ -74,7 +74,7 @@ const Edit = () => {
   const handleDelete = async () => {
     console.log("Deleting your account");
     await axios
-      .delete(`http://localhost:5000/api/user/${user._id}`)
+      .delete(`https://altru-volunteer-be.onrender.com/api/user/${user._id}`)
       .then((res) => {
         console.log(`Account deleted`, res.data);
         navigate("/");

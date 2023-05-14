@@ -11,7 +11,9 @@ export const NgosProvider = ({ children }) => {
 
   const fetchNgo = async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/ngos/${ngo._id}`);
+      const res = await axios.get(
+        `https://altru-volunteer-be.onrender.com/api/ngos/${ngo._id}`
+      );
       setNgo(res.data);
     } catch (e) {
       console.log(e);
@@ -21,7 +23,7 @@ export const NgosProvider = ({ children }) => {
   const fetchNgoModal = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:5000/api/ngos/${ngoModal._id}`
+        `https://altru-volunteer-be.onrender.com/api/ngos/${ngoModal._id}`
       );
       setNgoModal(res.data);
       console.log("ngoModal results:", res.data);
