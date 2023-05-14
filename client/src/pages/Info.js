@@ -116,7 +116,7 @@ const Info = () => {
 
         <div className="process">
           <StripeCheckout
-            stripeKey="pk_test_51L1kSgAoNhpouPlcyKF54cnZLtny8hT1C19isE9Iidc2UXxsYWtoyPckQFUxl8w3y1nDdid1AWGNeuLnDWuq56ue00ThTC2pQe"
+            stripeKey="pk_test_51L1kSgAoNhpouPlc1wUQc6a3zAxdhzv9hXazyvrYZa1beIP9okC7mpVZAI4hWioLXHaAYwxqtNsQnNJowellghHP00AhoZshJu"
             image={logo}
             token={handlePayment}
             name="Donating"
