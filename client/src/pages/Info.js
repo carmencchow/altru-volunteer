@@ -4,7 +4,6 @@ import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
 import { getUser } from "../utils/getUser";
 import StripeCheckout from "react-stripe-checkout";
-import toast, { Toaster } from "react-hot-toast";
 import Navbar from "../components/Navbar";
 import AmountBtn from "../components/AmountBtn";
 import Form from "../components/Form";
@@ -87,7 +86,6 @@ const Info = () => {
           Back
         </span>
         <FollowBtn ngo={ngo} />
-        <Toaster position="top-center" toastOption={{ duration: 3000 }} />
         <div className="header-text">
           <span className="header1">
             Don't have time to volunteer with {ngo.name}? Consider donating
