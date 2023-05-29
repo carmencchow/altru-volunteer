@@ -77,59 +77,6 @@ span {
 
 /* ------- Media Queries ------*/
 
-@media only screen and (max-width: 320px) {
-  h3 {
-    font-size: 10px;
-  }
-  .display {
-    margin-top: 5%;
-    width: 100vw;
-    margin-left: -10%;
-  }
-  .results-container {
-    width: 100vw;
-    margin-left: 0%;
-  }
-  .show-details p {
-    font-size: 10px;
-  }
-  .ngo-name {
-    font-size: 24px;
-  }
-  .next,
-  .previous {
-    height: 16px;
-    cursor: pointer;
-    color: white;
-    border: 2px solid #19add6;
-    width: 14px;
-    font-size: 12px;
-    margin-right: 7px;
-    font-family: "Montserrat", sans-serif;
-  }
-  .previous:before {
-    content: "<";
-  }
-  .next:before {
-    content: ">";
-  }
-  .volunteer-btn {
-    width: 60px;
-  }
-  .name div,
-  .org div,
-  .date div {
-    font-size: 10px;
-  }
-  .find {
-    font-size: 12px;
-  }
-  .commitment,
-  .cause {
-    display: none;
-  }
-}
-
 @media only screen and (max-width: 599px) {
   .find {
     display: flex;
@@ -174,10 +121,13 @@ span {
     margin: 2%;
   }
   .ngo-name {
-    font-size: 26px;
+    font-size: 20px;
   }
   .find {
     font-size: 14px;
+  }
+  .show-details p {
+    font-size: 12px;
   }
 }
 
@@ -206,6 +156,9 @@ span {
   }
   .ngo-name {
     font-size: 28px;
+  }
+  .show-details p {
+    font-size: 16px;
   }
 }
 

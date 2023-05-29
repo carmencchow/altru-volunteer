@@ -49,19 +49,25 @@ nav {
   .logout-btn,
   .profile-btn {
     font-size: 20px;
-    margin-top: 8px;
+    margin-top: 12px;
   }
   .logo {
     height: 20px;
     width: 60px;
-    margin-top: 20px;
+    margin-top: 24px;
   }
 }
 @media only screen and (min-width: 599px) {
   .logout-btn,
   .profile-btn {
     font-size: 22px;
-    margin-top: 8px;
+    margin-top: 12px;
+  }
+  .logo {
+    height: 22px;
+    width: 70px;
+    margin-top: 20px;
+    margin-left: 16px;
   }
 }
 
@@ -70,6 +76,12 @@ nav {
   .profile-btn {
     font-size: 22px;
     margin-top: 8px;
+  }
+  .logo {
+    height: 26px;
+    width: 78px;
+    margin-top: 20px;
+    margin-left: 16px;
   }
 }
 

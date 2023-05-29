@@ -87,18 +87,15 @@ const Info = () => {
         <span className="back" onClick={() => navigate(-1)}>
           Back
         </span>
+        <p className="confirmation">{confirmation}</p>
         <FollowBtn ngo={ngo} />
         <div className="header-text">
-          <span className="header1">
-            Don't have time to volunteer with {ngo.name}? Consider donating
-            instead.
-          </span>
+          <span className="header1">Want to donate to: {ngo.name}?</span>
         </div>
       </div>
 
       <div className="donation-card">
         <p>Select an amount to donate: </p>
-        <p className="confirmation">{confirmation}</p>
 
         <div className="donation-options">
           {amounts.map((amount) => {
@@ -111,11 +108,13 @@ const Info = () => {
             );
           })}
         </div>
+        <p>Enter billing information:</p>
 
         <Form />
 
         <div className="process">
           <StripeCheckout
+            className="stripe-btn"
             stripeKey="pk_test_51L1kSgAoNhpouPlc1wUQc6a3zAxdhzv9hXazyvrYZa1beIP9okC7mpVZAI4hWioLXHaAYwxqtNsQnNJowellghHP00AhoZshJu"
             image={logo}
             token={handlePayment}

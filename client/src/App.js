@@ -5,7 +5,6 @@ import { NgosProvider } from "./context/NgosContext";
 import Volunteer from "./components/Volunteer";
 import Profile from "./pages/Profile";
 import Signup from "./pages/Signup";
-// import Footer from "./components/Footer";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Edit from "./pages/Edit";
@@ -28,7 +27,6 @@ function App() {
               <Route path="/edit" element={<Edit />} />
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>
-            {/* <Footer/> */}
           </FiltersProvider>
         </AuthContextProvider>
       </NgosProvider>

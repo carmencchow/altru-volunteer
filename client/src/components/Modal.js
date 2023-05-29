@@ -93,27 +93,6 @@ const Modal = ({
             <p className="text">
               Time: <span>{ngoModal.event_time}</span>
             </p>
-            <h5 className="contact">
-              Please enter your contact info below and we will get in touch
-              shortly
-            </h5>
-
-            <div className="contact-info">
-              <div className="modal-inputs">
-                <input
-                  className="modal-input"
-                  type="text"
-                  name="name"
-                  placeholder="  Name"
-                />
-                <input
-                  className="modal-input"
-                  type="text"
-                  name="email"
-                  placeholder="  Email"
-                />
-              </div>
-            </div>
 
             <div className="button-container">
               <button onClick={() => handleRegister(ngoModal)}>Confirm</button>
