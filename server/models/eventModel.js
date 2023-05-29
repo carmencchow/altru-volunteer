@@ -1,7 +1,8 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+import mongoose from "mongoose";
+// const Schema = mongoose.Schema;
 
-const eventSchema = new Schema({
+// const eventSchema = new Schema({
+const eventSchema = new mongoose.Schema({
   ngo: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Ngo",
@@ -26,4 +27,6 @@ const eventSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model("Event", eventSchema);
+const Event = mongoose.model("Event", eventSchema);
+
+export default eventSchema;

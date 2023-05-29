@@ -1,5 +1,5 @@
-const User = require("../models/userModel");
-const mongoose = require("mongoose");
+import User from "../models/userModel.js";
+import mongoose from "mongoose";
 
 // GET user by Id
 const getUser = async (req, res) => {
@@ -143,7 +143,7 @@ const editGoal = async (req, res) => {
   }
 };
 
-module.exports = {
+export {
   getUser,
   getUsers,
   addEvent,

@@ -1,9 +1,9 @@
-const express = require("express");
-const getPayment = require("../controllers/stripeController");
+import express from "express";
+import getPayment from "../controllers/stripeController.js";
 
 const router = express.Router();
 
 // POST payment
 router.post("/payment", getPayment);
 
-module.exports = router;
+export default router;

@@ -1,21 +1,21 @@
-body{
+body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box; 
-} 
-.login-logo{
+  box-sizing: border-box;
+}
+.login-logo {
   margin-top: 20px;
   margin-left: 20px;
   cursor: pointer;
 }
-.login-card{
+.login-card {
   align-items: center;
   display: flex;
   flex-direction: column;
   width: 700px;
   margin-top: 0px;
 }
-.login-wrapper{
+.login-wrapper {
   height: 80vh;
   width: 70%;
   display: flex;
@@ -24,32 +24,32 @@ body{
   margin: 0 auto;
   justify-content: center;
 }
-.error{
+.error {
   color: red;
   font-weight: bolder;
 }
-h2{
+h2 {
   display: flex;
   flex-direction: row;
   justify-content: left;
   margin-left: 0px;
 }
-.form-container{
+.form-container {
   border: 2px solid #19add6;
   height: 70vh;
   width: 80%;
   margin: 0 auto;
   justify-content: center;
 }
-input{
+input {
   border: 2px solid #19add6;
   margin-bottom: 20px;
   width: 350px;
   height: 50px;
   margin-top: 0px;
-  margin-bottom: 20px; 
+  margin-bottom: 20px;
 }
-.login-submit{
+.login-submit {
   height: 40px;
   cursor: pointer;
   width: 350px;
@@ -60,30 +60,30 @@ input{
   background-color: #19add6;
   justify-content: center;
 }
-.login-submit:hover{
+.login-submit:hover {
   border: none;
   background-color: #322ca9;
   color: white;
   transition: ease-in 0.5s;
 }
-.new-account{
+.new-account {
   display: flex;
   justify-content: space-between;
   margin-top: 15px;
 }
-.no-account{
+.no-account {
   font-size: 14px;
   margin-left: 0px;
-} 
-.register{
+}
+.register {
   font-size: 14px;
   margin-left: 120px;
 }
-.register:hover{
+.register:hover {
   color: blue;
   cursor: pointer;
 }
-.text{
+.text {
   display: flex;
   flex-direction: row;
   justify-content: left;
@@ -92,51 +92,49 @@ input{
 /* Media Queries */
 
 @media only screen and (max-width: 320px) {
-  input{
+  input {
     width: 160px;
   }
-  .login-submit{
+  .login-submit {
     width: 160px;
   }
-  .no-account{
+  .no-account {
     display: none;
   }
-  .register{
+  .register {
     font-size: 12px;
     align-items: right;
   }
 }
 
 @media only screen and (max-width: 600px) {
-  input{
+  input {
     width: 200px;
   }
-  .login-submit{
+  .login-submit {
     width: 208px;
   }
-  .no-account{
+  .no-account {
     display: none;
   }
-  .register{
+  .register {
     font-size: 12px;
     align-items: right;
   }
 }
 
 @media only screen and (min-width: 992px) {
-  input{
+  input {
     width: 400px;
   }
-  .login-submit{
+  .login-submit {
     width: 408px;
   }
-  .no-account{
+  .no-account {
     font-size: 16px;
   }
-  .register{
+  .register {
     font-size: 16px;
     align-items: right;
   }
 }
-
-

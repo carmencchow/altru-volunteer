@@ -79,7 +79,7 @@ const Signup = () => {
 
       <div className="signup-wrapper">
         <div className="signup-card">
-          <h2>Sign up</h2>
+          <h2>Create an account</h2>
 
           <div className="name-row">
             <div className="firstname-input">

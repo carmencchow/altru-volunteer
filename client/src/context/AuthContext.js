@@ -1,37 +1,77 @@
 import React, { createContext, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { auth } from "../firebase";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
+
 export const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState("");
-  const navigate = useNavigate();
+
+  const signUp = async (email, password) => {
+    try {
+      const userCredentials = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      return userCredentials;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const signIn = async (email, password) => {
+    try {
+      const userCredentials = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      return userCredentials;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleSignOut = async () => {
+    console.log("logging out...");
+    await signOut(auth);
+  };
+
+  const handleToken = async () => {
+    if (user) {
+      const token = await user.getIdToken();
+      setToken(token);
+    } else {
+      setToken("");
+    }
+  };
 
   useEffect(() => {
-    const currentUser = JSON.stringify(localStorage.getItem("user"));
-
-    if (currentUser === null) {
-      navigate("/");
-    } else {
-      setUser(currentUser);
-    }
+    auth.onAuthStateChanged((currentUser) => {
+      if (currentUser) {
+        setUser(currentUser);
+      } else {
+        setUser(null);
+      }
+    });
+    // return unsubscribe()
   }, []);
 
-  //   if (user === null) {
-  //     navigate("/");
-  //   } else {
-  //     setUser(user);
-  //   }
-  // }, []);
+  useEffect(() => {
+    handleToken();
+  }, [user]);
 
   return (
     <AuthContext.Provider
-      value={{
-        user,
-        setUser,
-        token,
-        setToken,
-      }}
+      value={{ token, user, signIn, signUp, handleSignOut }}
     >
       {children}
     </AuthContext.Provider>

@@ -1,6 +1,6 @@
-const { response } = require("express");
-const Ngo = require("../models/ngoModel");
-const mongoose = require("mongoose");
+import { response } from "express";
+import Ngo from "../models/ngoModel.js";
+import mongoose from "mongoose";
 
 // Get all NGOs
 const getNgos = async (req, res) => {
@@ -67,9 +67,4 @@ const createNgo = async (req, res) => {
   }
 };
 
-module.exports = {
-  createNgo,
-  getNgos,
-  getNgo,
-  getFiltered,
-};
+export { createNgo, getNgos, getNgo, getFiltered };

@@ -1,6 +1,5 @@
-const express = require("express");
-const auth = require("../middleware/auth");
-const {
+import express from "express";
+import {
   getUser,
   getUsers,
   deleteProfile,
@@ -10,7 +9,7 @@ const {
   editProfile,
   addDonation,
   editGoal,
-} = require("../controllers/userController");
+} from "../controllers/userController.js";
 
 const router = express.Router();
 
@@ -24,4 +23,4 @@ router.post("/:id/add-event", addEvent);
 router.post("/:id/follow/ngo", follow);
 router.post("/:id/unfollow/ngo", unfollow);
 
-module.exports = router;
+export default router;
