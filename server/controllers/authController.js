@@ -6,7 +6,7 @@ import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 
 // Save FirebaseUID to MongoDB
-const createUser = async (req, res) => {
+export const createUser = async (req, res) => {
   try {
     const userId = req.body.firebaseUID;
     console.log(userId);
@@ -112,5 +112,3 @@ const createUser = async (req, res) => {
 //     res.status(500).json({ message: "Logout failed", err });
 //   }
 // };
-
-export default { createUser };

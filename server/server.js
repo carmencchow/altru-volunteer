@@ -69,6 +69,8 @@ app.use("/api/event", eventRoutes);
 app.use("/api/payment", stripeRoutes);
 
 // Connect to db
+console.log(process.env.MONGO_URI);
+
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
