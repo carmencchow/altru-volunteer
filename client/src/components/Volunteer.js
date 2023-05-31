@@ -105,6 +105,7 @@ const Volunteer = () => {
                       <VolunteerBtn
                         className="volunteer-btn"
                         attending={
+                          user.attending &&
                           user.attending.find((item) => {
                             // console.log("ngo._id:", item, ngo._id);
                             return item._id === ngo._id;

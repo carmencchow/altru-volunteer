@@ -2,6 +2,9 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
+  _id: {
+    type: String,
+  },
   attending: [
     {
       type: mongoose.Schema.Types.ObjectId,

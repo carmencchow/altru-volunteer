@@ -8,7 +8,7 @@ import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import ngoRoutes from "./routes/ngoRoute.js";
 import Stripe from "stripe";
-// import authRoutes from "./routes/authRoute.js";
+import authRoutes from "./routes/authRoute.js";
 import eventRoutes from "./routes/eventRoute.js";
 import stripeRoutes from "./routes/stripeRoute.js";
 import userRoutes from "./routes/userRoute.js";
@@ -31,7 +31,7 @@ const server = http.createServer(app);
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(express.json()); //parses incoming JSON requests and puts the parsed data in req.body.
+app.use(express.json());
 app.use(cors());
 
 app.use(async (req, res, next) => {
@@ -51,10 +51,20 @@ app.use(async (req, res, next) => {
   }
 });
 
+// app.get("/", (req, res) => {
+//   console.log(req.body);
+//   res.send("Hello World");
+// });
+
+// app.post("/verify", async (req, res) => {
+//   console.log(req.body);
+//   res.sendStatus(200);
+// });
+
 // Routes
 app.use("/api/ngos", ngoRoutes);
 app.use("/api/user", userRoutes);
-// app.use("/api/auth", authRoutes);
+app.use("/api/auth", authRoutes);
 app.use("/api/event", eventRoutes);
 app.use("/api/payment", stripeRoutes);
 
@@ -62,10 +72,15 @@ app.use("/api/payment", stripeRoutes);
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
-    app.listen(PORT, () => {
+    // server test
+    server.listen(PORT, () => {
       console.log(`connected to db and listening on port', ${PORT}`);
     });
   })
   .catch((err) => {
     console.log(err);
   });
+
+// app.listen(PORT, () => {
+//   console.log(`connected to db and listening on port', ${PORT}`);
+// });

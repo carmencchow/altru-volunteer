@@ -1,11 +1,34 @@
-// import express from "express";
-// import User from "../models/userModel.js";
-// import bcrypt from "bcryptjs";
-// import jwt from "jsonwebtoken";
-// import mongoose from "mongoose";
-// import cookieParser from "cookie-parser";
+import express from "express";
+import User from "../models/userModel.js";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import mongoose from "mongoose";
+import cookieParser from "cookie-parser";
 
-// // 1. REGISTER endpoint
+// Save FirebaseUID to MongoDB
+const createUser = async (req, res) => {
+  try {
+    const userId = req.body.firebaseUID;
+    console.log(userId);
+    // Create new user doc in MongoDB with firebaseUID
+    const user = await new User({
+      _id: userId,
+      firstname,
+      lastname,
+      email,
+      password,
+      following: [],
+      donations: [],
+      attending: [],
+    });
+    await user.save();
+  } catch (error) {
+    res.status(400).send("Error: ", error);
+    console.log(error);
+  }
+};
+
+// 1. REGISTER endpoint
 // const signup = async (req, res) => {
 //   try {
 //     const { email, password, firstname, lastname } = req.body;
@@ -31,6 +54,7 @@
 //       following: [],
 //       donations: [],
 //       attending: [],
+//       _id: firebaseUID,
 //     });
 
 //     // console.log("Salt is:", user.password);
@@ -54,7 +78,7 @@
 //   }
 // };
 
-// // 2. LOGIN endpoint
+// 2. LOGIN endpoint
 // const login = async (req, res) => {
 //   try {
 //     const { email, password } = req.body;
@@ -78,7 +102,7 @@
 //   }
 // };
 
-// // 3. LOGOUT endpoint
+// 3. LOGOUT endpoint
 // const logout = (req, res) => {
 //   try {
 //     res.clearCookie("jwt");
@@ -89,4 +113,4 @@
 //   }
 // };
 
-// export { signup, login, logout };
+export { signup, login, logout, createUser };

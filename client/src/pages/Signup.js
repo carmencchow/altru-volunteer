@@ -1,63 +1,20 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { AuthContext } from "../context/AuthContext";
 import logo from "../assets/altru.png";
 import "./Signup.css";
 
 const Signup = () => {
   const navigate = useNavigate();
-  const [error, setError] = useState("Passwords do not match");
-  const { setUser, setToken } = useContext(AuthContext);
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-    firstname: "",
-    lastname: "",
-    confirm: "",
-  });
-
-  const { email, password, firstname, lastname, confirm } = formData;
-
-  const handleChange = (e) => {
-    setFormData((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
-  const handleSubmit = async (e) => {
-    try {
-      e.preventDefault();
-      if (password === confirm) {
-        const res = await axios.post(
-          "https://altru-volunteer-be.onrender.com/api/auth/signup",
-          formData,
-
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        const data = res.data;
-        console.log("New user:", data.token, data.user);
-        localStorage.setItem("token", data.token);
-        setUser(data.user);
-        setToken(data.token);
-        localStorage.setItem("user", data.user);
-        navigate("/login");
-      } else {
-        console.log("Passwords do not match");
-        setError("Incorrect email or password. Please try again.");
-        navigate("/signup");
-      }
-    } catch (err) {
-      console.log(err, "Incorrect password or email");
-      setError("Signup failed, incorrect email or password. Please try again.");
-    }
-  };
+  const [error, setError] = useState("");
+  const { token, signUp, setUser, setToken } = useContext(AuthContext);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [confirm, setConfirm] = useState("");
+  const [firebaseUID, setFirebaseUID] = useState("");
 
   const homepage = () => {
     navigate("/");
@@ -66,6 +23,36 @@ const Signup = () => {
   const handleLogin = () => {
     navigate("/login");
   };
+
+  const handleSignUp = async () => {
+    if (email && password) {
+      const data = await signUp(email, password);
+      console.log("Register new user:", data);
+      setFirebaseUID(data.user.uid);
+      console.log("FirebaseUID:", data.user.uid);
+
+      // send Firebase uid to server
+      await axios.post(
+        "https://altru-volunteer-be.onrender.com/api/createUser",
+        {
+          firebaseUID: `${firebaseUID}`,
+        },
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+    }
+  };
+
+  useEffect(() => {
+    if (token) {
+      navigate("/volunteer");
+    }
+  }, [token]);
 
   return (
     <>
@@ -88,7 +75,7 @@ const Signup = () => {
                 type="text"
                 placeholder="  Enter your first name"
                 value={firstname}
-                onChange={handleChange}
+                onChange={(e) => setFirstname(e.target.value)}
               />
             </div>
 
@@ -98,7 +85,7 @@ const Signup = () => {
                 type="text"
                 placeholder="  Enter your last name"
                 value={lastname}
-                onChange={handleChange}
+                onChange={(e) => setLastname(e.target.value)}
               />
             </div>
           </div>
@@ -109,7 +96,7 @@ const Signup = () => {
               type="email"
               placeholder="  Enter your email"
               value={email}
-              onChange={handleChange}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
 
@@ -119,7 +106,7 @@ const Signup = () => {
               type="password"
               placeholder="  Enter your password"
               value={password}
-              onChange={handleChange}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
 
@@ -129,14 +116,16 @@ const Signup = () => {
               type="password"
               placeholder="  Confirm your password"
               value={confirm}
-              onChange={handleChange}
+              onChange={(e) => setConfirm(e.target.value)}
             />
           </div>
+
+          {error && <p className="error">{error}</p>}
 
           <button
             className="signup-submit"
             type="submit"
-            onClick={handleSubmit}
+            onClick={handleSignUp}
           >
             Sign Up
           </button>

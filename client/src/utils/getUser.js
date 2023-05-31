@@ -14,6 +14,4 @@ const getUser = async (userId, setUser) => {
 
 const server = "https://altru-volunteer-be.onrender.com";
 
-// export { server };
-
 export { getUser, server };

@@ -76,6 +76,9 @@ body {
   margin-left: 120px;
   cursor: pointer;
 }
+.error {
+  color: red;
+}
 .login:hover {
   color: blue;
   font-weight: bolder;

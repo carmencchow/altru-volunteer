@@ -1,27 +1,15 @@
-import React, { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import React, { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 import logo from "../assets/altru.png";
 import "./Login.css";
 
 const Login = () => {
+  const { token, signIn } = useContext(AuthContext);
   const navigate = useNavigate();
   const [error, setError] = useState("");
-  const { setUser, token, setToken } = useContext(AuthContext);
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
-
-  const { email, password } = formData;
-
-  const handleChange = (e) => {
-    setFormData((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
-  };
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const home = () => {
     navigate("/");
@@ -31,37 +19,20 @@ const Login = () => {
     navigate("/signup");
   };
 
-  const handleSubmit = async (e) => {
-    console.log("Submitting");
-    try {
-      e.preventDefault();
-      console.log("Form data:", formData);
-      const res = await axios.post(
-        "https://altru-volunteer-be.onrender.com/api/auth/login",
-
-        formData,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      console.log("Result:", res);
-      const data = res.data;
-      localStorage.setItem("token", res.data.token);
-      setUser(data.user);
-      setToken(data.token);
-      console.log(data.user.firstname, data.user.lastname, data.user._id);
-      localStorage.setItem("user", data.user);
-      // localStorage.setItem("user", JSON.stringify(data.user));
-      navigate("/volunteer");
-    } catch (err) {
-      console.log(err, "Incorrect password or email");
-      setError("Incorrect email or password. Please try again!");
-      navigate("/login");
+  const handleSignIn = async () => {
+    if (email && password) {
+      const data = await signIn(email, password);
+      console.log("User credentials:", data);
     }
   };
+
+  const handleGoogleSignIn = async () => {};
+
+  useEffect(() => {
+    if (token) {
+      navigate("/volunteer");
+    }
+  }, [token]);
 
   return (
     <>
@@ -82,7 +53,7 @@ const Login = () => {
               type="email"
               placeholder="  Enter your email"
               value={email}
-              onChange={handleChange}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
 
@@ -92,7 +63,7 @@ const Login = () => {
               type="password"
               placeholder="  Enter your password"
               value={password}
-              onChange={handleChange}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
 
@@ -102,11 +73,21 @@ const Login = () => {
             <button
               type="submit"
               className="login-submit"
-              onClick={handleSubmit}
+              onClick={handleSignIn}
             >
               Log in
             </button>
           </div>
+          {/* 
+          <div className="google-div">
+            <button
+              type="submit"
+              className="google-submit"
+              onClick={handleGoogleSignIn}
+            >
+              Google
+            </button>
+          </div> */}
 
           <div className="new-account">
             <div className="no-account"> Don't have an account?</div>
