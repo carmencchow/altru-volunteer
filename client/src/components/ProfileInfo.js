@@ -22,7 +22,7 @@ const ProfileInfo = () => {
         throw new Error("No token found in localStorage");
       }
       const res = await axios.post(
-        `https://altru-volunteer-be.onrender.com/api/user/${user._id}/unfollow/ngo`,
+        `http://localhost:5000/api/user/${user._id}/unfollow/ngo`,
         {
           remove: `${follow}`,
         },

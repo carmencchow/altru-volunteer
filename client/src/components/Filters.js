@@ -26,7 +26,7 @@ const Filters = () => {
       const frequency = filters.frequency;
       const category = filters.category;
       const res = await axios.get(
-        `https://altru-volunteer-be.onrender.com/api/ngos/${frequency}/${category}`
+        `http://localhost:5000/api/ngos/${frequency}/${category}`
       );
       setNgos(res.data);
       console.log(res.data);

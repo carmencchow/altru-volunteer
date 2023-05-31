@@ -12,7 +12,7 @@ const stripeBtn = () => {
     };
     axios
       // Send token and amount to the backend in the body with axios request
-      .post("https://altru-volunteer-be.onrender.com:8000/payment", body)
+      .post("http://localhost:5000:8000/payment", body)
       .then((response) => {
         console.log(response);
         alert("Payment Success");

@@ -14,7 +14,6 @@ const Signup = () => {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [confirm, setConfirm] = useState("");
-  const [firebaseUID, setFirebaseUID] = useState("");
 
   const homepage = () => {
     navigate("/");
@@ -28,14 +27,13 @@ const Signup = () => {
     if (email && password) {
       const data = await signUp(email, password);
       console.log("Register new user:", data);
-      setFirebaseUID(data.user.uid);
       console.log("FirebaseUID:", data.user.uid);
 
       // send Firebase uid to server
       await axios.post(
-        "https://altru-volunteer-be.onrender.com/api/createUser",
+        "http://localhost:5000/api/auth/createUser",
         {
-          firebaseUID: `${firebaseUID}`,
+          firebaseUID: data.user.uid,
         },
         {
           method: "POST",

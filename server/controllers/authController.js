@@ -113,4 +113,4 @@ const createUser = async (req, res) => {
 //   }
 // };
 
-export { signup, login, logout, createUser };
+export default { createUser };

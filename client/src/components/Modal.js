@@ -19,7 +19,7 @@ const Modal = ({
   const fetchNgo = async () => {
     try {
       const res = await axios.get(
-        `https://altru-volunteer-be.onrender.com/api/ngos/${ngoModal._id}`
+        `http://localhost:5000/api/ngos/${ngoModal._id}`
       );
       setNgo(res.data);
     } catch (e) {
@@ -44,7 +44,7 @@ const Modal = ({
         throw new Error("No token found in localStorage");
       }
       const res = await axios.post(
-        `https://altru-volunteer-be.onrender.com/api/user/${user._id}/add-event`,
+        `http://localhost:5000/api/user/${user._id}/add-event`,
         {
           id: `${ngoModal._id}`,
           title: `${ngoModal.name}`,

@@ -2,9 +2,7 @@ import axios from "axios";
 
 const getUser = async (userId, setUser) => {
   try {
-    const res = await axios.get(
-      `https://altru-volunteer-be.onrender.com/api/user/${userId}`
-    );
+    const res = await axios.get(`http://localhost:5000/api/user/${userId}`);
     const data = res.data;
     setUser(data);
   } catch (e) {
@@ -12,6 +10,6 @@ const getUser = async (userId, setUser) => {
   }
 };
 
-const server = "https://altru-volunteer-be.onrender.com";
+const server = "http://localhost:5000";
 
 export { getUser, server };
