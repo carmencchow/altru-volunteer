@@ -1,4 +1,4 @@
-require("dotenv").config();
+const dotenv = require("dotenv");
 const http = require("http");
 const express = require("express");
 const mongoose = require("mongoose");
@@ -21,6 +21,7 @@ const stripe = require("stripe")(
 );
 
 // Express app
+dotenv.config();
 const app = express();
 const server = http.createServer(app);
 
