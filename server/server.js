@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
-import { auth } from "./src/firebase-config.js";
+import { auth } from "./firebase-config.js";
 import http from "http";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
@@ -11,8 +11,6 @@ import Stripe from "stripe";
 import authRoutes from "./routes/authRoute.js";
 import stripeRoutes from "./routes/stripeRoute.js";
 import userRoutes from "./routes/userRoute.js";
-import Ngo from "./models/ngoModel.js";
-import User from "./models/userModel.js";
 
 // Add Stripe key
 const stripe = new Stripe(
