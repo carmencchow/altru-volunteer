@@ -9,9 +9,10 @@ import cookieParser from "cookie-parser";
 export const createUser = async (req, res) => {
   try {
     const userId = req.body.firebaseUID;
-    console.log(userId);
+    console.log("Firebase UID:", userId);
     // Create new user doc in MongoDB with firebaseUID
-    const user = await new User({
+    // const user = await new User({
+    const user = await User.create({
       _id: userId,
       firstname,
       lastname,
@@ -22,9 +23,9 @@ export const createUser = async (req, res) => {
       attending: [],
     });
     await user.save();
+    res.status(200).json({ msg: "User", user });
   } catch (error) {
-    res.status(400).send("Error: ", error);
-    console.log(error);
+    return res.status(400).send(error);
   }
 };
 

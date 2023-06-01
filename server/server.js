@@ -9,11 +9,9 @@ import cookieParser from "cookie-parser";
 import ngoRoutes from "./routes/ngoRoute.js";
 import Stripe from "stripe";
 import authRoutes from "./routes/authRoute.js";
-import eventRoutes from "./routes/eventRoute.js";
 import stripeRoutes from "./routes/stripeRoute.js";
 import userRoutes from "./routes/userRoute.js";
 import Ngo from "./models/ngoModel.js";
-import Event from "./models/eventModel.js";
 import User from "./models/userModel.js";
 
 // Add Stripe key
@@ -62,19 +60,15 @@ app.use(cors());
 // });
 
 // Routes
-app.use("/api/ngos", ngoRoutes);
+app.use("/api/ngo", ngoRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/auth", authRoutes);
-app.use("/api/event", eventRoutes);
 app.use("/api/payment", stripeRoutes);
 
 // Connect to db
-console.log(process.env.MONGO_URI);
-
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
-    // server test
     server.listen(PORT, () => {
       console.log(`connected to db and listening on port', ${PORT}`);
     });
