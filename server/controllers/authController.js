@@ -12,7 +12,7 @@ export const createUser = async (req, res) => {
     console.log("Firebase UID:", userId);
     // Create new user doc in MongoDB with firebaseUID
     // const user = await new User({
-    const user = await User.create({
+    const newUser = await User.create({
       _id: userId,
       firstname,
       lastname,
@@ -22,8 +22,9 @@ export const createUser = async (req, res) => {
       donations: [],
       attending: [],
     });
-    await user.save();
-    res.status(200).json({ msg: "User", user });
+    await newUser.save();
+    console.log("New user", newUser);
+    res.status(200).json({ msg: "User", newUser });
   } catch (error) {
     return res.status(400).send(error);
   }

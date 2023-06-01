@@ -6,7 +6,6 @@ import {
   updateProfile,
   signInWithEmailAndPassword,
   signOut,
-  GoogleAuthProvider,
 } from "firebase/auth";
 
 export const AuthContext = createContext();
@@ -25,22 +24,6 @@ export const AuthContextProvider = ({ children }) => {
   //     setUser(currentUser);
   //   }
   // }, []);
-
-  // const signUp = async (req, res) => {
-  //   const { email, password } = req.body;
-  //   try {
-  //     const userCredentials = await createUserWithEmailAndPassword(
-  //       auth,
-  //       email,
-  //       password
-  //     );
-  //     res.status(200).json({ userCredentials });
-  //     return userCredentials;
-  //   } catch (error) {
-  //     res.status(400).send({ message: error });
-  //     console.log("Firebase Error", error);
-  //   }
-  // };
 
   const signUp = async (email, password) => {
     try {
