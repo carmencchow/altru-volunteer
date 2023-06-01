@@ -26,8 +26,6 @@ const Login = () => {
     }
   };
 
-  const handleGoogleSignIn = async () => {};
-
   useEffect(() => {
     if (token) {
       navigate("/volunteer");
@@ -78,16 +76,6 @@ const Login = () => {
               Log in
             </button>
           </div>
-          {/* 
-          <div className="google-div">
-            <button
-              type="submit"
-              className="google-submit"
-              onClick={handleGoogleSignIn}
-            >
-              Google
-            </button>
-          </div> */}
 
           <div className="new-account">
             <div className="no-account"> Don't have an account?</div>

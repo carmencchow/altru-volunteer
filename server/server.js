@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
-import { auth } from "./firebase-config.js";
+import { auth } from "./src/firebase-config.js";
 import http from "http";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
@@ -30,22 +30,22 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(cors());
 
-app.use(async (req, res, next) => {
-  try {
-    const token = req.headers.authorization.split("")[1];
-    if (!token) {
-      res.sendStatus(400);
-    }
-    const verifyToken = await auth.verifyIdToken(token);
+// app.use(async (req, res, next) => {
+//   try {
+//     const token = req.headers.authorization.split("")[1];
+//     if (!token) {
+//       res.sendStatus(400);
+//     }
+//     const verifyToken = await auth.verifyIdToken(token);
 
-    const { email, uid } = verifyToken;
-    req.body = { ...req.body, email, uid };
-    next();
-  } catch (error) {
-    console.log(error);
-    res.sendStatus(500);
-  }
-});
+//     const { email, uid } = verifyToken;
+//     req.body = { ...req.body, email, uid };
+//     next();
+//   } catch (error) {
+//     console.log(error);
+//     res.sendStatus(500);
+//   }
+// });
 
 // app.get("/", (req, res) => {
 //   console.log(req.body);
