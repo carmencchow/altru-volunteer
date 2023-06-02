@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
 import {
   createUserWithEmailAndPassword,
-  updateProfile,
+  // updateProfile,
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
@@ -13,17 +13,6 @@ export const AuthContext = createContext();
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState("");
-  const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   const currentUser = JSON.stringify(localStorage.getItem("user"));
-
-  //   if (currentUser === null) {
-  //     navigate("/");
-  //   } else {
-  //     setUser(currentUser);
-  //   }
-  // }, []);
 
   const signUp = async (email, password) => {
     try {
@@ -53,19 +42,19 @@ export const AuthContextProvider = ({ children }) => {
     }
   };
 
-  const googleSignIn = async () => {};
+  // const googleSignIn = async () => {};
 
-  const profile = async (name, email, password) => {
-    try {
-      const getProfile = await updateProfile(auth.currentUser, {
-        displayName: name,
-      });
-      console.log(getProfile);
-      return getProfile;
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  // const profile = async (name, email, password) => {
+  //   try {
+  //     const getProfile = await updateProfile(auth.currentUser, {
+  //       displayName: name,
+  //     });
+  //     console.log(getProfile);
+  //     return getProfile;
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   const handleSignOut = async () => {
     console.log("logging out...");
@@ -100,11 +89,10 @@ export const AuthContextProvider = ({ children }) => {
       value={{
         token,
         user,
-        profile,
+        // profile,
         signIn,
         signUp,
         handleSignOut,
-        googleSignIn,
       }}
     >
       {children}

@@ -9,7 +9,7 @@ import "./Edit.css";
 
 const Edit = () => {
   const navigate = useNavigate();
-  const { user, setUser } = useContext(AuthContext);
+  const { user, setUser, token } = useContext(AuthContext);
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
@@ -33,20 +33,14 @@ const Edit = () => {
 
   const handleUpdate = async () => {
     try {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        throw new Error("No token found in localStorage");
-      }
-
       const res = await axios.put(
-        `http://localhost:5000/api/user/${user._id}`,
+        `http://localhost:5000/api/user/${user.uid}`,
         {
           firstname: `${firstname}`,
           lastname: `${lastname}`,
           email: `${email}`,
         },
         {
-          method: "PUT",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -60,7 +54,7 @@ const Edit = () => {
         user.lastname,
         user.email
       );
-      await getUser(user._id, setUser);
+      await getUser(user.uid, setUser);
       navigate("/profile");
     } catch (err) {
       console.log(err);
@@ -74,7 +68,7 @@ const Edit = () => {
   const handleDelete = async () => {
     console.log("Deleting your account");
     await axios
-      .delete(`http://localhost:5000/api/user/${user._id}`)
+      .delete(`http://localhost:5000/api/user/${user.uid}`)
       .then((res) => {
         console.log(`Account deleted`, res.data);
         navigate("/");
@@ -100,7 +94,6 @@ const Edit = () => {
                 <div className="row">
                   <p className="first">First name:</p>
                   <p className="last">Last name:</p>
-                  <p className="last">Email:</p>
                 </div>
 
                 <div className="row">
@@ -118,14 +111,6 @@ const Edit = () => {
                     placeholder=""
                     value={lastname}
                     onChange={handleLastname}
-                  />
-
-                  <input
-                    type="email"
-                    className="form-control"
-                    placeholder=""
-                    value={email}
-                    onChange={handleEmail}
                   />
                 </div>
 
