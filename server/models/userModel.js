@@ -33,12 +33,6 @@ const userSchema = new mongoose.Schema({
     lowercase: true,
     required: true,
   },
-  password: {
-    type: String,
-    unique: true,
-    lowercase: true,
-    required: true,
-  },
   goalAmount: {
     type: Number,
   },

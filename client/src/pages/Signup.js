@@ -25,18 +25,21 @@ const Signup = () => {
 
   const handleSignUp = async () => {
     if (email && password) {
+      // Send email and password to Firebase
       const data = await signUp(email, password);
       console.log("Register new user:", data);
       console.log("FirebaseUID:", data.user.uid);
 
-      // send Firebase uid to server
+      // Send details to server
       await axios.post(
         "http://localhost:5000/api/auth/createUser",
         {
           firebaseUID: data.user.uid,
+          email: data.user.email,
+          firstname: firstname,
+          lastname: lastname,
         },
         {
-          method: "POST",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
