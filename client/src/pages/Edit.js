@@ -27,10 +27,6 @@ const Edit = () => {
     setLastname(e.target.value);
   };
 
-  const handleEmail = (e) => {
-    setEmail(e.target.value);
-  };
-
   const handleUpdate = async () => {
     try {
       const res = await axios.put(
@@ -38,7 +34,6 @@ const Edit = () => {
         {
           firstname: `${firstname}`,
           lastname: `${lastname}`,
-          email: `${email}`,
         },
         {
           headers: {
