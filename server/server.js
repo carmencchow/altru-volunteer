@@ -36,9 +36,7 @@ app.use(async (req, res, next) => {
     if (!token) {
       res.sendStatus(400);
     }
-    console.log("Token:", token);
     const verifyToken = await auth.verifyIdToken(token);
-
     const { email, uid } = verifyToken;
     req.body = { ...req.body, email, uid };
     next();

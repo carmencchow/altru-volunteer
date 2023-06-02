@@ -1,12 +1,14 @@
 import React, { useContext } from "react";
 import { FiltersContext } from "../context/FiltersContext";
 import { NgosContext } from "../context/NgosContext";
-import "./Filters.css";
+import { AuthContext } from "../context/AuthContext";
 import axios from "axios";
+import "./Filters.css";
 
 const Filters = () => {
   const { filters, setFilters } = useContext(FiltersContext);
   const { ngos, setNgos } = useContext(NgosContext);
+  const { token } = useContext(AuthContext);
 
   const handleCategoryChange = (e) => {
     setFilters({ ...filters, category: e.target.value });
@@ -26,7 +28,13 @@ const Filters = () => {
       const frequency = filters.frequency;
       const category = filters.category;
       const res = await axios.get(
-        `http://localhost:5000/api/ngos/${frequency}/${category}`
+        `http://localhost:5000/api/ngo/${frequency}/${category}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       setNgos(res.data);
       console.log(res.data);

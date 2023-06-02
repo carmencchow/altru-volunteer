@@ -19,6 +19,8 @@ const getFiltered = async (req, res) => {
     const category = req.params.category.toLowerCase();
     const frequency = req.params.frequency.toLowerCase();
 
+    console.log(category, frequency);
+
     if (frequency === "all" && category === "all") {
       let ngos = await Ngo.find({});
       res.status(200).json(ngos);

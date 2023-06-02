@@ -27,7 +27,6 @@ const EditGoal = ({ openInput, closeInput }) => {
           goalAmount: `${input}`,
         },
         {
-          method: "PUT",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -37,7 +36,7 @@ const EditGoal = ({ openInput, closeInput }) => {
       const data = res.data;
       console.log(data);
       setInput("");
-      await getUser(user._id, setUser);
+      await getUser(user.uid, setUser, token);
       closeInput();
     } catch (err) {
       console.log("Error is: ", err);

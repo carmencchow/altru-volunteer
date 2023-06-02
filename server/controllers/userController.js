@@ -134,7 +134,7 @@ const editGoal = async (req, res) => {
     const goalAmount = req.body.goalAmount;
     const user = await User.findById({ _id: req.params.id });
     user.goalAmount = goalAmount;
-    await user.save();
+    await user.save(); // need token
     return res.status(200).send({ message: "Goal amount updated", goalAmount });
   } catch (err) {
     console.log(err);

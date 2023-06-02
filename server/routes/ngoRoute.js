@@ -5,7 +5,7 @@ import {
   getNgo,
   getFiltered,
 } from "../controllers/ngoController.js";
-// import auth from "../middleware/auth";
+
 const router = express.Router();
 
 router.get("/", getNgos);
