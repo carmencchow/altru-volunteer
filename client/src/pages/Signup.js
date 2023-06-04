@@ -8,7 +8,8 @@ import "./Signup.css";
 const Signup = () => {
   const navigate = useNavigate();
   const [error, setError] = useState("");
-  const { token, signUp, setUser, setToken } = useContext(AuthContext);
+  const { user, handleToken, signUp, setUser, setToken } =
+    useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [firstname, setFirstname] = useState("");
@@ -30,6 +31,11 @@ const Signup = () => {
       console.log("Register new user:", data);
       console.log("FirebaseUID:", data.user.uid);
 
+      // Wait for the token to be generated
+      // await handleToken();
+      const token = await data.user.getIdToken();
+      console.log(token);
+
       // Send details to server
       await axios.post(
         "http://localhost:5000/api/auth/createUser",
@@ -46,14 +52,15 @@ const Signup = () => {
           },
         }
       );
+      console.log("passing token", token);
     }
   };
 
   useEffect(() => {
-    if (token) {
+    if (user) {
       navigate("/volunteer");
     }
-  }, [token]);
+  }, [user]);
 
   return (
     <>

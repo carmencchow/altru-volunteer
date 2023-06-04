@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
+import morgan from "morgan";
 import { auth } from "./src/firebase-config.js";
 import http from "http";
 import mongoose from "mongoose";
@@ -29,9 +30,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.json());
 app.use(cors());
+app.use(morgan("tiny"));
 
 app.use(async (req, res, next) => {
   try {
+    console.log(req.headers.authorization);
     const token = req.headers.authorization.split(" ")[1];
     if (!token) {
       res.sendStatus(400);
@@ -45,16 +48,6 @@ app.use(async (req, res, next) => {
     res.sendStatus(500);
   }
 });
-
-// app.get("/", (req, res) => {
-//   console.log(req.body);
-//   res.send("Hello World");
-// });
-
-// app.post("/verify", async (req, res) => {
-//   console.log(req.body);
-//   res.sendStatus(200);
-// });
 
 // Routes
 app.use("/api/ngo", ngoRoutes);

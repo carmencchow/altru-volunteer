@@ -33,7 +33,7 @@ const Info = () => {
         throw new Error("No token found in localStorage");
       }
       const res = await axios.post(
-        `http://localhost:5000/api/user/${user._id}/donation`,
+        `http://localhost:5000/api/user/${user.uid}/donation`,
 
         {
           id: `${ngo._id}`,
@@ -41,7 +41,6 @@ const Info = () => {
           name: `${ngo.name}`,
         },
         {
-          method: "POST",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -49,7 +48,7 @@ const Info = () => {
         }
       );
       const data = res.data;
-      await getUser(user._id, setUser);
+      await getUser(user.uid, token, setUser);
     } catch (e) {
       console.log(e);
     }

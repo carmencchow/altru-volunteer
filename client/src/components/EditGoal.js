@@ -22,7 +22,7 @@ const EditGoal = ({ openInput, closeInput }) => {
         throw new Error("No token found in localStorage");
       }
       const res = await axios.put(
-        `http://localhost:5000/api/user/${user._id}/amount`,
+        `http://localhost:5000/api/user/${user.uid}/amount`,
         {
           goalAmount: `${input}`,
         },

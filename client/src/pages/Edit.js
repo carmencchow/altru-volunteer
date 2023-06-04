@@ -49,7 +49,7 @@ const Edit = () => {
         user.lastname,
         user.email
       );
-      await getUser(user.uid, setUser);
+      await getUser(user.uid, token, setUser);
       navigate("/profile");
     } catch (err) {
       console.log(err);

@@ -22,12 +22,11 @@ const ProfileInfo = () => {
         throw new Error("No token found in localStorage");
       }
       const res = await axios.post(
-        `http://localhost:5000/api/user/${user._id}/unfollow/ngo`,
+        `http://localhost:5000/api/user/${user.uid}/unfollow/ngo`,
         {
           remove: `${follow}`,
         },
         {
-          method: "POST",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -36,7 +35,7 @@ const ProfileInfo = () => {
       );
       const data = res.data;
       console.log(data);
-      await getUser(user._id, setUser);
+      await getUser(user.uid, setUser, token);
     } catch (e) {
       console.log(e);
     }

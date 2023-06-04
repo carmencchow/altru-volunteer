@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { FiltersContext } from "../context/FiltersContext";
 import { NgosContext } from "../context/NgosContext";
 import { AuthContext } from "../context/AuthContext";
@@ -9,6 +9,7 @@ const Filters = () => {
   const { filters, setFilters } = useContext(FiltersContext);
   const { ngos, setNgos } = useContext(NgosContext);
   const { token } = useContext(AuthContext);
+  const [error, setError] = useState("");
 
   const handleCategoryChange = (e) => {
     setFilters({ ...filters, category: e.target.value });
@@ -40,6 +41,7 @@ const Filters = () => {
       console.log(res.data);
     } catch (err) {
       console.log(err);
+      setError(err);
     }
   };
 
@@ -80,6 +82,8 @@ const Filters = () => {
           Search
         </button>
       </div>
+
+      {error && <p>{error}</p>}
     </div>
   );
 };

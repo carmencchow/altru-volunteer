@@ -1,9 +1,9 @@
 import React, { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
+import axios from "axios";
 import {
   createUserWithEmailAndPassword,
-  // updateProfile,
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
@@ -11,6 +11,7 @@ import {
 export const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
+  const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [token, setToken] = useState("");
 
@@ -42,20 +43,6 @@ export const AuthContextProvider = ({ children }) => {
     }
   };
 
-  // const googleSignIn = async () => {};
-
-  // const profile = async (name, email, password) => {
-  //   try {
-  //     const getProfile = await updateProfile(auth.currentUser, {
-  //       displayName: name,
-  //     });
-  //     console.log(getProfile);
-  //     return getProfile;
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-
   const handleSignOut = async () => {
     console.log("logging out...");
     await signOut(auth);
@@ -70,10 +57,32 @@ export const AuthContextProvider = ({ children }) => {
     }
   };
 
+  const verifyUser = async (token) => {
+    const data = await axios.post(
+      "http://localhost:5000/api/auth/verifyUser",
+      {},
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    if (data.status === 401) {
+      navigate("/signup");
+      return false;
+    }
+    return true;
+  };
+
   useEffect(() => {
-    auth.onAuthStateChanged((currentUser) => {
+    auth.onAuthStateChanged(async (currentUser) => {
       if (currentUser) {
-        setUser(currentUser);
+        const token = await currentUser.getIdToken();
+        const isVerified = await verifyUser(token);
+        if (isVerified) {
+          setUser(currentUser);
+        }
       } else {
         setUser(null);
       }
@@ -89,7 +98,6 @@ export const AuthContextProvider = ({ children }) => {
       value={{
         token,
         user,
-        // profile,
         signIn,
         signUp,
         handleSignOut,

@@ -13,13 +13,13 @@ const Modal = ({
   setOpenModal,
   ngoModal,
 }) => {
-  const { user, setUser } = useContext(AuthContext);
+  const { user, setUser, token } = useContext(AuthContext);
   const [ngo, setNgo] = useState("");
 
   const fetchNgo = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:5000/api/ngos/${ngoModal._id}`
+        `https://altru-volunteer-be.onrender.com/api/ngos/${ngoModal._id}`
       );
       setNgo(res.data);
     } catch (e) {
@@ -38,19 +38,16 @@ const Modal = ({
       "Thank you. We look forward to meeting you at our event!"
     );
     try {
-      const token = localStorage.getItem("token");
-
       if (!token) {
-        throw new Error("No token found in localStorage");
+        throw new Error("No token found");
       }
       const res = await axios.post(
-        `http://localhost:5000/api/user/${user._id}/add-event`,
+        `http://localhost:5000/api/user/${user.uid}/add-event`,
         {
           id: `${ngoModal._id}`,
           title: `${ngoModal.name}`,
         },
         {
-          method: "POST",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -66,7 +63,7 @@ const Modal = ({
         ngoModal.name
       );
       await fetchNgo(ngoModal._id);
-      await getUser(user._id, setUser);
+      await getUser(user.uid, setUser, token);
       setOpenModal(false);
     } catch (e) {
       console.log(e);
@@ -93,27 +90,6 @@ const Modal = ({
             <p className="text">
               Time: <span>{ngoModal.event_time}</span>
             </p>
-            <h5 className="contact">
-              Please enter your contact info below and we will get in touch
-              shortly
-            </h5>
-
-            <div className="contact-info">
-              <div className="modal-inputs">
-                <input
-                  className="modal-input"
-                  type="text"
-                  name="name"
-                  placeholder="  Name"
-                />
-                <input
-                  className="modal-input"
-                  type="text"
-                  name="email"
-                  placeholder="  Email"
-                />
-              </div>
-            </div>
 
             <div className="button-container">
               <button onClick={() => handleRegister(ngoModal)}>Confirm</button>

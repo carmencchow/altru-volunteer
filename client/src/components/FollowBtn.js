@@ -14,12 +14,11 @@ const FollowBtn = ({ ngo }) => {
         throw new Error("No token found in localStorage");
       }
       const res = await axios.post(
-        `http://localhost:5000/api/user/${user._id}/follow/ngo`,
+        `http://localhost:5000/api/user/${user.uid}/follow/ngo`,
         {
           follow: `${ngo.name}`,
         },
         {
-          method: "POST",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
@@ -29,7 +28,7 @@ const FollowBtn = ({ ngo }) => {
       const data = res.data;
       console.log(data);
       setDisabled("Following...");
-      await getUser(user._id, setUser);
+      await getUser(user.uid, setUser, token);
     } catch (e) {
       console.log(e);
     }
