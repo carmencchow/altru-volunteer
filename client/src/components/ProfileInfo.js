@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import { getUser } from "../utils/getUser";
-import axios from "axios";
+import { fetchUserData } from "../utils/fetchUserData";
 import "./ProfileInfo.css";
+import { api } from "../utils/axios";
 
 const ProfileInfo = () => {
   const navigate = useNavigate();
-  const { user, setUser } = useContext(AuthContext);
+  const { user, setMongoUser } = useContext(AuthContext);
 
   const handleEdit = (e) => {
     navigate("/edit");
@@ -17,25 +17,21 @@ const ProfileInfo = () => {
   const handleUnfollow = async (follow) => {
     try {
       console.log(follow);
-      const token = localStorage.getItem("token");
-      if (!token) {
-        throw new Error("No token found in localStorage");
-      }
-      const res = await axios.post(
-        `http://localhost:5000/api/user/${user.uid}/unfollow/ngo`,
+      const token = await user.getIdToken();
+      const res = await api.post(
+        `/user/${user.uid}/unfollow/ngo`,
         {
           remove: `${follow}`,
         },
         {
           headers: {
-            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
         }
       );
       const data = res.data;
       console.log(data);
-      await getUser(user.uid, setUser, token);
+      await fetchUserData(user.uid, setMongoUser, token);
     } catch (e) {
       console.log(e);
     }

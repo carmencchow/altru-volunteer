@@ -1,27 +1,28 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import axios from "axios";
 import logo from "../assets/altru.png";
 import "./Navbar.css";
+// import { api } from "../utils/axios";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const { user, setUser, profile, token, handleSignOut, setToken } =
-    useContext(AuthContext);
-  const [data, setData] = useState(null);
+  const { user, handleSignOut } = useContext(AuthContext);
+  // const [data, setData] = useState(null);
 
-  const fetchProtectedData = async () => {
-    const res = await axios.get("/", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    setData(res.data);
-  };
-  useEffect(() => {
-    fetchProtectedData();
-  }, []);
+  // const fetchProtectedData = async () => {
+  //   const token = await user.getIdToken();
+  //   const res = await api.get("/", {
+  //     headers: {
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //   });
+  //   console.log(data);
+  //   setData(res.data);
+  // };
+  // useEffect(() => {
+  //   fetchProtectedData();
+  // }, []);
 
   const navMain = () => {
     navigate("/volunteer");
@@ -30,22 +31,6 @@ const Navbar = () => {
   const navProfile = () => {
     navigate("/profile");
   };
-
-  // const handleLogout = async (e) => {
-  //   e.preventDefault();
-  //   console.log("User signed out");
-  //   try {
-  //     const res = await axios.post(
-  //       "http://localhost:5000/api/auth/logout"
-  //     );
-  //     setUser(null);
-  //     setToken("");
-  //     await localStorage.clear();
-  //     navigate("/login");
-  //   } catch (err) {
-  //     console.log(err, "Unable to log out");
-  //   }
-  // };
 
   return (
     <nav>

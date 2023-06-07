@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
-import { getUser } from "../utils/getUser";
+import { fetchUserData } from "../utils/fetchUserData";
 import StripeCheckout from "react-stripe-checkout";
 import Navbar from "../components/Navbar";
 import AmountBtn from "../components/AmountBtn";
@@ -10,6 +9,7 @@ import Form from "../components/Form";
 import FollowBtn from "../components/FollowBtn";
 import logo from "../assets/altru.png";
 import "./Info.css";
+import { api } from "../utils/axios";
 
 const Info = () => {
   const navigate = useNavigate();
@@ -18,22 +18,24 @@ const Info = () => {
   const [ngo, setNgo] = useState({});
   const [total, setTotal] = useState(0);
   const [clickedBtn, setClickedBtn] = useState("0");
-  const [confirmation, setConfirmation] = useState("");
   const amounts = [10, 25, 50, 75, 100];
+  // const confirmation = "Thank you for your donation!";
 
   const fetchNgo = async () => {
-    const res = await axios.get(`http://localhost:5000/api/ngos/${id}`);
+    const token = await user.getIdToken();
+    const res = await api.get(`/ngos/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     setNgo(res.data);
   };
 
   const handleConfirmation = async () => {
     try {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        throw new Error("No token found in localStorage");
-      }
-      const res = await axios.post(
-        `http://localhost:5000/api/user/${user.uid}/donation`,
+      const token = await user.getIdToken();
+      await api.post(
+        `/user/${user.uid}/donation`,
 
         {
           id: `${ngo._id}`,
@@ -42,35 +44,31 @@ const Info = () => {
         },
         {
           headers: {
-            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
         }
       );
-      const data = res.data;
-      await getUser(user.uid, token, setUser);
+      await fetchUserData(user.uid, token, setUser);
     } catch (e) {
       console.log(e);
     }
   };
 
-  const handlePayment = (token) => {
+  const handlePayment = async () => {
     handleConfirmation();
     console.log("Payment received");
+    const token = await user.getIdToken();
+
     const body = {
       token,
-      total,
+      // total,
     };
-    const headers = {
-      "Content-Type": "application/json",
-    };
-    return fetch("http://localhost:5000/api/payment", {
-      method: "POST",
-      headers,
-      body: JSON.stringify(body),
-    })
-      .then((response) => {})
-      .catch((err) => console.log(err));
+
+    await api.post("/payment", body, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
   };
 
   useEffect(() => {
@@ -95,7 +93,7 @@ const Info = () => {
 
       <div className="donation-card">
         <p>Select an amount to donate: </p>
-        <p className="confirmation">{confirmation}</p>
+        {/* <p className="confirmation">{confirmation}</p> */}
 
         <div className="donation-options">
           {amounts.map((amount) => {

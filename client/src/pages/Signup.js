@@ -1,15 +1,14 @@
 import React, { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { api } from "../utils/axios";
+
 import logo from "../assets/altru.png";
 import "./Signup.css";
 
 const Signup = () => {
   const navigate = useNavigate();
-  const [error, setError] = useState("");
-  const { user, handleToken, signUp, setUser, setToken } =
-    useContext(AuthContext);
+  const { user, signUp } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [firstname, setFirstname] = useState("");
@@ -29,16 +28,11 @@ const Signup = () => {
       // Send email and password to Firebase
       const data = await signUp(email, password);
       console.log("Register new user:", data);
-      console.log("FirebaseUID:", data.user.uid);
-
-      // Wait for the token to be generated
-      // await handleToken();
       const token = await data.user.getIdToken();
-      console.log(token);
 
       // Send details to server
-      await axios.post(
-        "http://localhost:5000/api/auth/createUser",
+      await api.post(
+        "/auth/createUser",
         {
           firebaseUID: data.user.uid,
           email: data.user.email,
@@ -47,12 +41,10 @@ const Signup = () => {
         },
         {
           headers: {
-            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
         }
       );
-      console.log("passing token", token);
     }
   };
 
@@ -127,8 +119,6 @@ const Signup = () => {
               onChange={(e) => setConfirm(e.target.value)}
             />
           </div>
-
-          {error && <p className="error">{error}</p>}
 
           <button
             className="signup-submit"

@@ -1,14 +1,12 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import logo from "../assets/altru.png";
 import "./Login.css";
 
 const Login = () => {
-  const { signIn, user } = useContext(AuthContext);
+  const { signIn } = useContext(AuthContext);
   const navigate = useNavigate();
-  const [error, setError] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -21,20 +19,17 @@ const Login = () => {
   };
 
   const handleSignIn = async () => {
-    if (email && password) {
-      const data = await signIn(email, password);
-      // console.log("User credentials:", data);
-
-      // const token = await data.user.getIdToken();
-      // console.log(token);
+    try {
+      if (email && password) {
+        // signIn function handles authentication process and updates the user state internally. No need to access user object/token in Login
+        await signIn(email, password);
+      } else {
+        console.log("Missing email or password");
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
-
-  // useEffect(() => {
-  //   if (user) {
-  //     navigate("/volunteer");
-  //   }
-  // }, [user]);
 
   return (
     <>
@@ -68,8 +63,6 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-
-          <p className="error">{error}</p>
 
           <div className="login-div">
             <button

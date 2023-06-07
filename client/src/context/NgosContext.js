@@ -1,5 +1,6 @@
-import React, { createContext, useState } from "react";
-import axios from "axios";
+import React, { createContext, useState, useContext } from "react";
+import { api } from "../utils/axios";
+import { AuthContext } from "./AuthContext";
 
 export const NgosContext = createContext();
 
@@ -8,10 +9,16 @@ export const NgosProvider = ({ children }) => {
   const [ngo, setNgo] = useState({});
   const [ngoModal, setNgoModal] = useState({});
   const [ngoId, setNgoId] = useState("");
+  const { user } = useContext(AuthContext);
 
   const fetchNgo = async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/ngos/${ngo._id}`);
+      const token = await user.getIdToken();
+      const res = await api.get(`/ngos/${ngo._id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setNgo(res.data);
     } catch (e) {
       console.log(e);
@@ -20,9 +27,12 @@ export const NgosProvider = ({ children }) => {
 
   const fetchNgoModal = async () => {
     try {
-      const res = await axios.get(
-        `http://localhost:5000/api/ngos/${ngoModal._id}`
-      );
+      const token = await user.getIdToken();
+      const res = await api.get(`/ngos/${ngoModal._id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setNgoModal(res.data);
       console.log("ngoModal results:", res.data);
     } catch (e) {

@@ -2,16 +2,16 @@ import dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
 import morgan from "morgan";
-import { auth } from "./src/firebase-config.js";
 import http from "http";
+import Stripe from "stripe";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
-import ngoRoutes from "./routes/ngoRoute.js";
-import Stripe from "stripe";
-import authRoutes from "./routes/authRoute.js";
-import stripeRoutes from "./routes/stripeRoute.js";
-import userRoutes from "./routes/userRoute.js";
+import { auth } from "./src/firebase-config.js";
+import ngoRoutes from "./src/routes/ngoRoute.js";
+import authRoutes from "./src/routes/authRoute.js";
+import stripeRoutes from "./src/routes/stripeRoute.js";
+import userRoutes from "./src/routes/userRoute.js";
 
 // Add Stripe key
 const stripe = new Stripe(
@@ -34,7 +34,7 @@ app.use(morgan("tiny"));
 
 app.use(async (req, res, next) => {
   try {
-    console.log(req.headers.authorization);
+    console.log("Headers", req.headers.authorization);
     const token = req.headers.authorization.split(" ")[1];
     if (!token) {
       res.sendStatus(400);
@@ -50,7 +50,7 @@ app.use(async (req, res, next) => {
 });
 
 // Routes
-app.use("/api/ngo", ngoRoutes);
+app.use("/api/ngos", ngoRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/payment", stripeRoutes);

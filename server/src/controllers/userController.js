@@ -1,9 +1,10 @@
 import User from "../models/userModel.js";
 import mongoose from "mongoose";
 
-// GET user by Id
+// GET USER
 const getUser = async (req, res) => {
   const { id } = req.params;
+  console.log("User Id", id);
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ err: "No such user with this id" });
   }
@@ -14,20 +15,6 @@ const getUser = async (req, res) => {
     return res.status(404).json({ err: "User doesn't exist" });
   }
   res.status(200).json(user);
-};
-
-// GET all users
-const getUsers = async (req, res) => {
-  try {
-    const users = await User.find({});
-    if (!users) {
-      res.status(401).send("Users not found");
-    }
-    res.status(200).send(users);
-  } catch (err) {
-    console.log(err);
-    res.status(500).send("Server error");
-  }
 };
 
 // DELETE user
@@ -85,7 +72,8 @@ const addEvent = async (req, res) => {
     await user.save();
     res.status(200).send({ results: user, message: user.attending });
   } catch (err) {
-    console.log("Already registered");
+    console.log(err);
+    res.status(400).send("Couldn't add event");
   }
 };
 
@@ -144,7 +132,6 @@ const editGoal = async (req, res) => {
 
 export {
   getUser,
-  getUsers,
   addEvent,
   follow,
   unfollow,

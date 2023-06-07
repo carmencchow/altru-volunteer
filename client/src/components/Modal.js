@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
-import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
-import { getUser } from "../utils/getUser";
+import { fetchUserData } from "../utils/fetchUserData";
 import { GrFormClose } from "react-icons/gr";
 import "./Modal.css";
+import { api } from "../utils/axios";
 
 const Modal = ({
   confirmMessage,
@@ -13,14 +13,18 @@ const Modal = ({
   setOpenModal,
   ngoModal,
 }) => {
-  const { user, setUser, token } = useContext(AuthContext);
+  const { user, setMongoUser } = useContext(AuthContext);
   const [ngo, setNgo] = useState("");
 
   const fetchNgo = async () => {
     try {
-      const res = await axios.get(
-        `https://altru-volunteer-be.onrender.com/api/ngos/${ngoModal._id}`
-      );
+      const token = await user.getIdToken();
+      console.log("NGO is", ngoModal);
+      const res = await api.get(`/ngo/${ngoModal._id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setNgo(res.data);
     } catch (e) {
       console.log(e);
@@ -38,18 +42,15 @@ const Modal = ({
       "Thank you. We look forward to meeting you at our event!"
     );
     try {
-      if (!token) {
-        throw new Error("No token found");
-      }
-      const res = await axios.post(
-        `http://localhost:5000/api/user/${user.uid}/add-event`,
+      const token = await user.getIdToken();
+      const res = await api.post(
+        `/user/${user.uid}/add-event`,
         {
           id: `${ngoModal._id}`,
           title: `${ngoModal.name}`,
         },
         {
           headers: {
-            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
         }
@@ -63,7 +64,7 @@ const Modal = ({
         ngoModal.name
       );
       await fetchNgo(ngoModal._id);
-      await getUser(user.uid, setUser, token);
+      await fetchUserData(user.uid, setMongoUser, token);
       setOpenModal(false);
     } catch (e) {
       console.log(e);

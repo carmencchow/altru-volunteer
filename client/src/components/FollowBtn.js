@@ -1,26 +1,23 @@
 import React, { useContext, useState } from "react";
-import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
-import { getUser } from "../utils/getUser";
+import { fetchUserData } from "../utils/fetchUserData";
+import { api } from "../utils/axios";
 
 const FollowBtn = ({ ngo }) => {
   const [disabled, setDisabled] = useState(false);
-  const { user, setUser } = useContext(AuthContext);
+  const { user, setMongoUser } = useContext(AuthContext);
 
   const handleFollow = async () => {
     try {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        throw new Error("No token found in localStorage");
-      }
-      const res = await axios.post(
-        `http://localhost:5000/api/user/${user.uid}/follow/ngo`,
+      const token = await user.getIdToken();
+      console.log("Following ngo", ngo, ngo.name);
+      const res = await api.post(
+        `/user/${user.uid}/follow/ngo`,
         {
           follow: `${ngo.name}`,
         },
         {
           headers: {
-            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
         }
@@ -28,7 +25,7 @@ const FollowBtn = ({ ngo }) => {
       const data = res.data;
       console.log(data);
       setDisabled("Following...");
-      await getUser(user.uid, setUser, token);
+      await fetchUserData(user.uid, setMongoUser, token);
     } catch (e) {
       console.log(e);
     }

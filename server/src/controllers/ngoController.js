@@ -23,18 +23,18 @@ const getFiltered = async (req, res) => {
 
     if (frequency === "all" && category === "all") {
       let ngos = await Ngo.find({});
-      res.status(200).json(ngos);
+      return res.status(200).json(ngos);
     }
     if (frequency === "all") {
       let ngos = await Ngo.find({ category: category });
-      res.status(200).json(ngos);
+      return res.status(200).json(ngos);
     }
     if (category === "all") {
       let ngos = await Ngo.find({ frequency: frequency });
-      res.status(200).json(ngos);
+      return res.status(200).json(ngos);
     } else {
       let ngos = await Ngo.find({ category: category, frequency: frequency });
-      res.status(200).json(ngos);
+      return res.status(200).json(ngos);
     }
   } catch (err) {
     console.log(err);
@@ -44,10 +44,12 @@ const getFiltered = async (req, res) => {
 const getNgo = async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
+    console.log("No such NGO with this id");
     return res.status(404).json({ err: "No such NGO with this id" });
   }
   const ngo = await Ngo.findById(id);
   if (!ngo) {
+    console.log("NGO not exist");
     return res.status(404).json({ err: "NGO doesn't exist" });
   }
   res.status(200).json(ngo);
