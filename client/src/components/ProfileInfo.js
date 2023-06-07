@@ -7,7 +7,7 @@ import { api } from "../utils/axios";
 
 const ProfileInfo = () => {
   const navigate = useNavigate();
-  const { user, setMongoUser } = useContext(AuthContext);
+  const { user, setMongoUser, mongoUser } = useContext(AuthContext);
 
   const handleEdit = (e) => {
     navigate("/edit");
@@ -42,22 +42,22 @@ const ProfileInfo = () => {
       <h2>Personal Info</h2>
       <div className="user-profile">
         <p>
-          User: {user.firstname} {user.lastname}
+          User: {mongoUser.firstname} {mongoUser.lastname}
         </p>
-        <p>Email: {user.email}</p>
-        <p>Member since: {String(user.createdAt).slice(0, 10)}</p>
+        <p>Email: {mongoUser.email}</p>
+        <p>Member since: {String(mongoUser.createdAt).slice(0, 10)}</p>
         <button onClick={handleEdit} className="edit-btn">
           Edit Profile
         </button>
       </div>
 
-      {user.following && (
+      {mongoUser.following && (
         // {!user.following.length === 0 && (
         <div className="following">
           <h3 className="follow-heading">Following</h3>
 
           <div className="organizations">
-            {user.following.map((follow) => (
+            {mongoUser.following.map((follow) => (
               <div className="follow-list">
                 {follow}
                 <button
