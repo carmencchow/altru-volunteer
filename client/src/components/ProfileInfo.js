@@ -51,13 +51,12 @@ const ProfileInfo = () => {
         </button>
       </div>
 
-      {user.following && (
-        // {!user.following.length === 0 && (
+      {mongoUser.following && (
         <div className="following">
           <h3 className="follow-heading">Following</h3>
 
           <div className="organizations">
-            {user.following.map((follow) => (
+            {mongoUser.following.map((follow) => (
               <div className="follow-list">
                 {follow}
                 <button

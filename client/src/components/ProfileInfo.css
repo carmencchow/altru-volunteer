@@ -1,45 +1,46 @@
-.follow{
+.follow {
   display: flex;
   justify-content: space-between;
 }
-.user-profile{
+.user-profile {
   display: flex;
   flex-direction: column;
   margin-top: 0px;
 }
-.user-profile p{
+.user-profile p {
   margin-top: 0px;
 }
-.follow-heading{
+.follow-heading {
   margin-left: 0px;
   margin-top: 30px;
   margin-bottom: 5px;
 }
-.follow-list{
+.follow-list {
   font-size: 14px;
 }
-.contact{
+.contact {
   font-weight: bold;
 }
-.user-profile p{
+.user-profile p {
   font-size: 14px;
 }
-.user-image{
+.user-image {
   margin-left: 200px;
 }
-.unfollow-btn{
+.unfollow-btn {
   margin-left: 0px;
   border: none;
   color: blue;
   font-size: 12px;
   cursor: pointer;
 }
-.edit-btn{
+.edit-btn {
   width: 100px;
   margin-top: 10px;
   cursor: pointer;
+  margin-bottom: 40px;
 }
-.edit-btn:hover{
+.edit-btn:hover {
   color: white;
   background-color: blueviolet;
   border: 2px solid blueviolet;
@@ -49,19 +50,19 @@
 /* Media Queries */
 
 @media only screen and (max-width: 320px) {
- 
-  .user-profile p{
+  .user-profile p {
     margin-top: 0px;
     font-size: 10px;
   }
-  .follow-list, .unfollow-btn{
+  .follow-list,
+  .unfollow-btn {
     font-size: 10px;
   }
-  .edit-btn{
+  .edit-btn {
     width: 80px;
     font-size: 10px;
   }
-  .follow-heading{
+  .follow-heading {
     margin-left: 0px;
     margin-top: 50px;
     margin-bottom: 5px;
@@ -69,7 +70,7 @@
 }
 
 @media only screen and (max-width: 599px) {
-  .follow-heading{
-    display:flex;
+  .follow-heading {
+    display: flex;
   }
 }

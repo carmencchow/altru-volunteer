@@ -19,7 +19,8 @@ const Info = () => {
   const [total, setTotal] = useState(0);
   const [clickedBtn, setClickedBtn] = useState("0");
   const amounts = [10, 25, 50, 75, 100];
-  // const confirmation = "Thank you for your donation!";
+
+  const confirmation = "Thank you for your donation!";
 
   const fetchNgo = async () => {
     const token = await user.getIdToken();
@@ -58,10 +59,10 @@ const Info = () => {
     handleConfirmation();
     console.log("Payment received");
     const token = await user.getIdToken();
-
+    console.log("Payment token");
     const body = {
       token,
-      // total,
+      total,
     };
 
     await api.post("/payment", body, {
@@ -82,7 +83,7 @@ const Info = () => {
         <span className="back" onClick={() => navigate(-1)}>
           Back
         </span>
-        {/* <p className="confirmation">{confirmation}</p> */}
+        <p className="confirmation">{confirmation}</p>
         <FollowBtn ngo={ngo} />
         <div className="header-text">
           <span className="header1">Want to donate to: {ngo.name}?</span>
@@ -110,7 +111,7 @@ const Info = () => {
         <div className="process">
           <StripeCheckout
             className="stripe-btn"
-            stripeKey="pk_test_51L1kSgAoNhpouPlc1wUQc6a3zAxdhzv9hXazyvrYZa1beIP9okC7mpVZAI4hWioLXHaAYwxqtNsQnNJowellghHP00AhoZshJu"
+            stripeKey={process.env.REACT_APP_STRIPE_KEY}
             image={logo}
             token={handlePayment}
             name="Donating"
