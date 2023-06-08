@@ -1,7 +1,5 @@
 import { api } from "./axios";
 
-// getUser
-
 // Get MongoDB user data
 const fetchUserData = async (userId, setMongoUser, token) => {
   try {
