@@ -32,6 +32,23 @@ const Home = () => {
             </div>
           </div>
         </div>
+        <img className="home-logo" src={logo} alt="logo" />
+        <div className="buttons">
+          <div className="login-btn" onClick={handleLogin}>
+            Login
+          </div>
+          <div className="signup-btn" onClick={handleSignup}>
+            Signup
+          </div>
+        </div>
+      </div>
+      <div className="home-text">
+        <p className="welcome-text">
+          Welcome to Altru, your volunteer platform
+        </p>
+        <p className="sub-text">
+          Find worthwhile causes to support in Toronto!
+        </p>
         <div className="home-text">
           <p className="welcome-text">
             Welcome to Altru, your volunteer platform.

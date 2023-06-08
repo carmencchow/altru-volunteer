@@ -50,7 +50,7 @@ app.use(async (req, res, next) => {
 });
 
 // Routes
-app.use("/api/ngos", ngoRoutes);
+app.use("/api/ngo", ngoRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/payment", stripeRoutes);

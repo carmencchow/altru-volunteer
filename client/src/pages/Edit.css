@@ -3,19 +3,21 @@
   border-bottom: none;
   width: 33%;
   font-size: 20px;
-  padding: 20px 30px;
+  padding-top: 10px;
   cursor: pointer;
+  z-index: 1;
 }
 .active-tabs {
-  background-color: rgb(153, 153, 243);
-  border-top-right-radius: 50px;
-  border-top-left-radius: 50px;
-  border-bottom: 5px solid blue;
+  background-color: rgb(180, 180, 228);
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
   color: white;
   font-weight: bold;
   font-size: 20px;
   border-bottom: none;
   width: 33%;
+  z-index: 9999;
+  height: 14px;
 }
 .last {
   margin-left: 150px;
@@ -65,26 +67,17 @@
 
 /* Media Queries */
 
-@media only screen and (max-width: 320px) {
+@media only screen and (max-width: 599px) {
   .active-tabs {
     font-size: 14px;
     background-color: none;
-    width: 25%;
+    width: 20%;
+    z-index: 9999;
   }
   .tabs {
     font-size: 14px;
-    width: 25%;
-  }
-  h2 {
-    font-size: 16px;
-    color: blue;
-  }
-}
-
-@media only screen and (max-width: 599px) {
-  .tabs,
-  .active-tabs {
-    font-size: 14px;
+    width: 20%;
+    z-index: 9999;
   }
   h2 {
     font-size: 16px;

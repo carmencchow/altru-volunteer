@@ -2,6 +2,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  box-sizing: border-box;
 }
 .background {
   height: 100vh;
@@ -12,10 +13,13 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  box-sizing: border-box;
 }
 .home-logo {
   margin-top: 10px;
   margin-left: 10px;
+  width: 80px;
+  height: 26px;
 }
 .buttons {
   display: flex;
@@ -81,8 +85,13 @@ body {
     margin-top: 5px;
     width: 100%;
   }
-  .banner {
-    width: 100%;
+}
+@media only screen and (max-width: 500px) {
+  .home-logo {
+    margin-top: 10px;
+    margin-left: 10px;
+    width: 80px;
+    height: 26px;
   }
   .welcome-text {
     font-size: 20px;
@@ -91,41 +100,25 @@ body {
   }
   .sub-text {
     font-size: 10px;
-    text-align: center;
-    font-style: normal;
-    margin-top: 0px;
-  }
-  .login-btn,
-  .signup-btn {
-    font-size: 14px;
-    border: none;
+    .welcome-text {
+      font-size: 18px;
+      text-align: center;
+      margin-top: 0px;
+      width: 100%;
+    }
+    .login-btn,
+    .signup-btn {
+      font-size: 14px;
+      border: none;
+    }
   }
 }
 
 @media only screen and (max-width: 460px) {
-  .home-logo {
-    margin-top: 10px;
-    margin-left: 10px;
-    height: 26px;
-    width: 84px;
-  }
-  .login-btn,
-  .signup-btn {
-    border: 2px solid #19add6;
-    color: white;
-    font-family: "League Gothic", sans-serif;
-    font-size: 18px;
-    margin-top: 10px;
-    padding: 4px;
-    margin-left: 10px;
-  }
   .home-text {
     height: 60px;
     margin-top: 5px;
-    width: 100%;
-  }
-  .banner {
-    width: 100%;
+    width: 95%;
   }
   .welcome-text {
     font-size: 22px;
@@ -136,34 +129,20 @@ body {
     font-size: 14px;
     text-align: center;
     font-style: normal;
+    width: 100%;
     margin-top: 0px;
+  }
+  .login-btn,
+  .signup-btn {
+    font-size: 16px;
+    padding: 2px;
   }
 }
 
 @media only screen and (min-width: 461px) {
-  .home-logo {
-    margin-top: 10px;
-    margin-left: 10px;
-    height: 28px;
-    width: 86px;
-  }
-  .banner {
-    width: 100%;
-    height: 50px;
-  }
-  .login-btn,
-  .signup-btn {
-    border: 2px solid #19add6;
-    color: white;
-    font-family: "League Gothic", sans-serif;
-    font-size: 20px;
-    margin-top: 8px;
-    padding: 4px;
-    margin-left: 10px;
-  }
   .home-text {
     height: 100px;
-    margin-top: 6px;
+    margin-top: 5px;
     width: 80vw;
   }
   .welcome-text {
@@ -199,7 +178,23 @@ body {
 @media only screen and (min-width: 768px) {
   .home-text {
     height: 120px;
-    margin-top: 8px;
+    margin-top: 5px;
+  }
+  .welcome-text {
+    font-size: 40px;
+    text-align: center;
+  }
+  .sub-text {
+    font-size: 30px;
+    text-align: center;
+    margin-top: 0px;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .home-text {
+    height: 120px;
+    margin-top: 5px;
   }
   .welcome-text {
     font-size: 40px;
@@ -211,24 +206,22 @@ body {
     font-style: normal;
     margin-top: 0px;
   }
-  .home-logo {
-    margin-top: 12px;
-    margin-left: 10px;
-    height: 40px;
-    width: 120px;
+}
+
+@media only screen and (min-width: 1200px) {
+  .home-text {
+    height: 135px;
+    margin-top: 5px;
   }
-  .banner {
-    width: 100%;
-    height: 66px;
+  .welcome-text {
+    font-size: 56px;
+    text-align: center;
+    margin-top: 0px;
   }
-  .login-btn,
-  .signup-btn {
-    border: 2px solid #19add6;
-    color: white;
-    font-family: "League Gothic", sans-serif;
-    font-size: 28px;
-    margin-top: 8px;
-    padding: 6px;
-    margin-left: 10px;
+  .sub-text {
+    font-size: 40px;
+    text-align: center;
+    font-style: normal;
+    margin-top: 0px;
   }
 }
