@@ -3,14 +3,14 @@ import { AuthContext } from "../context/AuthContext";
 import "./VolunteerInfo.css";
 
 const VolunteerInfo = () => {
-  const { mongoUser } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   return (
     <div className="events-container">
       <h2>Events</h2>
       <div className="events">
-        {mongoUser.attending &&
-          mongoUser.attending.map((attend) => (
+        {user.attending &&
+          user.attending.map((attend) => (
             <div className="list" key={attend._id}>
               <div className="place">
                 {attend.event_description} with {attend.name}

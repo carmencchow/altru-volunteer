@@ -9,7 +9,7 @@ import Modal from "../components/Modal";
 import "./Volunteer.css";
 
 const Volunteer = () => {
-  const { mongoUser } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const { ngos } = useContext(NgosContext);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageCount, setPageCount] = useState(1);
@@ -105,8 +105,8 @@ const Volunteer = () => {
                       <VolunteerBtn
                         className="volunteer-btn"
                         attending={
-                          mongoUser.attending &&
-                          mongoUser.attending.find((item) => {
+                          user.attending &&
+                          user.attending.find((item) => {
                             // console.log("ngo._id:", item, ngo._id);
                             return item._id === ngo._id;
                           })
