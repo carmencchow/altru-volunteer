@@ -1,7 +1,6 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+import mongoose from "mongoose";
 
-const ngoSchema = new Schema({
+const ngoSchema = new mongoose.Schema({
   name: {
     type: String,
   },
@@ -41,4 +40,6 @@ const ngoSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model("Ngo", ngoSchema);
+const Ngo = mongoose.model("Ngo", ngoSchema);
+
+export default Ngo;

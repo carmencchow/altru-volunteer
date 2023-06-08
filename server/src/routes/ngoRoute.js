@@ -1,11 +1,11 @@
-const express = require("express");
-const {
+import express from "express";
+import {
   createNgo,
   getNgos,
   getNgo,
   getFiltered,
-} = require("../controllers/ngoController");
-const auth = require("../middleware/auth");
+} from "../controllers/ngoController.js";
+
 const router = express.Router();
 
 router.get("/", getNgos);
@@ -13,4 +13,4 @@ router.get("/:id", getNgo);
 router.get("/:frequency/:category", getFiltered);
 router.post("/", createNgo);
 
-module.exports = router;
+export default router;

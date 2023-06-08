@@ -2,6 +2,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  box-sizing: border-box;
 }
 .background {
   height: 100vh;
@@ -11,6 +12,7 @@ body {
   opacity: 0.9;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
   box-sizing: border-box;
 }
 .home-logo {
@@ -77,6 +79,13 @@ body {
 
 /* Media Queries */
 
+@media only screen and (max-width: 320px) {
+  .home-text {
+    height: 90px;
+    margin-top: 5px;
+    width: 100%;
+  }
+}
 @media only screen and (max-width: 500px) {
   .home-logo {
     margin-top: 10px;
@@ -84,18 +93,37 @@ body {
     width: 80px;
     height: 26px;
   }
-  .banner {
-    height: 50px;
-  }
   .welcome-text {
-    font-size: 18px;
+    font-size: 20px;
     text-align: center;
     margin-top: 0px;
-    width: 100%;
   }
+  .sub-text {
+    font-size: 10px;
+    .welcome-text {
+      font-size: 18px;
+      text-align: center;
+      margin-top: 0px;
+      width: 100%;
+    }
+    .login-btn,
+    .signup-btn {
+      font-size: 14px;
+      border: none;
+    }
+  }
+}
+
+@media only screen and (max-width: 460px) {
   .home-text {
     height: 60px;
-    margin-top: 18px;
+    margin-top: 5px;
+    width: 95%;
+  }
+  .welcome-text {
+    font-size: 22px;
+    text-align: center;
+    margin-top: 0px;
   }
   .sub-text {
     font-size: 14px;
@@ -111,34 +139,89 @@ body {
   }
 }
 
-@media only screen and (min-width: 500px) {
+@media only screen and (min-width: 461px) {
   .home-text {
-    height: 76px;
-    margin-top: 10px;
-  }
-  .home-logo {
-    margin-top: 10px;
-    margin-left: 10px;
-    width: 84px;
-    height: 30px;
-  }
-  .banner {
-    height: 56px;
+    height: 100px;
+    margin-top: 5px;
+    width: 80vw;
   }
   .welcome-text {
-    font-size: 30px;
+    font-size: 28px;
     text-align: center;
-    margin-top: 0px;
+    margin-top: 10px;
   }
   .sub-text {
-    font-size: 26px;
+    font-size: 20px;
     text-align: center;
     font-style: normal;
     margin-top: 0px;
   }
-  .login-btn,
-  .signup-btn {
-    font-size: 20px;
-    padding: 2px;
+}
+
+@media only screen and (min-width: 600px) {
+  .home-text {
+    height: 100px;
+    margin-top: 5px;
+  }
+  .welcome-text {
+    font-size: 34px;
+    text-align: center;
+  }
+  .sub-text {
+    font-size: 24px;
+    text-align: center;
+    font-style: normal;
+    margin-top: 0px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .home-text {
+    height: 120px;
+    margin-top: 5px;
+  }
+  .welcome-text {
+    font-size: 40px;
+    text-align: center;
+  }
+  .sub-text {
+    font-size: 30px;
+    text-align: center;
+    margin-top: 0px;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .home-text {
+    height: 120px;
+    margin-top: 5px;
+  }
+  .welcome-text {
+    font-size: 40px;
+    text-align: center;
+  }
+  .sub-text {
+    font-size: 30px;
+    text-align: center;
+    font-style: normal;
+    margin-top: 0px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .home-text {
+    height: 135px;
+    margin-top: 5px;
+  }
+  .welcome-text {
+    font-size: 56px;
+    text-align: center;
+    margin-top: 0px;
+  }
+  .sub-text {
+    font-size: 40px;
+    text-align: center;
+    font-style: normal;
+    margin-top: 0px;
   }
 }

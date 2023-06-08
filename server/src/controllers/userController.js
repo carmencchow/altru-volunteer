@@ -1,12 +1,13 @@
-const User = require("../models/userModel");
-const mongoose = require("mongoose");
+import User from "../models/userModel.js";
+import mongoose from "mongoose";
 
-// GET user by Id
+// GET USER
 const getUser = async (req, res) => {
   const { id } = req.params;
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({ err: "No such user with this id" });
-  }
+  console.log("User Id", id);
+  // if (!mongoose.Types.ObjectId.isValid(id)) {
+  //   return res.status(404).json({ err: "No such user with this id" });
+  // }
   const user = await User.findById(id)
     .populate("attending")
     .populate("donations");
@@ -14,20 +15,6 @@ const getUser = async (req, res) => {
     return res.status(404).json({ err: "User doesn't exist" });
   }
   res.status(200).json(user);
-};
-
-// GET all users
-const getUsers = async (req, res) => {
-  try {
-    const users = await User.find({});
-    if (!users) {
-      res.status(401).send("Users not found");
-    }
-    res.status(200).send(users);
-  } catch (err) {
-    console.log(err);
-    res.status(500).send("Server error");
-  }
 };
 
 // DELETE user
@@ -46,12 +33,11 @@ const deleteProfile = async (req, res) => {
 // UPDATE user
 const editProfile = async (req, res) => {
   try {
-    const { firstname, lastname, email } = req.body;
+    const { firstname, lastname } = req.body;
     console.log(firstname, lastname, req.params);
     const user = await User.findById({ _id: req.params.id });
     user.firstname = firstname;
     user.lastname = lastname;
-    user.email = email;
     await user.save();
     return res.status(200).send({ message: "Profile updated", user });
   } catch (err) {
@@ -86,7 +72,8 @@ const addEvent = async (req, res) => {
     await user.save();
     res.status(200).send({ results: user, message: user.attending });
   } catch (err) {
-    console.log("Already registered");
+    console.log(err);
+    res.status(400).send("Couldn't add event");
   }
 };
 
@@ -135,7 +122,7 @@ const editGoal = async (req, res) => {
     const goalAmount = req.body.goalAmount;
     const user = await User.findById({ _id: req.params.id });
     user.goalAmount = goalAmount;
-    await user.save();
+    await user.save(); // need token
     return res.status(200).send({ message: "Goal amount updated", goalAmount });
   } catch (err) {
     console.log(err);
@@ -143,9 +130,8 @@ const editGoal = async (req, res) => {
   }
 };
 
-module.exports = {
+export {
   getUser,
-  getUsers,
   addEvent,
   follow,
   unfollow,

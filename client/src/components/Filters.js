@@ -1,12 +1,15 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { FiltersContext } from "../context/FiltersContext";
 import { NgosContext } from "../context/NgosContext";
+import { AuthContext } from "../context/AuthContext";
 import "./Filters.css";
-import axios from "axios";
+import { api } from "../utils/axios";
 
 const Filters = () => {
   const { filters, setFilters } = useContext(FiltersContext);
   const { ngos, setNgos } = useContext(NgosContext);
+  const { user } = useContext(AuthContext);
+  const [error, setError] = useState("");
 
   const handleCategoryChange = (e) => {
     setFilters({ ...filters, category: e.target.value });
@@ -25,13 +28,17 @@ const Filters = () => {
     try {
       const frequency = filters.frequency;
       const category = filters.category;
-      const res = await axios.get(
-        `https://altru-volunteer-be.onrender.com/api/ngos/${frequency}/${category}`
-      );
+      const token = await user.getIdToken();
+      const res = await api.get(`/ngo/${frequency}/${category}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setNgos(res.data);
       console.log(res.data);
     } catch (err) {
       console.log(err);
+      setError(err);
     }
   };
 
@@ -72,6 +79,8 @@ const Filters = () => {
           Search
         </button>
       </div>
+
+      {error && <p>{error}</p>}
     </div>
   );
 };

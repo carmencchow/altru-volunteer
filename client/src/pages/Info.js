@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
-import { getUser } from "../utils/getUser";
+import { fetchUserData } from "../utils/fetchUserData";
 import StripeCheckout from "react-stripe-checkout";
 import Navbar from "../components/Navbar";
 import AmountBtn from "../components/AmountBtn";
@@ -10,6 +9,7 @@ import Form from "../components/Form";
 import FollowBtn from "../components/FollowBtn";
 import logo from "../assets/altru.png";
 import "./Info.css";
+import { api } from "../utils/axios";
 
 const Info = () => {
   const navigate = useNavigate();
@@ -18,24 +18,25 @@ const Info = () => {
   const [ngo, setNgo] = useState({});
   const [total, setTotal] = useState(0);
   const [clickedBtn, setClickedBtn] = useState("0");
-  const [confirmation, setConfirmation] = useState("");
   const amounts = [10, 25, 50, 75, 100];
 
+  const confirmation = "Thank you for your donation!";
+
   const fetchNgo = async () => {
-    const res = await axios.get(
-      `https://altru-volunteer-be.onrender.com/api/ngos/${id}`
-    );
+    const token = await user.getIdToken();
+    const res = await api.get(`/ngo/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     setNgo(res.data);
   };
 
   const handleConfirmation = async () => {
     try {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        throw new Error("No token found in localStorage");
-      }
-      const res = await axios.post(
-        `https://altru-volunteer-be.onrender.com/api/user/${user._id}/donation`,
+      const token = await user.getIdToken();
+      await api.post(
+        `/user/${user.uid}/donation`,
 
         {
           id: `${ngo._id}`,
@@ -43,37 +44,32 @@ const Info = () => {
           name: `${ngo.name}`,
         },
         {
-          method: "POST",
           headers: {
-            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
         }
       );
-      const data = res.data;
-      await getUser(user._id, setUser);
+      await fetchUserData(user.uid, token, setUser);
     } catch (e) {
       console.log(e);
     }
   };
 
-  const handlePayment = (token) => {
+  const handlePayment = async () => {
     handleConfirmation();
     console.log("Payment received");
+    const token = await user.getIdToken();
+    console.log("Payment token");
     const body = {
       token,
       total,
     };
-    const headers = {
-      "Content-Type": "application/json",
-    };
-    return fetch("https://altru-volunteer-be.onrender.com/api/payment", {
-      method: "POST",
-      headers,
-      body: JSON.stringify(body),
-    })
-      .then((response) => {})
-      .catch((err) => console.log(err));
+
+    await api.post("/payment", body, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
   };
 
   useEffect(() => {
@@ -115,7 +111,7 @@ const Info = () => {
         <div className="process">
           <StripeCheckout
             className="stripe-btn"
-            stripeKey="pk_test_51L1kSgAoNhpouPlc1wUQc6a3zAxdhzv9hXazyvrYZa1beIP9okC7mpVZAI4hWioLXHaAYwxqtNsQnNJowellghHP00AhoZshJu"
+            stripeKey={process.env.REACT_APP_STRIPE_KEY}
             image={logo}
             token={handlePayment}
             name="Donating"

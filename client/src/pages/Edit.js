@@ -1,23 +1,17 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import { getUser } from "../utils/getUser";
-import axios from "axios";
+import { fetchUserData } from "../utils/fetchUserData";
 import Navbar from "../components/Navbar";
 import "./Profile.css";
 import "./Edit.css";
+import { api } from "../utils/axios";
 
 const Edit = () => {
   const navigate = useNavigate();
-  const { user, setUser } = useContext(AuthContext);
+  const { user, setMongoUser } = useContext(AuthContext);
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
-  const [email, setEmail] = useState("");
-  const [toggleState, setToggleState] = useState(1);
-
-  const toggletabs = (idx) => {
-    setToggleState(idx);
-  };
 
   const handleFirstname = (e) => {
     setFirstname(e.target.value);
@@ -27,40 +21,24 @@ const Edit = () => {
     setLastname(e.target.value);
   };
 
-  const handleEmail = (e) => {
-    setEmail(e.target.value);
-  };
-
   const handleUpdate = async () => {
     try {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        throw new Error("No token found in localStorage");
-      }
-
-      const res = await axios.put(
-        `https://altru-volunteer-be.onrender.com/api/user/${user._id}`,
+      const token = await user.getIdToken();
+      const res = await api.put(
+        `/user/${user.uid}`,
         {
           firstname: `${firstname}`,
           lastname: `${lastname}`,
-          email: `${email}`,
         },
         {
-          method: "PUT",
           headers: {
-            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
         }
       );
       const data = res.data;
-      console.log(
-        "Profile updated:",
-        user.firstname,
-        user.lastname,
-        user.email
-      );
-      await getUser(user._id, setUser);
+      console.log(data);
+      await fetchUserData(user.uid, setMongoUser, token);
       navigate("/profile");
     } catch (err) {
       console.log(err);
@@ -73,12 +51,10 @@ const Edit = () => {
 
   const handleDelete = async () => {
     console.log("Deleting your account");
-    await axios
-      .delete(`https://altru-volunteer-be.onrender.com/api/user/${user._id}`)
-      .then((res) => {
-        console.log(`Account deleted`, res.data);
-        navigate("/");
-      });
+    await api.delete(`/user/${user.uid}`).then((res) => {
+      console.log(`Account deleted`, res.data);
+      navigate("/");
+    });
   };
 
   return (
@@ -100,7 +76,6 @@ const Edit = () => {
                 <div className="row">
                   <p className="first">First name:</p>
                   <p className="last">Last name:</p>
-                  <p className="last">Email:</p>
                 </div>
 
                 <div className="row">
@@ -118,14 +93,6 @@ const Edit = () => {
                     placeholder=""
                     value={lastname}
                     onChange={handleLastname}
-                  />
-
-                  <input
-                    type="email"
-                    className="form-control"
-                    placeholder=""
-                    value={email}
-                    onChange={handleEmail}
                   />
                 </div>
 

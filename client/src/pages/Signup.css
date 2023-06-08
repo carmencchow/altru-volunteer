@@ -1,21 +1,21 @@
-body{
+body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box; 
-} 
-.signup-logo{
+  box-sizing: border-box;
+}
+.signup-logo {
   margin-top: 20px;
   margin-left: 20px;
   cursor: pointer;
 }
-.signup-card{
+.signup-card {
   align-items: center;
   display: flex;
   flex-direction: column;
   width: 700px;
   margin-top: 0px;
 }
-.signup-wrapper{
+.signup-wrapper {
   height: 80vh;
   width: 70%;
   display: flex;
@@ -24,21 +24,25 @@ body{
   margin: 0 auto;
   justify-content: center;
 }
-.name-inputs{
+.name-inputs {
   border: 2px solid #19add6;
   width: 350px;
   height: 50px;
   margin-top: 0px;
-  margin-bottom: 0px; 
+  margin-bottom: 0px;
 }
-.firstname, .lastname, .email, .password, .confirm{
+.firstname,
+.lastname,
+.email,
+.password,
+.confirm {
   border: 2px solid #19add6;
   width: 350px;
   height: 50px;
   margin-top: 0px;
-  margin-bottom: 0px; 
+  margin-bottom: 0px;
 }
-.signup-submit{
+.signup-submit {
   height: 40px;
   cursor: pointer;
   width: 355px;
@@ -49,29 +53,33 @@ body{
   margin-right: 4px;
   background-color: #19add6;
 }
-.signup-submit:hover{
+.signup-submit:hover {
   border: none;
   background-color: #322ca9;
   color: white;
   transition: ease-in 0.5s;
 }
-::placeholder{
+::placeholder {
   margin-left: 10px;
 }
-.account{
+.account {
   display: flex;
   justify-content: space-between;
   margin-top: 15px;
 }
-.my-account{
+.my-account {
   font-size: 14px;
   margin-left: 0px;
-} 
-.login{
+}
+.login {
   font-size: 12px;
   margin-left: 120px;
+  cursor: pointer;
 }
-.login:hover{
+.error {
+  color: red;
+}
+.login:hover {
   color: blue;
   font-weight: bolder;
 }
@@ -79,13 +87,17 @@ body{
 /* Media Queries */
 
 @media only screen and (max-width: 320px) {
-  .firstname, .lastname, .email, .password, .confirm{
+  .firstname,
+  .lastname,
+  .email,
+  .password,
+  .confirm {
     width: 300px;
     height: 20px;
     margin-top: 0px;
-    margin-bottom: 0px; 
+    margin-bottom: 0px;
   }
-  .signup-submit{
+  .signup-submit {
     height: 40px;
     cursor: pointer;
     width: 355px;
@@ -96,32 +108,31 @@ body{
     margin-right: 4px;
     background-color: #19add6;
   }
-
 }
 
 @media only screen and (max-width: 600px) {
-  .signup-submit{
+  .signup-submit {
     width: 208px;
   }
-  .account{
+  .account {
     flex-direction: column;
     align-items: flex-end;
   }
-  .my-account, .login{
+  .my-account,
+  .login {
     font-size: 10px;
   }
 }
 
 @media only screen and (min-width: 992px) {
-  input{
+  input {
     width: 400px;
   }
-  .signup-submit{
+  .signup-submit {
     width: 408px;
   }
-  .my-account, .login{
+  .my-account,
+  .login {
     font-size: 16px;
   }
 }
-
-

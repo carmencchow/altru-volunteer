@@ -1,7 +1,9 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+import mongoose from "mongoose";
 
-const userSchema = new Schema({
+const userSchema = new mongoose.Schema({
+  _id: {
+    type: String,
+  },
   attending: [
     {
       type: mongoose.Schema.Types.ObjectId,
@@ -31,12 +33,6 @@ const userSchema = new Schema({
     lowercase: true,
     required: true,
   },
-  password: {
-    type: String,
-    unique: true,
-    lowercase: true,
-    required: true,
-  },
   goalAmount: {
     type: Number,
   },
@@ -46,4 +42,6 @@ const userSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model("User", userSchema);
+const User = mongoose.model("User", userSchema);
+
+export default User;

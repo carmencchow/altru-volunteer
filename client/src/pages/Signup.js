@@ -1,63 +1,19 @@
-import React, { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import React, { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
+import { api } from "../utils/axios";
+
 import logo from "../assets/altru.png";
 import "./Signup.css";
 
 const Signup = () => {
   const navigate = useNavigate();
-  const [error, setError] = useState("Passwords do not match");
-  const { setUser, setToken } = useContext(AuthContext);
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-    firstname: "",
-    lastname: "",
-    confirm: "",
-  });
-
-  const { email, password, firstname, lastname, confirm } = formData;
-
-  const handleChange = (e) => {
-    setFormData((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
-  const handleSubmit = async (e) => {
-    try {
-      e.preventDefault();
-      if (password === confirm) {
-        const res = await axios.post(
-          "https://altru-volunteer-be.onrender.com/api/auth/signup",
-          formData,
-
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        const data = res.data;
-        console.log("New user:", data.token, data.user);
-        localStorage.setItem("token", data.token);
-        setUser(data.user);
-        setToken(data.token);
-        localStorage.setItem("user", data.user);
-        navigate("/login");
-      } else {
-        console.log("Passwords do not match");
-        setError("Incorrect email or password. Please try again.");
-        navigate("/signup");
-      }
-    } catch (err) {
-      console.log(err, "Incorrect password or email");
-      setError("Signup failed, incorrect email or password. Please try again.");
-    }
-  };
+  const { user, signUp } = useContext(AuthContext);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [confirm, setConfirm] = useState("");
 
   const homepage = () => {
     navigate("/");
@@ -66,6 +22,37 @@ const Signup = () => {
   const handleLogin = () => {
     navigate("/login");
   };
+
+  const handleSignUp = async () => {
+    if (email && password) {
+      // Send email and password to Firebase
+      const data = await signUp(email, password);
+      console.log("Register new user:", data);
+      const token = await data.user.getIdToken();
+
+      // Send details to server
+      await api.post(
+        "/auth/createUser",
+        {
+          firebaseUID: data.user.uid,
+          email: data.user.email,
+          firstname: firstname,
+          lastname: lastname,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+    }
+  };
+
+  useEffect(() => {
+    if (user) {
+      navigate("/volunteer");
+    }
+  }, [user]);
 
   return (
     <>
@@ -79,7 +66,7 @@ const Signup = () => {
 
       <div className="signup-wrapper">
         <div className="signup-card">
-          <h2>Sign up</h2>
+          <h2>Create an account</h2>
 
           <div className="name-row">
             <div className="firstname-input">
@@ -88,7 +75,7 @@ const Signup = () => {
                 type="text"
                 placeholder="  Enter your first name"
                 value={firstname}
-                onChange={handleChange}
+                onChange={(e) => setFirstname(e.target.value)}
               />
             </div>
 
@@ -98,7 +85,7 @@ const Signup = () => {
                 type="text"
                 placeholder="  Enter your last name"
                 value={lastname}
-                onChange={handleChange}
+                onChange={(e) => setLastname(e.target.value)}
               />
             </div>
           </div>
@@ -109,7 +96,7 @@ const Signup = () => {
               type="email"
               placeholder="  Enter your email"
               value={email}
-              onChange={handleChange}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
 
@@ -119,7 +106,7 @@ const Signup = () => {
               type="password"
               placeholder="  Enter your password"
               value={password}
-              onChange={handleChange}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
 
@@ -129,14 +116,14 @@ const Signup = () => {
               type="password"
               placeholder="  Confirm your password"
               value={confirm}
-              onChange={handleChange}
+              onChange={(e) => setConfirm(e.target.value)}
             />
           </div>
 
           <button
             className="signup-submit"
             type="submit"
-            onClick={handleSubmit}
+            onClick={handleSignUp}
           >
             Sign Up
           </button>
