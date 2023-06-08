@@ -23,7 +23,7 @@ const Info = () => {
 
   const fetchNgo = async () => {
     const token = await user.getIdToken();
-    const res = await api.get(`/ngos/${id}`, {
+    const res = await api.get(`/ngo/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

@@ -5,9 +5,9 @@ import mongoose from "mongoose";
 const getUser = async (req, res) => {
   const { id } = req.params;
   console.log("User Id", id);
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({ err: "No such user with this id" });
-  }
+  // if (!mongoose.Types.ObjectId.isValid(id)) {
+  //   return res.status(404).json({ err: "No such user with this id" });
+  // }
   const user = await User.findById(id)
     .populate("attending")
     .populate("donations");

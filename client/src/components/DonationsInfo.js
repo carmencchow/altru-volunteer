@@ -4,7 +4,7 @@ import EditGoal from "./EditGoal";
 import "./DonationsInfo.css";
 
 const DonationsInfo = () => {
-  const { user } = useContext(AuthContext);
+  const { mongoUser } = useContext(AuthContext);
   const [openInput, setOpenInput] = useState(false);
 
   return (
@@ -13,7 +13,7 @@ const DonationsInfo = () => {
         <div className="donation-history">
           <h2>Donation history </h2>
 
-          <h4>Goal Amount: ${user.goalAmount}</h4>
+          <h4>Goal Amount: ${mongoUser.goalAmount}</h4>
 
           <div className="goal-input">
             <EditGoal
@@ -38,7 +38,7 @@ const DonationsInfo = () => {
           </div>
         </div>
 
-        {user.goalAmount && (
+        {mongoUser.goalAmount && (
           <div className="donation-container">
             <p className="heading">
               <p>Amount</p>
@@ -47,12 +47,12 @@ const DonationsInfo = () => {
 
             <p className="donated-amounts">
               <div className="amount">
-                {user.donations.map((donation) => (
+                {mongoUser.donations.map((donation) => (
                   <div>${donation} </div>
                 ))}
               </div>
               <div className="ngo">
-                {user.ngos.map((ngo) => (
+                {mongoUser.ngos.map((ngo) => (
                   <div>{ngo}</div>
                 ))}
               </div>
@@ -61,7 +61,7 @@ const DonationsInfo = () => {
             <h4>
               Total amount donated:
               <p className="amount-donated">
-                ${user.donations.map(Number).reduce((a, b) => a + b, 0)}
+                ${mongoUser.donations.map(Number).reduce((a, b) => a + b, 0)}
               </p>
             </h4>
 
@@ -69,8 +69,8 @@ const DonationsInfo = () => {
               Amount needed to reach donation goal:
               <p className="amount-needed">
                 $
-                {user.goalAmount -
-                  user.donations.map(Number).reduce((a, b) => a + b, 0)}
+                {mongoUser.goalAmount -
+                  mongoUser.donations.map(Number).reduce((a, b) => a + b, 0)}
               </p>
             </h4>
           </div>

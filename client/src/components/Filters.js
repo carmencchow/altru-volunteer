@@ -29,7 +29,7 @@ const Filters = () => {
       const frequency = filters.frequency;
       const category = filters.category;
       const token = await user.getIdToken();
-      const res = await api.get(`/ngos/${frequency}/${category}`, {
+      const res = await api.get(`/ngo/${frequency}/${category}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

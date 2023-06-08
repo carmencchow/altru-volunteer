@@ -7,14 +7,14 @@ import Navbar from "../components/Navbar";
 import "./Profile.css";
 
 const Profile = () => {
-  const { user } = useContext(AuthContext);
+  const { mongoUser } = useContext(AuthContext);
   const [toggleState, setToggleState] = useState(1);
 
   const toggletabs = (idx) => {
     setToggleState(idx);
   };
 
-  if (!user) return null;
+  if (!mongoUser) return null;
 
   return (
     <>

@@ -56,9 +56,7 @@ export const AuthContextProvider = ({ children }) => {
   };
 
   const verifyUser = async (user) => {
-    // console.log("Verifying user...", user);
     const token = await user.getIdToken();
-    // console.log("Verifying token", token);
     const data = await api.get("/auth/verifyUser", {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -70,6 +68,7 @@ export const AuthContextProvider = ({ children }) => {
       setUser(null);
     } else {
       setUser(user);
+      setMongoUser(data.data.user);
     }
   };
 
@@ -80,6 +79,16 @@ export const AuthContextProvider = ({ children }) => {
       navigate("/volunteer");
     }
   }, [user]);
+
+  useEffect(() => {
+    auth.onAuthStateChanged(async function (user) {
+      if (user) {
+        await verifyUser(user);
+      } else {
+        setUser(null);
+      }
+    });
+  }, []);
 
   return (
     <AuthContext.Provider
