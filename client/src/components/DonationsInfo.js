@@ -40,10 +40,10 @@ const DonationsInfo = () => {
 
         {user.goalAmount && (
           <div className="donation-container">
-            <p className="heading">
+            <div className="heading">
               <p>Amount</p>
               <p>Organization</p>
-            </p>
+            </div>
 
             <p className="donated-amounts">
               <div className="amount">
