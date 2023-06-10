@@ -36,7 +36,6 @@ export const AuthContextProvider = ({ children }) => {
   const signIn = async (email, password) => {
     try {
       const data = await signInWithEmailAndPassword(auth, email, password);
-      console.log("Signing data", data);
       await verifyUser(data.user);
       console.log("Verify user", data.user);
     } catch (error) {
@@ -57,6 +56,7 @@ export const AuthContextProvider = ({ children }) => {
 
   const verifyUser = async (user) => {
     const token = await user.getIdToken();
+    console.log("Verifying user", token);
     const data = await api.get("/auth/verifyUser", {
       headers: {
         Authorization: `Bearer ${token}`,

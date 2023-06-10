@@ -61,7 +61,7 @@ const Filters = () => {
         <form className="dropdown">
           <p className="cause">Cause</p>
           <select value={filters.category} onChange={handleCategoryChange}>
-            <option value="all" className="allf">
+            <option value="all" className="all">
               Any Cause
             </option>
             <option value="animals">Animals</option>

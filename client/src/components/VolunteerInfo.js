@@ -10,7 +10,7 @@ const VolunteerInfo = () => {
       <h2>Events</h2>
       <div className="events">
         {mongoUser.attending &&
-          mongoUser?.attending?.map((attend, idx) => (
+          mongoUser.attending.map((attend, idx) => (
             <div className="list" key={idx}>
               <div className="place">
                 {attend.event_description} with {attend.name}

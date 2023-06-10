@@ -31,13 +31,8 @@ export const createUser = async (req, res) => {
 // VERIFY existing user
 export const verifyUser = async (req, res) => {
   try {
-    const { uid } = req.body;
+    const uid = req.body.uid;
     const user = await User.findById(uid);
-    if (!user) {
-      await auth.deleteUser(uid);
-      console.log("User not found. User deleted from Firebase");
-      return res.sendStatus(401);
-    }
     return res.status(200).json({ user: user });
   } catch (err) {
     console.log(err);
