@@ -106,7 +106,6 @@ const Volunteer = () => {
                       attending={
                         mongoUser.attending &&
                         mongoUser.attending.find((item) => {
-                          // console.log("ngo._id:", item, ngo._id);
                           return item._id === ngo._id;
                         })
                           ? true

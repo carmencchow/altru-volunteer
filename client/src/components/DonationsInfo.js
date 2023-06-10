@@ -47,13 +47,13 @@ const DonationsInfo = () => {
 
             <div className="donated-amounts">
               <div className="amount">
-                {mongoUser.donations.map((donation) => (
-                  <div>${donation} </div>
+                {mongoUser.donations.map((donation, idx) => (
+                  <div key={idx}>${donation} </div>
                 ))}
               </div>
               <div className="ngo">
-                {mongoUser.ngos.map((ngo) => (
-                  <div>{ngo}</div>
+                {mongoUser.ngos.map((ngo, idx) => (
+                  <div key={idx}>{ngo}</div>
                 ))}
               </div>
             </div>
