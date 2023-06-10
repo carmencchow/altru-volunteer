@@ -45,7 +45,7 @@ const DonationsInfo = () => {
               <p className="text">Organization</p>
             </div>
 
-            <p className="donated-amounts">
+            <div className="donated-amounts">
               <div className="amount">
                 {mongoUser.donations.map((donation) => (
                   <div>${donation} </div>
@@ -56,7 +56,7 @@ const DonationsInfo = () => {
                   <div>{ngo}</div>
                 ))}
               </div>
-            </p>
+            </div>
 
             <h4>
               Total amount donated:
