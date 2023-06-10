@@ -40,10 +40,10 @@ const DonationsInfo = () => {
 
         {mongoUser.goalAmount && (
           <div className="donation-container">
-            <p className="heading">
-              <p>Amount</p>
-              <p>Organization</p>
-            </p>
+            <div className="heading">
+              <p className="text">Amount</p>
+              <p className="text">Organization</p>
+            </div>
 
             <p className="donated-amounts">
               <div className="amount">
