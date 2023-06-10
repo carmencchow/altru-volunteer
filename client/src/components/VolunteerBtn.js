@@ -2,7 +2,6 @@ import React from "react";
 import "./VolunteerBtn.css";
 
 const VolunteerBtn = ({ attending, toggleModal }) => {
-  // console.log(attending);
   return (
     <button
       className="volunteer-btn"

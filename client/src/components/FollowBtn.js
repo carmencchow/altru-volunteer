@@ -5,7 +5,7 @@ import { api } from "../utils/axios";
 
 const FollowBtn = ({ ngo }) => {
   const [disabled, setDisabled] = useState(false);
-  const { user, setMongoUser } = useContext(AuthContext);
+  const { user, mongoUser, setMongoUser } = useContext(AuthContext);
 
   const handleFollow = async () => {
     try {
@@ -34,7 +34,7 @@ const FollowBtn = ({ ngo }) => {
   return (
     <div>
       <button disabled={disabled} className="follow" onClick={handleFollow}>
-        {user?.following?.find((item) => item === ngo.name)
+        {mongoUser?.following?.find((item) => item === ngo.name)
           ? `Following`
           : `Follow ${ngo.name}`}
       </button>
