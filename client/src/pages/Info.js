@@ -13,7 +13,7 @@ import { api } from "../utils/axios";
 
 const Info = () => {
   const navigate = useNavigate();
-  const { user, setUser } = useContext(AuthContext);
+  const { user, setMongoUser } = useContext(AuthContext);
   const { id } = useParams();
   const [ngo, setNgo] = useState({});
   const [total, setTotal] = useState(0);
@@ -49,7 +49,7 @@ const Info = () => {
           },
         }
       );
-      await fetchUserData(user.uid, token, setUser);
+      await fetchUserData(user.uid, setMongoUser, token);
     } catch (e) {
       console.log(e);
     }
@@ -94,9 +94,10 @@ const Info = () => {
         <p>Select an amount to donate: </p>
 
         <div className="donation-options">
-          {amounts.map((amount) => {
+          {amounts.map((amount, idx) => {
             return (
               <AmountBtn
+                key={idx}
                 amount={amount}
                 clickedBtn={clickedBtn}
                 setClickedBtn={setClickedBtn}

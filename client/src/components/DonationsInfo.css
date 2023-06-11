@@ -13,11 +13,16 @@
 .heading {
   display: flex;
   margin-top: 40px;
-  text-decoration: underline;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  font-size: 22px;
+  font-weight: bolder;
 }
-.heading p {
+.amount,
+.ngo {
+  font-size: 14px;
   margin-top: 0px;
-  padding-top: 0px;
+  color: blue;
 }
 .donated-amounts {
   display: flex;

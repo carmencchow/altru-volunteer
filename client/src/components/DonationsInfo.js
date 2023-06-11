@@ -40,23 +40,23 @@ const DonationsInfo = () => {
 
         {mongoUser.goalAmount && (
           <div className="donation-container">
-            <p className="heading">
-              <p>Amount</p>
-              <p>Organization</p>
-            </p>
+            <div className="heading">
+              <p className="text">Amount</p>
+              <p className="text">Organization</p>
+            </div>
 
-            <p className="donated-amounts">
+            <div className="donated-amounts">
               <div className="amount">
-                {mongoUser.donations.map((donation) => (
-                  <div>${donation} </div>
+                {mongoUser.donations.map((donation, idx) => (
+                  <div key={idx}>${donation} </div>
                 ))}
               </div>
               <div className="ngo">
-                {mongoUser.ngos.map((ngo) => (
-                  <div>{ngo}</div>
+                {mongoUser.ngos.map((ngo, idx) => (
+                  <div key={idx}>{ngo}</div>
                 ))}
               </div>
-            </p>
+            </div>
 
             <h4>
               Total amount donated:

@@ -12,6 +12,8 @@ const Filters = () => {
   const [error, setError] = useState("");
 
   const handleCategoryChange = (e) => {
+    // const value = e.target.value === "all" ? "" : e.target.value;
+    // setFilters((prevFilters) => ({ ...prevFilters, frequency: value }));
     setFilters({ ...filters, category: e.target.value });
   };
 
@@ -61,7 +63,7 @@ const Filters = () => {
         <form className="dropdown">
           <p className="cause">Cause</p>
           <select value={filters.category} onChange={handleCategoryChange}>
-            <option value="all" className="allf">
+            <option value="all" className="all">
               Any Cause
             </option>
             <option value="animals">Animals</option>

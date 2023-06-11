@@ -56,8 +56,8 @@ const ProfileInfo = () => {
           <h3 className="follow-heading">Following</h3>
 
           <div className="organizations">
-            {mongoUser.following.map((follow) => (
-              <div className="follow-list">
+            {mongoUser.following.map((follow, idx) => (
+              <div className="follow-list" key={idx}>
                 {follow}
                 <button
                   className="unfollow-btn"

@@ -9,7 +9,7 @@ import Modal from "../components/Modal";
 import "./Volunteer.css";
 
 const Volunteer = () => {
-  const { user } = useContext(AuthContext);
+  const { mongoUser } = useContext(AuthContext);
   const { ngos } = useContext(NgosContext);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageCount, setPageCount] = useState(1);
@@ -68,55 +68,52 @@ const Volunteer = () => {
             ?.slice((currentPage - 1) * 5, currentPage * 5)
             .map((ngo, idx) => {
               return (
-                <div className="display-container">
-                  <div key={ngo}>
-                    <div
-                      className="ngo-name"
-                      onClick={() => handleNgoSelected(ngo._id)}
-                    >
-                      {ngo.name}
-                    </div>
-                    <div className="show-details">
-                      <div>
-                        {ngo.event_description ? (
-                          <p className="event">{ngo.event_description}</p>
-                        ) : null}
-                        {ngo.event_date ? <p>Date: {ngo.event_date}</p> : null}
-                        {ngo.event_time ? <p>Time: {ngo.event_time}</p> : null}
-
-                        <p>{ngo.help ? <p>Duties: {ngo.help}</p> : null}</p>
-                        <p>
-                          {ngo.num_volunteers ? (
-                            <p>Volunteers needed: {ngo.num_volunteers}</p>
-                          ) : null}
-                        </p>
-                        {ngo.commitment ? (
-                          <p>
-                            Commitment: {ngo.commitment}
-                            {ngo.frequency}
-                          </p>
-                        ) : null}
-
-                        <p>Tel: {ngo.telephone}</p>
-                      </div>
-                    </div>
-
-                    {ngo.event === true && (
-                      <VolunteerBtn
-                        className="volunteer-btn"
-                        attending={
-                          user.attending &&
-                          user.attending.find((item) => {
-                            // console.log("ngo._id:", item, ngo._id);
-                            return item._id === ngo._id;
-                          })
-                            ? true
-                            : false
-                        }
-                        toggleModal={() => toggleModal(ngo)}
-                      />
-                    )}
+                <div className="display-container" key={ngo._id}>
+                  <div
+                    className="ngo-name"
+                    onClick={() => handleNgoSelected(ngo._id)}
+                  >
+                    {ngo.name}
                   </div>
+                  <div className="show-details">
+                    <div>
+                      {ngo.event_description ? (
+                        <p className="event">{ngo.event_description}</p>
+                      ) : null}
+                      {ngo.event_date ? <p>Date: {ngo.event_date}</p> : null}
+                      {ngo.event_time ? <p>Time: {ngo.event_time}</p> : null}
+
+                      <div>{ngo.help ? <p>Duties: {ngo.help}</p> : null}</div>
+                      <div>
+                        {ngo.num_volunteers ? (
+                          <p>Volunteers needed: {ngo.num_volunteers}</p>
+                        ) : null}
+                      </div>
+                      {ngo.commitment ? (
+                        <p>
+                          Commitment: {ngo.commitment}
+                          {ngo.frequency}
+                        </p>
+                      ) : null}
+
+                      <p>Tel: {ngo.telephone}</p>
+                    </div>
+                  </div>
+
+                  {ngo.event === true && (
+                    <VolunteerBtn
+                      className="volunteer-btn"
+                      attending={
+                        mongoUser.attending &&
+                        mongoUser.attending.find((item) => {
+                          return item._id === ngo._id;
+                        })
+                          ? true
+                          : false
+                      }
+                      toggleModal={() => toggleModal(ngo)}
+                    />
+                  )}
                 </div>
               );
             })}
