@@ -14,9 +14,7 @@ import stripeRoutes from "./src/routes/stripeRoute.js";
 import userRoutes from "./src/routes/userRoute.js";
 
 // Add Stripe key
-const stripe = new Stripe(
-  "sk_test_51L1kSgAoNhpouPlc5TPMmmk909SS97lPmaWnmSwz9dcGGgHGYlGES61londP5sfbmYNQ9Xt7SsN6tWsKrjfLrYDe00StwbT4sw"
-);
+const stripe = new Stripe(process.env.REACT_APP_STRIPE_SECRET_KEY);
 
 // Express app
 dotenv.config();
