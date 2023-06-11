@@ -40,17 +40,17 @@ const getFiltered = async (req, res) => {
 };
 
 const getNgo = async (req, res) => {
-  const id = req.params.id;
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    console.log("No such NGO with this id");
-    return res.status(404).json({ err: "No such NGO with this id" });
-  }
+  const { id } = req.params;
+  // if (!mongoose.Types.ObjectId.isValid(id)) {
+  //   console.log("No such NGO with this id");
+  //   return res.status(404).json({ err: "No such NGO with this id" });
+  // }
   const ngo = await Ngo.findById(id);
   if (!ngo) {
     console.log("NGO not exist");
     return res.status(404).json({ err: "NGO doesn't exist" });
   }
-  res.status(200).json(ngo);
+  return res.status(200).json(ngo);
 };
 
 const createNgo = async (req, res) => {
