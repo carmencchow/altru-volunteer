@@ -5,7 +5,7 @@ import { api } from "../utils/axios";
 
 const FollowBtn = ({ ngo }) => {
   const [disabled, setDisabled] = useState(false);
-  const { user, mongoUser, setMongoUser } = useContext(AuthContext);
+  const { mongoUser, user, setMongoUser } = useContext(AuthContext);
 
   const handleFollow = async () => {
     try {

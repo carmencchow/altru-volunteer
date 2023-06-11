@@ -1,5 +1,4 @@
 import React, { createContext, useEffect, useState } from "react";
-import { redirect } from "react-router-dom";
 
 export const NotificationContext = createContext({
   notification: null,

@@ -12,6 +12,8 @@ const Filters = () => {
   const [error, setError] = useState("");
 
   const handleCategoryChange = (e) => {
+    // const value = e.target.value === "all" ? "" : e.target.value;
+    // setFilters((prevFilters) => ({ ...prevFilters, frequency: value }));
     setFilters({ ...filters, category: e.target.value });
   };
 

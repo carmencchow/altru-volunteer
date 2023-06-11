@@ -1,7 +1,7 @@
 import User from "../models/userModel.js";
 import mongoose from "mongoose";
 
-// GET USER
+// GET USER by ID:
 const getUser = async (req, res) => {
   const { id } = req.params;
   console.log("User Id", id);

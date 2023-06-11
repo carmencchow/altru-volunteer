@@ -2,8 +2,11 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: "https://altru-volunteer-be.onrender.com/api/",
-  // baseURL: "http://localhost:5000/api/",
+  baseURL:
+    process.env.NODE_ENV === "production"
+      ? "https://altru-volunteer-be.onrender.com/api/"
+      : "http://localhost:5000/api/",
+
   headers: {
     "Content-Type": "application/json",
   },
