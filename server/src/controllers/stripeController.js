@@ -1,5 +1,3 @@
-import Ngo from "../models/ngoModel.js";
-import mongoose from "mongoose";
 import stripe from "stripe";
 
 const getPayment = (req, res) => {
