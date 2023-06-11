@@ -55,13 +55,14 @@ const Info = () => {
   };
 
   const handlePayment = async () => {
+    // const handlePayment = async (token) => {
     handleConfirmation();
     console.log("Payment received");
     const token = await user.getIdToken();
 
     const body = {
       token,
-      // total,
+      total,
     };
 
     await api.post("/payment", body, {
