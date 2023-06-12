@@ -11,7 +11,9 @@ node_modules
 # production
 /build
 client/build
+config.json
 node_modules
+serviceAccount.json
 
 # misc
 .env
