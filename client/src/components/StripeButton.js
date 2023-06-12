@@ -5,8 +5,6 @@ import { api } from "../utils/api";
 const stripeBtn = () => {
   const publishableKey = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY;
 
-  // Send card info to Stripe and returns a token object
-
   const onToken = async (token) => {
     const body = {
       amount: 999,
