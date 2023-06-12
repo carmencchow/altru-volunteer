@@ -1,3 +1,4 @@
+// Exclude token as it will be dynamic and change over time
 import axios from "axios";
 
 export const api = axios.create({

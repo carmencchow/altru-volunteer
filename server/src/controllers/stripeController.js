@@ -4,7 +4,7 @@ const getPayment = (req, res) => {
   const donation = req.body.donation;
   const token = req.body.token;
   console.log(`Donation amount: ${donation}`);
-  const idempotencyKey = uuid();
+  const idempotencyKey = uuid(); // To prevent user from being charged twice
 
   return stripe.customers
     .create({
@@ -14,8 +14,8 @@ const getPayment = (req, res) => {
     .then((customer) => {
       stripe.charges.create(
         {
-          customer: customer.id,
-          amount: donation * 100,
+          customer: customer.id, // grab from customer object above
+          amount: donation * 100, //get dollar amount
           currency: "usd",
           description: `${amount} donation`,
           shipping: {
