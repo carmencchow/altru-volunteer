@@ -56,9 +56,7 @@ const Info = () => {
   const handlePayment = async () => {
     // const handlePayment = async (token) => {
     handleConfirmation();
-    console.log("Payment received");
     const token = await user.getIdToken();
-    console.log("Payment token");
     const body = {
       token,
       total,
