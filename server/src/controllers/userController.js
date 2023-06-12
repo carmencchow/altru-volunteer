@@ -5,9 +5,6 @@ import mongoose from "mongoose";
 const getUser = async (req, res) => {
   const { id } = req.params;
   console.log("User Id", id);
-  // if (!mongoose.Types.ObjectId.isValid(id)) {
-  //   return res.status(404).json({ err: "No such user with this id" });
-  // }
   const user = await User.findById(id)
     .populate("attending")
     .populate("donations");
@@ -34,7 +31,6 @@ const deleteProfile = async (req, res) => {
 const editProfile = async (req, res) => {
   try {
     const { firstname, lastname } = req.body;
-    console.log(firstname, lastname, req.params);
     const user = await User.findById({ _id: req.params.id });
     user.firstname = firstname;
     user.lastname = lastname;
@@ -81,19 +77,15 @@ const addEvent = async (req, res) => {
 const follow = async (req, res) => {
   try {
     const newFollow = req.body.follow;
-    console.log("New:", newFollow);
     const user = await User.findOne({ _id: req.params.id });
     const ngoExists = user.following.find((ngo) => ngo === newFollow);
-    console.log("Exist:", ngoExists);
     if (ngoExists) {
       return res.status(400).send("Already following");
     }
     user.following.push(newFollow);
     await user.save();
-    console.log("Followed Orgs: ", user.following);
     return res.status(200).send({ results: user, message: user.following });
   } catch (err) {
-    console.log(err);
     return res.status(500).send({ message: "Already following" });
   }
 };
@@ -104,9 +96,7 @@ const unfollow = async (req, res) => {
     const remove = req.body.remove;
     const user = await User.findOne({ _id: req.params.id });
     let following = [...user.following];
-    console.log(following, user);
     let updatedFollowing = following.filter((ngo) => ngo !== remove);
-    console.log(updatedFollowing, remove);
     user.following = updatedFollowing;
     await user.save();
     return res.status(200).send({ message: user });

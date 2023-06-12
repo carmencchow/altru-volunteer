@@ -19,7 +19,6 @@ const Modal = ({
   const fetchNgo = async () => {
     try {
       const token = await user.getIdToken();
-      console.log("NGO is", ngoModal);
       const res = await api.get(`/ngo/${ngoModal._id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -32,7 +31,6 @@ const Modal = ({
   };
 
   const toggleModal = (ngoModal) => {
-    console.log("Card opened:", ngoModal.name, ngoModal._id);
     setNgoModal(ngoModal);
     setOpenModal(!openModal);
   };

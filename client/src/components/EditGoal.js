@@ -16,7 +16,6 @@ const EditGoal = ({ openInput, closeInput }) => {
 
   const handleSave = async () => {
     try {
-      console.log("New goal amount is", input);
       const token = await user.getIdToken();
       const res = await api.put(
         `/user/${user.uid}/amount`,
@@ -35,7 +34,7 @@ const EditGoal = ({ openInput, closeInput }) => {
       await fetchUserData(user.uid, setMongoUser, token);
       closeInput();
     } catch (err) {
-      console.log("Error is: ", err);
+      console.log(err);
     }
   };
 

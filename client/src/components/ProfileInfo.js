@@ -16,7 +16,6 @@ const ProfileInfo = () => {
   // Unfollow NGO
   const handleUnfollow = async (follow) => {
     try {
-      console.log(follow);
       const token = await user.getIdToken();
       const res = await api.post(
         `/user/${user.uid}/unfollow/ngo`,

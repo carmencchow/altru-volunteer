@@ -19,7 +19,6 @@ const Volunteer = () => {
   const navigate = useNavigate();
 
   const toggleModal = (ngo) => {
-    console.log("Card opened:", ngo.name, ngo._id);
     setNgoModal(ngo);
     setOpenModal(!openModal);
   };
@@ -33,7 +32,6 @@ const Volunteer = () => {
   };
 
   const handleNgoSelected = (id) => {
-    console.log(`Going to ${id}`);
     navigate(`/info/${id}`);
   };
 

@@ -34,7 +34,6 @@ export const NgosProvider = ({ children }) => {
         },
       });
       setNgoModal(res.data);
-      console.log("ngoModal results:", res.data);
     } catch (e) {
       console.log(e);
     }

@@ -10,7 +10,6 @@ const FollowBtn = ({ ngo }) => {
   const handleFollow = async () => {
     try {
       const token = await user.getIdToken();
-      console.log("Following ngo", ngo, ngo.name);
       const res = await api.post(
         `/user/${user.uid}/follow/ngo`,
         {

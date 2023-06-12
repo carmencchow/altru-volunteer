@@ -14,16 +14,13 @@ const stripeBtn = () => {
     };
 
     await api
-      // Send token and amount to the backend in the body with axios request
-      // .post("/payment", body)
-      // // .post("http://localhost:5000/payment", body)
       .post("/payment", body)
       .then((response) => {
         console.log(response);
         alert("Payment Success");
       })
       .catch((error) => {
-        console.log("Payment Error: ", error);
+        console.log(error);
         alert("Payment Error");
       });
   };

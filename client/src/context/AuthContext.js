@@ -56,7 +56,6 @@ export const AuthContextProvider = ({ children }) => {
 
   const verifyUser = async (user) => {
     const token = await user.getIdToken();
-    console.log("Verifying user", token);
     const data = await api.get("/auth/verifyUser", {
       headers: {
         Authorization: `Bearer ${token}`,

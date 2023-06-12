@@ -50,7 +50,6 @@ const Edit = () => {
   };
 
   const handleDelete = async () => {
-    console.log("Deleting your account");
     await api.delete(`/user/${user.uid}`).then((res) => {
       console.log(`Account deleted`, res.data);
       navigate("/");
