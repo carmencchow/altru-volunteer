@@ -16,11 +16,9 @@ const Info = () => {
   const { user, setMongoUser } = useContext(AuthContext);
   const { id } = useParams();
   const [ngo, setNgo] = useState({});
-  const [total, setTotal] = useState(0);
   const [clickedBtn, setClickedBtn] = useState("0");
   const amounts = [10, 25, 50, 75, 100];
-
-  // const confirmation = "Thank you for your donation!";
+  let total = 0;
 
   const fetchNgo = async () => {
     const token = await user.getIdToken();
@@ -84,7 +82,7 @@ const Info = () => {
         <span className="back" onClick={() => navigate(-1)}>
           Back
         </span>
-        {/* <p className="confirmation">{confirmation}</p> */}
+
         <FollowBtn ngo={ngo} />
         <div className="header-text">
           <span className="header1">Want to donate to: {ngo.name}?</span>
