@@ -109,7 +109,8 @@ const Info = () => {
         <div className="process">
           <StripeCheckout
             className="stripe-btn"
-            stripeKey={process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY}
+            // stripeKey={process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY}
+            stripeKey="pk_test_51L1kSgAoNhpouPlc1wUQc6a3zAxdhzv9hXazyvrYZa1beIP9okC7mpVZAI4hWioLXHaAYwxqtNsQnNJowellghHP00AhoZshJu"
             image={logo}
             token={handlePayment}
             name="Donating"
