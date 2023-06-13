@@ -33,6 +33,11 @@ const Info = () => {
   const handleConfirmation = async () => {
     try {
       const token = await user.getIdToken();
+      console.log(
+        "Publishable Key:",
+        process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY
+      );
+
       await api.post(
         `/user/${user.uid}/donation`,
 
