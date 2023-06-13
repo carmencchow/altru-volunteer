@@ -52,6 +52,7 @@ export const AuthContextProvider = ({ children }) => {
   const handleSignOut = async () => {
     await signOut(auth);
     setUser(null);
+    navigate("/login");
   };
 
   const verifyUser = async (user) => {

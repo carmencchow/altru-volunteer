@@ -13,7 +13,6 @@ node_modules
 client/build
 config.json
 node_modules
-serviceAccount.json
 
 # misc
 .env
