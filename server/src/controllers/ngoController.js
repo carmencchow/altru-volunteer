@@ -53,6 +53,20 @@ const getNgo = async (req, res) => {
   return res.status(200).json(ngo);
 };
 
+const updateNgo = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const ngo = await Ngo.findByIdAndUpdate(
+      id,
+      { $inc: { num_volunteers: -1 } },
+      { new: true }
+    );
+    return res.status(200).json(ngo.num_volunteers);
+  } catch (e) {
+    return res.status(400).json({ err: err.message });
+  }
+};
+
 const createNgo = async (req, res) => {
   const { name, category, commitment, frequency, event } = req.body;
   try {
