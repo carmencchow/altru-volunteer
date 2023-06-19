@@ -41,16 +41,27 @@ const getFiltered = async (req, res) => {
 
 const getNgo = async (req, res) => {
   const { id } = req.params;
-  // if (!mongoose.Types.ObjectId.isValid(id)) {
-  //   console.log("No such NGO with this id");
-  //   return res.status(404).json({ err: "No such NGO with this id" });
-  // }
+  // if (!mongoose.Types.ObjectId.isValid(id))
   const ngo = await Ngo.findById(id);
   if (!ngo) {
     console.log("NGO not exist");
     return res.status(404).json({ err: "NGO doesn't exist" });
   }
   return res.status(200).json(ngo);
+};
+
+const updateNgo = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const ngo = await Ngo.findByIdAndUpdate(
+      id,
+      { $inc: { num_volunteers: -1 } },
+      { new: true }
+    );
+    return res.status(200).json(ngo.num_volunteers);
+  } catch (e) {
+    return res.status(400).json({ err: err.message });
+  }
 };
 
 const createNgo = async (req, res) => {
@@ -69,4 +80,4 @@ const createNgo = async (req, res) => {
   }
 };
 
-export { createNgo, getNgos, getNgo, getFiltered };
+export { createNgo, getNgos, getNgo, getFiltered, updateNgo };
