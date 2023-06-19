@@ -1,8 +1,7 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { fetchUserData } from "../utils/fetchUserData";
 import { GrFormClose } from "react-icons/gr";
-import { NgosContext } from "../context/NgosContext";
 import "./Modal.css";
 import { api } from "../utils/axios";
 
@@ -15,8 +14,23 @@ const Modal = ({
   ngoModal,
 }) => {
   const { user, setMongoUser } = useContext(AuthContext);
-  const { getNgo } = useContext(NgosContext);
- 
+  const [ngo, setNgo] = useState("");
+
+  const fetchNgo = async () => {
+    try {
+      const token = await user.getIdToken();
+      console.log("NGO is", ngoModal);
+      const res = await api.get(`/ngo/${ngoModal._id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setNgo(res.data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   const toggleModal = (ngoModal) => {
     console.log("Card opened:", ngoModal.name, ngoModal._id);
     setNgoModal(ngoModal);
@@ -49,26 +63,11 @@ const Modal = ({
         ngoModal._id,
         ngoModal.name
       );
-
-      // Decrement volunteer count from ngo
-      const response = await api.put(
-        `/ngo/${ngoModal._id}/decrement`,
-        {
-          id: `${ngoModal._id}`,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      const resData = response.data;
-      console.log("Volunteers:", resData);
+      await fetchNgo(ngoModal._id);
       await fetchUserData(user.uid, setMongoUser, token);
       setOpenModal(false);
-      await getNgo(ngoModal);
-    } catch (err) {
-      console.log(err);
+    } catch (e) {
+      console.log(e);
     }
   };
 
