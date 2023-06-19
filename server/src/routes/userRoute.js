@@ -1,16 +1,5 @@
-// import express from "express";
-// import {
-//   getUser,
-//   deleteProfile,
-//   addEvent,
-//   follow,
-//   unfollow,
-//   editProfile,
-//   addDonation,
-//   editGoal,
-// } from "../controllers/userController.js";
-const express = require("express");
-const {
+import express from "express";
+import {
   getUser,
   deleteProfile,
   addEvent,
@@ -19,7 +8,18 @@ const {
   editProfile,
   addDonation,
   editGoal,
-} = require("../controllers/userController.js");
+} from "../controllers/userController.js";
+// const express = require("express");
+// const {
+//   getUser,
+//   deleteProfile,
+//   addEvent,
+//   follow,
+//   unfollow,
+//   editProfile,
+//   addDonation,
+//   editGoal,
+// } = require("../controllers/userController.js");
 
 const router = express.Router();
 
@@ -32,16 +32,16 @@ router.post("/:id/add-event", addEvent);
 router.post("/:id/follow/ngo", follow);
 router.post("/:id/unfollow/ngo", unfollow);
 
-// export default router;
+export default router;
 
-module.exports = router;
-// module.exports = {
-//   getUser,
-//   deleteProfile,
-//   addEvent,
-//   follow,
-//   unfollow,
-//   editProfile,
-//   addDonation,
-//   editGoal,
-// };
+// module.exports = router;
+// // module.exports = {
+// //   getUser,
+// //   deleteProfile,
+// //   addEvent,
+// //   follow,
+// //   unfollow,
+// //   editProfile,
+// //   addDonation,
+// //   editGoal,
+// // };

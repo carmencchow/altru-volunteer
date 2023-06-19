@@ -1,5 +1,5 @@
-// import mongoose from "mongoose";
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
+// const mongoose = require("mongoose");
 
 const ngoSchema = new mongoose.Schema({
   name: {
@@ -43,5 +43,5 @@ const ngoSchema = new mongoose.Schema({
 
 const Ngo = mongoose.model("Ngo", ngoSchema);
 
-// export default Ngo;
-module.exports = Ngo;
+export default Ngo;
+// module.exports = Ngo;

@@ -1,7 +1,7 @@
-// import User from "../models/userModel.js";
-// import mongoose from "mongoose";
-const User = require("../models/userModel.js");
-const mongoose = require("mongoose");
+import User from "../models/userModel.js";
+import mongoose from "mongoose";
+// const User = require("../models/userModel.js");
+// const mongoose = require("mongoose");
 
 // GET USER by ID:
 const getUser = async (req, res) => {
@@ -60,13 +60,15 @@ const addDonation = async (req, res) => {
   }
 };
 
-// JOIN event
+// ADD event
 const addEvent = async (req, res) => {
   try {
     const ngoId = req.body.id;
-    const user = await User.findByIdAndUpdate(req.params.id, {
-      $addToSet: { attending: ngoId },
-    });
+    const user = await User.findByIdAndUpdate(
+      req.params.id,
+      { $addToSet: { attending: ngoId } },
+      { new: true }
+    );
     await user.save();
     res.status(200).send({ results: user, message: user.attending });
   } catch (err) {
@@ -128,18 +130,7 @@ const editGoal = async (req, res) => {
   }
 };
 
-// export {
-//   getUser,
-//   addEvent,
-//   follow,
-//   unfollow,
-//   deleteProfile,
-//   editProfile,
-//   editGoal,
-//   addDonation,
-// };
-
-module.exports = {
+export {
   getUser,
   addEvent,
   follow,
@@ -149,3 +140,14 @@ module.exports = {
   editGoal,
   addDonation,
 };
+
+// module.exports = {
+//   getUser,
+//   addEvent,
+//   follow,
+//   unfollow,
+//   deleteProfile,
+//   editProfile,
+//   editGoal,
+//   addDonation,
+// };

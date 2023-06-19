@@ -52,6 +52,7 @@ export const AuthContextProvider = ({ children }) => {
   const handleSignOut = async () => {
     await signOut(auth);
     setUser(null);
+    navigate("/");
   };
 
   const verifyUser = async (user) => {
@@ -74,7 +75,7 @@ export const AuthContextProvider = ({ children }) => {
 
   useEffect(() => {
     if (!user) {
-      navigate("/login");
+      navigate("/");
     } else {
       navigate("/volunteer");
     }

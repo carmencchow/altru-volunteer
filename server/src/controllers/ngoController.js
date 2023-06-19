@@ -1,10 +1,9 @@
-// import { response } from "express";
-// import Ngo from "../models/ngoModel.js";
-// import mongoose from "mongoose";
-
-const { response } = require("express");
-const Ngo = require("../models/ngoModel.js");
-const mongoose = require("mongoose");
+import { response } from "express";
+import Ngo from "../models/ngoModel.js";
+import mongoose from "mongoose";
+// const { response } = require("express");
+// const Ngo = require("../models/ngoModel.js");
+// const mongoose = require("mongoose");
 
 // Get all NGOs
 const getNgos = async (req, res) => {
@@ -61,6 +60,7 @@ const updateNgo = async (req, res) => {
       { $inc: { num_volunteers: -1 } },
       { new: true }
     );
+    console.log("Volunteers - 1 equals", ngo);
     return res.status(200).json(ngo.num_volunteers);
   } catch (e) {
     return res.status(400).json({ err: err.message });
@@ -83,6 +83,6 @@ const createNgo = async (req, res) => {
   }
 };
 
-// export { createNgo, getNgos, getNgo, getFiltered, updateNgo };
+export { createNgo, getNgos, getNgo, getFiltered, updateNgo };
 
-module.exports = { createNgo, getNgos, getNgo, getFiltered, updateNgo };
+// module.exports = { createNgo, getNgos, getNgo, getFiltered, updateNgo };

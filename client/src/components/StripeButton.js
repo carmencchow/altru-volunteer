@@ -5,8 +5,6 @@ import { api } from "../utils/api";
 const stripeBtn = () => {
   const publishableKey = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY;
 
-  // Send card info to Stripe and returns a token object
-
   const onToken = async (token) => {
     const body = {
       amount: 999,
@@ -14,9 +12,6 @@ const stripeBtn = () => {
     };
 
     await api
-      // Send token and amount to the backend in the body with axios request
-      // .post("/payment", body)
-      // // .post("http://localhost:5000/payment", body)
       .post("/payment", body)
       .then((response) => {
         console.log(response);

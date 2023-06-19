@@ -16,11 +16,9 @@ const Info = () => {
   const { user, setMongoUser } = useContext(AuthContext);
   const { id } = useParams();
   const [ngo, setNgo] = useState({});
-  const [total, setTotal] = useState(0);
   const [clickedBtn, setClickedBtn] = useState("0");
   const amounts = [10, 25, 50, 75, 100];
-
-  // const confirmation = "Thank you for your donation!";
+  let total = 0;
 
   const fetchNgo = async () => {
     const token = await user.getIdToken();
@@ -35,6 +33,11 @@ const Info = () => {
   const handleConfirmation = async () => {
     try {
       const token = await user.getIdToken();
+      console.log(
+        "Publishable Key:",
+        process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY
+      );
+
       await api.post(
         `/user/${user.uid}/donation`,
 
@@ -58,9 +61,7 @@ const Info = () => {
   const handlePayment = async () => {
     // const handlePayment = async (token) => {
     handleConfirmation();
-    console.log("Payment received");
     const token = await user.getIdToken();
-    console.log("Payment token");
     const body = {
       token,
       total,
@@ -84,7 +85,7 @@ const Info = () => {
         <span className="back" onClick={() => navigate(-1)}>
           Back
         </span>
-        {/* <p className="confirmation">{confirmation}</p> */}
+
         <FollowBtn ngo={ngo} />
         <div className="header-text">
           <span className="header1">Want to donate to: {ngo.name}?</span>
@@ -113,7 +114,8 @@ const Info = () => {
         <div className="process">
           <StripeCheckout
             className="stripe-btn"
-            stripeKey={process.env.REACT_APP_STRIPE_KEY}
+            // stripeKey={process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY}
+            stripeKey="pk_test_51L1kSgAoNhpouPlcKhLQKANoLZIUKTvg6C2sNBHmBUlpAjYAD5SyZ4sKgTxSB3De9wi0hLyAMAaok6rMEcGqaEhH00Ukq7JyfZ"
             image={logo}
             token={handlePayment}
             name="Donating"

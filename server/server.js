@@ -1,42 +1,41 @@
-// (1) ES6 module imports --- (package.json type "module") -------
-// import dotenv from "dotenv";
-// import express from "express";
-// import cors from "cors";
-// import morgan from "morgan";
-// import http from "http";
-// import Stripe from "stripe";
-// import mongoose from "mongoose";
-//// import bodyParser from "body-parser";
-//// import cookieParser from "cookie-parser";
-// import { auth } from "./src/firebase-config.js";
-// import ngoRoutes from "./src/routes/ngoRoute.js";
-// import authRoutes from "./src/routes/authRoute.js";
-// import stripeRoutes from "./src/routes/stripeRoute.js";
-// import userRoutes from "./src/routes/userRoute.js";
+import dotenv from "dotenv";
+import express from "express";
+import cors from "cors";
+import morgan from "morgan";
+import http from "http";
+import Stripe from "stripe";
+import mongoose from "mongoose";
+// import bodyParser from "body-parser";
+// import cookieParser from "cookie-parser";
+import { auth } from "./src/firebase-config.js";
+import ngoRoutes from "./src/routes/ngoRoute.js";
+import authRoutes from "./src/routes/authRoute.js";
+import stripeRoutes from "./src/routes/stripeRoute.js";
+import userRoutes from "./src/routes/userRoute.js";
 
 // Add Stripe key
-// const stripe = new Stripe(process.env.REACT_APP_STRIPE_SECRET_KEY);
+const stripe = new Stripe(process.env.REACT_APP_STRIPE_SECRET_KEY);
 
-// (2) CommonJS require --- (package.json type "commonjs") -------
-require("dotenv").config();
-const express = require("express");
-const cors = require("cors");
-const morgan = require("morgan");
-const http = require("http");
-// const stripe = require("stripe");
-const mongoose = require("mongoose");
-// require("bodyParser") = require("bodyParser");
-const { auth } = require("./src/firebase-config.cjs");
-const ngoRoutes = require("./src/routes/ngoRoute.js");
-const authRoute = require("./src/routes/authRoute.js");
-const stripeRoutes = require("./src/routes/stripeRoute");
-const userRoutes = require("./src/routes/userRoute.js");
+// // (2) CommonJS require --- (package.json type "commonjs") -------
+// require("dotenv").config();
+// const express = require("express");
+// const cors = require("cors");
+// const morgan = require("morgan");
+// const http = require("http");
+// // const stripe = require("stripe");
+// const mongoose = require("mongoose");
+// // require("bodyParser") = require("bodyParser");
+// const { auth } = require("./firebase-config.js");
+// const ngoRoutes = require("./src/routes/ngoRoute.js");
+// const authRoute = require("./src/routes/authRoute.js");
+// const stripeRoutes = require("./src/routes/stripeRoute");
+// const userRoutes = require("./src/routes/userRoute.js");
 
-// Add Stripe key
-const stripe = require("stripe")(process.env.REACT_APP_STRIPE_SECRET_KEY);
+// // Add Stripe key
+// const stripe = require("stripe")(process.env.REACT_APP_STRIPE_SECRET_KEY);
 
 // Express app
-// dotenv.config();
+dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5001;
 const server = http.createServer(app);
@@ -69,7 +68,7 @@ app.use(async (req, res, next) => {
 // Routes
 app.use("/api/ngo", ngoRoutes);
 app.use("/api/user", userRoutes);
-app.use("/api/auth", authRoute);
+app.use("/api/auth", authRoutes);
 app.use("/api/payment", stripeRoutes);
 
 // Connect to db
