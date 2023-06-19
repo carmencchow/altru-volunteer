@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { FiltersContext } from "../context/FiltersContext";
+import { fetchUserData } from "../utils/fetchUserData";
 import { NgosContext } from "../context/NgosContext";
 import { AuthContext } from "../context/AuthContext";
 import "./Filters.css";
@@ -8,12 +9,10 @@ import { api } from "../utils/axios";
 const Filters = () => {
   const { filters, setFilters } = useContext(FiltersContext);
   const { ngos, setNgos } = useContext(NgosContext);
-  const { user } = useContext(AuthContext);
+  const { user, setMongoUser } = useContext(AuthContext);
   const [error, setError] = useState("");
 
   const handleCategoryChange = (e) => {
-    // const value = e.target.value === "all" ? "" : e.target.value;
-    // setFilters((prevFilters) => ({ ...prevFilters, frequency: value }));
     setFilters({ ...filters, category: e.target.value });
   };
 
@@ -38,6 +37,7 @@ const Filters = () => {
       });
       setNgos(res.data);
       console.log(res.data);
+      await fetchUserData(user.uid, setMongoUser, token);
     } catch (err) {
       console.log(err);
       setError(err);

@@ -21,6 +21,7 @@ const Login = () => {
   const handleSignIn = async () => {
     try {
       if (email && password) {
+        // signIn function handles authentication process and updates the user state internally. No need to access user object/token in Login
         await signIn(email, password);
       } else {
         console.log("Missing email or password");

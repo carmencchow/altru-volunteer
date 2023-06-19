@@ -15,19 +15,6 @@ const getUser = async (req, res) => {
   res.status(200).json(user);
 };
 
-// DELETE user
-const deleteProfile = async (req, res) => {
-  const { id } = req.params;
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({ err: "No such user with this id" });
-  }
-  const user = await User.findOneAndDelete({ _id: id });
-  if (!user) {
-    return res.status(404).json({ err: "User doesn't exist" });
-  }
-  res.status(200).json({ message: "User deleted" });
-};
-
 // UPDATE user
 const editProfile = async (req, res) => {
   try {
@@ -135,7 +122,6 @@ export {
   addEvent,
   follow,
   unfollow,
-  deleteProfile,
   editProfile,
   editGoal,
   addDonation,
@@ -146,7 +132,6 @@ export {
 //   addEvent,
 //   follow,
 //   unfollow,
-//   deleteProfile,
 //   editProfile,
 //   editGoal,
 //   addDonation,

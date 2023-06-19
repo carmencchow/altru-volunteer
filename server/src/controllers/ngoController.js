@@ -60,29 +60,12 @@ const updateNgo = async (req, res) => {
       { $inc: { num_volunteers: -1 } },
       { new: true }
     );
-    console.log("Volunteers - 1 equals", ngo);
     return res.status(200).json(ngo.num_volunteers);
   } catch (e) {
     return res.status(400).json({ err: err.message });
   }
 };
 
-const createNgo = async (req, res) => {
-  const { name, category, commitment, frequency, event } = req.body;
-  try {
-    const ngo = await Ngo.create({
-      name,
-      category,
-      commitment,
-      frequency,
-      event,
-    });
-    res.status(200).json(ngo);
-  } catch (err) {
-    res.status(400).json({ err: err.message });
-  }
-};
+export { getNgos, getNgo, getFiltered, updateNgo };
 
-export { createNgo, getNgos, getNgo, getFiltered, updateNgo };
-
-// module.exports = { createNgo, getNgos, getNgo, getFiltered, updateNgo };
+// module.exports = { getNgos, getNgo, getFiltered, updateNgo };
