@@ -1,9 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { fetchUserData } from "../utils/fetchUserData";
 import { GrFormClose } from "react-icons/gr";
-import "./Modal.css";
 import { api } from "../utils/axios";
+import { NgosContext } from "../context/NgosContext";
+import "./Modal.css";
 
 const Modal = ({
   confirmMessage,
@@ -14,22 +15,7 @@ const Modal = ({
   ngoModal,
 }) => {
   const { user, setMongoUser } = useContext(AuthContext);
-  const [ngo, setNgo] = useState("");
-
-  const fetchNgo = async () => {
-    try {
-      const token = await user.getIdToken();
-      console.log("NGO is", ngoModal);
-      const res = await api.get(`/ngo/${ngoModal._id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setNgo(res.data);
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  const { getNgo } = useContext(NgosContext);
 
   const toggleModal = (ngoModal) => {
     console.log("Card opened:", ngoModal.name, ngoModal._id);
@@ -41,8 +27,11 @@ const Modal = ({
     setConfirmMessage(
       "Thank you. We look forward to meeting you at our event!"
     );
+
     try {
       const token = await user.getIdToken();
+
+      // Add event to user
       const res = await api.post(
         `/user/${user.uid}/add-event`,
         {
@@ -63,11 +52,26 @@ const Modal = ({
         ngoModal._id,
         ngoModal.name
       );
-      await fetchNgo(ngoModal._id);
+
+      // Decrement volunteer count from ngo
+      const response = await api.put(
+        `/ngo/${ngoModal._id}/decrement`,
+        {
+          id: `${ngoModal._id}`,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const resData = response.data;
+      console.log("Volunteers:", resData);
       await fetchUserData(user.uid, setMongoUser, token);
       setOpenModal(false);
-    } catch (e) {
-      console.log(e);
+      await getNgo(ngoModal);
+    } catch (err) {
+      console.log(err);
     }
   };
 
