@@ -1,11 +1,20 @@
-import express from "express";
-import {
+// import express from "express";
+// import {
+//   createNgo,
+//   getNgos,
+//   getNgo,
+//   getFiltered,
+//   updateNgo,
+// } from "../controllers/ngoController.js";
+
+const express = require("express");
+const {
   createNgo,
   getNgos,
   getNgo,
   getFiltered,
   updateNgo,
-} from "../controllers/ngoController.js";
+} = require("../controllers/ngoController.js");
 
 const router = express.Router();
 
@@ -15,4 +24,5 @@ router.put("/:id/decrement", updateNgo);
 router.get("/:frequency/:category", getFiltered);
 router.post("/", createNgo);
 
-export default router;
+// export default router;
+module.exports = router;

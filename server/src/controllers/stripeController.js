@@ -1,4 +1,5 @@
-import stripe from "stripe";
+// import stripe from "stripe";
+const stripe = require("stripe");
 
 const getPayment = (req, res) => {
   const donation = req.body.donation;
@@ -34,4 +35,5 @@ const getPayment = (req, res) => {
     .catch((err) => console.log(err));
 };
 
-export default getPayment;
+// export default getPayment;
+module.exports = getPayment;

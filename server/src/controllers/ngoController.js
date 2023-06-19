@@ -1,6 +1,10 @@
-import { response } from "express";
-import Ngo from "../models/ngoModel.js";
-import mongoose from "mongoose";
+// import { response } from "express";
+// import Ngo from "../models/ngoModel.js";
+// import mongoose from "mongoose";
+
+const { response } = require("express");
+const Ngo = require("../models/ngoModel.js");
+const mongoose = require("mongoose");
 
 // Get all NGOs
 const getNgos = async (req, res) => {
@@ -41,7 +45,6 @@ const getFiltered = async (req, res) => {
 
 const getNgo = async (req, res) => {
   const { id } = req.params;
-  // if (!mongoose.Types.ObjectId.isValid(id))
   const ngo = await Ngo.findById(id);
   if (!ngo) {
     console.log("NGO not exist");
@@ -80,4 +83,6 @@ const createNgo = async (req, res) => {
   }
 };
 
-export { createNgo, getNgos, getNgo, getFiltered, updateNgo };
+// export { createNgo, getNgos, getNgo, getFiltered, updateNgo };
+
+module.exports = { createNgo, getNgos, getNgo, getFiltered, updateNgo };

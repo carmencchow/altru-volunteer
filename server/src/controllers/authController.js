@@ -1,8 +1,13 @@
-import User from "../models/userModel.js";
-import { auth } from "../firebase-config.js";
+// ES6 Modules
+// import User from "../models/userModel.js";
+// import { auth } from "../firebase-config.cjs";
+
+// Common JS require
+const User = require("../models/userModel.js");
+const { auth } = require("../firebase-config.cjs");
 
 // CREATE new user - set Firebase UID as MongoDB key
-export const createUser = async (req, res) => {
+const createUser = async (req, res) => {
   try {
     const { email, uid } = req.body;
     const firstname = req.body.firstname;
@@ -29,7 +34,7 @@ export const createUser = async (req, res) => {
 };
 
 // VERIFY existing user
-export const verifyUser = async (req, res) => {
+const verifyUser = async (req, res) => {
   try {
     const uid = req.body.uid;
     const user = await User.findById(uid);
@@ -39,3 +44,7 @@ export const verifyUser = async (req, res) => {
     return res.sendStatus(500);
   }
 };
+
+module.exports = { createUser, verifyUser };
+
+// export { createUser, verifyUser };

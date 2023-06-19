@@ -1,5 +1,16 @@
-import express from "express";
-import {
+// import express from "express";
+// import {
+//   getUser,
+//   deleteProfile,
+//   addEvent,
+//   follow,
+//   unfollow,
+//   editProfile,
+//   addDonation,
+//   editGoal,
+// } from "../controllers/userController.js";
+const express = require("express");
+const {
   getUser,
   deleteProfile,
   addEvent,
@@ -8,7 +19,7 @@ import {
   editProfile,
   addDonation,
   editGoal,
-} from "../controllers/userController.js";
+} = require("../controllers/userController.js");
 
 const router = express.Router();
 
@@ -21,4 +32,16 @@ router.post("/:id/add-event", addEvent);
 router.post("/:id/follow/ngo", follow);
 router.post("/:id/unfollow/ngo", unfollow);
 
-export default router;
+// export default router;
+
+module.exports = router;
+// module.exports = {
+//   getUser,
+//   deleteProfile,
+//   addEvent,
+//   follow,
+//   unfollow,
+//   editProfile,
+//   addDonation,
+//   editGoal,
+// };

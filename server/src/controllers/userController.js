@@ -1,13 +1,11 @@
-import User from "../models/userModel.js";
-import mongoose from "mongoose";
+// import User from "../models/userModel.js";
+// import mongoose from "mongoose";
+const User = require("../models/userModel.js");
+const mongoose = require("mongoose");
 
 // GET USER by ID:
 const getUser = async (req, res) => {
   const { id } = req.params;
-  console.log("User Id", id);
-  // if (!mongoose.Types.ObjectId.isValid(id)) {
-  //   return res.status(404).json({ err: "No such user with this id" });
-  // }
   const user = await User.findById(id)
     .populate("attending")
     .populate("donations");
@@ -130,7 +128,18 @@ const editGoal = async (req, res) => {
   }
 };
 
-export {
+// export {
+//   getUser,
+//   addEvent,
+//   follow,
+//   unfollow,
+//   deleteProfile,
+//   editProfile,
+//   editGoal,
+//   addDonation,
+// };
+
+module.exports = {
   getUser,
   addEvent,
   follow,
