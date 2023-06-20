@@ -56,7 +56,7 @@ const updateNgo = async (req, res) => {
       { new: true }
     );
     return res.status(200).json(ngo.num_volunteers);
-  } catch (e) {
+  } catch (err) {
     return res.status(400).json({ err: err.message });
   }
 };
