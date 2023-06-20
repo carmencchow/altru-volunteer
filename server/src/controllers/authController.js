@@ -34,7 +34,9 @@ const createUser = async (req, res) => {
 const verifyUser = async (req, res) => {
   try {
     const uid = req.body.uid;
-    const user = await User.findById(uid);
+    const user = await User.findById(uid)
+      .populate("attending")
+      .populate("donations");
     return res.status(200).json({ user: user });
   } catch (err) {
     console.log(err);

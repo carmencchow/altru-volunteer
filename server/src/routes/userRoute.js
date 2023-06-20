@@ -1,7 +1,6 @@
 import express from "express";
 import {
   getUser,
-  deleteProfile,
   addEvent,
   follow,
   unfollow,
@@ -12,7 +11,6 @@ import {
 // const express = require("express");
 // const {
 //   getUser,
-//   deleteProfile,
 //   addEvent,
 //   follow,
 //   unfollow,
@@ -24,7 +22,6 @@ import {
 const router = express.Router();
 
 router.get("/:id", getUser);
-router.delete("/:id", deleteProfile);
 router.put("/:id", editProfile);
 router.put("/:id/amount", editGoal);
 router.post("/:id/donation", addDonation);
@@ -37,7 +34,6 @@ export default router;
 // module.exports = router;
 // // module.exports = {
 // //   getUser,
-// //   deleteProfile,
 // //   addEvent,
 // //   follow,
 // //   unfollow,

@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useState, useContext, useEffect } from "react";
 import { api } from "../utils/axios";
 import { AuthContext } from "./AuthContext";
 
@@ -44,6 +44,12 @@ export const NgosProvider = ({ children }) => {
       console.log(e);
     }
   };
+
+  useEffect(() => {
+    if (user === null) {
+      setNgos([]);
+    }
+  }, [user]);
 
   return (
     <NgosContext.Provider
