@@ -1,6 +1,4 @@
-import { response } from "express";
 import Ngo from "../models/ngoModel.js";
-import mongoose from "mongoose";
 
 // Get all NGOs
 const getNgos = async (req, res) => {
