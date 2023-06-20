@@ -47,7 +47,7 @@ const getNgo = async (req, res) => {
   return res.status(200).json(ngo);
 };
 
-const updateNgo = async (req, res) => {
+const updateVolunteerCount = async (req, res) => {
   try {
     const { id } = req.params;
     const ngo = await Ngo.findByIdAndUpdate(
@@ -61,4 +61,4 @@ const updateNgo = async (req, res) => {
   }
 };
 
-export { getNgos, getNgo, getFiltered, updateNgo };
+export { getNgos, getNgo, getFiltered, updateVolunteerCount };
