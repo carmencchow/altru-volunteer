@@ -8,16 +8,6 @@ import {
   addDonation,
   editGoal,
 } from "../controllers/userController.js";
-// const express = require("express");
-// const {
-//   getUser,
-//   addEvent,
-//   follow,
-//   unfollow,
-//   editProfile,
-//   addDonation,
-//   editGoal,
-// } = require("../controllers/userController.js");
 
 const router = express.Router();
 
@@ -30,14 +20,3 @@ router.post("/:id/follow/ngo", follow);
 router.post("/:id/unfollow/ngo", unfollow);
 
 export default router;
-
-// module.exports = router;
-// // module.exports = {
-// //   getUser,
-// //   addEvent,
-// //   follow,
-// //   unfollow,
-// //   editProfile,
-// //   addDonation,
-// //   editGoal,
-// // };

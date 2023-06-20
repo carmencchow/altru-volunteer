@@ -1,9 +1,6 @@
 import { response } from "express";
 import Ngo from "../models/ngoModel.js";
 import mongoose from "mongoose";
-// const { response } = require("express");
-// const Ngo = require("../models/ngoModel.js");
-// const mongoose = require("mongoose");
 
 // Get all NGOs
 const getNgos = async (req, res) => {
@@ -67,5 +64,3 @@ const updateNgo = async (req, res) => {
 };
 
 export { getNgos, getNgo, getFiltered, updateNgo };
-
-// module.exports = { getNgos, getNgo, getFiltered, updateNgo };

@@ -1,7 +1,5 @@
 import express from "express";
 import getPayment from "../controllers/stripeController.js";
-// const express = require("express");
-// const getPayment = require("../controllers/stripeController.js");
 
 const router = express.Router();
 
@@ -9,4 +7,3 @@ const router = express.Router();
 router.post("/payment", getPayment);
 
 export default router;
-// module.exports = router;

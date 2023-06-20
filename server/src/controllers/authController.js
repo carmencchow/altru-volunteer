@@ -1,7 +1,5 @@
 import User from "../models/userModel.js";
 import { auth } from "../firebase-config.js";
-// const User = require("../models/userModel.js");
-// const { auth } = require("../../firebase-config.js");
 
 // CREATE new user - set Firebase UID as MongoDB key
 const createUser = async (req, res) => {
@@ -45,4 +43,3 @@ const verifyUser = async (req, res) => {
 };
 
 export { createUser, verifyUser };
-// module.exports = { createUser, verifyUser };

@@ -1,7 +1,5 @@
 import User from "../models/userModel.js";
 import mongoose from "mongoose";
-// const User = require("../models/userModel.js");
-// const mongoose = require("mongoose");
 
 // GET USER by ID:
 const getUser = async (req, res) => {
@@ -126,13 +124,3 @@ export {
   editGoal,
   addDonation,
 };
-
-// module.exports = {
-//   getUser,
-//   addEvent,
-//   follow,
-//   unfollow,
-//   editProfile,
-//   editGoal,
-//   addDonation,
-// };
