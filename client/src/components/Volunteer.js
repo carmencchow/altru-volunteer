@@ -19,7 +19,7 @@ const Volunteer = () => {
   const navigate = useNavigate();
 
   const toggleModal = (ngo) => {
-    console.log("Card opened:", ngo.name, ngo._id);
+    console.log("Card:", ngo.name, ngo._id);
     setNgoModal(ngo);
     setOpenModal(!openModal);
   };
