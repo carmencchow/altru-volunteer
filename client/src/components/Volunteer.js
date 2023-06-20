@@ -84,11 +84,11 @@ const Volunteer = () => {
                       {ngo.event_time ? <p>Time: {ngo.event_time}</p> : null}
 
                       <div>{ngo.help ? <p>Duties: {ngo.help}</p> : null}</div>
-                      <div>
+                      {/* <div>
                         {ngo.num_volunteers ? (
                           <p>Volunteers needed: {ngo.num_volunteers}</p>
                         ) : null}
-                      </div>
+                      </div> */}
                       {ngo.commitment ? (
                         <p>
                           Commitment: {ngo.commitment}
