@@ -10,10 +10,6 @@ const ngoSchema = new mongoose.Schema({
   category: {
     type: Array,
   },
-  favorite: {
-    type: Boolean,
-    default: false,
-  },
   commitment: {
     type: String,
   },
@@ -32,12 +28,12 @@ const ngoSchema = new mongoose.Schema({
   event_description: {
     type: String,
   },
-  amount: {
-    type: String,
-  },
-  org: {
-    type: String,
-  },
+  amount_raised: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
 });
 
 const Ngo = mongoose.model("Ngo", ngoSchema);

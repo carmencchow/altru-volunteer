@@ -14,6 +14,15 @@ const Signup = () => {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [confirm, setConfirm] = useState("");
+  const [isChecked, setIsChecked] = useState(false);
+
+  const handleChecked = () => {
+    setIsChecked(true);
+    console.log("checked", isChecked);
+  };
+
+  const userType = isChecked ? "organization" : "individual";
+  console.log("type is", userType);
 
   const homepage = () => {
     navigate("/");
@@ -24,7 +33,7 @@ const Signup = () => {
   };
 
   const handleSignUp = async () => {
-    if (email && password) {
+    if (email && password && userType) {
       // Send email and password to Firebase
       const data = await signUp(email, password);
       console.log("Register new user:", data);
@@ -118,6 +127,16 @@ const Signup = () => {
               value={confirm}
               onChange={(e) => setConfirm(e.target.value)}
             />
+          </div>
+
+          <div className="ngo-account">
+            <input
+              type="checkbox"
+              name="checkbox"
+              value={isChecked}
+              onChange={handleChecked}
+            />{" "}
+            Are you signing up as an NGO?
           </div>
 
           <button

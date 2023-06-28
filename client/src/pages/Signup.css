@@ -67,11 +67,17 @@ body {
   justify-content: space-between;
   margin-top: 15px;
 }
-.my-account {
+.my-account,
+.ngo-account {
   font-size: 14px;
   margin-left: 0px;
 }
-.login {
+input .checbox {
+  height: 20px;
+  width: 20px;
+}
+.login,
+.ngo-signup {
   font-size: 12px;
   margin-left: 120px;
   cursor: pointer;
@@ -79,7 +85,8 @@ body {
 .error {
   color: red;
 }
-.login:hover {
+.login:hover,
+.ngo-signup:hover {
   color: blue;
   font-weight: bolder;
 }
