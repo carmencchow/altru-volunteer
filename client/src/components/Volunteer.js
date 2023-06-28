@@ -84,11 +84,11 @@ const Volunteer = () => {
                       {ngo.event_time ? <p>Time: {ngo.event_time}</p> : null}
 
                       <div>{ngo.help ? <p>Duties: {ngo.help}</p> : null}</div>
-                      {/* <div>
+                      <div>
                         {ngo.num_volunteers ? (
                           <p>Volunteers needed: {ngo.num_volunteers}</p>
                         ) : null}
-                      </div> */}
+                      </div>
                       {ngo.commitment ? (
                         <p>
                           Commitment: {ngo.commitment}
@@ -100,20 +100,21 @@ const Volunteer = () => {
                     </div>
                   </div>
 
-                  {ngo.event === true && (
-                    <VolunteerBtn
-                      className="volunteer-btn"
-                      attending={
-                        mongoUser.attending &&
-                        mongoUser.attending.find((item) => {
-                          return item._id === ngo._id;
-                        })
-                          ? true
-                          : false
-                      }
-                      toggleModal={() => toggleModal(ngo)}
-                    />
-                  )}
+                  {ngo.event === true &&
+                    mongoUser.userType === "individual" && (
+                      <VolunteerBtn
+                        className="volunteer-btn"
+                        attending={
+                          mongoUser.attending &&
+                          mongoUser.attending.find((item) => {
+                            return item._id === ngo._id;
+                          })
+                            ? true
+                            : false
+                        }
+                        toggleModal={() => toggleModal(ngo)}
+                      />
+                    )}
                 </div>
               );
             })}

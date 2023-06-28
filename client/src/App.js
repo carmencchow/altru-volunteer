@@ -12,7 +12,7 @@ import Home from "./pages/Home";
 import Edit from "./pages/Edit";
 import Info from "./pages/Info";
 import "./App.css";
-import Admin from "./pages/Admin";
+import OrganizationProfile from "./components/OrganizationProfile";
 
 function App() {
   return (
@@ -28,7 +28,7 @@ function App() {
                 <Route path="/volunteer" element={<Volunteer />} />
                 <Route path="/info/:id" element={<Info />} />
                 <Route path="/profile" element={<Profile />} />
-                <Route path="/admin" element={<Admin />} />
+                <Route path="/admin" element={<OrganizationProfile />} />
                 <Route path="/edit" element={<Edit />} />
                 <Route path="*" element={<Navigate to="/" />} />
               </Route>

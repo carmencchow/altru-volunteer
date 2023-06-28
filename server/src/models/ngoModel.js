@@ -25,6 +25,12 @@ const ngoSchema = new mongoose.Schema({
   event_date: {
     type: String,
   },
+  num_volunteers: {
+    type: Number,
+  },
+  help: {
+    type: String,
+  },
   event_time: {
     type: String,
   },
