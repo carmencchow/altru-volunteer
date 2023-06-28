@@ -7,7 +7,6 @@ import {
   signOut,
 } from "firebase/auth";
 import { api } from "../utils/axios";
-import { NgosContext } from "./NgosContext";
 import { NotificationContext } from "./NotificationContext";
 
 export const AuthContext = createContext();

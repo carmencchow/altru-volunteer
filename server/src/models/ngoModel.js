@@ -1,6 +1,9 @@
 import mongoose from "mongoose";
 
 const ngoSchema = new mongoose.Schema({
+  _id: {
+    type: String,
+  },
   name: {
     type: String,
   },
@@ -26,6 +29,9 @@ const ngoSchema = new mongoose.Schema({
     type: String,
   },
   event_description: {
+    type: String,
+  },
+  userType: {
     type: String,
   },
   amount_raised: [

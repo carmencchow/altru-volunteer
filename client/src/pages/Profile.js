@@ -5,7 +5,9 @@ import VolunteerInfo from "../components/VolunteerInfo";
 import ProfileInfo from "../components/ProfileInfo";
 import Navbar from "../components/Navbar";
 import "./Profile.css";
+import OrganizationProfileInfo from "../components/OrganizationProfileInfo";
 
+// Display different components based on the mongoUser's userType
 const Profile = () => {
   const { mongoUser } = useContext(AuthContext);
   const [toggleState, setToggleState] = useState(1);
@@ -15,6 +17,7 @@ const Profile = () => {
   };
 
   if (!mongoUser) return null;
+  console.log(mongoUser, mongoUser.userType);
 
   return (
     <>
@@ -26,7 +29,7 @@ const Profile = () => {
               className={toggleState === 1 ? "tabs active-tabs" : "tabs"}
               onClick={() => toggletabs(1)}
             >
-              My Profile
+              Profile
             </div>
 
             <div
@@ -52,7 +55,11 @@ const Profile = () => {
               }
             >
               <div>
-                <ProfileInfo />
+                {mongoUser.userType === "individual" ? (
+                  <ProfileInfo />
+                ) : (
+                  <OrganizationProfileInfo />
+                )}
               </div>
             </div>
 

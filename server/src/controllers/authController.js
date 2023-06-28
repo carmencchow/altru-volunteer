@@ -1,4 +1,5 @@
 import User from "../models/userModel.js";
+import Ngo from "../models/ngoModel.js";
 import { auth } from "../firebase-config.js";
 
 // CREATE new user - set Firebase UID as MongoDB key
@@ -8,6 +9,7 @@ const createUser = async (req, res) => {
     const firstname = req.body.firstname;
     const lastname = req.body.lastname;
     const userType = req.body.userType;
+    console.log(email, uid, firstname, lastname, userType);
 
     if (userType === "individual") {
       // Create new user doc in MongoDB with firebaseUID
@@ -23,10 +25,10 @@ const createUser = async (req, res) => {
       });
       await newUser.save();
       console.log("New user", newUser);
-      return res.status(200).json({ msg: "User", newUser });
+      return res.status(200).send({ user: newUser });
     }
     if (userType === "organization") {
-      const newNgo = await Ngo.create({
+      const newNgo = await User.create({
         _id: uid,
         firstname,
         lastname,
@@ -34,9 +36,9 @@ const createUser = async (req, res) => {
         userType,
         category: [],
       });
-      await nseNgo.save();
+      await newNgo.save();
       console.log("New ngo", newNgo);
-      return res.status(200).json({ msg: "Ngo", newNgo });
+      return res.status(200).send({ ngo: newNgo });
     }
   } catch (error) {
     console.log("Error is", error);

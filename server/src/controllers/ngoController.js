@@ -61,4 +61,21 @@ const updateVolunteerCount = async (req, res) => {
   }
 };
 
-export { getNgos, getNgo, getFiltered, updateVolunteerCount };
+const createNgo = (req, res) => {
+  try {
+  } catch (err) {}
+};
+
+const editNgo = (req, res) => {
+  try {
+  } catch (err) {}
+};
+
+export {
+  getNgos,
+  getNgo,
+  createNgo,
+  editNgo,
+  getFiltered,
+  updateVolunteerCount,
+};

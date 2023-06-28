@@ -18,11 +18,8 @@ const Signup = () => {
 
   const handleChecked = () => {
     setIsChecked(true);
-    console.log("checked", isChecked);
+    console.log("checked");
   };
-
-  const userType = isChecked ? "organization" : "individual";
-  console.log("type is", userType);
 
   const homepage = () => {
     navigate("/");
@@ -33,13 +30,13 @@ const Signup = () => {
   };
 
   const handleSignUp = async () => {
+    const userType = isChecked ? "organization" : "individual";
     if (email && password && userType) {
       // Send email and password to Firebase
       const data = await signUp(email, password);
       console.log("Register new user:", data);
       const token = await data.user.getIdToken();
-
-      // Send details to server
+      // Send user data to server to add to mongoDB
       await api.post(
         "/auth/createUser",
         {
@@ -47,6 +44,7 @@ const Signup = () => {
           email: data.user.email,
           firstname: firstname,
           lastname: lastname,
+          userType: userType,
         },
         {
           headers: {

@@ -4,16 +4,15 @@ const userSchema = new mongoose.Schema({
   _id: {
     type: String,
   },
-  role: String,
+  userType: {
+    type: String,
+  },
   attending: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Ngo",
     },
   ],
-  userType: {
-    type: String,
-  },
   following: {
     type: [String],
   },
