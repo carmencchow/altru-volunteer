@@ -28,6 +28,9 @@ const ngoSchema = new mongoose.Schema({
   event_description: {
     type: String,
   },
+  num_volunteers: {
+    type: Number,
+  },
   amount_raised: [
     {
       type: mongoose.Schema.Types.ObjectId,

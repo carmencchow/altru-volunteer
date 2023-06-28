@@ -11,6 +11,9 @@ const getNgos = async (req, res) => {
   }
 };
 
+const updateNgo = (req, res) => {};
+const createNgo = (req, res) => {};
+
 // Get filtered NGOs
 const getFiltered = async (req, res) => {
   try {
@@ -55,10 +58,18 @@ const updateVolunteerCount = async (req, res) => {
       { $inc: { num_volunteers: -1 } },
       { new: true }
     );
-    return res.status(200).json(ngo.num_volunteers);
+    console.log(ngo, ngo.num_volunteers);
+    return res.status(200).json(ngo);
   } catch (err) {
     return res.status(400).json({ err: err.message });
   }
 };
 
-export { getNgos, getNgo, getFiltered, updateVolunteerCount };
+export {
+  getNgos,
+  createNgo,
+  updateNgo,
+  getNgo,
+  getFiltered,
+  updateVolunteerCount,
+};
