@@ -1,6 +1,7 @@
 import express from "express";
 import {
   getUser,
+  addEvent,
   follow,
   unfollow,
   addNgo,
@@ -15,6 +16,7 @@ router.get("/:id", getUser);
 router.put("/:id", editProfile);
 router.put("/:id/amount", editGoal);
 router.post("/:id/donation", addDonation);
+router.post("/:id/add-event", addEvent);
 router.post("/:id/follow/ngo", follow);
 router.post("/:id/unfollow/ngo", unfollow);
 router.post("/:id/addNgo", addNgo);

@@ -8,18 +8,14 @@ const createUser = async (req, res) => {
   try {
     const { email, uid, firstname, lastname, userType } = req.body;
     console.log(email, uid, firstname, lastname, userType);
-
-    if (userType === "organization") {
-      console.log("User is an organization");
-      const newUser = await User.create({
-        _id: uid,
-        userType,
-        firstname,
-        lastname,
-        email,
-        // goalAmount
-      });
-    }
+    const newUser = await User.create({
+      _id: uid,
+      userType,
+      firstname,
+      lastname,
+      email,
+      // goalAmount
+    });
     await newUser.save();
     console.log("New user", newUser);
     return res.status(200).send({ user: newUser });
@@ -34,10 +30,10 @@ const verifyUser = async (req, res) => {
   try {
     const uid = req.body.uid;
     const user = await User.findById(uid)
+      .populate("ngos")
       .populate("attending")
-      .populate("ngo")
       .populate("donations");
-    console.log("MongoDB User verified");
+    console.log("MongoDB User verified", user);
     return res.status(200).json({ user: user });
   } catch (err) {
     console.log(err);

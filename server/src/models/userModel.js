@@ -21,13 +21,19 @@ const userSchema = new mongoose.Schema({
     lowercase: true,
     required: true,
   },
-  goalAmount: {
-    type: Number,
-  },
-  ngo: {
+  organization: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Ngo",
   },
+  goalAmount: {
+    type: Number,
+  },
+  ngos: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Ngo",
+    },
+  ],
   attending: [
     {
       type: mongoose.Schema.Types.ObjectId,

@@ -24,7 +24,10 @@ const OrganizationProfile = () => {
         <p>
           User: {mongoUser.firstname} {mongoUser.lastname}
           <p> NGO: {mongoUser.ngo}</p>
+          <p> Donations: {mongoUser.donations}</p>
+          <p> Events: {mongoUser.attending}</p>
         </p>
+        <p>Type: {mongoUser.userType}</p>
         <p>Email: {user.email}</p>
         <p>Category: {mongoUser.email}</p>
         <p>Member since: {String(mongoUser.createdAt).slice(0, 10)}</p>

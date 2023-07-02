@@ -8,7 +8,7 @@ const getUser = async (req, res) => {
   const user = await User.findById(id)
     .populate("attending")
     .populate("donations")
-    .populate("ngo");
+    .populate("ngos");
   if (!user) {
     return res.status(404).json({ err: "User doesn't exist" });
   }
@@ -133,15 +133,32 @@ const addNgo = async (req, res) => {
       // owner: mongoose.Types.ObjectId(user._id),
     });
     ngo.owner = user._id;
-    user.ngo = ngo._id;
+    user.organization = ngo._id;
     console.log("Ngo's ownerID:", ngo.owner);
-    console.log("User'ngoID", user, user.ngo);
+    console.log("User'ngoID", user, user.organization);
     await ngo.save();
     console.log("new ngo", ngo);
     return res.status(200).send({ ngo });
   } catch (err) {
     console.log(err);
     return res.status(400).send(err);
+  }
+};
+
+// ADD event
+const addEvent = async (req, res) => {
+  try {
+    const ngoId = req.body.id;
+    const user = await User.findByIdAndUpdate(
+      req.params.id,
+      { $addToSet: { attending: ngoId } },
+      { new: true }
+    );
+    await user.save();
+    res.status(200).send({ results: user, message: user.attending });
+  } catch (err) {
+    console.log(err);
+    res.status(400).send("Couldn't add event");
   }
 };
 
@@ -153,4 +170,5 @@ export {
   editGoal,
   addDonation,
   addNgo,
+  addEvent,
 };
