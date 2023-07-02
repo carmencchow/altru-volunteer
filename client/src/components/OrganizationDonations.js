@@ -12,10 +12,7 @@ const OrganizationDonations = () => {
       <div className="stats">
         <div className="donation-history">
           <h2>Donations & Donors </h2>
-
-          {/* <h4>Goal Amount: ${mongoUser.goalAmount}</h4> */}
         </div>
-
         {/* {mongoUser.goalAmount && (
           <div className="donation-container">
             <div className="heading">
@@ -43,14 +40,6 @@ const OrganizationDonations = () => {
               </p>
             </h4>
 
-            <h4>
-              Amount needed to reach donation goal:
-              <p className="amount-needed">
-                $
-                {mongoUser.goalAmount -
-                  mongoUser.donations.map(Number).reduce((a, b) => a + b, 0)}
-              </p>
-            </h4>
           </div>
         )} */}
       </div>

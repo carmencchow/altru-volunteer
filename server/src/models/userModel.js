@@ -43,9 +43,12 @@ const userSchema = new mongoose.Schema({
   following: {
     type: [String],
   },
-  donations: {
-    type: [String],
-  },
+  donations: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Donation",
+    },
+  ],
   createdAt: {
     type: Date,
     default: Date.now,

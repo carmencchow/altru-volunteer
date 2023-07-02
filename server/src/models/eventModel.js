@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const eventSchema = new mongoose.Schema({
-  ngo: {
+  parentNgo: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Ngo",
   },

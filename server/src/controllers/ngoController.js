@@ -99,12 +99,12 @@ const editNgo = async (req, res) => {
   }
 };
 
-// Add new Event
+// Create new NGO Event
 const createNGOEvent = async (req, res) => {
-  // event details
   try {
     const { name, date, time, description, help } = req.body;
-    // find parentNgo
+    const ngo = await Ngo.findById(req.params.id);
+    console.log(ngo);
     const event = await Event.create({
       name,
       date,
@@ -112,9 +112,11 @@ const createNGOEvent = async (req, res) => {
       description,
       help,
       event: true,
+      parentNgo: ngo._id,
     });
     await event.save();
-    console.log("new Event", event);
+    await ngo.save();
+    console.log("new Event", event), ngo;
     return res.status(200).send({ event });
   } catch (err) {
     console.log(err);

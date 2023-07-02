@@ -86,6 +86,7 @@ export const AuthContextProvider = ({ children }) => {
     auth.onAuthStateChanged(async function (user) {
       if (user) {
         await verifyUser(user);
+        console.log("Firebase user verified");
       } else {
         setUser(null);
       }

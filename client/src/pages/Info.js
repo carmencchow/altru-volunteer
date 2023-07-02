@@ -37,14 +37,15 @@ const Info = () => {
         "Publishable Key:",
         process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY
       );
+      console.log(id, ngo);
 
       await api.post(
         `/user/${user.uid}/donation`,
 
         {
           id: `${ngo._id}`,
-          donation: `${clickedBtn}`,
-          name: `${ngo.name}`,
+          ngo: `${ngo.name}`,
+          amount: `${clickedBtn}`,
         },
         {
           headers: {

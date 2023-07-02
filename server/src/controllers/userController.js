@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import User from "../models/userModel.js";
 import Ngo from "../models/ngoModel.js";
+import Donation from "../models/donationModel.js";
 
 // GET USER by ID:
 const getUser = async (req, res) => {
@@ -35,14 +36,21 @@ const editProfile = async (req, res) => {
 // ADD donation
 const addDonation = async (req, res) => {
   try {
-    const ngo = req.body.name;
-    const ngoId = req.body.id;
-    const donation = req.body.donation;
+    const { id, amount, ngo } = req.body;
+    console.log(req.body);
     const user = await User.findById(req.params.id);
+    const donation = await Donation.create({
+      amount,
+      ngo,
+      donor: user._id,
+      date: Date.now(),
+    });
+    await donation.save();
+
     user.donations.push(donation);
-    user.ngos.push(ngo);
     await user.save();
-    res.status(200).send({ results: user.donations });
+    console.log(donation, user);
+    res.status(200).send({ donation, user });
   } catch (err) {
     console.log(err);
   }
@@ -104,8 +112,10 @@ const editGoal = async (req, res) => {
 // Add NGO
 const addNgo = async (req, res) => {
   try {
+    const user = await User.findById(req.params.id);
     const { name, category, telephone, commitment, frequency, help } = req.body;
     console.log("Req Body", req.body);
+    const existingNgo = await Ngo.findOne({ name });
     const phoneRegex = /^\d{10}$/;
     if (
       !name ||
@@ -117,7 +127,6 @@ const addNgo = async (req, res) => {
     ) {
       return res.status(400).json({ error: "Missing required fields" });
     }
-    const user = await User.findById(req.params.id);
     console.log(user._id);
     if (!user) {
       return res.status(404).json({ err: "User not found" });
@@ -130,27 +139,38 @@ const addNgo = async (req, res) => {
     if (!phoneRegex.test(telephone)) {
       return res.status(400).json({ error: "Invalid phone number format" });
     }
-    const existingNgo = await Ngo.findOne({ name });
     if (existingNgo) {
       return res.status(400).json({ error: "NGO already exists" });
+    } else {
+      const token = await user.getIdToken();
+      console.log("Verfiying Firebase user", user.uid, token);
+      const data = await api.get("/auth/verifyUser", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (data.status === 401) {
+        return res.status(400).json({ error: "User not found" });
+      }
+      const ngo = await Ngo.create({
+        name,
+        telephone,
+        category,
+        commitment,
+        frequency,
+        help,
+        volunteers: [],
+        amount_raised: [],
+        owner: user._id,
+      });
+      // ngo.owner = user._id;
+      user.organization = ngo._id;
+      // await ngo.save();
+      // await user.save();
+      await Promise.all([ngo.save(), user.save()]);
+      console.log(ngo, user);
+      return res.status(200).send({ ngo });
     }
-    const ngo = await Ngo.create({
-      name,
-      telephone,
-      category,
-      commitment,
-      frequency,
-      help,
-      volunteers: [],
-      amount_raised: [],
-    });
-    ngo.owner = user._id;
-    user.organization = ngo._id;
-    console.log("Ngo's ownerID:", ngo.owner);
-    console.log("User'ngoID", user, user.organization);
-    await ngo.save();
-    console.log("new ngo", ngo);
-    return res.status(200).send({ ngo });
   } catch (err) {
     console.log(err);
     return res.status(400).send(err);
