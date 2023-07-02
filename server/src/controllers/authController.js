@@ -31,6 +31,7 @@ const verifyUser = async (req, res) => {
     const uid = req.body.uid;
     const user = await User.findById(uid)
       .populate("ngos")
+      .populate("organization")
       .populate("attending")
       .populate("donations");
     console.log("MongoDB User verified", user);

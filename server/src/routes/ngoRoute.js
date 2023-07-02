@@ -5,7 +5,7 @@ import {
   getFiltered,
   updateVolunteerCount,
   createNgo,
-  createEvent,
+  createNGOEvent,
   editEvent,
   editNgo,
 } from "../controllers/ngoController.js";
@@ -16,7 +16,7 @@ router.get("/", getNgos);
 router.post("/", createNgo);
 router.get("/:id", getNgo);
 router.put("/:id", editNgo);
-router.post("/:id/event", createEvent);
+router.post("/:id/event", createNGOEvent);
 router.put("/:id/event", editEvent);
 router.put("/:id/decrement", updateVolunteerCount);
 router.get("/:frequency/:category", getFiltered);

@@ -100,7 +100,7 @@ const editNgo = async (req, res) => {
 };
 
 // Add new Event
-const createEvent = async (req, res) => {
+const createNGOEvent = async (req, res) => {
   // event details
   try {
     const { name, date, time, description, help } = req.body;
@@ -111,6 +111,7 @@ const createEvent = async (req, res) => {
       time,
       description,
       help,
+      event: true,
     });
     await event.save();
     console.log("new Event", event);
@@ -153,7 +154,7 @@ export {
   getNgos,
   getNgo,
   createNgo,
-  createEvent,
+  createNGOEvent,
   editEvent,
   editNgo,
   getFiltered,

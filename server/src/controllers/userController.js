@@ -8,6 +8,7 @@ const getUser = async (req, res) => {
   const user = await User.findById(id)
     .populate("attending")
     .populate("donations")
+    .populate("organization")
     .populate("ngos");
   if (!user) {
     return res.status(404).json({ err: "User doesn't exist" });
@@ -92,7 +93,7 @@ const editGoal = async (req, res) => {
     const goalAmount = req.body.goalAmount;
     const user = await User.findById({ _id: req.params.id });
     user.goalAmount = goalAmount;
-    await user.save(); // need token
+    await user.save();
     return res.status(200).send({ message: "Goal amount updated", goalAmount });
   } catch (err) {
     console.log(err);
@@ -103,34 +104,45 @@ const editGoal = async (req, res) => {
 // Add NGO
 const addNgo = async (req, res) => {
   try {
-    const name = req.body.name;
-    // const { name, phone, category, commitment, frequency } = req.body;
-    // console.log(req.body);
-    // const phoneRegex = /^\d{10}$/;
-    // if (!name || !phone || !category || !commitment || !frequency) {
-    //   return res.status(400).json({ error: "Missing required fields" });
-    // }
+    const { name, category, telephone, commitment, frequency, help } = req.body;
+    console.log("Req Body", req.body);
+    const phoneRegex = /^\d{10}$/;
+    if (
+      !name ||
+      !category ||
+      !telephone ||
+      !commitment ||
+      !frequency ||
+      !help
+    ) {
+      return res.status(400).json({ error: "Missing required fields" });
+    }
     const user = await User.findById(req.params.id);
     console.log(user._id);
     if (!user) {
       return res.status(404).json({ err: "User not found" });
     }
-    // if (!phoneRegex.test(phone)) {
-    //   return res.status(400).json({ error: "Invalid phone number format" });
-    // }
+    if (user.organization) {
+      return res
+        .status(400)
+        .json({ err: "Your account is already linked to an NGO" });
+    }
+    if (!phoneRegex.test(telephone)) {
+      return res.status(400).json({ error: "Invalid phone number format" });
+    }
     const existingNgo = await Ngo.findOne({ name });
     if (existingNgo) {
       return res.status(400).json({ error: "NGO already exists" });
     }
     const ngo = await Ngo.create({
       name,
-      // phone,
-      // category,
-      // commitment,
-      // frequency,
+      telephone,
+      category,
+      commitment,
+      frequency,
+      help,
       volunteers: [],
       amount_raised: [],
-      // owner: mongoose.Types.ObjectId(user._id),
     });
     ngo.owner = user._id;
     user.organization = ngo._id;

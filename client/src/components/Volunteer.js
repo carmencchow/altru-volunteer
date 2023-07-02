@@ -24,10 +24,12 @@ const Volunteer = () => {
   };
 
   const handlePrevious = () => {
+    console.log("previous page");
     setCurrentPage(currentPage - 1);
   };
 
   const handleNext = () => {
+    console.log("next page");
     setCurrentPage(currentPage + 1);
   };
 
@@ -53,7 +55,8 @@ const Volunteer = () => {
             onClick={handlePrevious}
           ></button>
           <button
-            disabled={currentPage === pageCount - 1}
+            disabled={currentPage === pageCount}
+            // disabled={currentPage === pageCount - 1}
             className="next"
             onClick={handleNext}
           ></button>
@@ -94,7 +97,7 @@ const Volunteer = () => {
                         </p>
                       ) : null}
 
-                      <p>Tel: {ngo.telephone}</p>
+                      {ngo.telephone ? <p>Tel: {ngo.telephone}</p> : null}
                     </div>
                   </div>
 

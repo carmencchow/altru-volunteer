@@ -8,8 +8,8 @@ const ngoSchema = new mongoose.Schema({
   name: {
     type: String,
   },
-  phone: {
-    type: String,
+  telephone: {
+    type: Number,
   },
   category: {
     type: String,
@@ -25,6 +25,12 @@ const ngoSchema = new mongoose.Schema({
   },
   goalAmount: {
     type: Number,
+  },
+  help: {
+    type: String,
+  },
+  event: {
+    type: Boolean,
   },
   events: [
     {

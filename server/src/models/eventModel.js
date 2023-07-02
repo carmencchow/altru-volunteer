@@ -17,9 +17,15 @@ const eventSchema = new mongoose.Schema({
   description: {
     type: String,
   },
-  help: {
-    type: String,
+  numVolunteers: {
+    type: Number,
   },
+  volunteers: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
 });
 
 const Event = mongoose.model("Event", eventSchema);

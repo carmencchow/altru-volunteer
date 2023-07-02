@@ -11,31 +11,9 @@ const OrganizationDonations = () => {
     <div className="container">
       <div className="stats">
         <div className="donation-history">
-          <h2>Donation history </h2>
+          <h2>Donations & Donors </h2>
 
-          <h4>Goal Amount: ${mongoUser.goalAmount}</h4>
-
-          <div className="goal-input">
-            <EditGoal
-              openInput={openInput}
-              closeInput={() => {
-                setOpenInput(false);
-              }}
-            />
-
-            {!openInput ? (
-              <div
-                className="edit-amount"
-                onClick={() => {
-                  setOpenInput(true);
-                }}
-              >
-                <button className="edit">Edit</button>
-              </div>
-            ) : (
-              <div></div>
-            )}
-          </div>
+          {/* <h4>Goal Amount: ${mongoUser.goalAmount}</h4> */}
         </div>
 
         {/* {mongoUser.goalAmount && (

@@ -1,9 +1,7 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import { fetchUserData } from "../utils/fetchUserData";
 import "./OrganizationProfile.css";
-import { api } from "../utils/axios";
 
 const OrganizationProfile = () => {
   const navigate = useNavigate();
@@ -13,23 +11,21 @@ const OrganizationProfile = () => {
     navigate("/update");
   };
 
-  // useEffect(() => {
-  //   fetchUserData();
-  // }, []);
-
   return (
     <div>
       <h2>Organization</h2>
       <div className="user-profile">
         <p>
           User: {mongoUser.firstname} {mongoUser.lastname}
-          <p> NGO: {mongoUser.ngo}</p>
-          <p> Donations: {mongoUser.donations}</p>
-          <p> Events: {mongoUser.attending}</p>
         </p>
+        {mongoUser.organization && (
+          <p>Name of Charity: {mongoUser.organization.name}</p>
+        )}
         <p>Type: {mongoUser.userType}</p>
         <p>Email: {user.email}</p>
-        <p>Category: {mongoUser.email}</p>
+        {mongoUser.organization && (
+          <p>Category: {mongoUser.organization.category}</p>
+        )}
         <p>Member since: {String(mongoUser.createdAt).slice(0, 10)}</p>
         <button onClick={handleEdit} className="edit-btn">
           Add Ngo

@@ -10,7 +10,7 @@ const Update = () => {
   const navigate = useNavigate();
   const { user, setMongoUser, mongoUser } = useContext(AuthContext);
   const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
+  const [telephone, setTelephone] = useState("");
   const [category, setCategory] = useState("");
   const [numVolunteers, setNumVolunteers] = useState(0);
   const [commitment, setCommitment] = useState("");
@@ -18,7 +18,6 @@ const Update = () => {
   const [help, setHelp] = useState("");
 
   const updateProfile = async () => {
-    console.log("Updating profile");
     try {
       const token = await user.getIdToken();
       console.log("getting token");
@@ -26,11 +25,11 @@ const Update = () => {
         `/user/${user.uid}/addNgo`,
         {
           name: `${name}`,
-          // phone: `${phone}`,
-          // category: `${category}`,
-          // commitment: `${commitment}`,
-          // frequency: `${frequency}`,
-          // help: `${help}`,
+          telephone: `${telephone}`,
+          category: `${category}`,
+          commitment: `${commitment}`,
+          frequency: `${frequency}`,
+          help: `${help}`,
         },
         {
           headers: {
@@ -57,6 +56,14 @@ const Update = () => {
     navigate("/profile");
   };
 
+  const handleDelete = async () => {
+    console.log("Deleting your account");
+    await api.delete(`/user/${user.uid}`).then((res) => {
+      console.log(`Account deleted`, res.data);
+      navigate("/");
+    });
+  };
+
   return (
     <>
       <Navbar />
@@ -79,12 +86,12 @@ const Update = () => {
                     placeholder="NGO name"
                     onChange={(e) => setName(e.target.value)}
                   />
-                  {/* <input
+                  <input
                     type="text"
                     className="org-phone"
-                    value={phone}
+                    value={telephone}
                     placeholder="Phone number"
-                    onChange={(e) => setPhone(e.target.value)}
+                    onChange={(e) => setTelephone(e.target.value)}
                   />
                   <div>
                     <select
@@ -136,13 +143,18 @@ const Update = () => {
                     value={numVolunteers}
                     placeholder="How many volunteers needed?"
                     onChange={(e) => setNumVolunteers(e.target.value)}
-                  /> */}
+                  />
                   <button className="save-btn" onSubmit={updateProfile}>
-                    Add Ngo
+                    Create Ngo Profile
                   </button>
                 </form>
 
                 <div className="save-delete-row"></div>
+                <div className="save-delete-row">
+                  <button className="delete-btn" onClick={handleDelete}>
+                    Delete Account
+                  </button>
+                </div>
               </div>
             </div>
           </div>
