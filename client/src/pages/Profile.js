@@ -1,13 +1,14 @@
 import React, { useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
-import DonationsInfo from "../components/DonationsInfo";
-import VolunteerInfo from "../components/VolunteerInfo";
-import ProfileInfo from "../components/ProfileInfo";
+import UserDonations from "../components/UserDonations";
+import UserVolunteers from "../components/UserVolunteers";
+import UserProfile from "../components/UserProfile";
 import Navbar from "../components/Navbar";
 import "./Profile.css";
 import OrganizationProfile from "../components/OrganizationProfile";
+import OrganizationDonations from "../components/OrganizationDonations";
+import OrganizationVolunteers from "../components/OrganizationVolunteers";
 
-// Display different components based on the mongoUser's userType
 const Profile = () => {
   const { mongoUser } = useContext(AuthContext);
   const [toggleState, setToggleState] = useState(1);
@@ -17,7 +18,7 @@ const Profile = () => {
   };
 
   if (!mongoUser) return null;
-  console.log(mongoUser, mongoUser.userType);
+  console.log(mongoUser);
 
   return (
     <>
@@ -56,7 +57,7 @@ const Profile = () => {
             >
               <div>
                 {mongoUser.userType === "individual" ? (
-                  <ProfileInfo />
+                  <UserProfile />
                 ) : (
                   <OrganizationProfile />
                 )}
@@ -69,7 +70,11 @@ const Profile = () => {
               }
             >
               <div>
-                <DonationsInfo />
+                {mongoUser.userType === "individual" ? (
+                  <UserDonations />
+                ) : (
+                  <OrganizationDonations />
+                )}
               </div>
             </div>
 
@@ -79,7 +84,11 @@ const Profile = () => {
               }
             >
               <div>
-                <VolunteerInfo />
+                {mongoUser.userType === "individual" ? (
+                  <UserVolunteers />
+                ) : (
+                  <OrganizationVolunteers />
+                )}
               </div>
             </div>
           </div>

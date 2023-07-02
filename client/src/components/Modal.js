@@ -44,14 +44,6 @@ const Modal = ({
           },
         }
       );
-      setConfirmMessage("");
-      const data = res.data;
-      console.log(
-        "Event added to user: ",
-        data.results.attending,
-        ngoModal._id,
-        ngoModal.name
-      );
 
       // Decrement volunteer count from ngo
       const response = await api.put(
@@ -65,11 +57,12 @@ const Modal = ({
           },
         }
       );
+      setConfirmMessage("");
       const resData = response.data;
-      console.log("Volunteers:", resData);
+      console.log(res.data.results.attending, resData.num_volunteers);
       await fetchUserData(user.uid, setMongoUser, token);
-      setOpenModal(false);
       await getNgo(ngoModal);
+      setOpenModal(false);
     } catch (err) {
       console.log(err);
     }

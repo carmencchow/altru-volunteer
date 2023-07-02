@@ -9,7 +9,7 @@ import { api } from "../utils/axios";
 
 const Edit = () => {
   const navigate = useNavigate();
-  const { user, setMongoUser, mongoUser } = useContext(AuthContext);
+  const { user, setMongoUser } = useContext(AuthContext);
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
 

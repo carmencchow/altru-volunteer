@@ -1,17 +1,18 @@
 import mongoose from "mongoose";
 
 const ngoSchema = new mongoose.Schema({
-  _id: {
+  owner: {
     type: String,
+    ref: "User",
   },
   name: {
     type: String,
   },
-  telephone: {
+  phone: {
     type: String,
   },
   category: {
-    type: Array,
+    type: String,
   },
   commitment: {
     type: String,
@@ -19,28 +20,31 @@ const ngoSchema = new mongoose.Schema({
   frequency: {
     type: String,
   },
-  event: {
-    type: Boolean,
-  },
-  event_date: {
-    type: String,
-  },
   num_volunteers: {
     type: Number,
   },
-  help: {
-    type: String,
+  goalAmount: {
+    type: Number,
   },
-  event_time: {
-    type: String,
-  },
-  event_description: {
-    type: String,
-  },
-  userType: {
-    type: String,
-  },
-  amount_raised: [
+  events: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Event",
+    },
+  ],
+  volunteers: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
+  donors: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
+  donations: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",

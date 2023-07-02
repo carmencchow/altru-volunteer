@@ -2,10 +2,10 @@ import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { fetchUserData } from "../utils/fetchUserData";
-import "./ProfileInfo.css";
+import "./UserProfile.css";
 import { api } from "../utils/axios";
 
-const ProfileInfo = () => {
+const UserProfile = () => {
   const navigate = useNavigate();
   const { mongoUser, user, setMongoUser } = useContext(AuthContext);
 
@@ -74,4 +74,4 @@ const ProfileInfo = () => {
   );
 };
 
-export default ProfileInfo;
+export default UserProfile;

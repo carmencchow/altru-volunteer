@@ -134,7 +134,7 @@ const Signup = () => {
               value={isChecked}
               onChange={handleChecked}
             />{" "}
-            Are you signing up as an NGO?
+            Are you signing up on behalf of an NGO/Charity?
           </div>
 
           <button

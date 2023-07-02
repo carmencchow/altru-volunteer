@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
-import "./VolunteerInfo.css";
+import "./UserVolunteers.css";
 
-const VolunteerInfo = () => {
+const UserVolunteers = () => {
   const { mongoUser } = useContext(AuthContext);
 
   return (
@@ -25,4 +25,4 @@ const VolunteerInfo = () => {
   );
 };
 
-export default VolunteerInfo;
+export default UserVolunteers;

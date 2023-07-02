@@ -1,4 +1,7 @@
 import Ngo from "../models/ngoModel.js";
+import User from "../models/userModel.js";
+import Event from "../models/eventModel.js";
+import mongoose from "mongoose";
 
 // Get all NGOs
 const getNgos = async (req, res) => {
@@ -47,39 +50,84 @@ const getNgo = async (req, res) => {
   return res.status(200).json(ngo);
 };
 
-// Create NGO
+// Create NGO - push [ngo._id to user.ngo] && push [user._id to ngo.owner]
 const createNgo = async (req, res) => {
   try {
+    const userId = req.body.id;
     const { name, phone, category, commitment, frequency } = req.body;
+    console.log(req.body);
+    const phoneRegex = /^\d{10}$/;
+    if (!name || !phone || !category || !commitment || !frequency) {
+      return res.status(400).json({ error: "Missing required fields" });
+    }
+    const user = await User.findById(userId);
+    console.log(user);
+    if (!user) {
+      return res.status(404).json({ err: "User not found" });
+    }
+    if (!phoneRegex.test(phone)) {
+      return res.status(400).json({ error: "Invalid phone number format" });
+    }
+    const existingNgo = await Ngo.findOne({ name });
+    if (existingNgo) {
+      return res.status(400).json({ error: "NGO already exists" });
+    }
     const newNgo = await Ngo.create({
       name,
       phone,
       category,
       commitment,
       frequency,
+      volunteers: [],
+      amount_raised: [],
+      owner: user._id,
     });
-    await newNgo.save();
-    return res.status(200).send({ ngo: newNgo });
+    user.ngo = newNgo._id;
+    await user.save();
+    console.log(user, newNgo);
+    return res.status(200).send({ ngo: newNgo, user });
   } catch (err) {
     console.log(err);
-    return res.status(500).send(err);
+    return res.status(400).send(err);
+  }
+};
+
+const editNgo = async (req, res) => {
+  try {
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// Add new Event
+const createEvent = async (req, res) => {
+  // event details
+  try {
+    const { name, date, time, description, help } = req.body;
+    // find parentNgo
+    const event = await Event.create({
+      name,
+      date,
+      time,
+      description,
+      help,
+    });
+    await event.save();
+    console.log("new Event", event);
+    return res.status(200).send({ event });
+  } catch (err) {
+    console.log(err);
+    return res.status(400).send(err);
   }
 };
 
 // Edit NGO
-const editNgo = async (req, res) => {
+const editEvent = async (req, res) => {
   try {
-    const {
-      event,
-      help,
-      eventDate,
-      eventTime,
-      eventDescription,
-      numVolunteers,
-    } = req.body;
-    const ngo = await Ngo.find(req.params.id);
-    await ngo.save();
-    res.status(200).send({ ngo: ngo });
+    const { help, eventDate, eventTime, eventDescription } = req.body;
+    const event = await Event.find(req.params.id);
+    await event.save();
+    res.status(200).send({ event: event });
   } catch (err) {
     console.log(err);
     res.status(500).send("Error while updating");
@@ -94,10 +142,10 @@ const updateVolunteerCount = async (req, res) => {
       { $inc: { num_volunteers: -1 } },
       { new: true }
     );
-    console.log("numVol:", ngo.num_volunteers);
-    return res.status(200).json(ngo.num_volunteers);
+    console.log(ngo, ngo.num_volunteers);
+    return res.status(200).json(ngo);
   } catch (err) {
-    return res.status(400).json({ err: err.message, ngo: ngo });
+    return res.status(400).json({ err: err.message });
   }
 };
 
@@ -105,6 +153,8 @@ export {
   getNgos,
   getNgo,
   createNgo,
+  createEvent,
+  editEvent,
   editNgo,
   getFiltered,
   updateVolunteerCount,

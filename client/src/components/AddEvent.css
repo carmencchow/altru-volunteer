@@ -1,0 +1,11 @@
+.event-form {
+  width: 100%;
+  border: 1px solid orange;
+  display: flex;
+  flex-direction: column;
+}
+select,
+.event-form input {
+  border: 1px solid grey;
+  width: 300px;
+}

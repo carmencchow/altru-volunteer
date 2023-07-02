@@ -7,21 +7,6 @@ const userSchema = new mongoose.Schema({
   userType: {
     type: String,
   },
-  attending: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Ngo",
-    },
-  ],
-  following: {
-    type: [String],
-  },
-  donations: {
-    type: [String],
-  },
-  ngos: {
-    type: [String],
-  },
   firstname: {
     type: String,
     required: true,
@@ -38,6 +23,22 @@ const userSchema = new mongoose.Schema({
   },
   goalAmount: {
     type: Number,
+  },
+  ngo: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Ngo",
+  },
+  attending: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Ngo",
+    },
+  ],
+  following: {
+    type: [String],
+  },
+  donations: {
+    type: [String],
   },
   createdAt: {
     type: Date,

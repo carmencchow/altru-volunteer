@@ -1,9 +1,9 @@
 import React, { useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import EditGoal from "./EditGoal";
-import "./DonationsInfo.css";
+import "./OrganizationDonations.css";
 
-const DonationsInfo = () => {
+const OrganizationDonations = () => {
   const { mongoUser } = useContext(AuthContext);
   const [openInput, setOpenInput] = useState(false);
 
@@ -38,11 +38,11 @@ const DonationsInfo = () => {
           </div>
         </div>
 
-        {mongoUser.goalAmount && (
+        {/* {mongoUser.goalAmount && (
           <div className="donation-container">
             <div className="heading">
               <p className="text">Amount</p>
-              <p className="text">Organization</p>
+              <p className="text">Donor</p>
             </div>
 
             <div className="donated-amounts">
@@ -74,10 +74,10 @@ const DonationsInfo = () => {
               </p>
             </h4>
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );
 };
 
-export default DonationsInfo;
+export default OrganizationDonations;
