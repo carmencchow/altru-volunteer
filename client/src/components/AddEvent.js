@@ -9,6 +9,7 @@ const AddEvent = ({ openInput, closeInput }) => {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [help, setHelp] = useState("");
+  const [numVolunteers, setNumVolunteers] = useState(0);
   const [description, setDescription] = useState("");
 
   const { setMongoUser, user } = useContext(AuthContext);
@@ -82,6 +83,14 @@ const AddEvent = ({ openInput, closeInput }) => {
           value={help}
           placeholder="What kind of help do you need?"
           onChange={(e) => setHelp(e.target.value)}
+        />
+
+        <p className="numVol">Number of volunteers:</p>
+        <input
+          type="number"
+          className="numVolunteer"
+          value={numVolunteers}
+          onChange={(e) => setNumVolunteers(e.target.value)}
         />
 
         <button className="save-btn" onClick={saveEvent}>

@@ -8,3 +8,21 @@ select,
   border: 1px solid grey;
   width: 300px;
 }
+.numVol {
+  font-size: 14px;
+  display: flex;
+  margin-left: 0px;
+}
+
+input {
+  margin-top: 10px;
+}
+input.name {
+  margin-bottom: 20px;
+}
+input.desc {
+  height: 100px;
+}
+input.help {
+  height: 100px;
+}

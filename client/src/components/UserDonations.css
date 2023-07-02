@@ -33,6 +33,9 @@ p {
   height: 20px;
   width: 150px;
 }
+.amount-span {
+  margin-left: 0px;
+}
 .amount-donated,
 .amount-needed {
   font-size: 14px;

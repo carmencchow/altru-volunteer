@@ -2,7 +2,6 @@ import React, { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { api } from "../utils/axios";
-
 import logo from "../assets/altru.png";
 import "./Signup.css";
 
@@ -134,7 +133,7 @@ const Signup = () => {
               value={isChecked}
               onChange={handleChecked}
             />{" "}
-            Are you signing up on behalf of an NGO/Charity?
+            Are you signing up on behalf of a nonprofit?
           </div>
 
           <button

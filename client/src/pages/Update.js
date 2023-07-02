@@ -12,7 +12,6 @@ const Update = () => {
   const [name, setName] = useState("");
   const [telephone, setTelephone] = useState("");
   const [category, setCategory] = useState("");
-  const [numVolunteers, setNumVolunteers] = useState(0);
   const [commitment, setCommitment] = useState("");
   const [frequency, setFrequency] = useState("");
   const [help, setHelp] = useState("");
@@ -56,14 +55,6 @@ const Update = () => {
     navigate("/profile");
   };
 
-  const handleDelete = async () => {
-    console.log("Deleting your account");
-    await api.delete(`/user/${user.uid}`).then((res) => {
-      console.log(`Account deleted`, res.data);
-      navigate("/");
-    });
-  };
-
   return (
     <>
       <Navbar />
@@ -79,11 +70,12 @@ const Update = () => {
             <div className="content active-content">
               <div>
                 <form className="admin-form" onSubmit={updateProfile}>
+                  <h2>Tell us about your nonprofit</h2>
                   <input
                     type="text"
                     className="org-name"
                     value={name}
-                    placeholder="NGO name"
+                    placeholder="Name of nonprofit"
                     onChange={(e) => setName(e.target.value)}
                   />
                   <input
@@ -98,7 +90,7 @@ const Update = () => {
                       value={category}
                       onChange={(e) => setCategory(e.target.value)}
                     >
-                      <option value="selection">Category:</option>
+                      <option value="selection">Type of nonprofit:</option>
                       <option value="animals">Animals</option>
                       <option value="children & youth">Children & Youth</option>
                       <option value="education & literacy">
@@ -113,48 +105,42 @@ const Update = () => {
                       </option>
                     </select>
                   </div>
-                  <input
-                    type="number"
-                    className="org-commitment"
-                    value={commitment}
-                    placeholder="Hours required"
-                    onChange={(e) => setCommitment(e.target.value)}
-                  />
-                  <select
-                    value={frequency}
-                    onChange={(e) => setFrequency(e.target.value)}
-                  >
-                    <option value="time">Time commitment:</option>
-                    <option value="day">just one day</option>
-                    <option value="week">per week</option>
-                    <option value="month">per month</option>
-                  </select>
-                  What kind of help do you need?
+                  <div className="volunteers">
+                    {" "}
+                    <p>Volunteer Information:</p>
+                  </div>
+                  <div className="row">
+                    <select
+                      value={commitment}
+                      onChange={(e) => setCommitment(e.target.value)}
+                    >
+                      <option value="hours">Number of hours:</option>
+                      <option value="1-5">1-5</option>
+                      <option value="6-10">6-10</option>
+                      <option value="10-15">10-15</option>
+                      <option value="15-20">15-20</option>
+                    </select>
+                    <select
+                      value={frequency}
+                      onChange={(e) => setFrequency(e.target.value)}
+                    >
+                      <option value="time">Time commitment:</option>
+                      <option value="day">just one day</option>
+                      <option value="week">a week</option>
+                      <option value="month">a month</option>
+                    </select>
+                  </div>
                   <input
                     type="text"
                     className="help"
-                    placeholder="Eg. clerical work, social media ..."
+                    placeholder="Describe volunteer position and duties..."
                     value={help}
                     onChange={(e) => setHelp(e.target.value)}
                   />
-                  <input
-                    type="number"
-                    className="numVolunteer"
-                    value={numVolunteers}
-                    placeholder="How many volunteers needed?"
-                    onChange={(e) => setNumVolunteers(e.target.value)}
-                  />
                   <button className="save-btn" onSubmit={updateProfile}>
-                    Create Ngo Profile
+                    Save Profile
                   </button>
                 </form>
-
-                <div className="save-delete-row"></div>
-                <div className="save-delete-row">
-                  <button className="delete-btn" onClick={handleDelete}>
-                    Delete Account
-                  </button>
-                </div>
               </div>
             </div>
           </div>

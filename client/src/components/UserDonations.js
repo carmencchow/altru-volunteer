@@ -48,9 +48,9 @@ const UserDonations = () => {
             <div className="donated-amounts">
               {mongoUser.donations.map((donation, idx) => (
                 <div key={idx} className="donations">
-                  <span>{String(donation.date).slice(0, 10)}</span>
-                  <span>${donation.amount}</span>
+                  <span className="amount-span">${donation.amount}</span>
                   <span>{donation.ngo}</span>
+                  <span>{String(donation.date).slice(0, 10)}</span>
                 </div>
               ))}
             </div>
@@ -58,8 +58,10 @@ const UserDonations = () => {
             <h4>
               Total amount donated:
               <p className="amount-donated">
-                ${mongoUser.donations.map(Number).reduce((a, b) => a + b, 0)}
-                {/* ${mongoUser.donations.map(Number).reduce((a, b) => a + b, 0)} */}
+                $
+                {mongoUser.donations
+                  .map((donation) => Number(donation.amount))
+                  .reduce((a, b) => a + b, 0)}
               </p>
             </h4>
 
@@ -68,7 +70,9 @@ const UserDonations = () => {
               <p className="amount-needed">
                 $
                 {mongoUser.goalAmount -
-                  mongoUser.donations.map(Number).reduce((a, b) => a + b, 0)}
+                  mongoUser.donations
+                    .map((donation) => Number(donation.amount))
+                    .reduce((a, b) => a + b, 0)}
               </p>
             </h4>
           </div>

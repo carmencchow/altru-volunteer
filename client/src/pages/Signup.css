@@ -72,9 +72,10 @@ body {
   font-size: 14px;
   margin-left: 0px;
 }
-input .checbox {
+input[type="checkbox"] {
   height: 20px;
   width: 20px;
+  border: blue solid 3px;
 }
 .login,
 .ngo-signup {
