@@ -29,7 +29,7 @@ const Volunteer = () => {
   };
 
   const handleNext = () => {
-    console.log("next page");
+    console.log("next page", currentPage);
     setCurrentPage(currentPage + 1);
   };
 
@@ -55,8 +55,7 @@ const Volunteer = () => {
             onClick={handlePrevious}
           ></button>
           <button
-            disabled={currentPage === pageCount}
-            // disabled={currentPage === pageCount - 1}
+            disabled={currentPage === pageCount - 1}
             className="next"
             onClick={handleNext}
           ></button>

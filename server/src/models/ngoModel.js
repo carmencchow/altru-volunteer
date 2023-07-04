@@ -8,6 +8,12 @@ const ngoSchema = new mongoose.Schema({
   name: {
     type: String,
   },
+  about: {
+    type: String,
+  },
+  url: {
+    type: String,
+  },
   telephone: {
     type: Number,
   },

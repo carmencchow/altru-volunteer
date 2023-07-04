@@ -5,29 +5,32 @@ import { api } from "../utils/axios";
 import Input from "react-phone-number-input/input";
 import "./Update.css";
 
-const EditNGO = ({ name }) => {
-  const { user, setMongoUser, mongoUser } = useContext(AuthContext);
+const EditNGO = ({ name, about, url, telephone, help, setIsEditing }) => {
+  const { user, setMongoUser } = useContext(AuthContext);
   const [newName, setNewname] = useState("");
-  const [telephone, setTelephone] = useState("");
-  const [category, setCategory] = useState("");
-  const [commitment, setCommitment] = useState("");
-  const [frequency, setFrequency] = useState("");
-  const [help, setHelp] = useState("");
+  const [newAbout, setNewAbout] = useState("");
+  const [newTelephone, setNewTelephone] = useState("");
+  const [newUrl, setNewUrl] = useState("");
+  const [newCategory, setNewCategory] = useState("");
+  const [newCommitment, setNewCommitment] = useState("");
+  const [newFrequency, setNewFrequency] = useState("");
+  const [newHelp, setNewHelp] = useState("");
 
   const updateProfile = async (e) => {
     e.preventDefault();
     try {
       const token = await user.getIdToken();
-      console.log("getting token");
-      await api.put(
-        `/user/${user.uid}/editNgo`,
+      const res = await api.put(
+        `/user/${user.uid}/editNgo/`,
         {
           name: `${newName}`,
-          telephone: `${telephone}`,
-          category: `${category}`,
-          commitment: `${commitment}`,
-          frequency: `${frequency}`,
-          help: `${help}`,
+          about: `${newAbout}`,
+          url: `${url}`,
+          telephone: `${newTelephone}`,
+          category: `${newCategory}`,
+          commitment: `${newCommitment}`,
+          frequency: `${newFrequency}`,
+          help: `${newHelp}`,
         },
         {
           headers: {
@@ -35,9 +38,10 @@ const EditNGO = ({ name }) => {
           },
         }
       );
-      // const data = res.data;
-      // console.log("Data is:", data);
+      const data = res.data;
+      console.log("Data is:", data);
       await fetchUserData(user.uid, setMongoUser, token);
+      setIsEditing(false);
     } catch (err) {
       console.log(err);
     }
@@ -49,22 +53,39 @@ const EditNGO = ({ name }) => {
         <input
           type="text"
           className="org-name"
-          value={name ? name : newName}
-          // placeholder={name}
+          value={newName}
+          placeholder={name ? name : "Name of non-profit"}
           onChange={(e) => setNewname(e.target.value)}
+        />
+        <input
+          type="text"
+          className="about"
+          value={newAbout}
+          placeholder={
+            about
+              ? about
+              : "Describe your non-profit and the work you are doing"
+          }
+          onChange={(e) => setNewAbout(e.target.value)}
+        />
+        <input
+          type="url"
+          className="url"
+          value={newUrl}
+          placeholder="https://www.example.com"
+          onChange={(e) => setNewUrl(e.target.value)}
         />
         <Input
           country="CA"
-          value={telephone}
-          placeholder="Phone number"
-          type="number"
-          maxLength="10"
-          onChange={(e) => setTelephone}
+          value={newTelephone}
+          placeholder={telephone ? telephone : "Phone number"}
+          maxLength="14"
+          onChange={(e) => setNewTelephone(e.target.value)}
         />
         <div>
           <select
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
+            value={newCategory}
+            onChange={(e) => setNewCategory(e.target.value)}
           >
             <option value="selection">Type of nonprofit:</option>
             <option value="animals">Animals</option>
@@ -76,13 +97,12 @@ const EditNGO = ({ name }) => {
           </select>
         </div>
         <div className="volunteers">
-          {" "}
           <p>Volunteer Information:</p>
         </div>
         <div className="row">
           <select
-            value={commitment}
-            onChange={(e) => setCommitment(e.target.value)}
+            value={newCommitment}
+            onChange={(e) => setNewCommitment(e.target.value)}
           >
             <option value="hours">Number of hours:</option>
             <option value="1-5">1-5</option>
@@ -91,8 +111,8 @@ const EditNGO = ({ name }) => {
             <option value="15-20">15-20</option>
           </select>
           <select
-            value={frequency}
-            onChange={(e) => setFrequency(e.target.value)}
+            value={newFrequency}
+            onChange={(e) => setNewFrequency(e.target.value)}
           >
             <option value="time">Time commitment:</option>
             <option value="day">just one day</option>
@@ -103,12 +123,12 @@ const EditNGO = ({ name }) => {
         <input
           type="text"
           className="help"
-          placeholder="Describe volunteer position and duties..."
-          value={help}
-          onChange={(e) => setHelp(e.target.value)}
+          placeholder={help ? help : "Describe volunteer duties ..."}
+          value={newHelp}
+          onChange={(e) => setNewHelp(e.target.value)}
         />
         <button className="save-btn" onClick={updateProfile}>
-          Save Profile
+          Save Changes
         </button>
       </form>
     </>

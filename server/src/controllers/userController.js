@@ -109,17 +109,28 @@ const editGoal = async (req, res) => {
   }
 };
 
-// Add NGO
+// Create NGO Profile
 const addNGOProfile = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
-    const { name, category, telephone, commitment, frequency, help } = req.body;
+    const {
+      name,
+      category,
+      about,
+      url,
+      telephone,
+      commitment,
+      frequency,
+      help,
+    } = req.body;
     console.log("Req Body", req.body);
     const existingNgo = await Ngo.findOne({ name });
     const phoneRegex = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
     if (
       !name ||
       !category ||
+      !about ||
+      !url ||
       !telephone ||
       !commitment ||
       !frequency ||
@@ -144,6 +155,8 @@ const addNGOProfile = async (req, res) => {
     } else {
       const ngo = await Ngo.create({
         name,
+        about,
+        url,
         telephone,
         category,
         commitment,
@@ -153,10 +166,7 @@ const addNGOProfile = async (req, res) => {
         amount_raised: [],
         owner: user._id,
       });
-      // ngo.owner = user._id;
       user.organization = ngo._id;
-      // await ngo.save();
-      // await user.save();
       await Promise.all([ngo.save(), user.save()]);
       console.log(ngo, user);
       return res.status(200).send({ ngo });
@@ -167,19 +177,39 @@ const addNGOProfile = async (req, res) => {
   }
 };
 
-// Edit NGO:
+// Edit NGO Profile:
 const editNGOProfile = async (req, res) => {
   try {
-    const { name, category, telephone, commitment, frequency, help } = req.body;
-    const user = await User.findById({ _id: req.params.id });
-    user.name = name;
-    user.category = category;
-    user.telephone = telephone;
-    user.commitment = commitment;
-    user.frequency = frequency;
-    user.help = help;
-    await user.save();
-    return res.status(200).send({ message: "NGO Profile updated", user });
+    const user = await User.findById(req.params.id);
+    const {
+      name,
+      about,
+      url,
+      category,
+      telephone,
+      commitment,
+      frequency,
+      help,
+    } = req.body;
+    console.log("Req body", req.body);
+    const ngoId = user.organization;
+    console.log("Org ID", ngoId);
+    const ngo = await Ngo.findOneAndUpdate(
+      { _id: ngoId },
+      {
+        name,
+        about,
+        url,
+        category,
+        telephone,
+        commitment,
+        frequency,
+        help,
+      },
+      { new: true }
+    );
+    console.log("New NGO details", ngo, name, help, telephone);
+    return res.status(200).send({ message: "NGO Profile updated", ngo });
   } catch (err) {
     console.log(err);
     res.status(500).send({ message: "Error occurred while updating" });

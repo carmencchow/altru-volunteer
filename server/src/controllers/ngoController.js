@@ -50,55 +50,6 @@ const getNgo = async (req, res) => {
   return res.status(200).json(ngo);
 };
 
-// Create NGO - push [ngo._id to user.ngo] && push [user._id to ngo.owner]
-const createNgo = async (req, res) => {
-  try {
-    const userId = req.body.id;
-    const { name, phone, category, commitment, frequency } = req.body;
-    console.log(req.body);
-    const phoneRegex = /^\d{10}$/;
-    if (!name || !phone || !category || !commitment || !frequency) {
-      return res.status(400).json({ error: "Missing required fields" });
-    }
-    const user = await User.findById(userId);
-    console.log(user);
-    if (!user) {
-      return res.status(404).json({ err: "User not found" });
-    }
-    if (!phoneRegex.test(phone)) {
-      return res.status(400).json({ error: "Invalid phone number format" });
-    }
-    const existingNgo = await Ngo.findOne({ name });
-    if (existingNgo) {
-      return res.status(400).json({ error: "NGO already exists" });
-    }
-    const newNgo = await Ngo.create({
-      name,
-      phone,
-      category,
-      commitment,
-      frequency,
-      volunteers: [],
-      amount_raised: [],
-      owner: user._id,
-    });
-    user.ngo = newNgo._id;
-    await user.save();
-    console.log(user, newNgo);
-    return res.status(200).send({ ngo: newNgo, user });
-  } catch (err) {
-    console.log(err);
-    return res.status(400).send(err);
-  }
-};
-
-const editNgo = async (req, res) => {
-  try {
-  } catch (err) {
-    console.log(err);
-  }
-};
-
 // Create new NGO Event
 const createNGOEvent = async (req, res) => {
   try {
@@ -124,7 +75,7 @@ const createNGOEvent = async (req, res) => {
   }
 };
 
-// Edit NGO
+// Edit NGO Event
 const editEvent = async (req, res) => {
   try {
     const { help, eventDate, eventTime, eventDescription } = req.body;
@@ -155,10 +106,8 @@ const updateVolunteerCount = async (req, res) => {
 export {
   getNgos,
   getNgo,
-  createNgo,
   createNGOEvent,
   editEvent,
-  editNgo,
   getFiltered,
   updateVolunteerCount,
 };
