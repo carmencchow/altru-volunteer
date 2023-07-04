@@ -1,7 +1,5 @@
 import Ngo from "../models/ngoModel.js";
-import User from "../models/userModel.js";
 import Event from "../models/eventModel.js";
-import mongoose from "mongoose";
 
 // Get all NGOs
 const getNgos = async (req, res) => {
@@ -13,6 +11,9 @@ const getNgos = async (req, res) => {
     res.sendStatus(500);
   }
 };
+
+const updateNgo = (req, res) => {};
+const createNgo = (req, res) => {};
 
 // Get filtered NGOs
 const getFiltered = async (req, res) => {
