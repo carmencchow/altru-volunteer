@@ -18,7 +18,7 @@ const getUser = async (req, res) => {
 };
 
 // UPDATE user
-const editProfile = async (req, res) => {
+const editUserProfile = async (req, res) => {
   try {
     const { firstname, lastname } = req.body;
     console.log(firstname, lastname, req.params);
@@ -110,13 +110,13 @@ const editGoal = async (req, res) => {
 };
 
 // Add NGO
-const addNgo = async (req, res) => {
+const addNGOProfile = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
     const { name, category, telephone, commitment, frequency, help } = req.body;
     console.log("Req Body", req.body);
     const existingNgo = await Ngo.findOne({ name });
-    const phoneRegex = /^\d{10}$/;
+    const phoneRegex = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
     if (
       !name ||
       !category ||
@@ -142,16 +142,6 @@ const addNgo = async (req, res) => {
     if (existingNgo) {
       return res.status(400).json({ error: "NGO already exists" });
     } else {
-      const token = await user.getIdToken();
-      console.log("Verfiying Firebase user", user.uid, token);
-      const data = await api.get("/auth/verifyUser", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      if (data.status === 401) {
-        return res.status(400).json({ error: "User not found" });
-      }
       const ngo = await Ngo.create({
         name,
         telephone,
@@ -177,6 +167,25 @@ const addNgo = async (req, res) => {
   }
 };
 
+// Edit NGO:
+const editNGOProfile = async (req, res) => {
+  try {
+    const { name, category, telephone, commitment, frequency, help } = req.body;
+    const user = await User.findById({ _id: req.params.id });
+    user.name = name;
+    user.category = category;
+    user.telephone = telephone;
+    user.commitment = commitment;
+    user.frequency = frequency;
+    user.help = help;
+    await user.save();
+    return res.status(200).send({ message: "NGO Profile updated", user });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({ message: "Error occurred while updating" });
+  }
+};
+
 // ADD event
 const addEvent = async (req, res) => {
   try {
@@ -198,9 +207,10 @@ export {
   getUser,
   follow,
   unfollow,
-  editProfile,
+  editUserProfile,
   editGoal,
   addDonation,
-  addNgo,
+  addNGOProfile,
+  editNGOProfile,
   addEvent,
 };

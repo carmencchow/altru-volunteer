@@ -10,7 +10,7 @@ import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Edit from "./pages/Edit";
-import Update from "./pages/Update";
+import EditNGO from "./pages/EditNGO";
 import Info from "./pages/Info";
 import "./App.css";
 
@@ -29,7 +29,7 @@ function App() {
                 <Route path="/info/:id" element={<Info />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/edit" element={<Edit />} />
-                <Route path="/update" element={<Update />} />
+                <Route path="/editNGO" element={<EditNGO />} />
                 <Route path="*" element={<Navigate to="/" />} />
               </Route>
             </Routes>

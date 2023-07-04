@@ -1,3 +1,13 @@
 input {
   height: 40px;
+  border-radius: 10px;
+}
+.server-error {
+  color: blue;
+}
+select {
+  border-radius: 10px;
+}
+.name {
+  color: lilac;
 }
