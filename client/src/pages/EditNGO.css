@@ -1,0 +1,56 @@
+.admin-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+select,
+.admin-form input {
+  border: 1px solid grey;
+  width: 300px;
+}
+.checkbox-event {
+  height: 20px;
+  width: 20px;
+}
+.row select {
+  width: 130px;
+  display: flex;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.help {
+  height: 120px;
+  margin-top: 15px;
+}
+.about {
+  height: 100px;
+}
+input[type="text"]::placeholder {
+  text-align: left;
+  padding-left: 5px;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+}
+.volunteers p {
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 20px;
+  justify-items: left;
+}
+.save-ngo,
+.cancel-ngo {
+  margin-right: 10px;
+  color: white;
+  background-color: blueviolet;
+  border: 2px solid blueviolet;
+  border-radius: 5px;
+  height: 25px;
+}
+.cancel-ngo:hover,
+.save-ngo:hover {
+  background-color: rgb(178, 121, 231);
+  border: 2px solid rgb(178, 121, 231);
+  border-radius: 5px;
+  height: 25px;
+}

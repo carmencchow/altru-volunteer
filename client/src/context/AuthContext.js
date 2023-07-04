@@ -58,7 +58,7 @@ export const AuthContextProvider = ({ children }) => {
 
   const verifyUser = async (user) => {
     const token = await user.getIdToken();
-    console.log("Verifying user", token);
+    console.log("Verifying Firebase user", user.uid, token);
     const data = await api.get("/auth/verifyUser", {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -86,6 +86,7 @@ export const AuthContextProvider = ({ children }) => {
     auth.onAuthStateChanged(async function (user) {
       if (user) {
         await verifyUser(user);
+        console.log("Firebase user verified");
       } else {
         setUser(null);
       }

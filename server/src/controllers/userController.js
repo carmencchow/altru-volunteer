@@ -1,12 +1,16 @@
-import User from "../models/userModel.js";
 import mongoose from "mongoose";
+import User from "../models/userModel.js";
+import Ngo from "../models/ngoModel.js";
+import Donation from "../models/donationModel.js";
 
 // GET USER by ID:
 const getUser = async (req, res) => {
   const { id } = req.params;
   const user = await User.findById(id)
     .populate("attending")
-    .populate("donations");
+    .populate("donations")
+    .populate("organization")
+    .populate("ngos");
   if (!user) {
     return res.status(404).json({ err: "User doesn't exist" });
   }
@@ -14,7 +18,7 @@ const getUser = async (req, res) => {
 };
 
 // UPDATE user
-const editProfile = async (req, res) => {
+const editUserProfile = async (req, res) => {
   try {
     const { firstname, lastname } = req.body;
     console.log(firstname, lastname, req.params);
@@ -32,33 +36,23 @@ const editProfile = async (req, res) => {
 // ADD donation
 const addDonation = async (req, res) => {
   try {
-    const ngo = req.body.name;
-    const ngoId = req.body.id;
-    const donation = req.body.donation;
+    const { id, amount, ngo } = req.body;
+    console.log(req.body);
     const user = await User.findById(req.params.id);
-    user.donations.push(donation);
-    user.ngos.push(ngo);
-    await user.save();
-    res.status(200).send({ results: user.donations });
-  } catch (err) {
-    console.log(err);
-  }
-};
+    const donation = await Donation.create({
+      amount,
+      ngo,
+      donor: user._id,
+      date: Date.now(),
+    });
+    await donation.save();
 
-// ADD event
-const addEvent = async (req, res) => {
-  try {
-    const ngoId = req.body.id;
-    const user = await User.findByIdAndUpdate(
-      req.params.id,
-      { $addToSet: { attending: ngoId } },
-      { new: true }
-    );
+    user.donations.push(donation);
     await user.save();
-    res.status(200).send({ results: user, message: user.attending });
+    console.log(donation, user);
+    res.status(200).send({ donation, user });
   } catch (err) {
     console.log(err);
-    res.status(400).send("Couldn't add event");
   }
 };
 
@@ -107,7 +101,7 @@ const editGoal = async (req, res) => {
     const goalAmount = req.body.goalAmount;
     const user = await User.findById({ _id: req.params.id });
     user.goalAmount = goalAmount;
-    await user.save(); // need token
+    await user.save();
     return res.status(200).send({ message: "Goal amount updated", goalAmount });
   } catch (err) {
     console.log(err);
@@ -115,12 +109,138 @@ const editGoal = async (req, res) => {
   }
 };
 
+// Create NGO Profile
+const addNGOProfile = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    const {
+      name,
+      category,
+      about,
+      url,
+      telephone,
+      commitment,
+      frequency,
+      help,
+    } = req.body;
+    console.log("Req Body", req.body);
+    const existingNgo = await Ngo.findOne({ name });
+    const phoneRegex = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
+    if (
+      !name ||
+      !category ||
+      !about ||
+      !url ||
+      !telephone ||
+      !commitment ||
+      !frequency ||
+      !help
+    ) {
+      return res.status(400).json({ error: "Missing required fields" });
+    }
+    console.log(user._id);
+    if (!user) {
+      return res.status(404).json({ err: "User not found" });
+    }
+    if (user.organization) {
+      return res
+        .status(400)
+        .json({ err: "Your account is already linked to an NGO" });
+    }
+    if (!phoneRegex.test(telephone)) {
+      return res.status(400).json({ error: "Invalid phone number format" });
+    }
+    if (existingNgo) {
+      return res.status(400).json({ error: "NGO already exists" });
+    } else {
+      const ngo = await Ngo.create({
+        name,
+        about,
+        url,
+        telephone,
+        category,
+        commitment,
+        frequency,
+        help,
+        volunteers: [],
+        amount_raised: [],
+        owner: user._id,
+      });
+      user.organization = ngo._id;
+      await Promise.all([ngo.save(), user.save()]);
+      console.log(ngo, user);
+      return res.status(200).send({ ngo });
+    }
+  } catch (err) {
+    console.log(err);
+    return res.status(400).send(err);
+  }
+};
+
+// Edit NGO Profile:
+const editNGOProfile = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    const {
+      name,
+      about,
+      url,
+      category,
+      telephone,
+      commitment,
+      frequency,
+      help,
+    } = req.body;
+    console.log("Req body", req.body);
+    const ngoId = user.organization;
+    console.log("Org ID", ngoId);
+    const ngo = await Ngo.findOneAndUpdate(
+      { _id: ngoId },
+      {
+        name,
+        about,
+        url,
+        category,
+        telephone,
+        commitment,
+        frequency,
+        help,
+      },
+      { new: true }
+    );
+    console.log("New NGO details", ngo, name, help, telephone);
+    return res.status(200).send({ message: "NGO Profile updated", ngo });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({ message: "Error occurred while updating" });
+  }
+};
+
+// ADD event
+const addEvent = async (req, res) => {
+  try {
+    const ngoId = req.body.id;
+    const user = await User.findByIdAndUpdate(
+      req.params.id,
+      { $addToSet: { attending: ngoId } },
+      { new: true }
+    );
+    await user.save();
+    res.status(200).send({ results: user, message: user.attending });
+  } catch (err) {
+    console.log(err);
+    res.status(400).send("Couldn't add event");
+  }
+};
+
 export {
   getUser,
-  addEvent,
   follow,
   unfollow,
-  editProfile,
+  editUserProfile,
   editGoal,
   addDonation,
+  addNGOProfile,
+  editNGOProfile,
+  addEvent,
 };

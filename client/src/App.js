@@ -10,9 +10,9 @@ import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Edit from "./pages/Edit";
+import EditNGO from "./pages/EditNGO";
 import Info from "./pages/Info";
 import "./App.css";
-import Admin from "./pages/Admin";
 
 function App() {
   return (
@@ -28,8 +28,8 @@ function App() {
                 <Route path="/volunteer" element={<Volunteer />} />
                 <Route path="/info/:id" element={<Info />} />
                 <Route path="/profile" element={<Profile />} />
-                <Route path="/admin" element={<Admin />} />
                 <Route path="/edit" element={<Edit />} />
+                <Route path="/editNGO" element={<EditNGO />} />
                 <Route path="*" element={<Navigate to="/" />} />
               </Route>
             </Routes>

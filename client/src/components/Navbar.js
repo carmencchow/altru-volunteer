@@ -6,7 +6,7 @@ import "./Navbar.css";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const { user, handleSignOut } = useContext(AuthContext);
+  const { user, mongoUser, handleSignOut } = useContext(AuthContext);
   const navMain = () => {
     navigate("/volunteer");
   };
@@ -23,6 +23,7 @@ const Navbar = () => {
           <div className="profile-btn" onClick={navProfile}>
             {user && <p className="user-email">{user.email}</p>}
           </div>
+
           <div className="logout-btn" onClick={handleSignOut}>
             Logout
           </div>

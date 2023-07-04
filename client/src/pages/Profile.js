@@ -1,10 +1,13 @@
 import React, { useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
-import DonationsInfo from "../components/DonationsInfo";
-import VolunteerInfo from "../components/VolunteerInfo";
-import ProfileInfo from "../components/ProfileInfo";
+import UserDonations from "../components/UserDonations";
+import UserVolunteers from "../components/UserVolunteers";
+import UserProfile from "../components/UserProfile";
 import Navbar from "../components/Navbar";
 import "./Profile.css";
+import OrganizationProfile from "../components/OrganizationProfile";
+import OrganizationDonations from "../components/OrganizationDonations";
+import OrganizationVolunteers from "../components/OrganizationVolunteers";
 
 const Profile = () => {
   const { mongoUser } = useContext(AuthContext);
@@ -15,6 +18,7 @@ const Profile = () => {
   };
 
   if (!mongoUser) return null;
+  console.log(mongoUser);
 
   return (
     <>
@@ -26,7 +30,7 @@ const Profile = () => {
               className={toggleState === 1 ? "tabs active-tabs" : "tabs"}
               onClick={() => toggletabs(1)}
             >
-              My Profile
+              {mongoUser.userType === "individual" ? "Profile" : "NGO Profile"}
             </div>
 
             <div
@@ -52,7 +56,11 @@ const Profile = () => {
               }
             >
               <div>
-                <ProfileInfo />
+                {mongoUser.userType === "individual" ? (
+                  <UserProfile />
+                ) : (
+                  <OrganizationProfile />
+                )}
               </div>
             </div>
 
@@ -62,7 +70,11 @@ const Profile = () => {
               }
             >
               <div>
-                <DonationsInfo />
+                {mongoUser.userType === "individual" ? (
+                  <UserDonations />
+                ) : (
+                  <OrganizationDonations />
+                )}
               </div>
             </div>
 
@@ -72,7 +84,11 @@ const Profile = () => {
               }
             >
               <div>
-                <VolunteerInfo />
+                {mongoUser.userType === "individual" ? (
+                  <UserVolunteers />
+                ) : (
+                  <OrganizationVolunteers />
+                )}
               </div>
             </div>
           </div>

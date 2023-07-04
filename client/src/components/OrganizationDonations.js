@@ -1,9 +1,8 @@
 import React, { useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
-import EditGoal from "./EditGoal";
-import "./DonationsInfo.css";
+import "./OrganizationDonations.css";
 
-const DonationsInfo = () => {
+const OrganizationDonations = () => {
   const { mongoUser } = useContext(AuthContext);
   const [openInput, setOpenInput] = useState(false);
 
@@ -11,38 +10,13 @@ const DonationsInfo = () => {
     <div className="container">
       <div className="stats">
         <div className="donation-history">
-          <h2>Donation history </h2>
-
-          <h4>Goal Amount: ${mongoUser.goalAmount}</h4>
-
-          <div className="goal-input">
-            <EditGoal
-              openInput={openInput}
-              closeInput={() => {
-                setOpenInput(false);
-              }}
-            />
-
-            {!openInput ? (
-              <div
-                className="edit-amount"
-                onClick={() => {
-                  setOpenInput(true);
-                }}
-              >
-                <button className="edit">Edit</button>
-              </div>
-            ) : (
-              <div></div>
-            )}
-          </div>
+          <h2>Donations & Donors </h2>
         </div>
-
-        {mongoUser.goalAmount && (
+        {/* {mongoUser.goalAmount && (
           <div className="donation-container">
             <div className="heading">
               <p className="text">Amount</p>
-              <p className="text">Organization</p>
+              <p className="text">Donor</p>
             </div>
 
             <div className="donated-amounts">
@@ -65,19 +39,11 @@ const DonationsInfo = () => {
               </p>
             </h4>
 
-            <h4>
-              Amount needed to reach donation goal:
-              <p className="amount-needed">
-                $
-                {mongoUser.goalAmount -
-                  mongoUser.donations.map(Number).reduce((a, b) => a + b, 0)}
-              </p>
-            </h4>
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );
 };
 
-export default DonationsInfo;
+export default OrganizationDonations;

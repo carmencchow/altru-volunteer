@@ -4,7 +4,9 @@ import {
   addEvent,
   follow,
   unfollow,
-  editProfile,
+  addNGOProfile,
+  editNGOProfile,
+  editUserProfile,
   addDonation,
   editGoal,
 } from "../controllers/userController.js";
@@ -12,11 +14,13 @@ import {
 const router = express.Router();
 
 router.get("/:id", getUser);
-router.put("/:id", editProfile);
+router.put("/:id", editUserProfile);
 router.put("/:id/amount", editGoal);
 router.post("/:id/donation", addDonation);
 router.post("/:id/add-event", addEvent);
 router.post("/:id/follow/ngo", follow);
 router.post("/:id/unfollow/ngo", unfollow);
+router.post("/:id/addNgo", addNGOProfile);
+router.put("/:id/editNgo", editNGOProfile);
 
 export default router;

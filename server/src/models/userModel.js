@@ -4,24 +4,8 @@ const userSchema = new mongoose.Schema({
   _id: {
     type: String,
   },
-  role: String,
-  attending: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Ngo",
-    },
-  ],
   userType: {
     type: String,
-  },
-  following: {
-    type: [String],
-  },
-  donations: {
-    type: [String],
-  },
-  ngos: {
-    type: [String],
   },
   firstname: {
     type: String,
@@ -37,9 +21,34 @@ const userSchema = new mongoose.Schema({
     lowercase: true,
     required: true,
   },
+  organization: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Ngo",
+  },
   goalAmount: {
     type: Number,
   },
+  ngos: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Ngo",
+    },
+  ],
+  attending: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Ngo",
+    },
+  ],
+  following: {
+    type: [String],
+  },
+  donations: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Donation",
+    },
+  ],
   createdAt: {
     type: Date,
     default: Date.now,

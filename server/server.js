@@ -26,7 +26,6 @@ app.use(morgan("tiny"));
 
 app.use(async (req, res, next) => {
   try {
-    // console.log("Headers", req.headers.authorization);
     const token = req.headers.authorization.split(" ")[1];
     if (!token) {
       res.sendStatus(400);

@@ -12,7 +12,7 @@ export const NotificationProvider = ({ children }) => {
     if (notification) {
       setTimeout(() => {
         setNotification(null);
-      }, 5000);
+      }, 6000);
     }
   }, [notification]);
 

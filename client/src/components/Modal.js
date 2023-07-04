@@ -2,9 +2,12 @@ import React, { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { fetchUserData } from "../utils/fetchUserData";
 import { GrFormClose } from "react-icons/gr";
+// import sgMail from "@sendgrid/mail";
 import { api } from "../utils/axios";
 import { NgosContext } from "../context/NgosContext";
 import "./Modal.css";
+
+// const email = process.env.EMAIL;
 
 const Modal = ({
   confirmMessage,
@@ -44,6 +47,7 @@ const Modal = ({
           },
         }
       );
+
       // Decrement volunteer count from ngo
       const response = await api.put(
         `/ngo/${ngoModal._id}/decrement`,
@@ -62,6 +66,24 @@ const Modal = ({
       await fetchUserData(user.uid, setMongoUser, token);
       await getNgo(ngoModal);
       setOpenModal(false);
+
+      // sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+      // const msg = {
+      //   to: `${user.email}`,
+      //   from: email,
+      //   subject: "Confirmation Email from Altru",
+      //   text: `Dear ${user.name}! Thanks for registering to the event. Our volunteer coordinator will be in touch with you soon.`,
+      //   html: `<h3>Dear ${user.name}!</h3> <p>Thanks for registering to the event. Our volunteer coordinator will be in touch with you soon.<p>`,
+      // };
+
+      // sgMail
+      //   .send(msg)
+      //   .then(() => {
+      //     console.log("Email sent");
+      //   })
+      //   .catch((err) => {
+      //     console.err("Error sending email:", err);
+      //   });
     } catch (err) {
       console.log(err);
     }

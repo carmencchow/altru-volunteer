@@ -1,0 +1,56 @@
+input {
+  height: 40px;
+  border-radius: 10px;
+  padding-left: 5px;
+}
+.server-error {
+  color: blue;
+}
+.about {
+  height: 40px;
+}
+select {
+  border-radius: 10px;
+}
+.name {
+  color: lilac;
+}
+.user-profile {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.email-ngo,
+.ngo-website {
+  color: blue;
+}
+h5 {
+  margin-bottom: 2px;
+}
+.ngo-contact {
+  margin-bottom: 0px;
+}
+.ngo-name {
+  color: blue;
+  font-size: 26px;
+  margin-left: 0px;
+}
+.left-side p {
+  font-size: 12px;
+  padding-top: 5px;
+}
+.edit-btn,
+.save-btn {
+  color: white;
+  background-color: blueviolet;
+  border: 2px solid blueviolet;
+  border-radius: 5px;
+  height: 25px;
+}
+.edit-btn:hover,
+.save-btn:hover {
+  background-color: rgb(178, 121, 231);
+  border: 2px solid rgb(178, 121, 231);
+  border-radius: 5px;
+  height: 25px;
+}

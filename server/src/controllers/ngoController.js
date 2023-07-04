@@ -1,4 +1,5 @@
 import Ngo from "../models/ngoModel.js";
+import Event from "../models/eventModel.js";
 
 // Get all NGOs
 const getNgos = async (req, res) => {
@@ -50,6 +51,44 @@ const getNgo = async (req, res) => {
   return res.status(200).json(ngo);
 };
 
+// Create new NGO Event
+const createNGOEvent = async (req, res) => {
+  try {
+    const { name, date, time, description, help } = req.body;
+    const ngo = await Ngo.findById(req.params.id);
+    console.log(ngo);
+    const event = await Event.create({
+      name,
+      date,
+      time,
+      description,
+      help,
+      event: true,
+      parentNgo: ngo._id,
+    });
+    await event.save();
+    await ngo.save();
+    console.log("new Event", event), ngo;
+    return res.status(200).send({ event });
+  } catch (err) {
+    console.log(err);
+    return res.status(400).send(err);
+  }
+};
+
+// Edit NGO Event
+const editEvent = async (req, res) => {
+  try {
+    const { help, eventDate, eventTime, eventDescription } = req.body;
+    const event = await Event.find(req.params.id);
+    await event.save();
+    res.status(200).send({ event: event });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Error while updating");
+  }
+};
+
 const updateVolunteerCount = async (req, res) => {
   try {
     const { id } = req.params;
@@ -67,9 +106,9 @@ const updateVolunteerCount = async (req, res) => {
 
 export {
   getNgos,
-  createNgo,
-  updateNgo,
   getNgo,
+  createNGOEvent,
+  editEvent,
   getFiltered,
   updateVolunteerCount,
 };

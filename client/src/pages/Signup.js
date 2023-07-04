@@ -2,7 +2,6 @@ import React, { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { api } from "../utils/axios";
-
 import logo from "../assets/altru.png";
 import "./Signup.css";
 
@@ -14,12 +13,12 @@ const Signup = () => {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [confirm, setConfirm] = useState("");
-  // const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
 
-  // const handleChecked = () => {
-  //   setIsChecked(true);
-  //   console.log("checked", isChecked);
-  // };
+  const handleChecked = () => {
+    setIsChecked(true);
+    console.log("checked");
+  };
 
   const homepage = () => {
     navigate("/");
@@ -30,16 +29,13 @@ const Signup = () => {
   };
 
   const handleSignUp = async () => {
-    // const userType = isChecked ? "organization" : "individual";
-
-    if (email && password) {
-      // if (email && password && userType) {
+    const userType = isChecked ? "organization" : "individual";
+    if (email && password && userType) {
       // Send email and password to Firebase
       const data = await signUp(email, password);
       console.log("Register new user:", data);
       const token = await data.user.getIdToken();
-
-      // Send details to server
+      // Send user data to server to add to mongoDB
       await api.post(
         "/auth/createUser",
         {
@@ -47,6 +43,7 @@ const Signup = () => {
           email: data.user.email,
           firstname: firstname,
           lastname: lastname,
+          userType: userType,
         },
         {
           headers: {
@@ -136,8 +133,8 @@ const Signup = () => {
               value={isChecked}
               onChange={handleChecked}
             />{" "}
-            Are you signing up as an NGO?
-          </div> */}
+            Are you signing up on behalf of a nonprofit?
+          </div>
 
           <button
             className="signup-submit"

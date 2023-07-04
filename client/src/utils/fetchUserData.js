@@ -9,7 +9,6 @@ const fetchUserData = async (userId, setMongoUser, token) => {
       },
     });
     const data = res.data;
-    console.log("User data:", userId, data);
     setMongoUser(data);
   } catch (e) {
     console.log(e);

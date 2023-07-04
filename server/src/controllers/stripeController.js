@@ -4,7 +4,7 @@ const getPayment = (req, res) => {
   const donation = req.body.donation;
   const token = req.body.token;
   console.log(`Donation amount: ${donation}`);
-  const idempotencyKey = uuid();
+  // const idempotencyKey = uuid();
 
   return stripe.customers
     .create({
@@ -26,8 +26,8 @@ const getPayment = (req, res) => {
               zip: token.card.address_zip,
             },
           },
-        },
-        { idempotencyKey }
+        }
+        // { idempotencyKey }
       );
     })
     .then((result) => res.status(200).json(result))

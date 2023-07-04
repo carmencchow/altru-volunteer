@@ -32,7 +32,6 @@ const EditGoal = ({ openInput, closeInput }) => {
       const data = res.data;
       console.log(data);
       setInput("");
-      await fetchUserData(user.uid, setMongoUser, token);
       closeInput();
     } catch (err) {
       console.log("Error is: ", err);

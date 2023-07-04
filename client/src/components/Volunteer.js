@@ -19,26 +19,26 @@ const Volunteer = () => {
   const navigate = useNavigate();
 
   const toggleModal = (ngo) => {
-    console.log("Card:", ngo.name, ngo._id);
     setNgoModal(ngo);
     setOpenModal(!openModal);
   };
 
   const handlePrevious = () => {
+    console.log("previous page");
     setCurrentPage(currentPage - 1);
   };
 
   const handleNext = () => {
+    console.log("next page", currentPage);
     setCurrentPage(currentPage + 1);
   };
 
   const handleNgoSelected = (id) => {
-    console.log(`Going to ${id}`);
     navigate(`/info/${id}`);
   };
 
   useEffect(() => {
-    setPageCount(Math.ceil(ngos.length / 4));
+    setPageCount(Math.floor(ngos.length / 4));
   }, [ngos.length]);
 
   return (
@@ -55,7 +55,8 @@ const Volunteer = () => {
             onClick={handlePrevious}
           ></button>
           <button
-            disabled={currentPage === pageCount}
+            // disabled={currentPage === pageCount}
+            // disabled={currentPage === pageCount - 1}
             className="next"
             onClick={handleNext}
           ></button>
@@ -96,24 +97,25 @@ const Volunteer = () => {
                         </p>
                       ) : null}
 
-                      <p>Tel: {ngo.telephone}</p>
+                      {ngo.telephone ? <p>Tel: {ngo.telephone}</p> : null}
                     </div>
                   </div>
 
-                  {ngo.event === true && (
-                    <VolunteerBtn
-                      className="volunteer-btn"
-                      attending={
-                        mongoUser.attending &&
-                        mongoUser.attending.find((item) => {
-                          return item._id === ngo._id;
-                        })
-                          ? true
-                          : false
-                      }
-                      toggleModal={() => toggleModal(ngo)}
-                    />
-                  )}
+                  {ngo.event === true &&
+                    mongoUser.userType === "individual" && (
+                      <VolunteerBtn
+                        className="volunteer-btn"
+                        attending={
+                          mongoUser.attending &&
+                          mongoUser.attending.find((item) => {
+                            return item._id === ngo._id;
+                          })
+                            ? true
+                            : false
+                        }
+                        toggleModal={() => toggleModal(ngo)}
+                      />
+                    )}
                 </div>
               );
             })}

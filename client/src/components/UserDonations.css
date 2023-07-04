@@ -18,15 +18,10 @@
   font-size: 22px;
   font-weight: bolder;
 }
-.amount,
-.ngo {
-  font-size: 14px;
-  margin-top: 0px;
-  color: blue;
-}
-.donated-amounts {
+.donations {
   display: flex;
-  margin-top: 0px;
+  flex-direction: row;
+  font-size: 14px;
 }
 .ngo {
   padding-left: 40px;
@@ -37,6 +32,9 @@ p {
 .goal-input {
   height: 20px;
   width: 150px;
+}
+.amount-span {
+  margin-left: 0px;
 }
 .amount-donated,
 .amount-needed {
