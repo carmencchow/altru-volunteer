@@ -1,0 +1,12 @@
+.left-side p {
+  font-size: 12px;
+  padding-top: 5px;
+}
+.server-error {
+  color: blue;
+}
+.event-profile {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}

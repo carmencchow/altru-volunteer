@@ -12,6 +12,9 @@ select,
   height: 20px;
   width: 20px;
 }
+.updateNgo {
+  font-size: 14px;
+}
 .row select {
   width: 130px;
   display: flex;

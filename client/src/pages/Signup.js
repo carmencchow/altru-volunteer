@@ -126,7 +126,7 @@ const Signup = () => {
             />
           </div>
 
-          {/* <div className="ngo-account">
+          <div className="ngo-account">
             <input
               type="checkbox"
               name="checkbox"

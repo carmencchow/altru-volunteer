@@ -26,3 +26,19 @@ input.desc {
 input.help {
   height: 100px;
 }
+.save-event,
+.cancel-event {
+  margin-right: 10px;
+  color: white;
+  background-color: blueviolet;
+  border: 2px solid blueviolet;
+  border-radius: 5px;
+  height: 25px;
+}
+.cancel-event:hover,
+.save-event:hover {
+  background-color: rgb(178, 121, 231);
+  border: 2px solid rgb(178, 121, 231);
+  border-radius: 5px;
+  height: 25px;
+}

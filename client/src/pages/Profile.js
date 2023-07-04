@@ -7,7 +7,7 @@ import Navbar from "../components/Navbar";
 import "./Profile.css";
 import OrganizationProfile from "../components/OrganizationProfile";
 import OrganizationDonations from "../components/OrganizationDonations";
-import OrganizationVolunteers from "../components/OrganizationVolunteers";
+import OrganizationVolunteers from "../components/OrganizationEvents";
 
 const Profile = () => {
   const { mongoUser } = useContext(AuthContext);
@@ -45,7 +45,7 @@ const Profile = () => {
               className={toggleState === 3 ? "tabs  active-tabs" : "tabs"}
               onClick={() => toggletabs(3)}
             >
-              Volunteer
+              Events
             </div>
           </div>
 

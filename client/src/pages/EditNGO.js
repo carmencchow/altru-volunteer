@@ -84,6 +84,7 @@ const EditNGO = ({ name, about, url, telephone, help, setIsEditing }) => {
         />
         <div>
           <select
+            className="updateNgo"
             value={newCategory}
             onChange={(e) => setNewCategory(e.target.value)}
           >
@@ -101,6 +102,7 @@ const EditNGO = ({ name, about, url, telephone, help, setIsEditing }) => {
         </div>
         <div className="row">
           <select
+            className="updateNgo"
             value={newCommitment}
             onChange={(e) => setNewCommitment(e.target.value)}
           >
@@ -108,14 +110,15 @@ const EditNGO = ({ name, about, url, telephone, help, setIsEditing }) => {
             <option value="1-5">1-5</option>
             <option value="6-10">6-10</option>
             <option value="10-15">10-15</option>
-            <option value="15-20">15-20</option>
+            <option value="15-20">15+</option>
           </select>
           <select
+            className="updateNgo"
             value={newFrequency}
             onChange={(e) => setNewFrequency(e.target.value)}
           >
-            <option value="time">Time commitment:</option>
-            <option value="day">just one day</option>
+            <option value="time">Frequency:</option>
+            {/* <option value="day">just one day</option> */}
             <option value="week">a week</option>
             <option value="month">a month</option>
           </select>
