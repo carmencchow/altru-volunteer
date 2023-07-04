@@ -3,7 +3,7 @@ import { AuthContext } from "../context/AuthContext";
 import { fetchUserData } from "../utils/fetchUserData";
 import { api } from "../utils/axios";
 import Input from "react-phone-number-input/input";
-import "./Update.css";
+import "./EditNGO.css";
 
 const EditNGO = ({ name, about, url, telephone, help, setIsEditing }) => {
   const { user, setMongoUser } = useContext(AuthContext);
@@ -80,7 +80,7 @@ const EditNGO = ({ name, about, url, telephone, help, setIsEditing }) => {
           value={newTelephone}
           placeholder={telephone ? telephone : "Phone number"}
           maxLength="14"
-          onChange={(e) => setNewTelephone(e.target.value)}
+          onChange={(e) => setNewTelephone}
         />
         <div>
           <select
@@ -127,9 +127,14 @@ const EditNGO = ({ name, about, url, telephone, help, setIsEditing }) => {
           value={newHelp}
           onChange={(e) => setNewHelp(e.target.value)}
         />
-        <button className="save-btn" onClick={updateProfile}>
-          Save Changes
-        </button>
+        <div className="buttons">
+          <button className="save-ngo" onClick={updateProfile}>
+            Save Changes
+          </button>
+          <button className="cancel-ngo" onClick={() => setIsEditing(false)}>
+            Cancel
+          </button>
+        </div>
       </form>
     </>
   );

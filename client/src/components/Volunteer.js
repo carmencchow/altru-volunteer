@@ -55,7 +55,8 @@ const Volunteer = () => {
             onClick={handlePrevious}
           ></button>
           <button
-            disabled={currentPage === pageCount - 1}
+            // disabled={currentPage === pageCount}
+            // disabled={currentPage === pageCount - 1}
             className="next"
             onClick={handleNext}
           ></button>
