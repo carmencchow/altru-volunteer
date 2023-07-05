@@ -78,7 +78,7 @@ const OrganizationEvents = () => {
               <p>Date:{mongoUser.firstname} </p>
               <p>Time: {mongoUser.email}</p>
               {/* <p>Location: {mongoUser.oneDayEvents} </p> */}
-              <p>Description: {mongoUser.organization.name} </p>
+              {/* <p>Description: {mongoUser.organization.name} </p> */}
               <p>Help needed: </p>
               <p>Numbers needed: </p>
               <button onClick={handleEditEvent} className="edit-btn">

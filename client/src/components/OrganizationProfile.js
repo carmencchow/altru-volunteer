@@ -85,7 +85,7 @@ const OrganizationProfile = () => {
               </p>
               <p className="email-ngo"> {mongoUser.email}</p>
               <p className="ngo-website">{mongoUser.organization.url}</p>
-              <p>+{mongoUser.organization.telephone}</p>
+              <p>{mongoUser.organization.telephone}</p>
             </div>
           )}
           {!mongoUser.organization ? (

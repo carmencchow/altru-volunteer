@@ -22,6 +22,16 @@ const OrganizationDonations = () => {
             </div>
           ))}
         </div>
+
+        <h4>
+          Total amount donated:
+          <p className="amount-donated">
+            $
+            {mongoUser.receivingDonations
+              .map((donation) => Number(donation.amount))
+              .reduce((a, b) => a + b, 0)}
+          </p>
+        </h4>
       </div>
     </div>
   );
