@@ -30,8 +30,8 @@ const EditEvent = ({
     try {
       const token = await user.getIdToken();
       console.log("getting token");
-      const res = await api.post(
-        `/user/${user.uid}/event`,
+      await api.put(
+        `/user/${user.uid}/edit-event`,
         {
           name: `${newName}`,
           date: `${newDate}`,
@@ -48,8 +48,6 @@ const EditEvent = ({
           },
         }
       );
-      const data = res.data;
-      console.log("Data is:", data);
       await fetchUserData(user.uid, setMongoUser, token);
       setIsEditingEvent(false);
     } catch (err) {

@@ -1,7 +1,7 @@
 import express from "express";
 import {
   getUser,
-  addEvent,
+  attendEvent,
   follow,
   unfollow,
   addNGOProfile,
@@ -19,9 +19,9 @@ router.get("/:id", getUser);
 router.put("/:id", editUserProfile);
 router.put("/:id/amount", editGoal);
 router.post("/:id/donation", addDonation);
-router.post("/:id/add-event", addEvent);
+router.post("/:id/attend-event", attendEvent);
 router.post("/:id/event", createNGOEvent);
-router.put("/:id/event", editNGOEvent);
+router.put("/:id/edit-event", editNGOEvent);
 router.post("/:id/follow/ngo", follow);
 router.post("/:id/unfollow/ngo", unfollow);
 router.post("/:id/addNgo", addNGOProfile);

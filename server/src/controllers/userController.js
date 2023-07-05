@@ -6,13 +6,13 @@ import Event from "../models/eventModel.js";
 // GET USER by ID:
 const getUser = async (req, res) => {
   const { id } = req.params;
-  const user = await User.findById(id)
-    .populate("oneDayEvents")
-    .populate("receivingDonations")
-    .populate("attending")
-    .populate("donations")
-    .populate("organization")
-    .populate("ngos");
+  const user = await User.findById(id);
+  // .populate("oneDayEvents")
+  // .populate("receivingDonations")
+  // .populate("attending")
+  // .populate("donations")
+  // .populate("organization")
+  // .populate("ngos");
   if (!user) {
     return res.status(404).json({ err: "User doesn't exist" });
   }
@@ -39,7 +39,6 @@ const editUserProfile = async (req, res) => {
 const addDonation = async (req, res) => {
   try {
     const { amount, ngoName, ngoId } = req.body;
-    console.log(req.body);
     const donorUser = await User.findById(req.params.id);
     const ngo = await Ngo.findById({ _id: ngoId });
     const receivingUser = await User.findById(ngo.owner);
@@ -53,7 +52,6 @@ const addDonation = async (req, res) => {
     });
     donorUser.donations.push(donation._id);
     receivingUser.receivingDonations.push(donation._id);
-    console.log(receivingUser._id);
 
     await Promise.all([
       donorUser.save(),
@@ -135,6 +133,7 @@ const addNGOProfile = async (req, res) => {
       category,
       about,
       url,
+      location,
       telephone,
       commitment,
       frequency,
@@ -148,6 +147,7 @@ const addNGOProfile = async (req, res) => {
       !category ||
       !about ||
       !url ||
+      !location ||
       !telephone ||
       !commitment ||
       !frequency ||
@@ -176,6 +176,7 @@ const addNGOProfile = async (req, res) => {
         url,
         telephone,
         category,
+        location,
         commitment,
         frequency,
         help,
@@ -321,7 +322,7 @@ const editNGOEvent = async (req, res) => {
 };
 
 // ADD EVENT to USER and NGO
-const addEvent = async (req, res) => {
+const attendEvent = async (req, res) => {
   try {
     const ngoId = req.body.id;
     const user = await User.findByIdAndUpdate(
@@ -334,7 +335,6 @@ const addEvent = async (req, res) => {
       { $addToSet: { volunteers: user._id } },
       { new: true }
     );
-    console.log("Ngo & phone", ngo, ngo.telephone);
     await Promise.all([ngo.save(), user.save()]);
     res.status(200).send({ results: user, message: user.attending });
   } catch (err) {
@@ -352,7 +352,7 @@ export {
   addDonation,
   addNGOProfile,
   editNGOProfile,
-  addEvent,
+  attendEvent,
   createNGOEvent,
   editNGOEvent,
 };

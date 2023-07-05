@@ -33,7 +33,7 @@ const OrganizationEvents = () => {
     try {
       const token = await user.getIdToken();
       console.log("getting token");
-      const res = await api.post(
+      await api.post(
         `/user/${user.uid}/event`,
         {
           name: `${name}`,
@@ -51,8 +51,6 @@ const OrganizationEvents = () => {
           },
         }
       );
-      setEvent(res.data);
-      console.log(res.data);
       console.log("event is", event);
       setServerError("");
       await fetchUserData(user.uid, setMongoUser, token);
@@ -66,32 +64,40 @@ const OrganizationEvents = () => {
     }
   };
 
-  if (!mongoUser) return null;
-  console.log(mongoUser);
-
   return (
     <div>
       <div className="event-profile">
         <div className="left-side">
-          {mongoUser ? (
+          {mongoUser.oneDayEvents && (
             <div>
-              <p>Date:{mongoUser.firstname} </p>
-              <p>Time: {mongoUser.email}</p>
-              {/* <p>Location: {mongoUser.oneDayEvents} </p> */}
-              {/* <p>Description: {mongoUser.organization.name} </p> */}
-              <p>Help needed: </p>
-              <p>Numbers needed: </p>
-              <button onClick={handleEditEvent} className="edit-btn">
-                Edit Event
-              </button>
+              <h4>Scheduled events</h4>
+              <p>{mongoUser.oneDayEvents.name}</p>
+              <p> {mongoUser.oneDayEvents.location} </p>
+              <p>{mongoUser.oneDayEvents.date} </p>
+              <p>
+                {mongoUser.oneDayEvents.startTime}-
+                {mongoUser.oneDayEvents.endTime}
+              </p>
             </div>
+          )}
+
+          <h4>Volunteers attending</h4>
+
+          {/* {mongoUser.oneDayEvents.volunteers.map((volunteer, idx) => (
+            <div key={idx} className="volunteers">
+              {volunteer.name}
+              <p>{volunteer.email}</p>
+            </div>
+          ))} */}
+
+          {!mongoUser.organization ? (
+            <button onClick={handleCreateEvent} className="edit-btn">
+              Add an Event
+            </button>
           ) : (
-            <>
-              <p>Add an event to our database:</p>
-              <button onClick={handleCreateEvent} className="edit-btn">
-                Add Event
-              </button>
-            </>
+            <button onClick={handleEditEvent} className="edit-btn">
+              Edit Event
+            </button>
           )}
         </div>
 

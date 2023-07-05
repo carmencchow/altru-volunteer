@@ -12,6 +12,9 @@ const eventSchema = new mongoose.Schema({
   name: {
     type: String,
   },
+  location: {
+    type: String,
+  },
   date: {
     type: String,
   },
@@ -19,6 +22,9 @@ const eventSchema = new mongoose.Schema({
     type: String,
   },
   endTime: {
+    type: String,
+  },
+  help: {
     type: String,
   },
   description: {

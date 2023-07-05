@@ -36,7 +36,7 @@ const Modal = ({
 
       // Add event to user
       const res = await api.post(
-        `/user/${user.uid}/add-event`,
+        `/user/${user.uid}/attend-event`,
         {
           id: `${ngoModal._id}`,
           title: `${ngoModal.name}`,
