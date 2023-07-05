@@ -25,6 +25,12 @@ const userSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Ngo",
   },
+  receivingDonations: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Donation",
+    },
+  ],
   goalAmount: {
     type: Number,
   },
@@ -47,6 +53,12 @@ const userSchema = new mongoose.Schema({
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Donation",
+    },
+  ],
+  oneDayEvents: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Event",
     },
   ],
   createdAt: {

@@ -85,7 +85,7 @@ const OrganizationProfile = () => {
               </p>
               <p className="email-ngo"> {mongoUser.email}</p>
               <p className="ngo-website">{mongoUser.organization.url}</p>
-              <p>{mongoUser.organization.telephone}</p>
+              <p>+{mongoUser.organization.telephone}</p>
             </div>
           )}
           {!mongoUser.organization ? (
@@ -153,7 +153,6 @@ const OrganizationProfile = () => {
                 </select>
               </div>
               <div className="volunteers">
-                {" "}
                 <p>Time commitment from volunteers:</p>
               </div>
               <div className="row">
@@ -162,10 +161,10 @@ const OrganizationProfile = () => {
                   onChange={(e) => setCommitment(e.target.value)}
                 >
                   <option value="hours">Number of hours:</option>
-                  <option value="1-5">1-5</option>
-                  <option value="6-10">6-10</option>
-                  <option value="10-15">10-15</option>
-                  <option value="15-20">15-20</option>
+                  <option value="1-5 hours">1-5</option>
+                  <option value="6-10 hours">6-10</option>
+                  <option value="10-15 hours">10-15</option>
+                  <option value="15-20 hours">15-20</option>
                 </select>
                 <select
                   value={frequency}

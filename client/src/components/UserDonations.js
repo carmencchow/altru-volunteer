@@ -30,7 +30,7 @@ const UserDonations = () => {
                   setOpenInput(true);
                 }}
               >
-                <button className="edit">Edit</button>
+                <button className="edit-btn">Edit</button>
               </div>
             ) : (
               <div></div>
@@ -49,7 +49,7 @@ const UserDonations = () => {
               {mongoUser.donations.map((donation, idx) => (
                 <div key={idx} className="donations">
                   <span className="amount-span">${donation.amount}</span>
-                  <span>{donation.ngo}</span>
+                  <span>{donation.ngoName}</span>
                   <span>{String(donation.date).slice(0, 10)}</span>
                 </div>
               ))}

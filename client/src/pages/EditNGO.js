@@ -5,7 +5,17 @@ import { api } from "../utils/axios";
 import Input from "react-phone-number-input/input";
 import "./EditNGO.css";
 
-const EditNGO = ({ name, about, url, telephone, help, setIsEditing }) => {
+const EditNGO = ({
+  name,
+  about,
+  url,
+  telephone,
+  help,
+  category,
+  frequency,
+  commitment,
+  setIsEditing,
+}) => {
   const { user, setMongoUser } = useContext(AuthContext);
   const [newName, setNewname] = useState("");
   const [newAbout, setNewAbout] = useState("");
@@ -23,14 +33,14 @@ const EditNGO = ({ name, about, url, telephone, help, setIsEditing }) => {
       const res = await api.put(
         `/user/${user.uid}/editNgo/`,
         {
-          name: `${newName}`,
-          about: `${newAbout}`,
-          url: `${url}`,
-          telephone: `${newTelephone}`,
-          category: `${newCategory}`,
-          commitment: `${newCommitment}`,
-          frequency: `${newFrequency}`,
-          help: `${newHelp}`,
+          name: `${newName}` ? `${newName}` : `${name}`,
+          about: `${newAbout}` || `${about}`,
+          url: `${newUrl}` || `${url}`,
+          telephone: `${newTelephone}` || `${telephone}`,
+          category: `${newCategory}` || `${category}`,
+          commitment: `${newCommitment}` || `${commitment}`,
+          frequency: `${newFrequency}` || `${frequency}`,
+          help: `${newHelp}` || `${help}`,
         },
         {
           headers: {
@@ -54,13 +64,14 @@ const EditNGO = ({ name, about, url, telephone, help, setIsEditing }) => {
           type="text"
           className="org-name"
           value={newName}
+          // value={newName ? newName : name}
           placeholder={name ? name : "Name of non-profit"}
           onChange={(e) => setNewname(e.target.value)}
         />
         <input
           type="text"
           className="about"
-          value={newAbout}
+          value={newAbout ? newAbout : about}
           placeholder={
             about
               ? about
@@ -71,13 +82,13 @@ const EditNGO = ({ name, about, url, telephone, help, setIsEditing }) => {
         <input
           type="url"
           className="url"
-          value={newUrl}
-          placeholder="https://www.example.com"
+          value={newUrl ? newUrl : url}
+          placeholder={url ? url : "https://www.organization.com"}
           onChange={(e) => setNewUrl(e.target.value)}
         />
         <Input
           country="CA"
-          value={newTelephone}
+          value={newTelephone ? newTelephone : telephone}
           placeholder={telephone ? telephone : "Phone number"}
           maxLength="14"
           onChange={(e) => setNewTelephone}
@@ -85,7 +96,7 @@ const EditNGO = ({ name, about, url, telephone, help, setIsEditing }) => {
         <div>
           <select
             className="updateNgo"
-            value={newCategory}
+            value={newCategory ? newCategory : category}
             onChange={(e) => setNewCategory(e.target.value)}
           >
             <option value="selection">Type of nonprofit:</option>
@@ -103,7 +114,7 @@ const EditNGO = ({ name, about, url, telephone, help, setIsEditing }) => {
         <div className="row">
           <select
             className="updateNgo"
-            value={newCommitment}
+            value={newCommitment ? newCommitment : commitment}
             onChange={(e) => setNewCommitment(e.target.value)}
           >
             <option value="hours">Number of hours:</option>
@@ -114,7 +125,7 @@ const EditNGO = ({ name, about, url, telephone, help, setIsEditing }) => {
           </select>
           <select
             className="updateNgo"
-            value={newFrequency}
+            value={newFrequency ? newFrequency : frequency}
             onChange={(e) => setNewFrequency(e.target.value)}
           >
             <option value="time">Frequency:</option>
@@ -127,7 +138,7 @@ const EditNGO = ({ name, about, url, telephone, help, setIsEditing }) => {
           type="text"
           className="help"
           placeholder={help ? help : "Describe volunteer duties ..."}
-          value={newHelp}
+          value={newHelp ? newHelp : help}
           onChange={(e) => setNewHelp(e.target.value)}
         />
         <div className="buttons">

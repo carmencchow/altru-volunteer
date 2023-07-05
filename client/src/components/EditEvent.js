@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
-import { NgosContext } from "../context/NgosContext";
 import { fetchUserData } from "../utils/fetchUserData";
 import { api } from "../utils/axios";
 import "./EditEvent.css";

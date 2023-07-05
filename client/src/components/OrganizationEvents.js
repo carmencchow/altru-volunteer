@@ -1,6 +1,5 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
-import { NgosContext } from "../context/NgosContext";
 import { fetchUserData } from "../utils/fetchUserData";
 import { api } from "../utils/axios";
 import "./OrganizationEvents.css";
@@ -67,21 +66,21 @@ const OrganizationEvents = () => {
     }
   };
 
+  if (!mongoUser) return null;
+  console.log(mongoUser);
+
   return (
     <div>
       <div className="event-profile">
         <div className="left-side">
-          {event ? (
+          {mongoUser ? (
             <div>
-              <p>Name: {event.name}</p>
-              <p>Date: {event.date}</p>
-              <p>
-                Time: {event.startTime} - {event.endTime}
-              </p>
-              <p>Location: {event.location}</p>
-              <p>Description: {event.description}</p>
-              <p>Help needed: {event.help}</p>
-              <p>Numbers needed: {event.numVolunteers} </p>
+              <p>Date:{mongoUser.firstname} </p>
+              <p>Time: {mongoUser.email}</p>
+              {/* <p>Location: {mongoUser.oneDayEvents} </p> */}
+              <p>Description: {mongoUser.organization.name} </p>
+              <p>Help needed: </p>
+              <p>Numbers needed: </p>
               <button onClick={handleEditEvent} className="edit-btn">
                 Edit Event
               </button>

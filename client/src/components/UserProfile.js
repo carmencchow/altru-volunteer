@@ -40,12 +40,12 @@ const UserProfile = () => {
   return (
     <div>
       <h2>Personal Info</h2>
-      <div className="user-profile">
+      <div className="individ-profile">
         <p>
-          User: {mongoUser.firstname} {mongoUser.lastname}
+          {mongoUser.firstname} {mongoUser.lastname}
         </p>
-        <p>Email: {user.email}</p>
-        <p>Member since: {String(mongoUser.createdAt).slice(0, 10)}</p>
+        <p>{user.email}</p>
+        <p>Joined: {String(mongoUser.createdAt).slice(0, 10)}</p>
         <button onClick={handleEdit} className="edit-btn">
           Edit Profile
         </button>

@@ -7,6 +7,8 @@ import Event from "../models/eventModel.js";
 const getUser = async (req, res) => {
   const { id } = req.params;
   const user = await User.findById(id)
+    .populate("oneDayEvents")
+    .populate("receivingDonations")
     .populate("attending")
     .populate("donations")
     .populate("organization")
@@ -33,24 +35,39 @@ const editUserProfile = async (req, res) => {
   }
 };
 
-// ADD donation
+// ADD donation - add USER and Donation amount to NGO
 const addDonation = async (req, res) => {
   try {
-    const { id, amount, ngo } = req.body;
+    const { amount, ngoName, ngoId } = req.body;
     console.log(req.body);
-    const user = await User.findById(req.params.id);
+    const donorUser = await User.findById(req.params.id);
+    const ngo = await Ngo.findById({ _id: ngoId });
+    const receivingUser = await User.findById(ngo.owner);
     const donation = await Donation.create({
+      ngoName,
+      donor: donorUser._id,
       amount,
-      ngo,
-      donor: user._id,
+      parentNgo: ngoId,
       date: Date.now(),
+      donee: receivingUser._id,
     });
-    await donation.save();
+    donorUser.donations.push(donation._id);
+    receivingUser.receivingDonations.push(donation._id);
+    console.log(receivingUser._id);
 
-    user.donations.push(donation);
-    await user.save();
-    console.log(donation, user);
-    res.status(200).send({ donation, user });
+    await Promise.all([
+      donorUser.save(),
+      receivingUser.save(),
+      Ngo.findOneAndUpdate(
+        { _id: ngoId },
+        {
+          $push: { donations: donation._id },
+          $addToSet: { donors: donorUser._id },
+        },
+        { new: true }
+      ),
+    ]);
+    res.status(200).send({ donation, donorUser, receivingUser, ngo });
   } catch (err) {
     console.log(err);
   }
@@ -109,7 +126,7 @@ const editGoal = async (req, res) => {
   }
 };
 
-// Create NGO Profile
+// Add an NGO
 const addNGOProfile = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
@@ -220,6 +237,7 @@ const editNGOProfile = async (req, res) => {
 const createNGOEvent = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
+    const ngoId = user.organization;
     const {
       name,
       date,
@@ -230,7 +248,6 @@ const createNGOEvent = async (req, res) => {
       description,
       help,
     } = req.body;
-    const ngoId = user.organization;
     if (
       !name ||
       !date ||
@@ -241,15 +258,6 @@ const createNGOEvent = async (req, res) => {
       !help ||
       !numVolunteers
     ) {
-      console.log(
-        name,
-        date,
-        startTime,
-        endTime,
-        location,
-        description,
-        numVolunteers
-      );
       return res.status(400).json({ error: "Missing required fields" });
     } else {
       const event = await Event.create({
@@ -260,17 +268,28 @@ const createNGOEvent = async (req, res) => {
         location,
         description,
         help,
-        event: true,
-        parentNgo: ngoId, //Add ngoId to event
+        parentNgo: ngoId,
+        organizer: user._id,
         numVolunteers,
       });
-      user.organization.event = event._id; //Add eventId to user
-      console.log("Event", event._id);
-      // ngo.event = event._id;
-      // await event.save();
-      // await ngo.save();
-      await Promise.all([user.save(), event.save()]);
-      console.log("new Event", event, user.organization.event);
+      const findUser = await User.findOneAndUpdate(
+        { _id: user },
+        { $push: { oneDayEvents: event._id } },
+        { new: true }
+      );
+      const ngo = await Ngo.findOneAndUpdate(
+        { _id: ngoId },
+        { $push: { oneDayEvents: event._id } },
+        { $push: { event: true } }
+      );
+      await Promise.all([findUser.save(), ngo.save(), event.save()]);
+      console.log(
+        "new Event",
+        findUser.oneDayEvents,
+        ngo.oneDayEvents,
+        event.organizer,
+        event.parentNgo
+      );
       return res.status(200).send({ event });
     }
   } catch (err) {
@@ -301,7 +320,7 @@ const editNGOEvent = async (req, res) => {
   }
 };
 
-// ADD event
+// ADD EVENT to USER and NGO
 const addEvent = async (req, res) => {
   try {
     const ngoId = req.body.id;
@@ -310,7 +329,13 @@ const addEvent = async (req, res) => {
       { $addToSet: { attending: ngoId } },
       { new: true }
     );
-    await user.save();
+    const ngo = await Ngo.findByIdAndUpdate(
+      ngoId,
+      { $addToSet: { volunteers: user._id } },
+      { new: true }
+    );
+    console.log("Ngo & phone", ngo, ngo.telephone);
+    await Promise.all([ngo.save(), user.save()]);
     res.status(200).send({ results: user, message: user.attending });
   } catch (err) {
     console.log(err);

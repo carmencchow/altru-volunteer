@@ -1,6 +1,4 @@
 import User from "../models/userModel.js";
-import Ngo from "../models/ngoModel.js";
-import { auth } from "../firebase-config.js";
 
 // CREATE new user
 const createUser = async (req, res) => {
@@ -14,7 +12,6 @@ const createUser = async (req, res) => {
       firstname,
       lastname,
       email,
-      // goalAmount
     });
     await newUser.save();
     console.log("New user", newUser);
@@ -32,8 +29,10 @@ const verifyUser = async (req, res) => {
     const user = await User.findById(uid)
       .populate("ngos")
       .populate("organization")
+      .populate("oneDayEvents")
       .populate("attending")
-      .populate("donations");
+      .populate("donations")
+      .populate("receivingDonations");
     console.log("MongoDB User verified", user);
     return res.status(200).json({ user: user });
   } catch (err) {

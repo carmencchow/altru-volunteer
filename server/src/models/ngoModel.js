@@ -15,10 +15,10 @@ const ngoSchema = new mongoose.Schema({
     type: String,
   },
   telephone: {
-    type: Number,
+    type: String,
   },
   category: {
-    type: String,
+    type: [String],
   },
   commitment: {
     type: String,
@@ -38,7 +38,7 @@ const ngoSchema = new mongoose.Schema({
   event: {
     type: Boolean,
   },
-  events: [
+  oneDayEvents: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Event",
@@ -46,13 +46,13 @@ const ngoSchema = new mongoose.Schema({
   ],
   volunteers: [
     {
-      type: mongoose.Schema.Types.ObjectId,
+      type: String,
       ref: "User",
     },
   ],
   donors: [
     {
-      type: mongoose.Schema.Types.ObjectId,
+      type: String,
       ref: "User",
     },
   ],
@@ -62,6 +62,10 @@ const ngoSchema = new mongoose.Schema({
       ref: "Donation",
     },
   ],
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 const Ngo = mongoose.model("Ngo", ngoSchema);
