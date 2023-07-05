@@ -42,3 +42,13 @@ input.help {
   border-radius: 5px;
   height: 25px;
 }
+.row {
+  display: flex;
+  flex-direction: row;
+}
+.row .event-time {
+  width: 130px;
+  display: flex;
+  margin-left: 20px;
+  margin-right: 20px;
+}

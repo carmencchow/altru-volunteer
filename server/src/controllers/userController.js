@@ -1,7 +1,7 @@
-import mongoose from "mongoose";
 import User from "../models/userModel.js";
 import Ngo from "../models/ngoModel.js";
 import Donation from "../models/donationModel.js";
+import Event from "../models/eventModel.js";
 
 // GET USER by ID:
 const getUser = async (req, res) => {
@@ -216,6 +216,91 @@ const editNGOProfile = async (req, res) => {
   }
 };
 
+// Create NGO Event
+const createNGOEvent = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    const {
+      name,
+      date,
+      startTime,
+      location,
+      numVolunteers,
+      endTime,
+      description,
+      help,
+    } = req.body;
+    const ngoId = user.organization;
+    if (
+      !name ||
+      !date ||
+      !startTime ||
+      !endTime ||
+      !location ||
+      !description ||
+      !help ||
+      !numVolunteers
+    ) {
+      console.log(
+        name,
+        date,
+        startTime,
+        endTime,
+        location,
+        description,
+        numVolunteers
+      );
+      return res.status(400).json({ error: "Missing required fields" });
+    } else {
+      const event = await Event.create({
+        name,
+        date,
+        endTime,
+        startTime,
+        location,
+        description,
+        help,
+        event: true,
+        parentNgo: ngoId, //Add ngoId to event
+        numVolunteers,
+      });
+      user.organization.event = event._id; //Add eventId to user
+      console.log("Event", event._id);
+      // ngo.event = event._id;
+      // await event.save();
+      // await ngo.save();
+      await Promise.all([user.save(), event.save()]);
+      console.log("new Event", event, user.organization.event);
+      return res.status(200).send({ event });
+    }
+  } catch (err) {
+    console.log(err);
+    return res.status(400).send(err);
+  }
+};
+
+// Edit NGO Event
+const editNGOEvent = async (req, res) => {
+  try {
+    const {
+      name,
+      date,
+      endTime,
+      startTime,
+      location,
+      description,
+      help,
+      numVolunteers,
+    } = req.body;
+    const event = await Event.find(req.params.id);
+    await event.save();
+    res.status(200).send({ event: event });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Error while updating");
+  }
+};
+
 // ADD event
 const addEvent = async (req, res) => {
   try {
@@ -243,4 +328,6 @@ export {
   addNGOProfile,
   editNGOProfile,
   addEvent,
+  createNGOEvent,
+  editNGOEvent,
 };

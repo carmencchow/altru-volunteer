@@ -33,7 +33,7 @@ const OrganizationProfile = () => {
     try {
       const token = await user.getIdToken();
       console.log("getting token");
-      await api.post(
+      const res = await api.post(
         `/user/${user.uid}/addNgo`,
         {
           name: `${name}`,
@@ -54,6 +54,7 @@ const OrganizationProfile = () => {
       setServerError("");
       await fetchUserData(user.uid, setMongoUser, token);
       setIsAddingNGO(false);
+      console.log("Data", res.data);
     } catch (err) {
       if (err.response && err.response.status === 400) {
         setServerError(err.response.data.error);

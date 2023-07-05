@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
+import { NgosContext } from "../context/NgosContext";
 import { fetchUserData } from "../utils/fetchUserData";
 import { api } from "../utils/axios";
 import "./EditEvent.css";
@@ -7,7 +8,8 @@ import "./EditEvent.css";
 const EditEvent = ({
   name,
   date,
-  time,
+  startTime,
+  endTime,
   location,
   description,
   help,
@@ -17,7 +19,8 @@ const EditEvent = ({
   const { setMongoUser, user } = useContext(AuthContext);
   const [newName, setNewName] = useState("");
   const [newDate, setNewDate] = useState("");
-  const [newTime, setNewTime] = useState("");
+  const [newStartTime, setNewStartTime] = useState("");
+  const [newEndTime, setNewEndTime] = useState("");
   const [newLocation, setNewLocation] = useState("");
   const [newHelp, setNewHelp] = useState("");
   const [newNumVolunteers, setNewNumVolunteers] = useState(0);
@@ -29,11 +32,12 @@ const EditEvent = ({
       const token = await user.getIdToken();
       console.log("getting token");
       const res = await api.post(
-        `/ngo/:id/event`,
+        `/user/${user.uid}/event`,
         {
           name: `${newName}`,
           date: `${newDate}`,
-          time: `${newTime}`,
+          startTime: `${newStartTime}`,
+          endTime: `${newEndTime}`,
           location: `${newLocation}`,
           description: `${newDescription}`,
           help: `${newHelp}`,
@@ -65,19 +69,34 @@ const EditEvent = ({
           onChange={(e) => setNewName(e.target.value)}
         />
         <input
-          type="text"
+          type="date"
           className="event-date"
+          min="2023-07-01"
+          max="2024-12-31"
           value={newDate}
           placeholder={date ? date : "Date of event"}
           onChange={(e) => setNewDate(e.target.value)}
         />
-        <input
-          type="text"
-          className="event-time"
-          value={newTime}
-          placeholder={time ? time : "Time of event"}
-          onChange={(e) => setNewTime(e.target.value)}
-        />
+        <div className="row">
+          <input
+            type="time"
+            className="event-time"
+            min="08:00"
+            max="22:00"
+            value={newStartTime}
+            placeholder={startTime ? startTime : "Start time"}
+            onChange={(e) => setNewStartTime(e.target.value)}
+          />
+          <input
+            type="time"
+            className="event-time"
+            min="08:00"
+            max="22:00"
+            value={newEndTime}
+            placeholder={endTime ? endTime : "End time"}
+            onChange={(e) => setNewEndTime(e.target.value)}
+          />
+        </div>
         <input
           type="text"
           className="event-location"
@@ -103,10 +122,10 @@ const EditEvent = ({
         <input
           type="number"
           className="numVolunteer"
+          placeholder={numVolunteers ? numVolunteers : "0"}
           value={newNumVolunteers}
           onChange={(e) => setNewNumVolunteers(e.target.value)}
         />
-
         <div className="buttons">
           <button className="save-event" onClick={updateEvent}>
             Save Changes

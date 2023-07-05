@@ -1,5 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
+import { NgosContext } from "../context/NgosContext";
 import { fetchUserData } from "../utils/fetchUserData";
 import { api } from "../utils/axios";
 import "./OrganizationEvents.css";
@@ -7,18 +8,20 @@ import EditEvent from "./EditEvent";
 
 const OrganizationEvents = () => {
   const { mongoUser, setMongoUser, user } = useContext(AuthContext);
+  const [event, setEvent] = useState({});
   const [isEditingEvent, setIsEditingEvent] = useState(false);
   const [isAddingEvent, setIsAddingEvent] = useState(false);
   const [name, setName] = useState("");
   const [date, setDate] = useState("");
-  const [time, setTime] = useState("");
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
   const [help, setHelp] = useState("");
   const [location, setLocation] = useState("");
   const [numVolunteers, setNumVolunteers] = useState(0);
   const [description, setDescription] = useState("");
   const [serverError, setServerError] = useState("");
 
-  const handleAddEvent = () => {
+  const handleCreateEvent = () => {
     setIsAddingEvent(true);
   };
 
@@ -26,17 +29,18 @@ const OrganizationEvents = () => {
     setIsEditingEvent(true);
   };
 
-  const saveEventChanges = async (e) => {
+  const createEvent = async (e) => {
     e.preventDefault();
     try {
       const token = await user.getIdToken();
       console.log("getting token");
       const res = await api.post(
-        `/ngo/:id/event`,
+        `/user/${user.uid}/event`,
         {
           name: `${name}`,
           date: `${date}`,
-          time: `${time}`,
+          startTime: `${startTime}`,
+          endTime: `${endTime}`,
           location: `${location}`,
           description: `${description}`,
           help: `${help}`,
@@ -48,6 +52,9 @@ const OrganizationEvents = () => {
           },
         }
       );
+      setEvent(res.data);
+      console.log(res.data);
+      console.log("event is", event);
       setServerError("");
       await fetchUserData(user.uid, setMongoUser, token);
       setIsAddingEvent(false);
@@ -64,25 +71,28 @@ const OrganizationEvents = () => {
     <div>
       <div className="event-profile">
         <div className="left-side">
-          {mongoUser.organization.events && (
+          {event ? (
             <div>
-              <p>name</p>
-              <p>date</p>
-              <p>time</p>
-              <p>location</p>
-              <p>description</p>
-              <p>help</p>
-              <p>Num volunteers</p>
+              <p>Name: {event.name}</p>
+              <p>Date: {event.date}</p>
+              <p>
+                Time: {event.startTime} - {event.endTime}
+              </p>
+              <p>Location: {event.location}</p>
+              <p>Description: {event.description}</p>
+              <p>Help needed: {event.help}</p>
+              <p>Numbers needed: {event.numVolunteers} </p>
+              <button onClick={handleEditEvent} className="edit-btn">
+                Edit Event
+              </button>
             </div>
-          )}
-          {!mongoUser.organization.events ? (
-            <button onClick={handleAddEvent} className="edit-btn">
-              Add Event
-            </button>
           ) : (
-            <button onClick={handleEditEvent} className="edit-btn">
-              Edit Event
-            </button>
+            <>
+              <p>Add an event to our database:</p>
+              <button onClick={handleCreateEvent} className="edit-btn">
+                Add Event
+              </button>
+            </>
           )}
         </div>
 
@@ -97,19 +107,34 @@ const OrganizationEvents = () => {
                 onChange={(e) => setName(e.target.value)}
               />
               <input
-                type="text"
+                type="date"
                 className="event-date"
+                min="2023-07-01"
+                max="2024-12-31"
                 value={date}
                 placeholder="Date of event"
                 onChange={(e) => setDate(e.target.value)}
               />
-              <input
-                type="text"
-                className="event-time"
-                value={time}
-                placeholder="Event time"
-                onChange={(e) => setTime(e.target.value)}
-              />
+              <div className="row">
+                <input
+                  type="time"
+                  className="event-time"
+                  value={startTime}
+                  min="2023-07-01"
+                  max="2024-12-31"
+                  placeholder="Event time"
+                  onChange={(e) => setStartTime(e.target.value)}
+                />
+                <input
+                  type="time"
+                  min="2023-07-01"
+                  max="2024-12-31"
+                  className="event-time"
+                  value={endTime}
+                  placeholder="Event time"
+                  onChange={(e) => setEndTime(e.target.value)}
+                />
+              </div>
               <input
                 type="text"
                 className="event-location"
@@ -124,7 +149,6 @@ const OrganizationEvents = () => {
                 placeholder="Description of event"
                 onChange={(e) => setDescription(e.target.value)}
               />
-
               <input
                 type="text"
                 className="help"
@@ -132,7 +156,6 @@ const OrganizationEvents = () => {
                 placeholder="What kind of help do you need?"
                 onChange={(e) => setHelp(e.target.value)}
               />
-
               <p className="numVol">Number of volunteers:</p>
               <input
                 type="number"
@@ -141,8 +164,8 @@ const OrganizationEvents = () => {
                 onChange={(e) => setNumVolunteers(e.target.value)}
               />
               {serverError && <p className="server-error">{serverError}</p>}
-              <button className="save-btn" onClick={saveEventChanges}>
-                Save Event
+              <button className="create-btn" onClick={createEvent}>
+                Create Event
               </button>
             </form>
           ) : null}
@@ -152,7 +175,8 @@ const OrganizationEvents = () => {
               {...{
                 name,
                 date,
-                time,
+                startTime,
+                endTime,
                 location,
                 description,
                 help,
