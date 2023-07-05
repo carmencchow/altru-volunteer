@@ -6,7 +6,7 @@ import "./Navbar.css";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const { user, mongoUser, handleSignOut } = useContext(AuthContext);
+  const { user, handleSignOut } = useContext(AuthContext);
   const navMain = () => {
     navigate("/volunteer");
   };

@@ -1,10 +1,14 @@
 import mongoose from "mongoose";
 
 const donationSchema = new mongoose.Schema({
-  ngo: {
+  ngoName: {
     type: String,
   },
   donor: {
+    type: String,
+    ref: "User",
+  },
+  donee: {
     type: String,
     ref: "User",
   },
@@ -14,6 +18,10 @@ const donationSchema = new mongoose.Schema({
   date: {
     type: Date,
     default: Date.now,
+  },
+  parentNgo: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Ngo",
   },
 });
 

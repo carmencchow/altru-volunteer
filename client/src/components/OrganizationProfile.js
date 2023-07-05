@@ -33,7 +33,7 @@ const OrganizationProfile = () => {
     try {
       const token = await user.getIdToken();
       console.log("getting token");
-      await api.post(
+      const res = await api.post(
         `/user/${user.uid}/addNgo`,
         {
           name: `${name}`,
@@ -54,6 +54,7 @@ const OrganizationProfile = () => {
       setServerError("");
       await fetchUserData(user.uid, setMongoUser, token);
       setIsAddingNGO(false);
+      console.log("Data", res.data);
     } catch (err) {
       if (err.response && err.response.status === 400) {
         setServerError(err.response.data.error);
@@ -152,7 +153,6 @@ const OrganizationProfile = () => {
                 </select>
               </div>
               <div className="volunteers">
-                {" "}
                 <p>Time commitment from volunteers:</p>
               </div>
               <div className="row">
@@ -161,10 +161,10 @@ const OrganizationProfile = () => {
                   onChange={(e) => setCommitment(e.target.value)}
                 >
                   <option value="hours">Number of hours:</option>
-                  <option value="1-5">1-5</option>
-                  <option value="6-10">6-10</option>
-                  <option value="10-15">10-15</option>
-                  <option value="15-20">15-20</option>
+                  <option value="1-5 hours">1-5</option>
+                  <option value="6-10 hours">6-10</option>
+                  <option value="10-15 hours">10-15</option>
+                  <option value="15-20 hours">15-20</option>
                 </select>
                 <select
                   value={frequency}

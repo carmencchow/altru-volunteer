@@ -55,8 +55,8 @@ const Volunteer = () => {
             onClick={handlePrevious}
           ></button>
           <button
+            disabled={currentPage === pageCount + 1}
             // disabled={currentPage === pageCount}
-            // disabled={currentPage === pageCount - 1}
             className="next"
             onClick={handleNext}
           ></button>
@@ -92,8 +92,7 @@ const Volunteer = () => {
                       </div>
                       {ngo.commitment ? (
                         <p>
-                          Commitment: {ngo.commitment}
-                          {ngo.frequency}
+                          Commitment: {ngo.commitment} hours /{ngo.frequency}
                         </p>
                       ) : null}
 

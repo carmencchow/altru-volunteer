@@ -1,0 +1,54 @@
+.event-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+select,
+.event-form input {
+  border: 1px solid grey;
+  width: 300px;
+}
+.numVol {
+  font-size: 14px;
+  display: flex;
+  margin-left: 0px;
+}
+
+input {
+  margin-top: 10px;
+}
+input.name {
+  margin-bottom: 20px;
+}
+input.desc {
+  height: 100px;
+}
+input.help {
+  height: 100px;
+}
+.save-event,
+.cancel-event {
+  margin-right: 10px;
+  color: white;
+  background-color: blueviolet;
+  border: 2px solid blueviolet;
+  border-radius: 5px;
+  height: 25px;
+}
+.cancel-event:hover,
+.save-event:hover {
+  background-color: rgb(178, 121, 231);
+  border: 2px solid rgb(178, 121, 231);
+  border-radius: 5px;
+  height: 25px;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+}
+.row .event-time {
+  width: 130px;
+  display: flex;
+  margin-left: 20px;
+  margin-right: 20px;
+}

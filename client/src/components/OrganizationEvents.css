@@ -1,0 +1,30 @@
+.left-side p {
+  font-size: 12px;
+  padding-top: 5px;
+}
+.server-error {
+  color: blue;
+}
+.event-profile {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-top: 2%;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+}
+.create-btn {
+  color: white;
+  background-color: blueviolet;
+  border: 2px solid blueviolet;
+  border-radius: 5px;
+  height: 25px;
+}
+.create-btn:hover {
+  background-color: rgb(178, 121, 231);
+  border: 2px solid rgb(178, 121, 231);
+  border-radius: 5px;
+  height: 25px;
+}

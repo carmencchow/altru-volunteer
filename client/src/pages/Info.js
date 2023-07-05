@@ -17,7 +17,7 @@ const Info = () => {
   const { id } = useParams();
   const [ngo, setNgo] = useState({});
   const [clickedBtn, setClickedBtn] = useState("0");
-  const amounts = [10, 25, 50, 75, 100];
+  const amounts = [10, 15, 25, 50, 75];
   let total = 0;
 
   const fetchNgo = async () => {
@@ -43,8 +43,8 @@ const Info = () => {
         `/user/${user.uid}/donation`,
 
         {
-          id: `${ngo._id}`,
-          ngo: `${ngo.name}`,
+          ngoId: `${ngo._id}`,
+          ngoName: `${ngo.name}`,
           amount: `${clickedBtn}`,
         },
         {
@@ -60,7 +60,6 @@ const Info = () => {
   };
 
   const handlePayment = async () => {
-    // const handlePayment = async (token) => {
     handleConfirmation();
     const token = await user.getIdToken();
     const body = {

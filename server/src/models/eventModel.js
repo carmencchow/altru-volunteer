@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 
 const eventSchema = new mongoose.Schema({
+  organizer: {
+    type: String,
+    ref: "User",
+  },
   parentNgo: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Ngo",
@@ -11,7 +15,10 @@ const eventSchema = new mongoose.Schema({
   date: {
     type: String,
   },
-  time: {
+  startTime: {
+    type: String,
+  },
+  endTime: {
     type: String,
   },
   description: {
