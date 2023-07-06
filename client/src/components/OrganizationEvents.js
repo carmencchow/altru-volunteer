@@ -1,14 +1,15 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { fetchUserData } from "../utils/fetchUserData";
+import { FiEdit2 } from "react-icons/fi";
+import { AiOutlineDelete } from "react-icons/ai";
 import { api } from "../utils/axios";
 import "./OrganizationEvents.css";
 import EditEvent from "./EditEvent";
 
 const OrganizationEvents = () => {
   const { mongoUser, setMongoUser, user } = useContext(AuthContext);
-  const [event, setEvent] = useState({});
-  const [isEditingEvent, setIsEditingEvent] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
   const [isAddingEvent, setIsAddingEvent] = useState(false);
   const [name, setName] = useState("");
   const [date, setDate] = useState("");
@@ -20,12 +21,29 @@ const OrganizationEvents = () => {
   const [description, setDescription] = useState("");
   const [serverError, setServerError] = useState("");
 
-  const handleCreateEvent = () => {
+  const handleAddEvent = () => {
     setIsAddingEvent(true);
   };
 
   const handleEditEvent = () => {
-    setIsEditingEvent(true);
+    setIsEditing(true);
+  };
+
+  const handleDeleteEvent = async () => {
+    try {
+      const token = await user.getIdToken();
+      console.log("getting token");
+      await api.delete(`/user/${user.uid}/event`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setServerError("");
+      await fetchUserData(user.uid, setMongoUser, token);
+      setIsAddingEvent(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const createEvent = async (e) => {
@@ -51,7 +69,6 @@ const OrganizationEvents = () => {
           },
         }
       );
-      console.log("event is", event);
       setServerError("");
       await fetchUserData(user.uid, setMongoUser, token);
       setIsAddingEvent(false);
@@ -71,34 +88,50 @@ const OrganizationEvents = () => {
           {mongoUser.oneDayEvents && (
             <div>
               <h4>Scheduled events</h4>
-              <p>{mongoUser.oneDayEvents.name}</p>
-              <p> {mongoUser.oneDayEvents.location} </p>
-              <p>{mongoUser.oneDayEvents.date} </p>
-              <p>
-                {mongoUser.oneDayEvents.startTime}-
-                {mongoUser.oneDayEvents.endTime}
-              </p>
+
+              {mongoUser.oneDayEvents.map((event, idx) => (
+                <div key={idx} className="event-card">
+                  <p>{event.name}</p>
+                  <p> {event.location} </p>
+                  <p>{event.date} </p>
+                  <p>
+                    {event.startTime}-{event.endTime}
+                  </p>
+
+                  {/* Show volunteers */}
+                  {mongoUser.oneDayEvents.volunteers && (
+                    <div>
+                      <h4>Volunteers attending</h4>
+                      <p>
+                        Volunteers needed: {mongoUser.oneDayEvent.numVolunteers}
+                      </p>
+                      {mongoUser.oneDayEvents.volunteers.map(
+                        (volunteer, idx) => (
+                          <div key={idx} className="volunteers">
+                            {volunteer.name}
+                            <p>{volunteer.email}</p>
+                          </div>
+                        )
+                      )}
+                    </div>
+                  )}
+
+                  <div className="edit-row">
+                    <button onClick={handleEditEvent} className="react-btn">
+                      <FiEdit2 />
+                    </button>
+                    <button onClick={handleDeleteEvent} className="react-btn">
+                      <AiOutlineDelete />
+                    </button>
+                  </div>
+                </div>
+              ))}
             </div>
           )}
 
-          <h4>Volunteers attending</h4>
-
-          {/* {mongoUser.oneDayEvents.volunteers.map((volunteer, idx) => (
-            <div key={idx} className="volunteers">
-              {volunteer.name}
-              <p>{volunteer.email}</p>
-            </div>
-          ))} */}
-
-          {!mongoUser.organization ? (
-            <button onClick={handleCreateEvent} className="edit-btn">
-              Add an Event
-            </button>
-          ) : (
-            <button onClick={handleEditEvent} className="edit-btn">
-              Edit Event
-            </button>
-          )}
+          <button onClick={() => setIsAddingEvent(true)} className="create-btn">
+            Create Event
+          </button>
         </div>
 
         <div className="right-side">
@@ -169,13 +202,21 @@ const OrganizationEvents = () => {
                 onChange={(e) => setNumVolunteers(e.target.value)}
               />
               {serverError && <p className="server-error">{serverError}</p>}
-              <button className="create-btn" onClick={createEvent}>
-                Create Event
-              </button>
+              <div className="buttons">
+                <button className="save-ngo" onClick={createEvent}>
+                  Save Changes
+                </button>
+                <button
+                  className="save-ngo"
+                  onClick={() => setIsEditing(false)}
+                >
+                  Cancel
+                </button>
+              </div>
             </form>
           ) : null}
 
-          {isEditingEvent && (
+          {isEditing && (
             <EditEvent
               {...{
                 name,
@@ -186,7 +227,7 @@ const OrganizationEvents = () => {
                 description,
                 help,
                 numVolunteers,
-                setIsEditingEvent,
+                setIsEditing,
               }}
             />
           )}

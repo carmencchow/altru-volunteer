@@ -13,7 +13,7 @@ const EditEvent = ({
   description,
   help,
   numVolunteers,
-  setIsEditingEvent,
+  setIsEditing,
 }) => {
   const { setMongoUser, user } = useContext(AuthContext);
   const [newName, setNewName] = useState("");
@@ -29,11 +29,10 @@ const EditEvent = ({
     e.preventDefault();
     try {
       const token = await user.getIdToken();
-      console.log("getting token");
       await api.put(
-        `/user/${user.uid}/edit-event`,
+        `/user/${user.uid}/event`,
         {
-          name: `${newName}`,
+          name: `${newName}` || `${name}`,
           date: `${newDate}`,
           startTime: `${newStartTime}`,
           endTime: `${newEndTime}`,
@@ -49,7 +48,7 @@ const EditEvent = ({
         }
       );
       await fetchUserData(user.uid, setMongoUser, token);
-      setIsEditingEvent(false);
+      setIsEditing(false);
     } catch (err) {
       console.log(err);
     }
@@ -61,7 +60,7 @@ const EditEvent = ({
         <input
           type="text"
           className="name"
-          value={newName}
+          value={newName ? newName : name}
           placeholder={name ? name : "Name of event"}
           onChange={(e) => setNewName(e.target.value)}
         />
@@ -127,10 +126,7 @@ const EditEvent = ({
           <button className="save-event" onClick={updateEvent}>
             Save Changes
           </button>
-          <button
-            className="cancel-event"
-            onClick={() => setIsEditingEvent(false)}
-          >
+          <button className="cancel-event" onClick={() => setIsEditing(false)}>
             Cancel
           </button>
         </div>

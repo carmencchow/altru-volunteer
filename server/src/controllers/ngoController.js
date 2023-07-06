@@ -23,11 +23,13 @@ const getFiltered = async (req, res) => {
       return res.status(200).json(ngos);
     }
     if (frequency === "all") {
-      let ngos = await Ngo.find({ category: category, createdAt: -1 });
+      let ngos = await Ngo.find({ category: category }).sort({ createdAt: -1 });
       return res.status(200).json(ngos);
     }
     if (category === "all") {
-      let ngos = await Ngo.find({ frequency: frequency, createdAt: -1 });
+      let ngos = await Ngo.find({ frequency: frequency }).sort({
+        createdAt: -1,
+      });
       return res.status(200).json(ngos);
     } else {
       let ngos = await Ngo.find({
@@ -39,12 +41,17 @@ const getFiltered = async (req, res) => {
     }
   } catch (err) {
     console.log(err);
+    return res.status(400).json({ message: "" });
   }
 };
 
 const getNgo = async (req, res) => {
   const { id } = req.params;
-  const ngo = await Ngo.findById(id).populate("event");
+  const ngo = await Ngo.findById(id)
+    .populate("oneDayEvents")
+    .populate("volunteers")
+    .populate("donors")
+    .populate("donations");
   if (!ngo) {
     console.log("NGO not exist");
     return res.status(404).json({ err: "NGO doesn't exist" });

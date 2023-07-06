@@ -10,13 +10,16 @@ const UserVolunteers = () => {
       <h2>Events</h2>
       <div className="events">
         {mongoUser.attending &&
-          mongoUser.attending.map((attend, idx) => (
+          mongoUser.attending.map((event, idx) => (
             <div className="list" key={idx}>
               <div className="place">
-                {attend.event_description} with {attend.name}
-              </div>
-              <div className="date">
-                {attend.event_date} from {attend.event_time}
+                <p>{event.name}</p>
+                {/* {event.parentNgo && <div>{event.parentNgo.name}</div>} */}
+
+                {/* {event.parentNgo.name} */}
+                <div className="date">
+                  {event.location} {event.date}
+                </div>
               </div>
             </div>
           ))}

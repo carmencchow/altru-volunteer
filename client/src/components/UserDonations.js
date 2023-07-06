@@ -43,6 +43,7 @@ const UserDonations = () => {
             <div className="heading">
               <p className="text">Amount</p>
               <p className="text">Organization</p>
+              <p className="text">Date</p>
             </div>
 
             <div className="donated-amounts">

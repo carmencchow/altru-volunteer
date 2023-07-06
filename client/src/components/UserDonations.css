@@ -12,11 +12,14 @@
 }
 .heading {
   display: flex;
+  width: 90%;
+  justify-content: space-between;
   margin-top: 40px;
   margin-bottom: 0px;
   margin-left: 0px;
   font-size: 22px;
   font-weight: bolder;
+  text-decoration: underline;
 }
 .donations {
   display: flex;

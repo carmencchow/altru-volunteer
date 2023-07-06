@@ -20,15 +20,15 @@ const OrganizationProfile = () => {
   const [serverError, setServerError] = useState("");
   const { user, setMongoUser, mongoUser } = useContext(AuthContext);
 
-  const handleAdd = () => {
+  const handleAddNGO = () => {
     setIsAddingNGO(true);
   };
 
-  const handleEdit = () => {
+  const handleEditNGO = () => {
     setIsEditing(true);
   };
 
-  const saveProfileChanges = async (e) => {
+  const createProfile = async (e) => {
     e.preventDefault();
     try {
       const token = await user.getIdToken();
@@ -88,11 +88,11 @@ const OrganizationProfile = () => {
             </div>
           )}
           {!mongoUser.organization ? (
-            <button onClick={handleAdd} className="edit-btn">
+            <button onClick={handleAddNGO} className="edit-btn">
               Add NGO
             </button>
           ) : (
-            <button onClick={handleEdit} className="edit-btn">
+            <button onClick={handleEditNGO} className="edit-btn">
               Edit NGO
             </button>
           )}
@@ -185,7 +185,7 @@ const OrganizationProfile = () => {
                 value={help}
                 onChange={(e) => setHelp(e.target.value)}
               />
-              <button className="edit-btn" onClick={saveProfileChanges}>
+              <button className="edit-btn" onClick={createProfile}>
                 Save Profile
               </button>
             </form>

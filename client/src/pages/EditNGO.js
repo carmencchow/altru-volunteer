@@ -30,7 +30,7 @@ const EditNGO = ({
     e.preventDefault();
     try {
       const token = await user.getIdToken();
-      const res = await api.put(
+      await api.put(
         `/user/${user.uid}/editNgo/`,
         {
           name: `${newName}` ? `${newName}` : `${name}`,
@@ -48,8 +48,6 @@ const EditNGO = ({
           },
         }
       );
-      const data = res.data;
-      console.log("Data is:", data);
       await fetchUserData(user.uid, setMongoUser, token);
       setIsEditing(false);
     } catch (err) {
