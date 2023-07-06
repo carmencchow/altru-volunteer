@@ -40,7 +40,7 @@ const addDonation = async (req, res) => {
     const donorUser = await User.findById(req.params.id);
     console.log("donor", donorUser, donorUser._id);
     const ngo = await Ngo.findById({ _id: ngoId });
-    const receivingUser = await User.findOne(ngo.owner);
+    const receivingUser = await User.findOne({ _id: ngo.owner });
     const donation = await Donation.create({
       ngoName,
       donor: donorUser._id,

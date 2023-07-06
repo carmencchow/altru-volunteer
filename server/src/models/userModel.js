@@ -45,8 +45,11 @@ const userSchema = new mongoose.Schema({
   attending: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      // ref: "Event",
       ref: "Ngo",
+    },
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Event",
     },
   ],
   // Organizer:
