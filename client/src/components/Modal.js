@@ -101,18 +101,31 @@ const Modal = ({
               Thank you for your interest in volunteering for this event! Here
               are the event details:
             </h4>
+
+            {/* {ngoModal.oneDayEvents((item, idx) => (
+              <div key={idx} className="event-details">
+                <p>{item.name}</p>
+                <p>{item.location}</p>
+                <p>{item.startTime}</p>
+                <p>Date:{item.date}</p>
+                <p>
+                  Time:
+                  {item.startTime} -{item.endTime}
+                </p>
+              </div>
+            ))} */}
+
+            {/* {ngoModal.oneDayEvents} */}
+
+            {/* Another endpoint get oneDay events */}
+
+            <p className="event-name">{ngoModal.event_description}</p>
             <p className="event-org">{ngoModal.name}</p>
-            <p className="event-org">{ngoModal.oneDayEvents.location}</p>
-            <p className="event-org">{ngoModal.oneDayEvents}</p>
             <p className="text">
-              Date: <span>{ngoModal.oneDayEvents.date}</span>
+              Date: <span>{ngoModal.event_date}</span>
             </p>
             <p className="text">
-              Time:
-              <span>
-                {ngoModal.oneDayEvents.startTime} -
-                {ngoModal.oneDayEvents.endTime}
-              </span>
+              Time: <span>{ngoModal.event_time}</span>
             </p>
 
             <div className="button-container">

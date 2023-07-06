@@ -17,7 +17,7 @@ const EditNGO = ({
   setIsEditing,
 }) => {
   const { user, setMongoUser } = useContext(AuthContext);
-  const [newName, setNewname] = useState("");
+  const [newName, setNewname] = useState(name);
   const [newAbout, setNewAbout] = useState("");
   const [newTelephone, setNewTelephone] = useState("");
   const [newUrl, setNewUrl] = useState("");
@@ -33,7 +33,7 @@ const EditNGO = ({
       await api.put(
         `/user/${user.uid}/editNgo/`,
         {
-          name: `${newName}` ? `${newName}` : `${name}`,
+          name: `${newName}` || `${name}`,
           about: `${newAbout}` || `${about}`,
           url: `${newUrl}` || `${url}`,
           telephone: `${newTelephone}` || `${telephone}`,
@@ -61,8 +61,7 @@ const EditNGO = ({
         <input
           type="text"
           className="org-name"
-          value={newName}
-          // value={newName ? newName : name}
+          value={newName ? newName : name}
           placeholder={name ? name : "Name of non-profit"}
           onChange={(e) => setNewname(e.target.value)}
         />

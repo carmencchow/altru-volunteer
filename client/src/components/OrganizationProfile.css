@@ -5,6 +5,7 @@ input {
 }
 .server-error {
   color: blue;
+  font-size: 14px;
 }
 .about {
   height: 40px;

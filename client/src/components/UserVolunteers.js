@@ -14,11 +14,13 @@ const UserVolunteers = () => {
             <div className="list" key={idx}>
               <div className="place">
                 <p>{event.name}</p>
-                {/* {event.parentNgo && <div>{event.parentNgo.name}</div>} */}
-
-                {/* {event.parentNgo.name} */}
                 <div className="date">
-                  {event.location} {event.date}
+                  <p>
+                    Location: <span>{event.location}</span>
+                  </p>{" "}
+                  <p>
+                    Date: <span>{event.date}</span>
+                  </p>
                 </div>
               </div>
             </div>

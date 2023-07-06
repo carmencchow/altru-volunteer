@@ -21,6 +21,33 @@ const OrganizationEvents = () => {
   const [description, setDescription] = useState("");
   const [serverError, setServerError] = useState("");
 
+  const days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  const now = new Date("06/07/2023");
+
   const handleAddEvent = () => {
     setIsAddingEvent(true);
   };
@@ -91,14 +118,19 @@ const OrganizationEvents = () => {
 
               {mongoUser.oneDayEvents.map((event, idx) => (
                 <div key={idx} className="event-card">
-                  <p>{event.name}</p>
-                  <p> {event.location} </p>
-                  <p>{event.date} </p>
+                  <p className="event-name">{event.name}</p>
+                  <p className="event-location"> {event.location} </p>
+                  <p className="event-desc">{event.description}</p>
                   <p>
-                    {event.startTime}-{event.endTime}
+                    Date: <span>{event.date} </span>
+                  </p>
+                  <p>
+                    Time:
+                    <span>
+                      {event.startTime}-{event.endTime}
+                    </span>
                   </p>
 
-                  {/* Show volunteers */}
                   {mongoUser.oneDayEvents.volunteers && (
                     <div>
                       <h4>Volunteers attending</h4>
@@ -158,7 +190,7 @@ const OrganizationEvents = () => {
                   type="time"
                   className="event-time"
                   value={startTime}
-                  min="2023-07-01"
+                  min="2023-01-01"
                   max="2024-12-31"
                   placeholder="Event time"
                   onChange={(e) => setStartTime(e.target.value)}

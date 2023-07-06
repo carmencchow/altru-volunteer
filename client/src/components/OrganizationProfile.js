@@ -51,8 +51,8 @@ const OrganizationProfile = () => {
           },
         }
       );
-      setServerError("");
       await fetchUserData(user.uid, setMongoUser, token);
+      setServerError("");
       setIsAddingNGO(false);
     } catch (err) {
       if (err.response && err.response.status === 400) {
@@ -111,7 +111,6 @@ const OrganizationProfile = () => {
                 placeholder="Name of nonprofit"
                 onChange={(e) => setName(e.target.value)}
               />
-              {serverError && <p className="server-error">{serverError}</p>}
               <input
                 type="text"
                 className="about"
@@ -185,6 +184,9 @@ const OrganizationProfile = () => {
                 value={help}
                 onChange={(e) => setHelp(e.target.value)}
               />
+
+              {serverError && <p className="server-error">{serverError}</p>}
+
               <button className="edit-btn" onClick={createProfile}>
                 Save Profile
               </button>

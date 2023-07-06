@@ -35,7 +35,7 @@ const eventSchema = new mongoose.Schema({
   },
   volunteers: [
     {
-      type: mongoose.Schema.Types.ObjectId,
+      type: String,
       ref: "User",
     },
   ],

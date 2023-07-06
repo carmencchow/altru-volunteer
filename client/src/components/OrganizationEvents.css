@@ -8,6 +8,12 @@
   padding: 10px 20px;
   margin-bottom: 20px;
 }
+.event-desc p {
+  font-size: 12px;
+}
+.event-card p {
+  font-size: 14px;
+}
 .server-error {
   color: blue;
 }
@@ -41,9 +47,10 @@
 }
 .react-btn {
   border: none;
+  color: purple;
   background-color: white;
   font-size: 14px;
 }
 .react-btn:hover {
-  color: purple;
+  color: plum;
 }

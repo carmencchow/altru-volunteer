@@ -47,7 +47,7 @@ const Volunteer = () => {
       <h3 className="find">Find volunteer opportunities:</h3>
       <Filters />
 
-      {ngos && (
+      {ngos && currentPage !== pageCount ? (
         <div className="pagination">
           <button
             disabled={currentPage === 1}
@@ -56,9 +56,17 @@ const Volunteer = () => {
           ></button>
           <button
             disabled={currentPage === pageCount + 1}
-            // disabled={currentPage === pageCount}
             className="next"
             onClick={handleNext}
+          ></button>
+        </div>
+      ) : (
+        // Hide previous button if you're on the last page
+        <div className="pagination">
+          <button
+            disabled={currentPage === 1}
+            className="previous"
+            onClick={handlePrevious}
           ></button>
         </div>
       )}
@@ -76,6 +84,17 @@ const Volunteer = () => {
                 </div>
                 <div className="show-details">
                   <div>
+                    {ngo.oneDayEvents.length > 0 && (
+                      <div className="single-events">
+                        {ngo.oneDayEvents.map((event, idx) => (
+                          <div key={idx}>
+                            <p>Name: {ngo.oneDayEvents.name}</p>
+                            <p>{ngo.oneDayEvents.location}</p>
+                            <p>{ngo.oneDayEvents.description}</p>
+                          </div>
+                        ))}
+                      </div>
+                    )}
                     {ngo.event_description ? (
                       <p className="event">{ngo.event_description}</p>
                     ) : null}
@@ -97,6 +116,11 @@ const Volunteer = () => {
                     {ngo.telephone ? <p>Tel: {ngo.telephone}</p> : null}
                   </div>
                 </div>
+
+                {ngo.event === true &&
+                  mongoUser.userType === "organization" && (
+                    <p>{ngo.oneDayEvents.numVolunteers}</p>
+                  )}
 
                 {ngo.event === true && mongoUser.userType === "individual" && (
                   <VolunteerBtn

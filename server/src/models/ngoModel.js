@@ -18,7 +18,7 @@ const ngoSchema = new mongoose.Schema({
     type: String,
   },
   category: {
-    type: [String],
+    type: Array,
   },
   commitment: {
     type: String,

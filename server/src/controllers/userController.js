@@ -131,7 +131,6 @@ const addNGOProfile = async (req, res) => {
       category,
       about,
       url,
-      location,
       telephone,
       commitment,
       frequency,
@@ -145,7 +144,6 @@ const addNGOProfile = async (req, res) => {
       !category ||
       !about ||
       !url ||
-      !location ||
       !telephone ||
       !commitment ||
       !frequency ||
@@ -174,7 +172,6 @@ const addNGOProfile = async (req, res) => {
         url,
         telephone,
         category,
-        location,
         commitment,
         frequency,
         help,

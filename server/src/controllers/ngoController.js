@@ -1,5 +1,21 @@
 import Ngo from "../models/ngoModel.js";
 
+// Get all NGO
+const getNgo = async (req, res) => {
+  const { id } = req.params;
+  const ngo = await Ngo.findById(id)
+    .populate("oneDayEvents")
+    .populate("volunteers")
+    .populate("owner")
+    .populate("donors")
+    .populate("donations");
+  if (!ngo) {
+    console.log("NGO not exist");
+    return res.status(404).json({ err: "NGO doesn't exist" });
+  }
+  return res.status(200).json(ngo);
+};
+
 // Get all NGOs
 const getNgos = async (req, res) => {
   try {
@@ -35,7 +51,6 @@ const getFiltered = async (req, res) => {
       let ngos = await Ngo.find({
         category: category,
         frequency: frequency,
-        createdAt: -1,
       });
       return res.status(200).json(ngos);
     }
@@ -45,18 +60,15 @@ const getFiltered = async (req, res) => {
   }
 };
 
-const getNgo = async (req, res) => {
-  const { id } = req.params;
-  const ngo = await Ngo.findById(id)
-    .populate("oneDayEvents")
-    .populate("volunteers")
-    .populate("donors")
-    .populate("donations");
-  if (!ngo) {
-    console.log("NGO not exist");
-    return res.status(404).json({ err: "NGO doesn't exist" });
+const getEvent = async (req, res) => {
+  try {
+    const ngo = await Ngo.findById(req.params.id);
+    console.log("Ngo is", ngo, ngo.oneDayEvents);
+    res.status(200).json({ events: oneDayEvents });
+  } catch (err) {
+    console.log(err);
+    res.status(404).send({ err: err });
   }
-  return res.status(200).json(ngo);
 };
 
 const updateVolunteerCount = async (req, res) => {
@@ -74,4 +86,4 @@ const updateVolunteerCount = async (req, res) => {
   }
 };
 
-export { getNgos, getNgo, getFiltered, updateVolunteerCount };
+export { getNgos, getNgo, getEvent, getFiltered, updateVolunteerCount };
