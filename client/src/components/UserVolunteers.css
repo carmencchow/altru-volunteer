@@ -14,9 +14,10 @@
 .event-heading p {
   font-size: 14px;
 }
-.events {
+.events p {
   justify-content: space-between;
   font-size: 14px;
+  font-weight: lighter;
 }
 .list {
   margin: 5px;

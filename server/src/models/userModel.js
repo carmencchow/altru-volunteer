@@ -40,10 +40,23 @@ const userSchema = new mongoose.Schema({
       ref: "Ngo",
     },
   ],
+
+  // Volunteers:
   attending: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Ngo",
+    },
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Event",
+    },
+  ],
+  // Organizer:
+  oneDayEvents: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Event",
     },
   ],
   following: {
@@ -53,12 +66,6 @@ const userSchema = new mongoose.Schema({
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Donation",
-    },
-  ],
-  oneDayEvents: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Event",
     },
   ],
   createdAt: {

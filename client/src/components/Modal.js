@@ -36,7 +36,7 @@ const Modal = ({
 
       // Add event to user
       const res = await api.post(
-        `/user/${user.uid}/add-event`,
+        `/user/${user.uid}/attend`,
         {
           id: `${ngoModal._id}`,
           title: `${ngoModal.name}`,
@@ -101,6 +101,24 @@ const Modal = ({
               Thank you for your interest in volunteering for this event! Here
               are the event details:
             </h4>
+
+            {/* {ngoModal.oneDayEvents((item, idx) => (
+              <div key={idx} className="event-details">
+                <p>{item.name}</p>
+                <p>{item.location}</p>
+                <p>{item.startTime}</p>
+                <p>Date:{item.date}</p>
+                <p>
+                  Time:
+                  {item.startTime} -{item.endTime}
+                </p>
+              </div>
+            ))} */}
+
+            {/* {ngoModal.oneDayEvents} */}
+
+            {/* Another endpoint get oneDay events */}
+
             <p className="event-name">{ngoModal.event_description}</p>
             <p className="event-org">{ngoModal.name}</p>
             <p className="text">

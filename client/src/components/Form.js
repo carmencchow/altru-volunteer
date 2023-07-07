@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import "./Form.css";
 
 const Form = () => {
-  const [name, setName] = useState("");
+  // const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [province, setProvince] = useState("");
   const [city, setCity] = useState("");
   const [postal, setPostal] = useState("");
 
-  const handleNameInput = (e) => {
-    setName(e.target.value);
-  };
+  // const handleNameInput = (e) => {
+  //   setName(e.target.value);
+  // };
 
   const handleAddressInput = (e) => {
     setAddress(e.target.value);
@@ -32,22 +32,22 @@ const Form = () => {
     <div className="donor-info">
       <h3>Donor Information</h3>
       <div className="column">
-        <p>Name:</p>
+        {/* <p>Name:</p>
         <input
           type="text"
           className="form-control"
           value={name}
           onChange={handleNameInput}
-        />
+        /> */}
         <p>Address:</p>
         <input
           type="text"
-          className="form-control"
+          className="address"
           value={address}
           onChange={handleAddressInput}
         />
       </div>
-      <div className="column">
+      {/* <div className="column">
         <p>City:</p>
         <input
           type="text"
@@ -71,7 +71,7 @@ const Form = () => {
           value={postal}
           onChange={handlePostalInput}
         />
-      </div>
+      </div> */}
     </div>
   );
 };

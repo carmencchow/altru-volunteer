@@ -7,11 +7,9 @@ import Event from "../models/eventModel.js";
 const getUser = async (req, res) => {
   const { id } = req.params;
   const user = await User.findById(id)
-    .populate("oneDayEvents")
-    .populate("receivingDonations")
     .populate("attending")
     .populate("donations")
-    .populate("organization")
+    .populate("oneDayEvents")
     .populate("ngos");
   if (!user) {
     return res.status(404).json({ err: "User doesn't exist" });
@@ -39,10 +37,10 @@ const editUserProfile = async (req, res) => {
 const addDonation = async (req, res) => {
   try {
     const { amount, ngoName, ngoId } = req.body;
-    console.log(req.body);
     const donorUser = await User.findById(req.params.id);
+    console.log("donor", donorUser, donorUser._id);
     const ngo = await Ngo.findById({ _id: ngoId });
-    const receivingUser = await User.findById(ngo.owner);
+    const receivingUser = await User.findOne({ _id: ngo.owner });
     const donation = await Donation.create({
       ngoName,
       donor: donorUser._id,
@@ -53,7 +51,6 @@ const addDonation = async (req, res) => {
     });
     donorUser.donations.push(donation._id);
     receivingUser.receivingDonations.push(donation._id);
-    console.log(receivingUser._id);
 
     await Promise.all([
       donorUser.save(),
@@ -194,7 +191,7 @@ const addNGOProfile = async (req, res) => {
   }
 };
 
-// Edit NGO Profile:
+// Edit NGO Profile
 const editNGOProfile = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
@@ -208,9 +205,7 @@ const editNGOProfile = async (req, res) => {
       frequency,
       help,
     } = req.body;
-    console.log("Req body", req.body);
     const ngoId = user.organization;
-    console.log("Org ID", ngoId);
     const ngo = await Ngo.findOneAndUpdate(
       { _id: ngoId },
       {
@@ -225,7 +220,6 @@ const editNGOProfile = async (req, res) => {
       },
       { new: true }
     );
-    console.log("New NGO details", ngo, name, help, telephone);
     return res.status(200).send({ message: "NGO Profile updated", ngo });
   } catch (err) {
     console.log(err);
@@ -237,6 +231,7 @@ const editNGOProfile = async (req, res) => {
 const createNGOEvent = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
+    console.log(user);
     const ngoId = user.organization;
     const {
       name,
@@ -279,8 +274,8 @@ const createNGOEvent = async (req, res) => {
       );
       const ngo = await Ngo.findOneAndUpdate(
         { _id: ngoId },
-        { $push: { oneDayEvents: event._id } },
-        { $push: { event: true } }
+        { $push: { oneDayEvents: event._id }, event: true },
+        { new: true }
       );
       await Promise.all([findUser.save(), ngo.save(), event.save()]);
       console.log(
@@ -301,6 +296,10 @@ const createNGOEvent = async (req, res) => {
 // Edit NGO Event
 const editNGOEvent = async (req, res) => {
   try {
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      return res.status(404).send("User not found");
+    }
     const {
       name,
       date,
@@ -311,17 +310,50 @@ const editNGOEvent = async (req, res) => {
       help,
       numVolunteers,
     } = req.body;
-    const event = await Event.find(req.params.id);
-    await event.save();
-    res.status(200).send({ event: event });
+    const event = await Event.findOneAndUpdate(
+      { organizer: user._id },
+      {
+        name,
+        date,
+        endTime,
+        startTime,
+        location,
+        description,
+        help,
+        numVolunteers,
+      },
+      { new: true }
+    );
+    if (!event) {
+      return res.status(404).send("Event not found");
+    }
+    res.status(200).send({ event });
   } catch (err) {
     console.log(err);
     res.status(500).send("Error while updating");
   }
 };
 
-// ADD EVENT to USER and NGO
-const addEvent = async (req, res) => {
+// DELETE NGO event
+const deleteNGOEvent = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      return res.status(404).send("User not found");
+    }
+    const event = await Event.findOneAndDelete({ organizer: user._id });
+    if (!event) {
+      return res.status(404).send("Event not found");
+    }
+    res.status(400).send("Event not found");
+  } catch (err) {
+    console.log(err);
+    return res.status(400).send("Error while deleting event");
+  }
+};
+
+// ADD EVENT to volunteer and organizer USERS
+const attendEvent = async (req, res) => {
   try {
     const ngoId = req.body.id;
     const user = await User.findByIdAndUpdate(
@@ -334,7 +366,6 @@ const addEvent = async (req, res) => {
       { $addToSet: { volunteers: user._id } },
       { new: true }
     );
-    console.log("Ngo & phone", ngo, ngo.telephone);
     await Promise.all([ngo.save(), user.save()]);
     res.status(200).send({ results: user, message: user.attending });
   } catch (err) {
@@ -352,7 +383,8 @@ export {
   addDonation,
   addNGOProfile,
   editNGOProfile,
-  addEvent,
+  attendEvent,
   createNGOEvent,
   editNGOEvent,
+  deleteNGOEvent,
 };

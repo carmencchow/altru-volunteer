@@ -47,7 +47,7 @@ const Volunteer = () => {
       <h3 className="find">Find volunteer opportunities:</h3>
       <Filters />
 
-      {ngos && (
+      {ngos && currentPage !== pageCount ? (
         <div className="pagination">
           <button
             disabled={currentPage === 1}
@@ -56,68 +56,89 @@ const Volunteer = () => {
           ></button>
           <button
             disabled={currentPage === pageCount + 1}
-            // disabled={currentPage === pageCount}
             className="next"
             onClick={handleNext}
+          ></button>
+        </div>
+      ) : (
+        // Hide previous button if you're on the last page
+        <div className="pagination">
+          <button
+            disabled={currentPage === 1}
+            className="previous"
+            onClick={handlePrevious}
           ></button>
         </div>
       )}
 
       <div className="display">
         <div className="results-container">
-          {ngos
-            ?.slice((currentPage - 1) * 5, currentPage * 5)
-            .map((ngo, idx) => {
-              return (
-                <div className="display-container" key={ngo._id}>
-                  <div
-                    className="ngo-name"
-                    onClick={() => handleNgoSelected(ngo._id)}
-                  >
-                    {ngo.name}
-                  </div>
-                  <div className="show-details">
-                    <div>
-                      {ngo.event_description ? (
-                        <p className="event">{ngo.event_description}</p>
-                      ) : null}
-                      {ngo.event_date ? <p>Date: {ngo.event_date}</p> : null}
-                      {ngo.event_time ? <p>Time: {ngo.event_time}</p> : null}
-
-                      <div>{ngo.help ? <p>Duties: {ngo.help}</p> : null}</div>
-                      <div>
-                        {ngo.num_volunteers ? (
-                          <p>Volunteers needed: {ngo.num_volunteers}</p>
-                        ) : null}
-                      </div>
-                      {ngo.commitment ? (
-                        <p>
-                          Commitment: {ngo.commitment} hours /{ngo.frequency}
-                        </p>
-                      ) : null}
-
-                      {ngo.telephone ? <p>Tel: {ngo.telephone}</p> : null}
-                    </div>
-                  </div>
-
-                  {ngo.event === true &&
-                    mongoUser.userType === "individual" && (
-                      <VolunteerBtn
-                        className="volunteer-btn"
-                        attending={
-                          mongoUser.attending &&
-                          mongoUser.attending.find((item) => {
-                            return item._id === ngo._id;
-                          })
-                            ? true
-                            : false
-                        }
-                        toggleModal={() => toggleModal(ngo)}
-                      />
-                    )}
+          {ngos?.slice((currentPage - 1) * 5, currentPage * 5).map((ngo) => {
+            return (
+              <div className="display-container" key={ngo._id}>
+                <div
+                  className="ngo-name"
+                  onClick={() => handleNgoSelected(ngo._id)}
+                >
+                  {ngo.name}
                 </div>
-              );
-            })}
+                <div className="show-details">
+                  <div>
+                    {ngo.oneDayEvents.length > 0 && (
+                      <div className="single-events">
+                        {ngo.oneDayEvents.map((event, idx) => (
+                          <div key={idx}>
+                            <p>Name: {ngo.oneDayEvents.name}</p>
+                            <p>{ngo.oneDayEvents.location}</p>
+                            <p>{ngo.oneDayEvents.description}</p>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                    {ngo.event_description ? (
+                      <p className="event">{ngo.event_description}</p>
+                    ) : null}
+                    {ngo.event_date ? <p>Date: {ngo.event_date}</p> : null}
+                    {ngo.event_time ? <p>Time: {ngo.event_time}</p> : null}
+
+                    <div>{ngo.help ? <p>Duties: {ngo.help}</p> : null}</div>
+                    <div>
+                      {ngo.num_volunteers ? (
+                        <p>Volunteers needed: {ngo.num_volunteers}</p>
+                      ) : null}
+                    </div>
+                    {ngo.commitment ? (
+                      <p>
+                        Commitment: {ngo.commitment} hours /{ngo.frequency}
+                      </p>
+                    ) : null}
+
+                    {ngo.telephone ? <p>Tel: {ngo.telephone}</p> : null}
+                  </div>
+                </div>
+
+                {ngo.event === true &&
+                  mongoUser.userType === "organization" && (
+                    <p>{ngo.oneDayEvents.numVolunteers}</p>
+                  )}
+
+                {ngo.event === true && mongoUser.userType === "individual" && (
+                  <VolunteerBtn
+                    className="volunteer-btn"
+                    attending={
+                      mongoUser.attending &&
+                      mongoUser.attending.find((item) => {
+                        return item._id === ngo._id;
+                      })
+                        ? true
+                        : false
+                    }
+                    toggleModal={() => toggleModal(ngo)}
+                  />
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
 

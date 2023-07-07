@@ -1,14 +1,15 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { fetchUserData } from "../utils/fetchUserData";
+import { FiEdit2 } from "react-icons/fi";
+import { AiOutlineDelete } from "react-icons/ai";
 import { api } from "../utils/axios";
 import "./OrganizationEvents.css";
 import EditEvent from "./EditEvent";
 
 const OrganizationEvents = () => {
   const { mongoUser, setMongoUser, user } = useContext(AuthContext);
-  const [event, setEvent] = useState({});
-  const [isEditingEvent, setIsEditingEvent] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
   const [isAddingEvent, setIsAddingEvent] = useState(false);
   const [name, setName] = useState("");
   const [date, setDate] = useState("");
@@ -20,12 +21,29 @@ const OrganizationEvents = () => {
   const [description, setDescription] = useState("");
   const [serverError, setServerError] = useState("");
 
-  const handleCreateEvent = () => {
+  const handleAddEvent = () => {
     setIsAddingEvent(true);
   };
 
   const handleEditEvent = () => {
-    setIsEditingEvent(true);
+    setIsEditing(true);
+  };
+
+  const handleDeleteEvent = async () => {
+    try {
+      const token = await user.getIdToken();
+      console.log("getting token");
+      await api.delete(`/user/${user.uid}/event`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setServerError("");
+      await fetchUserData(user.uid, setMongoUser, token);
+      setIsAddingEvent(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const createEvent = async (e) => {
@@ -33,7 +51,7 @@ const OrganizationEvents = () => {
     try {
       const token = await user.getIdToken();
       console.log("getting token");
-      const res = await api.post(
+      await api.post(
         `/user/${user.uid}/event`,
         {
           name: `${name}`,
@@ -51,9 +69,6 @@ const OrganizationEvents = () => {
           },
         }
       );
-      setEvent(res.data);
-      console.log(res.data);
-      console.log("event is", event);
       setServerError("");
       await fetchUserData(user.uid, setMongoUser, token);
       setIsAddingEvent(false);
@@ -66,33 +81,62 @@ const OrganizationEvents = () => {
     }
   };
 
-  if (!mongoUser) return null;
-  console.log(mongoUser);
-
   return (
     <div>
       <div className="event-profile">
         <div className="left-side">
-          {mongoUser ? (
+          {mongoUser.oneDayEvents && (
             <div>
-              <p>Date:{mongoUser.firstname} </p>
-              <p>Time: {mongoUser.email}</p>
-              {/* <p>Location: {mongoUser.oneDayEvents} </p> */}
-              {/* <p>Description: {mongoUser.organization.name} </p> */}
-              <p>Help needed: </p>
-              <p>Numbers needed: </p>
-              <button onClick={handleEditEvent} className="edit-btn">
-                Edit Event
-              </button>
+              <h4>Scheduled events</h4>
+
+              {mongoUser.oneDayEvents.map((event, idx) => (
+                <div key={idx} className="event-card">
+                  <p className="event-name">{event.name}</p>
+                  <p className="event-location"> {event.location} </p>
+                  <p className="event-desc">{event.description}</p>
+                  <p>
+                    Date: <span>{event.date} </span>
+                  </p>
+                  <p>
+                    Time:
+                    <span>
+                      {event.startTime}-{event.endTime}
+                    </span>
+                  </p>
+                  <p className="event-desc">
+                    People:<span>{event.numVolunteers}</span>volunteers needed
+                  </p>
+
+                  {mongoUser.oneDayEvents && (
+                    <div>
+                      <h4>Volunteers attending</h4>
+
+                      {mongoUser.oneDayEvents.map((volunteer, idx) => (
+                        <div key={idx} className="volunteers">
+                          <p>{volunteer.email}</p>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Get names of volunteers */}
+
+                  <div className="edit-row">
+                    <button onClick={handleEditEvent} className="react-btn">
+                      <FiEdit2 />
+                    </button>
+                    <button onClick={handleDeleteEvent} className="react-btn">
+                      <AiOutlineDelete />
+                    </button>
+                  </div>
+                </div>
+              ))}
             </div>
-          ) : (
-            <>
-              <p>Add an event to our database:</p>
-              <button onClick={handleCreateEvent} className="edit-btn">
-                Add Event
-              </button>
-            </>
           )}
+
+          <button onClick={() => setIsAddingEvent(true)} className="create-btn">
+            Create Event
+          </button>
         </div>
 
         <div className="right-side">
@@ -119,7 +163,7 @@ const OrganizationEvents = () => {
                   type="time"
                   className="event-time"
                   value={startTime}
-                  min="2023-07-01"
+                  min="2023-01-01"
                   max="2024-12-31"
                   placeholder="Event time"
                   onChange={(e) => setStartTime(e.target.value)}
@@ -163,13 +207,21 @@ const OrganizationEvents = () => {
                 onChange={(e) => setNumVolunteers(e.target.value)}
               />
               {serverError && <p className="server-error">{serverError}</p>}
-              <button className="create-btn" onClick={createEvent}>
-                Create Event
-              </button>
+              <div className="buttons">
+                <button className="save-ngo" onClick={createEvent}>
+                  Save Changes
+                </button>
+                <button
+                  className="save-ngo"
+                  onClick={() => setIsEditing(false)}
+                >
+                  Cancel
+                </button>
+              </div>
             </form>
           ) : null}
 
-          {isEditingEvent && (
+          {isEditing && (
             <EditEvent
               {...{
                 name,
@@ -180,7 +232,7 @@ const OrganizationEvents = () => {
                 description,
                 help,
                 numVolunteers,
-                setIsEditingEvent,
+                setIsEditing,
               }}
             />
           )}

@@ -5,6 +5,7 @@ input {
 }
 .server-error {
   color: blue;
+  font-size: 14px;
 }
 .about {
   height: 40px;
@@ -24,6 +25,10 @@ select {
 .email-ngo,
 .ngo-website {
   color: blue;
+}
+.edit-row {
+  display: flex;
+  flex-direction: row;
 }
 h5 {
   margin-bottom: 2px;
@@ -47,6 +52,7 @@ h5 {
   border: 2px solid blueviolet;
   border-radius: 5px;
   height: 25px;
+  margin-right: 20px;
 }
 .edit-btn:hover,
 .save-btn:hover {

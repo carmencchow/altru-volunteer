@@ -20,20 +20,20 @@ const OrganizationProfile = () => {
   const [serverError, setServerError] = useState("");
   const { user, setMongoUser, mongoUser } = useContext(AuthContext);
 
-  const handleAdd = () => {
+  const handleAddNGO = () => {
     setIsAddingNGO(true);
   };
 
-  const handleEdit = () => {
+  const handleEditNGO = () => {
     setIsEditing(true);
   };
 
-  const saveProfileChanges = async (e) => {
+  const createProfile = async (e) => {
     e.preventDefault();
     try {
       const token = await user.getIdToken();
       console.log("getting token");
-      const res = await api.post(
+      await api.post(
         `/user/${user.uid}/addNgo`,
         {
           name: `${name}`,
@@ -51,10 +51,9 @@ const OrganizationProfile = () => {
           },
         }
       );
-      setServerError("");
       await fetchUserData(user.uid, setMongoUser, token);
+      setServerError("");
       setIsAddingNGO(false);
-      console.log("Data", res.data);
     } catch (err) {
       if (err.response && err.response.status === 400) {
         setServerError(err.response.data.error);
@@ -89,11 +88,11 @@ const OrganizationProfile = () => {
             </div>
           )}
           {!mongoUser.organization ? (
-            <button onClick={handleAdd} className="edit-btn">
+            <button onClick={handleAddNGO} className="edit-btn">
               Add NGO
             </button>
           ) : (
-            <button onClick={handleEdit} className="edit-btn">
+            <button onClick={handleEditNGO} className="edit-btn">
               Edit NGO
             </button>
           )}
@@ -112,7 +111,6 @@ const OrganizationProfile = () => {
                 placeholder="Name of nonprofit"
                 onChange={(e) => setName(e.target.value)}
               />
-              {serverError && <p className="server-error">{serverError}</p>}
               <input
                 type="text"
                 className="about"
@@ -186,7 +184,10 @@ const OrganizationProfile = () => {
                 value={help}
                 onChange={(e) => setHelp(e.target.value)}
               />
-              <button className="edit-btn" onClick={saveProfileChanges}>
+
+              {serverError && <p className="server-error">{serverError}</p>}
+
+              <button className="edit-btn" onClick={createProfile}>
                 Save Profile
               </button>
             </form>
