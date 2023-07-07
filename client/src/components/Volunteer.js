@@ -61,7 +61,6 @@ const Volunteer = () => {
           ></button>
         </div>
       ) : (
-        // Hide previous button if you're on the last page
         <div className="pagination">
           <button
             disabled={currentPage === 1}
@@ -88,9 +87,9 @@ const Volunteer = () => {
                       <div className="single-events">
                         {ngo.oneDayEvents.map((event, idx) => (
                           <div key={idx}>
-                            <p>Name: {ngo.oneDayEvents.name}</p>
-                            <p>{ngo.oneDayEvents.location}</p>
-                            <p>{ngo.oneDayEvents.description}</p>
+                            <p>Name: {event.name}</p>
+                            <p>{event.location}</p>
+                            <p>{event.description}</p>
                           </div>
                         ))}
                       </div>

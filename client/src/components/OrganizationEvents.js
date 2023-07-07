@@ -21,10 +21,6 @@ const OrganizationEvents = () => {
   const [description, setDescription] = useState("");
   const [serverError, setServerError] = useState("");
 
-  const handleAddEvent = () => {
-    setIsAddingEvent(true);
-  };
-
   const handleEditEvent = () => {
     setIsEditing(true);
   };
@@ -110,10 +106,11 @@ const OrganizationEvents = () => {
                   {mongoUser.oneDayEvents && (
                     <div>
                       <h4>Volunteers attending</h4>
-
-                      {mongoUser.oneDayEvents.map((volunteer, idx) => (
+                      {mongoUser.oneDayEvents.map((event, idx) => (
                         <div key={idx} className="volunteers">
-                          <p>{volunteer.email}</p>
+                          <p>Name: {event.volunteers.firstname}</p>
+                          <p>{event.volunteers.lastname}</p>
+                          <p>Email: {event.volunteers.email}</p>
                         </div>
                       ))}
                     </div>

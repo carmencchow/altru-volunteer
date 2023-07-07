@@ -41,7 +41,7 @@ const ngoSchema = new mongoose.Schema({
   oneDayEvents: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Event",
+      ref: "et",
     },
   ],
   volunteers: [

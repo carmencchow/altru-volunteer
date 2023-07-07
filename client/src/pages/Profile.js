@@ -1,13 +1,13 @@
 import React, { useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import UserDonations from "../components/UserDonations";
-import UserVolunteers from "../components/UserVolunteers";
+import UserEvents from "../components/UserEvents";
 import UserProfile from "../components/UserProfile";
 import Navbar from "../components/Navbar";
 import "./Profile.css";
 import OrganizationProfile from "../components/OrganizationProfile";
 import OrganizationDonations from "../components/OrganizationDonations";
-import OrganizationVolunteers from "../components/OrganizationEvents";
+import OrganizationEvents from "../components/OrganizationEvents";
 
 const Profile = () => {
   const { mongoUser } = useContext(AuthContext);
@@ -85,9 +85,9 @@ const Profile = () => {
             >
               <div>
                 {mongoUser.userType === "individual" ? (
-                  <UserVolunteers />
+                  <UserEvents />
                 ) : (
-                  <OrganizationVolunteers />
+                  <OrganizationEvents />
                 )}
               </div>
             </div>

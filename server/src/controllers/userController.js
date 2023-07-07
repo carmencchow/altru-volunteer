@@ -3,31 +3,55 @@ import Ngo from "../models/ngoModel.js";
 import Donation from "../models/donationModel.js";
 import Event from "../models/eventModel.js";
 
-// GET USER by ID:
+// GET MdB USER by ID:
 const getUser = async (req, res) => {
-  const { id } = req.params;
-  const user = await User.findById(id)
-    .populate("ngos")
-    .populate("organization")
-    .populate(["oneDayEvents"])
-    .populate("attending")
-    .populate([
-      {
-        path: "donations",
-        model: Donation,
-        populate: {
-          path: "donor.user",
-          model: User,
-        },
-      },
-    ])
-    .populate("receivingDonations")
-    .exec();
-  console.log("user", user);
-  if (!user) {
+  try {
+    const { id } = req.params;
+    const user = await User.findById(id)
+      .populate("ngos")
+      .populate("organization")
+      .populate("receivingDonations")
+      .populate("oneDayEvents")
+      .populate("attending");
+    // .populate([
+    //   {
+    //     path: "oneDayEvents",
+    //     model: "Event",
+    //     populate: {
+    //       path: "volunteers",
+    //       model: "User",
+    //     },
+    //   },
+    // ])
+    // .populate("attending")
+    // .populate([
+    //   {
+    //     path: "donations",
+    //     model: "Donation",
+    //     populate: {
+    //       path: "donor",
+    //       model: "User",
+    //     },
+    //   },
+    // ])
+    // .populate([
+    //   {
+    //     path: "receivingDonations",
+    //     model: "Donation",
+    //     populate: {
+    //       path: "donor",
+    //       model: "User",
+    //     },
+    //   },
+    // ]);
+    console.log("get user data");
+    if (!user) {
+      return res.status(200).json({ user });
+    }
+  } catch (err) {
+    console.log(err);
     return res.status(404).json({ err: "User doesn't exist" });
   }
-  res.status(200).json(user);
 };
 
 // UPDATE user
@@ -380,7 +404,7 @@ const attendEvent = async (req, res) => {
       { new: true }
     );
     await Promise.all([ngo.save(), user.save()]);
-    res.status(200).send({ results: user, message: user.attending });
+    res.status(200).send({ "Events:": user.attending });
   } catch (err) {
     console.log(err);
     res.status(400).send("Couldn't add event");

@@ -33,7 +33,6 @@ const Modal = ({
 
     try {
       const token = await user.getIdToken();
-
       // Add event to user
       const res = await api.post(
         `/user/${user.uid}/attend`,
@@ -62,9 +61,10 @@ const Modal = ({
       );
       setConfirmMessage("");
       const resData = response.data;
-      console.log(res.data.results.attending, resData.num_volunteers);
+      console.log("EventsArr:", resData);
       await fetchUserData(user.uid, setMongoUser, token);
       await getNgo(ngoModal);
+      console.log("close modal");
       setOpenModal(false);
 
       // sgMail.setApiKey(process.env.SENDGRID_API_KEY);

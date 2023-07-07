@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
-import "./UserVolunteers.css";
+import "./UserEvents.css";
 
-const UserVolunteers = () => {
+const UserEvents = () => {
   const { mongoUser } = useContext(AuthContext);
 
   return (
@@ -13,13 +13,13 @@ const UserVolunteers = () => {
           mongoUser.attending.map((event, idx) => (
             <div className="list" key={idx}>
               <div className="place">
-                <p>{event.name}</p>
+                <p>Event: {event.oneDayEvents.name}</p>
                 <div className="date">
                   <p>
-                    Location: <span>{event.location}</span>
-                  </p>{" "}
+                    Location: <span>{event.oneDayEvents.location}</span>
+                  </p>
                   <p>
-                    Date: <span>{event.date}</span>
+                    Date: <span>{event.oneDayEvents.date}</span>
                   </p>
                 </div>
               </div>
@@ -30,4 +30,4 @@ const UserVolunteers = () => {
   );
 };
 
-export default UserVolunteers;
+export default UserEvents;

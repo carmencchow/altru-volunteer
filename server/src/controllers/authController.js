@@ -22,36 +22,48 @@ const createUser = async (req, res) => {
   }
 };
 
-// VERIFY existing user
+// VERIFY existing FB user
 const verifyUser = async (req, res) => {
   try {
     const uid = req.body.uid;
     const user = await User.findById(uid)
       .populate("ngos")
       .populate("organization")
+      .populate("receivingDonations")
       .populate("oneDayEvents")
-      .populate("attending")
-      .populate([
-        {
-          path: "donations",
-          model: "Donation",
-          populate: {
-            path: "donor",
-            model: "User",
-          },
-        },
-      ])
-      .populate([
-        {
-          path: "receivingDonations",
-          model: "Donation",
-          populate: {
-            path: "donor",
-            model: "User",
-          },
-        },
-      ]);
-    console.log("MongoDB User verified", user);
+      .populate("attending");
+    // .populate([
+    //   {
+    //     path: "oneDayEvents",
+    //     model: "Event",
+    //     populate: {
+    //       path: "volunteers",
+    //       model: "User",
+    //     },
+    //   },
+    // ])
+    // .populate("attending")
+    // .populate([
+    //   {
+    //     path: "donations",
+    //     model: "Donation",
+    //     populate: {
+    //       path: "donor",
+    //       model: "User",
+    //     },
+    //   },
+    // ])
+    // .populate([
+    //   {
+    //     path: "receivingDonations",
+    //     model: "Donation",
+    //     populate: {
+    //       path: "donor",
+    //       model: "User",
+    //     },
+    //   },
+    // ]);
+    console.log("verifyUser:", user._id);
     return res.status(200).json({ user: user });
   } catch (err) {
     console.log(err);

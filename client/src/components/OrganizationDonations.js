@@ -10,9 +10,6 @@ const OrganizationDonations = () => {
       <div className="stats">
         <div className="donation-history">
           <h4>Donor List </h4>
-          <h5>
-            A record of the generous donors and sponsors who support your cause
-          </h5>
         </div>
 
         <div className="donated-amounts">
