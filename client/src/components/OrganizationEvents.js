@@ -21,33 +21,6 @@ const OrganizationEvents = () => {
   const [description, setDescription] = useState("");
   const [serverError, setServerError] = useState("");
 
-  const days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
-
-  const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-
-  const now = new Date("06/07/2023");
-
   const handleAddEvent = () => {
     setIsAddingEvent(true);
   };
@@ -130,23 +103,23 @@ const OrganizationEvents = () => {
                       {event.startTime}-{event.endTime}
                     </span>
                   </p>
+                  <p className="event-desc">
+                    People:<span>{event.numVolunteers}</span>volunteers needed
+                  </p>
 
-                  {mongoUser.oneDayEvents.volunteers && (
+                  {mongoUser.oneDayEvents && (
                     <div>
                       <h4>Volunteers attending</h4>
-                      <p>
-                        Volunteers needed: {mongoUser.oneDayEvent.numVolunteers}
-                      </p>
-                      {mongoUser.oneDayEvents.volunteers.map(
-                        (volunteer, idx) => (
-                          <div key={idx} className="volunteers">
-                            {volunteer.name}
-                            <p>{volunteer.email}</p>
-                          </div>
-                        )
-                      )}
+
+                      {mongoUser.oneDayEvents.map((volunteer, idx) => (
+                        <div key={idx} className="volunteers">
+                          <p>{volunteer.email}</p>
+                        </div>
+                      ))}
                     </div>
                   )}
+
+                  {/* Get names of volunteers */}
 
                   <div className="edit-row">
                     <button onClick={handleEditEvent} className="react-btn">
