@@ -19,7 +19,10 @@ const OrganizationDonations = () => {
           {mongoUser.receivingDonations.map((donation, idx) => (
             <div key={idx} className="donations">
               <span className="amount-span">${donation.amount}</span>
-              <span>{donation.donor}</span>
+              <span>
+                {donation.donor.firstname}
+                {donation.donor.lastname}
+              </span>
               <span>{donation.ngoName}</span>
               <span>{String(donation.date).slice(0, 10)}</span>
             </div>

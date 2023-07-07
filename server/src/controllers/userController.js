@@ -7,10 +7,23 @@ import Event from "../models/eventModel.js";
 const getUser = async (req, res) => {
   const { id } = req.params;
   const user = await User.findById(id)
+    .populate("ngos")
+    .populate("organization")
+    .populate(["oneDayEvents"])
     .populate("attending")
-    .populate("donations")
-    .populate("oneDayEvents")
-    .populate("ngos");
+    .populate([
+      {
+        path: "donations",
+        model: Donation,
+        populate: {
+          path: "donor.user",
+          model: User,
+        },
+      },
+    ])
+    .populate("receivingDonations")
+    .exec();
+  console.log("user", user);
   if (!user) {
     return res.status(404).json({ err: "User doesn't exist" });
   }

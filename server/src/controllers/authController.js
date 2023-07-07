@@ -31,8 +31,26 @@ const verifyUser = async (req, res) => {
       .populate("organization")
       .populate("oneDayEvents")
       .populate("attending")
-      .populate("donations")
-      .populate("receivingDonations");
+      .populate([
+        {
+          path: "donations",
+          model: "Donation",
+          populate: {
+            path: "donor",
+            model: "User",
+          },
+        },
+      ])
+      .populate([
+        {
+          path: "receivingDonations",
+          model: "Donation",
+          populate: {
+            path: "donor",
+            model: "User",
+          },
+        },
+      ]);
     console.log("MongoDB User verified", user);
     return res.status(200).json({ user: user });
   } catch (err) {

@@ -63,6 +63,8 @@ const getFiltered = async (req, res) => {
 const getEvent = async (req, res) => {
   try {
     const ngo = await Ngo.findById(req.params.id);
+    const event = await Ngo.findByOne({ _id: oneDayEvents });
+    console.log(event);
     console.log("Ngo is", ngo, ngo.oneDayEvents);
     res.status(200).json({ events: oneDayEvents });
   } catch (err) {
