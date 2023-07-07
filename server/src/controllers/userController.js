@@ -10,40 +10,40 @@ const getUser = async (req, res) => {
     const user = await User.findById(id)
       .populate("ngos")
       .populate("organization")
-      .populate("receivingDonations")
+      // .populate("receivingDonations")
       .populate("oneDayEvents")
-      .populate("attending");
-    // .populate([
-    //   {
-    //     path: "oneDayEvents",
-    //     model: "Event",
-    //     populate: {
-    //       path: "volunteers",
-    //       model: "User",
-    //     },
-    //   },
-    // ])
-    // .populate("attending")
-    // .populate([
-    //   {
-    //     path: "donations",
-    //     model: "Donation",
-    //     populate: {
-    //       path: "donor",
-    //       model: "User",
-    //     },
-    //   },
-    // ])
-    // .populate([
-    //   {
-    //     path: "receivingDonations",
-    //     model: "Donation",
-    //     populate: {
-    //       path: "donor",
-    //       model: "User",
-    //     },
-    //   },
-    // ]);
+      .populate("attending")
+      // .populate([
+      //   {
+      //     path: "oneDayEvents",
+      //     model: "Event",
+      //     populate: {
+      //       path: "volunteers",
+      //       model: "User",
+      //     },
+      //   },
+      // ])
+      // .populate("attending")
+      .populate([
+        {
+          path: "donations",
+          model: "Donation",
+          populate: {
+            path: "donor",
+            model: "User",
+          },
+        },
+      ])
+      .populate([
+        {
+          path: "receivingDonations",
+          model: "Donation",
+          populate: {
+            path: "donor",
+            model: "User",
+          },
+        },
+      ]);
     console.log("get user data");
     if (!user) {
       return res.status(200).json({ user });
