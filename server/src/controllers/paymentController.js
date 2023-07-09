@@ -4,7 +4,6 @@ const getPayment = (req, res) => {
   const donation = req.body.donation;
   const token = req.body.token;
   console.log(`Donation amount: ${donation}`);
-  // const idempotencyKey = uuid();
 
   return stripe.customers
     .create({

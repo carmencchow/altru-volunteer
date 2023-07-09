@@ -4,10 +4,10 @@ import { fetchUserData } from "../utils/fetchUserData";
 import { FiEdit2 } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
 import { api } from "../utils/axios";
-import "./OrganizationEvents.css";
+import "./NgoEvents.css";
 import EditEvent from "./EditEvent";
 
-const OrganizationEvents = () => {
+const NgoEvents = () => {
   const { mongoUser, setMongoUser, user } = useContext(AuthContext);
   const [isEditing, setIsEditing] = useState(false);
   const [isAddingEvent, setIsAddingEvent] = useState(false);
@@ -239,4 +239,4 @@ const OrganizationEvents = () => {
   );
 };
 
-export default OrganizationEvents;
+export default NgoEvents;

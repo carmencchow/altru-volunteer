@@ -17,7 +17,7 @@ const Signup = () => {
 
   const handleChecked = () => {
     setIsChecked(true);
-    console.log("checked");
+    console.log("isOrganizer checked");
   };
 
   const homepage = () => {
@@ -29,11 +29,13 @@ const Signup = () => {
   };
 
   const handleSignUp = async () => {
-    const userType = isChecked ? "organization" : "individual";
-    if (email && password && userType) {
+    const isOrganizer = isChecked ? true : false;
+    if (email && password && isOrganizer) {
+      console.log(email, password, isOrganizer);
       // Send email and password to Firebase
       const data = await signUp(email, password);
-      console.log("Register new user:", data);
+      console.log("data", data);
+      console.log("Register new user in Firebase:", data);
       const token = await data.user.getIdToken();
       // Send user data to server to add to mongoDB
       await api.post(
@@ -43,7 +45,7 @@ const Signup = () => {
           email: data.user.email,
           firstname: firstname,
           lastname: lastname,
-          userType: userType,
+          isOrganizer,
         },
         {
           headers: {
@@ -56,7 +58,7 @@ const Signup = () => {
 
   useEffect(() => {
     if (user) {
-      navigate("/volunteer");
+      navigate("/ngos");
     }
   }, [user]);
 

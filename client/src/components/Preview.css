@@ -1,0 +1,41 @@
+.about-section {
+  border: 1px solid orange;
+  width: 90%;
+  margin: 0% auto;
+}
+.background-image {
+  border: 3px dotted plum;
+  margin: 2% auto;
+  height: 200px;
+  width: 90%;
+  position: relative;
+}
+.info {
+  display: flex;
+  flex-direction: row;
+}
+span {
+  font-weight: bold;
+}
+.image {
+  border-radius: 5px;
+  border: none;
+  padding: 5px;
+  display: flex;
+  flex-direction: row;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  position: absolute;
+}
+.events {
+  border: 1px solid orange;
+  width: 90%;
+  margin: 5% auto;
+}
+.events-grid {
+  border: 3px dotted plum;
+  margin: 2% auto;
+  height: 200px;
+  width: 90%;
+  position: relative;
+}

@@ -5,10 +5,27 @@ import { AuthContext } from "./AuthContext";
 export const NgosContext = createContext();
 
 export const NgosProvider = ({ children }) => {
+  const [ngo, setNgo] = useState(null); // newly created Ngo
   const [ngos, setNgos] = useState([]);
   const [ngoModal, setNgoModal] = useState({});
   const [ngoId, setNgoId] = useState("");
   const { user } = useContext(AuthContext);
+
+  // // Fetch an Ngo
+  // const fetchNgo = async (req, res) => {
+  //   try {
+  //     const token = await user.getIdToken();
+  //     const res = await api.get(`/ngo/${ngo._id}`, {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     });
+  //     setNgo(res.data);
+  //     console.log("data", res.data);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   const getNgo = async (ngo) => {
     try {
@@ -19,7 +36,7 @@ export const NgosProvider = ({ children }) => {
         },
       });
 
-      // Update with newest copy of ngo
+      // Update the ngo in the `ngos` array:
       const updatedNgo = res.data;
       const arrayCopy = [...ngos];
       const idx = arrayCopy.findIndex((ngo) => ngo._id === updatedNgo._id);
@@ -56,8 +73,11 @@ export const NgosProvider = ({ children }) => {
       value={{
         getNgo,
         fetchNgoModal,
+        ngo,
+        setNgo,
         ngos,
         setNgos,
+        // fetchNgo,
         ngoId,
         setNgoId,
       }}

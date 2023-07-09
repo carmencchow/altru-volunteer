@@ -1,27 +1,20 @@
 import mongoose from "mongoose";
 
 const donationSchema = new mongoose.Schema({
-  ngoName: {
-    type: String,
+  ngo: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Ngo",
   },
   donor: {
-    type: String,
-    ref: "User",
-  },
-  donee: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
   amount: {
-    type: String,
+    type: Number,
   },
   date: {
     type: Date,
     default: Date.now,
-  },
-  parentNgo: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Ngo",
   },
 });
 

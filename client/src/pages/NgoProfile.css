@@ -17,10 +17,11 @@
   display: flex;
   flex-direction: row;
   text-align: center;
+  border-bottom: 2px dashed purple;
 }
 .tabs,
 .active-tabs {
-  border-bottom: none;
+  border-bottom: blue;
   width: 33%;
   font-size: 20px;
   padding: 20px 30px;
@@ -28,9 +29,9 @@
   box-sizing: content-box;
 }
 .active-tabs {
-  color: white;
+  color: blue;
   font-size: 20px;
-  border-bottom: 5px solid blue;
+  font-weight: bolder;
   width: 33%;
 }
 .content {
@@ -49,6 +50,23 @@
   background: white;
   max-width: 900px;
   width: 90vw;
+}
+.preview-btn {
+  margin-top: 0px;
+  background-color: rgb(125, 125, 239);
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  color: white;
+}
+.preview-btn:hover {
+  margin-top: 0px;
+  border: none;
+  background-color: rgb(75, 75, 246);
+  color: white;
+  border-radius: 10px;
+  padding: 10px;
+  transition: ease-in 0.5s;
 }
 
 /* Media Queries */

@@ -3,16 +3,18 @@ import { AuthContextProvider } from "./context/AuthContext";
 import { NotificationProvider } from "./context/NotificationContext";
 import { FiltersProvider } from "./context/FiltersContext";
 import { NgosProvider } from "./context/NgosContext";
-import { ProtectedRoute } from "./ProtectedRoute";
-import Volunteer from "./components/Volunteer";
-import Profile from "./pages/Profile";
+import { ProtectedRouteforUser } from "./ProtectedRouteforUser";
+import { ProtectedRouteforNGO } from "./ProtectedRouteforNGO";
+import UserProfile from "./pages/UserProfile";
+import NgoProfile from "./pages/NgoProfile";
+import Events from "./pages/Events";
+import Ngos from "./pages/Ngos";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
-import Edit from "./pages/Edit";
-import EditNGO from "./pages/EditNGO";
-import Info from "./pages/Info";
+import Ngo from "./pages/Ngo";
 import "./App.css";
+import Preview from "./components/Preview";
 
 function App() {
   return (
@@ -22,16 +24,22 @@ function App() {
           <FiltersProvider>
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
-              <Route element={<ProtectedRoute />}>
-                <Route path="/volunteer" element={<Volunteer />} />
-                <Route path="/info/:id" element={<Info />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route path="/edit" element={<Edit />} />
-                <Route path="/editNGO" element={<EditNGO />} />
-                <Route path="*" element={<Navigate to="/" />} />
+              <Route path="/login" element={<Login />} />
+
+              <Route element={<ProtectedRouteforUser />}>
+                <Route path="/ngos" element={<Ngos />} />
+                <Route path="/events" element={<Events />} />
+                <Route path="/ngo/:id" element={<Ngo />} />
+                <Route path="/user/profile" element={<UserProfile />} />
               </Route>
+
+              <Route element={<ProtectedRouteforNGO />}>
+                <Route path="/profile" element={<NgoProfile />} />
+                <Route path="/preview" element={<Preview />} />
+              </Route>
+
+              <Route path="*" element={<Navigate to="/" />} />
             </Routes>
           </FiltersProvider>
         </NgosProvider>

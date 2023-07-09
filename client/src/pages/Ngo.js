@@ -8,11 +8,10 @@ import AmountBtn from "../components/AmountBtn";
 import Form from "../components/Form";
 import FollowBtn from "../components/FollowBtn";
 import logo from "../assets/altru.png";
-import "./Info.css";
 import { api } from "../utils/axios";
-import "./Info.css";
+import "./Ngo.css";
 
-const Info = () => {
+const Ngo = () => {
   const navigate = useNavigate();
   const { user, setMongoUser } = useContext(AuthContext);
   const { id } = useParams();
@@ -147,4 +146,4 @@ const Info = () => {
   );
 };
 
-export default Info;
+export default Ngo;

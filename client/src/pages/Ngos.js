@@ -6,9 +6,9 @@ import VolunteerBtn from "../components/VolunteerBtn";
 import Filters from "../components/Filters";
 import Navbar from "../components/Navbar";
 import Modal from "../components/Modal";
-import "./Volunteer.css";
+import "./Ngos.css";
 
-const Volunteer = () => {
+const Ngos = () => {
   const { mongoUser } = useContext(AuthContext);
   const { ngos } = useContext(NgosContext);
   const [currentPage, setCurrentPage] = useState(1);
@@ -80,12 +80,16 @@ const Volunteer = () => {
                   onClick={() => handleNgoSelected(ngo._id)}
                 >
                   {ngo.name}
+                  <p>{ngo.description}</p>
+                  <p>{ngo.url}</p>
+                  <p>{ngo.telephone}</p>
+                  <p>{ngo.contact}</p>
                 </div>
-                <div className="show-details">
+                {/* <div className="show-details">
                   <div>
-                    {ngo.oneDayEvents.length > 0 && (
+                    {ngo.length > 0 && (
                       <div className="single-events">
-                        {ngo.oneDayEvents.map((event, idx) => (
+                        {ngo.map((event, idx) => (
                           <div key={idx}>
                             <p>Name: {event.name}</p>
                             <p>{event.location}</p>
@@ -117,24 +121,27 @@ const Volunteer = () => {
                 </div>
 
                 {ngo.event === true &&
-                  mongoUser.userType === "organization" && (
+                  mongoUser.isOrganizer &&
+                  mongoUser.isOrganizer(
                     <p>{ngo.oneDayEvents.numVolunteers}</p>
                   )}
 
-                {ngo.event === true && mongoUser.userType === "individual" && (
-                  <VolunteerBtn
-                    className="volunteer-btn"
-                    attending={
-                      mongoUser.attending &&
-                      mongoUser.attending.find((item) => {
-                        return item._id === ngo._id;
-                      })
-                        ? true
-                        : false
-                    }
-                    toggleModal={() => toggleModal(ngo)}
-                  />
-                )}
+                {ngo.event === true &&
+                  mongoUser.isOrganizer &&
+                  mongoUser.isOrganizer(
+                    <VolunteerBtn
+                      className="volunteer-btn"
+                      attending={
+                        mongoUser.attending &&
+                        mongoUser.attending.find((item) => {
+                          return item._id === ngo._id;
+                        })
+                          ? true
+                          : false
+                      }
+                      toggleModal={() => toggleModal(ngo)}
+                    />
+                  )} */}
               </div>
             );
           })}
@@ -157,4 +164,4 @@ const Volunteer = () => {
   );
 };
 
-export default Volunteer;
+export default Ngos;
