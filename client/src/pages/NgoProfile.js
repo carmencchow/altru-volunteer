@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import Navbar from "../components/Navbar";
 import NgoInfo from "../components/NgoInfo";
-// import NgoDonations from "../components/NgoDonations";
-// import NgoEvents from "../components/NgoEvents";
+import NgoDonations from "../components/NgoDonations";
 import "./NgoProfile.css";
+import NgoEvents from "../components/NgoEvents";
 
 const NgoProfile = () => {
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ const NgoProfile = () => {
         <div className="tabs-container">
           <div className="heading-tabs">
             <button className="preview-btn" onClick={handlePreview}>
-              Live Preview
+              Preview Page
             </button>
 
             <div
@@ -71,7 +71,9 @@ const NgoProfile = () => {
                 toggleState === 2 ? "content active-content" : "content"
               }
             >
-              <div>{/* <NgoDonations /> */}</div>
+              <div>
+                <NgoDonations />
+              </div>
             </div>
 
             <div
@@ -79,7 +81,9 @@ const NgoProfile = () => {
                 toggleState === 3 ? "content active-content" : "content"
               }
             >
-              <div>{/* <NgoEvents /> */}</div>
+              <div>
+                <NgoEvents />
+              </div>
             </div>
           </div>
         </div>

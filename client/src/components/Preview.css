@@ -33,6 +33,11 @@ span {
   margin: 5% auto;
 }
 .events-grid {
+  display: grid;
+  column-count: 3;
+  grid-row: 1fr 1fr 1fr;
+}
+.events-card {
   border: 3px dotted plum;
   margin: 2% auto;
   height: 200px;

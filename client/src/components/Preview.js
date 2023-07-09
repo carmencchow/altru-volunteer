@@ -18,7 +18,7 @@ const Preview = () => {
   };
   return (
     <div>
-      Preview
+      <span> Preview Page</span>
       <span className="back" onClick={() => navigate(-1)}>
         Back
       </span>
@@ -63,6 +63,29 @@ const Preview = () => {
             <p>description:</p>
             <p>duties:</p>
             <p>numVol:</p>
+            <button onClick={register}>Sign up for more info</button>
+          </div>
+          <div className="events-card">
+            <p>name:</p>
+            <p>date:</p>
+            <p>time:</p>
+            <p>location:</p>
+            <p>description:</p>
+            <p>duties:</p>
+            <p>numVol:</p>
+            <button onClick={register}>Sign up for more info</button>
+          </div>
+
+          <div className="events-card">
+            <p>name:</p>
+            <p>date:</p>
+            <p>time:</p>
+            <p>location:</p>
+            <p>description:</p>
+            <p>duties:</p>
+            <p>numVol:</p>
+
+            {/* SendMail email contact person */}
             <button onClick={register}>Sign up for more info</button>
           </div>
         </div>

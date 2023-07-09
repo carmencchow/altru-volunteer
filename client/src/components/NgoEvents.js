@@ -80,6 +80,15 @@ const NgoEvents = () => {
   return (
     <div>
       <div className="event-profile">
+        <div className="side">
+          <h4>Scheduled Events</h4>
+          <h4>Registered Volunteers</h4>
+
+          <button onClick={() => setIsAddingEvent(true)} className="create-btn">
+            Create Event
+          </button>
+        </div>
+
         <div className="left-side">
           {mongoUser.oneDayEvents && (
             <div>
@@ -102,6 +111,8 @@ const NgoEvents = () => {
                   <p className="event-desc">
                     People:<span>{event.numVolunteers}</span>volunteers needed
                   </p>
+
+                  <h4>Registered Volunteers</h4>
 
                   {mongoUser.oneDayEvents && (
                     <div>
@@ -131,9 +142,9 @@ const NgoEvents = () => {
             </div>
           )}
 
-          <button onClick={() => setIsAddingEvent(true)} className="create-btn">
+          {/* <button onClick={() => setIsAddingEvent(true)} className="create-btn">
             Create Event
-          </button>
+          </button> */}
         </div>
 
         <div className="right-side">

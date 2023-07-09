@@ -54,3 +54,7 @@
 .react-btn:hover {
   color: plum;
 }
+.side {
+  display: flex;
+  flex-direction: column;
+}
