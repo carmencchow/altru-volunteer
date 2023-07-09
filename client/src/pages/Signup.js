@@ -30,7 +30,8 @@ const Signup = () => {
 
   const handleSignUp = async () => {
     const isOrganizer = isChecked ? true : false;
-    if (email && password && isOrganizer) {
+    console.log("individual accoutn", email, password);
+    if (email && password && (isOrganizer || !isOrganizer)) {
       console.log(email, password, isOrganizer);
       // Send email and password to Firebase
       const data = await signUp(email, password);

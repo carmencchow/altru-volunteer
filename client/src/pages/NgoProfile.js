@@ -4,8 +4,8 @@ import { AuthContext } from "../context/AuthContext";
 import Navbar from "../components/Navbar";
 import NgoInfo from "../components/NgoInfo";
 import NgoDonations from "../components/NgoDonations";
-import "./NgoProfile.css";
 import NgoEvents from "../components/NgoEvents";
+import "./NgoProfile.css";
 
 const NgoProfile = () => {
   const navigate = useNavigate();

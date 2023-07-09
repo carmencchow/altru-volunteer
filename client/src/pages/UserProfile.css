@@ -8,8 +8,25 @@
   margin-top: 0px;
   font-size: 14px;
 }
+button {
+  cursor: pointer;
+}
+.goal-btn {
+  height: 20px;
+  width: 150px;
+}
+.user-profile {
+  border: 1px solid orange;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+}
 .user-profile p {
   margin-top: 0px;
+}
+.user-row {
+  display: flex;
+  flex-direction: row;
 }
 .follow-heading {
   margin-left: 0px;

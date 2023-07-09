@@ -34,7 +34,7 @@ const Ngos = () => {
   };
 
   const handleNgoSelected = (id) => {
-    navigate(`/info/${id}`);
+    navigate(`/ngo/${id}`);
   };
 
   useEffect(() => {

@@ -25,8 +25,22 @@ span {
   flex-direction: row;
   margin-right: 0px;
   margin-bottom: 0px;
-  position: absolute;
+  margin-top: 10px;
 }
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.donate {
+  border-radius: 5px;
+  border: none;
+  padding: 5px;
+  display: flex;
+  flex-direction: row;
+  height: 30px;
+}
+
 .events {
   border: 1px solid orange;
   width: 90%;
@@ -42,5 +56,4 @@ span {
   margin: 2% auto;
   height: 200px;
   width: 90%;
-  position: relative;
 }

@@ -5,7 +5,7 @@ import { fetchUserData } from "../utils/fetchUserData";
 import StripeCheckout from "react-stripe-checkout";
 import Navbar from "../components/Navbar";
 import AmountBtn from "../components/AmountBtn";
-import Form from "../components/Form";
+// import Form from "../components/Form";
 import FollowBtn from "../components/FollowBtn";
 import logo from "../assets/altru.png";
 import { api } from "../utils/axios";
@@ -38,14 +38,12 @@ const Ngo = () => {
         "Publishable Key:",
         process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY
       );
-      console.log(id, ngo);
-
       await api.post(
         `/user/${user.uid}/donation`,
+        // `/ngo/donate/${ngo._id}`,
 
         {
           ngoId: `${ngo._id}`,
-          ngoName: `${ngo.name}`,
           amount: `${clickedBtn}`,
         },
         {
@@ -74,6 +72,8 @@ const Ngo = () => {
         Authorization: `Bearer ${token}`,
       },
     });
+    setIsDonating(false);
+    console.log("closing");
   };
 
   useEffect(() => {
@@ -87,29 +87,75 @@ const Ngo = () => {
         <span className="back" onClick={() => navigate(-1)}>
           Back
         </span>
-        <p>{ngo.about}</p>
-        <p>{ngo.url}</p>
 
-        {ngo.owner && (
-          <div>
-            <p>
-              Contact {ngo.owner.firstname}
-              {ngo.owner.lastname}
-            </p>
-            <p> {ngo.owner.email}</p>
+        {isDonating && (
+          <div className="donation-card">
+            <p>Select an amount to donate: </p>
+
+            <div className="donation-options">
+              {amounts.map((amount, idx) => {
+                return (
+                  <AmountBtn
+                    key={idx}
+                    amount={amount}
+                    clickedBtn={clickedBtn}
+                    setClickedBtn={setClickedBtn}
+                  />
+                );
+              })}
+              <StripeCheckout
+                className="stripe-btn"
+                stripeKey="pk_test_51L1kSgAoNhpouPlcKhLQKANoLZIUKTvg6C2sNBHmBUlpAjYAD5SyZ4sKgTxSB3De9wi0hLyAMAaok6rMEcGqaEhH00Ukq7JyfZ"
+                image={logo}
+                token={handlePayment}
+                name="Making a donation"
+                amount={total * 100}
+              />
+            </div>
           </div>
         )}
 
-        <p>Want to follow us or donate?</p>
+        <div className="about-section">
+          <div className="row">
+            <h2>NGO Name: {/* {mongoUser.organization.name} */}</h2>
+          </div>
+          <p>
+            About:
+            {/* {mongoUser.organization.description} */}
+          </p>
+          <div className="background-image">NGO's background image</div>
+          <div className="info">
+            <p>
+              <span>Location:</span>
+              {/* {mongoUser.organization.address},{mongoUser.organization.district}, */}
+              Toronto
+            </p>
+            <p>
+              <span>Tel</span>
+              {/* {mongoUser.organization.telephone} */}
+            </p>
 
-        <button onClick={() => setIsDonating(true)}> Donate </button>
-        <FollowBtn ngo={ngo} />
-        <div className="header-text">
-          <span className="header1">Want to donate to: {ngo.name}?</span>
+            <p>
+              <span>Cause: </span>
+              {/* {mongoUser.organization.category} */}
+            </p>
+            <p>
+              <span>URL:</span>
+              {/* {mongoUser.organization.url} */}
+            </p>
+          </div>
         </div>
       </div>
 
-      {isDonating && (
+      <div className="button-row">
+        <button onClick={() => setIsDonating(true)} className="donate">
+          {" "}
+          Donate{" "}
+        </button>
+        <FollowBtn classa ngo={ngo} />
+      </div>
+
+      {/* {isDonating && (
         <div className="donation-card">
           <p>Select an amount to donate: </p>
 
@@ -125,14 +171,10 @@ const Ngo = () => {
               );
             })}
           </div>
-          <p>Fill out your billing address:</p>
-
-          <Form />
 
           <div className="process">
             <StripeCheckout
               className="stripe-btn"
-              // stripeKey={process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY}
               stripeKey="pk_test_51L1kSgAoNhpouPlcKhLQKANoLZIUKTvg6C2sNBHmBUlpAjYAD5SyZ4sKgTxSB3De9wi0hLyAMAaok6rMEcGqaEhH00Ukq7JyfZ"
               image={logo}
               token={handlePayment}
@@ -141,7 +183,7 @@ const Ngo = () => {
             />
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

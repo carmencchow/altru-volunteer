@@ -65,35 +65,29 @@ const editUser = async (req, res) => {
 // ADD donation
 const addDonation = async (req, res) => {
   try {
-    const { amount, ngoName, ngoId } = req.body;
-    const donorUser = await User.findById(req.params.id);
-    console.log("donor", donorUser, donorUser._id);
+    const { amount, ngoId } = req.body;
+    const user = await User.findById(req.params.id);
     const ngo = await Ngo.findById({ _id: ngoId });
-    const receivingUser = await User.findOne({ _id: ngo.owner });
     const donation = await Donation.create({
-      ngoName,
-      donor: donorUser._id,
+      ngo: ngoId,
+      donor: user._id,
       amount,
-      parentNgo: ngoId,
       date: Date.now(),
-      donee: receivingUser._id,
     });
-    donorUser.donations.push(donation._id);
-    receivingUser.receivingDonations.push(donation._id);
-
+    console.log("donor", user, ngo);
+    user.donations.push(donation._id);
     await Promise.all([
-      donorUser.save(),
-      receivingUser.save(),
+      user.save(),
       Ngo.findOneAndUpdate(
         { _id: ngoId },
         {
           $push: { donations: donation._id },
-          $addToSet: { donors: donorUser._id },
+          $addToSet: { donors: user._id },
         },
         { new: true }
       ),
     ]);
-    res.status(200).send({ donation, donorUser, receivingUser, ngo });
+    res.status(200).send({ donation: donation, user: user, ngo: ngo });
   } catch (err) {
     console.log(err);
   }

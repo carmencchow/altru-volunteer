@@ -6,7 +6,7 @@ const donationSchema = new mongoose.Schema({
     ref: "Ngo",
   },
   donor: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: String,
     ref: "User",
   },
   amount: {

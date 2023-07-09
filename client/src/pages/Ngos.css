@@ -40,6 +40,8 @@ h3 {
 }
 .display-container {
   margin: 30px 60px;
+  border: 1px dashed orange;
+  color: black;
 }
 .ngo-name {
   color: #322ca9;

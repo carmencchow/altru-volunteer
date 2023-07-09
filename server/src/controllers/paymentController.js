@@ -11,23 +11,20 @@ const getPayment = (req, res) => {
       source: token.id,
     })
     .then((customer) => {
-      stripe.charges.create(
-        {
-          customer: customer.id,
-          amount: donation * 100,
-          currency: "usd",
-          description: `${amount} donation`,
-          shipping: {
-            name: token.card.name,
-            address: {
-              address: token.card.address_line1,
-              city: token.card.address_city,
-              zip: token.card.address_zip,
-            },
+      stripe.charges.create({
+        customer: customer.id,
+        amount: donation * 100,
+        currency: "usd",
+        description: `${amount} donation`,
+        shipping: {
+          name: token.card.name,
+          address: {
+            address: token.card.address_line1,
+            city: token.card.address_city,
+            zip: token.card.address_zip,
           },
-        }
-        // { idempotencyKey }
-      );
+        },
+      });
     })
     .then((result) => res.status(200).json(result))
     .catch((err) => console.log(err));

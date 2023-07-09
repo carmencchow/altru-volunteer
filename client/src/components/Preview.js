@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./Preview.css";
 import { AuthContext } from "../context/AuthContext";
 
@@ -13,6 +13,10 @@ const Preview = () => {
     console.log("upload image ...");
   };
 
+  const donate = () => {
+    console.log("donate image ...");
+  };
+
   const register = () => {
     console.log("register");
   };
@@ -23,7 +27,12 @@ const Preview = () => {
         Back
       </span>
       <div className="about-section">
-        <h2>{mongoUser.organization.name}</h2>
+        <div className="row">
+          <h2>{mongoUser.organization.name}</h2>
+          <button className="donate" onClick={donate}>
+            Make a donation
+          </button>
+        </div>
         <p>About: {mongoUser.organization.description}</p>
         <div className="background-image">
           stock image

@@ -4,7 +4,7 @@ import {
   getNgo,
   getNgos,
   editNgo,
-  donateNgo,
+  // donateNgo,
   followNgo,
   unfollowNgo,
 } from "../controllers/ngoController.js";
@@ -15,7 +15,7 @@ const router = express.Router();
 router.post("/", createNgo);
 router.get("/:id", getNgo);
 router.put("/:id", editNgo);
-router.post("/donate/:id", donateNgo);
+// router.post("/donate/:id", donateNgo);
 router.get("/:frequency/:category", getNgos);
 router.get("/:id", editNgo);
 router.post("/follow/:id", followNgo);

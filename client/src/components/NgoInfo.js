@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import Input from "react-phone-number-input/input";
+import { Image } from "cloudinary-react";
 import { AuthContext } from "../context/AuthContext";
 import { api } from "../utils/axios";
 import EditNGO from "../components/EditNGO";

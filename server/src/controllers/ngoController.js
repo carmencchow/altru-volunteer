@@ -1,14 +1,14 @@
 import Ngo from "../models/ngoModel.js";
 import User from "../models/userModel.js";
+import Donation from "../models/donationModel.js";
 
 // Get all NGO
 const getNgo = async (req, res) => {
   const { id } = req.params;
   const ngo = await Ngo.findById(id)
-    .populate("oneDayEvents")
-    .populate("volunteers")
     .populate("owner")
-    .populate("donors")
+    .populate("events")
+    .populate("volunteers")
     .populate("donations");
   if (!ngo) {
     console.log("NGO not exist");
@@ -172,49 +172,43 @@ const unfollowNgo = async (req, res) => {
   }
 };
 
-// ADD donation - add USER and Donation amount to NGO
-const donateNgo = async (req, res) => {
-  try {
-    const { amount, ngoName, ngoId } = req.body;
-    const donorUser = await User.findById(req.params.id);
-    console.log("donor", donorUser, donorUser._id);
-    const ngo = await Ngo.findById({ _id: ngoId });
-    const receivingUser = await User.findOne({ _id: ngo.owner });
-    const donation = await Donation.create({
-      ngoName,
-      donor: donorUser._id,
-      amount,
-      parentNgo: ngoId,
-      date: Date.now(),
-      donee: receivingUser._id,
-    });
-    donorUser.donations.push(donation._id);
-    receivingUser.receivingDonations.push(donation._id);
-
-    await Promise.all([
-      donorUser.save(),
-      receivingUser.save(),
-      Ngo.findOneAndUpdate(
-        { _id: ngoId },
-        {
-          $push: { donations: donation._id },
-          $addToSet: { donors: donorUser._id },
-        },
-        { new: true }
-      ),
-    ]);
-    res.status(200).send({ donation, donorUser, receivingUser, ngo });
-  } catch (err) {
-    console.log(err);
-  }
-};
+// // ADD Donation
+// const donateNgo = async (req, res) => {
+//   try {
+//     const { amount, ngoId } = req.body;
+//     const user = await User.findById(req.params.id);
+//     console.log("donor", user);
+//     const ngo = await Ngo.findById({ _id: ngoId });
+//     const donation = await Donation.create({
+//       ngo: ngoId,
+//       donor: user._id,
+//       amount,
+//       date: Date.now(),
+//     });
+//     user.donations.push(donation._id);
+//     await Promise.all([
+//       user.save(),
+//       Ngo.findOneAndUpdate(
+//         { _id: ngoId },
+//         {
+//           $push: { donations: donation._id },
+//           $addToSet: { donors: user._id },
+//         },
+//         { new: true }
+//       ),
+//     ]);
+//     res.status(200).send({ donation, user, ngo });
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };
 
 export {
   createNgo,
   editNgo,
   getNgos,
   getNgo,
-  donateNgo,
+  // donateNgo,
   followNgo,
   unfollowNgo,
 };
