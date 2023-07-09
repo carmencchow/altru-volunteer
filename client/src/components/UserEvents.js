@@ -7,7 +7,7 @@ const UserEvents = () => {
 
   return (
     <div className="events-container">
-      <h2>Events</h2>
+      {/* <h2>Events</h2> */}
       <div className="events">
         {mongoUser.attending &&
           mongoUser.attending.map((event, idx) => (

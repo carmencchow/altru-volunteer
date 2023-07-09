@@ -5,7 +5,6 @@ import { fetchUserData } from "../utils/fetchUserData";
 import StripeCheckout from "react-stripe-checkout";
 import Navbar from "../components/Navbar";
 import AmountBtn from "../components/AmountBtn";
-// import Form from "../components/Form";
 import FollowBtn from "../components/FollowBtn";
 import logo from "../assets/altru.png";
 import { api } from "../utils/axios";
@@ -13,9 +12,10 @@ import "./Ngo.css";
 
 const Ngo = () => {
   const navigate = useNavigate();
-  const { user, setMongoUser } = useContext(AuthContext);
+  const { mongoUser, user, setMongoUser } = useContext(AuthContext);
   const { id } = useParams();
   const [ngo, setNgo] = useState({});
+  const [disabled, setDisabled] = useState(false);
   const [isDonating, setIsDonating] = useState(false);
   const [clickedBtn, setClickedBtn] = useState("0");
   const amounts = [10, 15, 25, 50, 75];
@@ -29,6 +29,31 @@ const Ngo = () => {
       },
     });
     setNgo(res.data);
+  };
+
+  const handleFollow = async () => {
+    try {
+      const token = await user.getIdToken();
+      console.log("Following ngo", ngo, ngo.name);
+      const res = await api.post(
+        // `/user/${user.uid}/follow/ngo`,
+        `/ngo/follow/${ngo._id}`,
+        {
+          ngoName: `${ngo.name}`,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const data = res.data;
+      console.log(data);
+      setDisabled("Following...");
+      await fetchUserData(user.uid, setMongoUser, token);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const handleConfirmation = async () => {
@@ -117,31 +142,24 @@ const Ngo = () => {
 
         <div className="about-section">
           <div className="row">
-            <h2>NGO Name: {/* {mongoUser.organization.name} */}</h2>
+            <h2>NGO Name:</h2>
           </div>
-          <p>
-            About:
-            {/* {mongoUser.organization.description} */}
-          </p>
+          <p>About:</p>
           <div className="background-image">NGO's background image</div>
           <div className="info">
             <p>
               <span>Location:</span>
-              {/* {mongoUser.organization.address},{mongoUser.organization.district}, */}
               Toronto
             </p>
             <p>
               <span>Tel</span>
-              {/* {mongoUser.organization.telephone} */}
             </p>
 
             <p>
               <span>Cause: </span>
-              {/* {mongoUser.organization.category} */}
             </p>
             <p>
               <span>URL:</span>
-              {/* {mongoUser.organization.url} */}
             </p>
           </div>
         </div>
@@ -149,41 +167,19 @@ const Ngo = () => {
 
       <div className="button-row">
         <button onClick={() => setIsDonating(true)} className="donate">
-          {" "}
-          Donate{" "}
+          Donate
         </button>
-        <FollowBtn classa ngo={ngo} />
-      </div>
 
-      {/* {isDonating && (
-        <div className="donation-card">
-          <p>Select an amount to donate: </p>
-
-          <div className="donation-options">
-            {amounts.map((amount, idx) => {
-              return (
-                <AmountBtn
-                  key={idx}
-                  amount={amount}
-                  clickedBtn={clickedBtn}
-                  setClickedBtn={setClickedBtn}
-                />
-              );
-            })}
-          </div>
-
-          <div className="process">
-            <StripeCheckout
-              className="stripe-btn"
-              stripeKey="pk_test_51L1kSgAoNhpouPlcKhLQKANoLZIUKTvg6C2sNBHmBUlpAjYAD5SyZ4sKgTxSB3De9wi0hLyAMAaok6rMEcGqaEhH00Ukq7JyfZ"
-              image={logo}
-              token={handlePayment}
-              name="Donating"
-              amount={total * 100}
-            />
-          </div>
+        <div>
+          <button disabled={disabled} className="follow" onClick={handleFollow}>
+            {/* {mongoUser.ngos?.find((ngo) => ngo === ngo.name)
+              ? `Following`
+              : `Follow ${ngo.name}`} */}
+          </button>
         </div>
-      )} */}
+
+        {/* {ngo} */}
+      </div>
     </div>
   );
 };

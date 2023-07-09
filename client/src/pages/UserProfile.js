@@ -29,7 +29,7 @@ const UserProfile = () => {
     try {
       console.log("New goal amount is", input);
       const token = await user.getIdToken();
-      await api.put(
+      const res = await api.put(
         `/user/${user.uid}/amount`,
         {
           goalAmount: `${input}`,
@@ -40,6 +40,7 @@ const UserProfile = () => {
           },
         }
       );
+      console.log("Data is", res.data);
       setInput("");
       setIsEditing(false);
       await fetchUserData(user.uid, setMongoUser, token);
@@ -89,7 +90,6 @@ const UserProfile = () => {
               <div className="goal-input">
                 <input
                   type="number"
-                  className="goal-input"
                   placeholder="Enter goal amount"
                   min="10"
                   value={goalAmount}

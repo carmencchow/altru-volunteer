@@ -96,11 +96,15 @@ const addDonation = async (req, res) => {
 // EDIT goal
 const editGoal = async (req, res) => {
   try {
-    const goalAmount = req.body.goalAmount;
-    const user = await User.findById({ _id: req.params.id });
-    user.goalAmount = goalAmount;
-    await user.save();
-    return res.status(200).send({ message: "Goal amount updated", goalAmount });
+    const { goalAmount, uid } = req.body;
+    const user = await User.findByIdAndUpdate(
+      { _id: uid },
+      { goalAmount },
+      { new: true }
+    );
+    return res
+      .status(200)
+      .send({ message: "Goal amount updated", goalAmount, user });
   } catch (err) {
     console.log(err);
     res.status(500).send({ message: "Error occurred while updating" });

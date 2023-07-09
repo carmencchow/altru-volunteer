@@ -24,6 +24,9 @@ button {
 .user-profile p {
   margin-top: 0px;
 }
+button {
+  cursor: pointer;
+}
 .user-row {
   display: flex;
   flex-direction: row;

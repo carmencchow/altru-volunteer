@@ -21,26 +21,26 @@ const getNgo = async (req, res) => {
 const getNgos = async (req, res) => {
   try {
     const category = req.params.category.toLowerCase();
-    const frequency = req.params.frequency.toLowerCase();
+    const district = req.params.district.toLowerCase();
 
-    console.log(category, frequency);
-    if (frequency === "all" && category === "all") {
+    console.log(category, district);
+    if (district === "all" && category === "all") {
       let ngos = await Ngo.find({}).sort({ createdAt: -1 });
       return res.status(200).json(ngos);
     }
-    if (frequency === "all") {
+    if (district === "all") {
       let ngos = await Ngo.find({ category: category }).sort({ createdAt: -1 });
       return res.status(200).json(ngos);
     }
     if (category === "all") {
-      let ngos = await Ngo.find({ frequency: frequency }).sort({
+      let ngos = await Ngo.find({ district: district }).sort({
         createdAt: -1,
       });
       return res.status(200).json(ngos);
     } else {
       let ngos = await Ngo.find({
         category: category,
-        frequency: frequency,
+        district: district,
       });
       return res.status(200).json(ngos);
     }
@@ -136,18 +136,20 @@ const editNgo = async (req, res) => {
 // FOLLOW NGO
 const followNgo = async (req, res) => {
   try {
-    const newFollow = req.body.follow;
-    console.log("New:", newFollow);
-    const user = await User.findOne({ _id: req.params.id });
-    const ngoExists = user.following.find((ngo) => ngo === newFollow);
-    console.log("Exist:", ngoExists);
-    if (ngoExists) {
+    // need ngoId not the ngoName
+
+    const { ngoName, uid } = req.body;
+    const user = await User.findOne({ _id: uid });
+    console.log("NGO:", ngoName);
+    console.log("User", user);
+    const existingNgo = user.ngos.find((item) => item === ngo._id);
+    if (existingNgo) {
       return res.status(400).send("Already following");
     }
-    user.following.push(newFollow);
+    user.ngos.push(ngo._id);
     await user.save();
-    console.log("Followed Orgs: ", user.following);
-    return res.status(200).send({ results: user, message: user.following });
+    console.log("Following:", user.ngos);
+    return res.status(200).send({ user });
   } catch (err) {
     console.log(err);
     return res.status(500).send({ message: "Already following" });

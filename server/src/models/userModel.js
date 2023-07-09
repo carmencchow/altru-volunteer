@@ -26,6 +26,9 @@ const userSchema = new mongoose.Schema({
     lowercase: true,
     required: true,
   },
+  goalAmount: {
+    type: Number,
+  },
   ngos: [
     {
       type: mongoose.Schema.Types.ObjectId,

@@ -84,26 +84,26 @@ const getEvent = async (req, res) => {
 const getEvents = async (req, res) => {
   try {
     const category = req.params.category.toLowerCase();
-    const frequency = req.params.frequency.toLowerCase();
+    const district = req.params.district.toLowerCase();
 
-    console.log(category, frequency);
-    if (frequency === "all" && category === "all") {
+    console.log(category, district);
+    if (district === "all" && category === "all") {
       let ngos = await Ngo.find({}).sort({ createdAt: -1 });
       return res.status(200).json(ngos);
     }
-    if (frequency === "all") {
+    if (district === "all") {
       let ngos = await Ngo.find({ category: category }).sort({ createdAt: -1 });
       return res.status(200).json(ngos);
     }
     if (category === "all") {
-      let ngos = await Ngo.find({ frequency: frequency }).sort({
+      let ngos = await Ngo.find({ district: district }).sort({
         createdAt: -1,
       });
       return res.status(200).json(ngos);
     } else {
       let ngos = await Ngo.find({
         category: category,
-        frequency: frequency,
+        district: district,
       });
       return res.status(200).json(ngos);
     }

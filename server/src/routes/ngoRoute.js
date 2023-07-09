@@ -16,7 +16,7 @@ router.post("/", createNgo);
 router.get("/:id", getNgo);
 router.put("/:id", editNgo);
 // router.post("/donate/:id", donateNgo);
-router.get("/:frequency/:category", getNgos);
+router.get("/:district/:category", getNgos);
 router.get("/:id", editNgo);
 router.post("/follow/:id", followNgo);
 router.delete("/unfollow/:id", unfollowNgo);

@@ -15,7 +15,7 @@ router.post("/", createEvent);
 router.get("/:id", getEvent);
 router.put("/:id", editEvent);
 router.delete("/:id", deleteEvent);
-router.get("/:frequency/:category", getEvents);
+router.get("/:district/:category", getEvents);
 router.post("/:id/attend", attendEvent);
 
 export default router;
