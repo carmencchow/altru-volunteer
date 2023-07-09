@@ -8,7 +8,10 @@ const Navbar = () => {
   const navigate = useNavigate();
   const { user, mongoUser, handleSignOut } = useContext(AuthContext);
   const navMain = () => {
-    navigate("/volunteer");
+    if (mongoUser.isOrganizer) {
+      navigate("/profile");
+    }
+    navigate("/ngos");
   };
 
   const navProfile = () => {

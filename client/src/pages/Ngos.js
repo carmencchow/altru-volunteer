@@ -81,10 +81,12 @@ const Ngos = () => {
                 >
                   {ngo.name}
                   <p>{ngo.description}</p>
-                  <p>{ngo.url}</p>
+                  <p>{ngo.address}</p>
+                  <p>{ngo.location}</p>
                   <p>{ngo.telephone}</p>
                   <p>{ngo.contact}</p>
                 </div>
+
                 {/* <div className="show-details">
                   <div>
                     {ngo.length > 0 && (

@@ -12,8 +12,8 @@ const findUser = async (id) => {
         path: "donations",
         model: "Donation",
         populate: {
-          path: "donor",
-          model: "User",
+          path: "ngo",
+          model: "Ngo",
         },
       },
     ]);
@@ -21,7 +21,7 @@ const findUser = async (id) => {
   //   {
   //     path: "attending",
   //     model: "Ngo",
-  //     populate: [b
+  //     populate:
   //       {
   //         path: "oneDayEvents",
   //         model: "Event",
@@ -66,10 +66,12 @@ const editUser = async (req, res) => {
 const addDonation = async (req, res) => {
   try {
     const { amount, ngoId } = req.body;
+    // const { amount, ngoId, ngoName } = req.body;
     const user = await User.findById(req.params.id);
     const ngo = await Ngo.findById({ _id: ngoId });
     const donation = await Donation.create({
       ngo: ngoId,
+      ngoName,
       donor: user._id,
       amount,
       date: Date.now(),

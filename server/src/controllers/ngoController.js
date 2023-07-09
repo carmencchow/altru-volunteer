@@ -136,17 +136,14 @@ const editNgo = async (req, res) => {
 // FOLLOW NGO
 const followNgo = async (req, res) => {
   try {
-    // need ngoId not the ngoName
-
-    const { ngoName, uid } = req.body;
+    const { ngoId, uid } = req.body;
     const user = await User.findOne({ _id: uid });
-    console.log("NGO:", ngoName);
-    console.log("User", user);
-    const existingNgo = user.ngos.find((item) => item === ngo._id);
+    console.log(ngoId, user._id);
+    const existingNgo = user.ngos.find((item) => item === ngoId);
     if (existingNgo) {
       return res.status(400).send("Already following");
     }
-    user.ngos.push(ngo._id);
+    user.ngos.push(ngoId);
     await user.save();
     console.log("Following:", user.ngos);
     return res.status(200).send({ user });

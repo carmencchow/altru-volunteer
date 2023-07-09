@@ -76,7 +76,7 @@ const UserProfile = () => {
   return (
     <div className="container">
       <Navbar />
-      <div className="user-profile">
+      <div className="userprofile">
         <div className="user-row">
           <div>
             <h3>
@@ -107,20 +107,26 @@ const UserProfile = () => {
                 Add Goal
               </button>
             )}
-
-            {/* <UserDonations /> */}
           </div>
         </div>
 
         <h3>Your donations</h3>
-        {mongoUser.ngos && (
+        {mongoUser.donations && (
           <div className="following">
+            {mongoUser.donations.map((donation, idx) => (
+              <div key={idx} className="donations">
+                <p>${donation.amount}.00</p>
+                <p>{donation.ngo.name}</p>
+                <p>{String(donation.date).slice(0, 10)}</p>
+              </div>
+            ))}
+
             <h3>Organizations you follow:</h3>
 
             <div className="organizations">
               {mongoUser.ngos.map((ngo, idx) => (
                 <div className="follow-list" key={idx}>
-                  {ngo}
+                  {ngo.name}
                   <button
                     className="unfollow-btn"
                     onClick={async () => await handleUnfollow(ngo)}

@@ -5,7 +5,6 @@ import { fetchUserData } from "../utils/fetchUserData";
 import StripeCheckout from "react-stripe-checkout";
 import Navbar from "../components/Navbar";
 import AmountBtn from "../components/AmountBtn";
-import FollowBtn from "../components/FollowBtn";
 import logo from "../assets/altru.png";
 import { api } from "../utils/axios";
 import "./Ngo.css";
@@ -35,11 +34,11 @@ const Ngo = () => {
     try {
       const token = await user.getIdToken();
       console.log("Following ngo", ngo, ngo.name);
-      const res = await api.post(
+      await api.post(
         // `/user/${user.uid}/follow/ngo`,
         `/ngo/follow/${ngo._id}`,
         {
-          ngoName: `${ngo.name}`,
+          ngoId: `${ngo._id}`,
         },
         {
           headers: {
@@ -47,8 +46,6 @@ const Ngo = () => {
           },
         }
       );
-      const data = res.data;
-      console.log(data);
       setDisabled("Following...");
       await fetchUserData(user.uid, setMongoUser, token);
     } catch (e) {
@@ -70,6 +67,7 @@ const Ngo = () => {
         {
           ngoId: `${ngo._id}`,
           amount: `${clickedBtn}`,
+          ngoName: `${ngo.name}`,
         },
         {
           headers: {
@@ -113,53 +111,52 @@ const Ngo = () => {
           Back
         </span>
 
-        {isDonating && (
-          <div className="donation-card">
-            <p>Select an amount to donate: </p>
-
-            <div className="donation-options">
-              {amounts.map((amount, idx) => {
-                return (
-                  <AmountBtn
-                    key={idx}
-                    amount={amount}
-                    clickedBtn={clickedBtn}
-                    setClickedBtn={setClickedBtn}
-                  />
-                );
-              })}
-              <StripeCheckout
-                className="stripe-btn"
-                stripeKey="pk_test_51L1kSgAoNhpouPlcKhLQKANoLZIUKTvg6C2sNBHmBUlpAjYAD5SyZ4sKgTxSB3De9wi0hLyAMAaok6rMEcGqaEhH00Ukq7JyfZ"
-                image={logo}
-                token={handlePayment}
-                name="Making a donation"
-                amount={total * 100}
-              />
-            </div>
-          </div>
-        )}
-
         <div className="about-section">
           <div className="row">
-            <h2>NGO Name:</h2>
+            <h2>{ngo.name}</h2>
+            {/* {isDonating && ( */}
+            <div className="donation-card">
+              <p>Select an amount to donate: </p>
+
+              <div className="donation-options">
+                {amounts.map((amount, idx) => {
+                  return (
+                    <AmountBtn
+                      key={idx}
+                      amount={amount}
+                      clickedBtn={clickedBtn}
+                      setClickedBtn={setClickedBtn}
+                    />
+                  );
+                })}
+                <StripeCheckout
+                  className="stripe-btn"
+                  stripeKey="pk_test_51L1kSgAoNhpouPlcKhLQKANoLZIUKTvg6C2sNBHmBUlpAjYAD5SyZ4sKgTxSB3De9wi0hLyAMAaok6rMEcGqaEhH00Ukq7JyfZ"
+                  image={logo}
+                  token={handlePayment}
+                  name="Making a donation"
+                  amount={total * 100}
+                />
+              </div>
+            </div>
           </div>
-          <p>About:</p>
+          {/* )} */}
           <div className="background-image">NGO's background image</div>
+          <p>Description: {ngo.description}</p>
           <div className="info">
             <p>
-              <span>Location:</span>
+              <span>Location:{ngo.location}</span>
               Toronto
             </p>
             <p>
-              <span>Tel</span>
+              <span>Tel: {ngo.telephone}</span>
             </p>
 
             <p>
-              <span>Cause: </span>
+              <span>Cause: {ngo.category}</span>
             </p>
             <p>
-              <span>URL:</span>
+              <span>URL: {ngo.url}</span>
             </p>
           </div>
         </div>
@@ -172,13 +169,14 @@ const Ngo = () => {
 
         <div>
           <button disabled={disabled} className="follow" onClick={handleFollow}>
-            {/* {mongoUser.ngos?.find((ngo) => ngo === ngo.name)
+            {mongoUser.ngos.find((item) => item === ngo.name)
               ? `Following`
-              : `Follow ${ngo.name}`} */}
+              : `Follow ${ngo.name}`}
           </button>
         </div>
-
-        {/* {ngo} */}
+        <div className="row">
+          <h2>Volunteer Events</h2>
+        </div>
       </div>
     </div>
   );
