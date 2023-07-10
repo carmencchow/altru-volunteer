@@ -8,37 +8,25 @@ const ngoSchema = new mongoose.Schema({
   name: {
     type: String,
   },
-  about: {
+  description: {
     type: String,
   },
-  url: {
+  category: {
+    type: [String],
+  },
+  address: {
+    String,
+  },
+  district: {
     type: String,
   },
   telephone: {
     type: String,
   },
-  category: {
-    type: Array,
-  },
-  commitment: {
+  url: {
     type: String,
   },
-  frequency: {
-    type: String,
-  },
-  num_volunteers: {
-    type: Number,
-  },
-  goalAmount: {
-    type: Number,
-  },
-  help: {
-    type: String,
-  },
-  event: {
-    type: Boolean,
-  },
-  oneDayEvents: [
+  events: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Event",
@@ -46,13 +34,7 @@ const ngoSchema = new mongoose.Schema({
   ],
   volunteers: [
     {
-      type: String,
-      ref: "User",
-    },
-  ],
-  donors: [
-    {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
   ],

@@ -1,0 +1,69 @@
+.events,
+.about-section {
+  width: 90%;
+  margin: 0% auto;
+  background-color: #f6f6fa;
+  border-radius: 10px;
+  padding: 0px 20px;
+}
+.background-image {
+  border: 2px dotted plum;
+  margin: 2% auto;
+  height: 200px;
+  width: 90%;
+  position: relative;
+  border-radius: 10px;
+}
+h2 {
+  padding-top: 20px;
+}
+button {
+  border-radius: 5px;
+  border: none;
+  padding: 5px;
+}
+.info {
+  display: flex;
+  flex-direction: row;
+}
+span {
+  font-weight: bold;
+}
+.image {
+  border-radius: 5px;
+  border: none;
+  padding: 5px;
+  display: flex;
+  flex-direction: row;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  margin-top: 10px;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.donate {
+  border-radius: 5px;
+  border: none;
+  padding: 5px;
+  display: flex;
+  flex-direction: row;
+  height: 30px;
+  color: white;
+  margin: 10px;
+  background-color: rgb(218, 126, 244);
+}
+.events-grid {
+  display: flex;
+  column-count: 3;
+  grid-row: 1fr 1fr 1fr;
+}
+.events-card {
+  border: 2px dotted plum;
+  border-radius: 10px;
+  margin: 2% auto;
+  height: 200px;
+  width: 200px;
+}

@@ -64,7 +64,6 @@ export const AuthContextProvider = ({ children }) => {
         Authorization: `Bearer ${token}`,
       },
     });
-
     if (data.status === 401) {
       setNotification("User not found, please sign up");
       setUser(null);
@@ -78,7 +77,7 @@ export const AuthContextProvider = ({ children }) => {
     if (!user) {
       navigate("/");
     } else {
-      navigate("/volunteer");
+      navigate("/ngos");
     }
   }, [user]);
 

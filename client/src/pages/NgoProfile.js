@@ -1,15 +1,14 @@
 import React, { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import UserDonations from "../components/UserDonations";
-import UserVolunteers from "../components/UserVolunteers";
-import UserProfile from "../components/UserProfile";
 import Navbar from "../components/Navbar";
-import "./Profile.css";
-import OrganizationProfile from "../components/OrganizationProfile";
-import OrganizationDonations from "../components/OrganizationDonations";
-import OrganizationVolunteers from "../components/OrganizationEvents";
+import NgoInfo from "../components/NgoInfo";
+import NgoDonations from "../components/NgoDonations";
+import NgoEvents from "../components/NgoEvents";
+import "./NgoProfile.css";
 
-const Profile = () => {
+const NgoProfile = () => {
+  const navigate = useNavigate();
   const { mongoUser } = useContext(AuthContext);
   const [toggleState, setToggleState] = useState(1);
 
@@ -17,8 +16,11 @@ const Profile = () => {
     setToggleState(idx);
   };
 
+  const handlePreview = () => {
+    navigate("/preview");
+  };
+
   if (!mongoUser) return null;
-  console.log(mongoUser);
 
   return (
     <>
@@ -26,18 +28,21 @@ const Profile = () => {
       <div className="profile-container">
         <div className="tabs-container">
           <div className="heading-tabs">
+            <button className="preview-btn" onClick={handlePreview}>
+              Preview Page
+            </button>
+
             <div
               className={toggleState === 1 ? "tabs active-tabs" : "tabs"}
               onClick={() => toggletabs(1)}
             >
-              {mongoUser.userType === "individual" ? "Profile" : "NGO Profile"}
+              Profile
             </div>
 
             <div
               className={toggleState === 2 ? "tabs  active-tabs" : "tabs"}
               onClick={() => toggletabs(2)}
             >
-              {" "}
               Donations
             </div>
 
@@ -56,11 +61,7 @@ const Profile = () => {
               }
             >
               <div>
-                {mongoUser.userType === "individual" ? (
-                  <UserProfile />
-                ) : (
-                  <OrganizationProfile />
-                )}
+                <NgoInfo />
               </div>
             </div>
 
@@ -70,11 +71,7 @@ const Profile = () => {
               }
             >
               <div>
-                {mongoUser.userType === "individual" ? (
-                  <UserDonations />
-                ) : (
-                  <OrganizationDonations />
-                )}
+                <NgoDonations />
               </div>
             </div>
 
@@ -84,11 +81,7 @@ const Profile = () => {
               }
             >
               <div>
-                {mongoUser.userType === "individual" ? (
-                  <UserVolunteers />
-                ) : (
-                  <OrganizationVolunteers />
-                )}
+                <NgoEvents />
               </div>
             </div>
           </div>
@@ -98,4 +91,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default NgoProfile;

@@ -1,32 +1,19 @@
 import express from "express";
 import {
   getUser,
-  attendEvent,
-  follow,
-  unfollow,
-  addNGOProfile,
-  editNGOProfile,
-  deleteNGOEvent,
-  editUserProfile,
-  addDonation,
+  editUser,
   editGoal,
-  createNGOEvent,
-  editNGOEvent,
+  addGoal,
+  addDonation,
 } from "../controllers/userController.js";
 
 const router = express.Router();
 
+//userRoute (localhost:5000/api/user)
 router.get("/:id", getUser);
-router.put("/:id", editUserProfile);
-router.put("/:id/amount", editGoal);
+router.put("/:id", editUser);
+router.post("/:id/goal", addGoal);
+router.put("/:id/goal", editGoal);
 router.post("/:id/donation", addDonation);
-router.post("/:id/attend", attendEvent);
-router.post("/:id/event", createNGOEvent);
-router.put("/:id/event", editNGOEvent);
-router.delete("/:id/event", deleteNGOEvent);
-router.post("/:id/follow/ngo", follow);
-router.post("/:id/unfollow/ngo", unfollow);
-router.post("/:id/addNgo", addNGOProfile);
-router.put("/:id/editNgo", editNGOProfile);
 
 export default router;

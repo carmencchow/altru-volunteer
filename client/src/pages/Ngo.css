@@ -21,6 +21,11 @@ button {
   margin-top: 0px;
   margin-bottom: 0px;
 }
+.button-row {
+  display: flex;
+  margin-left: 30px;
+  flex-direction: row;
+}
 .back {
   display: flex;
   font-size: 14px;
@@ -36,10 +41,7 @@ button {
 }
 .donation-card {
   width: 500px;
-  height: 600px;
   margin-left: 40px;
-  border: 1px solid grey;
-  border-radius: 20px;
   padding: 10px;
   margin-top: 10px;
 }
@@ -49,6 +51,9 @@ button {
 textarea:focus,
 .donation-input:focus {
   outline: none;
+}
+.ngo-name {
+  font-size: 20px;
 }
 .ngo-donate {
   color: #19add6;
@@ -68,17 +73,26 @@ textarea:focus,
   display: flex;
   flex-direction: row;
 }
-.other-amount {
+.stripe-btn {
+  background-color: white;
+  margin-left: 0px;
+  border: none;
+}
+.donate,
+.follow {
+  border-radius: 5px;
+  border: none;
+  padding: 5px;
   display: flex;
   flex-direction: row;
+  height: 30px;
 }
+
 .save-btn {
   cursor: pointer;
 }
-/* form */
 .donation-card {
   margin: 0 auto;
-  height: 100vh;
 }
 .form-control {
   flex: 0 1 auto;
@@ -110,14 +124,6 @@ textarea:focus,
     width: 90px;
     height: 30px;
   }
-  .donation-card {
-    width: 250px;
-    height: 510px;
-    border: 1px solid grey;
-    border-radius: 20px;
-    padding: 10px;
-    margin-top: 10px;
-  }
   .back {
     visibility: hidden;
   }
@@ -131,27 +137,5 @@ textarea:focus,
   .header-text .header1 {
     font-size: 10px;
     width: 100%;
-  }
-}
-
-@media only screen and (min-width: 480px) {
-  .donation-card {
-    width: 340px;
-    height: 530px;
-    border: 1px solid grey;
-    border-radius: 20px;
-    padding: 10px;
-    margin-top: 10px;
-  }
-}
-
-@media only screen and (min-width: 600px) {
-  .donation-card {
-    width: 480px;
-    height: 550px;
-    border: 1px solid grey;
-    border-radius: 20px;
-    padding: 10px;
-    margin-top: 30px;
   }
 }

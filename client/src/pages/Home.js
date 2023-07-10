@@ -35,10 +35,12 @@ const Home = () => {
       </div>
       <div className="home-text">
         <p className="welcome-text">
-          Welcome to Altru, your volunteer platform
+          Welcome to UnityVolunteer, Harnessing the Power of Volunteers for
+          Good.
         </p>
         <p className="sub-text">
-          Find worthwhile causes to support in Toronto!
+          Your platform to volunteer or give to a worthwhile cause in your
+          community.
         </p>
       </div>
     </div>

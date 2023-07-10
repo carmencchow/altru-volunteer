@@ -6,13 +6,19 @@ import "./Navbar.css";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const { user, handleSignOut } = useContext(AuthContext);
+  const { user, mongoUser, handleSignOut } = useContext(AuthContext);
   const navMain = () => {
-    navigate("/volunteer");
+    if (mongoUser.isOrganizer) {
+      navigate("/profile");
+    }
+    navigate("/ngos");
   };
 
   const navProfile = () => {
-    navigate("/profile");
+    if (mongoUser.isOrganizer) {
+      navigate("/profile");
+    }
+    navigate("/user/profile");
   };
 
   return (

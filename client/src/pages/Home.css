@@ -30,19 +30,21 @@ body {
 .banner {
   height: 70px;
   width: 100%;
-  background-color: rgb(76, 76, 245);
+  /* background-color: rgb(76, 76, 245); */
 }
 .home-text {
   font-family: "League Gothic", sans-serif;
-  background-color: #322ca9;
+  /* background-color: #322ca9; */
   width: 70%;
   height: 170px;
   padding: 10px;
   margin: 0 auto;
 }
 .welcome-text {
-  color: #19add6;
-  font-size: 60px;
+  color: black;
+  font-family: "Montserrat", sans-serif;
+  /* color: #19add6; */
+  font-size: 50px;
   margin-top: 10px;
   margin-bottom: 10px;
 }
@@ -56,10 +58,13 @@ body {
 }
 .login-btn,
 .signup-btn {
+  /* border: 2px solid #19add6; */
+  background-color: #19add6;
   border: 2px solid #19add6;
+  border-radius: 10px;
   color: white;
-  font-family: "League Gothic", sans-serif;
-  font-size: 28px;
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
   margin-top: 10px;
   padding: 8px;
   margin-left: 10px;
@@ -67,9 +72,10 @@ body {
 .login-btn:hover,
 .signup-btn:hover {
   cursor: pointer;
-  background-color: #19add6;
+  border: 2px solid #19add6;
+  background: none;
   color: #322ca9;
-  transition: ease-in 0.5s;
+  transition: ease-in 0.3s;
 }
 .logo-wrapper {
   display: flex;

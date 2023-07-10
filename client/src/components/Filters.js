@@ -16,8 +16,8 @@ const Filters = () => {
     setFilters({ ...filters, category: e.target.value });
   };
 
-  const handleFrequencyChange = (e) => {
-    setFilters({ ...filters, frequency: e.target.value });
+  const handleDistrictChange = (e) => {
+    setFilters({ ...filters, district: e.target.value });
   };
 
   const handleSubmit = async (e) => {
@@ -27,10 +27,10 @@ const Filters = () => {
 
   const fetchNgos = async () => {
     try {
-      const frequency = filters.frequency;
+      const district = filters.district;
       const category = filters.category;
       const token = await user.getIdToken();
-      const res = await api.get(`/ngo/${frequency}/${category}`, {
+      const res = await api.get(`/ngo/${district}/${category}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -50,13 +50,15 @@ const Filters = () => {
         <form className="dropdown">
           <p className="commitment">Commitment</p>
 
-          <select value={filters.frequency} onChange={handleFrequencyChange}>
+          <select value={filters.district} onChange={handleDistrictChange}>
             <option value="all" className="all">
-              Any time
+              Any district
             </option>
-            <option value="day">One Day Events</option>
-            <option value="week">Weekly commitment</option>
-            <option value="month">Monthly commitment</option>
+            <option value="district">District:</option>
+            <option value="Etobicoke-York">Etobicoke-York</option>
+            <option value="North York">North York</option>
+            <option value="Toronto">Toronto</option>
+            <option value="East York">East York & Scarborough</option>
           </select>
         </form>
 

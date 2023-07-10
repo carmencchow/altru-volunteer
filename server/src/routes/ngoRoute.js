@@ -1,18 +1,22 @@
 import express from "express";
 import {
-  getNgos,
+  createNgo,
   getNgo,
-  getFiltered,
-  getEvent,
-  updateVolunteerCount,
+  getNgos,
+  editNgo,
+  followNgo,
+  unfollowNgo,
 } from "../controllers/ngoController.js";
 
 const router = express.Router();
 
-router.get("/", getNgos);
+//ngoRoute (localhost:5000/api/ngo)
+router.post("/", createNgo);
 router.get("/:id", getNgo);
-router.get("/:id/event/", getEvent);
-router.put("/:id/decrement", updateVolunteerCount);
-router.get("/:frequency/:category", getFiltered);
+router.put("/:id", editNgo);
+router.get("/:district/:category", getNgos);
+router.get("/:id", editNgo);
+router.post("/follow/:id", followNgo);
+router.delete("/unfollow/:id", unfollowNgo);
 
 export default router;

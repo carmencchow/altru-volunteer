@@ -1,23 +1,22 @@
 import User from "../models/userModel.js";
+import { findUser } from "../controllers/userController.js";
 
 // CREATE new user
 const createUser = async (req, res) => {
-  // If user is organization create NGO profile
   try {
-    const { email, uid, firstname, lastname, userType } = req.body;
-    console.log(email, uid, firstname, lastname, userType);
-    const newUser = await User.create({
+    const { email, uid, firstname, lastname, isOrganizer } = req.body;
+    const user = await User.create({
       _id: uid,
-      userType,
+      isOrganizer,
       firstname,
       lastname,
       email,
     });
-    await newUser.save();
-    console.log("New user", newUser);
-    return res.status(200).send({ user: newUser });
+    await user.save();
+    console.log(user);
+    return res.status(200).send({ user });
   } catch (error) {
-    console.log("Error is", error);
+    console.log(error);
     return res.status(400).send(error);
   }
 };
@@ -26,33 +25,9 @@ const createUser = async (req, res) => {
 const verifyUser = async (req, res) => {
   try {
     const uid = req.body.uid;
-    const user = await User.findById(uid)
-      .populate("ngos")
-      .populate("organization")
-      .populate("oneDayEvents")
-      .populate("attending")
-      .populate([
-        {
-          path: "donations",
-          model: "Donation",
-          populate: {
-            path: "donor",
-            model: "User",
-          },
-        },
-      ])
-      .populate([
-        {
-          path: "receivingDonations",
-          model: "Donation",
-          populate: {
-            path: "donor",
-            model: "User",
-          },
-        },
-      ]);
-    console.log("MongoDB User verified", user);
-    return res.status(200).json({ user: user });
+    const user = await findUser(uid);
+    console.log("verifyUser:", user);
+    return res.status(200).json({ user });
   } catch (err) {
     console.log(err);
     return res.sendStatus(500);

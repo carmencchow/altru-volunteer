@@ -4,10 +4,10 @@ import { fetchUserData } from "../utils/fetchUserData";
 import { FiEdit2 } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
 import { api } from "../utils/axios";
-import "./OrganizationEvents.css";
+import "./NgoEvents.css";
 import EditEvent from "./EditEvent";
 
-const OrganizationEvents = () => {
+const NgoEvents = () => {
   const { mongoUser, setMongoUser, user } = useContext(AuthContext);
   const [isEditing, setIsEditing] = useState(false);
   const [isAddingEvent, setIsAddingEvent] = useState(false);
@@ -20,10 +20,6 @@ const OrganizationEvents = () => {
   const [numVolunteers, setNumVolunteers] = useState(0);
   const [description, setDescription] = useState("");
   const [serverError, setServerError] = useState("");
-
-  const handleAddEvent = () => {
-    setIsAddingEvent(true);
-  };
 
   const handleEditEvent = () => {
     setIsEditing(true);
@@ -84,6 +80,15 @@ const OrganizationEvents = () => {
   return (
     <div>
       <div className="event-profile">
+        <div className="side">
+          <h4>Scheduled Events</h4>
+          <h4>Registered Volunteers</h4>
+
+          <button onClick={() => setIsAddingEvent(true)} className="create-btn">
+            Create Event
+          </button>
+        </div>
+
         <div className="left-side">
           {mongoUser.oneDayEvents && (
             <div>
@@ -107,13 +112,16 @@ const OrganizationEvents = () => {
                     People:<span>{event.numVolunteers}</span>volunteers needed
                   </p>
 
+                  <h4>Registered Volunteers</h4>
+
                   {mongoUser.oneDayEvents && (
                     <div>
                       <h4>Volunteers attending</h4>
-
-                      {mongoUser.oneDayEvents.map((volunteer, idx) => (
+                      {mongoUser.oneDayEvents.map((event, idx) => (
                         <div key={idx} className="volunteers">
-                          <p>{volunteer.email}</p>
+                          <p>Name: {event.volunteers.firstname}</p>
+                          <p>{event.volunteers.lastname}</p>
+                          <p>Email: {event.volunteers.email}</p>
                         </div>
                       ))}
                     </div>
@@ -134,9 +142,9 @@ const OrganizationEvents = () => {
             </div>
           )}
 
-          <button onClick={() => setIsAddingEvent(true)} className="create-btn">
+          {/* <button onClick={() => setIsAddingEvent(true)} className="create-btn">
             Create Event
-          </button>
+          </button> */}
         </div>
 
         <div className="right-side">
@@ -242,4 +250,4 @@ const OrganizationEvents = () => {
   );
 };
 
-export default OrganizationEvents;
+export default NgoEvents;
