@@ -18,21 +18,21 @@ const UserProfile = () => {
   if (!mongoUser) return null;
 
   // Add donation goal
-  const saveGoal = (e) => {
-    const fixed = parseFloat(e.target.value).toFixed(2).toString();
-    if (fixed.length < parseFloat(e.target.value).toString().length)
-      e.target.value = fixed;
-    setInput(e.target.value);
-  };
+  // const saveGoal = (e) => {
+  //   const fixed = parseFloat(e.target.value).toFixed(2).toString();
+  //   if (fixed.length < parseFloat(e.target.value).toString().length)
+  //     e.target.value = fixed;
+  //   setInput(e.target.value);
+  // };
 
-  const handleSave = async () => {
+  const handleSaveAmount = async () => {
     try {
       console.log("New goal amount is", input);
       const token = await user.getIdToken();
-      const res = await api.put(
-        `/user/${user.uid}/amount`,
+      const res = await api.post(
+        `/user/${user.uid}/goal`,
         {
-          goalAmount: `${input}`,
+          goalAmount: `${goalAmount}`,
         },
         {
           headers: {
@@ -49,13 +49,35 @@ const UserProfile = () => {
     }
   };
 
+  // Edit goal
+  const handleEditAmount = async () => {
+    try {
+      const token = await user.getIdToken();
+      await api.put(
+        `/user/${user.uid}/goal`,
+        {
+          goalAmount: `${goalAmount}`,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setInput("");
+      setIsEditing(false);
+      await fetchUserData(user.uid, setMongoUser, token);
+    } catch (err) {
+      console.log("Error is: ", err);
+    }
+  };
+
   // Unfollow NGO
-  const handleUnfollow = async (follow) => {
+  const unfollowNgo = async (follow) => {
     try {
       console.log(follow);
       const token = await user.getIdToken();
-      const res = await api.post(
-        `/user/${user.uid}/unfollow/ngo`,
+      await api.post(
         {
           remove: `${follow}`,
         },
@@ -65,8 +87,6 @@ const UserProfile = () => {
           },
         }
       );
-      const data = res.data;
-      console.log(data);
       await fetchUserData(user.uid, setMongoUser, token);
     } catch (e) {
       console.log(e);
@@ -96,7 +116,7 @@ const UserProfile = () => {
                   onChange={(e) => setGoalAmount(e.target.value)}
                 />
 
-                <button className="save-goal-btn" onClick={handleSave}>
+                <button className="save-goal-btn" onClick={handleSaveAmount}>
                   Save
                 </button>
 
@@ -109,9 +129,9 @@ const UserProfile = () => {
             )}
           </div>
         </div>
-
         <h3>Your donations</h3>
         {mongoUser.donations && (
+          // {mongoUser.donations > 0 && (
           <div className="following">
             {mongoUser.donations.map((donation, idx) => (
               <div key={idx} className="donations">
@@ -129,7 +149,7 @@ const UserProfile = () => {
                   {ngo.name}
                   <button
                     className="unfollow-btn"
-                    onClick={async () => await handleUnfollow(ngo)}
+                    onClick={async () => await unfollowNgo(ngo)}
                   >
                     Unfollow
                   </button>
@@ -138,7 +158,6 @@ const UserProfile = () => {
             </div>
           </div>
         )}
-
         <div className="events-section">
           <h3>Your Volunteering Events</h3>
           <UserEvents />

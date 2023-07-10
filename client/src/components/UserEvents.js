@@ -9,17 +9,18 @@ const UserEvents = () => {
     <div className="events-container">
       {/* <h2>Events</h2> */}
       <div className="events">
-        {mongoUser.attending &&
-          mongoUser.attending.map((event, idx) => (
+        {mongoUser.events &&
+          mongoUser.events.map((event, idx) => (
             <div className="list" key={idx}>
               <div className="place">
-                <p>Event: {event.oneDayEvents.name}</p>
+                <p>Event: {event.name}</p>
+                <p>NGO: {event.ngo.name}</p>
                 <div className="date">
                   <p>
-                    Location: <span>{event.oneDayEvents.location}</span>
+                    Location: <span>{event.location}</span>
                   </p>
                   <p>
-                    Date: <span>{event.oneDayEvents.date}</span>
+                    Date: <span>{event.date}</span>
                   </p>
                 </div>
               </div>

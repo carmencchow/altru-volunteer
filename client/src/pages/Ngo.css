@@ -23,6 +23,7 @@ button {
 }
 .button-row {
   display: flex;
+  margin-left: 30px;
   flex-direction: row;
 }
 .back {

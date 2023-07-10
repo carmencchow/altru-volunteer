@@ -43,7 +43,6 @@ const NgoProfile = () => {
               className={toggleState === 2 ? "tabs  active-tabs" : "tabs"}
               onClick={() => toggletabs(2)}
             >
-              {" "}
               Donations
             </div>
 

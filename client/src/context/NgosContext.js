@@ -12,7 +12,7 @@ export const NgosProvider = ({ children }) => {
   const { user } = useContext(AuthContext);
 
   // // Fetch an Ngo
-  // const fetchNgo = async (req, res) => {
+  // const getUsersNgo = async (req, res) => {
   //   try {
   //     const token = await user.getIdToken();
   //     const res = await api.get(`/ngo/${ngo._id}`, {
@@ -77,7 +77,7 @@ export const NgosProvider = ({ children }) => {
         setNgo,
         ngos,
         setNgos,
-        // fetchNgo,
+        // getUsersNgo
         ngoId,
         setNgoId,
       }}

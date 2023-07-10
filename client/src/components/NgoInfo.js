@@ -43,6 +43,8 @@ const NgoInfo = () => {
       console.log("data", res.data);
       setServerError("");
       setIsAddingNGO(false);
+
+      //
     } catch (err) {
       if (err.response && err.response.status === 400) {
         setServerError(err.response.data.error);

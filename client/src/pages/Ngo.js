@@ -35,7 +35,6 @@ const Ngo = () => {
       const token = await user.getIdToken();
       console.log("Following ngo", ngo, ngo.name);
       await api.post(
-        // `/user/${user.uid}/follow/ngo`,
         `/ngo/follow/${ngo._id}`,
         {
           ngoId: `${ngo._id}`,
@@ -62,8 +61,6 @@ const Ngo = () => {
       );
       await api.post(
         `/user/${user.uid}/donation`,
-        // `/ngo/donate/${ngo._id}`,
-
         {
           ngoId: `${ngo._id}`,
           amount: `${clickedBtn}`,
@@ -169,7 +166,7 @@ const Ngo = () => {
 
         <div>
           <button disabled={disabled} className="follow" onClick={handleFollow}>
-            {mongoUser.ngos.find((item) => item === ngo.name)
+            {mongoUser.ngos && mongoUser.ngos.find((item) => item === ngo.name)
               ? `Following`
               : `Follow ${ngo.name}`}
           </button>

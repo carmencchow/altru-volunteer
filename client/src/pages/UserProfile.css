@@ -8,6 +8,10 @@
   margin-top: 0px;
   font-size: 14px;
 }
+.organizations {
+  margin: 5% auto;
+  color: orange;
+}
 button {
   cursor: pointer;
 }
@@ -20,7 +24,8 @@ button {
   display: flex;
   flex-direction: column;
 }
-.donations {
+.donations,
+.organizations {
   margin: 10px auto;
   margin-left: 30%;
 }
@@ -34,6 +39,10 @@ button {
   display: flex;
   flex-direction: row;
 }
+.following,
+.events-section {
+  border: 2px dashed orange;
+}
 .follow-heading {
   margin-left: 0px;
   margin-top: 30px;
@@ -41,6 +50,7 @@ button {
 }
 .follow-list {
   font-size: 14px;
+  color: black;
 }
 .contact {
   font-weight: bold;

@@ -2,6 +2,7 @@ import User from "../models/userModel.js";
 import Ngo from "../models/ngoModel.js";
 import Donation from "../models/donationModel.js";
 
+// Helper function to query mongo
 const findUser = async (id) => {
   const user = await User.findById(id)
     .populate("ngos")
@@ -14,6 +15,14 @@ const findUser = async (id) => {
         populate: {
           path: "ngo",
           model: "Ngo",
+        },
+      },
+      {
+        path: "donations",
+        model: "Donation",
+        populate: {
+          path: "donor",
+          model: "User",
         },
       },
     ]);
@@ -38,11 +47,12 @@ const getUser = async (req, res) => {
     const { id } = req.params;
     const user = await findUser(id);
     if (!user) {
-      return res.status(200).json({ user });
+      return res.status(400).json({ err: "User doesn't exist" });
     }
+    return res.status(200).json({ user });
   } catch (err) {
     console.log(err);
-    return res.status(404).json({ err: "User doesn't exist" });
+    return res.status(404).json({ err: "Cannot find user" });
   }
 };
 
@@ -65,7 +75,7 @@ const editUser = async (req, res) => {
 // ADD donation
 const addDonation = async (req, res) => {
   try {
-    const { amount, ngoId } = req.body;
+    const { amount, ngoId, ngoName } = req.body;
     // const { amount, ngoId, ngoName } = req.body;
     const user = await User.findById(req.params.id);
     const ngo = await Ngo.findById({ _id: ngoId });
@@ -95,6 +105,22 @@ const addDonation = async (req, res) => {
   }
 };
 
+// ADD goal
+const addGoal = async (req, res) => {
+  try {
+    const { goalAmount } = req.body;
+    const user = await User.findByIdAndUpdate(
+      { _id: req.params.id },
+      { goalAmount },
+      { new: true }
+    );
+    return res.status(200).send({ message: "Goal amount updated" });
+  } catch (error) {
+    console.log(err);
+    return res.status(500).send({ message: "Couldn't add amount" });
+  }
+};
+
 // EDIT goal
 const editGoal = async (req, res) => {
   try {
@@ -113,4 +139,4 @@ const editGoal = async (req, res) => {
   }
 };
 
-export { getUser, findUser, editUser, editGoal, addDonation };
+export { getUser, findUser, editUser, addGoal, editGoal, addDonation };
