@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { fetchUserData } from "../utils/fetchUserData";
 import { FiEdit2 } from "react-icons/fi";
@@ -7,67 +7,53 @@ import { api } from "../utils/axios";
 import "./NgoEvents.css";
 import EditEvent from "./EditEvent";
 
-const NgoEvents = () => {
+const NgoEvents = ({ ngoId }) => {
   const { mongoUser, setMongoUser, user } = useContext(AuthContext);
   const [isEditing, setIsEditing] = useState(false);
   const [isAddingEvent, setIsAddingEvent] = useState(false);
   const [name, setName] = useState("");
+  const [location, setLocation] = useState("");
+  const [numVolunteers, setNumVolunteers] = useState(0);
   const [date, setDate] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
-  const [help, setHelp] = useState("");
-  const [location, setLocation] = useState("");
-  const [numVolunteers, setNumVolunteers] = useState(0);
+  const [duties, setDuties] = useState("");
   const [description, setDescription] = useState("");
   const [serverError, setServerError] = useState("");
+  const [events, setEvents] = useState(null);
 
   const handleEditEvent = () => {
     setIsEditing(true);
   };
 
   const handleDeleteEvent = async () => {
+    // try {
+    //   const token = await user.getIdToken();
+    //   console.log("getting token");
+    //   await api.delete(`/ngo/${ngoId}/event/${event._id}`, {
+    //     headers: {
+    //       Authorization: `Bearer ${token}`,
+    //     },
+    //   });
+    //   setServerError("");
+    //   await fetchUserData(user.uid, setMongoUser, token);
+    //   setIsAddingEvent(false);
+    // } catch (error) {
+    //   console.log(error);
+    // }
+  };
+
+  const fetchAllEvents = async () => {
     try {
       const token = await user.getIdToken();
-      console.log("getting token");
-      await api.delete(`/user/${user.uid}/event`, {
+      const res = api.get(`/ngo/${ngoId}/events`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
       setServerError("");
-      await fetchUserData(user.uid, setMongoUser, token);
-      setIsAddingEvent(false);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const createEvent = async (e) => {
-    e.preventDefault();
-    try {
-      const token = await user.getIdToken();
-      console.log("getting token");
-      await api.post(
-        `/user/${user.uid}/event`,
-        {
-          name: `${name}`,
-          date: `${date}`,
-          startTime: `${startTime}`,
-          endTime: `${endTime}`,
-          location: `${location}`,
-          description: `${description}`,
-          help: `${help}`,
-          numVolunteers: `${numVolunteers}`,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      setServerError("");
-      await fetchUserData(user.uid, setMongoUser, token);
-      setIsAddingEvent(false);
+      console.log("Results", res.data);
+      setEvents(res.data);
     } catch (err) {
       if (err.response && err.response.status === 400) {
         setServerError(err.response.data.error);
@@ -77,173 +63,211 @@ const NgoEvents = () => {
     }
   };
 
+  const createEvent = async (e) => {
+    e.preventDefault();
+    try {
+      const token = await user.getIdToken();
+      const res = await api.post(
+        `/ngo/${ngoId}/event`,
+        {
+          name: `${name}`,
+          date: `${date}`,
+          startTime: `${startTime}`,
+          endTime: `${endTime}`,
+          location: `${location}`,
+          description: `${description}`,
+          duties: `${duties}`,
+          numVolunteers: `${numVolunteers}`,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setServerError("");
+      console.log("Results", res.data);
+      await fetchUserData(user.uid, setMongoUser, token);
+      setIsAddingEvent(false);
+      await fetchAllEvents(ngoId, token);
+    } catch (err) {
+      if (err.response && err.response.status === 400) {
+        setServerError(err.response.data.error);
+      } else {
+        console.log(err);
+      }
+    }
+  };
+
+  // Fetch NGO events
+  useEffect(() => {
+    if (user) {
+      fetchAllEvents();
+    }
+  }, []);
+
   return (
     <div>
       <div className="event-profile">
         <div className="side">
-          <h4>Scheduled Events</h4>
+          <h2>📅 Scheduled Events</h2>
           <h4>Registered Volunteers</h4>
 
           <button onClick={() => setIsAddingEvent(true)} className="create-btn">
-            Create Event
+            Create an event
           </button>
         </div>
 
         <div className="left-side">
-          {mongoUser.oneDayEvents && (
-            <div>
-              <h4>Scheduled events</h4>
+          <div>
+            {events && (
+              <div>
+                {events.map((event, idx) => (
+                  <div key={idx} className="event-card">
+                    <p className="event-name">{event.name}</p>
+                    <p className="event-location"> {event.location} </p>
+                    <p className="event-desc">{event.description}</p>
+                    <p>
+                      Date: <span>{event.date} </span>
+                    </p>
+                    <p>
+                      Time:
+                      <span>
+                        {event.startTime}-{event.endTime}
+                      </span>
+                    </p>
+                    <p className="event-desc">
+                      People:<span>{event.num_volunteers}</span>volunteers
+                      needed
+                    </p>
 
-              {mongoUser.oneDayEvents.map((event, idx) => (
-                <div key={idx} className="event-card">
-                  <p className="event-name">{event.name}</p>
-                  <p className="event-location"> {event.location} </p>
-                  <p className="event-desc">{event.description}</p>
-                  <p>
-                    Date: <span>{event.date} </span>
-                  </p>
-                  <p>
-                    Time:
-                    <span>
-                      {event.startTime}-{event.endTime}
-                    </span>
-                  </p>
-                  <p className="event-desc">
-                    People:<span>{event.numVolunteers}</span>volunteers needed
-                  </p>
+                    <h4>Registered Volunteers</h4>
 
-                  <h4>Registered Volunteers</h4>
+                    {events && (
+                      <div>
+                        <h4>Volunteers attending</h4>
+                        {events.volunteers.map((volunteer, idx) => (
+                          <div key={idx} className="volunteers">
+                            <p>Name: {volunteer.firstname}</p>
+                            <p>{volunteer.lastname}</p>
+                            <p>Email: {volunteer.email}</p>
+                          </div>
+                        ))}
+                      </div>
+                    )}
 
-                  {mongoUser.oneDayEvents && (
-                    <div>
-                      <h4>Volunteers attending</h4>
-                      {mongoUser.oneDayEvents.map((event, idx) => (
-                        <div key={idx} className="volunteers">
-                          <p>Name: {event.volunteers.firstname}</p>
-                          <p>{event.volunteers.lastname}</p>
-                          <p>Email: {event.volunteers.email}</p>
-                        </div>
-                      ))}
+                    <div className="edit-row">
+                      <button onClick={handleEditEvent} className="react-btn">
+                        <FiEdit2 />
+                      </button>
+                      <button onClick={handleDeleteEvent} className="react-btn">
+                        <AiOutlineDelete />
+                      </button>
                     </div>
-                  )}
-
-                  {/* Get names of volunteers */}
-
-                  <div className="edit-row">
-                    <button onClick={handleEditEvent} className="react-btn">
-                      <FiEdit2 />
-                    </button>
-                    <button onClick={handleDeleteEvent} className="react-btn">
-                      <AiOutlineDelete />
-                    </button>
                   </div>
-                </div>
-              ))}
-            </div>
-          )}
+                ))}
+              </div>
+            )}
+          </div>
 
-          {/* <button onClick={() => setIsAddingEvent(true)} className="create-btn">
-            Create Event
-          </button> */}
-        </div>
-
-        <div className="right-side">
-          {isAddingEvent ? (
-            <form className="event-form">
-              <input
-                type="text"
-                className="name"
-                value={name}
-                placeholder="Name of event"
-                onChange={(e) => setName(e.target.value)}
-              />
-              <input
-                type="date"
-                className="event-date"
-                min="2023-07-01"
-                max="2024-12-31"
-                value={date}
-                placeholder="Date of event"
-                onChange={(e) => setDate(e.target.value)}
-              />
-              <div className="row">
+          <div className="right-side">
+            {isAddingEvent ? (
+              <form className="event-form">
                 <input
-                  type="time"
-                  className="event-time"
-                  value={startTime}
-                  min="2023-01-01"
-                  max="2024-12-31"
-                  placeholder="Event time"
-                  onChange={(e) => setStartTime(e.target.value)}
+                  type="text"
+                  className="name"
+                  value={name}
+                  placeholder="Event name"
+                  onChange={(e) => setName(e.target.value)}
                 />
                 <input
-                  type="time"
+                  type="date"
+                  className="event-date"
                   min="2023-07-01"
                   max="2024-12-31"
-                  className="event-time"
-                  value={endTime}
-                  placeholder="Event time"
-                  onChange={(e) => setEndTime(e.target.value)}
+                  value={date}
+                  placeholder="Event date"
+                  onChange={(e) => setDate(e.target.value)}
                 />
-              </div>
-              <input
-                type="text"
-                className="event-location"
-                value={location}
-                placeholder="Event location"
-                onChange={(e) => setLocation(e.target.value)}
-              />
-              <input
-                type="text"
-                className="desc"
-                value={description}
-                placeholder="Description of event"
-                onChange={(e) => setDescription(e.target.value)}
-              />
-              <input
-                type="text"
-                className="help"
-                value={help}
-                placeholder="What kind of help do you need?"
-                onChange={(e) => setHelp(e.target.value)}
-              />
-              <p className="numVol">Number of volunteers:</p>
-              <input
-                type="number"
-                className="numVolunteer"
-                value={numVolunteers}
-                onChange={(e) => setNumVolunteers(e.target.value)}
-              />
-              {serverError && <p className="server-error">{serverError}</p>}
-              <div className="buttons">
-                <button className="save-ngo" onClick={createEvent}>
-                  Save Changes
-                </button>
-                <button
-                  className="save-ngo"
-                  onClick={() => setIsEditing(false)}
-                >
-                  Cancel
-                </button>
-              </div>
-            </form>
-          ) : null}
+                <div className="row">
+                  <input
+                    type="time"
+                    className="event-time"
+                    value={startTime}
+                    min="2023-01-01"
+                    max="2024-12-31"
+                    placeholder="Event time"
+                    onChange={(e) => setStartTime(e.target.value)}
+                  />
+                  <input
+                    type="time"
+                    min="2023-07-01"
+                    max="2024-12-31"
+                    className="event-time"
+                    value={endTime}
+                    placeholder="Event time"
+                    onChange={(e) => setEndTime(e.target.value)}
+                  />
+                </div>
+                <input
+                  type="text"
+                  className="event-location"
+                  value={location}
+                  placeholder="Event location"
+                  onChange={(e) => setLocation(e.target.value)}
+                />
+                <input
+                  type="text"
+                  className="desc"
+                  value={description}
+                  placeholder="Event description"
+                  onChange={(e) => setDescription(e.target.value)}
+                />
+                <input
+                  type="text"
+                  className="help"
+                  value={duties}
+                  placeholder="What kind of volunteer help do you need on the day of your event?"
+                  onChange={(e) => setDuties(e.target.value)}
+                />
+                <p className="numVol">Number of volunteers:</p>
+                <input
+                  type="number"
+                  className="numVolunteer"
+                  value={numVolunteers}
+                  onChange={(e) => setNumVolunteers(e.target.value)}
+                />
+                {serverError && <p className="server-error">{serverError}</p>}
+                <div className="buttons">
+                  <button className="save-ngo" onClick={createEvent}>
+                    Save Changes
+                  </button>
+                  <button
+                    className="save-ngo"
+                    onClick={() => setIsEditing(false)}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            ) : null}
 
-          {isEditing && (
-            <EditEvent
-              {...{
-                name,
-                date,
-                startTime,
-                endTime,
-                location,
-                description,
-                help,
-                numVolunteers,
-                setIsEditing,
-              }}
-            />
-          )}
+            {isEditing && (
+              <EditEvent
+                {...{
+                  name,
+                  date,
+                  startTime,
+                  endTime,
+                  location,
+                  description,
+                  duties,
+                  numVolunteers,
+                  setIsEditing,
+                }}
+              />
+            )}
+          </div>
         </div>
       </div>
     </div>

@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import Input from "react-phone-number-input/input";
+import { fetchUserData } from "../utils/fetchUserData";
 import { Image } from "cloudinary-react";
 import { AuthContext } from "../context/AuthContext";
 import { api } from "../utils/axios";
@@ -7,6 +8,7 @@ import EditNGO from "../components/EditNGO";
 import "./NgoInfo.css";
 
 const NgoInfo = () => {
+  const { user, setMongoUser, mongoUser } = useContext(AuthContext);
   const [isEditing, setIsEditing] = useState(false);
   const [isAddingNGO, setIsAddingNGO] = useState(false);
   const [name, setName] = useState("");
@@ -17,7 +19,6 @@ const NgoInfo = () => {
   const [telephone, setTelephone] = useState("");
   const [url, setUrl] = useState("");
   const [serverError, setServerError] = useState("");
-  const { user, mongoUser } = useContext(AuthContext);
 
   const saveProfile = async (e) => {
     e.preventDefault();
@@ -41,10 +42,10 @@ const NgoInfo = () => {
         }
       );
       console.log("data", res.data);
+      await fetchUserData(user.uid, setMongoUser, token);
+
       setServerError("");
       setIsAddingNGO(false);
-
-      //
     } catch (err) {
       if (err.response && err.response.status === 400) {
         setServerError(err.response.data.error);
@@ -64,36 +65,37 @@ const NgoInfo = () => {
 
   return (
     <div>
-      <h1>Organization Profile</h1>
+      <h2>📂 Organization Profile</h2>
       <div className="user-profile">
-        <div className="left-side">
+        <div className="ngo-profile-about">
           {mongoUser.organization && (
             <div>
               <div>
                 <span className="ngo-name">{mongoUser.organization.name}</span>
-                <h5>Non-profit Information:</h5>
-                <p>About: {mongoUser.organization.description}</p>
-                <p>Address: {mongoUser.organization.address}</p>
-                <p>District:{mongoUser.organization.district}</p>
-                <p>Cause: {mongoUser.organization.category}</p>
-                <p>Tel: {mongoUser.organization.telephone}</p>
-                <p>URL: {mongoUser.organization.url}</p>
+                <p className="website">Website: {mongoUser.organization.url}</p>
+                <h5>Organization description:</h5>
+                <p>{mongoUser.organization.description}</p>
+
+                <h5>Address:</h5>
+                <p>{mongoUser.organization.address}</p>
+                <p>{mongoUser.organization.district}</p>
                 <h5>Contact: </h5>
                 <p className="ngo-contact">
                   {mongoUser.firstname} {mongoUser.lastname}
                 </p>
                 <p className="email-ngo"> {mongoUser.email}</p>
+                <p>{mongoUser.organization.telephone}</p>
               </div>
             </div>
           )}
 
           {!mongoUser.organization ? (
             <button onClick={handleAddNGO} className="add-btn">
-              Add NGO
+              Add Organization
             </button>
           ) : (
             <button onClick={handleEditNGO} className="edit-btn">
-              Edit NGO
+              Edit Organization
             </button>
           )}
         </div>
@@ -101,46 +103,45 @@ const NgoInfo = () => {
         <div classname="right-side">
           {isAddingNGO ? (
             <form className="admin-form">
-              <div className="volunteers">
-                <p>NGO Information:</p>
-              </div>
+              <div className="volunteers"></div>
               <input
                 type="text"
                 className="org-name"
                 value={name}
-                placeholder="Name of nonprofit"
+                placeholder="Organization name"
                 onChange={(e) => setName(e.target.value)}
               />
               <input
                 type="text"
                 className="description"
                 value={description}
-                placeholder="Describe your non-profit and the work you are doing"
+                placeholder="Organization description"
                 onChange={(e) => setDescription(e.target.value)}
               />
               <input
                 type="text"
                 className="address"
                 value={address}
-                placeholder="Address"
+                placeholder="Organization address"
                 onChange={(e) => setAddress(e.target.value)}
               />
               <input
                 type="url"
                 className="url"
                 value={url}
-                placeholder="https://www.example.com"
+                placeholder="Organization URL https://www.organization.com"
                 onChange={(e) => setUrl(e.target.value)}
               />
               <Input
                 country="CA"
                 maxLength="14"
                 value={telephone}
-                placeholder="Phone number"
+                placeholder="Organization phone number"
                 onChange={setTelephone}
               />
               <div>
                 <select
+                  className="ngo-select"
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
                 >
@@ -159,6 +160,7 @@ const NgoInfo = () => {
               </div>
 
               <select
+                className="ngo-select"
                 value={district}
                 onChange={(e) => setDistrict(e.target.value)}
               >

@@ -5,12 +5,14 @@ import Navbar from "../components/Navbar";
 import NgoInfo from "../components/NgoInfo";
 import NgoDonations from "../components/NgoDonations";
 import NgoEvents from "../components/NgoEvents";
+import { MdPreview } from "react-icons/md";
 import "./NgoProfile.css";
 
 const NgoProfile = () => {
   const navigate = useNavigate();
   const { mongoUser } = useContext(AuthContext);
   const [toggleState, setToggleState] = useState(1);
+  // const ngoId = mongoUser.organization._id;
 
   const toggletabs = (idx) => {
     setToggleState(idx);
@@ -29,7 +31,8 @@ const NgoProfile = () => {
         <div className="tabs-container">
           <div className="heading-tabs">
             <button className="preview-btn" onClick={handlePreview}>
-              Preview Page
+              <MdPreview size={50} />
+              Preview
             </button>
 
             <div
@@ -81,7 +84,7 @@ const NgoProfile = () => {
               }
             >
               <div>
-                <NgoEvents />
+                <NgoEvents ngoId={mongoUser.organization._id} />
               </div>
             </div>
           </div>

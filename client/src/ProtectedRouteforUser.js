@@ -4,7 +4,8 @@ import { AuthContext } from "./context/AuthContext";
 
 export const ProtectedRouteforUser = () => {
   const { mongoUser } = useContext(AuthContext);
-  if (!mongoUser || mongoUser.isOrganizer === true) {
+  if (mongoUser.isOrganizer) {
+    // if (!mongoUser || mongoUser.isOrganizer === true) {
     return <Navigate to="/profile" replace />;
   }
   return <Outlet />;

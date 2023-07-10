@@ -34,16 +34,21 @@
 }
 .create-btn {
   color: white;
-  background-color: blueviolet;
-  border: 2px solid blueviolet;
+  background-color: rgb(167, 88, 241);
+  border: 2px solid rgb(167, 88, 241);
   border-radius: 5px;
-  height: 25px;
+  margin-right: 20px;
+  width: 180px;
+}
+.event-form input.name {
+  margin-bottom: 10px;
+  width: 300px;
 }
 .create-btn:hover {
-  background-color: rgb(178, 121, 231);
-  border: 2px solid rgb(178, 121, 231);
+  background-color: rgb(145, 17, 236);
+  border: 2px solid rgb(145, 17, 236);
   border-radius: 5px;
-  height: 25px;
+  transition: ease-in 0.5s;
 }
 .react-btn {
   border: none;

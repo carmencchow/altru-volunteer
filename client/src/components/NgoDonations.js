@@ -9,10 +9,12 @@ const NgoDonations = () => {
     <div className="container">
       <div className="stats">
         <div className="donation-history">
-          <h4>Donor List </h4>
+          <h2>🪙 Donations </h2>
         </div>
 
-        {mongoUser.organization.donations > 0 && (
+        {/* Change to {ngo.donations && ( ... )} */}
+
+        {/* {mongoUser.organization.donations > 0 && (
           // {mongoUser.organization.donations && (
           <div className="donated-amounts">
             {mongoUser.organization.donations.map((donation, idx) => (
@@ -26,15 +28,15 @@ const NgoDonations = () => {
               </div>
             ))}
           </div>
-        )}
+        )} */}
 
         <h4>
           Total amount donated:
           <p className="amount-donated">
             $
-            {mongoUser.organization.donations
+            {/* {mongoUser.organization.donations
               .map((donation) => Number(donation.amount))
-              .reduce((a, b) => a + b, 0)}
+              .reduce((a, b) => a + b, 0)} */}
           </p>
         </h4>
       </div>
