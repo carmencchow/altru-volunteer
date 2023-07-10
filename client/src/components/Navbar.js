@@ -27,12 +27,10 @@ const Navbar = () => {
         <img className="logo" onClick={navMain} src={logo} alt="logo" />
         <div className="navbar-right">
           <div className="profile-btn" onClick={navProfile}>
-            {user && (
-              <p className="user-email">
-                {mongoUser.firstname}
-                {mongoUser.lastname}
-              </p>
-            )}
+            <p className="user-email">
+              {mongoUser.firstname}
+              {mongoUser.lastname}
+            </p>
           </div>
           <div className="profile-btn" onClick={navProfile}>
             {user && <p className="user-email">{user.email}</p>}

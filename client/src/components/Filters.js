@@ -52,9 +52,8 @@ const Filters = () => {
 
           <select value={filters.district} onChange={handleDistrictChange}>
             <option value="all" className="all">
-              Any district
+              All of Toronto
             </option>
-            <option value="district">District:</option>
             <option value="Etobicoke-York">Etobicoke-York</option>
             <option value="North York">North York</option>
             <option value="Toronto">Toronto</option>
@@ -66,7 +65,7 @@ const Filters = () => {
           <p className="cause">Cause</p>
           <select value={filters.category} onChange={handleCategoryChange}>
             <option value="all" className="all">
-              Any Cause
+              All Causes
             </option>
             <option value="animals">Animals</option>
             <option value="children & youth">Children & Youth</option>

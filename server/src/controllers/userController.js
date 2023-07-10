@@ -26,18 +26,6 @@ const findUser = async (id) => {
         },
       },
     ]);
-  // .populate([
-  //   {
-  //     path: "attending",
-  //     model: "Ngo",
-  //     populate:
-  //       {
-  //         path: "oneDayEvents",
-  //         model: "Event",
-  //       },
-  //     ],
-  //   },
-  // ])
   return user;
 };
 

@@ -1,17 +1,21 @@
-button {
-  cursor: pointer;
-}
 .header1 {
   margin-bottom: 10px;
   margin-left: 10px;
 }
-.follow {
-  cursor: pointer;
-  margin-left: 30px;
-  margin-bottom: 20px;
-  padding: 10px;
-  border-radius: 20px;
-  border: 2px solid rgb(131, 216, 244);
+.follow-ngo-btn {
+  color: white;
+  background-color: rgb(167, 88, 241);
+  border: 2px dashed rgb(167, 88, 241);
+  border-radius: 5px;
+  margin-right: 20px;
+  margin-top: 0px;
+}
+.donate:hover,
+.follow-ngo-btn:hover {
+  background-color: rgb(145, 17, 236);
+  border: 2px solid rgb(145, 17, 236);
+  border-radius: 5px;
+  transition: ease-in 0.5s;
 }
 .confirmation {
   font-size: 20px;
@@ -55,12 +59,6 @@ textarea:focus,
 .ngo-name {
   font-size: 20px;
 }
-.ngo-donate {
-  color: #19add6;
-  font-weight: bolder;
-  display: flex;
-  flex-direction: row;
-}
 .column {
   display: flex;
   justify-content: space-between;
@@ -77,15 +75,6 @@ textarea:focus,
   background-color: white;
   margin-left: 0px;
   border: none;
-}
-.donate,
-.follow {
-  border-radius: 5px;
-  border: none;
-  padding: 5px;
-  display: flex;
-  flex-direction: row;
-  height: 30px;
 }
 
 .save-btn {
