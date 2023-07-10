@@ -52,6 +52,9 @@ textarea:focus,
 .donation-input:focus {
   outline: none;
 }
+.ngo-name {
+  font-size: 20px;
+}
 .ngo-donate {
   color: #19add6;
   font-weight: bolder;

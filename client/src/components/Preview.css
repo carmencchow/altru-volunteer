@@ -1,14 +1,26 @@
+.events,
 .about-section {
-  border: 1px solid orange;
   width: 90%;
   margin: 0% auto;
+  background-color: #f6f6fa;
+  border-radius: 10px;
+  padding: 0px 20px;
 }
 .background-image {
-  border: 3px dotted plum;
+  border: 2px dotted plum;
   margin: 2% auto;
   height: 200px;
   width: 90%;
   position: relative;
+  border-radius: 10px;
+}
+h2 {
+  padding-top: 20px;
+}
+button {
+  border-radius: 5px;
+  border: none;
+  padding: 5px;
 }
 .info {
   display: flex;
@@ -39,21 +51,19 @@ span {
   display: flex;
   flex-direction: row;
   height: 30px;
-}
-
-.events {
-  border: 1px solid orange;
-  width: 90%;
-  margin: 5% auto;
+  color: white;
+  margin: 10px;
+  background-color: rgb(218, 126, 244);
 }
 .events-grid {
-  display: grid;
+  display: flex;
   column-count: 3;
   grid-row: 1fr 1fr 1fr;
 }
 .events-card {
-  border: 3px dotted plum;
+  border: 2px dotted plum;
+  border-radius: 10px;
   margin: 2% auto;
   height: 200px;
-  width: 90%;
+  width: 200px;
 }

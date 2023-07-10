@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
+// import { AuthContext } from "../context/AuthContext";
 import { NgosContext } from "../context/NgosContext";
-import VolunteerBtn from "../components/VolunteerBtn";
+// import VolunteerBtn from "../components/VolunteerBtn";
 import Filters from "../components/Filters";
 import Navbar from "../components/Navbar";
 import Modal from "../components/Modal";
 import "./Ngos.css";
 
 const Ngos = () => {
-  const { mongoUser } = useContext(AuthContext);
+  // const { mongoUser } = useContext(AuthContext);
   const { ngos } = useContext(NgosContext);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageCount, setPageCount] = useState(1);
@@ -18,10 +18,10 @@ const Ngos = () => {
   const [ngoModal, setNgoModal] = useState(null);
   const navigate = useNavigate();
 
-  const toggleModal = (ngo) => {
-    setNgoModal(ngo);
-    setOpenModal(!openModal);
-  };
+  // const toggleModal = (ngo) => {
+  //   setNgoModal(ngo);
+  //   setOpenModal(!openModal);
+  // };
 
   const handlePrevious = () => {
     console.log("previous page");

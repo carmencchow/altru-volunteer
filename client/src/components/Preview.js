@@ -2,6 +2,12 @@ import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Preview.css";
 import { AuthContext } from "../context/AuthContext";
+import { TfiLocationPin } from "react-icons/tfi";
+import { BsTelephone } from "react-icons/bs";
+import { BiLeaf } from "react-icons/bi";
+import { TbWorld } from "react-icons/tb";
+import { IoMdArrowRoundBack } from "react-icons/io";
+import { MdPreview } from "react-icons/md";
 
 const Preview = () => {
   const navigate = useNavigate();
@@ -20,15 +26,21 @@ const Preview = () => {
   };
   return (
     <div>
-      <span> Preview Page</span>
+      <span>
+        {" "}
+        <MdPreview /> Preview Page
+      </span>
       <span className="back" onClick={() => navigate(-1)}>
-        Back
+        <IoMdArrowRoundBack />
       </span>
 
       {mongoUser.organization && (
         <div className="about-section">
           <div className="row">
             <h2>{mongoUser.organization.name}</h2>
+            <button className="donate" onClick={donate}>
+              Follow Organization
+            </button>
             <button className="donate" onClick={donate}>
               Make a donation
             </button>
@@ -42,21 +54,28 @@ const Preview = () => {
           </div>
           <div className="info">
             <p>
-              <span>Location:</span>
-              {mongoUser.organization.address},{mongoUser.organization.district}
-              , Toronto
+              <span>
+                <TfiLocationPin />
+              </span>
+              {mongoUser.organization.address}
+              {mongoUser.organization.district}, Toronto
             </p>
             <p>
-              <span>Tel</span>
+              <span>
+                <BsTelephone />
+              </span>
               {mongoUser.organization.telephone}
             </p>
 
             <p>
-              <span>Cause: </span>
+              <span>Cause:</span>
               {mongoUser.organization.category}
             </p>
             <p>
-              <span>URL:</span> {mongoUser.organization.url}
+              <span>
+                <TbWorld />
+              </span>{" "}
+              {mongoUser.organization.url}
             </p>
           </div>
         </div>
@@ -73,7 +92,7 @@ const Preview = () => {
             <p>description:</p>
             <p>duties:</p>
             <p>numVol:</p>
-            <button onClick={register}>Sign up for more info</button>
+            <button onClick={register}>Register for event</button>
           </div>
           <div className="events-card">
             <p>name:</p>
@@ -83,7 +102,7 @@ const Preview = () => {
             <p>description:</p>
             <p>duties:</p>
             <p>numVol:</p>
-            <button onClick={register}>Sign up for more info</button>
+            <button onClick={register}>Register for event</button>{" "}
           </div>
 
           <div className="events-card">
@@ -94,9 +113,8 @@ const Preview = () => {
             <p>description:</p>
             <p>duties:</p>
             <p>numVol:</p>
-
             {/* SendMail email contact person */}
-            <button onClick={register}>Sign up for more info</button>
+            <button onClick={register}>Register for event</button>{" "}
           </div>
         </div>
       </div>

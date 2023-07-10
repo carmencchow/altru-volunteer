@@ -40,8 +40,10 @@ h3 {
 }
 .display-container {
   margin: 30px 60px;
-  border: 1px dashed orange;
   color: black;
+  background-color: #f6f6fa;
+  border-radius: 10px;
+  padding: 5px;
 }
 .ngo-name {
   color: #322ca9;
@@ -50,7 +52,10 @@ h3 {
   font-size: 38px;
   letter-spacing: 0.5px;
   cursor: pointer;
-  margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
 }
 .event {
   font-weight: bold;

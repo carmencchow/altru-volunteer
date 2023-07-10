@@ -48,7 +48,6 @@ const Filters = () => {
     <div>
       <div className="filters">
         <form className="dropdown">
-          <p>Choose options to filter by:</p>
           <p className="commitment">Commitment</p>
 
           <select value={filters.district} onChange={handleDistrictChange}>

@@ -13,7 +13,7 @@ const NgoDonations = () => {
         </div>
 
         {mongoUser.organization.donations > 0 && (
-          // {mongoUser.organization.donations > 0 && (
+          // {mongoUser.organization.donations && (
           <div className="donated-amounts">
             {mongoUser.organization.donations.map((donation, idx) => (
               <div key={idx} className="donations">
