@@ -23,6 +23,7 @@ const EditNGO = ({
   const [newDistrict, setNewDistrict] = useState("");
   const [newTelephone, setNewTelephone] = useState("");
   const [newUrl, setNewUrl] = useState("");
+  const [serverError, setServerError] = useState("");
 
   const updateProfile = async (e) => {
     e.preventDefault();
@@ -47,6 +48,7 @@ const EditNGO = ({
       );
       await fetchUserData(user.uid, setMongoUser, token);
       setIsEditing(false);
+      setServerError("");
     } catch (err) {
       console.log(err);
     }
@@ -59,26 +61,46 @@ const EditNGO = ({
           type="text"
           className="org-name"
           value={newName ? newName : name}
-          placeholder={name ? name : "Name of non-profit"}
+          placeholder={name ? name : "Organization name"}
           onChange={(e) => setNewname(e.target.value)}
         />
         <input
           type="text"
           className="description"
           value={newDescription ? newDescription : description}
-          placeholder={
-            description
-              ? description
-              : "Describe your non-profit and the work you are doing"
-          }
+          placeholder={description ? description : "Organization description"}
           onChange={(e) => setNewDescription(e.target.value)}
         />
+
+        <input
+          type="text"
+          className="address"
+          placeholder={newAddress ? newAddress : "Organization address"}
+          value={newAddress ? newAddress : address}
+          onChange={(e) => setNewAddress(e.target.value)}
+        />
+        <input
+          type="url"
+          className="url"
+          value={url}
+          placeholder={
+            url ? url : "Organization URL https://www.organization.com"
+          }
+          onChange={(e) => setNewUrl(e.target.value)}
+        />
+        <Input
+          country="CA"
+          value={newTelephone ? newTelephone : telephone}
+          placeholder={telephone ? telephone : "Phone number"}
+          maxLength="14"
+          onChange={(e) => setNewTelephone}
+        />
         <select
-          className="updateNgo"
+          className="ngo-select"
           value={newCategory ? newCategory : category}
           onChange={(e) => setNewCategory(e.target.value)}
         >
-          <option value="selection">Type of nonprofit:</option>
+          <option value="selection">Organization Cause:</option>
           <option value="animals">Animals</option>
           <option value="children & youth">Children & Youth</option>
           <option value="education & literacy">Education & Literacy</option>
@@ -86,17 +108,9 @@ const EditNGO = ({
           <option value="health & medicine">Health & Medicine</option>
           <option value="sports & recreation">Sports & Recreation</option>
         </select>
-        <input
-          type="text"
-          className="address"
-          placeholder={
-            newAddress ? newAddress : "Describe volunteer duties ..."
-          }
-          value={newAddress ? newAddress : address}
-          onChange={(e) => setNewAddress(e.target.value)}
-        />
+
         <select
-          className="updateNgo"
+          className="ngo-selectS"
           value={newDistrict ? newDistrict : district}
           onChange={(e) => setNewDistrict(e.target.value)}
         >
@@ -106,20 +120,8 @@ const EditNGO = ({
           <option value="Toronto">Toronto</option>
           <option value="East York">East York & Scarborough</option>
         </select>
-        <Input
-          country="CA"
-          value={newTelephone ? newTelephone : telephone}
-          placeholder={telephone ? telephone : "Phone number"}
-          maxLength="14"
-          onChange={(e) => setNewTelephone}
-        />
-        <input
-          type="url"
-          className="url"
-          value={newUrl ? newUrl : url}
-          placeholder={url ? url : "https://www.organization.com"}
-          onChange={(e) => setNewUrl(e.target.value)}
-        />
+
+        {serverError && <p className="server-error">{serverError}</p>}
 
         <div className="buttons">
           <button className="save-ngo" onClick={updateProfile}>

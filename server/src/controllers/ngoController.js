@@ -1,6 +1,6 @@
 import Ngo from "../models/ngoModel.js";
 import User from "../models/userModel.js";
-import Donation from "../models/donationModel.js";
+import Event from "../models/eventModel.js";
 
 // Get all NGO
 const getNgo = async (req, res) => {
@@ -80,7 +80,7 @@ const createNgo = async (req, res) => {
     if (ownerExists) {
       return res
         .status(400)
-        .json({ error: "You've already registered an NGO" });
+        .json({ error: "You have already created an organization account" });
     }
     if (nameExists) {
       return res.status(400).json({ error: "NGO already exists" });
@@ -171,6 +171,136 @@ const unfollowNgo = async (req, res) => {
   }
 };
 
+// Create an Event
+const createEvent = async (req, res) => {
+  try {
+    const ngo = await Ngo.findById(req.params.id);
+    console.log(ngo._id);
+    const {
+      name,
+      date,
+      startTime,
+      location,
+      numVolunteers,
+      endTime,
+      description,
+      duties,
+    } = req.body;
+    console.log(req.body);
+    if (
+      !name ||
+      !date ||
+      !startTime ||
+      !endTime ||
+      !location ||
+      !description ||
+      !duties ||
+      !numVolunteers
+    ) {
+      return res.status(400).json({ error: "Missing required fields" });
+    }
+    const existingEvent = ngo.events.find((event) => event.name === name);
+    if (existingEvent) {
+      return res.status(400).json({ error: "Event already exists " });
+    } else {
+      const event = await Event.create({
+        name,
+        date,
+        endTime,
+        startTime,
+        location,
+        description,
+        volunteer_duties: duties,
+        num_volunteers: numVolunteers,
+        volunteers: [],
+        ngo: ngo._id,
+      });
+      const updatedNgo = await Ngo.findOneAndUpdate(
+        { _id: ngo._id },
+        { $push: { events: event._id } },
+        { new: true }
+      );
+      await Promise.all([updatedNgo.save(), event.save()]);
+      console.log(event);
+      return res.status(200).send({ event });
+    }
+  } catch (err) {
+    console.log(err);
+    return res.status(400).send(err);
+  }
+};
+
+// Get an ngo's list of events
+const getAllNgoEvents = async (req, res) => {
+  try {
+    const ngo = await Ngo.findById(req.params.id);
+    console.log("all events", ngo.events);
+    return ngo.events;
+  } catch (err) {
+    console.log(err);
+    return res.status(400).send({ err: "No events found" });
+  }
+};
+
+// Edit Event
+const editEvent = async (req, res) => {
+  // try {
+  //   const user = await User.findById(req.params.id);
+  //   if (!user) {
+  //     return res.status(404).send("User not found");
+  //   }
+  //   const {
+  //     name,
+  //     date,
+  //     endTime,
+  //     startTime,
+  //     location,
+  //     description,
+  //     help,
+  //     numVolunteers,
+  //   } = req.body;
+  //   const event = await Event.findOneAndUpdate(
+  //     { organizer: user._id },
+  //     {
+  //       name,
+  //       date,
+  //       endTime,
+  //       startTime,
+  //       location,
+  //       description,
+  //       help,
+  //       numVolunteers,
+  //     },
+  //     { new: true }
+  //   );
+  //   if (!event) {
+  //     return res.status(404).send("Event not found");
+  //   }
+  //   res.status(200).send({ event });
+  // } catch (err) {
+  //   console.log(err);
+  //   res.status(500).send("Error while updating");
+  // }
+};
+
+// DELETE event
+const deleteEvent = async (req, res) => {
+  // try {
+  //   const user = await User.findById(req.params.id);
+  //   if (!user) {
+  //     return res.status(404).send("User not found");
+  //   }
+  //   const event = await Event.findOneAndDelete({ organizer: user._id });
+  //   if (!event) {
+  //     return res.status(404).send("Event not found");
+  //   }
+  //   res.status(400).send("Event not found");
+  // } catch (err) {
+  //   console.log(err);
+  //   return res.status(400).send("Error while deleting event");
+  // }
+};
+
 // // ADD Donation
 // const donateNgo = async (req, res) => {
 //   try {
@@ -207,7 +337,10 @@ export {
   editNgo,
   getNgos,
   getNgo,
-  // donateNgo,
   followNgo,
   unfollowNgo,
+  createEvent,
+  getAllNgoEvents,
+  editEvent,
+  deleteEvent,
 };

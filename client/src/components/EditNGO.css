@@ -6,7 +6,7 @@
 select,
 .admin-form input {
   border: 1px solid grey;
-  width: 300px;
+  /* width: 300px; */
 }
 .checkbox-event {
   height: 20px;
@@ -43,17 +43,16 @@ input[type="text"]::placeholder {
 }
 .save-ngo,
 .cancel-ngo {
-  margin-right: 10px;
   color: white;
-  background-color: blueviolet;
-  border: 2px solid blueviolet;
+  background-color: rgb(167, 88, 241);
+  border: 2px solid rgb(167, 88, 241);
   border-radius: 5px;
-  height: 25px;
+  margin-right: 20px;
 }
 .cancel-ngo:hover,
 .save-ngo:hover {
-  background-color: rgb(178, 121, 231);
-  border: 2px solid rgb(178, 121, 231);
+  background-color: rgb(145, 17, 236);
+  border: 2px solid rgb(145, 17, 236);
   border-radius: 5px;
-  height: 25px;
+  transition: ease-in 0.5s;
 }

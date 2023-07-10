@@ -17,7 +17,7 @@ select,
 input {
   margin-top: 10px;
 }
-input.name {
+.event-form input.name {
   margin-bottom: 20px;
 }
 input.desc {

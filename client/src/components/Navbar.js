@@ -27,11 +27,19 @@ const Navbar = () => {
         <img className="logo" onClick={navMain} src={logo} alt="logo" />
         <div className="navbar-right">
           <div className="profile-btn" onClick={navProfile}>
+            {user && (
+              <p className="user-email">
+                {mongoUser.firstname}
+                {mongoUser.lastname}
+              </p>
+            )}
+          </div>
+          <div className="profile-btn" onClick={navProfile}>
             {user && <p className="user-email">{user.email}</p>}
           </div>
 
           <div className="logout-btn" onClick={handleSignOut}>
-            Logout
+            <p>Logout</p>
           </div>
         </div>
       </div>

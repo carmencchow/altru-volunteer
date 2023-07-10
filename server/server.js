@@ -7,7 +7,7 @@ import Stripe from "stripe";
 import mongoose from "mongoose";
 import { auth } from "./src/firebase-config.js";
 import ngoRoutes from "./src/routes/ngoRoute.js";
-import eventRoutes from "./src/routes/eventRoute.js";
+// import eventRoutes from "./src/routes/eventRoute.js";
 import authRoutes from "./src/routes/authRoute.js";
 import stripeRoutes from "./src/routes/stripeRoute.js";
 import userRoutes from "./src/routes/userRoute.js";
@@ -45,7 +45,7 @@ app.use(async (req, res, next) => {
 app.use("/api/ngo", ngoRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/auth", authRoutes);
-app.use("/api/event", eventRoutes);
+// app.use("/api/event", eventRoutes);
 app.use("/api/payment", stripeRoutes);
 
 // Connect to db

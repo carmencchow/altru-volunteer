@@ -22,7 +22,8 @@ const Home = () => {
     >
       <div className="banner">
         <div className="logo-wrapper">
-          <img className="home-logo" src={logo} alt="logo" />
+          {/* <img className="home-logo" src={logo} alt="logo" /> */}
+          VolunteerConnect
           <div className="buttons">
             <div className="login-btn" onClick={handleLogin}>
               Login
@@ -34,14 +35,8 @@ const Home = () => {
         </div>
       </div>
       <div className="home-text">
-        <p className="welcome-text">
-          Welcome to UnityVolunteer, Harnessing the Power of Volunteers for
-          Good.
-        </p>
-        <p className="sub-text">
-          Your platform to volunteer or give to a worthwhile cause in your
-          community.
-        </p>
+        <p className="welcome-text">Volunteer. Inspire. Transform </p>
+        <p className="sub-text">Make a difference in your community.</p>
       </div>
     </div>
   );

@@ -6,9 +6,10 @@ input {
 .server-error {
   color: blue;
   font-size: 14px;
+  padding-top: 10px;
 }
-.about {
-  height: 40px;
+input.description {
+  height: 100px;
 }
 select {
   border-radius: 10px;
@@ -41,25 +42,41 @@ h5 {
   font-size: 26px;
   margin-left: 0px;
 }
-.left-side p {
-  font-size: 12px;
+.ngo-profile-about p {
+  font-size: 14px;
   padding-top: 5px;
+}
+.website {
+  color: blueviolet;
+  font-weight: bolder;
+}
+.edit-btn {
+  width: 180px;
 }
 .edit-btn,
 .add-btn,
 .save-btn {
   color: white;
-  background-color: blueviolet;
-  border: 2px solid blueviolet;
+  background-color: rgb(167, 88, 241);
+  border: 2px solid rgb(167, 88, 241);
   border-radius: 5px;
-  height: 25px;
   margin-right: 20px;
 }
 .edit-btn:hover,
 .add-btn:hover,
 .save-btn:hover {
-  background-color: rgb(178, 121, 231);
-  border: 2px solid rgb(178, 121, 231);
+  background-color: rgb(145, 17, 236);
+  border: 2px solid rgb(145, 17, 236);
   border-radius: 5px;
-  height: 25px;
+  transition: ease-in 0.5s;
+}
+
+@media only screen and (min-width: 768px) {
+  .ngo-select select {
+    width: 300px;
+    font-size: 12px;
+  }
+  input {
+    width: 300px;
+  }
 }

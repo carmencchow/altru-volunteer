@@ -17,7 +17,14 @@
   display: flex;
   flex-direction: row;
   text-align: center;
-  border-bottom: 2px dashed purple;
+  font-family: "Poppins", sans-serif;
+  color: #322ca9;
+  background-color: #f6f6fa;
+  border-radius: 10px;
+}
+.heading-tabs:hover {
+  color: rgb(121, 92, 250);
+  transition: ease-in 0.5s;
 }
 .tabs,
 .active-tabs {
@@ -29,10 +36,10 @@
   box-sizing: content-box;
 }
 .active-tabs {
-  color: blue;
   font-size: 20px;
   font-weight: bolder;
   width: 33%;
+  text-decoration: underline;
 }
 .content {
   max-width: 700px;
@@ -53,17 +60,20 @@
 }
 .preview-btn {
   margin-top: 0px;
-  background-color: rgb(125, 125, 239);
   border: none;
   border-radius: 10px;
   padding: 10px;
-  color: white;
+  color: rgb(75, 75, 246);
+  background: none;
+}
+.toggle-state {
+  font-family: "Poppins", sans-serif;
+  color: #322ca9;
 }
 .preview-btn:hover {
   margin-top: 0px;
   border: none;
-  background-color: rgb(75, 75, 246);
-  color: white;
+  color: #19add6;
   border-radius: 10px;
   padding: 10px;
   transition: ease-in 0.5s;

@@ -26,7 +26,7 @@ const Preview = () => {
   };
   return (
     <div>
-      <span>
+      <span className="preview">
         {" "}
         <MdPreview /> Preview Page
       </span>
@@ -37,13 +37,15 @@ const Preview = () => {
       {mongoUser.organization && (
         <div className="about-section">
           <div className="row">
-            <h2>{mongoUser.organization.name}</h2>
-            <button className="donate" onClick={donate}>
-              Follow Organization
-            </button>
-            <button className="donate" onClick={donate}>
-              Make a donation
-            </button>
+            <div className="right-side">
+              <h2>🏅 {mongoUser.organization.name}</h2>
+              <button className="donate" onClick={donate}>
+                Follow Organization
+              </button>
+              <button className="donate" onClick={donate}>
+                Make a donation
+              </button>
+            </div>
           </div>
           <p>About: {mongoUser.organization.description}</p>
           <div className="background-image">
@@ -58,7 +60,7 @@ const Preview = () => {
                 <TfiLocationPin />
               </span>
               {mongoUser.organization.address}
-              {mongoUser.organization.district}, Toronto
+              {/* {mongoUser.organization.district} */}
             </p>
             <p>
               <span>
@@ -91,7 +93,6 @@ const Preview = () => {
             <p>location:</p>
             <p>description:</p>
             <p>duties:</p>
-            <p>numVol:</p>
             <button onClick={register}>Register for event</button>
           </div>
           <div className="events-card">
@@ -101,7 +102,6 @@ const Preview = () => {
             <p>location:</p>
             <p>description:</p>
             <p>duties:</p>
-            <p>numVol:</p>
             <button onClick={register}>Register for event</button>{" "}
           </div>
 
@@ -112,7 +112,6 @@ const Preview = () => {
             <p>location:</p>
             <p>description:</p>
             <p>duties:</p>
-            <p>numVol:</p>
             {/* SendMail email contact person */}
             <button onClick={register}>Register for event</button>{" "}
           </div>
