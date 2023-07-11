@@ -4,9 +4,8 @@ import { AuthContext } from "./context/AuthContext";
 
 export const ProtectedRouteforNGO = () => {
   const { mongoUser } = useContext(AuthContext);
-  // if (!mongoUser.isOrganizer) {
-  if (!mongoUser || !mongoUser.isOrganizer) {
-    return <Navigate to="/ngos" replace />;
+  if (mongoUser && mongoUser.isOrganizer) {
+    return <Outlet />;
   }
-  return <Outlet />;
+  return <Navigate to="/login" replace />;
 };

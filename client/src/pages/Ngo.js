@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import { fetchUserData } from "../utils/fetchUserData";
 import StripeCheckout from "react-stripe-checkout";
 import Navbar from "../components/Navbar";
 import AmountBtn from "../components/AmountBtn";
@@ -12,7 +11,7 @@ import "./Ngo.css";
 
 const Ngo = () => {
   const navigate = useNavigate();
-  const { mongoUser, user, setMongoUser } = useContext(AuthContext);
+  const { mongoUser, user, verifyUser } = useContext(AuthContext);
   const { id } = useParams();
   const [ngo, setNgo] = useState({});
   const [disabled, setDisabled] = useState(false);
@@ -47,7 +46,7 @@ const Ngo = () => {
         }
       );
       setDisabled(true);
-      await fetchUserData(user.uid, setMongoUser, token);
+      await verifyUser(user);
     } catch (e) {
       console.log(e);
     }
@@ -73,7 +72,7 @@ const Ngo = () => {
           },
         }
       );
-      await fetchUserData(user.uid, setMongoUser, token);
+      await verifyUser(user);
       toast("Thank you for your donation!");
     } catch (e) {
       console.log(e);

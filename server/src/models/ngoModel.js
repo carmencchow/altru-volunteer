@@ -12,10 +12,10 @@ const ngoSchema = new mongoose.Schema({
     type: String,
   },
   category: {
-    type: [String],
+    type: String,
   },
   address: {
-    String,
+    type: String,
   },
   district: {
     type: String,

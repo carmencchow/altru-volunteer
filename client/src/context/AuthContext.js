@@ -30,6 +30,7 @@ export const AuthContextProvider = ({ children }) => {
       } else if (error.code === "auth/weak-password") {
         setNotification("Weak password");
       }
+      console.log(error.code);
     }
   };
 
@@ -53,7 +54,6 @@ export const AuthContextProvider = ({ children }) => {
     await signOut(auth);
     setUser(null);
     setMongoUser(null);
-    navigate("/");
   };
 
   const verifyUser = async (user) => {
@@ -64,9 +64,11 @@ export const AuthContextProvider = ({ children }) => {
         Authorization: `Bearer ${token}`,
       },
     });
+    console.log(data);
     if (data.status === 401) {
       setNotification("User not found, please sign up");
       setUser(null);
+      setMongoUser(null);
     } else {
       setUser(user);
       setMongoUser(data.data.user);
@@ -74,12 +76,12 @@ export const AuthContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    if (!user) {
+    if (!mongoUser) {
       navigate("/");
     } else {
-      navigate("/ngos");
+      navigate(window.location.pathname);
     }
-  }, [user]);
+  }, [mongoUser]);
 
   useEffect(() => {
     auth.onAuthStateChanged(async function (user) {
@@ -88,6 +90,7 @@ export const AuthContextProvider = ({ children }) => {
         console.log("Firebase user verified");
       } else {
         setUser(null);
+        setMongoUser(null);
       }
     });
   }, []);
@@ -101,6 +104,7 @@ export const AuthContextProvider = ({ children }) => {
         handleSignOut,
         mongoUser,
         setMongoUser,
+        verifyUser,
       }}
     >
       {children}

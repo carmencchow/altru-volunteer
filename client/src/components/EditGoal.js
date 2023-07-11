@@ -1,11 +1,10 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
-import { fetchUserData } from "../utils/fetchUserData";
 import { api } from "../utils/axios";
 
 const EditGoal = ({ openInput, closeInput }) => {
   const [input, setInput] = useState(0);
-  const { setMongoUser, user } = useContext(AuthContext);
+  const { verifyUser, user } = useContext(AuthContext);
 
   const handleInput = (e) => {
     const fixed = parseFloat(e.target.value).toFixed(2).toString();
@@ -33,7 +32,7 @@ const EditGoal = ({ openInput, closeInput }) => {
       console.log(data);
       setInput("");
       closeInput();
-      await fetchUserData(user.uid, setMongoUser, token);
+      await verifyUser(user);
     } catch (err) {
       console.log("Error is: ", err);
     }

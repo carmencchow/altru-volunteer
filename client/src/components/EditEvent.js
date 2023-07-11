@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
-import { fetchUserData } from "../utils/fetchUserData";
 import { api } from "../utils/axios";
 import "./EditEvent.css";
 
@@ -15,7 +14,7 @@ const EditEvent = ({
   numVolunteers,
   setIsEditing,
 }) => {
-  const { setMongoUser, user } = useContext(AuthContext);
+  const { user, verifyUser } = useContext(AuthContext);
   const [newName, setNewName] = useState("");
   const [newDate, setNewDate] = useState("");
   const [newStartTime, setNewStartTime] = useState("");
@@ -47,7 +46,7 @@ const EditEvent = ({
           },
         }
       );
-      await fetchUserData(user.uid, setMongoUser, token);
+      await verifyUser(user);
       setIsEditing(false);
     } catch (err) {
       console.log(err);

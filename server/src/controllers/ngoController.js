@@ -85,6 +85,7 @@ const createNgo = async (req, res) => {
     if (nameExists) {
       return res.status(400).json({ error: "NGO already exists" });
     } else {
+      console.log(district, category);
       const ngo = await Ngo.create({
         name,
         description,

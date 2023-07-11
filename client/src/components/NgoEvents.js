@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
-import { fetchUserData } from "../utils/fetchUserData";
 import { FiEdit2 } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
 import { api } from "../utils/axios";
@@ -8,7 +7,7 @@ import "./NgoEvents.css";
 import EditEvent from "./EditEvent";
 
 const NgoEvents = ({ ngoId }) => {
-  const { mongoUser, setMongoUser, user } = useContext(AuthContext);
+  const { verifyUser, user } = useContext(AuthContext);
   const [isEditing, setIsEditing] = useState(false);
   const [isAddingEvent, setIsAddingEvent] = useState(false);
   const [name, setName] = useState("");
@@ -36,7 +35,7 @@ const NgoEvents = ({ ngoId }) => {
     //     },
     //   });
     //   setServerError("");
-    //   await fetchUserData(user.uid, setMongoUser, token);
+    //   await verifyUser(user)
     //   setIsAddingEvent(false);
     // } catch (error) {
     //   console.log(error);
@@ -87,7 +86,7 @@ const NgoEvents = ({ ngoId }) => {
       );
       setServerError("");
       console.log("Results", res.data);
-      await fetchUserData(user.uid, setMongoUser, token);
+      await verifyUser(user);
       setIsAddingEvent(false);
       await fetchAllEvents(ngoId, token);
     } catch (err) {

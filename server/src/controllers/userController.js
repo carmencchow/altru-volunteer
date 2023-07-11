@@ -17,14 +17,14 @@ const findUser = async (id) => {
           model: "Ngo",
         },
       },
-      {
-        path: "donations",
-        model: "Donation",
-        populate: {
-          path: "donor",
-          model: "User",
-        },
-      },
+      // {
+      //   path: "donations",
+      //   model: "Donation",
+      //   populate: {
+      //     path: "donor",
+      //     model: "User",
+      //   },
+      // },
     ]);
   return user;
 };

@@ -31,8 +31,7 @@ const Signup = () => {
   const handleSignUp = async () => {
     const isOrganizer = isChecked ? true : false;
     console.log("individual account", email, password);
-    // if (email && password && isOrganizer) {
-    if (email && password && (isOrganizer || !isOrganizer)) {
+    if (email && password) {
       console.log(email, password, isOrganizer);
       // Send email and password to Firebase
       const data = await signUp(email, password);
@@ -56,12 +55,6 @@ const Signup = () => {
       );
     }
   };
-
-  useEffect(() => {
-    if (user) {
-      navigate("/ngos");
-    }
-  }, [user]);
 
   return (
     <>

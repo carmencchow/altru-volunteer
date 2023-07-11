@@ -4,7 +4,6 @@ import { AuthContext } from "../context/AuthContext";
 import Navbar from "../components/Navbar";
 import NgoInfo from "../components/NgoInfo";
 import NgoDonations from "../components/NgoDonations";
-import NgoEvents from "../components/NgoEvents";
 import { MdPreview } from "react-icons/md";
 import "./NgoProfile.css";
 
@@ -84,7 +83,7 @@ const NgoProfile = () => {
               }
             >
               <div>
-                <NgoEvents ngoId={mongoUser.organization._id} />
+                {/* <NgoEvents ngoId={mongoUser.organization._id} /> */}
               </div>
             </div>
           </div>
