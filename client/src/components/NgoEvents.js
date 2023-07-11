@@ -51,8 +51,8 @@ const NgoEvents = ({ ngoId }) => {
         },
       });
       setServerError("");
-      console.log("Events Res", ngoId, res);
       setEvents(res.data);
+      console.log("Events:", res.data);
     } catch (err) {
       if (err.response && err.response.status === 400) {
         setServerError(err.response.data.error);
@@ -85,7 +85,6 @@ const NgoEvents = ({ ngoId }) => {
         }
       );
       setServerError("");
-      console.log("Results", res.data);
       await verifyUser(user);
       setIsAddingEvent(false);
     } catch (err) {
@@ -116,10 +115,6 @@ const NgoEvents = ({ ngoId }) => {
         </div>
 
         <div className="left-side">
-          <button onClick={fetchNgoEvents} className="fetch-btn">
-            NGO events
-          </button>
-
           <div>
             {events && (
               <div>

@@ -15,7 +15,7 @@ const NgoDonations = ({ ngoId }) => {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log("Donations Res", res.data);
+      console.log("Donations:", res.data);
       setDonations(res.data);
     } catch (err) {
       console.log(err);

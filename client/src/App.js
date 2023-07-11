@@ -37,7 +37,6 @@ function App() {
               <Route element={<ProtectedRouteforNGO />}>
                 <Route path="/profile" element={<NgoProfile />} />
                 <Route path="/preview" element={<Preview />} />
-                {/* <Route path="/preview/:id" element={<Preview />} /> */}
               </Route>
 
               <Route path="*" element={<Navigate to="/" />} />
