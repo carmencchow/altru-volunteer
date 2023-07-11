@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
-import { fetchUserData } from "../utils/fetchUserData";
 import { GrFormClose } from "react-icons/gr";
 // import sgMail from "@sendgrid/mail";
 import { api } from "../utils/axios";
@@ -17,7 +16,7 @@ const Modal = ({
   setOpenModal,
   ngoModal,
 }) => {
-  const { user, setMongoUser } = useContext(AuthContext);
+  const { user, verifyUser } = useContext(AuthContext);
   const { getNgo } = useContext(NgosContext);
 
   const toggleModal = (ngoModal) => {
@@ -62,7 +61,7 @@ const Modal = ({
       setConfirmMessage("");
       const resData = response.data;
       console.log("EventsArr:", resData);
-      await fetchUserData(user.uid, setMongoUser, token);
+      await verifyUser(user);
       await getNgo(ngoModal);
       console.log("close modal");
       setOpenModal(false);

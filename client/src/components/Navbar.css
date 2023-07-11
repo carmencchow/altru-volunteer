@@ -33,13 +33,12 @@ nav {
   margin-top: 10px;
   padding: 5px;
   margin-left: 10px;
+  font-weight: bolder;
   cursor: pointer;
 }
 .logout-btn:hover,
 .profile-btn:hover {
   color: rgb(121, 92, 250);
-  /* transition: ease-in 0.5s; */
-  font-weight: bolder;
 }
 
 /* Media Queries */

@@ -27,7 +27,6 @@ const Preview = () => {
   return (
     <div>
       <span className="preview">
-        {" "}
         <MdPreview /> Preview Page
       </span>
       <span className="back" onClick={() => navigate(-1)}>

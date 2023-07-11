@@ -30,12 +30,11 @@ const Signup = () => {
 
   const handleSignUp = async () => {
     const isOrganizer = isChecked ? true : false;
-    console.log("individual accoutn", email, password);
-    if (email && password && (isOrganizer || !isOrganizer)) {
+    console.log("individual account", email, password);
+    if (email && password) {
       console.log(email, password, isOrganizer);
       // Send email and password to Firebase
       const data = await signUp(email, password);
-      console.log("data", data);
       console.log("Register new user in Firebase:", data);
       const token = await data.user.getIdToken();
       // Send user data to server to add to mongoDB
@@ -56,12 +55,6 @@ const Signup = () => {
       );
     }
   };
-
-  useEffect(() => {
-    if (user) {
-      navigate("/ngos");
-    }
-  }, [user]);
 
   return (
     <>

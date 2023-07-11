@@ -1,11 +1,11 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/altru.png";
 import "./Login.css";
 
 const Login = () => {
-  const { signIn } = useContext(AuthContext);
+  const { signIn, mongoUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -31,6 +31,14 @@ const Login = () => {
     }
   };
 
+  useEffect(() => {
+    if (mongoUser && mongoUser.isOrganizer) {
+      navigate("/profile");
+    } else if (mongoUser && !mongoUser.isOrganizer) {
+      navigate("/ngos");
+    }
+  }, [mongoUser]);
+
   return (
     <>
       <img
@@ -43,7 +51,7 @@ const Login = () => {
 
       <div className="login-wrapper">
         <div className="login-card">
-          <h2>Welcome!</h2>
+          <h2>👋 Welcome</h2>
           <div className="email-input">
             <input
               name="email"

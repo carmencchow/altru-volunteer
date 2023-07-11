@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import { FiltersContext } from "../context/FiltersContext";
-import { fetchUserData } from "../utils/fetchUserData";
 import { NgosContext } from "../context/NgosContext";
 import { AuthContext } from "../context/AuthContext";
 import "./Filters.css";
@@ -8,8 +7,8 @@ import { api } from "../utils/axios";
 
 const Filters = () => {
   const { filters, setFilters } = useContext(FiltersContext);
-  const { ngos, setNgos } = useContext(NgosContext);
-  const { user, setMongoUser } = useContext(AuthContext);
+  const { setNgos } = useContext(NgosContext);
+  const { user, verifyUser } = useContext(AuthContext);
   const [error, setError] = useState("");
 
   const handleCategoryChange = (e) => {
@@ -37,7 +36,7 @@ const Filters = () => {
       });
       setNgos(res.data);
       console.log(res.data);
-      await fetchUserData(user.uid, setMongoUser, token);
+      await verifyUser(user);
     } catch (err) {
       console.log(err);
       setError(err);
@@ -52,9 +51,8 @@ const Filters = () => {
 
           <select value={filters.district} onChange={handleDistrictChange}>
             <option value="all" className="all">
-              Any district
+              All of Toronto
             </option>
-            <option value="district">District:</option>
             <option value="Etobicoke-York">Etobicoke-York</option>
             <option value="North York">North York</option>
             <option value="Toronto">Toronto</option>
@@ -66,7 +64,7 @@ const Filters = () => {
           <p className="cause">Cause</p>
           <select value={filters.category} onChange={handleCategoryChange}>
             <option value="all" className="all">
-              Any Cause
+              All Causes
             </option>
             <option value="animals">Animals</option>
             <option value="children & youth">Children & Youth</option>

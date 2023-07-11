@@ -1,6 +1,5 @@
 import React, { useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
-import { fetchUserData } from "../utils/fetchUserData";
 import { api } from "../utils/axios";
 import Input from "react-phone-number-input/input";
 import "./EditNGO.css";
@@ -15,7 +14,7 @@ const EditNGO = ({
   url,
   setIsEditing,
 }) => {
-  const { user, setMongoUser } = useContext(AuthContext);
+  const { user, verifyUser } = useContext(AuthContext);
   const [newName, setNewname] = useState(name);
   const [newDescription, setNewDescription] = useState("");
   const [newCategory, setNewCategory] = useState("");
@@ -46,7 +45,7 @@ const EditNGO = ({
           },
         }
       );
-      await fetchUserData(user.uid, setMongoUser, token);
+      await verifyUser(user);
       setIsEditing(false);
       setServerError("");
     } catch (err) {

@@ -12,7 +12,11 @@ const AmountBtn = ({ amount, clickedBtn, setClickedBtn }) => {
       className="amount-btn"
       style={
         clickedBtn === amount
-          ? { backgroundColor: "purple", color: "white", border: "purple" }
+          ? {
+              backgroundColor: "rgb(167, 88, 241",
+              color: "white",
+              border: "purple",
+            }
           : undefined
       }
       onClick={handleClick}

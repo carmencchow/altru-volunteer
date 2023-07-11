@@ -26,9 +26,9 @@ const Navbar = () => {
       <div className="navbar">
         <img className="logo" onClick={navMain} src={logo} alt="logo" />
         <div className="navbar-right">
-          <div className="profile-btn" onClick={navProfile}>
-            {user && (
-              <p className="user-email">
+          <div className="name-btn">
+            {mongoUser && (
+              <p className="user-name">
                 {mongoUser.firstname}
                 {mongoUser.lastname}
               </p>

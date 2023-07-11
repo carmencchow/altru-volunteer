@@ -8,6 +8,9 @@
 h3 {
   margin: 30px 100px;
 }
+.opportunities:hover {
+  text-decoration: underline;
+}
 .next,
 .previous {
   height: 50px;
@@ -44,6 +47,10 @@ h3 {
   background-color: #f6f6fa;
   border-radius: 10px;
   padding: 5px;
+}
+.display-container:hover {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  transition: ease-in 0.3;
 }
 .ngo-name {
   color: #322ca9;

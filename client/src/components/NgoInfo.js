@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import Input from "react-phone-number-input/input";
-import { fetchUserData } from "../utils/fetchUserData";
 import { Image } from "cloudinary-react";
 import { AuthContext } from "../context/AuthContext";
 import { api } from "../utils/axios";
@@ -8,7 +7,7 @@ import EditNGO from "../components/EditNGO";
 import "./NgoInfo.css";
 
 const NgoInfo = () => {
-  const { user, setMongoUser, mongoUser } = useContext(AuthContext);
+  const { user, verifyUser, mongoUser } = useContext(AuthContext);
   const [isEditing, setIsEditing] = useState(false);
   const [isAddingNGO, setIsAddingNGO] = useState(false);
   const [name, setName] = useState("");
@@ -42,8 +41,8 @@ const NgoInfo = () => {
         }
       );
       console.log("data", res.data);
-      await fetchUserData(user.uid, setMongoUser, token);
-
+      // await verifyUser(user)
+      verifyUser(user);
       setServerError("");
       setIsAddingNGO(false);
     } catch (err) {
@@ -102,7 +101,7 @@ const NgoInfo = () => {
 
         <div classname="right-side">
           {isAddingNGO ? (
-            <form className="admin-form">
+            <div className="admin-form">
               <div className="volunteers"></div>
               <input
                 type="text"
@@ -176,7 +175,7 @@ const NgoInfo = () => {
               <button className="edit-btn" onClick={saveProfile}>
                 Save Profile
               </button>
-            </form>
+            </div>
           ) : null}
 
           {isEditing && (

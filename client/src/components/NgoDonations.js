@@ -14,29 +14,33 @@ const NgoDonations = () => {
 
         {/* Change to {ngo.donations && ( ... )} */}
 
-        {/* {mongoUser.organization.donations > 0 && (
-          // {mongoUser.organization.donations && (
-          <div className="donated-amounts">
-            {mongoUser.organization.donations.map((donation, idx) => (
-              <div key={idx} className="donations">
-                <span className="amount-span">${donation.amount}</span>
-                <span>
-                  {donation.donor.firstname}
-                  {donation.donor.lastname}
-                </span>
-                <span>{String(donation.date).slice(0, 10)}</span>
-              </div>
-            ))}
-          </div>
-        )} */}
+        {mongoUser &&
+          mongoUser.organization &&
+          mongoUser.organization.donations > 0 && (
+            // {mongoUser.organization.donations && (
+            <div className="donated-amounts">
+              {mongoUser.organization.donations.map((donation, idx) => (
+                <div key={idx} className="donations">
+                  <span className="amount-span">${donation.amount}</span>
+                  <span>
+                    {donation.donor.firstname}
+                    {donation.donor.lastname}
+                  </span>
+                  <span>{String(donation.date).slice(0, 10)}</span>
+                </div>
+              ))}
+            </div>
+          )}
 
         <h4>
           Total amount donated:
           <p className="amount-donated">
             $
-            {/* {mongoUser.organization.donations
-              .map((donation) => Number(donation.amount))
-              .reduce((a, b) => a + b, 0)} */}
+            {mongoUser &&
+              mongoUser.organization &&
+              mongoUser.organization.donations
+                .map((donation) => Number(donation.amount))
+                .reduce((a, b) => a + b, 0)}
           </p>
         </h4>
       </div>

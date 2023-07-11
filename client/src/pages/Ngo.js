@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import { fetchUserData } from "../utils/fetchUserData";
 import StripeCheckout from "react-stripe-checkout";
 import Navbar from "../components/Navbar";
 import AmountBtn from "../components/AmountBtn";
@@ -11,12 +11,12 @@ import "./Ngo.css";
 
 const Ngo = () => {
   const navigate = useNavigate();
-  const { mongoUser, user, setMongoUser } = useContext(AuthContext);
+  const { mongoUser, user, verifyUser } = useContext(AuthContext);
   const { id } = useParams();
   const [ngo, setNgo] = useState({});
   const [disabled, setDisabled] = useState(false);
-  const [isDonating, setIsDonating] = useState(false);
   const [clickedBtn, setClickedBtn] = useState("0");
+  const notify = () => toast.success("Thank you for donating!");
   const amounts = [10, 15, 25, 50, 75];
   let total = 0;
 
@@ -45,8 +45,8 @@ const Ngo = () => {
           },
         }
       );
-      setDisabled("Following...");
-      await fetchUserData(user.uid, setMongoUser, token);
+      setDisabled(true);
+      await verifyUser(user);
     } catch (e) {
       console.log(e);
     }
@@ -72,8 +72,8 @@ const Ngo = () => {
           },
         }
       );
-      await fetchUserData(user.uid, setMongoUser, token);
-      setIsDonating(false);
+      await verifyUser(user);
+      toast("Thank you for your donation!");
     } catch (e) {
       console.log(e);
     }
@@ -92,8 +92,6 @@ const Ngo = () => {
         Authorization: `Bearer ${token}`,
       },
     });
-    setIsDonating(false);
-    console.log("closing");
   };
 
   useEffect(() => {
@@ -103,6 +101,11 @@ const Ngo = () => {
   return (
     <div>
       <Navbar />
+      <Toaster
+        toastOptions={{
+          style: { backgroundColor: "#00d26a", color: "white" },
+        }}
+      />
       <div>
         <span className="back" onClick={() => navigate(-1)}>
           Back
@@ -111,7 +114,6 @@ const Ngo = () => {
         <div className="about-section">
           <div className="row">
             <h2>{ngo.name}</h2>
-            {/* {isDonating && ( */}
             <div className="donation-card">
               <p>Select an amount to donate: </p>
 
@@ -137,7 +139,17 @@ const Ngo = () => {
               </div>
             </div>
           </div>
-          {/* )} */}
+
+          <button
+            disabled={disabled}
+            className="follow-ngo-btn"
+            onClick={handleFollow}
+          >
+            {mongoUser?.ngos && mongoUser.ngos.find((item) => item === ngo._id)
+              ? `Following`
+              : `Follow ${ngo.name}`}
+          </button>
+
           <div className="background-image">NGO's background image</div>
           <p>Description: {ngo.description}</p>
           <div className="info">
@@ -159,18 +171,7 @@ const Ngo = () => {
         </div>
       </div>
 
-      <div className="button-row">
-        <button onClick={() => setIsDonating(true)} className="donate">
-          Donate
-        </button>
-
-        <div>
-          <button disabled={disabled} className="follow" onClick={handleFollow}>
-            {mongoUser.ngos && mongoUser.ngos.find((item) => item === ngo.name)
-              ? `Following`
-              : `Follow ${ngo.name}`}
-          </button>
-        </div>
+      <div>
         <div className="row">
           <h2>Volunteer Events</h2>
         </div>

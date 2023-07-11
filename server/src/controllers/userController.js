@@ -17,27 +17,15 @@ const findUser = async (id) => {
           model: "Ngo",
         },
       },
-      {
-        path: "donations",
-        model: "Donation",
-        populate: {
-          path: "donor",
-          model: "User",
-        },
-      },
+      // {
+      //   path: "donations",
+      //   model: "Donation",
+      //   populate: {
+      //     path: "donor",
+      //     model: "User",
+      //   },
+      // },
     ]);
-  // .populate([
-  //   {
-  //     path: "attending",
-  //     model: "Ngo",
-  //     populate:
-  //       {
-  //         path: "oneDayEvents",
-  //         model: "Event",
-  //       },
-  //     ],
-  //   },
-  // ])
   return user;
 };
 

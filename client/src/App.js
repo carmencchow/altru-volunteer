@@ -7,14 +7,13 @@ import { ProtectedRouteforUser } from "./ProtectedRouteforUser";
 import { ProtectedRouteforNGO } from "./ProtectedRouteforNGO";
 import UserProfile from "./pages/UserProfile";
 import NgoProfile from "./pages/NgoProfile";
-import Events from "./pages/Events";
+import Preview from "./pages/Preview";
 import Ngos from "./pages/Ngos";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Ngo from "./pages/Ngo";
 import "./App.css";
-import Preview from "./components/Preview";
 
 function App() {
   return (
@@ -29,7 +28,6 @@ function App() {
 
               <Route element={<ProtectedRouteforUser />}>
                 <Route path="/ngos" element={<Ngos />} />
-                <Route path="/events" element={<Events />} />
                 <Route path="/ngo/:id" element={<Ngo />} />
                 <Route path="/user/profile" element={<UserProfile />} />
               </Route>

@@ -85,6 +85,7 @@ const createNgo = async (req, res) => {
     if (nameExists) {
       return res.status(400).json({ error: "NGO already exists" });
     } else {
+      console.log(district, category);
       const ngo = await Ngo.create({
         name,
         description,
@@ -139,7 +140,7 @@ const followNgo = async (req, res) => {
     const { ngoId, uid } = req.body;
     const user = await User.findOne({ _id: uid });
     console.log(ngoId, user._id);
-    const existingNgo = user.ngos.find((item) => item === ngoId);
+    const existingNgo = user.ngos.find((item) => item.toString() === ngoId);
     if (existingNgo) {
       return res.status(400).send("Already following");
     }
