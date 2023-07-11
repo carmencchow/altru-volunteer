@@ -3,8 +3,8 @@ import { AuthContext } from "../context/AuthContext";
 import { FiEdit2 } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
 import { api } from "../utils/axios";
-import "./NgoEvents.css";
 import EditEvent from "./EditEvent";
+import "./NgoEvents.css";
 
 const NgoEvents = ({ ngoId }) => {
   const { verifyUser, user } = useContext(AuthContext);
@@ -20,7 +20,6 @@ const NgoEvents = ({ ngoId }) => {
   const [description, setDescription] = useState("");
   const [serverError, setServerError] = useState("");
   const [events, setEvents] = useState(null);
-  const [allEvents, setAllEvents] = useState(null);
 
   const handleEditEvent = () => {
     setIsEditing(true);
@@ -89,7 +88,6 @@ const NgoEvents = ({ ngoId }) => {
       console.log("Results", res.data);
       await verifyUser(user);
       setIsAddingEvent(false);
-      // await fetchAllNgoEvents(ngoId, token);
     } catch (err) {
       if (err.response && err.response.status === 400) {
         setServerError(err.response.data.error);
@@ -99,12 +97,11 @@ const NgoEvents = ({ ngoId }) => {
     }
   };
 
-  // // Fetch NGO events
-  // useEffect(() => {
-  //   if (user) {
-  //     fetchAllNgoEvents();
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (user) {
+      fetchNgoEvents();
+    }
+  }, []);
 
   return (
     <div>
@@ -123,14 +120,13 @@ const NgoEvents = ({ ngoId }) => {
             NGO events
           </button>
 
-          {/* <div>
+          <div>
             {events && (
               <div>
-                {events?.map((event, idx) => (
+                {events.map((event, idx) => (
                   <div key={idx} className="event-card">
                     <p className="event-name">{event.name}</p>
                     <p className="event-location"> {event.location} </p>
-                    <p className="event-desc">{event.description}</p>
                     <p>
                       Date: <span>{event.date} </span>
                     </p>
@@ -140,23 +136,18 @@ const NgoEvents = ({ ngoId }) => {
                         {event.startTime}-{event.endTime}
                       </span>
                     </p>
-                    <p className="event-desc">
-                      People:<span>{event.num_volunteers}</span>volunteers
-                      needed
-                    </p>
-
-                    <h4>Registered Volunteers</h4>
 
                     {events && (
                       <div>
-                        <h4>Volunteers attending</h4>
-                        {events.volunteers.map((volunteer, idx) => (
-                          <div key={idx} className="volunteers">
-                            <p>Name: {volunteer.firstname}</p>
-                            <p>{volunteer.lastname}</p>
-                            <p>Email: {volunteer.email}</p>
-                          </div>
-                        ))}
+                        {events.volunteers &&
+                          events.volunteers.map((volunteer, idx) => (
+                            <div key={idx} className="volunteers">
+                              <h4>Registered Volunteers</h4>
+                              <p>Name: {volunteer.firstname}</p>
+                              <p>{volunteer.lastname}</p>
+                              <p>Email: {volunteer.email}</p>
+                            </div>
+                          ))}
                       </div>
                     )}
 
@@ -172,7 +163,7 @@ const NgoEvents = ({ ngoId }) => {
                 ))}
               </div>
             )}
-          </div> */}
+          </div>
 
           <div className="right-side">
             {isAddingEvent ? (

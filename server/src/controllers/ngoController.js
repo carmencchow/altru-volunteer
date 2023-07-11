@@ -7,8 +7,17 @@ const getNgo = async (req, res) => {
   const { id } = req.params;
   const ngo = await Ngo.findById(id)
     .populate("owner")
-    .populate("events")
     .populate("volunteers")
+    .populate([
+      {
+        path: "events",
+        model: "Event",
+        populate: {
+          path: "volunteers",
+          model: "User",
+        },
+      },
+    ])
     .populate([
       {
         path: "donations",
@@ -244,10 +253,19 @@ const createEvent = async (req, res) => {
 // Get an ngo's list of events
 const getNgoEvents = async (req, res) => {
   try {
-    const ngo = await Ngo.findById(req.params.id);
+    const ngo = await Ngo.findById(req.params.id).populate([
+      {
+        path: "events",
+        model: "Event",
+        populate: {
+          path: "volunteers",
+          model: "User",
+        },
+      },
+    ]);
     const events = ngo.events;
-    console.log({ events });
-    return res.status(200).json({ events });
+    console.log("Ngo events", events);
+    return res.status(200).send(events);
   } catch (err) {
     console.log(err);
     return res.status(400).send({ err: "No events found" });
@@ -344,37 +362,6 @@ const getDonations = async (req, res) => {
     return res.status(400).send("Error while fetching donations");
   }
 };
-
-// // ADD Donation
-// const donateNgo = async (req, res) => {
-//   try {
-//     const { amount, ngoId } = req.body;
-//     const user = await User.findById(req.params.id);
-//     console.log("donor", user);
-//     const ngo = await Ngo.findById({ _id: ngoId });
-//     const donation = await Donation.create({
-//       ngo: ngoId,
-//       donor: user._id,
-//       amount,
-//       date: Date.now(),
-//     });
-//     user.donations.push(donation._id);
-//     await Promise.all([
-//       user.save(),
-//       Ngo.findOneAndUpdate(
-//         { _id: ngoId },
-//         {
-//           $push: { donations: donation._id },
-//           $addToSet: { donors: user._id },
-//         },
-//         { new: true }
-//       ),
-//     ]);
-//     res.status(200).send({ donation, user, ngo });
-//   } catch (err) {
-//     console.log(err);
-//   }
-// };
 
 export {
   createNgo,
