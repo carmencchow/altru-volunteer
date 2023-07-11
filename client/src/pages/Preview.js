@@ -38,10 +38,10 @@ const Preview = () => {
           <div className="row">
             <div className="right-side">
               <h2>🏅 {mongoUser.organization.name}</h2>
-              <button className="donate" onClick={donate}>
+              <button className="preview-follow" onClick={donate}>
                 Follow Organization
               </button>
-              <button className="donate" onClick={donate}>
+              <button className="preview-donate" onClick={donate}>
                 Make a donation
               </button>
             </div>

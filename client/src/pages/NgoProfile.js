@@ -6,6 +6,7 @@ import NgoInfo from "../components/NgoInfo";
 import NgoDonations from "../components/NgoDonations";
 import { MdPreview } from "react-icons/md";
 import "./NgoProfile.css";
+import NgoEvents from "../components/NgoEvents";
 
 const NgoProfile = () => {
   const navigate = useNavigate();
@@ -66,24 +67,22 @@ const NgoProfile = () => {
                 <NgoInfo />
               </div>
             </div>
-
             <div
               className={
                 toggleState === 2 ? "content active-content" : "content"
               }
             >
               <div>
-                <NgoDonations />
+                <NgoDonations ngoId={mongoUser.organization._id} />
               </div>
             </div>
-
             <div
               className={
                 toggleState === 3 ? "content active-content" : "content"
               }
             >
               <div>
-                {/* <NgoEvents ngoId={mongoUser.organization._id} /> */}
+                <NgoEvents ngoId={mongoUser.organization._id} />
               </div>
             </div>
           </div>

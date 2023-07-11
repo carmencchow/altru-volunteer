@@ -10,6 +10,8 @@ const Filters = () => {
   const { setNgos } = useContext(NgosContext);
   const { user, verifyUser } = useContext(AuthContext);
   const [error, setError] = useState("");
+  const [events, setEvents] = useState(null);
+  const [serverError, setServerError] = useState("");
 
   const handleCategoryChange = (e) => {
     setFilters({ ...filters, category: e.target.value });
@@ -40,6 +42,26 @@ const Filters = () => {
     } catch (err) {
       console.log(err);
       setError(err);
+    }
+  };
+
+  const fetchAllEvents = async () => {
+    try {
+      const token = await user.getIdToken();
+      const res = await api.get(`/event`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setServerError("");
+      console.log("Results", res.data);
+      setEvents(res.data);
+    } catch (err) {
+      if (err.response && err.response.status === 400) {
+        setServerError(err.response.data.error);
+      } else {
+        console.log(err);
+      }
     }
   };
 
@@ -81,6 +103,10 @@ const Filters = () => {
           Search
         </button>
       </div>
+
+      <button onClick={fetchAllEvents} className="fetch-btn">
+        ALL events
+      </button>
 
       {error && <p>{error}</p>}
     </div>

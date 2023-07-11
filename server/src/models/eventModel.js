@@ -23,6 +23,9 @@ const eventSchema = new mongoose.Schema({
   startTime: {
     type: String,
   },
+  category: {
+    type: String,
+  },
   endTime: {
     type: String,
   },

@@ -41,8 +41,7 @@ const NgoInfo = () => {
         }
       );
       console.log("data", res.data);
-      // await verifyUser(user)
-      verifyUser(user);
+      await verifyUser(user);
       setServerError("");
       setIsAddingNGO(false);
     } catch (err) {

@@ -1,4 +1,5 @@
-// import Event from "../models/eventModel.js";
+import Event from "../models/eventModel.js";
+import Ngo from "../models/ngoModel.js";
 
 // // Create NGO Event
 // const createEvent = async (req, res) => {
@@ -66,22 +67,33 @@
 //   }
 // };
 
-// // Get an event by id
-// const getEvent = async (req, res) => {
-//   try {
-//     const ngo = await Ngo.findById(req.params.id);
-//     const event = await Ngo.findByOne({ _id: oneDayEvents });
-//     console.log(event);
-//     console.log("Ngo is", ngo, ngo.oneDayEvents);
-//     res.status(200).json({ events: oneDayEvents });
-//   } catch (err) {
-//     console.log(err);
-//     res.status(404).send({ err: err });
-//   }
-// };
+// Get an event by id
+const getEventById = async (req, res) => {
+  try {
+    const ngo = await Ngo.findById(req.params.id);
+    const event = await Ngo.findByOne({ _id: oneDayEvents });
+    console.log(event);
+    console.log("Ngo is", ngo, ngo.oneDayEvents);
+    res.status(200).json({ events: oneDayEvents });
+  } catch (err) {
+    console.log(err);
+    res.status(404).send({ err: err });
+  }
+};
 
 // Get all events
-const getEvents = async (req, res) => {
+const getAllEvents = async (req, res) => {
+  try {
+    const allEvents = await Event.find({});
+    res.status(200).json({ allEvents: allEvents });
+  } catch (error) {
+    console.log(error.message);
+    res.status(400).send("Fetching events failed");
+  }
+};
+
+// Get filtered events
+const getFilteredEvents = async (req, res) => {
   try {
     const category = req.params.category.toLowerCase();
     const district = req.params.district.toLowerCase();
@@ -112,65 +124,6 @@ const getEvents = async (req, res) => {
     return res.status(400).json({ message: "" });
   }
 };
-
-// // Edit Event
-// const editEvent = async (req, res) => {
-//   try {
-//     const user = await User.findById(req.params.id);
-//     if (!user) {
-//       return res.status(404).send("User not found");
-//     }
-//     const {
-//       name,
-//       date,
-//       endTime,
-//       startTime,
-//       location,
-//       description,
-//       help,
-//       numVolunteers,
-//     } = req.body;
-//     const event = await Event.findOneAndUpdate(
-//       { organizer: user._id },
-//       {
-//         name,
-//         date,
-//         endTime,
-//         startTime,
-//         location,
-//         description,
-//         help,
-//         numVolunteers,
-//       },
-//       { new: true }
-//     );
-//     if (!event) {
-//       return res.status(404).send("Event not found");
-//     }
-//     res.status(200).send({ event });
-//   } catch (err) {
-//     console.log(err);
-//     res.status(500).send("Error while updating");
-//   }
-// };
-
-// // DELETE event
-// const deleteEvent = async (req, res) => {
-//   try {
-//     const user = await User.findById(req.params.id);
-//     if (!user) {
-//       return res.status(404).send("User not found");
-//     }
-//     const event = await Event.findOneAndDelete({ organizer: user._id });
-//     if (!event) {
-//       return res.status(404).send("Event not found");
-//     }
-//     res.status(400).send("Event not found");
-//   } catch (err) {
-//     console.log(err);
-//     return res.status(400).send("Error while deleting event");
-//   }
-// };
 
 // // Attend event
 // const attendEvent = async (req, res) => {
@@ -210,11 +163,4 @@ const getEvents = async (req, res) => {
 //   }
 // };
 
-// export {
-//   createEvent,
-//   editEvent,
-//   getEvent,
-//   getEvents,
-//   deleteEvent,
-//   attendEvent,
-// };
+export { getAllEvents, getFilteredEvents, getEventById };

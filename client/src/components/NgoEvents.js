@@ -20,6 +20,7 @@ const NgoEvents = ({ ngoId }) => {
   const [description, setDescription] = useState("");
   const [serverError, setServerError] = useState("");
   const [events, setEvents] = useState(null);
+  const [allEvents, setAllEvents] = useState(null);
 
   const handleEditEvent = () => {
     setIsEditing(true);
@@ -35,23 +36,23 @@ const NgoEvents = ({ ngoId }) => {
     //     },
     //   });
     //   setServerError("");
-    //   await verifyUser(user)
+    //   await verifyUser(user);
     //   setIsAddingEvent(false);
     // } catch (error) {
     //   console.log(error);
     // }
   };
 
-  const fetchAllEvents = async () => {
+  const fetchNgoEvents = async () => {
     try {
       const token = await user.getIdToken();
-      const res = api.get(`/ngo/${ngoId}/events`, {
+      const res = await api.get(`/ngo/${ngoId}/events`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
       setServerError("");
-      console.log("Results", res.data);
+      console.log("Events Res", ngoId, res);
       setEvents(res.data);
     } catch (err) {
       if (err.response && err.response.status === 400) {
@@ -88,7 +89,7 @@ const NgoEvents = ({ ngoId }) => {
       console.log("Results", res.data);
       await verifyUser(user);
       setIsAddingEvent(false);
-      await fetchAllEvents(ngoId, token);
+      // await fetchAllNgoEvents(ngoId, token);
     } catch (err) {
       if (err.response && err.response.status === 400) {
         setServerError(err.response.data.error);
@@ -98,12 +99,12 @@ const NgoEvents = ({ ngoId }) => {
     }
   };
 
-  // Fetch NGO events
-  useEffect(() => {
-    if (user) {
-      fetchAllEvents();
-    }
-  }, []);
+  // // Fetch NGO events
+  // useEffect(() => {
+  //   if (user) {
+  //     fetchAllNgoEvents();
+  //   }
+  // }, []);
 
   return (
     <div>
@@ -118,10 +119,14 @@ const NgoEvents = ({ ngoId }) => {
         </div>
 
         <div className="left-side">
-          <div>
+          <button onClick={fetchNgoEvents} className="fetch-btn">
+            NGO events
+          </button>
+
+          {/* <div>
             {events && (
               <div>
-                {events.map((event, idx) => (
+                {events?.map((event, idx) => (
                   <div key={idx} className="event-card">
                     <p className="event-name">{event.name}</p>
                     <p className="event-location"> {event.location} </p>
@@ -167,7 +172,7 @@ const NgoEvents = ({ ngoId }) => {
                 ))}
               </div>
             )}
-          </div>
+          </div> */}
 
           <div className="right-side">
             {isAddingEvent ? (

@@ -9,7 +9,16 @@ const getNgo = async (req, res) => {
     .populate("owner")
     .populate("events")
     .populate("volunteers")
-    .populate("donations");
+    .populate([
+      {
+        path: "donations",
+        model: "Donation",
+        populate: {
+          path: "donor",
+          model: "User",
+        },
+      },
+    ]);
   if (!ngo) {
     console.log("NGO not exist");
     return res.status(404).json({ err: "NGO doesn't exist" });
@@ -215,6 +224,7 @@ const createEvent = async (req, res) => {
         num_volunteers: numVolunteers,
         volunteers: [],
         ngo: ngo._id,
+        category: ngo.category,
       });
       const updatedNgo = await Ngo.findOneAndUpdate(
         { _id: ngo._id },
@@ -232,14 +242,26 @@ const createEvent = async (req, res) => {
 };
 
 // Get an ngo's list of events
-const getAllNgoEvents = async (req, res) => {
+const getNgoEvents = async (req, res) => {
   try {
     const ngo = await Ngo.findById(req.params.id);
-    console.log("all events", ngo.events);
-    return ngo.events;
+    const events = ngo.events;
+    console.log({ events });
+    return res.status(200).json({ events });
   } catch (err) {
     console.log(err);
     return res.status(400).send({ err: "No events found" });
+  }
+};
+
+// GET one event
+const getNgoEvent = async (req, res) => {
+  try {
+    const ngo = await Ngo.findById(req.params.id);
+    return res.status(200).json(ngo);
+  } catch (err) {
+    console.log(err);
+    return res.status(400).send("Event not found");
   }
 };
 
@@ -302,6 +324,27 @@ const deleteEvent = async (req, res) => {
   // }
 };
 
+// GET donations
+const getDonations = async (req, res) => {
+  try {
+    const ngo = await Ngo.findById(req.params.id).populate([
+      {
+        path: "donations",
+        model: "Donation",
+        populate: {
+          path: "donor",
+          model: "User",
+        },
+      },
+    ]);
+    console.log("Ngo donations", ngo.donations);
+    return res.status(200).json(ngo.donations);
+  } catch (error) {
+    console.log(error);
+    return res.status(400).send("Error while fetching donations");
+  }
+};
+
 // // ADD Donation
 // const donateNgo = async (req, res) => {
 //   try {
@@ -341,7 +384,9 @@ export {
   followNgo,
   unfollowNgo,
   createEvent,
-  getAllNgoEvents,
+  getNgoEvent,
+  getNgoEvents,
   editEvent,
   deleteEvent,
+  getDonations,
 };

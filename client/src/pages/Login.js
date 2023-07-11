@@ -51,7 +51,7 @@ const Login = () => {
 
       <div className="login-wrapper">
         <div className="login-card">
-          <h2>👋 Welcome</h2>
+          <h2>👋 Hello again!</h2>
           <div className="email-input">
             <input
               name="email"
