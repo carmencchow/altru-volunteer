@@ -22,7 +22,7 @@ const NgoProfile = () => {
     navigate("/preview");
   };
 
-  if (!mongoUser) return null;
+  // if (!mongoUser) return null;
 
   return (
     <>
@@ -64,7 +64,13 @@ const NgoProfile = () => {
               }
             >
               <div>
-                <NgoInfo />
+                <NgoInfo
+                  ngoId={
+                    mongoUser &&
+                    mongoUser.organization &&
+                    mongoUser.organization._id
+                  }
+                />
               </div>
             </div>
             <div
@@ -73,7 +79,13 @@ const NgoProfile = () => {
               }
             >
               <div>
-                <NgoDonations ngoId={mongoUser.organization._id} />
+                <NgoDonations
+                  ngoId={
+                    mongoUser &&
+                    mongoUser.organization &&
+                    mongoUser.organization._id
+                  }
+                />
               </div>
             </div>
             <div
@@ -82,7 +94,13 @@ const NgoProfile = () => {
               }
             >
               <div>
-                <NgoEvents ngoId={mongoUser.organization._id} />
+                <NgoEvents
+                  ngoId={
+                    mongoUser &&
+                    mongoUser.organization &&
+                    mongoUser.organization._id
+                  }
+                />
               </div>
             </div>
           </div>

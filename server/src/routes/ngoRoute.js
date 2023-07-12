@@ -9,8 +9,6 @@ import {
   getNgoEvents,
   getNgoEvent,
   createEvent,
-  editEvent,
-  deleteEvent,
   getDonations,
 } from "../controllers/ngoController.js";
 
@@ -23,8 +21,6 @@ router.get("/:id/event", getNgoEvent);
 router.post("/follow/:id", followNgo);
 router.delete("/unfollow/:id", unfollowNgo);
 router.post("/:id/event", createEvent);
-router.put("/:id/event/:eventId", editEvent);
-router.delete("/:id/event/:eventId", deleteEvent);
 router.get("/:id", getNgo);
 router.put("/:id", editNgo);
 router.get("/:district/:category", getNgos);

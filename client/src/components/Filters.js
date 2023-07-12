@@ -2,8 +2,8 @@ import React, { useContext, useState } from "react";
 import { FiltersContext } from "../context/FiltersContext";
 import { NgosContext } from "../context/NgosContext";
 import { AuthContext } from "../context/AuthContext";
-import "./Filters.css";
 import { api } from "../utils/axios";
+import "./Filters.css";
 
 const Filters = () => {
   const { filters, setFilters } = useContext(FiltersContext);
@@ -21,9 +21,33 @@ const Filters = () => {
     setFilters({ ...filters, district: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSearchNgos = async (e) => {
     e.preventDefault();
     fetchNgos();
+  };
+
+  const handleSearchEvents = async (e) => {
+    e.preventDefault();
+    fetchFilteredEvents();
+  };
+
+  const fetchFilteredEvents = async () => {
+    try {
+      const district = filters.district;
+      const category = filters.category;
+      const token = await user.getIdToken();
+      const eventsRes = await api.get(`/event/${district}/${category}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setEvents(eventsRes.data);
+      console.log("Events", eventsRes.data);
+      await verifyUser(user);
+    } catch (err) {
+      console.log(err);
+      setError(err);
+    }
   };
 
   const fetchNgos = async () => {
@@ -37,7 +61,7 @@ const Filters = () => {
         },
       });
       setNgos(res.data);
-      console.log(res.data);
+      console.log("Ngos", res.data);
       await verifyUser(user);
     } catch (err) {
       console.log(err);
@@ -97,17 +121,16 @@ const Filters = () => {
           </select>
         </form>
       </div>
-
+      Search for ...
       <div className="search-row">
-        <button className="searchBtn" onClick={handleSubmit}>
-          Search
+        <button className="searchBtn" onClick={handleSearchNgos}>
+          Organizations
+        </button>
+
+        <button className="searchBtn" onClick={handleSearchEvents}>
+          Events
         </button>
       </div>
-
-      <button onClick={fetchAllEvents} className="fetch-btn">
-        ALL events
-      </button>
-
       {error && <p>{error}</p>}
     </div>
   );

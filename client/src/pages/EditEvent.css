@@ -1,0 +1,82 @@
+.event-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 0px;
+}
+.event-wrapper {
+  background-color: #f6f6fa;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  padding: 0px 20px;
+  margin: 20px auto;
+  width: 90%;
+}
+.react-btn {
+  border: 1px solid purple;
+}
+.event-form {
+  margin: 10px auto;
+  width: 90%;
+}
+select,
+.event-form input {
+  border: 1px solid grey;
+  width: 300px;
+}
+.display-card {
+  width: 400px;
+}
+.event-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+input {
+  margin-top: 5x;
+}
+.event-form input.name {
+  margin-bottom: 20px;
+}
+input.desc {
+  height: 100px;
+}
+input.duties {
+  height: 80px;
+}
+.delete-btn {
+  background-color: rgb(225, 229, 234);
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+}
+.delete-btn:hover {
+  display: flex;
+  color: rgb(178, 175, 175);
+  flex-direction: row;
+  justify-content: end;
+}
+.save-event,
+.cancel-event {
+  margin-right: 10px;
+  color: white;
+  background-color: rgb(178, 121, 231);
+  border: 2px solid rgb(178, 121, 231);
+  border-radius: 5px;
+}
+.cancel-event:hover,
+.save-event:hover {
+  background-color: blueviolet;
+  border: 2px solid blueviolet;
+  border-radius: 5px;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+}
+.row .event-time {
+  width: 130px;
+  display: flex;
+}

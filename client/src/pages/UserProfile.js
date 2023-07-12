@@ -6,6 +6,7 @@ import "./UserProfile.css";
 
 const UserProfile = () => {
   const [isEditing, setIsEditing] = useState(false);
+  const [isAdding, setIsAdding] = useState(false);
   const [goalAmount, setGoalAmount] = useState(0);
   const [input, setInput] = useState(0);
   const { mongoUser, user, verifyUser } = useContext(AuthContext);
@@ -77,18 +78,12 @@ const UserProfile = () => {
   return (
     <div className="container">
       <Navbar />
-
-      {/* Section 1: Profile */}
+      <div className="profile-name">
+        <p>👋 Hi, {mongoUser.firstname}!</p>
+      </div>
       <div className="profile-section">
-        <h3>😊 My Profile</h3>
-
-        <div className="userprofile">
-          <h3>
-            {mongoUser.firstname}
-            {mongoUser.lastname}
-          </h3>
-        </div>
-        <h3>Organizations I follow:</h3>
+        <div className="userprofile"></div>
+        <h4>Following:</h4>
 
         <div className="organizations">
           {mongoUser.ngos &&
@@ -106,11 +101,11 @@ const UserProfile = () => {
         </div>
       </div>
 
-      {/* Section 2: Donations */}
       <div className="donations-section">
-        <h3>💵 My donations</h3>
-        <h4 className="goal-amt">Goal Amount: ${mongoUser.goalAmount}</h4>
-
+        <div className="row">
+          <h4>💵 Donations</h4>
+          <h4 className="goal-amt">Goal Amount: ${mongoUser.goalAmount}.00</h4>
+        </div>
         {isEditing ? (
           <div className="goal-input">
             <input
@@ -132,16 +127,16 @@ const UserProfile = () => {
             </button>
           </div>
         ) : (
-          <button className="goal-btn" onClick={() => setIsEditing(true)}>
-            Add Goal
-          </button>
+          <div className="goal-row">
+            <button className="goal-btn" onClick={() => setIsEditing(true)}>
+              Edit Goal
+            </button>
+          </div>
         )}
-
         {mongoUser.donations && (
           <div className="donations-table">
             {mongoUser.donations.map((donation, idx) => (
               <div key={idx} className="donations">
-                {/* <div className="donation"> */}
                 <p>
                   ${donation.amount}.00 to {donation.ngo.name}
                 </p>
@@ -151,11 +146,31 @@ const UserProfile = () => {
             ))}
           </div>
         )}
+        <h4>
+          Total amount donated:
+          <p className="amount-donated">
+            $
+            {mongoUser.donations
+              .map((donation) => Number(donation.amount))
+              .reduce((a, b) => a + b, 0)}
+            .00
+          </p>
+        </h4>
+        <h4>
+          Amount needed to reach donation goal:
+          <p className="amount-needed">
+            $
+            {mongoUser.goalAmount -
+              mongoUser.donations
+                .map((donation) => Number(donation.amount))
+                .reduce((a, b) => a + b, 0)}
+            .00
+          </p>
+        </h4>{" "}
       </div>
 
-      {/* Section 3: Events Sections */}
       <div className="events-section">
-        <h3>🗓️ My Volunteering Events</h3>
+        <h4>🗓️ Upcoming Events</h4>
         {mongoUser.events &&
           mongoUser.events.map((event, idx) => (
             <div className="list" key={idx}>

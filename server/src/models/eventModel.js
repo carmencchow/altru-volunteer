@@ -14,9 +14,6 @@ const eventSchema = new mongoose.Schema({
   num_volunteers: {
     type: Number,
   },
-  volunteer_duties: {
-    type: String,
-  },
   date: {
     type: String,
   },
@@ -38,6 +35,9 @@ const eventSchema = new mongoose.Schema({
       ref: "User",
     },
   ],
+  duties: {
+    type: String,
+  },
 });
 
 const Event = mongoose.model("Event", eventSchema);

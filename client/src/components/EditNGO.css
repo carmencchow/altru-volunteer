@@ -6,7 +6,9 @@
 select,
 .admin-form input {
   border: 1px solid grey;
-  /* width: 300px; */
+}
+.editing-buttons {
+  margin-top: 20px;
 }
 .checkbox-event {
   height: 20px;
@@ -21,7 +23,7 @@ select,
   margin-left: 20px;
   margin-right: 20px;
 }
-.help {
+.duties {
   height: 120px;
   margin-top: 15px;
 }

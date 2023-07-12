@@ -20,6 +20,10 @@ const Ngo = () => {
   const amounts = [10, 15, 25, 50, 75];
   let total = 0;
 
+  const register = () => {
+    console.log("Register");
+  };
+
   const fetchNgo = async () => {
     const token = await user.getIdToken();
     const res = await api.get(`/ngo/${id}`, {
@@ -107,10 +111,6 @@ const Ngo = () => {
         }}
       />
       <div>
-        <span className="back" onClick={() => navigate(-1)}>
-          Back
-        </span>
-
         <div className="about-section">
           <div className="row">
             <h2>{ngo.name}</h2>
@@ -172,8 +172,26 @@ const Ngo = () => {
       </div>
 
       <div>
-        <div className="row">
-          <h2>Volunteer Events</h2>
+        <h2>Volunteer Events</h2>
+        <div className="ngo-row">
+          {ngo && ngo.events && (
+            <div className="ngo-events">
+              {ngo.events.map((event, idx) => (
+                <div key={idx} className="ngo-event-card">
+                  <p>⭐ {event.name}</p>
+                  <p>📍 {event.location}</p>
+                  <p>📅 {event.date}</p>
+                  <button
+                    onClick={() => {
+                      navigate(`/event/${id}`);
+                    }}
+                  >
+                    Details
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>

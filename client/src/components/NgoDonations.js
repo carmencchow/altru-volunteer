@@ -30,8 +30,12 @@ const NgoDonations = ({ ngoId }) => {
     <div className="container">
       <div className="stats">
         <div className="donation-history">
-          <h2>🪙 Donations </h2>
-          <p>Your donations</p>
+          <h2>🪙 Donations made to your organization</h2>
+          <div className="row">
+            <p>Amount</p>
+            <p>Donor</p>
+            <p>Date</p>
+          </div>
         </div>
         {donations && (
           <div className="donated-amounts">
@@ -40,7 +44,7 @@ const NgoDonations = ({ ngoId }) => {
                 <p className="amount-span">${donation.amount}.00</p>
                 <p className="first-name">{donation.donor.firstname}</p>
                 <p>{donation.donor.lastname}</p>
-                <p>Date: {String(donation.date).slice(0, 10)}</p>
+                <p className="date">{String(donation.date).slice(0, 10)}</p>
               </div>
             ))}
           </div>

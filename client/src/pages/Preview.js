@@ -62,10 +62,10 @@ const Preview = () => {
             <div className="right-side">
               <h2>🏅 {ngo.name}</h2>
               <button className="preview-follow" onClick={donate}>
-                Follow Organization
+                Follow
               </button>
               <button className="preview-donate" onClick={donate}>
-                Make a donation
+                Donate
               </button>
             </div>
           </div>
@@ -90,11 +90,6 @@ const Preview = () => {
               </span>
               {ngo.telephone}
             </p>
-
-            <p>
-              <span>Cause:</span>
-              {ngo.category}
-            </p>
             <p>
               <span>
                 <TbWorld />
@@ -109,7 +104,7 @@ const Preview = () => {
         <h2>Events</h2>
         <div className="events-grid">
           <div>
-            {ngo.events && (
+            {ngo && ngo.events && (
               <div>
                 {ngo.events.map((event, idx) => (
                   <div key={idx} className="event-card">

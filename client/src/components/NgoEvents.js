@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
-import { FiEdit2 } from "react-icons/fi";
-import { AiOutlineDelete } from "react-icons/ai";
 import { api } from "../utils/axios";
-import EditEvent from "./EditEvent";
+import EditEvent from "../pages/EditEvent";
+import { FiEdit2 } from "react-icons/fi";
+
 import "./NgoEvents.css";
+import { useNavigate } from "react-router-dom";
 
 const NgoEvents = ({ ngoId }) => {
   const { verifyUser, user } = useContext(AuthContext);
@@ -20,27 +21,7 @@ const NgoEvents = ({ ngoId }) => {
   const [description, setDescription] = useState("");
   const [serverError, setServerError] = useState("");
   const [events, setEvents] = useState(null);
-
-  const handleEditEvent = () => {
-    setIsEditing(true);
-  };
-
-  const handleDeleteEvent = async () => {
-    // try {
-    //   const token = await user.getIdToken();
-    //   console.log("getting token");
-    //   await api.delete(`/ngo/${ngoId}/event/${event._id}`, {
-    //     headers: {
-    //       Authorization: `Bearer ${token}`,
-    //     },
-    //   });
-    //   setServerError("");
-    //   await verifyUser(user);
-    //   setIsAddingEvent(false);
-    // } catch (error) {
-    //   console.log(error);
-    // }
-  };
+  const navigate = useNavigate();
 
   const fetchNgoEvents = async () => {
     try {
@@ -66,7 +47,7 @@ const NgoEvents = ({ ngoId }) => {
     e.preventDefault();
     try {
       const token = await user.getIdToken();
-      const res = await api.post(
+      await api.post(
         `/ngo/${ngoId}/event`,
         {
           name: `${name}`,
@@ -97,167 +78,134 @@ const NgoEvents = ({ ngoId }) => {
   };
 
   useEffect(() => {
-    if (user) {
-      fetchNgoEvents();
-    }
+    fetchNgoEvents();
   }, []);
 
   return (
     <div>
+      <h2>📅 Scheduled Events</h2>
       <div className="event-profile">
         <div className="side">
-          <h2>📅 Scheduled Events</h2>
-          <h4>Registered Volunteers</h4>
+          {events && (
+            <div>
+              {events.map((event, idx) => (
+                <div
+                  key={idx}
+                  className="event-card"
+                  onClick={() => {
+                    navigate(`/edit/${event._id}`);
+                  }}
+                >
+                  <p className="event-name">⭐ {event.name}</p>
+                  <p className="event-name">📅 {event.date}</p>
+                  <p className="event-location">📍 {event.location} </p>
+                </div>
+              ))}
+            </div>
+          )}
 
           <button onClick={() => setIsAddingEvent(true)} className="create-btn">
             Create an event
           </button>
         </div>
 
-        <div className="left-side">
-          <div>
-            {events && (
-              <div>
-                {events.map((event, idx) => (
-                  <div key={idx} className="event-card">
-                    <p className="event-name">{event.name}</p>
-                    <p className="event-location"> {event.location} </p>
-                    <p>
-                      Date: <span>{event.date} </span>
-                    </p>
-                    <p>
-                      Time:
-                      <span>
-                        {event.startTime}-{event.endTime}
-                      </span>
-                    </p>
-
-                    {events && (
-                      <div>
-                        {events.volunteers &&
-                          events.volunteers.map((volunteer, idx) => (
-                            <div key={idx} className="volunteers">
-                              <h4>Registered Volunteers</h4>
-                              <p>Name: {volunteer.firstname}</p>
-                              <p>{volunteer.lastname}</p>
-                              <p>Email: {volunteer.email}</p>
-                            </div>
-                          ))}
-                      </div>
-                    )}
-
-                    <div className="edit-row">
-                      <button onClick={handleEditEvent} className="react-btn">
-                        <FiEdit2 />
-                      </button>
-                      <button onClick={handleDeleteEvent} className="react-btn">
-                        <AiOutlineDelete />
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-
-          <div className="right-side">
-            {isAddingEvent ? (
-              <form className="event-form">
+        <div className="right-side">
+          {isAddingEvent ? (
+            <form className="event-form">
+              <input
+                type="text"
+                className="name"
+                value={name}
+                placeholder="Event name"
+                onChange={(e) => setName(e.target.value)}
+              />
+              <input
+                type="date"
+                className="event-date"
+                min="2023-07-01"
+                max="2024-12-31"
+                value={date}
+                placeholder="Event date"
+                onChange={(e) => setDate(e.target.value)}
+              />
+              <div className="row">
                 <input
-                  type="text"
-                  className="name"
-                  value={name}
-                  placeholder="Event name"
-                  onChange={(e) => setName(e.target.value)}
+                  type="time"
+                  className="event-time"
+                  value={startTime}
+                  min="2023-01-01"
+                  max="2024-12-31"
+                  placeholder="Event time"
+                  onChange={(e) => setStartTime(e.target.value)}
                 />
                 <input
-                  type="date"
-                  className="event-date"
+                  type="time"
                   min="2023-07-01"
                   max="2024-12-31"
-                  value={date}
-                  placeholder="Event date"
-                  onChange={(e) => setDate(e.target.value)}
+                  className="event-time"
+                  value={endTime}
+                  placeholder="Event time"
+                  onChange={(e) => setEndTime(e.target.value)}
                 />
-                <div className="row">
-                  <input
-                    type="time"
-                    className="event-time"
-                    value={startTime}
-                    min="2023-01-01"
-                    max="2024-12-31"
-                    placeholder="Event time"
-                    onChange={(e) => setStartTime(e.target.value)}
-                  />
-                  <input
-                    type="time"
-                    min="2023-07-01"
-                    max="2024-12-31"
-                    className="event-time"
-                    value={endTime}
-                    placeholder="Event time"
-                    onChange={(e) => setEndTime(e.target.value)}
-                  />
-                </div>
-                <input
-                  type="text"
-                  className="event-location"
-                  value={location}
-                  placeholder="Event location"
-                  onChange={(e) => setLocation(e.target.value)}
-                />
-                <input
-                  type="text"
-                  className="desc"
-                  value={description}
-                  placeholder="Event description"
-                  onChange={(e) => setDescription(e.target.value)}
-                />
-                <input
-                  type="text"
-                  className="help"
-                  value={duties}
-                  placeholder="What kind of volunteer help do you need on the day of your event?"
-                  onChange={(e) => setDuties(e.target.value)}
-                />
-                <p className="numVol">Number of volunteers:</p>
-                <input
-                  type="number"
-                  className="numVolunteer"
-                  value={numVolunteers}
-                  onChange={(e) => setNumVolunteers(e.target.value)}
-                />
-                {serverError && <p className="server-error">{serverError}</p>}
-                <div className="buttons">
-                  <button className="save-ngo" onClick={createEvent}>
-                    Save Changes
-                  </button>
-                  <button
-                    className="save-ngo"
-                    onClick={() => setIsEditing(false)}
-                  >
-                    Cancel
-                  </button>
-                </div>
-              </form>
-            ) : null}
-
-            {isEditing && (
-              <EditEvent
-                {...{
-                  name,
-                  date,
-                  startTime,
-                  endTime,
-                  location,
-                  description,
-                  duties,
-                  numVolunteers,
-                  setIsEditing,
-                }}
+              </div>
+              <input
+                type="text"
+                className="event-location"
+                value={location}
+                placeholder="Event location"
+                onChange={(e) => setLocation(e.target.value)}
               />
-            )}
-          </div>
+              <input
+                type="text"
+                className="desc"
+                value={description}
+                placeholder="Event description"
+                onChange={(e) => setDescription(e.target.value)}
+              />
+              <input
+                type="text"
+                className="duties"
+                value={duties}
+                placeholder="What kind of volunteer duties do you need on the day of your event?"
+                onChange={(e) => setDuties(e.target.value)}
+              />
+              <p className="numVol">Number of volunteers:</p>
+              <input
+                type="number"
+                className="numVolunteer"
+                value={numVolunteers}
+                onChange={(e) => setNumVolunteers(e.target.value)}
+              />
+              {serverError && <p className="server-error">{serverError}</p>}
+              <div className="buttons">
+                <button className="save-ngo" onClick={createEvent}>
+                  Save Changes
+                </button>
+                <button
+                  className="save-ngo"
+                  onClick={() => setIsEditing(false)}
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          ) : null}
+
+          {isEditing && (
+            <EditEvent
+              {...{
+                name,
+                date,
+                startTime,
+                endTime,
+                location,
+                description,
+                duties,
+                numVolunteers,
+                setIsEditing,
+              }}
+            />
+          )}
         </div>
       </div>
     </div>

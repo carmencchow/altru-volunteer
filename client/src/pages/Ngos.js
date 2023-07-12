@@ -33,7 +33,10 @@ const Ngos = () => {
   return (
     <div>
       <Navbar />
-      <h3 className="find">Find volunteer opportunities:</h3>
+      <h3 className="find">
+        Find hundreds of volunteer opportunities in Toronto
+      </h3>
+      <p>Use the filters to find an organization by cause/area</p>
       <Filters />
 
       {ngos && currentPage !== pageCount ? (
@@ -63,17 +66,16 @@ const Ngos = () => {
         <div className="results-container">
           {ngos?.slice((currentPage - 1) * 5, currentPage * 5).map((ngo) => {
             return (
-              <div className="display-container" key={ngo._id}>
+              <div
+                className="display-container"
+                onClick={() => handleNgoSelected(ngo._id)}
+                key={ngo._id}
+              >
                 <div className="ngo-name">
                   {ngo.name}
                   <p>
-                    {ngo.description}{" "}
-                    <span
-                      className="opportunities"
-                      onClick={() => handleNgoSelected(ngo._id)}
-                    >
-                      View Volunteer Opportunities ...
-                    </span>
+                    {ngo.description}
+                    <span className="opportunities"></span>
                   </p>
                   <p>{ngo.address}</p>
                 </div>

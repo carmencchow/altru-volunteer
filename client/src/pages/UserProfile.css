@@ -1,12 +1,12 @@
 .profile-section,
 .donations-section,
 .events-section {
-  width: 90%;
+  width: 80%;
   margin: 5% auto;
   background-color: #f6f6fa;
-  border-radius: 10px;
+  border-radius: 15px;
   padding: 0px 20px;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
 }
 .donations {
   display: flex;
@@ -27,23 +27,25 @@
   margin-top: 0px;
   font-size: 14px;
 }
-.organizations {
-  margin: 5% auto;
-}
 button {
   cursor: pointer;
 }
-.goal-input {
+.goal-input input {
   border: none;
 }
+.goal-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  margin-left: 0px;
+}
 .goal-btn {
-  width: 150px;
+  width: 100px;
   margin-bottom: 20px;
-  margin-left: 10%;
 }
 .cancel-goal-btn,
 .save-goal-btn {
-  width: 150px;
+  width: 100px;
   margin-bottom: 20px;
   margin-left: 2%;
 }
@@ -56,12 +58,17 @@ button {
   display: flex;
   flex-direction: row;
 }
+.profile-name p {
+  font-size: 20px;
+  font-weight: bolder;
+  margin-left: 20px;
+}
+.amount-donated,
+.amount-needed {
+  font-weight: normal;
+}
 .goal-amt {
   margin-left: 10%;
-}
-.organizations {
-  margin: 10px auto;
-  margin-left: 30%;
 }
 .user-profile p {
   margin-top: 0px;
@@ -93,10 +100,10 @@ button {
   margin-left: 200px;
 }
 .unfollow-btn {
-  margin-left: 0px;
+  margin-left: 10px;
   border: none;
   color: blue;
-  font-size: 12px;
+  font-size: 14px;
   cursor: pointer;
 }
 .edit-btn {

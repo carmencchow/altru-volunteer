@@ -43,6 +43,25 @@
 .back:hover {
   color: blue;
 }
+.ngo-event-card {
+  border: 2px dashed plum;
+  border-radius: 10px;
+  padding: 10px 0 10px 20px;
+  margin-bottom: 20px;
+  margin-right: 20px;
+  cursor: pointer;
+}
+.ngo-event-card:hover {
+  border: 2px solid plum;
+}
+.ngo-events {
+  width: 90%;
+  margin: 0% auto;
+  border-radius: 10px;
+  padding: 0px 20px;
+  display: flex;
+  flex-direction: row;
+}
 .donation-card {
   width: 500px;
   margin-left: 40px;

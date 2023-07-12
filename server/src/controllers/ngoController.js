@@ -2,7 +2,7 @@ import Ngo from "../models/ngoModel.js";
 import User from "../models/userModel.js";
 import Event from "../models/eventModel.js";
 
-// Get all NGO
+// GET all NGO
 const getNgo = async (req, res) => {
   const { id } = req.params;
   const ngo = await Ngo.findById(id)
@@ -35,7 +35,7 @@ const getNgo = async (req, res) => {
   return res.status(200).json(ngo);
 };
 
-// Get all NGOs
+// GET all NGOs
 const getNgos = async (req, res) => {
   try {
     const category = req.params.category.toLowerCase();
@@ -64,11 +64,11 @@ const getNgos = async (req, res) => {
     }
   } catch (err) {
     console.log(err);
-    return res.status(400).json({ message: "" });
+    return res.status(400).json({ message: "Unable to return results" });
   }
 };
 
-// Create an Ngo
+// CREATE an Ngo
 const createNgo = async (req, res) => {
   try {
     const {
@@ -127,7 +127,7 @@ const createNgo = async (req, res) => {
   }
 };
 
-// Edit an Ngo
+// EDIT an Ngo
 const editNgo = async (req, res) => {
   try {
     const { name, description, category, address, district, url, telephone } =
@@ -194,7 +194,7 @@ const unfollowNgo = async (req, res) => {
 const createEvent = async (req, res) => {
   try {
     const ngo = await Ngo.findById(req.params.id);
-    console.log(ngo._id);
+    const category = ngo.category;
     const {
       name,
       date,
@@ -229,11 +229,11 @@ const createEvent = async (req, res) => {
         startTime,
         location,
         description,
-        volunteer_duties: duties,
+        duties,
         num_volunteers: numVolunteers,
         volunteers: [],
         ngo: ngo._id,
-        category: ngo.category,
+        category,
       });
       const updatedNgo = await Ngo.findOneAndUpdate(
         { _id: ngo._id },
@@ -283,65 +283,6 @@ const getNgoEvent = async (req, res) => {
   }
 };
 
-// Edit Event
-const editEvent = async (req, res) => {
-  // try {
-  //   const user = await User.findById(req.params.id);
-  //   if (!user) {
-  //     return res.status(404).send("User not found");
-  //   }
-  //   const {
-  //     name,
-  //     date,
-  //     endTime,
-  //     startTime,
-  //     location,
-  //     description,
-  //     help,
-  //     numVolunteers,
-  //   } = req.body;
-  //   const event = await Event.findOneAndUpdate(
-  //     { organizer: user._id },
-  //     {
-  //       name,
-  //       date,
-  //       endTime,
-  //       startTime,
-  //       location,
-  //       description,
-  //       help,
-  //       numVolunteers,
-  //     },
-  //     { new: true }
-  //   );
-  //   if (!event) {
-  //     return res.status(404).send("Event not found");
-  //   }
-  //   res.status(200).send({ event });
-  // } catch (err) {
-  //   console.log(err);
-  //   res.status(500).send("Error while updating");
-  // }
-};
-
-// DELETE event
-const deleteEvent = async (req, res) => {
-  // try {
-  //   const user = await User.findById(req.params.id);
-  //   if (!user) {
-  //     return res.status(404).send("User not found");
-  //   }
-  //   const event = await Event.findOneAndDelete({ organizer: user._id });
-  //   if (!event) {
-  //     return res.status(404).send("Event not found");
-  //   }
-  //   res.status(400).send("Event not found");
-  // } catch (err) {
-  //   console.log(err);
-  //   return res.status(400).send("Error while deleting event");
-  // }
-};
-
 // GET donations
 const getDonations = async (req, res) => {
   try {
@@ -373,7 +314,5 @@ export {
   createEvent,
   getNgoEvent,
   getNgoEvents,
-  editEvent,
-  deleteEvent,
   getDonations,
 };

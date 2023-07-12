@@ -70,6 +70,7 @@ export const AuthContextProvider = ({ children }) => {
       setMongoUser(null);
     } else {
       setUser(user);
+      console.log("Data from verifyUser", data.data.user);
       setMongoUser(data.data.user);
     }
   };
