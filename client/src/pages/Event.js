@@ -10,8 +10,6 @@ import "./Event.css";
 const Event = () => {
   const { fetchEvent, event } = useContext(EventsContext);
   const { mongoUser, user, verifyUser } = useContext(AuthContext);
-  const notify1 = () => toast.success("Event added");
-  const notify2 = () => toast.success("Event has been removed");
   const { id } = useParams();
 
   const registerEvent = async () => {
@@ -91,7 +89,7 @@ const Event = () => {
             <div className="button-row">
               {mongoUser &&
               mongoUser.events.length > 0 &&
-              mongoUser.events.map((event) => event === event._id) ? (
+              mongoUser.events.map((item) => item === event._id) ? (
                 <button className="remove" onClick={removeEvent}>
                   Remove
                 </button>

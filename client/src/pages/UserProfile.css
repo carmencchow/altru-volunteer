@@ -101,16 +101,14 @@ button {
 .place {
   margin-bottom: 0px;
 }
-.event-title {
+.event-title,
+.follow-list {
   color: rgb(136, 136, 247);
   cursor: pointer;
 }
-.event-title:hover {
+.event-title:hover,
+.follow-list:hover {
   text-decoration: underline;
-}
-.follow-list {
-  font-size: 14px;
-  color: black;
 }
 .contact {
   font-weight: bold;

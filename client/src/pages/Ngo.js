@@ -14,9 +14,7 @@ const Ngo = () => {
   const { mongoUser, user, verifyUser } = useContext(AuthContext);
   const { id } = useParams();
   const [ngo, setNgo] = useState({});
-  const [disabled, setDisabled] = useState(false);
   const [clickedBtn, setClickedBtn] = useState("0");
-  const notify = () => toast.success("Thank you for donating!");
   const amounts = [10, 15, 25, 50, 75];
   let total = 0;
 
@@ -30,7 +28,7 @@ const Ngo = () => {
     setNgo(res.data);
   };
 
-  const handleFollow = async () => {
+  const followNgo = async () => {
     try {
       const token = await user.getIdToken();
       console.log("Following ngo", ngo, ngo.name);
@@ -45,21 +43,30 @@ const Ngo = () => {
           },
         }
       );
-      setDisabled(true);
+      // toast("Following");
+      toast("Following", `${ngo.name}`);
       await verifyUser(user);
     } catch (e) {
       console.log(e);
     }
   };
 
-  const unfollowNgo = async (ngo) => {
+  const unfollowNgo = async () => {
     try {
+      const userId = mongoUser._id;
+      console.log("userid", userId, ngo._id);
       const token = await user.getIdToken();
-      await api.put(`/ngo/unfollow/${ngo._id}`, null, {
-        headers: {
-          Authorization: `Bearer ${token}`,
+      await api.put(
+        `/ngo/unfollow/${ngo._id}`,
+        {
+          userId,
         },
-      });
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       await verifyUser(user);
     } catch (err) {
       console.log(err);
@@ -117,7 +124,7 @@ const Ngo = () => {
       <Navbar />
       <Toaster
         toastOptions={{
-          style: { backgroundColor: "#00d26a", color: "white" },
+          style: { backgroundColor: "#8fd200", color: "white" },
         }}
       />
       <div>
@@ -150,24 +157,17 @@ const Ngo = () => {
             </div>
           </div>
 
-          <button
-            disabled={disabled}
-            className="follow-ngo-btn"
-            onClick={handleFollow}
-          >
-            {mongoUser?.ngos &&
-            mongoUser.ngos.find((item) => item === ngo._id) ? (
-              <button
-                className="unfollow-btn"
-                // Pass in ngo to unfollow later ...
-                onClick={async () => await unfollowNgo(ngo)}
-              >
-                Unfollow
-              </button>
-            ) : (
-              `Follow ${ngo.name}`
-            )}
-          </button>
+          {mongoUser &&
+          mongoUser.ngos.length > 0 &&
+          mongoUser.ngos.map((item) => item === ngo._id) ? (
+            <button className="unfollow-btn" onClick={unfollowNgo}>
+              Unfollow
+            </button>
+          ) : (
+            <button className="follow-ngo-btn" onClick={followNgo}>
+              Follow {`${ngo.name}`}
+            </button>
+          )}
 
           <div className="background-image">NGO's background image</div>
           <p>Description: {ngo.description}</p>

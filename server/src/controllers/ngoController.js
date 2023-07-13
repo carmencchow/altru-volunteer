@@ -177,40 +177,23 @@ const followNgo = async (req, res) => {
   }
 };
 
-// UNFOLLOW NGO
+// Remove ngo
 const unfollowNgo = async (req, res) => {
   try {
-    const { ngo } = req.body;
-    const user = await User.findOne({ _id: req.params.id });
-    let following = [...user.following];
-    console.log(following, user);
-    let updatedFollowing = following.filter((ngo) => ngo !== remove);
-    console.log(updatedFollowing, remove);
-    user.following = updatedFollowing;
+    const { userId } = req.body;
+    const ngo = await Ngo.findById(req.params.id);
+    const user = await User.findByIdAndUpdate(
+      userId,
+      { $pull: { ngos: ngo._id } },
+      { new: true }
+    );
     await user.save();
     return res.status(200).send({ message: user });
   } catch (err) {
     console.log(err);
-    return res.status(500).send({ message: err.message });
+    return res.status(500).send("Error removing ngo");
   }
 };
-
-// const unfollowNgo = async (req, res) => {
-//   try {
-//     const remove = req.body.remove;
-//     const user = await User.findOne({ _id: req.params.id });
-//     let following = [...user.following];
-//     console.log(following, user);
-//     let updatedFollowing = following.filter((ngo) => ngo !== remove);
-//     console.log(updatedFollowing, remove);
-//     user.following = updatedFollowing;
-//     await user.save();
-//     return res.status(200).send({ message: user });
-//   } catch (err) {
-//     console.log(err);
-//     return res.status(500).send({ message: err.message });
-//   }
-// };
 
 // Create an Event
 const createEvent = async (req, res) => {

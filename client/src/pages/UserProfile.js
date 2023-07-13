@@ -76,7 +76,7 @@ const UserProfile = () => {
           {mongoUser.ngos &&
             mongoUser.ngos.map((ngo, idx) => (
               <div className="follow-list" key={idx}>
-                {ngo.name}
+                <p onClick={() => navigate(`/ngo/${ngo._id}`)}>{ngo.name}</p>
               </div>
             ))}
         </div>
