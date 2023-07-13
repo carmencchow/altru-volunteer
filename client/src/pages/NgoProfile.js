@@ -1,18 +1,17 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import Navbar from "../components/Navbar";
-import NgoInfo from "../components/NgoInfo";
-import NgoDonations from "../components/NgoDonations";
 import { MdPreview } from "react-icons/md";
-import "./NgoProfile.css";
+import NgoDonations from "../components/NgoDonations";
 import NgoEvents from "../components/NgoEvents";
+import NgoInfo from "../components/NgoInfo";
+import Navbar from "../components/Navbar";
+import "./NgoProfile.css";
 
 const NgoProfile = () => {
   const navigate = useNavigate();
   const { mongoUser } = useContext(AuthContext);
   const [toggleState, setToggleState] = useState(1);
-  // const ngoId = mongoUser.organization._id;
 
   const toggletabs = (idx) => {
     setToggleState(idx);
@@ -66,13 +65,7 @@ const NgoProfile = () => {
               }
             >
               <div>
-                <NgoInfo
-                  ngoId={
-                    mongoUser &&
-                    mongoUser.organization &&
-                    mongoUser.organization._id
-                  }
-                />
+                <NgoInfo />
               </div>
             </div>
             <div
@@ -81,13 +74,7 @@ const NgoProfile = () => {
               }
             >
               <div>
-                <NgoDonations
-                // ngoId={
-                //   mongoUser &&
-                //   mongoUser.organization &&
-                //   mongoUser.organization._id
-                // }
-                />
+                <NgoDonations />
               </div>
             </div>
             <div
@@ -96,13 +83,7 @@ const NgoProfile = () => {
               }
             >
               <div>
-                <NgoEvents
-                // ngoId={
-                //   mongoUser &&
-                //   mongoUser.organization &&
-                //   mongoUser.organization._id
-                // }
-                />
+                <NgoEvents />
               </div>
             </div>
           </div>

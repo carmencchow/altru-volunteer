@@ -52,6 +52,20 @@ const Ngo = () => {
     }
   };
 
+  const unfollowNgo = async (ngo) => {
+    try {
+      const token = await user.getIdToken();
+      await api.put(`/ngo/unfollow/${ngo._id}`, null, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      await verifyUser(user);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const handleConfirmation = async () => {
     try {
       const token = await user.getIdToken();
@@ -141,9 +155,18 @@ const Ngo = () => {
             className="follow-ngo-btn"
             onClick={handleFollow}
           >
-            {mongoUser?.ngos && mongoUser.ngos.find((item) => item === ngo._id)
-              ? `Following`
-              : `Follow ${ngo.name}`}
+            {mongoUser?.ngos &&
+            mongoUser.ngos.find((item) => item === ngo._id) ? (
+              <button
+                className="unfollow-btn"
+                // Pass in ngo to unfollow later ...
+                onClick={async () => await unfollowNgo(ngo)}
+              >
+                Unfollow
+              </button>
+            ) : (
+              `Follow ${ngo.name}`
+            )}
           </button>
 
           <div className="background-image">NGO's background image</div>

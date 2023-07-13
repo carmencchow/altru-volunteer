@@ -7,12 +7,22 @@
 h1 {
   margin-left: 7%;
 }
-.register {
-  margin-bottom: 10px;
-}
 .register:hover {
+  margin-bottom: 10px;
+  height: 30px;
+  color: blue;
+}
+.remove {
+  color: grey;
+}
+.remove:hover {
+  color: rgb(183, 180, 180);
+}
+.register {
   background-color: rgb(230, 230, 249);
   transition: ease-in 0.5;
+  margin-bottom: 10px;
+  height: 30px;
 }
 .event-ngo-name {
   font-weight: bolder;

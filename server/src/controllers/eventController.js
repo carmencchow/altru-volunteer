@@ -124,4 +124,35 @@ const registerEvent = async (req, res) => {
   }
 };
 
-export { getEvents, getEvent, deleteEvent, editEvent, registerEvent };
+// Remove event
+const removeEvent = async (req, res) => {
+  try {
+    const { userId } = req.body;
+    const user = await User.findById(userId);
+    const event = await Event.findById(req.params.id);
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { $pull: { events: event._id } },
+      { new: true }
+    );
+    const updatedEvent = await Event.findByIdAndUpdate(
+      { _id: req.params.id },
+      { $pull: { volunteers: updatedUser._id } },
+      { new: true }
+    );
+    console.log("Updated event", updatedEvent.volunteers, updatedUser.events);
+    res.status(200).send({ event, user });
+  } catch (err) {
+    console.log(err);
+    res.status(400).send("Couldn't remove event");
+  }
+};
+
+export {
+  getEvents,
+  getEvent,
+  deleteEvent,
+  editEvent,
+  registerEvent,
+  removeEvent,
+};

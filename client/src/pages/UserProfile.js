@@ -1,16 +1,16 @@
 import React, { useContext, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import Navbar from "../components/Navbar";
 import { api } from "../utils/axios";
+import Navbar from "../components/Navbar";
 import "./UserProfile.css";
-import { useParams } from "react-router-dom";
 
 const UserProfile = () => {
   const [isEditing, setIsEditing] = useState(false);
-  const [isAdding, setIsAdding] = useState(false);
   const [goalAmount, setGoalAmount] = useState(0);
   const [input, setInput] = useState(0);
   const { id } = useParams();
+  const navigate = useNavigate();
   const { mongoUser, user, verifyUser } = useContext(AuthContext);
 
   if (!mongoUser) return null;
@@ -61,24 +61,10 @@ const UserProfile = () => {
     }
   };
 
-  // Unfollow NGO
-  const unfollowNgo = async (ngo) => {
-    try {
-      const token = await user.getIdToken();
-      await api.put(`/ngo/unfollow/${ngo._id}`, null, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      await verifyUser(user);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   return (
     <div className="container">
       <Navbar />
+
       <div className="profile-name">
         <p>👋 Hi, {mongoUser.firstname}!</p>
       </div>
@@ -91,13 +77,6 @@ const UserProfile = () => {
             mongoUser.ngos.map((ngo, idx) => (
               <div className="follow-list" key={idx}>
                 {ngo.name}
-                <button
-                  className="unfollow-btn"
-                  // Pass in ngo to unfollow later ...
-                  onClick={async () => await unfollowNgo(ngo)}
-                >
-                  Unfollow
-                </button>
               </div>
             ))}
         </div>
@@ -149,16 +128,6 @@ const UserProfile = () => {
           </div>
         )}
         <h4>
-          Total amount donated:
-          <p className="amount-donated">
-            $
-            {mongoUser.donations
-              .map((donation) => Number(donation.amount))
-              .reduce((a, b) => a + b, 0)}
-            .00
-          </p>
-        </h4>
-        <h4>
           Amount needed to reach donation goal:
           <p className="amount-needed">
             $
@@ -177,17 +146,18 @@ const UserProfile = () => {
           mongoUser.events.map((event, idx) => (
             <div className="list" key={idx}>
               <div className="place">
-                <p>Event: {event.name}</p>
-                <p>NGO: {event.ngo.name}</p>
-                <div className="date">
-                  <p>
-                    Location: <span>{event.location}</span>
-                  </p>
-                  <p>
-                    Date: <span>{event.date}</span>
-                  </p>
-                </div>
-              </div>
+                <p
+                  className="event-title"
+                  onClick={() => {
+                    navigate(`/event/${event._id}`);
+                    console.log(`navigate to ${event._id}`);
+                  }}
+                >
+                  {event.name} with {event.ngo.name}
+                </p>
+                <p>{event.location}</p>
+                <p>{event.date}</p>
+              </div>{" "}
             </div>
           ))}
       </div>

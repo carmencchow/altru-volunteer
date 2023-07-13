@@ -6,7 +6,16 @@ import Donation from "../models/donationModel.js";
 const findUser = async (id) => {
   const user = await User.findById(id)
     .populate("ngos")
-    .populate("events")
+    .populate([
+      {
+        path: "events",
+        model: "Event",
+        populate: {
+          path: "ngo",
+          model: "Ngo",
+        },
+      },
+    ])
     .populate("organization")
     .populate([
       {

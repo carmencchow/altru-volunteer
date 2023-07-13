@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { api } from "../utils/axios";
 import EditEvent from "../pages/EditEvent";
-import { FiEdit2 } from "react-icons/fi";
 
 import "./NgoEvents.css";
 import { useNavigate } from "react-router-dom";

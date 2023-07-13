@@ -8,6 +8,9 @@
   padding: 0px 20px;
   margin-bottom: 5px;
 }
+.profile-section {
+  margin-top: 0px;
+}
 .donations {
   display: flex;
   flex-direction: row;
@@ -32,6 +35,7 @@ button {
 }
 .goal-input input {
   border: none;
+  width: 150px;
 }
 .donategoal-row {
   display: flex;
@@ -49,9 +53,10 @@ button {
 }
 .cancel-goal-btn,
 .save-goal-btn {
-  width: 100px;
+  width: 70px;
   margin-bottom: 20px;
   margin-left: 2%;
+  height: 30px;
 }
 .userprofile {
   width: 80%;
@@ -66,6 +71,10 @@ button {
   font-size: 20px;
   font-weight: bolder;
   margin-left: 20px;
+}
+.event-button-row {
+  display: flex;
+  justify-content: space-between;
 }
 .amount-donated,
 .amount-needed {
@@ -89,6 +98,16 @@ button {
   margin-top: 30px;
   margin-bottom: 5px;
 }
+.place {
+  margin-bottom: 0px;
+}
+.event-title {
+  color: rgb(136, 136, 247);
+  cursor: pointer;
+}
+.event-title:hover {
+  text-decoration: underline;
+}
 .follow-list {
   font-size: 14px;
   color: black;
@@ -106,15 +125,20 @@ button {
 .unfollow-btn {
   margin-left: 10px;
   border: none;
-  color: blue;
   font-size: 14px;
   cursor: pointer;
+  height: 30px;
 }
-.edit-btn {
-  width: 100px;
+.edit-btn,
+.remove {
+  width: 80px;
   margin-top: 10px;
   cursor: pointer;
   margin-bottom: 40px;
+  height: 30px;
+}
+.remove {
+  margin-top: 0px;
 }
 .edit-btn:hover {
   color: white;
