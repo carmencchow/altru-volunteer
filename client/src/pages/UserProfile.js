@@ -64,7 +64,6 @@ const UserProfile = () => {
   return (
     <div className="container">
       <Navbar />
-
       <div className="profile-name">
         <p>👋 Hi, {mongoUser.firstname}!</p>
       </div>
@@ -73,7 +72,8 @@ const UserProfile = () => {
         <h4>Following:</h4>
 
         <div className="organizations">
-          {mongoUser.ngos &&
+          {mongoUser &&
+            mongoUser.ngos &&
             mongoUser.ngos.map((ngo, idx) => (
               <div className="follow-list" key={idx}>
                 <p onClick={() => navigate(`/ngo/${ngo._id}`)}>{ngo.name}</p>
@@ -114,7 +114,7 @@ const UserProfile = () => {
             </button>
           </div>
         )}
-        {mongoUser.donations && (
+        {mongoUser && mongoUser.donations && (
           <div className="donations-table">
             {mongoUser.donations.map((donation, idx) => (
               <div key={idx} className="donations">
@@ -142,7 +142,8 @@ const UserProfile = () => {
 
       <div className="events-section">
         <h4>🗓️ Upcoming Events</h4>
-        {mongoUser.events &&
+        {mongoUser &&
+          mongoUser.events &&
           mongoUser.events.map((event, idx) => (
             <div className="list" key={idx}>
               <div className="place">
