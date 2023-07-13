@@ -43,6 +43,47 @@
 .back:hover {
   color: blue;
 }
+.button-row {
+  display: flex;
+  flex-direction: row-reverse;
+  padding-right: 10px;
+}
+.buttons {
+  flex-direction: row-reverse;
+}
+.details {
+  font-size: 14px;
+}
+.register {
+  font-size: 14px;
+}
+.details:hover {
+  color: blue;
+  background-color: rgb(230, 230, 249);
+  transition: ease-in 0.5;
+}
+h2 {
+  margin-left: 5%;
+}
+.ngo-event-card {
+  border: 2px dashed plum;
+  border-radius: 10px;
+  padding: 10px 20px 10px 20px;
+  margin-bottom: 20px;
+  margin-right: 20px;
+  cursor: pointer;
+}
+.ngo-event-card:hover {
+  border: 2px solid plum;
+}
+.ngo-events {
+  width: 90%;
+  margin: 0% auto;
+  border-radius: 10px;
+  padding: 0px 20px;
+  display: flex;
+  flex-direction: row;
+}
 .donation-card {
   width: 500px;
   margin-left: 40px;

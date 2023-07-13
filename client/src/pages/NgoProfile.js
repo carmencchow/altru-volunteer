@@ -1,17 +1,17 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import Navbar from "../components/Navbar";
-import NgoInfo from "../components/NgoInfo";
-import NgoDonations from "../components/NgoDonations";
 import { MdPreview } from "react-icons/md";
+import NgoDonations from "../components/NgoDonations";
+import NgoEvents from "../components/NgoEvents";
+import NgoInfo from "../components/NgoInfo";
+import Navbar from "../components/Navbar";
 import "./NgoProfile.css";
 
 const NgoProfile = () => {
   const navigate = useNavigate();
   const { mongoUser } = useContext(AuthContext);
   const [toggleState, setToggleState] = useState(1);
-  // const ngoId = mongoUser.organization._id;
 
   const toggletabs = (idx) => {
     setToggleState(idx);
@@ -21,7 +21,7 @@ const NgoProfile = () => {
     navigate("/preview");
   };
 
-  if (!mongoUser) return null;
+  // if (!mongoUser) return null;
 
   return (
     <>
@@ -48,12 +48,14 @@ const NgoProfile = () => {
               Donations
             </div>
 
-            <div
-              className={toggleState === 3 ? "tabs  active-tabs" : "tabs"}
-              onClick={() => toggletabs(3)}
-            >
-              Events
-            </div>
+            {mongoUser && mongoUser.organization && (
+              <div
+                className={toggleState === 3 ? "tabs  active-tabs" : "tabs"}
+                onClick={() => toggletabs(3)}
+              >
+                Events
+              </div>
+            )}
           </div>
 
           <div className="content-tabs">
@@ -66,7 +68,6 @@ const NgoProfile = () => {
                 <NgoInfo />
               </div>
             </div>
-
             <div
               className={
                 toggleState === 2 ? "content active-content" : "content"
@@ -76,14 +77,13 @@ const NgoProfile = () => {
                 <NgoDonations />
               </div>
             </div>
-
             <div
               className={
                 toggleState === 3 ? "content active-content" : "content"
               }
             >
               <div>
-                {/* <NgoEvents ngoId={mongoUser.organization._id} /> */}
+                <NgoEvents />
               </div>
             </div>
           </div>

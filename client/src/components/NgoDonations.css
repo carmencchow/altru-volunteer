@@ -1,0 +1,21 @@
+p {
+  margin-right: 10px;
+}
+.first-name {
+  margin-right: 5px;
+}
+.row {
+  width: 200px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  font-weight: bolder;
+}
+.amount-span,
+.firstname {
+  margin-right: 30px;
+}
+
+.date {
+  margin-left: 30px;
+}

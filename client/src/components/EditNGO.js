@@ -16,28 +16,45 @@ const EditNGO = ({
 }) => {
   const { user, verifyUser } = useContext(AuthContext);
   const [newName, setNewname] = useState(name);
-  const [newDescription, setNewDescription] = useState("");
-  const [newCategory, setNewCategory] = useState("");
-  const [newAddress, setNewAddress] = useState("");
-  const [newDistrict, setNewDistrict] = useState("");
-  const [newTelephone, setNewTelephone] = useState("");
-  const [newUrl, setNewUrl] = useState("");
+  // const [newName, setNewname] = useState(mongoUser.organization.name);
+  const [newDescription, setNewDescription] = useState(description);
+  const [newCategory, setNewCategory] = useState(category);
+  const [newAddress, setNewAddress] = useState(address);
+  const [newDistrict, setNewDistrict] = useState(district);
+  const [newTelephone, setNewTelephone] = useState(telephone);
+  const [newUrl, setNewUrl] = useState(url);
   const [serverError, setServerError] = useState("");
 
-  const updateProfile = async (e) => {
+  const updateProfile = async ({ ngoId, e }) => {
+    console.log("input", e);
     e.preventDefault();
     try {
       const token = await user.getIdToken();
       await api.put(
-        // `/ngo/${ngo._id}/`,
+        `/ngo/${ngoId}/`,
         {
-          name: `${newName}` || `${name}`,
-          description: `${newDescription}` || `${description}`,
-          category: `${newCategory}` || `${category}`,
-          address: `${newAddress}` || `${address}`,
-          district: `${newDistrict}` || `${district}`,
-          telephone: `${newTelephone}` || `${telephone}`,
-          url: `${newUrl}` || `${url}`,
+          name,
+          description,
+          category,
+          address,
+          district,
+          telephone,
+          url,
+          // name: newName || name,
+          // description: newDescription || description,
+          // category: newCategory || category,
+          // address: newAddress || address,
+          // district: newDistrict || district,
+          // telephone: newTelephone || telephone,
+          // url: newUrl || url,
+
+          // name: `${newName}` || `${name}`,
+          // address: `${newAddress}` || `${address}`,
+          // description: `${newDescription}` || `${description}`,
+          // category: `${newCategory}` || `${category}`,
+          // district: `${newDistrict}` || `${district}`,
+          // telephone: `${newTelephone}` || `${telephone}`,
+          // url: `${newUrl}` || `${url}`,
         },
         {
           headers: {
@@ -45,7 +62,7 @@ const EditNGO = ({
           },
         }
       );
-      await verifyUser(user);
+      // await verifyUser(user);
       setIsEditing(false);
       setServerError("");
     } catch (err) {
@@ -59,44 +76,42 @@ const EditNGO = ({
         <input
           type="text"
           className="org-name"
-          value={newName ? newName : name}
-          placeholder={name ? name : "Organization name"}
+          value={newName}
+          placeholder={"Organization name"}
           onChange={(e) => setNewname(e.target.value)}
         />
         <input
           type="text"
           className="description"
-          value={newDescription ? newDescription : description}
-          placeholder={description ? description : "Organization description"}
+          value={newDescription}
+          placeholder={"Organization description"}
           onChange={(e) => setNewDescription(e.target.value)}
         />
 
         <input
           type="text"
           className="address"
-          placeholder={newAddress ? newAddress : "Organization address"}
-          value={newAddress ? newAddress : address}
+          placeholder={"Organization address"}
+          value={newAddress}
           onChange={(e) => setNewAddress(e.target.value)}
         />
         <input
           type="url"
           className="url"
-          value={url}
-          placeholder={
-            url ? url : "Organization URL https://www.organization.com"
-          }
+          value={newUrl}
+          placeholder={"Organization URL https://www.organization.com"}
           onChange={(e) => setNewUrl(e.target.value)}
         />
         <Input
           country="CA"
-          value={newTelephone ? newTelephone : telephone}
-          placeholder={telephone ? telephone : "Phone number"}
+          value={newTelephone}
+          placeholder={"Phone number"}
           maxLength="14"
           onChange={(e) => setNewTelephone}
         />
         <select
           className="ngo-select"
-          value={newCategory ? newCategory : category}
+          value={newCategory}
           onChange={(e) => setNewCategory(e.target.value)}
         >
           <option value="selection">Organization Cause:</option>
@@ -110,7 +125,7 @@ const EditNGO = ({
 
         <select
           className="ngo-selectS"
-          value={newDistrict ? newDistrict : district}
+          value={newDistrict}
           onChange={(e) => setNewDistrict(e.target.value)}
         >
           <option value="district">District:</option>
@@ -122,7 +137,7 @@ const EditNGO = ({
 
         {serverError && <p className="server-error">{serverError}</p>}
 
-        <div className="buttons">
+        <div className="editing-buttons">
           <button className="save-ngo" onClick={updateProfile}>
             Save Changes
           </button>

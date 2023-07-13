@@ -24,8 +24,18 @@ nav {
   display: flex;
   justify-content: flex-end;
 }
-.logout-btn,
 .profile-btn {
+  font-weight: bolder;
+  background: none;
+  color: rgb(121, 92, 250);
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  margin-top: 10px;
+  padding: 5px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+.logout-btn {
   background: none;
   color: #322ca9;
   font-family: "Poppins", sans-serif;
@@ -33,12 +43,10 @@ nav {
   margin-top: 10px;
   padding: 5px;
   margin-left: 10px;
-  font-weight: bolder;
   cursor: pointer;
 }
-.logout-btn:hover,
 .profile-btn:hover {
-  color: rgb(121, 92, 250);
+  color: rgb(184, 170, 245);
 }
 
 /* Media Queries */

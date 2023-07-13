@@ -64,13 +64,13 @@ export const AuthContextProvider = ({ children }) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(data);
     if (data.status === 401) {
       setNotification("User not found, please sign up");
       setUser(null);
       setMongoUser(null);
     } else {
       setUser(user);
+      console.log("Data from verifyUser", data.data.user);
       setMongoUser(data.data.user);
     }
   };

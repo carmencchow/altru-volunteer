@@ -9,6 +9,15 @@
 .preview {
   margin-top: 20px;
 }
+.preview-follow,
+.preview-donate {
+  height: 30px;
+  background-color: rgb(186, 128, 240);
+  border: 2px solid rgb(186, 128, 240);
+  margin-left: 10px;
+  margin-top: 10px;
+  color: white;
+}
 .background-image {
   border: 2px dotted plum;
   margin: 2% auto;

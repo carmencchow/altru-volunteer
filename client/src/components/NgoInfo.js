@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Input from "react-phone-number-input/input";
 import { Image } from "cloudinary-react";
 import { AuthContext } from "../context/AuthContext";
@@ -23,7 +23,7 @@ const NgoInfo = () => {
     e.preventDefault();
     try {
       const token = await user.getIdToken();
-      const res = await api.post(
+      await api.post(
         `/ngo`,
         {
           name: `${name}`,
@@ -40,9 +40,7 @@ const NgoInfo = () => {
           },
         }
       );
-      console.log("data", res.data);
-      // await verifyUser(user)
-      verifyUser(user);
+      await verifyUser(user);
       setServerError("");
       setIsAddingNGO(false);
     } catch (err) {
@@ -61,6 +59,18 @@ const NgoInfo = () => {
   const handleEditNGO = () => {
     setIsEditing(true);
   };
+
+  useEffect(() => {
+    if (mongoUser && mongoUser.organization) {
+      setName(mongoUser.organization.name);
+      setDescription(mongoUser.organization.description);
+      setAddress(mongoUser.organization.address);
+      setUrl(mongoUser.organization.url);
+      setTelephone(mongoUser.organization.telephone);
+      setCategory(mongoUser.organization.category);
+      setDistrict(mongoUser.organization.district);
+    }
+  }, [mongoUser]);
 
   return (
     <div>
@@ -99,7 +109,7 @@ const NgoInfo = () => {
           )}
         </div>
 
-        <div classname="right-side">
+        <div className="right-side">
           {isAddingNGO ? (
             <div className="admin-form">
               <div className="volunteers"></div>

@@ -2,14 +2,37 @@ import Ngo from "../models/ngoModel.js";
 import User from "../models/userModel.js";
 import Event from "../models/eventModel.js";
 
-// Get all NGO
+// GET all NGO
 const getNgo = async (req, res) => {
   const { id } = req.params;
   const ngo = await Ngo.findById(id)
     .populate("owner")
-    .populate("events")
-    .populate("volunteers")
-    .populate("donations");
+    .populate([
+      {
+        path: "volunteers",
+        model: "User",
+      },
+    ])
+    .populate([
+      {
+        path: "events",
+        model: "Event",
+        populate: {
+          path: "volunteers",
+          model: "User",
+        },
+      },
+    ])
+    .populate([
+      {
+        path: "donations",
+        model: "Donation",
+        populate: {
+          path: "donor",
+          model: "User",
+        },
+      },
+    ]);
   if (!ngo) {
     console.log("NGO not exist");
     return res.status(404).json({ err: "NGO doesn't exist" });
@@ -17,7 +40,7 @@ const getNgo = async (req, res) => {
   return res.status(200).json(ngo);
 };
 
-// Get all NGOs
+// GET all NGOs
 const getNgos = async (req, res) => {
   try {
     const category = req.params.category.toLowerCase();
@@ -46,11 +69,11 @@ const getNgos = async (req, res) => {
     }
   } catch (err) {
     console.log(err);
-    return res.status(400).json({ message: "" });
+    return res.status(400).json({ message: "Unable to return results" });
   }
 };
 
-// Create an Ngo
+// CREATE an Ngo
 const createNgo = async (req, res) => {
   try {
     const {
@@ -109,7 +132,7 @@ const createNgo = async (req, res) => {
   }
 };
 
-// Edit an Ngo
+// EDIT an Ngo
 const editNgo = async (req, res) => {
   try {
     const { name, description, category, address, district, url, telephone } =
@@ -154,21 +177,21 @@ const followNgo = async (req, res) => {
   }
 };
 
-// UNFOLLOW NGO
+// Remove ngo
 const unfollowNgo = async (req, res) => {
   try {
-    const remove = req.body.remove;
-    const user = await User.findOne({ _id: req.params.id });
-    let following = [...user.following];
-    console.log(following, user);
-    let updatedFollowing = following.filter((ngo) => ngo !== remove);
-    console.log(updatedFollowing, remove);
-    user.following = updatedFollowing;
+    const { userId } = req.body;
+    const ngo = await Ngo.findById(req.params.id);
+    const user = await User.findByIdAndUpdate(
+      userId,
+      { $pull: { ngos: ngo._id } },
+      { new: true }
+    );
     await user.save();
     return res.status(200).send({ message: user });
   } catch (err) {
     console.log(err);
-    return res.status(500).send({ message: err.message });
+    return res.status(500).send("Error removing ngo");
   }
 };
 
@@ -176,7 +199,7 @@ const unfollowNgo = async (req, res) => {
 const createEvent = async (req, res) => {
   try {
     const ngo = await Ngo.findById(req.params.id);
-    console.log(ngo._id);
+    const category = ngo.category;
     const {
       name,
       date,
@@ -211,10 +234,11 @@ const createEvent = async (req, res) => {
         startTime,
         location,
         description,
-        volunteer_duties: duties,
+        duties,
         num_volunteers: numVolunteers,
         volunteers: [],
         ngo: ngo._id,
+        category,
       });
       const updatedNgo = await Ngo.findOneAndUpdate(
         { _id: ngo._id },
@@ -232,106 +256,58 @@ const createEvent = async (req, res) => {
 };
 
 // Get an ngo's list of events
-const getAllNgoEvents = async (req, res) => {
+const getNgoEvents = async (req, res) => {
   try {
-    const ngo = await Ngo.findById(req.params.id);
-    console.log("all events", ngo.events);
-    return ngo.events;
+    const ngo = await Ngo.findById(req.params.id).populate([
+      {
+        path: "events",
+        model: "Event",
+        populate: {
+          path: "volunteers",
+          model: "User",
+        },
+      },
+    ]);
+    const events = ngo.events;
+    console.log("Ngo events", events);
+    return res.status(200).send(events);
   } catch (err) {
     console.log(err);
     return res.status(400).send({ err: "No events found" });
   }
 };
 
-// Edit Event
-const editEvent = async (req, res) => {
-  // try {
-  //   const user = await User.findById(req.params.id);
-  //   if (!user) {
-  //     return res.status(404).send("User not found");
-  //   }
-  //   const {
-  //     name,
-  //     date,
-  //     endTime,
-  //     startTime,
-  //     location,
-  //     description,
-  //     help,
-  //     numVolunteers,
-  //   } = req.body;
-  //   const event = await Event.findOneAndUpdate(
-  //     { organizer: user._id },
-  //     {
-  //       name,
-  //       date,
-  //       endTime,
-  //       startTime,
-  //       location,
-  //       description,
-  //       help,
-  //       numVolunteers,
-  //     },
-  //     { new: true }
-  //   );
-  //   if (!event) {
-  //     return res.status(404).send("Event not found");
-  //   }
-  //   res.status(200).send({ event });
-  // } catch (err) {
-  //   console.log(err);
-  //   res.status(500).send("Error while updating");
-  // }
+// GET one event
+const getNgoEvent = async (req, res) => {
+  try {
+    const ngo = await Ngo.findById(req.params.id);
+    return res.status(200).json(ngo);
+  } catch (err) {
+    console.log(err);
+    return res.status(400).send("Event not found");
+  }
 };
 
-// DELETE event
-const deleteEvent = async (req, res) => {
-  // try {
-  //   const user = await User.findById(req.params.id);
-  //   if (!user) {
-  //     return res.status(404).send("User not found");
-  //   }
-  //   const event = await Event.findOneAndDelete({ organizer: user._id });
-  //   if (!event) {
-  //     return res.status(404).send("Event not found");
-  //   }
-  //   res.status(400).send("Event not found");
-  // } catch (err) {
-  //   console.log(err);
-  //   return res.status(400).send("Error while deleting event");
-  // }
+// GET donations
+const getDonations = async (req, res) => {
+  try {
+    const ngo = await Ngo.findById(req.params.id).populate([
+      {
+        path: "donations",
+        model: "Donation",
+        populate: {
+          path: "donor",
+          model: "User",
+        },
+      },
+    ]);
+    console.log("Ngo donations", ngo.donations);
+    return res.status(200).json(ngo.donations);
+  } catch (error) {
+    console.log(error);
+    return res.status(400).send("Error while fetching donations");
+  }
 };
-
-// // ADD Donation
-// const donateNgo = async (req, res) => {
-//   try {
-//     const { amount, ngoId } = req.body;
-//     const user = await User.findById(req.params.id);
-//     console.log("donor", user);
-//     const ngo = await Ngo.findById({ _id: ngoId });
-//     const donation = await Donation.create({
-//       ngo: ngoId,
-//       donor: user._id,
-//       amount,
-//       date: Date.now(),
-//     });
-//     user.donations.push(donation._id);
-//     await Promise.all([
-//       user.save(),
-//       Ngo.findOneAndUpdate(
-//         { _id: ngoId },
-//         {
-//           $push: { donations: donation._id },
-//           $addToSet: { donors: user._id },
-//         },
-//         { new: true }
-//       ),
-//     ]);
-//     res.status(200).send({ donation, user, ngo });
-//   } catch (err) {
-//     console.log(err);
-//   }
-// };
 
 export {
   createNgo,
@@ -341,7 +317,7 @@ export {
   followNgo,
   unfollowNgo,
   createEvent,
-  getAllNgoEvents,
-  editEvent,
-  deleteEvent,
+  getNgoEvent,
+  getNgoEvents,
+  getDonations,
 };

@@ -1,12 +1,15 @@
 .profile-section,
 .donations-section,
 .events-section {
-  width: 90%;
+  width: 80%;
   margin: 5% auto;
   background-color: #f6f6fa;
-  border-radius: 10px;
+  border-radius: 15px;
   padding: 0px 20px;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
+}
+.profile-section {
+  margin-top: 0px;
 }
 .donations {
   display: flex;
@@ -27,25 +30,33 @@
   margin-top: 0px;
   font-size: 14px;
 }
-.organizations {
-  margin: 5% auto;
-}
 button {
   cursor: pointer;
 }
-.goal-input {
+.goal-input input {
   border: none;
+  width: 150px;
+}
+.donategoal-row {
+  display: flex;
+  justify-content: space-between;
+}
+.goal-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  margin-left: 0px;
 }
 .goal-btn {
-  width: 150px;
+  width: 100px;
   margin-bottom: 20px;
-  margin-left: 10%;
 }
 .cancel-goal-btn,
 .save-goal-btn {
-  width: 150px;
+  width: 70px;
   margin-bottom: 20px;
   margin-left: 2%;
+  height: 30px;
 }
 .userprofile {
   width: 80%;
@@ -56,12 +67,21 @@ button {
   display: flex;
   flex-direction: row;
 }
+.profile-name p {
+  font-size: 20px;
+  font-weight: bolder;
+  margin-left: 20px;
+}
+.event-button-row {
+  display: flex;
+  justify-content: space-between;
+}
+.amount-donated,
+.amount-needed {
+  font-weight: normal;
+}
 .goal-amt {
   margin-left: 10%;
-}
-.organizations {
-  margin: 10px auto;
-  margin-left: 30%;
 }
 .user-profile p {
   margin-top: 0px;
@@ -78,9 +98,17 @@ button {
   margin-top: 30px;
   margin-bottom: 5px;
 }
+.place {
+  margin-bottom: 0px;
+}
+.event-title,
 .follow-list {
-  font-size: 14px;
-  color: black;
+  color: rgb(136, 136, 247);
+  cursor: pointer;
+}
+.event-title:hover,
+.follow-list:hover {
+  text-decoration: underline;
 }
 .contact {
   font-weight: bold;
@@ -93,17 +121,22 @@ button {
   margin-left: 200px;
 }
 .unfollow-btn {
-  margin-left: 0px;
+  margin-left: 10px;
   border: none;
-  color: blue;
-  font-size: 12px;
+  font-size: 14px;
   cursor: pointer;
+  height: 30px;
 }
-.edit-btn {
-  width: 100px;
+.edit-btn,
+.remove {
+  width: 80px;
   margin-top: 10px;
   cursor: pointer;
   margin-bottom: 40px;
+  height: 30px;
+}
+.remove {
+  margin-top: 0px;
 }
 .edit-btn:hover {
   color: white;

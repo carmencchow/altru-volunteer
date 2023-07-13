@@ -1,7 +1,7 @@
 import { api } from "./axios";
 
 // Get Ngo user data
-const fetchUsersNgo = async (setNgo, ngo, token) => {
+const fetchNgoData = async (setNgo, ngo, token) => {
   try {
     const res = await api.get(`/ngo/${ngo._id}`, {
       headers: {
@@ -15,4 +15,4 @@ const fetchUsersNgo = async (setNgo, ngo, token) => {
   }
 };
 
-export { fetchUsersNgo };
+export { fetchNgoData };
