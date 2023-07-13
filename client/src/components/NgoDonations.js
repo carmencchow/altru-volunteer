@@ -3,11 +3,12 @@ import { AuthContext } from "../context/AuthContext";
 import { api } from "../utils/axios";
 import "./NgoDonations.css";
 
-const NgoDonations = ({ ngoId }) => {
+const NgoDonations = () => {
+  // const NgoDonations = ({ ngoId }) => {
   const [donations, setDonations] = useState(null);
-  const { user } = useContext(AuthContext);
+  const { user, mongoUser } = useContext(AuthContext);
 
-  const fetchDonations = async () => {
+  const fetchDonations = async (ngoId) => {
     try {
       const token = await user.getIdToken();
       const res = await api.get(`ngo/${ngoId}/donations`, {
@@ -23,7 +24,9 @@ const NgoDonations = ({ ngoId }) => {
   };
 
   useEffect(() => {
-    fetchDonations();
+    if (mongoUser.organization) {
+      fetchDonations(mongoUser.organization._id);
+    }
   }, [user]);
 
   return (

@@ -56,7 +56,6 @@ const editUser = async (req, res) => {
 const addDonation = async (req, res) => {
   try {
     const { amount, ngoId, ngoName } = req.body;
-    // const { amount, ngoId, ngoName } = req.body;
     const user = await User.findById(req.params.id);
     const ngo = await Ngo.findById({ _id: ngoId });
     const donation = await Donation.create({

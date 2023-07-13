@@ -33,6 +33,10 @@ button {
 .goal-input input {
   border: none;
 }
+.donategoal-row {
+  display: flex;
+  justify-content: space-between;
+}
 .goal-row {
   display: flex;
   flex-direction: row;

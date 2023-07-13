@@ -5,11 +5,21 @@ import User from "../models/userModel.js";
 // Get one event
 const getEvent = async (req, res) => {
   try {
-    const event = await Event.findById(req.params.id);
+    const event = await Event.findById(req.params.id)
+      .populate([
+        {
+          path: "volunteers",
+          model: "User",
+        },
+      ])
+      .populate({
+        path: "ngo",
+        model: "Ngo",
+      });
     res.status(200).send(event);
   } catch (err) {
     console.log(err);
-    res.status(404).send({ err: err });
+    res.status(404).send("Error fetching event");
   }
 };
 
@@ -86,30 +96,32 @@ const deleteEvent = async (req, res) => {
   }
 };
 
-// Attend event
-const attendEvent = async (req, res) => {
+// Register for event
+const registerEvent = async (req, res) => {
   try {
-    const event = await Event.findByIdAndUpdate(
-      { _id: req.body.id },
-      { volunteers: user._id },
+    const { userId } = req.body;
+    const user = await User.findById(userId);
+    const event = await Event.findById(req.params.id);
+    console.log("User and id:", user, event._id);
+    if (user.events.includes(event._id)) {
+      return res.status(400).send("You are already registered for this event");
+    }
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { $addToSet: { events: event._id } },
       { new: true }
     );
-    // const user = await User.findByIdAndUpdate(
-    //   req.params.id,
-    //   { $addToSet: { attending: ngoId } },
-    //   { new: true }
-    // );
-    // const ngo = await Ngo.findByIdAndUpdate(
-    //   ngoId,
-    //   { $addToSet: { volunteers: user._id } },
-    //   { new: true }
-    // );
-    // await Promise.all([ngo.save(), user.save()]);
-    res.status(200).send({ results: user, message: user.attending });
+    const updatedEvent = await Event.findByIdAndUpdate(
+      { _id: req.params.id },
+      { $addToSet: { volunteers: updatedUser._id } },
+      { new: true }
+    );
+    console.log("Updated event", updatedEvent.volunteers, updatedUser.events);
+    res.status(200).send({ event, user });
   } catch (err) {
     console.log(err);
     res.status(400).send("Couldn't add event");
   }
 };
 
-export { getEvents, getEvent, deleteEvent, editEvent, attendEvent };
+export { getEvents, getEvent, deleteEvent, editEvent, registerEvent };

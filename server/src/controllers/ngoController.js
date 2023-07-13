@@ -7,7 +7,12 @@ const getNgo = async (req, res) => {
   const { id } = req.params;
   const ngo = await Ngo.findById(id)
     .populate("owner")
-    .populate("volunteers")
+    .populate([
+      {
+        path: "volunteers",
+        model: "User",
+      },
+    ])
     .populate([
       {
         path: "events",
@@ -175,7 +180,7 @@ const followNgo = async (req, res) => {
 // UNFOLLOW NGO
 const unfollowNgo = async (req, res) => {
   try {
-    const remove = req.body.remove;
+    const { ngo } = req.body;
     const user = await User.findOne({ _id: req.params.id });
     let following = [...user.following];
     console.log(following, user);
@@ -189,6 +194,23 @@ const unfollowNgo = async (req, res) => {
     return res.status(500).send({ message: err.message });
   }
 };
+
+// const unfollowNgo = async (req, res) => {
+//   try {
+//     const remove = req.body.remove;
+//     const user = await User.findOne({ _id: req.params.id });
+//     let following = [...user.following];
+//     console.log(following, user);
+//     let updatedFollowing = following.filter((ngo) => ngo !== remove);
+//     console.log(updatedFollowing, remove);
+//     user.following = updatedFollowing;
+//     await user.save();
+//     return res.status(200).send({ message: user });
+//   } catch (err) {
+//     console.log(err);
+//     return res.status(500).send({ message: err.message });
+//   }
+// };
 
 // Create an Event
 const createEvent = async (req, res) => {

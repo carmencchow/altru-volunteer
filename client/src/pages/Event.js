@@ -1,13 +1,37 @@
-import React, { useContext, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { EventsContext } from "../context/EventsContext";
+import { AuthContext } from "../context/AuthContext";
+import { api } from "../utils/axios";
 import Navbar from "../components/Navbar";
+import "./Event.css";
 
 const Event = () => {
-  const { fetchEvent } = useContext(EventsContext);
+  const { fetchEvent, event } = useContext(EventsContext);
+  const { mongoUser, user } = useContext(AuthContext);
   const { id } = useParams();
-  const [event] = useState(null);
-  const navigate = useNavigate();
+
+  const registerEvent = async () => {
+    try {
+      const userId = mongoUser._id;
+      const token = await user.getIdToken();
+      const res = await api.put(
+        `/event/${id}/register`,
+        {
+          userId,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(res.data);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   useEffect(() => {
     fetchEvent(id);
@@ -16,23 +40,25 @@ const Event = () => {
   return (
     <div>
       <Navbar />
-      <span className="back" onClick={() => navigate(-1)}>
-        Back
-      </span>
-
-      <h1>Event</h1>
-
+      {event && <h2>⭐ {event.name}</h2>}
       <div className="event-wrapper">
         {event && (
           <div className="display-card">
-            <h4>Name:{event.name}</h4>
-            <h4>Id:{event._id}</h4>
+            <p className="event-ngo-name">{event.ngo.name}</p>
             <p>{event.description}</p>
-            <p>{event.location}</p>
-            <p>{event.duties}</p>
+            <p>Help needed: {event.duties}</p>
+            <p>📍{event.location}</p>
             <p>
+              {" "}
+              🕒
               {event.startTime}-{event.endTime}pm
             </p>
+
+            <div className="button-row">
+              <button className="register" onClick={registerEvent}>
+                Register
+              </button>
+            </div>
           </div>
         )}
       </div>

@@ -3,7 +3,6 @@ import { AuthContext } from "../context/AuthContext";
 import { EventsContext } from "../context/EventsContext";
 import { AiOutlineDelete } from "react-icons/ai";
 import Navbar from "../components/Navbar";
-
 import { api } from "../utils/axios";
 import "./EditEvent.css";
 import { useNavigate, useParams } from "react-router-dom";

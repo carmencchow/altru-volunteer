@@ -17,9 +17,9 @@ const router = express.Router();
 //ngoRoute (localhost:5000/api/ngo)
 router.get("/:id/events", getNgoEvents);
 router.get("/:id/donations", getDonations);
-router.get("/:id/event", getNgoEvent);
+// router.get("/:id/event", getNgoEvent);
 router.post("/follow/:id", followNgo);
-router.delete("/unfollow/:id", unfollowNgo);
+router.put("/unfollow/:id", unfollowNgo);
 router.post("/:id/event", createEvent);
 router.get("/:id", getNgo);
 router.put("/:id", editNgo);

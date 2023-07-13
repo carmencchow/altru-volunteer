@@ -3,12 +3,14 @@ import { AuthContext } from "../context/AuthContext";
 import Navbar from "../components/Navbar";
 import { api } from "../utils/axios";
 import "./UserProfile.css";
+import { useParams } from "react-router-dom";
 
 const UserProfile = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
   const [goalAmount, setGoalAmount] = useState(0);
   const [input, setInput] = useState(0);
+  const { id } = useParams();
   const { mongoUser, user, verifyUser } = useContext(AuthContext);
 
   if (!mongoUser) return null;
@@ -60,19 +62,18 @@ const UserProfile = () => {
   };
 
   // Unfollow NGO
-  const unfollowNgo = async () => {
-    // try {
-    //   const token = await user.getIdToken();
-    //   await api.delete(`/ngo/unfollow/${ngoId}`,
-    //   {
-    //     headers: {
-    //       Authorization: `Bearer ${token}`,
-    //     },
-    //   });
-    //   await verifyUser(user)
-    // } catch (e) {
-    //   console.log(e);
-    // }
+  const unfollowNgo = async (ngo) => {
+    try {
+      const token = await user.getIdToken();
+      await api.put(`/ngo/unfollow/${ngo._id}`, null, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      await verifyUser(user);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -92,6 +93,7 @@ const UserProfile = () => {
                 {ngo.name}
                 <button
                   className="unfollow-btn"
+                  // Pass in ngo to unfollow later ...
                   onClick={async () => await unfollowNgo(ngo)}
                 >
                   Unfollow
@@ -102,7 +104,7 @@ const UserProfile = () => {
       </div>
 
       <div className="donations-section">
-        <div className="row">
+        <div className="donategoal-row">
           <h4>💵 Donations</h4>
           <h4 className="goal-amt">Goal Amount: ${mongoUser.goalAmount}.00</h4>
         </div>

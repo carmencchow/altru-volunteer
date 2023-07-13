@@ -7,8 +7,8 @@ import { FiEdit2 } from "react-icons/fi";
 import "./NgoEvents.css";
 import { useNavigate } from "react-router-dom";
 
-const NgoEvents = ({ ngoId }) => {
-  const { verifyUser, user } = useContext(AuthContext);
+const NgoEvents = () => {
+  const { verifyUser, user, mongoUser } = useContext(AuthContext);
   const [isEditing, setIsEditing] = useState(false);
   const [isAddingEvent, setIsAddingEvent] = useState(false);
   const [name, setName] = useState("");
@@ -23,7 +23,7 @@ const NgoEvents = ({ ngoId }) => {
   const [events, setEvents] = useState(null);
   const navigate = useNavigate();
 
-  const fetchNgoEvents = async () => {
+  const fetchNgoEvents = async (ngoId) => {
     try {
       const token = await user.getIdToken();
       const res = await api.get(`/ngo/${ngoId}/events`, {
@@ -48,7 +48,7 @@ const NgoEvents = ({ ngoId }) => {
     try {
       const token = await user.getIdToken();
       await api.post(
-        `/ngo/${ngoId}/event`,
+        `/ngo/${mongoUser.organization._id}/event`,
         {
           name: `${name}`,
           date: `${date}`,
@@ -78,7 +78,9 @@ const NgoEvents = ({ ngoId }) => {
   };
 
   useEffect(() => {
-    fetchNgoEvents();
+    if (mongoUser.organization) {
+      fetchNgoEvents(mongoUser.organization._id);
+    }
   }, []);
 
   return (

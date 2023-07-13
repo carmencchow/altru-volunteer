@@ -20,10 +20,6 @@ const Ngo = () => {
   const amounts = [10, 15, 25, 50, 75];
   let total = 0;
 
-  const register = () => {
-    console.log("Register");
-  };
-
   const fetchNgo = async () => {
     const token = await user.getIdToken();
     const res = await api.get(`/ngo/${id}`, {
@@ -181,13 +177,16 @@ const Ngo = () => {
                   <p>⭐ {event.name}</p>
                   <p>📍 {event.location}</p>
                   <p>📅 {event.date}</p>
-                  <button
-                    onClick={() => {
-                      navigate(`/event/${id}`);
-                    }}
-                  >
-                    Details
-                  </button>
+                  <div className="button-row">
+                    <button
+                      className="details"
+                      onClick={() => {
+                        navigate(`/event/${event._id}`);
+                      }}
+                    >
+                      Details
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>

@@ -49,12 +49,14 @@ const NgoProfile = () => {
               Donations
             </div>
 
-            <div
-              className={toggleState === 3 ? "tabs  active-tabs" : "tabs"}
-              onClick={() => toggletabs(3)}
-            >
-              Events
-            </div>
+            {mongoUser && mongoUser.organization && (
+              <div
+                className={toggleState === 3 ? "tabs  active-tabs" : "tabs"}
+                onClick={() => toggletabs(3)}
+              >
+                Events
+              </div>
+            )}
           </div>
 
           <div className="content-tabs">
@@ -80,11 +82,11 @@ const NgoProfile = () => {
             >
               <div>
                 <NgoDonations
-                  ngoId={
-                    mongoUser &&
-                    mongoUser.organization &&
-                    mongoUser.organization._id
-                  }
+                // ngoId={
+                //   mongoUser &&
+                //   mongoUser.organization &&
+                //   mongoUser.organization._id
+                // }
                 />
               </div>
             </div>
@@ -95,11 +97,11 @@ const NgoProfile = () => {
             >
               <div>
                 <NgoEvents
-                  ngoId={
-                    mongoUser &&
-                    mongoUser.organization &&
-                    mongoUser.organization._id
-                  }
+                // ngoId={
+                //   mongoUser &&
+                //   mongoUser.organization &&
+                //   mongoUser.organization._id
+                // }
                 />
               </div>
             </div>

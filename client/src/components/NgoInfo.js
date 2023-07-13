@@ -61,13 +61,15 @@ const NgoInfo = () => {
   };
 
   useEffect(() => {
-    setName(mongoUser.organization.name);
-    setDescription(mongoUser.organization.description);
-    setAddress(mongoUser.organization.address);
-    setUrl(mongoUser.organization.url);
-    setTelephone(mongoUser.organization.telephone);
-    setCategory(mongoUser.organization.category);
-    setDistrict(mongoUser.organization.district);
+    if (mongoUser && mongoUser.organization) {
+      setName(mongoUser.organization.name);
+      setDescription(mongoUser.organization.description);
+      setAddress(mongoUser.organization.address);
+      setUrl(mongoUser.organization.url);
+      setTelephone(mongoUser.organization.telephone);
+      setCategory(mongoUser.organization.category);
+      setDistrict(mongoUser.organization.district);
+    }
   }, [mongoUser]);
 
   return (
@@ -107,7 +109,7 @@ const NgoInfo = () => {
           )}
         </div>
 
-        <div classname="right-side">
+        <div className="right-side">
           {isAddingNGO ? (
             <div className="admin-form">
               <div className="volunteers"></div>

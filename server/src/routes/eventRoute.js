@@ -4,7 +4,7 @@ import {
   getEvents,
   editEvent,
   deleteEvent,
-  attendEvent,
+  registerEvent,
 } from "../controllers/eventController.js";
 
 const router = express.Router();
@@ -14,6 +14,6 @@ router.get("/:id", getEvent);
 router.get("/:district/:category", getEvents);
 router.put("/:id", editEvent);
 router.delete("/:id", deleteEvent);
-router.put("/:id/attend", attendEvent);
+router.put("/:id/register", registerEvent);
 
 export default router;

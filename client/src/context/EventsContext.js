@@ -17,6 +17,7 @@ export const EventsProvider = ({ children }) => {
         },
       });
       setEvent(res.data);
+      console.log("Res.data from EventsCOntext", res.data);
       await verifyUser(user);
     } catch (err) {
       console.log(err);
