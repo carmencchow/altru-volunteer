@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { NgosContext } from "../context/NgosContext";
 import Filters from "../components/Filters";
 import Navbar from "../components/Navbar";
-import Modal from "../components/Modal";
 import "./Ngos.css";
 
 const Ngos = () => {

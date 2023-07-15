@@ -26,6 +26,9 @@ const ngoSchema = new mongoose.Schema({
   url: {
     type: String,
   },
+  file_name: {
+    type: String,
+  },
   events: [
     {
       type: mongoose.Schema.Types.ObjectId,

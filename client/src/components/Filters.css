@@ -16,7 +16,7 @@ option {
   border-radius: 0px;
   font-family: "Montserrat", sans-serif;
 }
-select,
+.filters,
 option {
   height: 40px;
 }
@@ -54,7 +54,7 @@ form.dropdown p {
     flex-direction: column;
     margin: 10px auto;
   }
-  select {
+  .select-filters {
     width: 70vw;
     margin-top: 10px;
     height: 40px;
@@ -89,7 +89,7 @@ form.dropdown p {
     flex-direction: row;
     margin: 10px auto;
   }
-  select {
+  .select-filters {
     width: 40vw;
     margin-top: 10px;
   }
@@ -126,7 +126,7 @@ form.dropdown p {
     width: 80px;
     border: none;
   }
-  select {
+  .select-filters {
     font-size: 20px;
   }
   .search-row {

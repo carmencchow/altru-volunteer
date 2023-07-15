@@ -7,7 +7,6 @@ import {
   followNgo,
   unfollowNgo,
   getNgoEvents,
-  getNgoEvent,
   createEvent,
   getDonations,
 } from "../controllers/ngoController.js";

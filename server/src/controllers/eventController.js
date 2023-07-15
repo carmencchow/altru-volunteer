@@ -1,6 +1,7 @@
 import Event from "../models/eventModel.js";
 import Ngo from "../models/ngoModel.js";
 import User from "../models/userModel.js";
+import nodemailer from "nodemailer";
 
 // Get one event
 const getEvent = async (req, res) => {
@@ -117,6 +118,42 @@ const registerEvent = async (req, res) => {
       { new: true }
     );
     console.log("Updated event", updatedEvent.volunteers, updatedUser.events);
+
+    // Send email to user
+    const transporter = nodemailer.createTransport({
+      host: process.env.MAIL_HOST,
+      port: process.env.MAIL_PORT,
+      secure: false,
+      service: process.env.MAIL_SERVICE,
+      auth: {
+        user: process.env.EMAIL,
+        pass: process.env.PASSWORD,
+      },
+      tls: {
+        ciphers: "SSLv3",
+      },
+    });
+
+    // const info = await transporter.sendMail({
+    await transporter.sendMail({
+      // from: '"Admin" <volunteer.connect@outlook.com>',
+      from: `Volunteer Connect <${process.env.EMAIL}>`,
+      to: `${updatedUser.email}`,
+      subject: `${event} Registration`,
+      text: `TEST: Hi  Thanks for registering to the ${event.name}. Our volunteer coordinator will be in touch with you soon.`,
+      html: `<h3>Hi </h3> 
+      <p>TEST: Thanks for registering to the ${event.name}. Our volunteer coordinator will be in touch with you soon.<p>Here are the event details:</p> 
+      <div>
+        <p>Name: ${event.name}</p>
+        <p>Organization: ${event.ngo}</p>
+        <p>Location: ${event.location}</p>
+        <p>Date: ${event.date}</p>
+        <p>Time: ${event.startTime}-${event.endTime}</p>
+      </div>
+      <h2>We look forward to seeing you there!</h2>
+      <h2> Volunteer Toronto</h2>`,
+    });
+    console.log("Message sent", updatedUser.email);
     res.status(200).send({ event, user });
   } catch (err) {
     console.log(err);

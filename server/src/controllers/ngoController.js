@@ -85,6 +85,7 @@ const createNgo = async (req, res) => {
       telephone,
       url,
       uid,
+      file_name,
     } = req.body;
     const ownerExists = await Ngo.findOne({ owner: uid });
     const nameExists = await Ngo.findOne({ name });
@@ -121,6 +122,7 @@ const createNgo = async (req, res) => {
         donations: [],
         events: [],
         owner: uid,
+        file_name: "",
       });
       user.organization = ngo._id;
       user.save();

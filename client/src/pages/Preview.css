@@ -9,6 +9,10 @@
 .preview {
   margin-top: 20px;
 }
+.preview-follow {
+  margin-left: 0px;
+}
+
 .preview-follow,
 .preview-donate {
   height: 30px;
@@ -25,9 +29,6 @@
   width: 90%;
   position: relative;
   border-radius: 10px;
-}
-h2 {
-  padding-top: 20px;
 }
 button {
   border-radius: 5px;
@@ -54,11 +55,13 @@ span {
 .row {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: end;
+  margin-top: 10px;
 }
 .right-side {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 }
 .donate {
   margin-top: 10px;

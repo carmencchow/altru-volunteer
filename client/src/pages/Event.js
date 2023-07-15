@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import { EventsContext } from "../context/EventsContext";
 import { AuthContext } from "../context/AuthContext";
@@ -11,6 +11,7 @@ const Event = () => {
   const { fetchEvent, event } = useContext(EventsContext);
   const { mongoUser, user, verifyUser } = useContext(AuthContext);
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const registerEvent = async () => {
     try {
@@ -51,6 +52,7 @@ const Event = () => {
           },
         }
       );
+      console.log(res.data);
       toast("The event has been removed");
       await verifyUser(user);
       return res.data;
@@ -68,7 +70,7 @@ const Event = () => {
       <Navbar />
       <Toaster
         toastOptions={{
-          style: { backgroundColor: "#00d26a", color: "white" },
+          style: { backgroundColor: "#b8e981", color: "white" },
         }}
       />
 
@@ -76,7 +78,15 @@ const Event = () => {
       <div className="event-wrapper">
         {event && (
           <div className="display-card">
-            <p className="event-ngo-name">{event.ngo.name}</p>
+            <p
+              className="event-ngo-name"
+              onClick={() => {
+                navigate(`/ngo/${event.ngo._id}`);
+                console.log(`navigate to ${event.ngo.name}`);
+              }}
+            >
+              {event.ngo.name}
+            </p>
             <p>{event.description}</p>
             <p>Help needed: {event.duties}</p>
             <p>📍 {event.location}</p>

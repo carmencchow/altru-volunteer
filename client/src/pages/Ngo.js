@@ -124,7 +124,7 @@ const Ngo = () => {
       <Navbar />
       <Toaster
         toastOptions={{
-          style: { backgroundColor: "#8fd200", color: "white" },
+          style: { backgroundColor: "#b8e981", color: "white" },
         }}
       />
       <div>

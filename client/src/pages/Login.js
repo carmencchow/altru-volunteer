@@ -51,7 +51,7 @@ const Login = () => {
 
       <div className="login-wrapper">
         <div className="login-card">
-          <h2>👋 Hello again!</h2>
+          <h2 className="hello">👋 Hello again!</h2>
           <div className="email-input">
             <input
               name="email"
@@ -84,7 +84,7 @@ const Login = () => {
 
           <div className="new-account">
             <div className="no-account"> Don't have an account?</div>
-            <div className="register" onClick={handleSignup}>
+            <div className="new-user" onClick={handleSignup}>
               Sign Up
             </div>
           </div>

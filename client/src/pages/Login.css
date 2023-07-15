@@ -28,7 +28,7 @@ body {
   color: red;
   font-weight: bolder;
 }
-h2 {
+.hello {
   display: flex;
   flex-direction: row;
   justify-content: left;
@@ -74,11 +74,12 @@ input {
   font-size: 14px;
   margin-left: 0px;
 }
-.register {
+.new-user {
+  background-color: none;
   font-size: 14px;
   margin-left: 120px;
 }
-.register:hover {
+.new-user:hover {
   color: blue;
   cursor: pointer;
 }

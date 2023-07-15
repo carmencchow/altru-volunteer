@@ -95,25 +95,35 @@ const Filters = () => {
         <form className="dropdown">
           <p className="commitment">Commitment</p>
 
-          <select value={filters.district} onChange={handleDistrictChange}>
+          <select
+            className="select-filters"
+            value={filters.district}
+            onChange={handleDistrictChange}
+          >
             <option value="all" className="all">
               All of Toronto
             </option>
             <option value="Etobicoke-York">Etobicoke-York</option>
             <option value="North York">North York</option>
             <option value="Toronto">Toronto</option>
-            <option value="East York">East York & Scarborough</option>
+            <option value="East York & Scarborough">
+              East York & Scarborough
+            </option>
           </select>
         </form>
 
         <form className="dropdown">
           <p className="cause">Cause</p>
-          <select value={filters.category} onChange={handleCategoryChange}>
+          <select
+            className="select-filters"
+            value={filters.category}
+            onChange={handleCategoryChange}
+          >
             <option value="all" className="all">
               All Causes
             </option>
             <option value="animals">Animals</option>
-            <option value="children & youth">Children & Youth</option>
+            <option value="social justice">Social Justice</option>
             <option value="education & literacy">Education & Literacy</option>
             <option value="environment">Environment</option>
             <option value="health & medicine">Health & Medicine</option>
