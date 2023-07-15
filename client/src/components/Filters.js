@@ -26,30 +26,6 @@ const Filters = () => {
     fetchNgos();
   };
 
-  const handleSearchEvents = async (e) => {
-    e.preventDefault();
-    fetchFilteredEvents();
-  };
-
-  const fetchFilteredEvents = async () => {
-    try {
-      const district = filters.district;
-      const category = filters.category;
-      const token = await user.getIdToken();
-      const eventsRes = await api.get(`/event/${district}/${category}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setEvents(eventsRes.data);
-      console.log("Events", eventsRes.data);
-      await verifyUser(user);
-    } catch (err) {
-      console.log(err);
-      setError(err);
-    }
-  };
-
   const fetchNgos = async () => {
     try {
       const district = filters.district;
@@ -69,32 +45,10 @@ const Filters = () => {
     }
   };
 
-  const fetchAllEvents = async () => {
-    try {
-      const token = await user.getIdToken();
-      const res = await api.get(`/event`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setServerError("");
-      console.log("Results", res.data);
-      setEvents(res.data);
-    } catch (err) {
-      if (err.response && err.response.status === 400) {
-        setServerError(err.response.data.error);
-      } else {
-        console.log(err);
-      }
-    }
-  };
-
   return (
-    <div>
+    <div className="wrapper">
       <div className="filters">
         <form className="dropdown">
-          <p className="commitment">Commitment</p>
-
           <select
             className="select-filters"
             value={filters.district}
@@ -130,16 +84,11 @@ const Filters = () => {
             <option value="sports & recreation">Sports & Recreation</option>
           </select>
         </form>
-      </div>
-      Search for ...
-      <div className="search-row">
-        <button className="searchBtn" onClick={handleSearchNgos}>
-          Organizations
-        </button>
-
-        <button className="searchBtn" onClick={handleSearchEvents}>
-          Events
-        </button>
+        <div className="search-row">
+          <button className="searchBtn" onClick={handleSearchNgos}>
+            Search
+          </button>
+        </div>
       </div>
       {error && <p>{error}</p>}
     </div>

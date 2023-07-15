@@ -99,11 +99,11 @@ const NgoInfo = () => {
 
           {!mongoUser.organization ? (
             <button onClick={handleAddNGO} className="add-btn">
-              Add Organization
+              Create a profile
             </button>
           ) : (
             <button onClick={handleEditNGO} className="edit-btn">
-              Edit Organization
+              Edit Profile
             </button>
           )}
         </div>

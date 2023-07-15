@@ -105,7 +105,7 @@ const Event = () => {
                 </button>
               ) : (
                 <button className="register" onClick={registerEvent}>
-                  Register
+                  Express Interest
                 </button>
               )}
             </div>
