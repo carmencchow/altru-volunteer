@@ -1,6 +1,22 @@
+.wrapper {
+  margin: 5% 10%;
+  background-color: #eae9f8;
+  border-radius: 20px;
+  padding: 2%;
+}
+.select-filters {
+  width: 200px;
+}
 .filters {
   display: flex;
+  flex-direction: row;
   justify-content: center;
+}
+.filters-headings {
+  width: 20%;
+  display: flex;
+  flex-direction: row;
+  margin: 0px auto;
 }
 form {
   display: flex;
@@ -16,7 +32,7 @@ option {
   border-radius: 0px;
   font-family: "Montserrat", sans-serif;
 }
-select,
+.filters,
 option {
   height: 40px;
 }
@@ -30,20 +46,16 @@ form.dropdown p {
   margin-left: 0;
 }
 .searchBtn {
-  height: 40px;
-  background-color: whitesmoke;
-  font-family: "Montserrat", sans-serif;
-  border-radius: 1px;
   width: 80px;
   margin-top: 7px;
-  color: white;
-  background-color: rgb(76, 76, 245);
-  border: 1px solid rgb(76, 76, 245);
-  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  color: purple;
+  font-weight: bolder;
+  background-color: #eae9f8;
+  margin-left: 5px;
 }
 .searchBtn:hover {
-  background-color: #a8a4db;
-  border: 1px solid #a8a4db;
+  color: rgb(205, 66, 205);
 }
 
 /* Media Queries */
@@ -52,9 +64,8 @@ form.dropdown p {
   .filters {
     display: flex;
     flex-direction: column;
-    margin: 10px auto;
   }
-  select {
+  .select-filters {
     width: 70vw;
     margin-top: 10px;
     height: 40px;
@@ -71,8 +82,7 @@ form.dropdown p {
   }
   .searchBtn {
     height: 20px;
-    font-size: 10px;
-    color: white;
+    /* font-size: 10px; */
     width: 60px;
     border: none;
   }
@@ -87,10 +97,9 @@ form.dropdown p {
   .filters {
     display: flex;
     flex-direction: row;
-    margin: 10px auto;
   }
-  select {
-    width: 40vw;
+  .select-filters {
+    width: 20vw;
     margin-top: 10px;
   }
   .cause {
@@ -106,8 +115,7 @@ form.dropdown p {
   }
   .searchBtn {
     height: 30px;
-    font-size: 12px;
-    color: white;
+    /* font-size: 12px; */
     width: 70px;
     border: none;
   }
@@ -121,12 +129,12 @@ form.dropdown p {
 @media only screen and (min-width: 768px) {
   .searchBtn {
     height: 40px;
-    font-size: 14px;
-    color: white;
+    /* font-size: 14px; */
+
     width: 80px;
     border: none;
   }
-  select {
+  .select-filters {
     font-size: 20px;
   }
   .search-row {

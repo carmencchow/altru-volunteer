@@ -3,13 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { NgosContext } from "../context/NgosContext";
 import Filters from "../components/Filters";
 import Navbar from "../components/Navbar";
-import Modal from "../components/Modal";
 import "./Ngos.css";
 
 const Ngos = () => {
   const { ngos } = useContext(NgosContext);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageCount, setPageCount] = useState(1);
+  const [isSearching, setIsSearching] = useState(false);
   const navigate = useNavigate();
 
   const handlePrevious = () => {
@@ -33,55 +33,65 @@ const Ngos = () => {
   return (
     <div>
       <Navbar />
+
       <h3 className="find">
-        Find hundreds of volunteer opportunities in Toronto
+        Find hundreds of volunteer opportunities in Toronto. Search volunteer
+        opportunities in your city and find how you can make a difference.
       </h3>
-      <p>Use the filters to find an organization by cause/area</p>
       <Filters />
 
-      {ngos && currentPage !== pageCount ? (
-        <div className="pagination">
-          <button
-            disabled={currentPage === 1}
-            className="previous"
-            onClick={handlePrevious}
-          ></button>
-          <button
-            disabled={currentPage === pageCount + 1}
-            className="next"
-            onClick={handleNext}
-          ></button>
-        </div>
-      ) : (
-        <div className="pagination">
-          <button
-            disabled={currentPage === 1}
-            className="previous"
-            onClick={handlePrevious}
-          ></button>
-        </div>
-      )}
+      <div className="pagination">
+        <button
+          disabled={currentPage === 1}
+          className="previous"
+          onClick={handlePrevious}
+        ></button>
+        {currentPage}/{pageCount - 1}
+        <button
+          disabled={currentPage === pageCount + 1}
+          className="next"
+          onClick={handleNext}
+        ></button>
+      </div>
 
       <div className="display">
+        <div className="results-heading">
+          <p>Opportunity</p>
+          <p>Organization</p>
+          <p>Cause</p>
+          <p>Location</p>
+          <p>Date</p>
+        </div>
+
         <div className="results-container">
-          {ngos?.slice((currentPage - 1) * 5, currentPage * 5).map((ngo) => {
-            return (
+          {ngos?.slice((currentPage - 1) * 5, currentPage * 5).map((ngo) => (
+            <div key={ngo._id}>
               <div
-                className="display-container"
+                className="results-wrapper"
                 onClick={() => handleNgoSelected(ngo._id)}
-                key={ngo._id}
               >
-                <div className="ngo-name">
-                  {ngo.name}
-                  <p>
-                    {ngo.description}
-                    <span className="opportunities"></span>
-                  </p>
-                  <p>{ngo.address}</p>
+                {/* <div className="opportunity"> */}
+                {ngo.events && ngo.events.length > 0 && (
+                  <p>{ngo.events[0].name}</p>
+                )}
+                {/* </div> */}
+                <div className="name-section">
+                  <p>{ngo.name}</p>
                 </div>
+                {/* <div className="results-section"> */}
+                <p>{ngo.category}</p>
+                {/* </div> */}
+                {/* <div className="results-section"> */}
+                <p>{ngo.district}</p>
+                {/* </div> */}
+                {/* <div className="results-section"> */}
+                {ngo.events && ngo.events.length > 0 && (
+                  <p>{ngo.events[0].date}</p>
+                )}
+                {/* </div> */}
               </div>
-            );
-          })}
+            </div>
+          ))}
         </div>
       </div>
     </div>

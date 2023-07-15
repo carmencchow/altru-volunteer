@@ -84,7 +84,7 @@ const NgoEvents = () => {
 
   return (
     <div>
-      <h2>📅 Scheduled Events</h2>
+      <h2 className="tab-heading">📅 Scheduled Events</h2>
       <div className="event-profile">
         <div className="side">
           {events && (

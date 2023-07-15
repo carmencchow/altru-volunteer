@@ -4,8 +4,15 @@
   justify-content: flex-end;
   margin-right: 60px;
 }
-h3 {
-  margin: 30px 100px;
+.results-heading {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  font-weight: bolder;
+}
+.opportunity {
+  margin-left: 0px;
+  border: 1px solid red;
 }
 .opportunities:hover {
   text-decoration: underline;
@@ -33,19 +40,43 @@ h3 {
 .contact {
   padding-top: 20px;
 }
+h3 {
+  margin: 5% 10%;
+}
 .volunteer-btn {
   margin-top: 0px;
   margin-bottom: 40px;
 }
+.results-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  border: 1px solid orange;
+  text-justify: distribute-all-lines;
+  cursor: pointer;
+}
+.results-wrapper p {
+  font-size: 14px;
+}
 .display {
   padding: 0px 70px;
 }
+.results-container {
+  font-size: 12px;
+}
 .display-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  font-size: 14px;
   margin: 30px 60px;
   color: black;
   background-color: #f6f6fa;
   border-radius: 10px;
   padding: 5px;
+}
+.display-container p {
+  font-size: 14px;
 }
 .display-container:hover {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -91,12 +122,6 @@ span {
 /* ------- Media Queries ------*/
 
 @media only screen and (max-width: 599px) {
-  .find {
-    display: flex;
-    margin-left: 10%;
-    width: 100%;
-    font-size: 14px;
-  }
   .show-details p {
     font-size: 14px;
   }
@@ -160,12 +185,6 @@ span {
   }
   .pagination {
     margin-right: 5%;
-  }
-  .find {
-    display: flex;
-    margin-left: 10%;
-    width: 100%;
-    font-size: 16px;
   }
   .ngo-name {
     font-size: 28px;

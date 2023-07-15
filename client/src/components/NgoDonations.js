@@ -33,7 +33,9 @@ const NgoDonations = () => {
     <div className="container">
       <div className="stats">
         <div className="donation-history">
-          <h2>🪙 Donations made to your organization</h2>
+          <h2 className="tab-heading">
+            🪙 Donations made to your organization
+          </h2>
           <div className="row">
             <p>Amount</p>
             <p>Donor</p>

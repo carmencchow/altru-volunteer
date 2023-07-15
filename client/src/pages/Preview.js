@@ -9,6 +9,7 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 import { MdPreview } from "react-icons/md";
 import { api } from "../utils/axios";
 import "./Preview.css";
+import Navbar from "../components/Navbar";
 
 const Preview = () => {
   const navigate = useNavigate();
@@ -44,11 +45,14 @@ const Preview = () => {
   };
 
   useEffect(() => {
-    fetchNgoData();
+    if (mongoUser.organization) {
+      fetchNgoData(mongoUser.organization._id);
+    }
   }, []);
 
   return (
     <div>
+      <Navbar />
       <span className="preview">
         <MdPreview /> Preview Page
       </span>
@@ -58,9 +62,9 @@ const Preview = () => {
 
       {ngo && (
         <div className="about-section">
-          <div className="row">
-            <div className="right-side">
-              <h2>🏅 {ngo.name}</h2>
+          <div className="right-side">
+            <h2 className="preview-h2">🏅 {ngo.name}</h2>
+            <div className="row">
               <button className="preview-follow" onClick={donate}>
                 Follow
               </button>
@@ -113,7 +117,7 @@ const Preview = () => {
                       Date: <span>{event.date} </span>
                     </p>
                     <p className="event-location"> {event.location} </p>
-                    <button onClick={register}>Register for event</button>
+                    <button>Register for event</button>
                   </div>
                 ))}
               </div>

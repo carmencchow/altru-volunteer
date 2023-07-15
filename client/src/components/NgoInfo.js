@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import Input from "react-phone-number-input/input";
-import { Image } from "cloudinary-react";
 import { AuthContext } from "../context/AuthContext";
 import { api } from "../utils/axios";
 import EditNGO from "../components/EditNGO";
@@ -100,11 +99,11 @@ const NgoInfo = () => {
 
           {!mongoUser.organization ? (
             <button onClick={handleAddNGO} className="add-btn">
-              Add Organization
+              Create a profile
             </button>
           ) : (
             <button onClick={handleEditNGO} className="edit-btn">
-              Edit Organization
+              Edit Profile
             </button>
           )}
         </div>
@@ -120,7 +119,7 @@ const NgoInfo = () => {
                 placeholder="Organization name"
                 onChange={(e) => setName(e.target.value)}
               />
-              <input
+              <textarea
                 type="text"
                 className="description"
                 value={description}
@@ -148,7 +147,7 @@ const NgoInfo = () => {
                 placeholder="Organization phone number"
                 onChange={setTelephone}
               />
-              <div>
+              <div className="profile-row">
                 <select
                   className="ngo-select"
                   value={category}
@@ -156,7 +155,7 @@ const NgoInfo = () => {
                 >
                   <option value="selection">Organization Cause:</option>
                   <option value="animals">Animals</option>
-                  <option value="children & youth">Children & Youth</option>
+                  <option value="social justice">Social Justice</option>
                   <option value="education & literacy">
                     Education & Literacy
                   </option>
@@ -166,19 +165,21 @@ const NgoInfo = () => {
                     Sports & Recreation
                   </option>
                 </select>
-              </div>
 
-              <select
-                className="ngo-select"
-                value={district}
-                onChange={(e) => setDistrict(e.target.value)}
-              >
-                <option value="district">District:</option>
-                <option value="Etobicoke-York">Etobicoke-York</option>
-                <option value="North York">North York</option>
-                <option value="Toronto">Toronto</option>
-                <option value="East York">East York & Scarborough</option>
-              </select>
+                <select
+                  className="ngo-select"
+                  value={district}
+                  onChange={(e) => setDistrict(e.target.value)}
+                >
+                  <option value="district">District:</option>
+                  <option value="Etobicoke-York">Etobicoke-York</option>
+                  <option value="North York">North York</option>
+                  <option value="Toronto">Toronto</option>
+                  <option value="East York & Scarborough">
+                    East York & Scarborough
+                  </option>
+                </select>
+              </div>
 
               {serverError && <p className="server-error">{serverError}</p>}
 

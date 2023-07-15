@@ -48,23 +48,65 @@ const getNgos = async (req, res) => {
 
     console.log(category, district);
     if (district === "all" && category === "all") {
-      let ngos = await Ngo.find({}).sort({ createdAt: -1 });
+      let ngos = await Ngo.find({})
+        .sort({ createdAt: -1 })
+        .populate([
+          {
+            path: "events",
+            model: "Event",
+            populate: {
+              path: "volunteers",
+              model: "User",
+            },
+          },
+        ]);
       return res.status(200).json(ngos);
     }
     if (district === "all") {
-      let ngos = await Ngo.find({ category: category }).sort({ createdAt: -1 });
+      let ngos = await Ngo.find({ category: category })
+        .sort({ createdAt: -1 })
+        .populate([
+          {
+            path: "events",
+            model: "Event",
+            populate: {
+              path: "volunteers",
+              model: "User",
+            },
+          },
+        ]);
       return res.status(200).json(ngos);
     }
     if (category === "all") {
-      let ngos = await Ngo.find({ district: district }).sort({
-        createdAt: -1,
-      });
+      let ngos = await Ngo.find({ district: district })
+        .sort({
+          createdAt: -1,
+        })
+        .populate([
+          {
+            path: "events",
+            model: "Event",
+            populate: {
+              path: "volunteers",
+              model: "User",
+            },
+          },
+        ]);
       return res.status(200).json(ngos);
     } else {
       let ngos = await Ngo.find({
         category: category,
         district: district,
-      });
+      }).populate([
+        {
+          path: "events",
+          model: "Event",
+          populate: {
+            path: "volunteers",
+            model: "User",
+          },
+        },
+      ]);
       return res.status(200).json(ngos);
     }
   } catch (err) {
@@ -85,6 +127,7 @@ const createNgo = async (req, res) => {
       telephone,
       url,
       uid,
+      file_name,
     } = req.body;
     const ownerExists = await Ngo.findOne({ owner: uid });
     const nameExists = await Ngo.findOne({ name });
@@ -121,6 +164,7 @@ const createNgo = async (req, res) => {
         donations: [],
         events: [],
         owner: uid,
+        file_name: "",
       });
       user.organization = ngo._id;
       user.save();
