@@ -2,6 +2,7 @@ import express from "express";
 import {
   getEvent,
   getEvents,
+  getRecentEvents,
   editEvent,
   deleteEvent,
   registerEvent,
@@ -11,6 +12,7 @@ import {
 const router = express.Router();
 
 //eventRoute (localhost:5000/api/event)
+router.get("/recent", getRecentEvents);
 router.get("/:id", getEvent);
 router.get("/:district/:category", getEvents);
 router.put("/:id", editEvent);

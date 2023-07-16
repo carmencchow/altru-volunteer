@@ -22,8 +22,7 @@ const Home = () => {
     >
       <div className="banner">
         <div className="logo-wrapper">
-          {/* <img className="home-logo" src={logo} alt="logo" /> */}
-          VolunteerConnect
+          <img className="home-logo" src={logo} alt="logo" />
           <div className="buttons">
             <div className="login-btn" onClick={handleLogin}>
               Login

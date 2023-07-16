@@ -1,8 +1,17 @@
 .pagination {
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
-  margin-right: 60px;
+  justify-content: space-between;
+  margin: 2% 7%;
+}
+.numResults {
+  padding: 5px;
+  background-color: #f6f6fa;
+  border-radius: 10px;
+}
+.pagination-buttons {
+  display: flex;
+  flex-direction: row;
 }
 .results-heading {
   display: flex;
@@ -10,38 +19,40 @@
   justify-content: space-evenly;
   font-weight: bolder;
 }
-.opportunity {
-  margin-left: 0px;
-  border: 1px solid red;
-}
 .opportunities:hover {
   text-decoration: underline;
 }
+.one-event {
+  color: rgb(121, 92, 250);
+}
+.one-name {
+  color: blue;
+}
+.currentNum {
+  margin-right: 0px;
+  margin-top: 20px;
+}
+.next {
+  width: 100px;
+}
 .next,
 .previous {
-  height: 50px;
   cursor: pointer;
-  background-color: #19add6;
-  color: white;
-  border: 2px solid #19add6;
+  color: rgb(121, 92, 250);
+  font-family: "Poppins", sans-serif;
   width: 120px;
-  margin-right: 7px;
-  font-family: "Montserrat", sans-serif;
+  background-color: #ffffff;
 }
 .next:hover,
 .previous:hover {
-  background-color: #77bacd;
-  border: 2px solid #77bacd;
-  color: white;
+  color: rgb(92, 56, 253);
+  font-weight: bolder;
 }
 .arrow:hover {
   color: white;
 }
 .contact {
   padding-top: 20px;
-}
-h3 {
-  margin: 5% 10%;
 }
 .volunteer-btn {
   margin-top: 0px;
@@ -51,7 +62,6 @@ h3 {
   display: flex;
   flex-direction: row;
   justify-content: left;
-  border: 1px solid orange;
   text-justify: distribute-all-lines;
   cursor: pointer;
 }
@@ -63,6 +73,9 @@ h3 {
 }
 .results-container {
   font-size: 12px;
+  margin: 2% 10%;
+  border-radius: 20px;
+  padding: 2%;
 }
 .display-container {
   display: flex;
@@ -94,9 +107,34 @@ h3 {
   width: 100%;
   justify-content: space-between;
 }
+.followed-orgs,
+.follow-event {
+  display: flex;
+  flex-direction: row;
+}
+.follow-ngo {
+  cursor: pointer;
+}
+.follow-ngo:hover {
+  cursor: pointer;
+  color: blue;
+}
+.subtext {
+  font-size: 12px;
+  font-style: italic;
+}
 .event {
   font-weight: bold;
   color: black;
+}
+.heading,
+h3,
+.highlights {
+  margin: 2% 7%;
+  background-color: #f6f6fa;
+
+  border-radius: 15px;
+  padding: 10px 20px;
 }
 .show-details {
   display: flex;
@@ -108,6 +146,13 @@ h3 {
 }
 .show-details p {
   margin-top: 2px;
+}
+.show-highlights {
+  cursor: pointer;
+}
+.show-highlights:hover {
+  transform: translateY(5px);
+  transition-duration: 1s;
 }
 span {
   margin-left: 30px;
@@ -125,6 +170,23 @@ span {
   .show-details p {
     font-size: 14px;
   }
+  .card-wrapper {
+    margin: 2% 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .card {
+    border-radius: 20px;
+    padding: 10px;
+    cursor: pointer;
+    width: 80vw;
+    height: 20vh;
+  }
+  .card:hover {
+    /* filter: grayscale(1); */
+    transform: translateY(0px);
+  }
   .left-side {
     width: 100%;
   }
@@ -136,12 +198,7 @@ span {
   .previous {
     height: 20px;
     cursor: pointer;
-    color: white;
-    border: 2px solid #19add6;
     width: 40px;
-    font-size: 12px;
-    margin-right: 7px;
-    font-family: "Montserrat", sans-serif;
   }
   .previous:before {
     content: "<<";
@@ -179,9 +236,6 @@ span {
   .previous,
   .next {
     width: 70px;
-    height: 26px;
-    font-size: 10px;
-    color: white;
   }
   .pagination {
     margin-right: 5%;
@@ -207,7 +261,5 @@ span {
   .previous,
   .next {
     width: 90px;
-    height: 30px;
-    font-size: 14px;
   }
 }

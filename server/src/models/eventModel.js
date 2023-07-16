@@ -38,6 +38,10 @@ const eventSchema = new mongoose.Schema({
   duties: {
     type: String,
   },
+  dateAdded: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 const Event = mongoose.model("Event", eventSchema);

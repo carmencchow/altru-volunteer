@@ -1,6 +1,5 @@
 .wrapper {
-  margin: 5% 10%;
-  background-color: #eae9f8;
+  margin: 2% 10%;
   border-radius: 20px;
   padding: 2%;
 }
@@ -49,13 +48,13 @@ form.dropdown p {
   width: 80px;
   margin-top: 7px;
   font-size: 16px;
-  color: purple;
+  color: rgb(205, 66, 205);
   font-weight: bolder;
-  background-color: #eae9f8;
+  background-color: white;
   margin-left: 5px;
 }
 .searchBtn:hover {
-  color: rgb(205, 66, 205);
+  color: rgb(175, 66, 175);
 }
 
 /* Media Queries */
