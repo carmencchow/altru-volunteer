@@ -5,12 +5,11 @@ import { AuthContext } from "../context/AuthContext";
 import { api } from "../utils/axios";
 import "./Filters.css";
 
-const Filters = () => {
+const Filters = ({ setCurrentPage }) => {
   const { filters, setFilters } = useContext(FiltersContext);
   const { setNgos } = useContext(NgosContext);
   const { user, verifyUser } = useContext(AuthContext);
   const [error, setError] = useState("");
-  const [events, setEvents] = useState(null);
   const [serverError, setServerError] = useState("");
 
   const handleCategoryChange = (e) => {
@@ -37,7 +36,8 @@ const Filters = () => {
         },
       });
       setNgos(res.data);
-      console.log("Ngos", res.data);
+      setCurrentPage(1);
+      console.log("Ngos", district, category, res.data);
       await verifyUser(user);
     } catch (err) {
       console.log(err);

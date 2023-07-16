@@ -43,9 +43,8 @@ const getNgo = async (req, res) => {
 // GET all NGOs
 const getNgos = async (req, res) => {
   try {
-    const category = req.params.category.toLowerCase();
-    const district = req.params.district.toLowerCase();
-
+    const category = req.params.category;
+    const district = req.params.district;
     console.log(category, district);
     if (district === "all" && category === "all") {
       let ngos = await Ngo.find({})
@@ -63,7 +62,7 @@ const getNgos = async (req, res) => {
       return res.status(200).json(ngos);
     }
     if (district === "all") {
-      let ngos = await Ngo.find({ category: category })
+      let ngos = await Ngo.find({ category })
         .sort({ createdAt: -1 })
         .populate([
           {
@@ -78,7 +77,7 @@ const getNgos = async (req, res) => {
       return res.status(200).json(ngos);
     }
     if (category === "all") {
-      let ngos = await Ngo.find({ district: district })
+      let ngos = await Ngo.find({ district })
         .sort({
           createdAt: -1,
         })
@@ -95,8 +94,8 @@ const getNgos = async (req, res) => {
       return res.status(200).json(ngos);
     } else {
       let ngos = await Ngo.find({
-        category: category,
-        district: district,
+        category,
+        district,
       }).populate([
         {
           path: "events",

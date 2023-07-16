@@ -27,28 +27,30 @@ const Ngos = () => {
   };
 
   useEffect(() => {
-    setPageCount(Math.floor(ngos.length / 4));
+    setPageCount(Math.ceil(ngos.length / 5));
   }, [ngos.length]);
+
+  // Display Featured Followed Ngos
 
   return (
     <div>
       <Navbar />
-
       <h3 className="find">
         Find hundreds of volunteer opportunities in Toronto. Search volunteer
         opportunities in your city and find how you can make a difference.
       </h3>
-      <Filters />
+      <Filters setCurrentPage={setCurrentPage} />
 
       <div className="pagination">
+        <p className="numResults">Number of results: {ngos.length}</p>
         <button
           disabled={currentPage === 1}
           className="previous"
           onClick={handlePrevious}
         ></button>
-        {currentPage}/{pageCount - 1}
+        {currentPage}/{pageCount}
         <button
-          disabled={currentPage === pageCount + 1}
+          disabled={currentPage === pageCount}
           className="next"
           onClick={handleNext}
         ></button>
