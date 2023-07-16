@@ -119,7 +119,7 @@ const NgoInfo = () => {
                 placeholder="Organization name"
                 onChange={(e) => setName(e.target.value)}
               />
-              <textarea
+              <input
                 type="text"
                 className="description"
                 value={description}

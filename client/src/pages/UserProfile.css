@@ -51,6 +51,11 @@ button {
   width: 100px;
   margin-bottom: 20px;
 }
+.goal-btn:hover {
+  color: blue;
+  background-color: rgb(230, 230, 249);
+  transition: ease-in 0.5;
+}
 .cancel-goal-btn,
 .save-goal-btn {
   width: 70px;

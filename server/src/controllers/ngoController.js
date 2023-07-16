@@ -282,6 +282,7 @@ const createEvent = async (req, res) => {
         volunteers: [],
         ngo: ngo._id,
         category,
+        dateAdded: Date.now(),
       });
       const updatedNgo = await Ngo.findOneAndUpdate(
         { _id: ngo._id },

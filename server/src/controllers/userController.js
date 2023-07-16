@@ -5,7 +5,16 @@ import Donation from "../models/donationModel.js";
 // Helper function to query mongo
 const findUser = async (id) => {
   const user = await User.findById(id)
-    .populate("ngos")
+    .populate([
+      {
+        path: "ngos",
+        model: "Ngo",
+        populate: {
+          path: "events",
+          model: "Event",
+        },
+      },
+    ])
     .populate([
       {
         path: "events",

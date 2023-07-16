@@ -13,12 +13,14 @@ h1 {
   transition: ease-in 0.5;
 }
 .remove {
-  color: grey;
-}
-.remove:hover {
   color: blue;
   background-color: rgb(230, 230, 249);
   transition: ease-in 0.5;
+}
+.remove:hover {
+  color: white;
+  background-color: rgb(197, 197, 242);
+  transition: ease-in 0.8;
 }
 .register {
   background-color: rgb(230, 230, 249);
