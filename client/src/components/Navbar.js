@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import logo from "../assets/altru.png";
+import logo from "../assets/logo.png";
 import "./Navbar.css";
 
 const Navbar = () => {

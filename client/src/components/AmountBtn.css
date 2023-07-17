@@ -24,14 +24,29 @@
     max-width: 400px;
   }
   .amount-btn {
-    width: 50px;
+    width: 40px;
     height: 35px;
     font-size: 14px;
-    padding: 5px;
+    margin-left: 0px;
   }
   .donation-options {
     margin-bottom: 10px;
     margin-top: 0px;
+    margin-left: 0px;
+    font-size: 10px;
+    display: flex;
+    flex-direction: row;
+  }
+  .stripe-btn {
+    width: 80px;
+    background-color: white;
+    margin-left: 0px;
+  }
+  .info {
+    display: flex;
+    flex-direction: column;
+    line-height: 0px;
+    align-items: right;
   }
 }
 

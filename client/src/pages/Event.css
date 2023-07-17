@@ -3,6 +3,20 @@
 }
 .display-card {
   width: 80vw;
+  margin: 2% auto;
+}
+.back {
+  display: flex;
+  font-size: 16px;
+  font-style: italic;
+  padding-top: 20px;
+  align-items: flex-end;
+  justify-content: flex-end;
+  margin-right: 50px;
+  cursor: pointer;
+}
+.back:hover {
+  font-weight: bolder;
 }
 h1 {
   margin-left: 7%;
@@ -28,13 +42,29 @@ h1 {
   margin-bottom: 10px;
   height: 30px;
 }
+.event-name {
+  font-weight: bolder;
+}
 .event-ngo-name {
   font-weight: bolder;
-  font-size: 16px;
+  font-size: 18px;
   margin-top: 25px;
   cursor: pointer;
+  margin-left: 5%;
+  color: rgb(112, 81, 253);
 }
 .event-ngo-name:hover {
-  color: blue;
+  color: rgb(112, 81, 253);
   font-weight: bolder;
+  transform: translateX(5px);
+  transition-duration: 1s, 3s;
+}
+
+/* Media Queries */
+
+@media only screen and (max-width: 599px) {
+  .event-wrapper {
+    width: 100vw;
+    margin-left: 10%;
+  }
 }

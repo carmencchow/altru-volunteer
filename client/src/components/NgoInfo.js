@@ -83,10 +83,11 @@ const NgoInfo = () => {
                 <p className="website">Website: {mongoUser.organization.url}</p>
                 <h5>Organization description:</h5>
                 <p>{mongoUser.organization.description}</p>
-
                 <h5>Address:</h5>
-                <p>{mongoUser.organization.address}</p>
-                <p>{mongoUser.organization.district}</p>
+                <p>
+                  {mongoUser.organization.address}{" "}
+                  <span>({mongoUser.organization.district})</span>
+                </p>
                 <h5>Contact: </h5>
                 <p className="ngo-contact">
                   {mongoUser.firstname} {mongoUser.lastname}

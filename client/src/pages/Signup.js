@@ -1,13 +1,13 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { api } from "../utils/axios";
-import logo from "../assets/altru.png";
+import icon from "../assets/icon.png";
 import "./Signup.css";
 
 const Signup = () => {
   const navigate = useNavigate();
-  const { user, signUp } = useContext(AuthContext);
+  const { signUp } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [firstname, setFirstname] = useState("");
@@ -33,12 +33,10 @@ const Signup = () => {
     console.log("individual account", email, password);
     if (email && password) {
       console.log(email, password, isOrganizer);
-      // Send email and password to Firebase
       const data = await signUp(email, password);
       console.log("Register new user in Firebase:", data);
       const token = await data.user.getIdToken();
-      // Send user data to server to add to mongoDB
-      await api.post(
+      const res = await api.post(
         "/auth/createUser",
         {
           firebaseUID: data.user.uid,
@@ -53,6 +51,7 @@ const Signup = () => {
           },
         }
       );
+      console.log(res.data);
     }
   };
 
@@ -61,8 +60,8 @@ const Signup = () => {
       <img
         onClick={homepage}
         className="signup-logo"
-        src={logo}
-        style={{ width: 130, height: 40 }}
+        src={icon}
+        style={{ width: 56, height: 50 }}
         alt="logo"
       />
 
@@ -129,7 +128,7 @@ const Signup = () => {
               value={isChecked}
               onChange={handleChecked}
             />{" "}
-            Are you signing up on behalf of an organization?
+            Are you part of an organization?
           </div>
 
           <button

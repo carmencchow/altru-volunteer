@@ -2,7 +2,6 @@ body,
 html {
   margin: 0;
   font-family: "Poppins", sans-serif;
-  /* font-family: 'Montserrat', sans-serif; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

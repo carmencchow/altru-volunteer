@@ -8,9 +8,9 @@ const FollowedOrgs = () => {
   return (
     <div className="highlights">
       <div>
-        ⭐ Followed Organizations
+        <p className="highlights-heading">⭐ Followed Organizations</p>
         <p className="subtext">
-          Latest events from the organizations you are following ...
+          View the latest events from organizations you follow ...
         </p>
         <p>
           {mongoUser.ngos.map((ngo, idx) => (

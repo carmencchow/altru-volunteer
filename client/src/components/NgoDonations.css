@@ -1,8 +1,22 @@
+.donors-heading {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  font-size: 1.5em;
+  font-weight: bold;
+}
 p {
-  margin-right: 10px;
+  font-size: 14px;
 }
 .first-name {
   margin-right: 5px;
+}
+.total,
+.donations-row p {
+  text-decoration: underline;
+}
+span {
+  text-decoration: none;
 }
 .row {
   width: 200px;
