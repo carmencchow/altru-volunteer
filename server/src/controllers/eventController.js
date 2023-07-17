@@ -124,24 +124,18 @@ const deleteEvent = async (req, res) => {
 const registerEvent = async (req, res) => {
   try {
     const { userId } = req.body;
-    const user = await User.findById(userId);
     const event = await Event.findById(req.params.id);
-    console.log("User and id:", user, event._id);
-    if (user.events.includes(event._id)) {
-      return res.status(400).send("You are already registered for this event");
-    }
-    const updatedUser = await User.findByIdAndUpdate(
+    const user = await User.findByIdAndUpdate(
       userId,
       { $addToSet: { events: event._id } },
       { new: true }
     );
     const updatedEvent = await Event.findByIdAndUpdate(
-      { _id: req.params.id },
-      { $addToSet: { volunteers: updatedUser._id } },
+      req.params.id,
+      { $addToSet: { volunteers: user._id } },
       { new: true }
     );
-    console.log("Updated event", updatedEvent.volunteers, updatedUser.events);
-
+    console.log("Updated event", updatedEvent.volunteers, user.events);
     // // Send email to user
     // const transporter = nodemailer.createTransport({
     //   host: process.env.MAIL_HOST,
@@ -176,8 +170,8 @@ const registerEvent = async (req, res) => {
     //   <h2>We look forward to seeing you there!</h2>
     //   <h2> Volunteer Toronto</h2>`,
     // });
-    console.log("Message sent", updatedUser.email);
-    res.status(200).send({ event, user });
+    console.log("Message sent", user.email);
+    res.status(200).send({ event: updatedEvent, user });
   } catch (err) {
     console.log(err);
     res.status(400).send("Couldn't add event");
@@ -196,12 +190,12 @@ const removeEvent = async (req, res) => {
       { new: true }
     );
     const updatedEvent = await Event.findByIdAndUpdate(
-      { _id: req.params.id },
+      req.params.id,
       { $pull: { volunteers: updatedUser._id } },
       { new: true }
     );
     console.log("Updated event", updatedEvent.volunteers, updatedUser.events);
-    res.status(200).send({ event, user });
+    res.status(200).send({ event: updatedEvent, user: updatedUser });
   } catch (err) {
     console.log(err);
     res.status(400).send("Couldn't remove event");

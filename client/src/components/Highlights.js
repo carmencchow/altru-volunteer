@@ -8,7 +8,6 @@ const Highlights = () => {
   const navigate = useNavigate();
   const [events, setEvents] = useState([]);
 
-  // Fetch most recently added events from server
   const fetchRecentEvents = async () => {
     try {
       const token = await user.getIdToken();
@@ -31,8 +30,8 @@ const Highlights = () => {
   return (
     <div className="highlights">
       <div>
-        🌎 Highlights
-        <p className="subtext">View the most recently created Events ... </p>
+        <p className="highlights-heading">🌎 Highlights</p>
+        <p className="subtext">View our recently added events ... </p>
         {events && events.length > 0 && (
           <div>
             {events.map((event, idx) => (
@@ -41,8 +40,8 @@ const Highlights = () => {
                 className="event-item"
                 onClick={() => navigate(`/event/${event._id}`)}
               >
-                <p>{event.name}</p>
-                <p>{event.ngo.name}</p>
+                <p className="event-name">{event.name}</p>
+                <p className="event-ngo">{event.ngo.name}</p>
                 <p className="date">
                   Added on: {String(event.dateAdded).slice(0, 10)}
                 </p>

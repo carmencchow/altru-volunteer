@@ -1,3 +1,7 @@
+.ngos-wrapper {
+  width: 90%;
+  margin: 0 auto;
+}
 .pagination {
   display: flex;
   flex-direction: row;
@@ -13,16 +17,49 @@
   display: flex;
   flex-direction: row;
 }
+.display {
+  margin: 0px auto;
+  justify-content: start;
+}
 .results-heading {
   display: flex;
+  margin: 0 auto;
+  width: 60vw;
   flex-direction: row;
-  justify-content: space-evenly;
   font-weight: bolder;
+}
+.results-heading p {
+  margin-right: 5%;
+}
+.results-container {
+  width: 80%;
+  margin: 0 auto;
+  font-size: 12px;
+  padding: 2%;
+}
+.results-container p {
+  margin-right: 3%;
+}
+.results-wrapper {
+  display: flex;
+  flex-direction: row;
+  width: 70vw;
+  cursor: pointer;
+}
+.results-wrapper p {
+  font-size: 14px;
 }
 .opportunities:hover {
   text-decoration: underline;
 }
+.event-ngo {
+  padding-left: 10px;
+  font-weight: normal;
+}
 .one-event {
+  text-decoration: underline;
+}
+.one-event:hover {
   color: rgb(121, 92, 250);
 }
 .one-name {
@@ -57,43 +94,6 @@
 .volunteer-btn {
   margin-top: 0px;
   margin-bottom: 40px;
-}
-.results-wrapper {
-  display: flex;
-  flex-direction: row;
-  justify-content: left;
-  text-justify: distribute-all-lines;
-  cursor: pointer;
-}
-.results-wrapper p {
-  font-size: 14px;
-}
-.display {
-  padding: 0px 70px;
-}
-.results-container {
-  font-size: 12px;
-  margin: 2% 10%;
-  border-radius: 20px;
-  padding: 2%;
-}
-.display-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  font-size: 14px;
-  margin: 30px 60px;
-  color: black;
-  background-color: #f6f6fa;
-  border-radius: 10px;
-  padding: 5px;
-}
-.display-container p {
-  font-size: 14px;
-}
-.display-container:hover {
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  transition: ease-in 0.3;
 }
 .ngo-name {
   color: #322ca9;
@@ -130,7 +130,8 @@
 .heading,
 h3,
 .highlights {
-  margin: 2% 7%;
+  width: 80%;
+  margin: 2% auto;
   background-color: #f6f6fa;
 
   border-radius: 15px;
@@ -144,11 +145,18 @@ h3,
   color: black;
   margin-bottom: 0px;
 }
+.highlights-heading {
+  color: rgb(121, 92, 250);
+  font-weight: bold;
+  font-size: 16px;
+}
 .show-details p {
   margin-top: 2px;
 }
 .show-highlights {
   cursor: pointer;
+  display: inline-block;
+  position: relative;
 }
 .show-highlights:hover {
   transform: translateY(5px);
@@ -169,23 +177,6 @@ span {
 @media only screen and (max-width: 599px) {
   .show-details p {
     font-size: 14px;
-  }
-  .card-wrapper {
-    margin: 2% 10%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  .card {
-    border-radius: 20px;
-    padding: 10px;
-    cursor: pointer;
-    width: 80vw;
-    height: 20vh;
-  }
-  .card:hover {
-    /* filter: grayscale(1); */
-    transform: translateY(0px);
   }
   .left-side {
     width: 100%;
@@ -212,8 +203,8 @@ span {
     justify-content: flex-end;
     margin-right: 12%;
   }
-  .display-container {
-    margin: 2%;
+  .display {
+    margin-left: 0px;
   }
   .ngo-name {
     font-size: 20px;
@@ -223,6 +214,17 @@ span {
   }
   .show-details p {
     font-size: 12px;
+  }
+  .results-container {
+    margin-left: 2% auto;
+  }
+  .results-heading {
+    display: flex;
+    flex-direction: row;
+    margin-left: 10%;
+    width: 40vw;
+    flex-direction: row;
+    font-weight: bolder;
   }
 }
 

@@ -70,7 +70,7 @@ const UserProfile = () => {
       </div>
       <div className="profile-section">
         <div className="userprofile"></div>
-        <h4>Following:</h4>
+        <h4>⭐ Following</h4>
 
         <div className="organizations">
           {mongoUser.ngos &&
@@ -114,21 +114,32 @@ const UserProfile = () => {
             </button>
           </div>
         )}
-        {mongoUser.donations && (
-          <div className="donations-table">
-            {mongoUser.donations.map((donation, idx) => (
+        <div className="donations-table">
+          {mongoUser.donations &&
+            mongoUser.donations.map((donation, idx) => (
               <div key={idx} className="donations">
-                <p>
-                  ${donation.amount}.00 to {donation.ngo.name}
-                </p>
-                {/* <p>{String(donation.date).slice(0, 10)}</p> */}
-                {/* </div> */}
+                <p>${donation.amount}.00</p>
+                {/* <p>${donation.ngo}.00</p> */}
+                <p>Made on: {String(donation.date).slice(0, 10)}</p>
               </div>
             ))}
-          </div>
-        )}
-        <h4>
-          Amount needed to reach donation goal:
+        </div>
+        <div className="donated-row">
+          <p className="donate-row-text">Total amount donated: </p>
+          <p className="amount-needed">
+            $
+            {mongoUser.donations &&
+              mongoUser.donations
+                .map((donation) => Number(donation.amount))
+                .reduce((a, b) => a + b, 0)}
+            .00
+          </p>
+        </div>
+        <div className="donated-row">
+          <p className="donate-row-text">
+            Amount needed to reach donation goal:{" "}
+          </p>
+
           <p className="amount-needed">
             $
             {mongoUser.goalAmount -
@@ -137,7 +148,7 @@ const UserProfile = () => {
                 .reduce((a, b) => a + b, 0)}
             .00
           </p>
-        </h4>{" "}
+        </div>
       </div>
 
       <div className="events-section">
@@ -156,7 +167,7 @@ const UserProfile = () => {
                   {event.name} with {event.ngo.name}
                 </p>
                 <p>{event.location}</p>
-                <p>{event.date}</p>
+                <p>🗓️ {event.date}</p>
               </div>{" "}
             </div>
           ))}

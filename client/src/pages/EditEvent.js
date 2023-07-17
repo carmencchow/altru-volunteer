@@ -1,22 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { EventsContext } from "../context/EventsContext";
-import { AiOutlineDelete } from "react-icons/ai";
 import Navbar from "../components/Navbar";
 import { api } from "../utils/axios";
 import "./EditEvent.css";
 import { useNavigate, useParams } from "react-router-dom";
 
-const EditEvent = ({
-  name,
-  date,
-  startTime,
-  endTime,
-  location,
-  description,
-  duties,
-  numVolunteers,
-}) => {
+const EditEvent = () => {
   const { user, verifyUser } = useContext(AuthContext);
   const { fetchEvent, event, setEvent } = useContext(EventsContext);
   const [isEditing, setIsEditing] = useState(true);
@@ -38,14 +28,6 @@ const EditEvent = ({
       await api.put(
         `/event/${id}`,
         {
-          // name: `${newName}` || `${name}`,
-          // date: `${newDate}` || `${date}`,
-          // startTime: `${newStartTime}` || `${startTime}`,
-          // endTime: `${newEndTime}` || `${endTime}`,
-          // location: `${newLocation}` || `${location}`,
-          // description: `${newDescription}` || `${description}`,
-          // duties: `${newDuties}` || `${duties}`,
-          // numVolunteers: `${newNumVolunteers}` || `${numVolunteers}`,
           name: newName,
           date: newDate,
           startTime: newStartTime,
@@ -95,26 +77,36 @@ const EditEvent = ({
       <div className="event-wrapper">
         {event && (
           <div className="display-card">
-            <h4>{event.name}</h4>
+            <h4>⭐{event.name}</h4>
+            <div className="event-details">
+              <p>🗓️ {event.date}</p>
+              <p>
+                {" "}
+                🕒
+                {event.startTime}-{event.endTime}pm
+              </p>
+            </div>
             <p>{event.description}</p>
+            <p>
+              {event.num_volunteers} volunteers needed to help with the
+              following:
+            </p>
             <p>{event.duties}</p>
             <p>📍{event.location}</p>
-            <p>
-              {" "}
-              🕒
-              {event.startTime}-{event.endTime}pm
-            </p>
-            <p>{event.num_Volunteers}</p>
 
-            <h4>Registered Volunteers</h4>
+            <h4 className="interested">
+              Interested Volunteers: {event.volunteers.length}
+            </h4>
             <p>
               {event.volunteers && (
                 <div>
                   {event.volunteers.map((volunteer) => (
                     <div className="volunteer">
-                      Name:
-                      {volunteer.firstname}
-                      {volunteer.lastname}
+                      <p>
+                        ✔️
+                        {volunteer.firstname}
+                        {volunteer.lastname}
+                      </p>
                       <p>{volunteer.email}</p>
                     </div>
                   ))}
@@ -122,9 +114,8 @@ const EditEvent = ({
               )}
             </p>
 
-            <button onClick={deleteEvent} className="delete-btn">
+            <button onClick={deleteEvent} className="delete-event">
               Delete Event
-              <AiOutlineDelete />
             </button>
           </div>
         )}
@@ -134,7 +125,7 @@ const EditEvent = ({
             <input
               type="text"
               className="name"
-              value={newName ? newName : event.name}
+              value={newName}
               placeholder="Name of event"
               onChange={(e) => setNewName(e.target.value)}
             />
@@ -143,9 +134,7 @@ const EditEvent = ({
               className="event-date"
               min="2023-01-01"
               max="2024-12-31"
-              value={name}
-              // value={newDate ? newDate : event.date}
-              // placeholder={event.date ? event.date : "Date of event"}
+              value={newDate}
               onChange={(e) => setNewDate(e.target.value)}
             />
             <div className="row">
@@ -154,8 +143,8 @@ const EditEvent = ({
                 className="event-time"
                 min="08:00"
                 max="22:00"
-                value={newStartTime ? newStartTime : event.startTime}
-                placeholder={event.startTime ? event.startTime : "Start time"}
+                value={newStartTime}
+                placeholder="Start time"
                 onChange={(e) => setNewStartTime(e.target.value)}
               />
               <input
@@ -163,44 +152,38 @@ const EditEvent = ({
                 className="event-time"
                 min="08:00"
                 max="22:00"
-                value={newEndTime ? newEndTime : event.endTime}
-                placeholder={event.endTime ? event.endTime : "End time"}
+                value={newEndTime}
+                placeholder="End time"
                 onChange={(e) => setNewEndTime(e.target.value)}
               />
             </div>
             <input
               type="text"
               className="event-location"
-              value={newLocation ? newLocation : event.location}
-              placeholder={
-                event.location ? event.location : "Location of event"
-              }
+              value={newLocation}
+              placeholder="Location of event"
               onChange={(e) => setNewLocation(e.target.value)}
             />
             <input
               type="text"
               className="desc"
-              value={newDescription ? newDescription : event.description}
-              placeholder={
-                event.description ? event.description : "Description of event"
-              }
+              value={newDescription}
+              placeholder="Description of event"
               onChange={(e) => setNewDescription(e.target.value)}
             />
             <input
               type="text"
               className="duties"
-              value={newDuties ? newDuties : event.duties}
-              placeholder={
-                event.duties ? event.duties : "How can volunteers help?"
-              }
+              value={newDuties}
+              placeholder="How can volunteers help?"
               onChange={(e) => setNewDuties(e.target.value)}
             />
             <p className="numVol">Number of volunteers:</p>
             <input
               type="number"
               className="numVolunteer"
-              placeholder={event.numVolunteers ? event.numVolunteers : "0"}
-              value={newNumVolunteers ? newNumVolunteers : event.numVolunteers}
+              placeholder="number of volunteers"
+              value={newNumVolunteers}
               onChange={(e) => setNewNumVolunteers(e.target.value)}
             />
             <div className="buttons">

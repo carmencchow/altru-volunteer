@@ -6,6 +6,16 @@
   border-radius: 10px;
   padding: 0px 20px;
 }
+.register {
+  display: flex;
+  flex-direction: row-reverse;
+}
+button {
+  justify-content: end;
+}
+.event-name {
+  font-weight: bold;
+}
 .preview {
   margin-top: 20px;
 }
@@ -38,9 +48,6 @@ button {
 .info {
   display: flex;
   flex-direction: row;
-}
-span {
-  font-weight: bold;
 }
 .image {
   border-radius: 5px;

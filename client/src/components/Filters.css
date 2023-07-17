@@ -63,6 +63,7 @@ form.dropdown p {
   .filters {
     display: flex;
     flex-direction: column;
+    margin: 10% auto;
   }
   .select-filters {
     width: 70vw;
@@ -77,11 +78,10 @@ form.dropdown p {
   }
   form.dropdown p {
     font-style: normal;
-    font-size: 14px;
+    font-size: 10px;
   }
   .searchBtn {
     height: 20px;
-    /* font-size: 10px; */
     width: 60px;
     border: none;
   }

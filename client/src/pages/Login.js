@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import logo from "../assets/altru.png";
+import icon from "../assets/icon.png";
 import "./Login.css";
 
 const Login = () => {
@@ -43,8 +43,8 @@ const Login = () => {
       <img
         onClick={home}
         className="login-logo"
-        src={logo}
-        style={{ width: 130, height: 40 }}
+        src={icon}
+        style={{ width: 56, height: 50 }}
         alt="logo"
       />
 

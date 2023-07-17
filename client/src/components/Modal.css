@@ -1,4 +1,4 @@
-.modal-background {
+/* .modal-background {
   width: 100%;
   background-color: rgba(0, 0, 0, 0.7);
   position: fixed;
@@ -20,7 +20,7 @@
   color: black;
   transform: translate(-50%, -50%);
   background-color: white;
-  /* font-family: "Domine", serif; */
+  /* font-family: "Domine", serif; 
 }
 .modal-content {
   margin: 4%;
@@ -92,6 +92,8 @@ p {
 }
 
 /* Media Queries */
+
+/*
 
 @media only screen and (min-width: 320px) {
   .modal-popup {
@@ -205,4 +207,4 @@ p {
     font-weight: normal;
     font-size: 20px;
   }
-}
+} */

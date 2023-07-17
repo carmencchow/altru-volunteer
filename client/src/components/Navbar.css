@@ -14,8 +14,8 @@ nav {
 .logo {
   margin-top: 14px;
   cursor: pointer;
-  height: 30px;
-  width: 90px;
+  height: 50px;
+  width: 120px;
 }
 .user-email {
   font-size: 14px;
@@ -48,6 +48,11 @@ nav {
 .profile-btn:hover {
   color: rgb(184, 170, 245);
 }
+.logout-btn:hover {
+  font-weight: bold;
+  color: rgb(89, 89, 249);
+  transition: ease-in 0.5;
+}
 
 /* Media Queries */
 
@@ -58,8 +63,8 @@ nav {
     margin-top: 12px;
   }
   .logo {
-    height: 20px;
-    width: 60px;
+    height: 40px;
+    width: 100px;
     margin-top: 24px;
   }
 }
@@ -70,8 +75,8 @@ nav {
     margin-top: 12px;
   }
   .logo {
-    height: 22px;
-    width: 70px;
+    height: 40px;
+    width: 100px;
     margin-top: 20px;
     margin-left: 16px;
   }
@@ -84,8 +89,8 @@ nav {
     margin-top: 8px;
   }
   .logo {
-    height: 26px;
-    width: 78px;
+    height: 40px;
+    width: 100px;
     margin-top: 20px;
     margin-left: 16px;
   }

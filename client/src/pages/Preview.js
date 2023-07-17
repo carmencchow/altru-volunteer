@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { TfiLocationPin } from "react-icons/tfi";
 import { BsTelephone } from "react-icons/bs";
-import { BiLeaf } from "react-icons/bi";
 import { TbWorld } from "react-icons/tb";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { MdPreview } from "react-icons/md";
@@ -117,7 +116,7 @@ const Preview = () => {
                       Date: <span>{event.date} </span>
                     </p>
                     <p className="event-location"> {event.location} </p>
-                    <button>Register for event</button>
+                    <button className="register">Express Interest</button>
                   </div>
                 ))}
               </div>

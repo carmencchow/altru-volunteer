@@ -4,7 +4,6 @@ import { api } from "../utils/axios";
 import "./NgoDonations.css";
 
 const NgoDonations = () => {
-  // const NgoDonations = ({ ngoId }) => {
   const [donations, setDonations] = useState(null);
   const { user, mongoUser } = useContext(AuthContext);
 
@@ -33,13 +32,11 @@ const NgoDonations = () => {
     <div className="container">
       <div className="stats">
         <div className="donation-history">
-          <h2 className="tab-heading">
+          <h2 className="donors-heading">
             🪙 Donations made to your organization
           </h2>
-          <div className="row">
-            <p>Amount</p>
-            <p>Donor</p>
-            <p>Date</p>
+          <div className="donations-row">
+            <p>Individual Donations:</p>
           </div>
         </div>
         {donations && (
@@ -54,17 +51,17 @@ const NgoDonations = () => {
             ))}
           </div>
         )}
-        <h4>
+        <p className="total">
           Total amount donated:
-          <p>
+          <span className="total-amt">
             $
             {donations &&
               donations
                 .map((donation) => Number(donation.amount))
                 .reduce((a, b) => a + b, 0)}
             .00
-          </p>
-        </h4>
+          </span>
+        </p>
       </div>
     </div>
   );

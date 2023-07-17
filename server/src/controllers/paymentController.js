@@ -14,16 +14,8 @@ const getPayment = (req, res) => {
       stripe.charges.create({
         customer: customer.id,
         amount: donation * 100,
-        currency: "usd",
+        currency: "cad",
         description: `${amount} donation`,
-        shipping: {
-          name: token.card.name,
-          address: {
-            address: token.card.address_line1,
-            city: token.card.address_city,
-            zip: token.card.address_zip,
-          },
-        },
       });
     })
     .then((result) => res.status(200).json(result))

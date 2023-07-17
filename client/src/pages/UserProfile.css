@@ -8,12 +8,24 @@
   padding: 0px 20px;
   margin-bottom: 5px;
 }
+.donated-row {
+  display: flex;
+  flex-direction: row;
+}
+.donate-row-text {
+  margin-right: 10px;
+  font-weight: bold;
+}
 .profile-section {
   margin-top: 0px;
 }
 .donations {
   display: flex;
   flex-direction: row;
+  margin-right: 2%;
+}
+.donations p {
+  margin-right: 10px;
 }
 .donation {
   display: flex;
@@ -50,8 +62,14 @@ button {
 .goal-btn {
   width: 100px;
   margin-bottom: 20px;
+  color: blue;
+  background-color: rgb(230, 230, 249);
+  transition: ease-in 0.5;
 }
 .goal-btn:hover {
+  color: grey;
+}
+.remove:hover {
   color: blue;
   background-color: rgb(230, 230, 249);
   transition: ease-in 0.5;
@@ -70,7 +88,7 @@ button {
 }
 .donations-table {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 .profile-name p {
   font-size: 20px;
@@ -106,14 +124,21 @@ button {
 .place {
   margin-bottom: 0px;
 }
+.list .plan {
+  display: flex;
+  flex-direction: row;
+  font-size: 12px;
+}
 .event-title,
 .follow-list {
   color: rgb(136, 136, 247);
   cursor: pointer;
+  text-decoration: underline;
 }
 .event-title:hover,
 .follow-list:hover {
-  text-decoration: underline;
+  text-decoration: none;
+  color: blue;
 }
 .contact {
   font-weight: bold;
@@ -131,6 +156,17 @@ button {
   font-size: 14px;
   cursor: pointer;
   height: 30px;
+  color: blue;
+  background-color: rgb(230, 230, 249);
+  transition: ease-in 0.5;
+}
+.register {
+  font-size: 14px;
+}
+.details:hover {
+  color: grey;
+  background-color: rgb(194, 194, 247);
+  transition: ease-in 0.5;
 }
 .edit-btn,
 .remove {

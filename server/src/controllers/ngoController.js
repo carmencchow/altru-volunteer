@@ -6,7 +6,10 @@ import Event from "../models/eventModel.js";
 const getNgo = async (req, res) => {
   const { id } = req.params;
   const ngo = await Ngo.findById(id)
-    .populate("owner")
+    .populate({
+      path: "owner",
+      model: "User",
+    })
     .populate([
       {
         path: "volunteers",
@@ -206,7 +209,7 @@ const followNgo = async (req, res) => {
     const { ngoId, uid } = req.body;
     const user = await User.findOne({ _id: uid });
     console.log(ngoId, user._id);
-    const existingNgo = user.ngos.find((item) => item.toString() === ngoId);
+    const existingNgo = user.ngos.find((item) => item === ngoId);
     if (existingNgo) {
       return res.status(400).send("Already following");
     }

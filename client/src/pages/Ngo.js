@@ -2,10 +2,13 @@ import React, { useState, useEffect, useContext } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
+import { BsArrowLeftSquare } from "react-icons/bs";
 import StripeCheckout from "react-stripe-checkout";
-import Navbar from "../components/Navbar";
+import UnFollowBtn from "../components/UnFollowBtn";
+import FollowBtn from "../components/FollowBtn";
 import AmountBtn from "../components/AmountBtn";
-import logo from "../assets/altru.png";
+import Navbar from "../components/Navbar";
+import logo from "../assets/logo.png";
 import { api } from "../utils/axios";
 import "./Ngo.css";
 
@@ -28,50 +31,49 @@ const Ngo = () => {
     setNgo(res.data);
   };
 
-  const followNgo = async () => {
-    try {
-      const token = await user.getIdToken();
-      console.log("Following ngo", ngo, ngo.name);
-      await api.post(
-        `/ngo/follow/${ngo._id}`,
-        {
-          ngoId: `${ngo._id}`,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      // toast("Following");
-      toast("Following", `${ngo.name}`);
-      await verifyUser(user);
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  // const followNgo = async () => {
+  //   try {
+  //     const token = await user.getIdToken();
+  //     console.log("Following ngo", ngo, ngo.name);
+  //     await api.post(
+  //       `/ngo/follow/${ngo._id}`,
+  //       {
+  //         ngoId: `${ngo._id}`,
+  //       },
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       }
+  //     );
+  //     toast("Following", `${ngo.name}`);
+  //     await verifyUser(user);
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
 
-  const unfollowNgo = async () => {
-    try {
-      const userId = mongoUser._id;
-      console.log("userid", userId, ngo._id);
-      const token = await user.getIdToken();
-      await api.put(
-        `/ngo/unfollow/${ngo._id}`,
-        {
-          userId,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      await verifyUser(user);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  // const unfollowNgo = async () => {
+  //   try {
+  //     const userId = mongoUser._id;
+  //     console.log("userid", userId, ngo._id);
+  //     const token = await user.getIdToken();
+  //     await api.put(
+  //       `/ngo/unfollow/${ngo._id}`,
+  //       {
+  //         userId,
+  //       },
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       }
+  //     );
+  //     await verifyUser(user);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   const handleConfirmation = async () => {
     try {
@@ -122,6 +124,9 @@ const Ngo = () => {
   return (
     <div>
       <Navbar />
+      <span className="back" onClick={() => navigate(-1)}>
+        <BsArrowLeftSquare />
+      </span>
       <Toaster
         toastOptions={{
           style: { backgroundColor: "#b8e981", color: "white" },
@@ -129,7 +134,7 @@ const Ngo = () => {
       />
       <div>
         <div className="about-section">
-          <div className="row">
+          <div className="ngo-heading">
             <h2>{ngo.name}</h2>
             <div className="donation-card">
               <p>Select an amount to donate: </p>
@@ -157,35 +162,16 @@ const Ngo = () => {
             </div>
           </div>
 
-          {mongoUser &&
-          mongoUser.ngos.length > 0 &&
-          mongoUser.ngos.map((item) => item === ngo._id) ? (
-            <button className="unfollow-btn" onClick={unfollowNgo}>
-              Unfollow
-            </button>
-          ) : (
-            <button className="follow-ngo-btn" onClick={followNgo}>
-              Follow {`${ngo.name}`}
-            </button>
-          )}
+          <FollowBtn ngo={ngo} />
 
-          <div className="background-image">NGO's background image</div>
+          <div className="background-image">
+            <p>NGO's background image</p>
+          </div>
           <p>Description: {ngo.description}</p>
           <div className="info">
-            <p>
-              <span>Location:{ngo.location}</span>
-              Toronto
-            </p>
-            <p>
-              <span>Tel: {ngo.telephone}</span>
-            </p>
-
-            <p>
-              <span>Cause: {ngo.category}</span>
-            </p>
-            <p>
-              <span>URL: {ngo.url}</span>
-            </p>
+            <p> {ngo.address}</p>
+            <p> {ngo.telephone}</p>
+            <p> {ngo.url}</p>
           </div>
         </div>
       </div>

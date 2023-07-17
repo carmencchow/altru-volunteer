@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import logo from "../assets/altru.png";
-import background from "../assets/volunteer1.jpg";
+import logo from "../assets/logo.png";
+import background from "../assets/volunteer.jpg";
 import "./Home.css";
 
 const Home = () => {
@@ -34,8 +34,10 @@ const Home = () => {
         </div>
       </div>
       <div className="home-text">
-        <p className="welcome-text">Volunteer. Inspire. Transform </p>
-        <p className="sub-text">Make a difference in your community.</p>
+        <p className="welcome-text">Make a difference in your community.</p>
+        <p className="sub-text">
+          Uniting volunteers and organizations for social impact.
+        </p>
       </div>
     </div>
   );

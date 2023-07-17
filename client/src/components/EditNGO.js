@@ -4,25 +4,16 @@ import { api } from "../utils/axios";
 import Input from "react-phone-number-input/input";
 import "./EditNGO.css";
 
-const EditNGO = ({
-  name,
-  description,
-  category,
-  address,
-  district,
-  telephone,
-  url,
-  setIsEditing,
-}) => {
+const EditNGO = ({ setIsEditing }) => {
   const { user, verifyUser } = useContext(AuthContext);
-  const [newName, setNewname] = useState(name);
+  const [name, setName] = useState();
   // const [newName, setNewname] = useState(mongoUser.organization.name);
-  const [newDescription, setNewDescription] = useState(description);
-  const [newCategory, setNewCategory] = useState(category);
-  const [newAddress, setNewAddress] = useState(address);
-  const [newDistrict, setNewDistrict] = useState(district);
-  const [newTelephone, setNewTelephone] = useState(telephone);
-  const [newUrl, setNewUrl] = useState(url);
+  const [description, setDescription] = useState();
+  const [category, setCategory] = useState();
+  const [address, setAddress] = useState();
+  const [district, setDistrict] = useState();
+  const [telephone, setTelephone] = useState();
+  const [url, setUrl] = useState();
   const [serverError, setServerError] = useState("");
   const [image, setImage] = useState("");
 
@@ -78,21 +69,6 @@ const EditNGO = ({
           district,
           telephone,
           url,
-          // name: newName || name,
-          // description: newDescription || description,
-          // category: newCategory || category,
-          // address: newAddress || address,
-          // district: newDistrict || district,
-          // telephone: newTelephone || telephone,
-          // url: newUrl || url,
-
-          // name: `${newName}` || `${name}`,
-          // address: `${newAddress}` || `${address}`,
-          // description: `${newDescription}` || `${description}`,
-          // category: `${newCategory}` || `${category}`,
-          // district: `${newDistrict}` || `${district}`,
-          // telephone: `${newTelephone}` || `${telephone}`,
-          // url: `${newUrl}` || `${url}`,
         },
         {
           headers: {
@@ -114,43 +90,43 @@ const EditNGO = ({
         <input
           type="text"
           className="org-name"
-          value={newName}
-          placeholder={"Organization name"}
-          onChange={(e) => setNewname(e.target.value)}
+          value={name}
+          placeholder="Organization name"
+          onChange={(e) => setName(e.target.value)}
         />
         <input
           type="text"
           className="description"
-          value={newDescription}
-          placeholder={"Organization description"}
-          onChange={(e) => setNewDescription(e.target.value)}
+          value={description}
+          placeholder="Organization description"
+          onChange={(e) => setDescription(e.target.value)}
         />
         <input
           type="text"
           className="address"
-          placeholder={"Organization address"}
-          value={newAddress}
-          onChange={(e) => setNewAddress(e.target.value)}
+          placeholder="Organization address"
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
         />
         <input
           type="url"
           className="url"
-          value={newUrl}
-          placeholder={"Organization URL https://www.organization.com"}
-          onChange={(e) => setNewUrl(e.target.value)}
+          value={url}
+          placeholder="Organization URL https://www.organization.com"
+          onChange={(e) => setUrl(e.target.value)}
         />
         <Input
           country="CA"
-          value={newTelephone}
-          placeholder={"Phone number"}
+          value={telephone}
+          placeholder="Phone number"
           maxLength="14"
-          onChange={(e) => setNewTelephone}
+          onChange={(e) => setTelephone}
         />
         <div className="profile-row">
           <select
             className="ngo-select"
-            value={newCategory}
-            onChange={(e) => setNewCategory(e.target.value)}
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
           >
             <option value="selection">Organization Cause:</option>
             <option value="animals">Animals</option>
@@ -163,8 +139,8 @@ const EditNGO = ({
 
           <select
             className="ngo-select"
-            value={newDistrict}
-            onChange={(e) => setNewDistrict(e.target.value)}
+            value={district}
+            onChange={(e) => setDistrict(e.target.value)}
           >
             <option value="district">District:</option>
             <option value="Etobicoke-York">Etobicoke-York</option>

@@ -82,6 +82,7 @@ input {
 .new-user:hover {
   color: blue;
   cursor: pointer;
+  font-weight: bold;
 }
 .text {
   display: flex;
