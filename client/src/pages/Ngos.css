@@ -2,6 +2,14 @@
   width: 90%;
   margin: 0 auto;
 }
+.heading {
+  margin-top: 20px;
+  padding-top: 30px;
+}
+.marker {
+  font-size: 22px;
+  font-weight: bolder;
+}
 .hide-btn {
   display: flex;
   flex-direction: row-reverse;
@@ -161,7 +169,6 @@ h3,
 }
 .show-highlights {
   cursor: pointer;
-  display: inline-block;
   position: relative;
 }
 .show-highlights:hover {

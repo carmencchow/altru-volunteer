@@ -223,7 +223,7 @@ const followNgo = async (req, res) => {
   }
 };
 
-// Remove ngo
+// UNFOLLOW Ngo
 const unfollowNgo = async (req, res) => {
   try {
     const { userId } = req.body;

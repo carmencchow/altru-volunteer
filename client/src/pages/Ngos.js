@@ -39,12 +39,12 @@ const Ngos = () => {
       <Navbar />
       <div>
         <div className="heading">
-          <h3 className="marker">Volunteer with Volunteer Connect</h3>
-          <h4>
+          <p className="marker">Volunteer with Volunteer Connect</p>
+          <p className="cta">
             Find opportunities with amazing charities in Toronto! Donate your
             time, skills or money, and contribute to your neighborhood in a
             lasting way.
-          </h4>
+          </p>
           <p></p>
         </div>
 

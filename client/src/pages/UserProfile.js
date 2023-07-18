@@ -9,7 +9,6 @@ const UserProfile = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [goalAmount, setGoalAmount] = useState(0);
   const [input, setInput] = useState(0);
-  const { id } = useParams();
   const navigate = useNavigate();
   const { mongoUser, user, verifyUser } = useContext(AuthContext);
 
@@ -166,8 +165,9 @@ const UserProfile = () => {
                 >
                   {event.name} with {event.ngo.name}
                 </p>
-                <p>{event.location}</p>
-                <p>🗓️ {event.date}</p>
+                <p>
+                  {event.location}, 🗓️{event.date}
+                </p>
               </div>{" "}
             </div>
           ))}

@@ -120,7 +120,7 @@ const deleteEvent = async (req, res) => {
   }
 };
 
-// Register for event
+// ADD an event (to a user)
 const registerEvent = async (req, res) => {
   try {
     const { userId } = req.body;
@@ -136,41 +136,6 @@ const registerEvent = async (req, res) => {
       { new: true }
     );
     console.log("Updated event", updatedEvent.volunteers, user.events);
-    // // Send email to user
-    // const transporter = nodemailer.createTransport({
-    //   host: process.env.MAIL_HOST,
-    //   port: process.env.MAIL_PORT,
-    //   secure: false,
-    //   service: process.env.MAIL_SERVICE,
-    //   auth: {
-    //     user: process.env.EMAIL,
-    //     pass: process.env.PASSWORD,
-    //   },
-    //   tls: {
-    //     ciphers: "SSLv3",
-    //   },
-    // });
-
-    // // const info = await transporter.sendMail({
-    // await transporter.sendMail({
-    //   // from: '"Admin" <volunteer.connect@outlook.com>',
-    //   from: `Volunteer Connect <${process.env.EMAIL}>`,
-    //   to: `${updatedUser.email}`,
-    //   subject: `${event} Registration`,
-    //   text: `TEST: Hi  Thanks for registering to the ${event.name}. Our volunteer coordinator will be in touch with you soon.`,
-    //   html: `<h3>Hi </h3>
-    //   <p>TEST: Thanks for registering to the ${event.name}. Our volunteer coordinator will be in touch with you soon.<p>Here are the event details:</p>
-    //   <div>
-    //     <p>Name: ${event.name}</p>
-    //     <p>Organization: ${event.ngo}</p>
-    //     <p>Location: ${event.location}</p>
-    //     <p>Date: ${event.date}</p>
-    //     <p>Time: ${event.startTime}-${event.endTime}</p>
-    //   </div>
-    //   <h2>We look forward to seeing you there!</h2>
-    //   <h2> Volunteer Toronto</h2>`,
-    // });
-    console.log("Message sent", user.email);
     res.status(200).send({ event: updatedEvent, user });
   } catch (err) {
     console.log(err);
@@ -178,24 +143,25 @@ const registerEvent = async (req, res) => {
   }
 };
 
-// Remove event
+// REMOVE an event (from a user)
 const removeEvent = async (req, res) => {
   try {
     const { userId } = req.body;
-    const user = await User.findById(userId);
     const event = await Event.findById(req.params.id);
-    const updatedUser = await User.findByIdAndUpdate(
+    const user = await User.findByIdAndUpdate(
       userId,
       { $pull: { events: event._id } },
       { new: true }
     );
+    await user.save();
     const updatedEvent = await Event.findByIdAndUpdate(
       req.params.id,
-      { $pull: { volunteers: updatedUser._id } },
+      { $pull: { volunteers: user._id } },
       { new: true }
     );
-    console.log("Updated event", updatedEvent.volunteers, updatedUser.events);
-    res.status(200).send({ event: updatedEvent, user: updatedUser });
+    await updatedEvent.save();
+    console.log("Updated event", updatedEvent.volunteers, user.events);
+    res.status(200).send({ event: updatedEvent, user });
   } catch (err) {
     console.log(err);
     res.status(400).send("Couldn't remove event");

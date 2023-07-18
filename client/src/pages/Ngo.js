@@ -4,7 +4,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { BsArrowLeftSquare } from "react-icons/bs";
 import StripeCheckout from "react-stripe-checkout";
-import UnFollowBtn from "../components/UnFollowBtn";
 import FollowBtn from "../components/FollowBtn";
 import AmountBtn from "../components/AmountBtn";
 import Navbar from "../components/Navbar";
@@ -14,7 +13,7 @@ import "./Ngo.css";
 
 const Ngo = () => {
   const navigate = useNavigate();
-  const { mongoUser, user, verifyUser } = useContext(AuthContext);
+  const { user, verifyUser } = useContext(AuthContext);
   const { id } = useParams();
   const [ngo, setNgo] = useState({});
   const [clickedBtn, setClickedBtn] = useState("0");
@@ -30,50 +29,6 @@ const Ngo = () => {
     });
     setNgo(res.data);
   };
-
-  // const followNgo = async () => {
-  //   try {
-  //     const token = await user.getIdToken();
-  //     console.log("Following ngo", ngo, ngo.name);
-  //     await api.post(
-  //       `/ngo/follow/${ngo._id}`,
-  //       {
-  //         ngoId: `${ngo._id}`,
-  //       },
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       }
-  //     );
-  //     toast("Following", `${ngo.name}`);
-  //     await verifyUser(user);
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
-
-  // const unfollowNgo = async () => {
-  //   try {
-  //     const userId = mongoUser._id;
-  //     console.log("userid", userId, ngo._id);
-  //     const token = await user.getIdToken();
-  //     await api.put(
-  //       `/ngo/unfollow/${ngo._id}`,
-  //       {
-  //         userId,
-  //       },
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       }
-  //     );
-  //     await verifyUser(user);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
 
   const handleConfirmation = async () => {
     try {
@@ -132,14 +87,17 @@ const Ngo = () => {
           style: { backgroundColor: "#b8e981", color: "white" },
         }}
       />
-      <div>
-        <div className="about-section">
+      <div className="heading-wrapper">
+        <p className="ngopage-name">⭐ {ngo.name}</p>
+        <div className="ngo-section">
           <div className="ngo-heading">
-            <h2>{ngo.name}</h2>
-            <div className="donation-card">
-              <p>Select an amount to donate: </p>
+            <div className="block">
+              <FollowBtn ngo={ngo} />
+            </div>
 
+            <div className="donation-card">
               <div className="donation-options">
+                Donate:
                 {amounts.map((amount, idx) => {
                   return (
                     <AmountBtn
@@ -155,35 +113,30 @@ const Ngo = () => {
                   stripeKey="pk_test_51L1kSgAoNhpouPlcKhLQKANoLZIUKTvg6C2sNBHmBUlpAjYAD5SyZ4sKgTxSB3De9wi0hLyAMAaok6rMEcGqaEhH00Ukq7JyfZ"
                   image={logo}
                   token={handlePayment}
-                  name="Making a donation"
+                  name="Thank you for donating!"
                   amount={total * 100}
                 />
               </div>
+              <p className="credit-card">
+                *** 4242 4242 4242 4242 | MMDD: 12/34 | CVC: 567
+              </p>
             </div>
           </div>
 
-          <FollowBtn ngo={ngo} />
-
-          <div className="background-image">
-            <p>NGO's background image</p>
-          </div>
-          <p>Description: {ngo.description}</p>
-          <div className="info">
-            <p> {ngo.address}</p>
-            <p> {ngo.telephone}</p>
-            <p> {ngo.url}</p>
-          </div>
+          <p>{ngo.description}</p>
         </div>
       </div>
 
       <div>
-        <h2>Volunteer Events</h2>
+        <div className="volunteer-wrapper">
+          <p className="volunteer">Volunteer Opportunities:</p>
+        </div>
         <div className="ngo-row">
           {ngo && ngo.events && (
             <div className="ngo-events">
               {ngo.events.map((event, idx) => (
                 <div key={idx} className="ngo-event-card">
-                  <p>⭐ {event.name}</p>
+                  <p className="event-name">⭐ {event.name}</p>
                   <p>📍 {event.location}</p>
                   <p>📅 {event.date}</p>
                   <div className="button-row">

@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import toast, { Toaster } from "react-hot-toast";
 import { api } from "../utils/axios";
+import "./FollowBtn.css";
 
 const FollowBtn = ({ ngo }) => {
   const { mongoUser, verifyUser, user } = useContext(AuthContext);
@@ -31,7 +32,6 @@ const FollowBtn = ({ ngo }) => {
   const unfollowNgo = async () => {
     try {
       const userId = mongoUser._id;
-      console.log("userid", userId, ngo._id);
       const token = await user.getIdToken();
       await api.put(
         `/ngo/unfollow/${ngo._id}`,
@@ -44,6 +44,7 @@ const FollowBtn = ({ ngo }) => {
           },
         }
       );
+      toast("Unfollowing", `${ngo.name}`);
       await verifyUser(user);
     } catch (err) {
       console.log(err);
@@ -61,16 +62,16 @@ const FollowBtn = ({ ngo }) => {
       {mongoUser.ngos &&
       mongoUser.ngos.filter((item) => item._id === ngo._id).length === 0 ? (
         <button
-          className="follow-btn"
+          className="unfollow-btn"
           onClick={() => {
             followNgo(ngo._id);
             console.log("Following", ngo._id);
           }}
         >
-          Follow {ngo.name}{" "}
+          Follow {ngo.name}
         </button>
       ) : (
-        <button className="follow-btn" onClick={unfollowNgo}>
+        <button className="btn" onClick={unfollowNgo}>
           Unfollow {ngo.name}
         </button>
       )}

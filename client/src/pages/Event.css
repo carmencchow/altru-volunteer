@@ -1,6 +1,11 @@
 .event-wrapper {
   width: 80vw;
 }
+.heading-wrapper {
+  padding: 0px 20px;
+  margin: 20px auto;
+  width: 80vw;
+}
 .display-card {
   width: 80vw;
   margin: 2% auto;
@@ -36,21 +41,25 @@ h1 {
   background-color: rgb(197, 197, 242);
   transition: ease-in 0.8;
 }
-.register {
+.interested {
+  font-size: 14px;
+  color: blue;
   background-color: rgb(230, 230, 249);
   transition: ease-in 0.5;
-  margin-bottom: 10px;
-  height: 30px;
+}
+.interested:hover {
+  color: rgb(180, 180, 239);
+  background-color: rgb(230, 230, 249);
+  transition: ease-in 0.5;
 }
 .event-name {
   font-weight: bolder;
 }
 .event-ngo-name {
   font-weight: bolder;
-  font-size: 18px;
+  font-size: 20px;
   margin-top: 25px;
   cursor: pointer;
-  margin-left: 5%;
   color: rgb(112, 81, 253);
 }
 .event-ngo-name:hover {
@@ -59,12 +68,8 @@ h1 {
   transform: translateX(5px);
   transition-duration: 1s, 3s;
 }
-
-/* Media Queries */
-
-@media only screen and (max-width: 599px) {
-  .event-wrapper {
-    width: 100vw;
-    margin-left: 10%;
-  }
+.org {
+  color: black;
+  font-size: 10px;
+  margin-left: 0px;
 }

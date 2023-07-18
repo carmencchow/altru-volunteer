@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
+import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import background from "../assets/volunteer.jpg";
 import logo from "../assets/logo.png";
@@ -44,10 +45,14 @@ const Home = () => {
         </div>
       </div>
       <div className="home-text">
-        <p className="welcome-text">Make a difference in your community.</p>
-        <p className="sub-text">
-          Uniting volunteers and organizations for social impact.
-        </p>
+        <motion.p className="welcome-text">
+          Uniting volunteers and organizations for social good.
+        </motion.p>
+        {/* <motion.p className="sub-text">
+          Volunteer Connect is a platform for volunteers and charitable
+          organizations. We help connect volunteers and organizations for social
+          good.
+        </motion.p> */}
       </div>
     </div>
   );
