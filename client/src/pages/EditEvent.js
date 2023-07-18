@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { EventsContext } from "../context/EventsContext";
 import Navbar from "../components/Navbar";
 import { api } from "../utils/axios";
 import "./EditEvent.css";
-import { useNavigate, useParams } from "react-router-dom";
 
 const EditEvent = () => {
   const { user, verifyUser } = useContext(AuthContext);
@@ -192,9 +192,19 @@ const EditEvent = () => {
               </button>
               <button
                 className="cancel-event"
-                onClick={() => setIsEditing(false)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setNewName("");
+                  setNewDate("");
+                  setNewStartTime("");
+                  setNewEndTime("");
+                  setNewLocation("");
+                  setNewDescription("");
+                  setNewDuties("");
+                  setNewNumVolunteers("");
+                }}
               >
-                Cancel
+                Clear Form
               </button>
             </div>
           </form>

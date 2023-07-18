@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
-import { api } from "../utils/axios";
 import toast, { Toaster } from "react-hot-toast";
+import { api } from "../utils/axios";
 
 const FollowBtn = ({ ngo }) => {
   const { mongoUser, verifyUser, user } = useContext(AuthContext);
@@ -58,7 +58,8 @@ const FollowBtn = ({ ngo }) => {
         }}
       />
 
-      {mongoUser.ngos.length === 0 || mongoUser.ngos.includes(ngo._id) ? (
+      {mongoUser.ngos &&
+      mongoUser.ngos.filter((item) => item._id === ngo._id).length === 0 ? (
         <button
           className="follow-btn"
           onClick={() => {

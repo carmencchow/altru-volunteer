@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
+import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import logo from "../assets/logo.png";
 import background from "../assets/volunteer.jpg";
+import logo from "../assets/logo.png";
 import "./Home.css";
 
 const Home = () => {
+  const { mongoUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleLogin = () => {
@@ -14,6 +16,14 @@ const Home = () => {
   const handleSignup = () => {
     navigate("/signup");
   };
+
+  useEffect(() => {
+    if (mongoUser && mongoUser.isOrganizer) {
+      navigate("/profile");
+    } else if (mongoUser && !mongoUser.isOrganizer) {
+      navigate("/ngos");
+    }
+  }, [mongoUser]);
 
   return (
     <div

@@ -13,6 +13,7 @@ const Ngos = () => {
   const [pageCount, setPageCount] = useState(1);
   const [isSearching, setIsSearching] = useState(false);
   const [isShowing, setIsShowing] = useState(true);
+  const [isShowingHighlights, setIsShowingHighlights] = useState(true);
   const navigate = useNavigate();
 
   const handlePrevious = () => {
@@ -115,7 +116,7 @@ const Ngos = () => {
           Highlighted Volunteer Opportunities
         </h3>
 
-        {isShowing && <Highlights />}
+        {isShowing && <Highlights setIsShowing={setIsShowing} />}
         {isShowing && <FollowedOrgs />}
       </div>
     </section>

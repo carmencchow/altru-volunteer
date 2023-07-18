@@ -7,7 +7,6 @@ import "./EditNGO.css";
 const EditNGO = ({ setIsEditing }) => {
   const { user, verifyUser } = useContext(AuthContext);
   const [name, setName] = useState();
-  // const [newName, setNewname] = useState(mongoUser.organization.name);
   const [description, setDescription] = useState();
   const [category, setCategory] = useState();
   const [address, setAddress] = useState();
@@ -31,17 +30,18 @@ const EditNGO = ({ setIsEditing }) => {
     };
   };
 
-  const uploadImage = async () => {
+  const uploadImage = async (e) => {
+    e.preventDefault();
     try {
       const token = await user.getIdToken();
       await api
         .post(`/image`, {
-          crossDomain: true,
+          // crossDomain: true,
           headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            "Access-Control-Allow-Origin": "*",
             Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+            // Accept: "application/json",
+            // "Access-Control-Allow-Origin": "*",
           },
           body: JSON.stringify({
             base64: image,

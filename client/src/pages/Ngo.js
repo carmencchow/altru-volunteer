@@ -119,7 +119,7 @@ const Ngo = () => {
 
   useEffect(() => {
     fetchNgo();
-  }, []);
+  }, [id]);
 
   return (
     <div>

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import Input from "react-phone-number-input/input";
 import { AuthContext } from "../context/AuthContext";
+import Input from "react-phone-number-input/input";
 import { api } from "../utils/axios";
 import EditNGO from "../components/EditNGO";
 import "./NgoInfo.css";

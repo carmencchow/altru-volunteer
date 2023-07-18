@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import { api } from "../utils/axios";
 import { AuthContext } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
+import { AiOutlineCloseCircle } from "react-icons/ai";
+import { api } from "../utils/axios";
 
-const Highlights = () => {
+const Highlights = ({ setIsShowing }) => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const [events, setEvents] = useState([]);
@@ -30,7 +31,11 @@ const Highlights = () => {
   return (
     <div className="highlights">
       <div>
+        <span className="hide-btn">
+          <AiOutlineCloseCircle onClick={() => setIsShowing(false)} />
+        </span>
         <p className="highlights-heading">🌎 Highlights</p>
+
         <p className="subtext">View our recently added events ... </p>
         {events && events.length > 0 && (
           <div>

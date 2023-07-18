@@ -73,7 +73,6 @@ input.duties {
   background-color: rgb(197, 197, 242);
   transition: ease-in 0.8;
 }
-
 .save-event,
 .cancel-event {
   margin-right: 10px;
