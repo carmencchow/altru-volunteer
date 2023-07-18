@@ -7,8 +7,8 @@ import { TbWorld } from "react-icons/tb";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { MdPreview } from "react-icons/md";
 import { api } from "../utils/axios";
-import "./Preview.css";
 import Navbar from "../components/Navbar";
+import "./Preview.css";
 
 const Preview = () => {
   const navigate = useNavigate();

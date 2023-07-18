@@ -6,6 +6,9 @@ nav {
   height: 60px;
   color: white;
 }
+.fullname {
+  padding-right: 10px;
+}
 .navbar {
   display: flex;
   width: 95%;
@@ -17,14 +20,18 @@ nav {
   height: 50px;
   width: 120px;
 }
-.user-email {
-  font-size: 14px;
-}
 .navbar-right {
   display: flex;
   justify-content: flex-end;
 }
+.icon {
+  font-size: 26px;
+  padding-top: 4px;
+  margin-right: 0px;
+}
 .profile-btn {
+  display: flex;
+  flex-direction: row;
   font-weight: bolder;
   background: none;
   color: rgb(121, 92, 250);
@@ -34,6 +41,9 @@ nav {
   padding: 5px;
   margin-left: 10px;
   cursor: pointer;
+}
+.profile-btn p {
+  margin-left: 6px;
 }
 .logout-btn {
   background: none;
@@ -47,6 +57,8 @@ nav {
 }
 .profile-btn:hover {
   color: rgb(184, 170, 245);
+  padding: 5px;
+  border-radius: 10px;
 }
 .logout-btn:hover {
   font-weight: bold;

@@ -11,7 +11,6 @@ import eventRoutes from "./src/routes/eventRoute.js";
 import authRoutes from "./src/routes/authRoute.js";
 import stripeRoutes from "./src/routes/stripeRoute.js";
 import userRoutes from "./src/routes/userRoute.js";
-import imageRoute from "./src/routes/imageRoute.js";
 import nodemailer from "nodemailer";
 
 const stripe = new Stripe(process.env.REACT_APP_STRIPE_SECRET_KEY);
@@ -49,7 +48,6 @@ app.use("/api/user", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/event", eventRoutes);
 app.use("/api/payment", stripeRoutes);
-app.use("/api/image", imageRoute);
 
 // ("use strict");
 

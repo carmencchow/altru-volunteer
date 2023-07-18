@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import Input from "react-phone-number-input/input";
 import { AuthContext } from "../context/AuthContext";
+import Input from "react-phone-number-input/input";
 import { api } from "../utils/axios";
 import EditNGO from "../components/EditNGO";
 import "./NgoInfo.css";
@@ -17,6 +17,8 @@ const NgoInfo = () => {
   const [telephone, setTelephone] = useState("");
   const [url, setUrl] = useState("");
   const [serverError, setServerError] = useState("");
+
+  const emojis = ["🌱", "📓", "⚖️", "⛹️‍♀️", "⚕️", "🐶"];
 
   const saveProfile = async (e) => {
     e.preventDefault();
@@ -83,6 +85,8 @@ const NgoInfo = () => {
                 <p className="website">Website: {mongoUser.organization.url}</p>
                 <h5>Organization description:</h5>
                 <p>{mongoUser.organization.description}</p>
+                <p>Cause: {mongoUser.organization.category}</p>
+                {/* <p>Image: {mongoUser.organization.file_name}</p> */}
                 <h5>Address:</h5>
                 <p>
                   {mongoUser.organization.address}{" "}

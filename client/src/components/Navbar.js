@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
+import { RxAvatar } from "react-icons/rx";
 import logo from "../assets/logo.png";
 import "./Navbar.css";
 
@@ -35,7 +36,15 @@ const Navbar = () => {
             )}
           </div>
           <div className="profile-btn" onClick={navProfile}>
-            {user && <p className="user-email">{user.email}</p>}
+            <p className="icon"></p>
+            {user && (
+              <p className="user-email">
+                <span className="fullname">
+                  {mongoUser.firstname}'s Profile{" "}
+                </span>
+                {user.email}
+              </p>
+            )}
           </div>
 
           <div className="logout-btn" onClick={handleSignOut}>

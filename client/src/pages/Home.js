@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
+import { AuthContext } from "../context/AuthContext";
+import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import logo from "../assets/logo.png";
 import background from "../assets/volunteer.jpg";
+import logo from "../assets/logo.png";
 import "./Home.css";
 
 const Home = () => {
+  const { mongoUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleLogin = () => {
@@ -14,6 +17,14 @@ const Home = () => {
   const handleSignup = () => {
     navigate("/signup");
   };
+
+  useEffect(() => {
+    if (mongoUser && mongoUser.isOrganizer) {
+      navigate("/profile");
+    } else if (mongoUser && !mongoUser.isOrganizer) {
+      navigate("/ngos");
+    }
+  }, [mongoUser]);
 
   return (
     <div
@@ -34,10 +45,14 @@ const Home = () => {
         </div>
       </div>
       <div className="home-text">
-        <p className="welcome-text">Make a difference in your community.</p>
-        <p className="sub-text">
-          Uniting volunteers and organizations for social impact.
-        </p>
+        <motion.p className="welcome-text">
+          Uniting volunteers and organizations for social good.
+        </motion.p>
+        {/* <motion.p className="sub-text">
+          Volunteer Connect is a platform for volunteers and charitable
+          organizations. We help connect volunteers and organizations for social
+          good.
+        </motion.p> */}
       </div>
     </div>
   );

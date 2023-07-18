@@ -13,7 +13,7 @@ const AmountBtn = ({ amount, clickedBtn, setClickedBtn }) => {
       style={
         clickedBtn === amount
           ? {
-              backgroundColor: "rgb(167, 88, 241",
+              backgroundColor: "rgb(167, 88, 241)",
               color: "white",
               border: "purple",
             }

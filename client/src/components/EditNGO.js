@@ -5,9 +5,8 @@ import Input from "react-phone-number-input/input";
 import "./EditNGO.css";
 
 const EditNGO = ({ setIsEditing }) => {
-  const { user, verifyUser } = useContext(AuthContext);
+  const { user, verifyUser, mongoUser } = useContext(AuthContext);
   const [name, setName] = useState();
-  // const [newName, setNewname] = useState(mongoUser.organization.name);
   const [description, setDescription] = useState();
   const [category, setCategory] = useState();
   const [address, setAddress] = useState();
@@ -15,44 +14,6 @@ const EditNGO = ({ setIsEditing }) => {
   const [telephone, setTelephone] = useState();
   const [url, setUrl] = useState();
   const [serverError, setServerError] = useState("");
-  const [image, setImage] = useState("");
-
-  // Convert uploaded image to base64
-  const convertToBase64 = (e) => {
-    console.log(e);
-    let reader = new FileReader();
-    reader.readAsDataURL(e.target.files[0]);
-    reader.onload = () => {
-      console.log(reader.result); //base64encoded string
-      setImage(reader.result);
-    };
-    reader.onerror = (error) => {
-      console.log("Error:", error);
-    };
-  };
-
-  const uploadImage = async () => {
-    try {
-      const token = await user.getIdToken();
-      await api
-        .post(`/image`, {
-          crossDomain: true,
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            "Access-Control-Allow-Origin": "*",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            base64: image,
-          }),
-        })
-        .then((res) => res.json())
-        .then((data) => console.log(data));
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
   const updateProfile = async ({ ngoId, e }) => {
     console.log("input", e);
@@ -160,16 +121,6 @@ const EditNGO = ({ setIsEditing }) => {
           <button className="cancel-ngo" onClick={() => setIsEditing(false)}>
             Cancel
           </button>
-        </div>
-
-        <div className="base64">
-          <input accept="image/*" type="file" onChange={convertToBase64} />
-          <button onClick={uploadImage}>Upload Image</button>
-          {image === "" || image == null ? (
-            ""
-          ) : (
-            <img width={100} height={100} src={image} alt="" />
-          )}
         </div>
       </form>
     </>

@@ -13,6 +13,7 @@ const Ngos = () => {
   const [pageCount, setPageCount] = useState(1);
   const [isSearching, setIsSearching] = useState(false);
   const [isShowing, setIsShowing] = useState(true);
+  const [isShowingHighlights, setIsShowingHighlights] = useState(true);
   const navigate = useNavigate();
 
   const handlePrevious = () => {
@@ -38,12 +39,12 @@ const Ngos = () => {
       <Navbar />
       <div>
         <div className="heading">
-          <h3 className="marker">Volunteer with Volunteer Connect</h3>
-          <h4>
+          <p className="marker">Volunteer with Volunteer Connect</p>
+          <p className="cta">
             Find opportunities with amazing charities in Toronto! Donate your
             time, skills or money, and contribute to your neighborhood in a
             lasting way.
-          </h4>
+          </p>
           <p></p>
         </div>
 
@@ -115,7 +116,7 @@ const Ngos = () => {
           Highlighted Volunteer Opportunities
         </h3>
 
-        {isShowing && <Highlights />}
+        {isShowing && <Highlights setIsShowing={setIsShowing} />}
         {isShowing && <FollowedOrgs />}
       </div>
     </section>

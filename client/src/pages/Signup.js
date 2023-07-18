@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { api } from "../utils/axios";
@@ -7,7 +7,7 @@ import "./Signup.css";
 
 const Signup = () => {
   const navigate = useNavigate();
-  const { signUp } = useContext(AuthContext);
+  const { signUp, mongoUser } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [firstname, setFirstname] = useState("");
@@ -54,6 +54,14 @@ const Signup = () => {
       console.log(res.data);
     }
   };
+
+  useEffect(() => {
+    if (mongoUser && mongoUser.isOrganizer) {
+      navigate("/profile");
+    } else if (mongoUser && !mongoUser.isOrganizer) {
+      navigate("/ngos");
+    }
+  }, [mongoUser]);
 
   return (
     <>
