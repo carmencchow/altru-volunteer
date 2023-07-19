@@ -13,7 +13,7 @@
   font-size: 16px;
   border: 1px solid #716bc4;
   border-radius: 5px;
-  width: 100px;
+  width: 60px;
   height: 40px;
 }
 .amount-btn:hover {
@@ -30,14 +30,19 @@
     max-width: 400px;
   }
   .amount-btn {
+    cursor: pointer;
+    border: none;
+    background-color: white;
+    color: purple;
+    font-size: 16px;
+    border: 1px solid #716bc4;
+    border-radius: 5px;
     width: 40px;
-    height: 35px;
-    font-size: 14px;
-    margin-left: 5px;
+    height: 40px;
   }
   .donation-options {
     margin-bottom: 0px;
-    margin-top: 0px;
+    margin-top: 10px;
     margin-left: 0px;
     font-size: 10px;
     display: flex;
@@ -62,26 +67,16 @@
     height: 35px;
     font-size: 12px;
     text-align: center;
-    margin-left: 5px;
+    padding: 0px;
+    margin-left: 0px;
   }
   .donation-options {
     margin-bottom: 0px;
-    margin-top: 0px;
+    margin-top: 10px;
     margin-left: 0px;
     font-size: 10px;
     display: flex;
     flex-direction: row;
+    justify-content: start;
   }
-}
-
-@media only screen and (min-width: 600px) {
-}
-
-@media only screen and (min-width: 768px) {
-}
-
-@media only screen and (min-width: 992px) {
-}
-
-@media only screen and (min-width: 1200px) {
 }

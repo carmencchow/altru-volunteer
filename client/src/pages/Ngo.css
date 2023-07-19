@@ -196,6 +196,12 @@ textarea:focus,
   .donation-card {
     border: none;
   }
+  .credit-card {
+    font-size: 10px;
+    display: flex;
+    justify-content: start;
+    margin-right: 10px;
+  }
   .ngo-heading {
     display: flex;
     flex-direction: column;
@@ -212,9 +218,6 @@ textarea:focus,
   .info span {
     font-weight: bold;
   }
-  /* .back {
-    visibility: hidden;
-  } */
   .follow {
     margin-left: 10px;
     margin-top: 0px;
@@ -227,11 +230,6 @@ textarea:focus,
     width: 100%;
   }
 }
-
-/* .info {
-  display: flex;
-  flex-direction: column;
-} */
 .info p {
   font-size: 14px;
   margin: 0 0;
