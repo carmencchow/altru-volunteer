@@ -201,10 +201,6 @@ textarea:focus,
     flex-direction: column;
     width: 82vw;
   }
-  /* .info {
-    display: flex;
-    flex-direction: column;
-  } */
   .info p {
     font-size: 10px;
   }

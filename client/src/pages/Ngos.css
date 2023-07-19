@@ -9,6 +9,7 @@
 .marker {
   font-size: 22px;
   font-weight: bolder;
+  margin-top: 50px;
 }
 .hide-btn {
   display: flex;

@@ -23,24 +23,16 @@ const Navbar = () => {
   };
 
   return (
-    <nav>
+    <div>
       <div className="navbar">
         <img className="logo" onClick={navMain} src={logo} alt="logo" />
         <div className="navbar-right">
-          <div className="name-btn">
-            {mongoUser && (
-              <p className="user-name">
-                {mongoUser.firstname}
-                {mongoUser.lastname}
-              </p>
-            )}
-          </div>
           <div className="profile-btn" onClick={navProfile}>
             <p className="icon"></p>
             {user && (
               <p className="user-email">
                 <span className="fullname">
-                  {mongoUser.firstname}'s Profile{" "}
+                  {/* {mongoUser.firstname}'s Profile{" "} */}
                 </span>
                 {user.email}
               </p>
@@ -52,7 +44,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-    </nav>
+    </div>
   );
 };
 

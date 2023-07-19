@@ -63,10 +63,7 @@ const UserProfile = () => {
   return (
     <div className="container">
       <Navbar />
-
-      <div className="profile-name">
-        <p>👋 Hi, {mongoUser.firstname}!</p>
-      </div>
+      <p className="profile-name">👋 Hi, {mongoUser.firstname}!</p>
       <div className="profile-section">
         <div className="userprofile"></div>
         <h4>⭐ Following</h4>
