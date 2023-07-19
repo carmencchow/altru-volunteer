@@ -149,12 +149,12 @@ body {
   }
   .login-btn,
   .signup-btn {
-    font-size: 10px;
+    font-size: 14px;
     padding: 2px;
   }
   .login-btn:hover,
   .signup-btn:hover {
-    font-size: 10px;
+    font-size: 14px;
     font-weight: bolder;
   }
 }
