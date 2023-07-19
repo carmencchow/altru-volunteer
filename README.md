@@ -1,1 +1,1 @@
-# Volunteer Connect  volunteer platform 
+# Volunteer Connect  
