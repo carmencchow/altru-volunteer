@@ -97,7 +97,6 @@ const Ngo = () => {
 
             <div className="donation-card">
               <div className="donation-options">
-                Donate:
                 {amounts.map((amount, idx) => {
                   return (
                     <AmountBtn
@@ -118,7 +117,7 @@ const Ngo = () => {
                 />
               </div>
               <p className="credit-card">
-                *** 4242 4242 4242 4242 | MMDD: 12/34 | CVC: 567
+                Donate:*** 4242 4242 4242 4242 | MMDD: 12/34 | CVC: 567
               </p>
             </div>
           </div>

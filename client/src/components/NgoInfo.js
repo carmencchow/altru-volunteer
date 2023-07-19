@@ -18,8 +18,6 @@ const NgoInfo = () => {
   const [url, setUrl] = useState("");
   const [serverError, setServerError] = useState("");
 
-  const emojis = ["🌱", "📓", "⚖️", "⛹️‍♀️", "⚕️", "🐶"];
-
   const saveProfile = async (e) => {
     e.preventDefault();
     try {
@@ -86,7 +84,6 @@ const NgoInfo = () => {
                 <h5>Organization description:</h5>
                 <p>{mongoUser.organization.description}</p>
                 <p>Cause: {mongoUser.organization.category}</p>
-                {/* <p>Image: {mongoUser.organization.file_name}</p> */}
                 <h5>Address:</h5>
                 <p>
                   {mongoUser.organization.address}{" "}

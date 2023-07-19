@@ -77,10 +77,11 @@ input {
 .new-user {
   background-color: none;
   font-size: 14px;
+  color: blue;
   margin-left: 120px;
 }
 .new-user:hover {
-  color: blue;
+  color: rgb(115, 115, 248);
   cursor: pointer;
   font-weight: bold;
 }

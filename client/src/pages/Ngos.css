@@ -2,6 +2,10 @@
   width: 90%;
   margin: 0 auto;
 }
+.cta {
+  margin: 2% auto;
+  width: 90%;
+}
 .heading {
   margin-top: 20px;
   padding-top: 30px;
@@ -47,10 +51,9 @@
   margin-right: 5%;
 }
 .results-container {
-  width: 80%;
+  width: 90%;
   margin: 0 auto;
   font-size: 12px;
-  padding: 2%;
 }
 .results-container p {
   margin-right: 3%;
@@ -201,7 +204,6 @@ span {
   }
   .next,
   .previous {
-    height: 20px;
     cursor: pointer;
     width: 40px;
   }
@@ -214,8 +216,7 @@ span {
   .pagination {
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
-    margin-right: 12%;
+    justify-content: space-between;
   }
   .display {
     margin-left: 0px;

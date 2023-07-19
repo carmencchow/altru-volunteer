@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { api } from "../utils/axios";
 import Navbar from "../components/Navbar";

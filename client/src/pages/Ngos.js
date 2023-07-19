@@ -13,7 +13,6 @@ const Ngos = () => {
   const [pageCount, setPageCount] = useState(1);
   const [isSearching, setIsSearching] = useState(false);
   const [isShowing, setIsShowing] = useState(true);
-  const [isShowingHighlights, setIsShowingHighlights] = useState(true);
   const navigate = useNavigate();
 
   const handlePrevious = () => {
@@ -40,13 +39,13 @@ const Ngos = () => {
       <div>
         <div className="ngos-heading">
           <p className="marker">👋 Welcome to Volunteer Connect!</p>
-          <p className="cta">
+          <div className="cta">
             Start your volunteering journey by searching for volunteer
             opportunities with amazing charities in Toronto. You can donate your
             time, skills or money, and contribute to your neighborhood in a
             lasting way. Track your donations, followed organizations and events
             by clicking on your email above to view your profile.
-          </p>
+          </div>
           <p></p>
         </div>
 

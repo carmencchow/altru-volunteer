@@ -5,7 +5,7 @@ import Input from "react-phone-number-input/input";
 import "./EditNGO.css";
 
 const EditNGO = ({ setIsEditing }) => {
-  const { user, verifyUser, mongoUser } = useContext(AuthContext);
+  const { user, verifyUser } = useContext(AuthContext);
   const [name, setName] = useState();
   const [description, setDescription] = useState();
   const [category, setCategory] = useState();
@@ -16,7 +16,6 @@ const EditNGO = ({ setIsEditing }) => {
   const [serverError, setServerError] = useState("");
 
   const updateProfile = async ({ ngoId, e }) => {
-    console.log("input", e);
     e.preventDefault();
     try {
       const token = await user.getIdToken();

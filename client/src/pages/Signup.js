@@ -148,7 +148,7 @@ const Signup = () => {
           </button>
 
           <div className="account">
-            <div className="my-account">Already have an account?</div>
+            <div className="my-account">Already registered?</div>
             <div className="login" onClick={handleLogin}>
               Login
             </div>

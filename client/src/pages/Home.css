@@ -2,7 +2,6 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  box-sizing: border-box;
 }
 .background {
   height: 100vh;
@@ -55,21 +54,37 @@ body {
   background-color: none;
   padding-bottom: 10px;
 }
-.login-btn,
 .signup-btn {
   background: none;
-  color: #322ca9;
+  font-weight: bold;
   font-family: "Poppins", sans-serif;
-  font-size: 14px;
+  font-size: 18px;
+  margin-top: 10px;
+  padding: 4px;
+  margin-left: 10px;
+  color: #19add6;
+}
+.login-btn {
+  background: none;
+  color: #322ca9;
+  font-weight: bold;
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
   margin-top: 10px;
   padding: 4px;
   margin-left: 10px;
 }
-.login-btn:hover,
+.login-btn:hover {
+  cursor: pointer;
+  transition: ease-in 0.3s;
+  font-weight: bolder;
+  color: #19add6;
+}
 .signup-btn:hover {
   cursor: pointer;
   transition: ease-in 0.3s;
   font-weight: bolder;
+  color: #322ca9;
 }
 .logo-wrapper {
   display: flex;
@@ -219,9 +234,9 @@ body {
     margin-top: 5px;
   }
   .welcome-text {
-    font-size: 56px;
+    font-size: 40px;
     text-align: center;
-    margin-top: 0px;
+    margin-top: 20px;
   }
   .sub-text {
     font-size: 34px;

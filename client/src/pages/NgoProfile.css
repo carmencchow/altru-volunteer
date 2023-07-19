@@ -3,6 +3,14 @@
   justify-content: space-between;
   margin: 0px auto;
 }
+.marker {
+  width: 90%;
+  margin: 0 auto;
+}
+.welcome {
+  width: 90%;
+  margin: 2% auto;
+}
 .tabs-container {
   display: flex;
   flex-direction: column;
@@ -21,6 +29,8 @@
   color: #322ca9;
   background-color: #f6f6fa;
   border-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 .heading-tabs:hover {
   color: rgb(121, 92, 250);
@@ -34,6 +44,9 @@
   padding: 20px 30px;
   cursor: pointer;
   box-sizing: content-box;
+  background-color: #f6f6fa;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 .active-tabs {
   font-size: 20px;
@@ -85,6 +98,15 @@
     max-width: 300px;
     width: 100vw;
   }
+  .tabs,
+  .active-tabs {
+    border-bottom: blue;
+    width: 30%;
+    font-size: 16px;
+    padding: 20px 30px;
+    cursor: pointer;
+    box-sizing: content-box;
+  }
   .heading-tabs {
     max-width: 280px;
     display: flex;
@@ -98,5 +120,30 @@
   .active-tabs {
     font-size: 14px;
     background-color: none;
+  }
+}
+
+@media only screen and (max-width: 599px) {
+  .tabs,
+  .active-tabs {
+    border-bottom: blue;
+    width: 25%;
+    font-size: 14px;
+    padding: 20px 30px;
+    cursor: pointer;
+    box-sizing: content-box;
+  }
+  .heading-tabs {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+  }
+  .preview-btn {
+    margin-top: 0px;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    color: rgb(75, 75, 246);
+    background: none;
   }
 }

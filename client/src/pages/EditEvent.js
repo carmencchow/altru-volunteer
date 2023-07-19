@@ -51,7 +51,8 @@ const EditEvent = () => {
     }
   };
 
-  const deleteEvent = async () => {
+  const deleteEvent = async (e) => {
+    e.preventDefault();
     try {
       const token = await user.getIdToken();
       const res = await api.delete(`/event/${id}`, {
@@ -93,9 +94,11 @@ const EditEvent = () => {
             </p>
             <p>{event.duties}</p>
             <p>📍{event.location}</p>
+            <p> Volunteers needed: {event.num_volunteers}</p>
 
-            <h4 className="interested">
-              Interested Volunteers: {event.volunteers.length}
+            <h4 className="interested-volunteers">
+              Interested Volunteers:{" "}
+              {event.volunteers && event.volunteers.length}
             </h4>
             <p>
               {event.volunteers && (

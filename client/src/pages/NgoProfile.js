@@ -21,11 +21,13 @@ const NgoProfile = () => {
     navigate("/preview");
   };
 
-  // if (!mongoUser) return null;
-
   return (
     <>
       <Navbar />
+      <p className="marker">👋 Welcome to Volunteer Connect!</p>
+      <p className="welcome">
+        This is ... to see what how your page will be displayed to a user{" "}
+      </p>
       <div className="profile-container">
         <div className="tabs-container">
           <div className="heading-tabs">

@@ -31,18 +31,6 @@ const Preview = () => {
     }
   };
 
-  const upload = () => {
-    console.log("upload image ...");
-  };
-
-  const donate = () => {
-    console.log("donate image ...");
-  };
-
-  const register = () => {
-    console.log("register");
-  };
-
   useEffect(() => {
     if (mongoUser.organization) {
       fetchNgoData(mongoUser.organization._id);
@@ -62,29 +50,19 @@ const Preview = () => {
       {ngo && (
         <div className="about-section">
           <div className="right-side">
-            <h2 className="preview-h2">🏅 {ngo.name}</h2>
+            <h2 className="preview-h2">{ngo.name}</h2>
             <div className="row">
-              <button className="preview-follow" onClick={donate}>
-                Follow
-              </button>
-              <button className="preview-donate" onClick={donate}>
-                Donate
-              </button>
+              <button className="preview-follow">Follow</button>
+              <button className="preview-donate">Donate</button>
             </div>
           </div>
           <p>{ngo.description}</p>
-          <div className="background-image">
-            stock image
-            <button className="image" onClick={upload}>
-              Upload Image
-            </button>
-          </div>
           <div className="info">
             <p>
               <span>
                 <TfiLocationPin />
               </span>
-              {ngo.address}
+              📍 {ngo.address}
               {ngo.district}
             </p>
             <p>
@@ -111,11 +89,9 @@ const Preview = () => {
               <div>
                 {ngo.events.map((event, idx) => (
                   <div key={idx} className="event-card">
-                    <p className="event-name">{event.name}</p>
-                    <p>
-                      Date: <span>{event.date} </span>
-                    </p>
-                    <p className="event-location"> {event.location} </p>
+                    <p className="event-name">⭐ {event.name}</p>
+                    <p>📅 Date: {event.date}</p>
+                    <p className="event-location">📍 {event.location} </p>
                     <button className="register">Express Interest</button>
                   </div>
                 ))}

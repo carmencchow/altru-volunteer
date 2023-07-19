@@ -4,15 +4,16 @@
   margin: 0% auto;
   background-color: #f6f6fa;
   border-radius: 10px;
-  padding: 0px 20px;
+  padding: 0px 20px 20px;
 }
 .register {
   display: flex;
   flex-direction: row-reverse;
+  font-size: 14px;
+  color: blue;
+  background-color: rgb(230, 230, 249);
+  transition: ease-in 0.5;
 }
-/* button {
-  justify-content: end;
-} */
 .event-name {
   font-weight: bold;
 }
