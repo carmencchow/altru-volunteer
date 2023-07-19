@@ -40,11 +40,10 @@ const Ngos = () => {
         <div className="ngos-heading">
           <p className="marker">👋 Welcome to Volunteer Connect!</p>
           <div className="cta">
-            Start your volunteering journey by searching for volunteer
-            opportunities with amazing charities in Toronto. You can donate your
-            time, skills or money, and contribute to your neighborhood in a
-            lasting way. Track your donations, followed organizations and events
-            by clicking on your email above to view your profile.
+            Start by searching for volunteer opportunities with organizations
+            across Toronto. Keep track of your donations, followed organizations
+            and upcoming events by clicking on your email to access and view
+            your profile.
           </div>
           <p></p>
         </div>

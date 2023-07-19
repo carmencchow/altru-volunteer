@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { AiOutlineEye, AiOutlineEdit } from "react-icons/ai";
 import { api } from "../utils/axios";
 import EditEvent from "../pages/EditEvent";
 import "./NgoEvents.css";
@@ -99,6 +100,14 @@ const NgoEvents = () => {
                   <p className="event-name">⭐ {event.name}</p>
                   <p className="event-name">📅 {event.date}</p>
                   <p className="event-location">📍 {event.location} </p>
+                  <div className="icon-row">
+                    <p className="view">
+                      <AiOutlineEye size={26} />
+                    </p>
+                    <p className="edit">
+                      <AiOutlineEdit size={26} />
+                    </p>
+                  </div>
                 </div>
               ))}
             </div>

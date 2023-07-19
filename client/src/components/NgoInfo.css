@@ -103,6 +103,24 @@ h5 {
   transition: ease-in 0.5s;
 }
 
+@media only screen and (max-width: 480px) {
+  .user-profile {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 2%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .ngo-select {
+    width: 40%;
+  }
+  .profile-row {
+    margin-left: 20px;
+  }
+}
+
 @media only screen and (min-width: 768px) {
   .ngo-select select {
     width: 300px;

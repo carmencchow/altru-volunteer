@@ -26,7 +26,15 @@ const NgoProfile = () => {
       <Navbar />
       <p className="marker">👋 Welcome to Volunteer Connect!</p>
       <p className="welcome">
-        This is ... to see what how your page will be displayed to a user{" "}
+        ✔️ Start by creating a profile for your organization{" "}
+      </p>
+      <p className="welcome">✔️ Click on the 'Events' tab to add an event </p>
+      <p className="welcome">
+        ✔️ Click on 'Preview' to see how your page will appear to volunteers
+      </p>
+      <p className="welcome">
+        ✔️ Keep track of volunteers who have expressed interest in your events
+        or donated to your organization
       </p>
       <div className="profile-container">
         <div className="tabs-container">

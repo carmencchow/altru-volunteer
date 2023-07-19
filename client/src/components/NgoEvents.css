@@ -10,6 +10,15 @@
 .edit-icon:hover {
   color: rgb(167, 88, 241);
 }
+.icon-row {
+  display: flex;
+  flex-direction: row-reverse;
+  margin: 0px 2px;
+}
+.view:hover,
+.edit:hover {
+  color: rgb(167, 88, 241);
+}
 .event-card {
   border: 2px dashed plum;
   border-radius: 10px;
