@@ -90,10 +90,11 @@ button {
   display: flex;
   flex-direction: column;
 }
-.profile-name p {
+.profile-name {
   font-size: 20px;
   font-weight: bolder;
-  margin-left: 40px;
+  width: 80%;
+  margin: 3% auto;
 }
 .event-button-row {
   display: flex;
@@ -155,7 +156,6 @@ button {
   border: none;
   font-size: 14px;
   cursor: pointer;
-  /* height: 30px; */
   color: blue;
   background-color: rgb(230, 230, 249);
   transition: ease-in 0.5;
@@ -211,5 +211,17 @@ button {
 @media only screen and (max-width: 599px) {
   .follow-heading {
     display: flex;
+  }
+}
+
+@media only screen and (min-width: 599px) {
+  .profile-section,
+  .donations-section,
+  .events-section {
+    width: 80%;
+    background-color: #f6f6fa;
+    border-radius: 15px;
+    padding: 0px 20px;
+    margin: 10px auto;
   }
 }

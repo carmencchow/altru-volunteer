@@ -135,7 +135,7 @@ const Signup = () => {
               name="checkbox"
               value={isChecked}
               onChange={handleChecked}
-            />{" "}
+            />
             Are you part of an organization?
           </div>
 
