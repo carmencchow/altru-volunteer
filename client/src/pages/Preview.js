@@ -1,9 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import { TfiLocationPin } from "react-icons/tfi";
-import { BsTelephone } from "react-icons/bs";
-import { TbWorld } from "react-icons/tb";
+
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { MdPreview } from "react-icons/md";
 import { api } from "../utils/axios";
@@ -41,7 +39,7 @@ const Preview = () => {
     <div>
       <Navbar />
       <span className="preview">
-        <MdPreview /> Preview Page
+        <MdPreview size={20} /> Preview Page
       </span>
       <span className="back" onClick={() => navigate(-1)}>
         <IoMdArrowRoundBack />
@@ -56,27 +54,11 @@ const Preview = () => {
               <button className="preview-donate">Donate</button>
             </div>
           </div>
-          <p>{ngo.description}</p>
-          <div className="info">
-            <p>
-              <span>
-                <TfiLocationPin />
-              </span>
-              📍 {ngo.address}
-              {ngo.district}
-            </p>
-            <p>
-              <span>
-                <BsTelephone />
-              </span>
-              {ngo.telephone}
-            </p>
-            <p>
-              <span>
-                <TbWorld />
-              </span>{" "}
-              {ngo.url}
-            </p>
+          <p className="description-ngo">{ngo.description}</p>
+          <div className="inform">
+            <p>{ngo.address}</p>
+            <p>{ngo.telephone}</p>
+            <p>{ngo.url}</p>
           </div>
         </div>
       )}

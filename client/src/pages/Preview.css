@@ -19,6 +19,7 @@
 }
 .preview {
   margin-top: 20px;
+  color: rgb(121, 92, 250);
 }
 .preview-follow {
   margin-left: 0px;
@@ -46,9 +47,13 @@ button {
   border: none;
   padding: 5px;
 }
-.info {
+.inform {
   display: flex;
   flex-direction: row;
+  justify-content: space-evenly;
+}
+.info p {
+  padding: 5px;
 }
 .image {
   border-radius: 5px;
@@ -96,4 +101,19 @@ button {
   margin: 2% auto;
   height: 200px;
   width: 200px;
+}
+
+@media only screen and (max-width: 480px) {
+  .back {
+    padding-bottom: 10px;
+  }
+  .inform p {
+    font-size: 10px;
+    line-height: 10px;
+    margin: 2px;
+  }
+  .inform {
+    display: flex;
+    flex-direction: column;
+  }
 }

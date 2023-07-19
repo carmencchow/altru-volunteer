@@ -79,7 +79,7 @@ const NgoEvents = () => {
     if (mongoUser.organization) {
       fetchNgoEvents(mongoUser.organization._id);
     }
-  }, []);
+  }, [mongoUser.organization]);
 
   return (
     <div>
