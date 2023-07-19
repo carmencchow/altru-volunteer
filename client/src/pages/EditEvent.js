@@ -190,9 +190,6 @@ const EditEvent = () => {
               onChange={(e) => setNewNumVolunteers(e.target.value)}
             />
             <div className="buttons">
-              <button className="save-event" onClick={updateEvent}>
-                Save Changes
-              </button>
               <button
                 className="cancel-event"
                 onClick={(e) => {
@@ -208,6 +205,9 @@ const EditEvent = () => {
                 }}
               >
                 Clear Form
+              </button>
+              <button className="save-event" onClick={updateEvent}>
+                Save Changes
               </button>
             </div>
           </form>

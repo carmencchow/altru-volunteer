@@ -128,7 +128,7 @@
   .active-tabs {
     border-bottom: blue;
     width: 25%;
-    font-size: 14px;
+    font-size: 16px;
     padding: 20px 30px;
     cursor: pointer;
     box-sizing: content-box;
