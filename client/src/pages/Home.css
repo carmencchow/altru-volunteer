@@ -113,6 +113,9 @@ body {
     text-align: center;
     margin-top: 0px;
   }
+  /* .background {
+    width: fit-content;
+  } */
   .sub-text {
     font-size: 10px;
     .welcome-text {

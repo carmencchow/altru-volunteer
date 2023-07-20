@@ -39,7 +39,7 @@ const Event = () => {
           >
             {" "}
             <span className="org">Organization:</span>⭐
-            {event && event.ngo.name}
+            {event.ngo && event.ngo.name}
           </h2>
         )}
       </div>
