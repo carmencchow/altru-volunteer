@@ -13,7 +13,7 @@
   border: 2px solid #795cfa;
   background-color: white;
   text-decoration: none;
-  color: #795cfa;
+  color: blue;
 }
 .skip-link:focus{
   translate: 0;
