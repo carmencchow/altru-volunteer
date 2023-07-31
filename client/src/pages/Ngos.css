@@ -2,6 +2,17 @@
   width: 90%;
   margin: 0 auto;
 }
+.skip-link{
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: .2rem;
+  translate: 0 -100%;
+  translate: translate 150ms ease-in-out;
+}
+.skip-link:focus{
+  translate: 0;
+}
 .cta {
   margin: 2% auto;
   width: 90%;
