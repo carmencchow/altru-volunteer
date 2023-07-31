@@ -44,15 +44,10 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className="home-text" role="heading" aria-level="1">
-        <motion.p className="welcome-text">
+      <div className="home-text">
+        <motion.p className="welcome-text" role="heading" aria-level="1">
           Uniting volunteers and organizations for social good.
         </motion.p>
-        {/* <motion.p className="sub-text">
-          Volunteer Connect is a platform for volunteers and charitable
-          organizations. We help connect volunteers and organizations for social
-          good.
-        </motion.p> */}
       </div>
     </div>
   );
