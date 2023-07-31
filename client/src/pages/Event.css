@@ -6,6 +6,22 @@
   margin: 20px auto;
   width: 80vw;
 }
+.skip-link{
+  position: fixed;
+  top: .5rem;
+  left: .5rem;
+  padding: .5rem;
+  translate: 0 -130%;
+  transition: translate 150ms ease-in-out;
+  border-radius: 5px;
+  border: 2px solid #795cfa;
+  background-color: white;
+  text-decoration: none;
+  color: blue;
+}
+.skip-link:focus{
+  translate: 0;
+}
 .display-card {
   width: 80vw;
   margin: 2% auto;
