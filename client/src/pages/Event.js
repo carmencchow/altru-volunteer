@@ -18,6 +18,7 @@ const Event = () => {
 
   return (
     <div>
+       <a href="#event-btn" className="skip-link">Skip to Event</a>
       <Navbar />
       <span className="back" onClick={() => navigate(-1)}>
         <BsArrowLeftSquare />
@@ -56,7 +57,7 @@ const Event = () => {
               {event.startTime}-{event.endTime}pm
             </p>
 
-            <InterestedBtn event={event} />
+            <InterestedBtn id="event-btn" event={event} />
           </div>
         )}
       </div>
