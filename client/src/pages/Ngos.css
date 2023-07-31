@@ -9,8 +9,10 @@
   padding: .5rem;
   translate: 0 -100%;
   transition: translate 150ms ease-in-out;
-  border: 1px solid blue;
+  border-radius: 5px;
+  color: white;
   text-decoration: none;
+  background: #795cfa;
 }
 .skip-link:focus{
   translate: 0;
