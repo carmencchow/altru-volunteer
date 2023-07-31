@@ -27,10 +27,11 @@ const Home = () => {
   }, [mongoUser]);
 
   return (
-    <div
+    <main
       className="background"
       style={{ backgroundImage: `url(${background})` }}
     >
+  <header>
       <div className="banner">
         <div className="logo-wrapper">
           <img className="home-logo" src={logo} alt="logo" />
@@ -44,12 +45,13 @@ const Home = () => {
           </div>
         </div>
       </div>
+  </header>
       <div className="home-text">
         <motion.p className="welcome-text" role="heading" aria-level="1">
           Uniting volunteers and organizations for social good.
         </motion.p>
       </div>
-    </div>
+    </main>
   );
 };
 
