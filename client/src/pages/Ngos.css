@@ -4,16 +4,17 @@
 }
 .skip-link{
   position: fixed;
-  top: 0;
-  left: 0;
+  top: .5rem;
+  left: .5rem;
   padding: .5rem;
   translate: 0 -100%;
   transition: translate 150ms ease-in-out;
   border-radius: 5px;
-  color: white;
+  border: 2px solid #795cfa;
+  background-color: white;
   font-weight: bold;
   text-decoration: none;
-  background-color: #795cfa;
+  color: #795cfa;
 }
 .skip-link:focus{
   translate: 0;
