@@ -78,6 +78,7 @@ const Ngo = () => {
 
   return (
     <div>
+      <a href="#event-details" className="skip-link">Skip to Event Details</a>
       <Navbar />
       <span className="back" onClick={() => navigate(-1)}>
         <BsArrowLeftSquare />
@@ -139,7 +140,7 @@ const Ngo = () => {
                   <p>📍 {event.location}</p>
                   <p>📅 {event.date}</p>
                   <div className="button-row">
-                    <button
+                    <button id="event-details"
                       className="details"
                       onClick={() => {
                         navigate(`/event/${event._id}`);
