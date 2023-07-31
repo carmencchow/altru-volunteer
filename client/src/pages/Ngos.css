@@ -11,8 +11,9 @@
   transition: translate 150ms ease-in-out;
   border-radius: 5px;
   color: white;
+  font-weight: bold;
   text-decoration: none;
-  background: #795cfa;
+  background-color: #795cfa;
 }
 .skip-link:focus{
   translate: 0;
