@@ -35,6 +35,7 @@ const Ngos = () => {
 
   return (
     <section className="ngos-wrapper">
+    <a href="#highlights" className="skip-link">Skip to Highlights</a>
       <Navbar />
       <div>
         <div className="ngos-heading">
@@ -112,7 +113,7 @@ const Ngos = () => {
           </>
         )}
 
-        <h3 className="show-highlights" onClick={() => setIsShowing(true)}>
+        <h3 className="show-highlights" id="highlights" onClick={() => setIsShowing(true)}>
           Highlighted Volunteer Opportunities
         </h3>
 
