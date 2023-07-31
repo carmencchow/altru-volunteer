@@ -44,7 +44,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className="home-text">
+      <div className="home-text" role="heading" aria-level="1">
         <motion.p className="welcome-text">
           Uniting volunteers and organizations for social good.
         </motion.p>
