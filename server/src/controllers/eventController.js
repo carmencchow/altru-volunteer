@@ -1,6 +1,5 @@
 import Event from "../models/eventModel.js";
 import User from "../models/userModel.js";
-import nodemailer from "nodemailer";
 
 // Get one event
 const getEvent = async (req, res) => {
